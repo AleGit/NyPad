@@ -32,6 +32,9 @@ typedef NSUInteger NyayaNodeType;
 
 - (NyayaBool)value;
 
+- (NyayaNode*)imf;
+- (NyayaNode*)nnf;
+
 
 
 

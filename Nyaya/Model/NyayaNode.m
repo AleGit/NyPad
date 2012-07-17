@@ -133,7 +133,7 @@
                     right = [first description];
                     break;
                 default:
-                    right = [NSString stringWithFormat:@"%@)", [first description]];
+                    right = [NSString stringWithFormat:@"(%@)", [first description]];
                     break;
             }
             return [NSString stringWithFormat:@"%@%@", self.symbol, right];
@@ -230,6 +230,95 @@
             return @"NIY";
     }
 }
+
+#pragma mark - cnf, dnf, nnf, imf
+
+- (NyayaNode*)copyWith:(NSArray*)nodes {
+    NyayaNode *node=[[NyayaNode alloc] init];
+    
+    node->_symbol = self.symbol;
+    node->_type = self.type;
+    node->_value = self.value;
+    
+    node->_nodes = [nodes copy];
+    
+    return node;
+    
+}
+
+- (NyayaNode*)copyImf {
+    NSMutableArray *nodes = nil;
+    
+    if (self.nodes) {
+        nodes = [NSMutableArray array];
+        for (NyayaNode *n in self.nodes) {
+            [nodes addObject:[n imf]];
+        }
+    }
+    
+    return [self copyWith:nodes];
+    
+}
+
+- (NyayaNode*)copyNnf {
+    NSMutableArray *nodes = nil;
+    
+    if (self.nodes) {
+        nodes = [NSMutableArray array];
+        for (NyayaNode *n in self.nodes) {
+            [nodes addObject:[n nnf]];
+        }
+    }
+    
+    return [self copyWith:nodes];
+    
+}
+
+- (NyayaNode*)imf {
+    if (self.type == NyayaImplication) {
+        NyayaNode *first = [[self.nodes objectAtIndex:0] imf];
+        NyayaNode *second = [[self.nodes objectAtIndex:1] imf];
+        NyayaNode *notfirst = [NyayaNode negation:first];
+        return [NyayaNode disjunction: notfirst with: second];
+    }
+    else {
+        return [self copyImf];
+    }
+}
+
+
+- (NyayaNode*)nnf {
+    
+    if (self.type == NyayaNegation) {
+        NyayaNode *node = [self.nodes objectAtIndex:0];
+        
+        NSUInteger count = [node.nodes count];
+        NyayaNode *first = (count > 0) ? [node.nodes objectAtIndex:0] : nil;
+        NyayaNode *second = (count > 1) ? [node.nodes objectAtIndex:1] : nil;
+        
+        switch (node.type) {
+            case NyayaNegation: // nnf(!!P) = nnf(P)
+                return [first nnf];
+            case NyayaDisjunction: // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
+                return [NyayaNode conjunction: [[NyayaNode negation:first] nnf]
+                                         with: [[NyayaNode negation:second] nnf] ];
+            case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
+                return [NyayaNode disjunction: [[NyayaNode negation:first] nnf]
+                                         with: [[NyayaNode negation:second] nnf] ];
+        
+            default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
+                return [self copyNnf];
+        }
+        
+        
+        
+    }
+    else {
+        return [self copyNnf];
+    }
+                
+}
+
 
 
 @end
