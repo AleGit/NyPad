@@ -7,6 +7,7 @@
 //
 
 #import "NyayaTests.h"
+#import "OldNyayaParser.h"
 
 @implementation NyayaTests
 
@@ -26,7 +27,8 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in NyayaTests");
+    
+    
 }
 
 @end

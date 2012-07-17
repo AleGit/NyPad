@@ -1,0 +1,41 @@
+EBNF-Grammatik für Arithmetische Ausdrücke
+==========================================
+
+Ausdruck = Summe
+Summe = Produkt { ("+"|"-") Produkt }
+Produkt = Faktor { ("*"|"/"|"%") Faktor }
+Faktor = ["+"|"-"] ( Zahl | "(" Summe ")" )
+Zahl = Ziffer | ZifferOhneNull Zahl
+ZifferOhneNull = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+Ziffer = "0" | ZifferOhneNull
+
+EBNF-Grammatik für Aussagenlogische Ausdrücke
+=============================================
+
+SEQUENCE = FORMULA { ";" FORMULA }                  (* left associative *)
+
+FORMULA = JUNCTION [ ( "→" | "↔" ) FORMULA ]        (* right associative *) a>b>c = a>(b>c)
+
+JUNCTION = NEGATION { ( "∨" | "∧" ) NEGATION }      (* left associative *)  a&b|c = (a&b)|c
+
+NEGATION = [ "¬" ] ( TERM | "(" FORMULA ")" )       
+
+TERM = IDENTIFIER [ "(" TUPLE ")" ]
+
+Identifier = Buchstabe { Buchstabe }
+
+TUPLE = FORMULA { "," FORMULA} | 
+
+
+===
+
+sequence    = formula   { ";" formula }
+formula     = junction  [ ( "→" | "↔" ) formula }
+junction    = negation  { ( "∨" | "∧" ) negation }
+negation    = "¬" negation | term | "(" formula ")"
+term        = identifier [ "(" ")" | "(" tuple ")" ]
+tuple       = formula { "," formula }
+
+
+
+
