@@ -34,6 +34,8 @@ typedef NSUInteger NyayaNodeType;
 
 - (NyayaNode*)imf;
 - (NyayaNode*)nnf;
+- (NyayaNode*)cnf;
+- (NyayaNode*)dnf;
 
 
 

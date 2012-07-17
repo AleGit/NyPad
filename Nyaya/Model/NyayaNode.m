@@ -309,15 +309,101 @@
             default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
                 return [self copyNnf];
         }
-        
-        
-        
     }
     else {
         return [self copyNnf];
     }
-                
 }
+
+
+
+
+
++ (NyayaNode*)cnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
+    if (first.type == NyayaConjunction) {
+        NyayaNode *n11 = [first.nodes objectAtIndex:0];
+        NyayaNode *n12 = [first.nodes objectAtIndex:1];
+        
+        return [NyayaNode conjunction:[NyayaNode cnfDistribution:n11 with:second] 
+                                 with:[NyayaNode cnfDistribution:n12 with:second]];
+        
+        
+        
+    }
+    else if (second.type == NyayaConjunction) {
+        NyayaNode *n21 = [second.nodes objectAtIndex:0];
+        NyayaNode *n22 = [second.nodes objectAtIndex:1];
+        
+        return [NyayaNode conjunction:[NyayaNode cnfDistribution:first with:n21] 
+                                 with:[NyayaNode cnfDistribution:first with:n22]];
+        
+    }
+    else { // no conjunctions
+        return [NyayaNode disjunction:first with:second];
+    }
+}
+
+- (NyayaNode*)cnf {
+    // precondition self is implication free and in negation normal form
+    switch(self.type) {
+        case NyayaConjunction:
+            return [NyayaNode conjunction:[[self.nodes objectAtIndex:0] cnf] 
+                                     with:[[self.nodes objectAtIndex:1] cnf]];
+            
+            
+        case NyayaDisjunction:
+            return [NyayaNode cnfDistribution:[[self.nodes objectAtIndex:0] cnf] 
+                                      with:[[self.nodes objectAtIndex:1] cnf]];
+            
+        default:
+            return self;
+    }
+}
+
+
+
++ (NyayaNode*)dnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
+    if (first.type == NyayaDisjunction) {
+        NyayaNode *n11 = [first.nodes objectAtIndex:0];
+        NyayaNode *n12 = [first.nodes objectAtIndex:1];
+        
+        return [NyayaNode disjunction:[NyayaNode dnfDistribution:n11 with:second] 
+                                 with:[NyayaNode dnfDistribution:n12 with:second]];
+        
+        
+        
+    }
+    else if (second.type == NyayaDisjunction) {
+        NyayaNode *n21 = [second.nodes objectAtIndex:0];
+        NyayaNode *n22 = [second.nodes objectAtIndex:1];
+        
+        return [NyayaNode disjunction:[NyayaNode dnfDistribution:first with:n21] 
+                                 with:[NyayaNode dnfDistribution:first with:n22]];
+        
+    }
+    else { // no disjunction
+        return [NyayaNode conjunction:first with:second];
+    }
+}
+
+- (NyayaNode *)dnf {
+    // precondition self is implication free and in negation normal form
+    switch(self.type) {
+        case NyayaDisjunction:
+            return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
+                                     with:[[self.nodes objectAtIndex:1] dnf]];
+            
+            
+        case NyayaConjunction:
+            return [NyayaNode dnfDistribution:[[self.nodes objectAtIndex:0] dnf] 
+                                      with:[[self.nodes objectAtIndex:1] dnf]];
+            
+        default:
+            return self;
+    }
+}
+
+
 
 
 

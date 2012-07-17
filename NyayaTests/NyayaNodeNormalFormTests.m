@@ -57,4 +57,38 @@
     
 }
 
+- (void)testCNF {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a&!b)|c"];
+    NyayaNode *node = [parser parseFormula];
+    NyayaNode *imf = [node cnf];
+    
+    STAssertEqualObjects(@"(a ∧ ¬b) ∨ c", [node description], nil);
+    STAssertEqualObjects(@"(a ∨ c) ∧ (¬b ∨ c)", [imf description], nil);
+    
+    [parser resetWithString:@"a|(!b&c)"];
+    node = [parser parseFormula];
+    imf = [node cnf];
+    
+    STAssertEqualObjects(@"a ∨ (¬b ∧ c)", [node description], nil);
+    STAssertEqualObjects(@"(a ∨ ¬b) ∧ (a ∨ c)", [imf description], nil);
+    
+}
+
+- (void)testDNF {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a|!b)&c"];
+    NyayaNode *node = [parser parseFormula];
+    NyayaNode *imf = [node dnf];
+    
+    STAssertEqualObjects(@"(a ∨ ¬b) ∧ c", [node description], nil);
+    STAssertEqualObjects(@"(a ∧ c) ∨ (¬b ∧ c)", [imf description], nil);
+    
+    [parser resetWithString:@"a&(!b|c)"];
+    node = [parser parseFormula];
+    imf = [node dnf];
+    
+    STAssertEqualObjects(@"a ∧ (¬b ∨ c)", [node description], nil);
+    STAssertEqualObjects(@"(a ∧ ¬b) ∨ (a ∧ c)", [imf description], nil);
+    
+}
+
 @end
