@@ -39,7 +39,8 @@ typedef NSUInteger NyayaNodeType;
 
 - (NSString*)treeDescription;
 
-
+- (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction of disjunctions of literals (a or b) AND (a or !b)
+- (NSArray*)disjunctionOfConjunctions; // dnf is disjunction of conjunctions of literals (a and b) OR (a and !b)
 
 
 

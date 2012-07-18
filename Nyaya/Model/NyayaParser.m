@@ -8,66 +8,7 @@
 
 #import "NyayaParser.h"
 #import "NyayaNode.h"
-
-@interface NSString (NyayaToken)
-- (BOOL)isNegation;
-- (BOOL)isConjunction;
-- (BOOL)isDisjunction;
-- (BOOL)isJunction;
-- (BOOL)isLeftParenthesis;
-- (BOOL)isRightParenthesis;
-- (BOOL)isComma;
-- (BOOL)isSemicolon;
-
-@end
-
-@implementation NSString (NyayaToken)
-
-- (BOOL)isNegation {
-    return [self isEqualToString:@"¬"]
-        || [self isEqualToString:@"!"];
-}
-
-- (BOOL)isConjunction {
-    return [self isEqualToString:@"∧"]
-    || [self isEqualToString:@"&"];
-    
-}
-
-- (BOOL)isDisjunction {
-    return [self isEqualToString:@"∨"]
-    || [self isEqualToString:@"|"];
-    
-}
-
-- (BOOL)isJunction {
-    return [self isDisjunction] || [self isConjunction];
-}
-
-- (BOOL)isImplication {
-    
-    return [self isEqualToString:@"→"]
-    || [self isEqualToString:@">"];
-    
-}
-
-- (BOOL)isLeftParenthesis {
-    return [self isEqualToString:@"("];
-}
-
-- (BOOL)isRightParenthesis {
-    return [self isEqualToString:@")"];
-}
-
-- (BOOL)isComma {
-    return [self isEqualToString:@","];
-}
-
-- (BOOL)isSemicolon {
-    return [self isEqualToString:@";"];
-}
-
-@end
+#import "NSString+NyayaToken.h"
 
 @interface NyayaParser () {
     NSUInteger _index;

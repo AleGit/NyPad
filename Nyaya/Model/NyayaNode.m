@@ -313,7 +313,7 @@
 
 
 - (NyayaNode*)nnf {
-    
+    // precondition 'self' is implication free, {¬ ∨ ∧} is a adequate set of boolean functions
     if (self.type == NyayaNegation) {
         NyayaNode *node = [self.nodes objectAtIndex:0];
         
@@ -369,7 +369,7 @@
 }
 
 - (NyayaNode*)cnf {
-    // precondition self is implication free and in negation normal form
+    // precondition 'self' is implication free and in negation normal form
     switch(self.type) {
         case NyayaConjunction:
             return [NyayaNode conjunction:[[self.nodes objectAtIndex:0] cnf] 
@@ -412,7 +412,7 @@
 }
 
 - (NyayaNode *)dnf {
-    // precondition self is implication free and in negation normal form
+    // precondition 'self' is implication free and in negation normal form
     switch(self.type) {
         case NyayaDisjunction:
             return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
@@ -426,6 +426,53 @@
         default:
             return self;
     }
+}
+
+#pragma mark - resolution
+
+- (NSArray*)clauses:(NyayaNodeType)separatorType {
+    NSArray *array = nil;
+    if (self.type == separatorType) {
+        for (NyayaNode *node in self.nodes) {
+            if (!array) array = [node clauses:separatorType];
+            else array = [array arrayByAddingObjectsFromArray:[node clauses:separatorType]];
+        }
+    }
+    else { 
+        array = [NSArray arrayWithObject:self];
+    }
+    return array;
+}
+
+- (NSArray*)clauses:(NyayaNodeType)outer clauses:(NyayaNodeType)inner {
+    
+    
+    NSMutableArray *result = [NSMutableArray array];
+    
+    for (NyayaNode *clause in [self clauses:outer]) {
+        NSMutableSet *set = [NSMutableSet set];
+        for (NyayaNode *c in [clause clauses:inner]) {
+            [set addObject: [c description]]; // c should b a literal
+            
+            
+        }
+        [result addObject:[set copy]];
+        
+    }
+    
+    return [result copy];
+    
+}
+
+- (NSArray*)conjunctionOfDisjunctions { // cnf is conjunction of disjunctions of literals
+    // precondition 'self' is in conjunctive normal form (cnf)
+    return [self clauses:NyayaConjunction clauses:NyayaDisjunction];
+    
+}
+
+- (NSArray*)disjunctionOfConjunctions { // dnf is disjunction of conjunctions of literals
+    // precondition 'self' is in disjunctive normal form (dnf)
+    return [self clauses:NyayaDisjunction clauses:NyayaConjunction];
 }
 
 

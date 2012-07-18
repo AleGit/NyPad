@@ -162,7 +162,7 @@
         
     }];
     
-    STAssertEquals(count, 0, nil);
+    STAssertEquals(count, 15, nil);
     
     
 }

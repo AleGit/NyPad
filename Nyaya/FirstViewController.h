@@ -10,4 +10,13 @@
 
 @interface FirstViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *input;
+@property (weak, nonatomic) IBOutlet UITextView *ast;
+@property (weak, nonatomic) IBOutlet UITextView *imf;
+@property (weak, nonatomic) IBOutlet UITextView *nnf;
+@property (weak, nonatomic) IBOutlet UITextView *cnf;
+@property (weak, nonatomic) IBOutlet UITextView *dnf;
+
+- (IBAction)compute:(id)sender;
+
 @end

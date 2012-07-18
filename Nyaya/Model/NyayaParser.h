@@ -22,7 +22,7 @@
 - (NyayaNode*)parseFormula;  // formula     = junction  [ ( "→" | "↔" ) formula }
 - (NyayaNode*)parseJunction; // junction    = negation  { ( "∨" | "∧" ) negation }
 - (NyayaNode*)parseNegation; // negation    = "¬" negation | term | "(" formula ")"
-- (NyayaNode*)parseTerm;     // term        = identifier [ "(" ")" | "(" tuple ")" ]
-- (NSArray*)parseTuple;      // tuple       = formula { "," formula }
+- (NyayaNode*)parseTerm;     // term        = identifier [ tuple ]
+- (NSArray*)parseTuple;      // tuple       = "(" formula { "," formula } ")"
 
 @end
