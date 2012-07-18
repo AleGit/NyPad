@@ -115,6 +115,29 @@
     }
 }
 
+- (NSString*)treeDescription {
+    NSUInteger count = [self.nodes count];
+    NyayaNode *first = (count > 0) ? [self.nodes objectAtIndex:0] : nil;
+    NyayaNode *second = (count > 1) ? [self.nodes objectAtIndex:1] : nil;
+    switch (_type) {
+        case NyayaConstant:
+            return _symbol;
+        case NyayaNegation:
+            return [NSString stringWithFormat:@"(%@%@)", self.symbol, [first treeDescription]];
+        case NyayaConjunction:
+        case NyayaDisjunction:
+        case NyayaImplication:
+            return [NSString stringWithFormat:@"(%@%@%@)", [first treeDescription], self.symbol, [second treeDescription]];
+        case NyayaFunction:
+        default:
+            return [NSString stringWithFormat:@"%@(%@)", 
+                    self.symbol, [[self.nodes valueForKey:@"treeDescription"] componentsJoinedByString:@","]];  
+            
+            
+            
+    }
+}
+
 - (NSString*)description {
     NSUInteger count = [self.nodes count];
     NyayaNode *first = (count > 0) ? [self.nodes objectAtIndex:0] : nil;
@@ -155,7 +178,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
-                case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
+                // case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
                     right = [second description];
                     break;
                 default:
@@ -183,7 +206,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
-                case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
+                // case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
                     right = [second description];
                     break;
                 default:

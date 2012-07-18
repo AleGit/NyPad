@@ -7,7 +7,6 @@
 //
 
 #import "NyayaTests.h"
-#import "OldNyayaParser.h"
 
 @implementation NyayaTests
 

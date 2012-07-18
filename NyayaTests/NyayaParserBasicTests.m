@@ -8,6 +8,7 @@
 
 #import "NyayaParserBasicTests.h"
 #import "NyayaParser.h"
+#import "NyayaNode.h"
 
 @implementation NyayaParserBasicTests
 

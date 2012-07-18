@@ -37,6 +37,8 @@ typedef NSUInteger NyayaNodeType;
 - (NyayaNode*)cnf;
 - (NyayaNode*)dnf;
 
+- (NSString*)treeDescription;
+
 
 
 

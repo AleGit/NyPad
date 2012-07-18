@@ -34,8 +34,6 @@
 		11C3762415B3D23D005C5C9C /* NyayaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3762315B3D23D005C5C9C /* NyayaTests.m */; };
 		11C3764015B3EC48005C5C9C /* Nyaya.g in Resources */ = {isa = PBXBuildFile; fileRef = 11C3763F15B3EC48005C5C9C /* Nyaya.g */; };
 		11C3764215B3FCC1005C5C9C /* ebnf in Resources */ = {isa = PBXBuildFile; fileRef = 11C3764115B3FCC1005C5C9C /* ebnf */; };
-		11C3765615B416EF005C5C9C /* OldNyayaParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3765515B416EF005C5C9C /* OldNyayaParser.m */; };
-		11C3766815B4718C005C5C9C /* OldNyayaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3766715B4718C005C5C9C /* OldNyayaNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,10 +88,6 @@
 		11C3762315B3D23D005C5C9C /* NyayaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NyayaTests.m; sourceTree = "<group>"; };
 		11C3763F15B3EC48005C5C9C /* Nyaya.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Nyaya.g; path = Model/Nyaya.g; sourceTree = "<group>"; };
 		11C3764115B3FCC1005C5C9C /* ebnf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ebnf; path = Model/ebnf; sourceTree = "<group>"; };
-		11C3765415B416EF005C5C9C /* OldNyayaParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNyayaParser.h; sourceTree = "<group>"; };
-		11C3765515B416EF005C5C9C /* OldNyayaParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNyayaParser.m; sourceTree = "<group>"; };
-		11C3766615B4718C005C5C9C /* OldNyayaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNyayaNode.h; sourceTree = "<group>"; };
-		11C3766715B4718C005C5C9C /* OldNyayaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNyayaNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,10 +200,6 @@
 			children = (
 				11C3763F15B3EC48005C5C9C /* Nyaya.g */,
 				11C3764115B3FCC1005C5C9C /* ebnf */,
-				11C3765415B416EF005C5C9C /* OldNyayaParser.h */,
-				11C3765515B416EF005C5C9C /* OldNyayaParser.m */,
-				11C3766615B4718C005C5C9C /* OldNyayaNode.h */,
-				11C3766715B4718C005C5C9C /* OldNyayaNode.m */,
 				1178CC9B15B5005300FD21CA /* NyayaNode.h */,
 				1178CC9C15B5005300FD21CA /* NyayaNode.m */,
 				1178CCA715B5313900FD21CA /* NyayaParser.h */,
@@ -352,8 +342,6 @@
 				11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */,
 				11C3760415B3D23D005C5C9C /* FirstViewController.m in Sources */,
 				11C3760B15B3D23D005C5C9C /* SecondViewController.m in Sources */,
-				11C3765615B416EF005C5C9C /* OldNyayaParser.m in Sources */,
-				11C3766815B4718C005C5C9C /* OldNyayaNode.m in Sources */,
 				1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */,
 				1178CCA915B5313A00FD21CA /* NyayaParser.m in Sources */,
 			);

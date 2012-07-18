@@ -7,12 +7,15 @@
 //
 
 #import "NyayaNodeDescriptionTests.h"
+#import "NyayaParser.h"
 #import "NyayaNode.h"
 
 @interface NyayaNodeDescriptionTests () {
     NyayaNode *_u;
     NyayaNode *_f;
     NyayaNode *_t;
+    
+    NSDictionary *_testCases;
 }
 
 @end
@@ -27,6 +30,111 @@
     _f = [NyayaNode constant:@"F"];
     _t = [NyayaNode constant:@"T"];
     
+    _testCases = [NSDictionary dictionaryWithObjectsAndKeys:
+                  // disjunctions
+                  
+                  [NSArray arrayWithObjects:
+                   @"a∨b ∨c", // parse
+                   @"a ∨ b ∨ c", // expected description
+                   @"((a∨b)∨c)", // expected tree description
+                   nil], @"OR s1", 
+                  
+                  [NSArray arrayWithObjects:
+                   @"(a∨b) ∨c", // parse
+                   @"a ∨ b ∨ c", // expected description
+                   @"((a∨b)∨c)", // expected tree description
+                   nil], @"OR s2",
+                  
+                  [NSArray arrayWithObjects:
+                   @"a∨(b ∨c)", // parse
+                   @"a ∨ (b ∨ c)", // expected description
+                   @"(a∨(b∨c))", // expected tree description
+                   nil], @"OR s3",
+                  
+                  // conjunctions
+                  
+                  [NSArray arrayWithObjects:
+                   @"a∧b ∧c", // parse
+                   @"a ∧ b ∧ c", // expected description
+                   @"((a∧b)∧c)", // expected tree description
+                   nil], @"AND s1", 
+                  
+                  [NSArray arrayWithObjects:
+                   @"(a∧b) ∧c", // parse
+                   @"a ∧ b ∧ c", // expected description
+                   @"((a∧b)∧c)", // expected tree description
+                   nil], @"AND s2",
+                  
+                  [NSArray arrayWithObjects:
+                   @"a∧(b ∧c)", // parse
+                   @"a ∧ (b ∧ c)", // expected description
+                   @"(a∧(b∧c))", // expected tree description
+                   nil], @"AND s3",
+                  
+                  // implications
+                  
+                  [NSArray arrayWithObjects:
+                   @"a→b →c", // parse
+                   @"a → b → c", // expected description
+                   @"(a→(b→c))", // expected tree description
+                   nil], @"IMPL s1", 
+                  
+                  [NSArray arrayWithObjects:
+                   @"(a→b) →c", // parse
+                   @"(a → b) → c", // expected description
+                   @"((a→b)→c)", // expected tree description
+                   nil], @"IMPL s2",
+                  
+                  [NSArray arrayWithObjects:
+                   @"a→(b →c)", // parse
+                   @"a → b → c", // expected description
+                   @"(a→(b→c))", // expected tree description
+                   nil], @"IMPL s3",
+                  
+                  // negations
+                  
+                  [NSArray arrayWithObjects:
+                   @"¬¬¬a", // parse
+                   @"¬¬¬a", // expected description
+                   @"(¬(¬(¬a)))", // expected tree description
+                   nil], @"NOT s1", 
+                  
+                  [NSArray arrayWithObjects:
+                   @"¬ ¬(¬a)", // parse
+                   @"¬¬¬a", // expected description
+                   @"(¬(¬(¬a)))", // expected tree description
+                   nil], @"NOT s2",                   
+                  
+                  [NSArray arrayWithObjects:
+                   @"¬ (¬¬(a))", // parse
+                   @"¬¬¬a", // expected description
+                   @"(¬(¬(¬a)))", // expected tree description
+                   nil], @"NOT s3", 
+                  
+                  // functions
+                  
+                  [NSArray arrayWithObjects:
+                   @"f(a∨b,a∧b,a→b,¬a,g(a))", // parse
+                   @"f(a ∨ b,a ∧ b,a → b,¬a,g(a))", // expected description
+                   @"f((a∨b),(a∧b),(a→b),(¬a),g(a))", // expected tree description
+                   nil], @"FNC s1", 
+                  
+                  [NSArray arrayWithObjects:
+                   @"f(a) → g(a,b)",
+                   @"f(a) → g(a,b)",
+                   @"(f(a)→g(a,b))",
+                   nil], @"FNC s2",
+                  
+                  [NSArray arrayWithObjects:
+                   @"f(f(f(f(f(f(f(f(a,f(a)))))))))",
+                   @"f(f(f(f(f(f(f(f(a,f(a)))))))))",
+                   @"f(f(f(f(f(f(f(f(a,f(a)))))))))",
+                   nil], @"FNC s3",
+                  
+                  
+                  
+                  nil]; // end of dictionary
+    
 }
 
 - (void)tearDown
@@ -34,8 +142,29 @@
     _u = nil;
     _f = nil;
     _t = nil;
-    
+    _testCases = nil;
     [super tearDown];
+}
+
+- (void)testCases {
+    __block NSInteger count = 0;
+    
+    [_testCases enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *array, BOOL *stop) {
+        NSString *input = [array objectAtIndex:0];
+        NSString *expected = [array objectAtIndex:1];
+        NSString *tree = [array objectAtIndex:2];
+        NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
+        NyayaNode *formula = [parser parseFormula];
+        STAssertEqualObjects([formula description], expected, key);
+        STAssertEqualObjects([formula treeDescription], tree, key);
+        
+        count++;
+        
+    }];
+    
+    STAssertEquals(count, 0, nil);
+    
+    
 }
 
 

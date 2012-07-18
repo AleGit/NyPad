@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NyayaNode.h"
+
+@class NyayaNode;
 
 @interface NyayaParser : NSObject
 

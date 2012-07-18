@@ -7,6 +7,7 @@
 //
 
 #import "NyayaParser.h"
+#import "NyayaNode.h"
 
 @interface NSString (NyayaToken)
 - (BOOL)isNegation;

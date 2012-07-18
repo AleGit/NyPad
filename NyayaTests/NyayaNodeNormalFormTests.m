@@ -8,6 +8,7 @@
 
 #import "NyayaNodeNormalFormTests.h"
 #import "NyayaParser.h"
+#import "NyayaNode.h"
 
 @implementation NyayaNodeNormalFormTests
 
@@ -28,7 +29,7 @@
     
     STAssertEqualObjects(@"¬a → b ∨ (¬b → ¬F)", [node description], nil);
     STAssertEquals((NyayaBool)NyayaTrue, node.value,nil);
-    STAssertEqualObjects([imf description], @"¬¬a ∨ b ∨ ¬¬b ∨ ¬F", nil);
+    STAssertEqualObjects([imf description], @"¬¬a ∨ (b ∨ (¬¬b ∨ ¬F))", nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, imf.value,[imf description]);
     
@@ -104,19 +105,19 @@
                           [NSArray arrayWithObjects: [ast description], @"a → b ∧ ¬a ∧ b → b ∨ a ∨ (a → b) ∨ ¬(¬a → a)",
                            nil], @"ast",
                           [NSArray arrayWithObjects: [imf description], 
-                           @"¬a ∨ ¬(b ∧ ¬a ∧ b) ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬(¬¬a ∨ a)",
+                           // @"¬a ∨ ¬(b ∧ ¬a ∧ b) ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬(¬¬a ∨ a)",
                            @"¬a ∨ (¬(b ∧ ¬a ∧ b) ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬(¬¬a ∨ a)))",
                            nil], @"imf",
                           [NSArray arrayWithObjects: [nnf description], 
-                           @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
+                           // @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
                            @"¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))",
                            nil], @"nnf",
                           [NSArray arrayWithObjects: [cnf description], 
-                           @"(¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a) ∧ (¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a)",
+                           // @"(¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a) ∧ (¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a)",
                            @"(¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))",
                            nil], @"cnf",
                           [NSArray arrayWithObjects: [dnf description], 
-                           @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
+                           // @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
                            @"¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))",
                            nil], @"dnf",
                           nil];

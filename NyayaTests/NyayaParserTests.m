@@ -8,6 +8,7 @@
 
 #import "NyayaParserTests.h"
 #import "NyayaParser.h"
+#import "NyayaNode.h"
 
 @interface NyayaParserTests () {
     NSDictionary *_testCases;
@@ -27,11 +28,11 @@
                   
                   @"a ∨ b ∨ c"      , @"(((a∨b∨c)))",
                   @"a ∨ b ∨ c"      , @"(a∨b)∨c",
-                  @"a ∨ b ∨ c"    , @"a∨(b∨(c))",
+                  @"a ∨ (b ∨ c)"    , @"a∨(b∨(c))",
                   
                   @"a ∧ b ∧ c"      , @"(((a∧b∧c)))",
                   @"a ∧ b ∧ c"      , @"(a∧b)∧c",
-                  @"a ∧ b ∧ c"    , @"a∧(b∧(c))",
+                  @"a ∧ (b ∧ c)"    , @"a∧(b∧(c))",
                   
                   @"(a ∧ ¬b) ∨ c"      , @"a∧!b∨c",
                   @"(a ∨ ¬b) ∧ c"      , @"a∨!b∧c",
