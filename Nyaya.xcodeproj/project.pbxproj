@@ -19,6 +19,7 @@
 		1178CCB215B541B000FD21CA /* NyayaParserBasicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */; };
 		1178CCB815B56F0B00FD21CA /* NyayaParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */; };
 		1178CCBB15B5983400FD21CA /* NyayaNodeNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */; };
+		1183B6CE15B70AC10076D92C /* NyayaNodeSubFormulasTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */; };
 		11C375EE15B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C375F015B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C375F215B3D23D005C5C9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375F115B3D23D005C5C9C /* CoreGraphics.framework */; };
@@ -75,6 +76,8 @@
 		1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserTests.m; sourceTree = "<group>"; };
 		1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeNormalFormTests.h; sourceTree = "<group>"; };
 		1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeNormalFormTests.m; sourceTree = "<group>"; };
+		1183B6CC15B70AC10076D92C /* NyayaNodeSubFormulasTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeSubFormulasTests.h; sourceTree = "<group>"; };
+		1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeSubFormulasTests.m; sourceTree = "<group>"; };
 		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1183B6D015B70AC60076D92C /* NyayaParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				1183B6CC15B70AC10076D92C /* NyayaNodeSubFormulasTests.h */,
+				1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */,
+				1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */,
+				1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */,
+				1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */,
+				1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */,
+			);
+			name = NyayaParserTests;
+			sourceTree = "<group>";
+		};
+		1183B6D115B70AE20076D92C /* NyayaNodeTests */ = {
+			isa = PBXGroup;
+			children = (
+				1178CCB015B541B000FD21CA /* NyayaParserBasicTests.h */,
+				1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */,
+				1178CCB615B56F0B00FD21CA /* NyayaParserTests.h */,
+				1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */,
+				1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */,
+				1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */,
+				1178CCA415B5270000FD21CA /* NyayaNodeDescriptionTests.h */,
+				1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */,
+			);
+			name = NyayaNodeTests;
+			sourceTree = "<group>";
+		};
 		11C375DE15B3D23D005C5C9C = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +221,9 @@
 		11C3761C15B3D23D005C5C9C /* NyayaTests */ = {
 			isa = PBXGroup;
 			children = (
-				11C3762E15B3D269005C5C9C /* ModelTests */,
+				1183B6D115B70AE20076D92C /* NyayaNodeTests */,
+				1183B6D015B70AC60076D92C /* NyayaParserTests */,
+				11C3762E15B3D269005C5C9C /* NyayaExtensionsTests */,
 				11C3761D15B3D23D005C5C9C /* Supporting Files */,
 			);
 			path = NyayaTests;
@@ -222,27 +255,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		11C3762E15B3D269005C5C9C /* ModelTests */ = {
+		11C3762E15B3D269005C5C9C /* NyayaExtensionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */,
-				1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */,
-				1178CCA415B5270000FD21CA /* NyayaNodeDescriptionTests.h */,
-				1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */,
-				1178CCB015B541B000FD21CA /* NyayaParserBasicTests.h */,
-				1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */,
-				1178CCB615B56F0B00FD21CA /* NyayaParserTests.h */,
-				1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */,
-				1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */,
-				1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */,
-				1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */,
-				1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */,
 				1166601B15B6E7D90070B5B8 /* NyayaTokenTests.h */,
 				1166601C15B6E7D90070B5B8 /* NyayaTokenTests.m */,
 				1166602115B6F0B20070B5B8 /* NyayaLiteralTests.h */,
 				1166602215B6F0B20070B5B8 /* NyayaLiteralTests.m */,
 			);
-			name = ModelTests;
+			name = NyayaExtensionsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +402,7 @@
 				1166601715B6BCE90070B5B8 /* NyayaNodeResolution.m in Sources */,
 				1166601D15B6E7D90070B5B8 /* NyayaTokenTests.m in Sources */,
 				1166602315B6F0B20070B5B8 /* NyayaLiteralTests.m in Sources */,
+				1183B6CE15B70AC10076D92C /* NyayaNodeSubFormulasTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

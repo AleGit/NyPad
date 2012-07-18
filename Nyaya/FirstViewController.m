@@ -22,6 +22,7 @@
 @synthesize nnf;
 @synthesize cnf;
 @synthesize dnf;
+@synthesize subformulas;
 
 - (void)viewDidLoad
 {
@@ -37,6 +38,7 @@
     [self setNnf:nil];
     [self setCnf:nil];
     [self setDnf:nil];
+    [self setSubformulas:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -65,6 +67,8 @@
 
     NyayaNode *d = [n dnf];
     self.dnf.text = [d description];
+    
+    self.subformulas.text = [[a sortedSubformulas] componentsJoinedByString:@"; "];
     
 
     

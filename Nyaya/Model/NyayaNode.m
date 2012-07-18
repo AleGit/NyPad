@@ -475,7 +475,32 @@
     return [self clauses:NyayaDisjunction clauses:NyayaConjunction];
 }
 
+#pragma mark - subformulas
 
+- (NSSet*)subformulas {
+    NSSet *set = [NSSet setWithObject:[self description]];
+    
+    for (NSSet* subset in [self valueForKeyPath:@"nodes.subformulas.description"]) {
+       
+        set = [set setByAddingObjectsFromSet:subset];
+    }
+    
+    // array = [array arrayByAddingObjectsFromArray:[self valueForKeyPath:@"nodes.subformulas.description"]];
+    
+    return set;
+    
+}
+
+- (NSArray*)sortedSubformulas {
+    NSArray *array = [[self subformulas] allObjects];
+    
+    return [array sortedArrayUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {
+        if ([obj1 length] < [obj2 length]) return -1;
+        else if ([obj1 length] > [obj2 length]) return 1;
+        else return [obj1 compare:obj2];
+    }];
+    
+}
 
 
 

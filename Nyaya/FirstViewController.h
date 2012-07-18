@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *nnf;
 @property (weak, nonatomic) IBOutlet UITextView *cnf;
 @property (weak, nonatomic) IBOutlet UITextView *dnf;
+@property (weak, nonatomic) IBOutlet UITextView *subformulas;
 
 - (IBAction)compute:(id)sender;
 
