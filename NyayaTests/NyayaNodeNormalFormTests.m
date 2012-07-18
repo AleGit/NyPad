@@ -28,7 +28,7 @@
     
     STAssertEqualObjects(@"¬a → b ∨ (¬b → ¬F)", [node description], nil);
     STAssertEquals((NyayaBool)NyayaTrue, node.value,nil);
-    STAssertEqualObjects(@"¬¬a ∨ (b ∨ (¬¬b ∨ ¬F))", [imf description], nil);
+    STAssertEqualObjects([imf description], @"¬¬a ∨ b ∨ ¬¬b ∨ ¬F", nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, imf.value,[imf description]);
     
@@ -88,6 +88,68 @@
     
     STAssertEqualObjects(@"a ∧ (¬b ∨ c)", [node description], nil);
     STAssertEqualObjects(@"(a ∧ ¬b) ∨ (a ∧ c)", [imf description], nil);
+    
+}
+
+- (void)testNormForms {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a>b&!a&b>b|a|(a>b)|!(!a>a)"];
+    
+    NyayaNode *ast = [parser parseFormula];
+    NyayaNode *imf = [ast imf];
+    NyayaNode *nnf = [imf nnf];
+    NyayaNode *cnf = [nnf cnf];
+    NyayaNode *dnf = [nnf dnf];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSArray arrayWithObjects: [ast description], @"a → b ∧ ¬a ∧ b → b ∨ a ∨ (a → b) ∨ ¬(¬a → a)",
+                           nil], @"ast",
+                          [NSArray arrayWithObjects: [imf description], 
+                           @"¬a ∨ ¬(b ∧ ¬a ∧ b) ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬(¬¬a ∨ a)",
+                           @"¬a ∨ (¬(b ∧ ¬a ∧ b) ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬(¬¬a ∨ a)))",
+                           nil], @"imf",
+                          [NSArray arrayWithObjects: [nnf description], 
+                           @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
+                           @"¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))",
+                           nil], @"nnf",
+                          [NSArray arrayWithObjects: [cnf description], 
+                           @"(¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a) ∧ (¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ ¬a)",
+                           @"(¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))",
+                           nil], @"cnf",
+                          [NSArray arrayWithObjects: [dnf description], 
+                           @"¬a ∨ ¬b ∨ a ∨ ¬b ∨ b ∨ a ∨ ¬a ∨ b ∨ (¬a ∧ ¬a)",
+                           @"¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))",
+                           nil], @"dnf",
+                          nil];
+    
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *array, BOOL *stop) {
+        NSString *actual = [array objectAtIndex:0];
+        NSString *expected = [array objectAtIndex:1];
+        
+        NSString *common = [actual commonPrefixWithString:expected options:0];
+        NSString *wrong = nil; 
+        NSString *missing=nil;
+        if ([expected length] > [common length])
+            wrong = [expected substringFromIndex:[common length]];
+        if ([actual length] > [common length])
+            missing = [actual substringFromIndex:[common length]];
+    
+        NSString *message = [NSString stringWithFormat:@"\n k:%@ \n c:%@ \n m:%@ \n w:%@ ", key, common, missing, wrong];
+        
+        STAssertEqualObjects(actual, expected, message);
+
+    
+    }];
+    
+    /*
+    STAssertEqualObjects([ast description], , nil);
+    STAssertEqualObjects([imf description], , nil);
+    STAssertEqualObjects([nnf description], , nil);
+    STAssertEqualObjects([cnf description], @"", nil);
+    STAssertEqualObjects([dnf description], @"", nil);
+    
+    */
+    
     
 }
 

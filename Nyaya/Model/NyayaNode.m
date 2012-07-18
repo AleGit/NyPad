@@ -143,7 +143,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
-                case NyayaConjunction: // left associative
+                case NyayaConjunction: // a ∧ b ∧ c = (a ∧ b) ∧ c (left associative) 
                     left = [first description];
                     break;
                 default:
@@ -155,6 +155,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
+                case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
                     right = [second description];
                     break;
                 default:
@@ -170,7 +171,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
-                case NyayaDisjunction:  // left associative
+                case NyayaDisjunction:  // a ∨ b ∨ c ≡ (a ∨ b) ∨ c (left associative) 
                     left = [first description];
                     break;
                 default:
@@ -182,6 +183,7 @@
                 case NyayaConstant:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
+                case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
                     right = [second description];
                     break;
                 default:
