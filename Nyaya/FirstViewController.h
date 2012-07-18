@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *dnf;
 @property (weak, nonatomic) IBOutlet UITextView *subformulas;
 
+@property (strong, nonatomic) IBOutlet UIView *myInputView;
 - (IBAction)compute:(id)sender;
+
+- (IBAction)press:(UIButton *)sender;
+- (IBAction)delete:(UIButton *)sender;
 
 @end
