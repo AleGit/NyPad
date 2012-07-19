@@ -10,7 +10,9 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 
-@interface FirstViewController ()
+@interface FirstViewController () {
+    dispatch_queue_t queue;
+}
 
 @end
 
@@ -42,11 +44,15 @@
     [compButton addTarget:self action:@selector(completeCurrentWord:)
          forControlEvents:UIControlEventTouchUpInside];
     [inputAccessoryView addSubview:compButton];*/
+    
     self.input.inputView = self.myInputView;
     // self.input.inputAccessoryView = self.myInputView;
     [self.input becomeFirstResponder];
     
     // self.input.inputView = self.myInputView;
+    
+    
+    queue = dispatch_queue_create("at.maringele.nyaya.queue", NULL);
 }
 
 
@@ -61,12 +67,14 @@
     [self setSubformulas:nil];
     [self setMyInputView:nil];
     [super viewDidUnload];
+    
+    dispatch_release(queue);
     // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return NO;
+    return YES;
 }
 
 - (IBAction)compute:(id)sender {
@@ -75,25 +83,51 @@
     }
     else {
         NyayaParser *parser = [[NyayaParser alloc] initWithString:self.input.text];
-        NyayaNode *a = [parser parseFormula];
-        self.ast.text = [a description];
+        dispatch_async(queue, ^{
+            dispatch_queue_t mq = dispatch_get_main_queue();
+            
+            NyayaNode *a = [parser parseFormula];
+            dispatch_async(mq, ^{
+                self.ast.text = [a description];
+            });
+            
+            NyayaNode *i = [a imf];
+            dispatch_async(mq, ^{
+                self.imf.text = [i description];
+            });
+            
+            
+            NyayaNode *n = [i nnf];
+            dispatch_async(mq, ^{
+                self.nnf.text = [n description];
+            });
+            
+            
+            NyayaNode *c = [n cnf];
+            dispatch_async(mq, ^{
+                self.cnf.text = [c description];
+            });
+            
+            
+            NyayaNode *d = [n dnf];
+            dispatch_async(mq, ^{
+                self.dnf.text = [d description];
+            });
+            
+            
+            NSString *s = [[a sortedSubformulas] componentsJoinedByString:@"; "];
+            
+            dispatch_async(mq, ^{
+                self.subformulas.text = s;
+            });
+            
+        });
         
-        NyayaNode *i = [a imf];
-        self.imf.text = [i description];
         
         
-        NyayaNode *n = [i nnf];
-        self.nnf.text = [n description];
         
+       
         
-        NyayaNode *c = [n cnf];
-        self.cnf.text = [c description];
-        
-        
-        NyayaNode *d = [n dnf];
-        self.dnf.text = [d description];
-        
-        self.subformulas.text = [[a sortedSubformulas] componentsJoinedByString:@"; "];
         
         
         [self.input resignFirstResponder];
@@ -101,13 +135,30 @@
     
 }
 
+- (void)parse {
+    
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:self.input.text];
+    dispatch_async(queue, ^{
+        dispatch_queue_t mq = dispatch_get_main_queue();
+        
+        NyayaNode *a = [parser parseFormula];
+        dispatch_async(mq, ^{
+            self.ast.text = [a description];
+        });
+        
+        
+        
+    });
+}
+
 - (IBAction)press:(UIButton *)sender {
     [self.input insertText:sender.currentTitle];
-    
+    if ([self.input hasText]) [self parse];
 }
 
 - (IBAction)delete:(UIButton *)sender {
     [self.input deleteBackward];
+    if ([self.input hasText]) [self parse];
 }
 
 @end
