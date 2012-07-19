@@ -19,6 +19,7 @@
 - (NSString*)complementaryLiteral;
 - (BOOL)isComplement:(NSString*)s;
 
+- (BOOL)isIdentifier;
 - (BOOL)isLeftParenthesis;
 - (BOOL)isRightParenthesis;
 - (BOOL)isComma;

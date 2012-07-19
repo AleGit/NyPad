@@ -11,6 +11,8 @@
 @implementation NSString (NyayaToken)
 
 - (BOOL)isNegation {
+    
+    
     return [self isEqualToString:@"¬"]
     || [self isEqualToString:@"!"];
 }
@@ -53,6 +55,13 @@
         && [s hasPrefix:@"¬"] && [s hasSuffix:self]);
     
     // return [self isEqualToString:[s complementaryLiteral]];
+}
+
+- (BOOL)isIdentifier {
+    NSCharacterSet *noids = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    NSRange range = [self rangeOfCharacterFromSet:noids];
+    
+    return range.location == NSNotFound;
 }
 
 - (BOOL)isLeftParenthesis {

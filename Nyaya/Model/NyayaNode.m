@@ -10,7 +10,6 @@
 
 @interface NyayaNode () {
     NyayaBool _value;
-    
 }
 @end
 
@@ -41,7 +40,7 @@
     node->_symbol = @"¬";
     node->_type = NyayaNegation;
     node->_value = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObject:firstNode];
+    node->_nodes = [NSArray arrayWithObjects:firstNode, nil];
     return node;
 }
 
@@ -139,6 +138,8 @@
 }
 
 - (NSString*)description {
+    NSString *result = nil;
+    
     NSUInteger count = [self.nodes count];
     NyayaNode *first = (count > 0) ? [self.nodes objectAtIndex:0] : nil;
     NyayaNode *second = (count > 1) ? [self.nodes objectAtIndex:1] : nil;
@@ -147,7 +148,8 @@
     
     switch (_type) {
         case NyayaConstant:
-            return _symbol;
+            result =  _symbol;
+            break;
         case NyayaNegation:
             switch(first.type) {
                 case NyayaConstant:
@@ -159,7 +161,8 @@
                     right = [NSString stringWithFormat:@"(%@)", [first description]];
                     break;
             }
-            return [NSString stringWithFormat:@"%@%@", self.symbol, right];
+            result =  [NSString stringWithFormat:@"%@%@", self.symbol, right];
+            break;
             
         case NyayaConjunction:
             switch(first.type) {
@@ -187,7 +190,8 @@
             }
             
             
-            return [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            break;
             
         case NyayaDisjunction:
             switch(first.type) {
@@ -215,7 +219,8 @@
             }
             
             
-            return [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            break;
 
         
         case NyayaImplication:
@@ -245,15 +250,21 @@
                     right = [NSString stringWithFormat:@"(%@)", [second description]];
                     break;
             }
-            return [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            break;
             
         case NyayaFunction:
             right = [[self.nodes valueForKey:@"description"] componentsJoinedByString:@","];
-            return [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
+            result =  [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
+            break;
             
         default:
-            return @"NIY";
+            result = @"NIY";
+            break;
+            
+        
     }
+    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
 }
 
 #pragma mark - cnf, dnf, nnf, imf

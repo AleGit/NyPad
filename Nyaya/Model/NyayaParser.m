@@ -13,6 +13,7 @@
 @interface NyayaParser () {
     NSUInteger _index;
     NSString* _token;
+    NSMutableArray* _errors;
 }
 @end
 
@@ -20,6 +21,7 @@
 
 @synthesize input = _input;
 @synthesize tokens = _tokens;
+@synthesize firstErrorState = _errorState;
 
 - (BOOL)nextToken {
     _index++;
@@ -27,6 +29,7 @@
         _token = [_tokens objectAtIndex:_index];
         return YES;
     }
+    else _token = nil;
     return NO;
 }
 
@@ -53,8 +56,14 @@
 - (void)resetWithString:(NSString*)input {
     _input = input;
     _index = 0;
+    _errorState = NyayaUndefined;
+    _errors = [NSMutableArray array];
+    
     [self tokenize];
-    _token = [_tokens objectAtIndex:_index];
+    
+    if ([_tokens count] > 0)
+        _token = [_tokens objectAtIndex:_index];
+    else _token = nil;
     
 }
 
@@ -67,20 +76,51 @@
     return self;
 }
 
+- (void)addErrorDescription:(NyayaErrorState)errorState {
+    if (_errorState == NyayaUndefined) {
+        _errorState = errorState;   // first error
+    }
+    
+    NSUInteger _idx = _index+1;
+    
+    NSString* description = [NSString stringWithFormat:@"%@::%@::%@::%d",
+                             [[_tokens subarrayWithRange:NSMakeRange(0, _index)] componentsJoinedByString:@""],
+                             _token ? _token : @" ",
+                             _idx < [_tokens count] ? [[_tokens subarrayWithRange:NSMakeRange(_idx, [_tokens count]-_idx)] componentsJoinedByString:@""] : @"",
+                             errorState];
+    [_errors addObject:description];
+}
 
-- (NSArray*)parseSequence {   // sequence    = formula   { ";" formula }
+- (BOOL)hasErrors {
+    return [_errors count] > 0;
+}
+
+- (NSString*)errorDescriptions {
+    return [_errors componentsJoinedByString:@"•"];
+}
+
+
+- (NSArray*)parseSequence {   // sequence    = [identifier "=" ] formula   { ";" [identifier "=" ] formula }
     return nil;
+    
 }
     
 - (NyayaNode*)parseFormula {  // formula     = junction  [ ( "→" | "↔" ) formula }
-    NyayaNode *formula =  [self parseJunction];
+    NyayaNode *result;
     
-    if ([_token isImplication]) {
-        [self nextToken]; // consume ">"
-        return [NyayaNode implication:formula with:[self parseFormula]];
+    if (_token) {
+        result = [self parseJunction];
+        
+        if ([_token isImplication]) {
+            [self nextToken]; // consume ">"
+            return [NyayaNode implication:result with:[self parseFormula]];
+        }
+    }
+    else {
+        [self addErrorDescription: NyayaErrorNoToken];
     }
     
-    return formula;
+    return result;
     
 }
     
@@ -89,78 +129,123 @@
     
     while ([_token isJunction]) {
         NSString *tok = _token;
-        [self nextToken];
-         
-        if ([tok isDisjunction]) {
-            
-            junction = [NyayaNode disjunction:junction with:[self parseNegation]];
+        
+        
+        NyayaNode *node = nil; 
+        while (!node && _token) {
+            [self nextToken];
+            node = [self parseNegation];
         }
-        else 
-            junction = [NyayaNode conjunction:junction with:[self parseNegation]];
+        
+        
+        
+         
+        if (node && [tok isDisjunction]) {
+            
+            junction = [NyayaNode disjunction:junction with:node];
+        }
+        else if (node)
+            junction = [NyayaNode conjunction:junction with:node];
+        
+        // if (!node) break;
         
     }
-        
     
+    if ([_token isNegation]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
+        
+    if (_token)
+        NSLog(@"token: %@", _token);
     
     
     return junction;
 }
 
-// negation    = "¬" negation | term | "(" formula ")"
+// negation    = "¬" negation | "(" formula ")" | term 
 - (NyayaNode*)parseNegation { 
+    NyayaNode *result = nil;
+    
     if ([_token isNegation]) {
-        [self nextToken];
+        [self nextToken];       // consume "¬"
         return [NyayaNode negation:[self parseNegation]];
         
     }
     else if ([_token isLeftParenthesis]) {
-        [self nextToken];
-        NyayaNode *f = [self parseFormula];
-        if ([_token isRightParenthesis]) [self nextToken];
-        else NSLog(@"ERROR missing right parenthesis");
-        return f;
+        [self nextToken];       // consume "("
+        result = [self parseFormula];
+        
+        if ([_token isRightParenthesis]) 
+            [self nextToken];   // consume ")"
+        else {
+            [self addErrorDescription:NyayaErrorNoRightParenthesis];
+        }
+    }
+    else if ([_token isIdentifier]) {
+        result = [self parseTerm];
+    }
+    else if (_token) {
+        [self addErrorDescription:NyayaErrorNoNegation|NyayaErrorNoLeftParenthesis|NyayaErrorNoIdentifier];
     }
     else {
-        return [self parseTerm];
+        [self addErrorDescription:NyayaErrorNoToken];
     }
+    
+    return result;
 }
 
 // term = identifier [ tuple ]
-- (NyayaNode*)parseTerm {     
-    NSString *identifier = _token;
-    [self nextToken];
+- (NyayaNode*)parseTerm { 
+    NyayaNode *result = nil;
     
-    NSArray *tuple = [self parseTuple];
+    if ([_token isIdentifier]) {
+        
+        NSString *identifier = _token;  // store identifier
+        [self nextToken];               // consume identifier
+        
+        NSArray *tuple = [self parseTuple]; // try to parse optional tuple 
+        
+        if (tuple) result = [NyayaNode function:identifier with:tuple];
+        else result = [NyayaNode constant:identifier];
+    }
+    else {
+        [self addErrorDescription: NyayaErrorNoIdentifier];    }
     
-    if (tuple) return [NyayaNode function:identifier with:tuple];
-    
-    return [NyayaNode constant:identifier];
+    return result;
 }
  
-// tuple = "(" [ formula { "," formula } ] ")"
-- (NSArray*)parseTuple {   
-    if (![_token isLeftParenthesis]) return nil;
+// tuple = "(" formula { "," formula } ")"
+- (NSArray*)parseTuple {
+    NSMutableArray* result = nil;
     
-    NSMutableArray *ma = [NSMutableArray array];
-    
-    [self nextToken]; // "(" consumed
-    
-    while (![_token isRightParenthesis]) {
-        NyayaNode *formula = [self parseFormula];
-        if (formula) [ma addObject:formula];
+    if ([_token isLeftParenthesis]) {                   // a tuple starts with "("
         
-        if ([_token isComma]) 
-            [self nextToken]; // consume ","
-        else if (![_token isRightParenthesis]) 
-            NSLog(@"parseTuple ERROR");
+        result = [NSMutableArray array];
         
+        [self nextToken];                               // consume "("
+        
+        while (![_token isRightParenthesis]) {          // a tuple ends with ")"
+            NyayaNode *formula = [self parseFormula];
+            if (formula) {
+                [result addObject:formula];
+            }
+            
+            if ([_token isComma])   {                    // tuple members are separeted by ","
+                [self nextToken];                           // consume ","
+                if ([_token isRightParenthesis])
+                    [self addErrorDescription: NyayaErrorNoNegation|NyayaErrorNoLeftParenthesis|NyayaErrorNoIdentifier];
+            }
+            else if (![_token isRightParenthesis]) {    // or closed by ")"
+                [self addErrorDescription: NyayaErrorNoRightParenthesis];
+                break;
+            }
+
+        }
+        
+        [self nextToken];                               // consume "("
     }
-    
-    [self nextToken]; // ")" consumed
          
 
     
-    return [ma copy];
+    return [result copy];
 }
 
 

@@ -24,6 +24,7 @@
 @synthesize cnf;
 @synthesize dnf;
 @synthesize subformulas;
+@synthesize errors;
 @synthesize myInputView;
 
 - (void)viewDidLoad
@@ -66,6 +67,7 @@
     [self setDnf:nil];
     [self setSubformulas:nil];
     [self setMyInputView:nil];
+    [self setErrors:nil];
     [super viewDidUnload];
     
     dispatch_release(queue);
@@ -89,37 +91,41 @@
             NyayaNode *a = [parser parseFormula];
             dispatch_async(mq, ^{
                 self.ast.text = [a description];
+                if ([parser hasErrors]) self.errors.text = [parser errorDescriptions];
             });
             
-            NyayaNode *i = [a imf];
-            dispatch_async(mq, ^{
-                self.imf.text = [i description];
-            });
-            
-            
-            NyayaNode *n = [i nnf];
-            dispatch_async(mq, ^{
-                self.nnf.text = [n description];
-            });
-            
-            
-            NyayaNode *c = [n cnf];
-            dispatch_async(mq, ^{
-                self.cnf.text = [c description];
-            });
-            
-            
-            NyayaNode *d = [n dnf];
-            dispatch_async(mq, ^{
-                self.dnf.text = [d description];
-            });
-            
-            
-            NSString *s = [[a sortedSubformulas] componentsJoinedByString:@"; "];
-            
-            dispatch_async(mq, ^{
-                self.subformulas.text = s;
-            });
+            if (![parser hasErrors]) {
+                
+                NyayaNode *i = [a imf];
+                dispatch_async(mq, ^{
+                    self.imf.text = [i description];
+                });
+                
+                
+                NyayaNode *n = [i nnf];
+                dispatch_async(mq, ^{
+                    self.nnf.text = [n description];
+                });
+                
+                
+                NyayaNode *c = [n cnf];
+                dispatch_async(mq, ^{
+                    self.cnf.text = [c description];
+                });
+                
+                
+                NyayaNode *d = [n dnf];
+                dispatch_async(mq, ^{
+                    self.dnf.text = [d description];
+                });
+                
+                
+                NSString *s = [[a sortedSubformulas] componentsJoinedByString:@"; "];
+                
+                dispatch_async(mq, ^{
+                    self.subformulas.text = s;
+                });
+            }
             
         });
         
@@ -144,6 +150,7 @@
         NyayaNode *a = [parser parseFormula];
         dispatch_async(mq, ^{
             self.ast.text = [a description];
+            self.errors.text = @"  ";
         });
         
         
@@ -161,4 +168,18 @@
     if ([self.input hasText]) [self parse];
 }
 
+- (IBAction)parenthesize:(UIButton *)sender {
+    if ([self.input hasText]) {
+       self.input.text = [NSString stringWithFormat:@"(%@)", self.input.text]; 
+    [self parse];
+    }
+    
+}
+
+- (IBAction)negate:(UIButton *)sender {
+    if ([self.input hasText]) {
+        self.input.text = [NSString stringWithFormat:@"¬(%@)", self.input.text]; 
+        [self parse];
+    }
+}
 @end
