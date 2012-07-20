@@ -13,7 +13,7 @@
 @implementation NyayaNodeNormalFormTests
 
 - (void)testImf {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a>T"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"a>T"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node imf];
     
@@ -23,7 +23,7 @@
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, imf.value,[imf description]);
     
-    [parser resetWithString:@"!a > b | (!b > !F)"];
+    parser = [NyayaParser parserWithString:@"!a > b | (!b > !F)"];
     node = [parser parseFormula];
     imf = [node imf];
     
@@ -36,7 +36,7 @@
 }
 
 - (void)testNNF {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"!!F"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"!!F"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node nnf];
     
@@ -46,7 +46,7 @@
     STAssertEquals((NyayaNodeType)NyayaConstant, imf.type,nil);
     STAssertEquals((NyayaBool)NyayaFalse, imf.value,[imf description]);
     
-    [parser resetWithString:@"(!(P|(Q&!R)))"];
+    parser = [NyayaParser parserWithString:@"(!(P|(Q&!R)))"];
     node = [parser parseFormula];
     imf = [node nnf];
     
@@ -59,14 +59,14 @@
 }
 
 - (void)testCNF {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a&!b)|c"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"(a&!b)|c"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node cnf];
     
     STAssertEqualObjects(@"(a ∧ ¬b) ∨ c", [node description], nil);
     STAssertEqualObjects(@"(a ∨ c) ∧ (¬b ∨ c)", [imf description], nil);
     
-    [parser resetWithString:@"a|(!b&c)"];
+    parser = [NyayaParser parserWithString:@"a|(!b&c)"];
     node = [parser parseFormula];
     imf = [node cnf];
     
@@ -76,14 +76,14 @@
 }
 
 - (void)testDNF {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a|!b)&c"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"(a|!b)&c"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node dnf];
     
     STAssertEqualObjects(@"(a ∨ ¬b) ∧ c", [node description], nil);
     STAssertEqualObjects(@"(a ∧ c) ∨ (¬b ∧ c)", [imf description], nil);
     
-    [parser resetWithString:@"a&(!b|c)"];
+    parser = [NyayaParser parserWithString:@"a&(!b|c)"];
     node = [parser parseFormula];
     imf = [node dnf];
     
@@ -93,7 +93,7 @@
 }
 
 - (void)testNormForms {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a>b&!a&b>b|a|(a>b)|!(!a>a)"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"a>b&!a&b>b|a|(a>b)|!(!a>a)"];
     
     NyayaNode *ast = [parser parseFormula];
     NyayaNode *imf = [ast imf];

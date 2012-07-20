@@ -16,7 +16,7 @@
 
 - (void)testParseTerm {
     
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"x1"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"x1"];
     
     NyayaNode *n = [parser parseTerm];
     
@@ -24,33 +24,45 @@
     STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     
-    [parser resetWithString:@"T"];
+    parser = [NyayaParser parserWithString:@"T"];
     n = [parser parseTerm];
     STAssertEqualObjects(@"T", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     
-    [parser resetWithString:@"0"];
+    parser = [NyayaParser parserWithString:@"1"];
+    n = [parser parseTerm];
+    STAssertEqualObjects(@"1", n.symbol, nil);
+    STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
+    STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
+    
+    parser = [NyayaParser parserWithString:@"F"];
+    n = [parser parseTerm];
+    STAssertEqualObjects(@"F", n.symbol, nil);
+    STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
+    STAssertEquals((NyayaBool)NyayaFalse, n.value, nil);
+    
+    parser = [NyayaParser parserWithString:@"0"];
     n = [parser parseTerm];
     STAssertEqualObjects(@"0", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
     STAssertEquals((NyayaBool)NyayaFalse, n.value, nil);
     
-    [parser resetWithString:@"f()"];
+    parser = [NyayaParser parserWithString:@"f()"];
     n = [parser parseTerm];
     STAssertEqualObjects(@"f", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaFunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"f()", [n description],nil);
     
-    [parser resetWithString:@"f(a)"];
+    parser = [NyayaParser parserWithString:@"f(a)"];
     n = [parser parseTerm];
     STAssertEqualObjects(@"f", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaFunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"f(a)", [n description],nil);
     
-    [parser resetWithString:@"f(a,b)"];
+    parser = [NyayaParser parserWithString:@"f(a,b)"];
     n = [parser parseTerm];
     STAssertEqualObjects(@"f", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaFunction, n.type,nil);
@@ -69,26 +81,26 @@
     STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     
-    [parser resetWithString:@"!T"];
+    parser = [NyayaParser parserWithString:@"!T"];
     n = [parser parseNegation];
     STAssertEqualObjects(@"¬", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
     STAssertEquals((NyayaBool)NyayaFalse, n.value, nil);
     
-    [parser resetWithString:@"!0"];
+    parser = [NyayaParser parserWithString:@"!0"];
     n = [parser parseNegation];
     STAssertEqualObjects(@"¬", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     
-    [parser resetWithString:@"!f()"];
+    parser = [NyayaParser parserWithString:@"!f()"];
     n = [parser parseNegation];
     STAssertEqualObjects(@"¬", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"¬f()", [n description],nil);
     
-    [parser resetWithString:@"!f(a)"];
+    parser = [NyayaParser parserWithString:@"!f(a)"];
     n = [parser parseNegation];
     STAssertEqualObjects(@"¬", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
@@ -108,34 +120,34 @@
     STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     
-    [parser resetWithString:@"!T | a"];
+    parser = [NyayaParser parserWithString:@"!T | a"];
     n = [parser parseJunction];
     STAssertEqualObjects(@"∨", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"¬T ∨ a", [n description],nil);
     
-    [parser resetWithString:@"!0 | b"];
+    parser = [NyayaParser parserWithString:@"!0 | b"];
     n = [parser parseJunction];
     STAssertEqualObjects(@"∨", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     
-    [parser resetWithString:@"c | !f()"];
+    parser = [NyayaParser parserWithString:@"c | !f()"];
     n = [parser parseJunction];
     STAssertEqualObjects(@"∨", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"c ∨ ¬f()", [n description],nil);
     
-    [parser resetWithString:@"a & !f(a)"];
+    parser = [NyayaParser parserWithString:@"a & !f(a)"];
     n = [parser parseJunction];
     STAssertEqualObjects(@"∧", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"a ∧ ¬f(a)", [n description],nil);
     
-    [parser resetWithString:@"a & !f(a,b)"];
+    parser = [NyayaParser parserWithString:@"a & !f(a,b)"];
     n = [parser parseJunction];
     STAssertEqualObjects(@"∧", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
@@ -154,34 +166,34 @@
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     
-    [parser resetWithString:@"!T | a>b"];
+    parser = [NyayaParser parserWithString:@"!T | a>b"];
     n = [parser parseFormula];
     STAssertEqualObjects(@"→", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"¬T ∨ a → b", [n description],nil);
     
-    [parser resetWithString:@"x>!0 | b"];
+    parser = [NyayaParser parserWithString:@"x>!0 | b"];
     n = [parser parseFormula];
     STAssertEqualObjects(@"→", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     
-    [parser resetWithString:@"c | !f()→ach()"];
+    parser = [NyayaParser parserWithString:@"c | !f()→ach()"];
     n = [parser parseFormula];
     STAssertEqualObjects(@"→", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     STAssertEqualObjects(@"c ∨ ¬f() → ach()", [n description],nil);
     
-    [parser resetWithString:@"a & !f(a)>T"];
+    parser = [NyayaParser parserWithString:@"a & !f(a)>T"];
     n = [parser parseFormula];
     STAssertEqualObjects(@"→", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     STAssertEqualObjects(@"a ∧ ¬f(a) → T", [n description],nil);
     
-    [parser resetWithString:@"F>a & !f(a,b)"];
+    parser = [NyayaParser parserWithString:@"F>a & !f(a,b)"];
     n = [parser parseFormula];
     STAssertEqualObjects(@"→", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);

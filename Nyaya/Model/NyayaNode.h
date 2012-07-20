@@ -11,16 +11,16 @@
 enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
 typedef NSUInteger NyayaBool;
 
-enum { NyayaConstant=1, NyayaFunction, NyayaNegation, NyayaConjunction, NyayaDisjunction, NyayaImplication };
+enum { // NyayaUndefined=0
+    NyayaConstant=1, NyayaFunction, NyayaNegation, NyayaConjunction, NyayaDisjunction, NyayaImplication };
 typedef NSUInteger NyayaNodeType;
 
 @interface NyayaNode : NSObject
 
 @property (nonatomic, readonly) NyayaNodeType type; 
-@property (nonatomic, readonly) NSString *symbol;
+@property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;
 
-+ (NyayaNode*)constant:(NSString*)name with:(NyayaBool)value;
 + (NyayaNode*)constant:(NSString*)name;
 
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
@@ -39,8 +39,8 @@ typedef NSUInteger NyayaNodeType;
 
 - (NSString*)treeDescription;
 
-- (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction of disjunctions of literals (a or b) AND (a or !b)
-- (NSArray*)disjunctionOfConjunctions; // dnf is disjunction of conjunctions of literals (a and b) OR (a and !b)
+- (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction (AND) of disjunctions (OR) of literals: (a or b) AND (a or !b)
+- (NSArray*)disjunctionOfConjunctions; // dnf is disjunction (OR) of conjunctions (AND) of literals: (a and b) OR (a and !b)
 
 - (NSSet*)subformulas;
 - (NSArray*)sortedSubformulas;

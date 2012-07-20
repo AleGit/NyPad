@@ -23,6 +23,29 @@
 @synthesize tokens = _tokens;
 @synthesize firstErrorState = _errorState;
 
++ (id)parserWithString:(NSString*)input {
+    return [[NyayaParser alloc]initWithString:input];
+}
+
+- (id)initWithString:(NSString*)input {
+    self = [super init];
+    if (self) {
+        _input = input;
+        _index = 0;
+        _errorState = NyayaUndefined;
+        _errors = [NSMutableArray array];
+        
+        [self tokenize];
+        
+        if ([_tokens count] > 0)
+            _token = [_tokens objectAtIndex:_index];
+        else _token = nil;
+    }
+    
+    return self;
+}
+
+
 - (BOOL)nextToken {
     _index++;
     if (_index < [_tokens count]) {
@@ -51,29 +74,6 @@
                          }];
     
     _tokens = [tokens copy];
-}
-
-- (void)resetWithString:(NSString*)input {
-    _input = input;
-    _index = 0;
-    _errorState = NyayaUndefined;
-    _errors = [NSMutableArray array];
-    
-    [self tokenize];
-    
-    if ([_tokens count] > 0)
-        _token = [_tokens objectAtIndex:_index];
-    else _token = nil;
-    
-}
-
-- (id)initWithString:(NSString*)input {
-    self = [super init];
-    if (self) {
-        [self resetWithString:input];
-    }
-    
-    return self;
 }
 
 - (void)addErrorDescription:(NyayaErrorState)errorState {

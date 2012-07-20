@@ -33,7 +33,7 @@ typedef NSUInteger NyayaErrorState;
 @property (readonly) NSArray* tokens;
 @property (readonly) NyayaErrorState firstErrorState;
 
-- (void)resetWithString:(NSString*)input;
++ (id)parserWithString:(NSString*)input;
 - (id)initWithString:(NSString*)input;
 
 - (BOOL)hasErrors;

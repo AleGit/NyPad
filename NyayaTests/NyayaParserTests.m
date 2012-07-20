@@ -73,12 +73,11 @@
 
 
 - (void)testParseFormula {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a"];
     
     
     [_testCases enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSLog(@"key=%@ obj=%@", key, obj);
-        [parser resetWithString:key];
+        NyayaParser *parser = [NyayaParser parserWithString:key];
         NyayaNode *node = [parser parseFormula];
         
         NSString *d = [node description];

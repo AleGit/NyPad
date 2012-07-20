@@ -7,6 +7,7 @@
 //
 
 #import "NyayaNode.h"
+#import "NyayaStore.h"
 
 @interface NyayaNode () {
     NyayaBool _value;
@@ -28,11 +29,18 @@
 }
 
 + (NyayaNode*)constant:(NSString*)name {
-    if ([name isEqualToString:@"T"]) return [self constant:name with:NyayaTrue];
-    else if ([name isEqualToString:@"1"]) return [self constant:name with:NyayaTrue];
-    else if ([name isEqualToString:@"F"]) return [self constant:name with:NyayaFalse];
-    else if ([name isEqualToString:@"0"]) return [self constant:name with:NyayaFalse];
-    else return [self constant:name with:NyayaUndefined];
+    NyayaStore *store = [NyayaStore sharedInstance];
+    NyayaNode *node = [store nodeForName:name];
+    if (!node) {
+        if ([name isEqualToString:@"T"]) node= [self constant:name with:NyayaTrue];
+        else if ([name isEqualToString:@"1"]) node= [self constant:name with:NyayaTrue];
+        else if ([name isEqualToString:@"F"]) node= [self constant:name with:NyayaFalse];
+        else if ([name isEqualToString:@"0"]) node= [self constant:name with:NyayaFalse];
+        else node= [self constant:name with:NyayaUndefined];
+        
+        [store setNode:node forName:node.symbol];
+    }
+    return node;
 }
 
 + (NyayaNode*)negation:(NyayaNode *)firstNode {
