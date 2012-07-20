@@ -374,20 +374,25 @@
                                  with:[NyayaNode cnfDistribution:first with:n22]];
         
     }
-    else { // no conjunctions
+    else { // no conjunctions (literals only)
         return [NyayaNode disjunction:first with:second];
     }
 }
 
 - (NyayaNode*)cnf {
     // precondition 'self' is implication free and in negation normal form
+    
     switch(self.type) {
         case NyayaConjunction:
+            // cnf (A & B) = cnf (A) & cnf (B)
             return [NyayaNode conjunction:[[self.nodes objectAtIndex:0] cnf] 
                                      with:[[self.nodes objectAtIndex:1] cnf]];
             
             
         case NyayaDisjunction:
+            // dnf (a | (b & c)) = (a | b) & (a | c)
+            // dnf ((a & b) | c)) = (a | c) & (b | c)
+            // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
             return [NyayaNode cnfDistribution:[[self.nodes objectAtIndex:0] cnf] 
                                       with:[[self.nodes objectAtIndex:1] cnf]];
             
@@ -417,20 +422,25 @@
                                  with:[NyayaNode dnfDistribution:first with:n22]];
         
     }
-    else { // no disjunction
+    else { // no disjunctions (literals only)
         return [NyayaNode conjunction:first with:second];
     }
 }
 
 - (NyayaNode *)dnf {
     // precondition 'self' is implication free and in negation normal form
+    
     switch(self.type) {
         case NyayaDisjunction:
+            // dnf (A | B) = dnf(A) | (dnf(B)
             return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
                                      with:[[self.nodes objectAtIndex:1] dnf]];
             
             
         case NyayaConjunction:
+            // dnf (a & (b | c)) = (a & b) | (a & c)
+            // dnf ((a | b) & c)) = (a & c) | (b & c)
+            // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
             return [NyayaNode dnfDistribution:[[self.nodes objectAtIndex:0] dnf] 
                                       with:[[self.nodes objectAtIndex:1] dnf]];
             

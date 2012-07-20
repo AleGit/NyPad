@@ -139,12 +139,6 @@
 				1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */,
 				1178CCB615B56F0B00FD21CA /* NyayaParserTests.h */,
 				1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */,
-				1183B6CC15B70AC10076D92C /* NyayaNodeSubFormulasTests.h */,
-				1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */,
-				1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */,
-				1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */,
-				1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */,
-				1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */,
 				111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */,
 				111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */,
 			);
@@ -154,6 +148,12 @@
 		1183B6D115B70AE20076D92C /* NyayaNodeTests */ = {
 			isa = PBXGroup;
 			children = (
+				1183B6CC15B70AC10076D92C /* NyayaNodeSubFormulasTests.h */,
+				1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */,
+				1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */,
+				1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */,
+				1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */,
+				1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */,
 				1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */,
 				1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */,
 				1178CCA415B5270000FD21CA /* NyayaNodeDescriptionTests.h */,
