@@ -200,6 +200,20 @@
     STAssertEquals((NyayaBool)NyayaTrue, n.value, nil);
     STAssertEqualObjects(@"F → a ∧ ¬f(a,b)", [n description],nil);
     
+    parser = [NyayaParser parserWithString:@"a & !f(a)<>T"];
+    n = [parser parseFormula];
+    STAssertEqualObjects(@"↔", n.symbol, nil);
+    STAssertEquals((NyayaNodeType)NyayaBicondition, n.type,nil);
+    STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
+    STAssertEqualObjects(@"a ∧ ¬f(a) ↔ T", [n description],nil);
+    
+    parser = [NyayaParser parserWithString:@"F<>a & !f(a,b)"];
+    n = [parser parseFormula];
+    STAssertEqualObjects(@"↔", n.symbol, nil);
+    STAssertEquals((NyayaNodeType)NyayaBicondition, n.type,nil);
+    STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
+    STAssertEqualObjects(@"F ↔ a ∧ ¬f(a,b)", [n description],nil);
+    
 }
 
 

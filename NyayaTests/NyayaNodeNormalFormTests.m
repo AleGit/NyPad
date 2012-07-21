@@ -92,6 +92,24 @@
     
 }
 
+- (void)testBicondition {
+    NyayaParser *parser = [NyayaParser parserWithString:@"a<>b"];
+    NyayaNode *ast = [parser parseFormula];
+    NyayaNode *imf = [ast imf];
+    NyayaNode *nnf = [imf nnf];
+    NyayaNode *cnf = [nnf cnf];
+    NyayaNode *dnf = [nnf dnf];
+    STAssertEqualObjects([ast description], @"a ↔ b",nil);
+    STAssertEqualObjects([imf description], @"(¬a ∨ b) ∧ (¬b ∨ a)",nil);
+    STAssertEqualObjects([nnf description], @"(¬a ∨ b) ∧ (¬b ∨ a)",nil);
+    STAssertEqualObjects([cnf description], @"(¬a ∨ b) ∧ (¬b ∨ a)",nil);
+    STAssertEqualObjects([dnf description], @"(¬a ∧ ¬b) ∨ (¬a ∧ a) ∨ ((b ∧ ¬b) ∨ (b ∧ a))",nil);
+    
+    
+    
+    
+}
+
 - (void)testNormForms {
     NyayaParser *parser = [NyayaParser parserWithString:@"a>b&!a&b>b|a|(a>b)|!(!a>a)"];
     

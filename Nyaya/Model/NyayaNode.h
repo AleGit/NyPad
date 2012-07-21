@@ -12,7 +12,10 @@ enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
 typedef NSUInteger NyayaBool;
 
 enum { // NyayaUndefined=0
-    NyayaConstant=1, NyayaFunction, NyayaNegation, NyayaConjunction, NyayaDisjunction, NyayaImplication };
+    NyayaConstant=1, NyayaFunction, 
+    NyayaNegation, NyayaConjunction, NyayaDisjunction, 
+    NyayaImplication, NyayaBicondition
+};
 typedef NSUInteger NyayaNodeType;
 
 @interface NyayaNode : NSObject
@@ -27,6 +30,7 @@ typedef NSUInteger NyayaNodeType;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 + (NyayaNode*)disjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 + (NyayaNode*)implication:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
++ (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 
 + (NyayaNode*)function:(NSString*)name with:(NSArray*)nodes;
 

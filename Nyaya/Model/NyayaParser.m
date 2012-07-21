@@ -60,7 +60,7 @@
     NSMutableArray *tokens = [NSMutableArray array];
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression 
-                                  regularExpressionWithPattern:@"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|↔|\\(|\\)|,|;|\\w+"
+                                  regularExpressionWithPattern:@"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+"
                                   options:NSRegularExpressionCaseInsensitive
                                   error:&error];
     
@@ -109,11 +109,16 @@
     NyayaNode *result;
     
     if (_token) {
-        result = [self parseJunction];
+        result = [self parseJunction];      // consumes junction
         
         if ([_token isImplication]) {
             [self nextToken]; // consume ">"
-            return [NyayaNode implication:result with:[self parseFormula]];
+            result = [NyayaNode implication:result with:[self parseFormula]];
+        }
+        else if ([_token isBicondition]) {
+            
+            [self nextToken]; // consume "<>"
+            result = [NyayaNode bicondition:result with:[self parseFormula]];
         }
     }
     else {

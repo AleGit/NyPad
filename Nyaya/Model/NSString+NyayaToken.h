@@ -15,6 +15,7 @@
 - (BOOL)isDisjunction;
 - (BOOL)isJunction;
 - (BOOL)isImplication;
+- (BOOL)isBicondition;
 
 - (NSString*)complementaryLiteral;
 - (BOOL)isComplement:(NSString*)s;

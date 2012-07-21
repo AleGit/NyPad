@@ -40,6 +40,13 @@
     
 }
 
+- (BOOL)isBicondition {
+    
+    return [self isEqualToString:@"↔"]
+    || [self isEqualToString:@"<>"];
+    
+}
+
 - (NSString*)complementaryLiteral {
     if ([self hasPrefix:@"¬"]) return [self substringFromIndex:1];
     else return [@"¬" stringByAppendingString:self];
