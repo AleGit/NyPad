@@ -23,6 +23,7 @@
 		1166602015B6EDE70070B5B8 /* NSSet+NyayaLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601F15B6EDE70070B5B8 /* NSSet+NyayaLiteral.m */; };
 		1166602315B6F0B20070B5B8 /* NyayaLiteralTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166602215B6F0B20070B5B8 /* NyayaLiteralTests.m */; };
 		1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */; };
+		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9C15B5005300FD21CA /* NyayaNode.m */; };
 		1178CCA015B5176900FD21CA /* NyayaNodeValueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */; };
 		1178CCA615B5270000FD21CA /* NyayaNodeDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */; };
@@ -95,6 +96,8 @@
 		1166602215B6F0B20070B5B8 /* NyayaLiteralTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaLiteralTests.m; sourceTree = "<group>"; };
 		1169DC5415BC3E19000BD3D0 /* NyayaNodeEvaluationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeEvaluationTests.h; sourceTree = "<group>"; };
 		1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeEvaluationTests.m; sourceTree = "<group>"; };
+		1169DC5815BC5C1B000BD3D0 /* NyayaNodeVariablesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeVariablesTests.h; sourceTree = "<group>"; };
+		1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeVariablesTests.m; sourceTree = "<group>"; };
 		1178CC9B15B5005300FD21CA /* NyayaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaNode.h; path = Model/NyayaNode.h; sourceTree = "<group>"; };
 		1178CC9C15B5005300FD21CA /* NyayaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaNode.m; path = Model/NyayaNode.m; sourceTree = "<group>"; };
 		1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeValueTests.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */,
 				1169DC5415BC3E19000BD3D0 /* NyayaNodeEvaluationTests.h */,
 				1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */,
+				1169DC5815BC5C1B000BD3D0 /* NyayaNodeVariablesTests.h */,
+				1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */,
 			);
 			name = NyayaNodeTests;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				1197E89315BB1BBE0004E84D /* SimpleFactory.m in Sources */,
 				1197E89615BB1DAC0004E84D /* FactoryTests.m in Sources */,
 				1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */,
+				1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

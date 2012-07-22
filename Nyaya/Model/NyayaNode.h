@@ -14,9 +14,10 @@ typedef NSUInteger NyayaBool;
 enum { // NyayaUndefined=0
     NyayaConstant=1, NyayaVariable,
     NyayaNegation, NyayaConjunction, NyayaDisjunction, 
-    NyayaImplication, NyayaBicondition, NyayaFunction, 
+    NyayaImplication, NyayaBicondition, NyayaFunction 
 };
 typedef NSUInteger NyayaNodeType;
+
 
 @interface NyayaNode : NSObject
 
@@ -48,5 +49,7 @@ typedef NSUInteger NyayaNodeType;
 
 - (NSSet*)subformulas;
 - (NSArray*)sortedSubformulas;
+
+- (NSSet*)variables;
 
 @end

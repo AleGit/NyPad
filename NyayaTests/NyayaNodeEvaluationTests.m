@@ -24,12 +24,13 @@
     STAssertEquals(cnf.evaluation, evaluation, nil);
     STAssertEquals(dnf.evaluation, evaluation, nil);
     
-
+    STAssertEquals([[node variables] count], (NSUInteger)0,nil);
 }
 
-- (void)testEvaluation {
+- (void)testConstantEvaluation {
     NyayaNode *t = [NyayaNode atom:@"T"];
     NyayaNode *f = [NyayaNode atom:@"F"];
+    
     
     [self assertDerivations:t expected:TRUE];
     [self assertDerivations:f expected:FALSE];
@@ -83,7 +84,6 @@
     [self assertDerivations:tbf expected:FALSE];
     [self assertDerivations:fbt expected:FALSE];
     [self assertDerivations:fbf expected:TRUE];
-    
     
 }
 

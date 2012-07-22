@@ -43,6 +43,7 @@
 #pragma mark - node sub class implementations
     
 @implementation NyayaNodeConstant
+
 - (NyayaNodeType)type { 
     return NyayaConstant; 
 }
@@ -476,13 +477,26 @@
 
 
 - (NyayaNode*)copyWith:(NSArray*)nodes {
-    NyayaNode *node=[[[self class] alloc] init];
+    NyayaNode *node = nil;
     
-    node->_symbol = self.symbol;
-    node->_value = self.value;
-    node->_evaluation = self.evaluation;
-    node->_nodes = [nodes copy];
+    if (self.type == NyayaUndefined) {
+        NSLog(@"+++ '%@' '%@' +++", [self description], self.symbol);
+        node = [[NyayaStore sharedInstance] nodeForName:self.symbol];
+    }
     
+    else if (self.type <= NyayaVariable) {
+        // node = [[NyayaStore sharedInstance] nodeForName:self.symbol];
+        node = self;
+    }
+    
+    if (!node) {
+        node = [[[self class] alloc] init];
+    
+        node->_symbol = self.symbol;
+        node->_value = self.value;
+        node->_evaluation = self.evaluation;
+        node->_nodes = [nodes copy];
+    }    
     return node;
     
 }
@@ -713,10 +727,14 @@
 - (NSSet*)subformulas {
     NSSet *set = [NSSet setWithObject:[self description]];
     
+    
     for (NSSet* subset in [self valueForKeyPath:@"nodes.subformulas.description"]) {
        
         set = [set setByAddingObjectsFromSet:subset];
     }
+     
+    
+    // set = [set setByAddingObjectsFromSet:[self valueForKeyPath:@"nodes.subformulas.@distinctUnionOfSets.description"]];
     
     // array = [array arrayByAddingObjectsFromArray:[self valueForKeyPath:@"nodes.subformulas.description"]];
     
@@ -732,6 +750,29 @@
         else if ([obj1 length] > [obj2 length]) return 1;
         else return [obj1 compare:obj2];
     }];
+    
+}
+
+
+- (NSSet*)variables {
+    NSSet *result = nil;
+    if (self.type == NyayaConstant) result = [NSSet set];
+    else if (self.type == NyayaVariable) result = [NSSet setWithObject:self];
+    else {
+        // return [self valueForKeyPath:@"@distinctUnionOfSets.nodes.variables"];
+        // result = [self.nodes valueForKeyPath:@"@distinctUnionOfSets.variables"];
+        
+        
+        for (NSSet* subset in [self valueForKeyPath:@"nodes.variables"]) {
+        // for (NSSet* subset in [self.nodes valueForKeyPath:@"variables"]) {
+            if (!result) result = subset;
+            else result = [result setByAddingObjectsFromSet:subset];
+        }
+        
+        
+        
+    }
+    return result;
     
 }
 
