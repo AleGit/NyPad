@@ -20,7 +20,8 @@ enum {
     NyayaErrorNoLeftParenthesis=4, 
     NyayaErrorNoRightParenthesis=8,
     NyayaErrorNoNegation=16,
-    NyayaErrorNoBinaryConnector=32
+    NyayaErrorNoBinaryConnector=32,
+    NyayaErrorUnusedToken = 64
 };
 typedef NSUInteger NyayaErrorState;
 

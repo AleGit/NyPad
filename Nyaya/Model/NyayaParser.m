@@ -12,6 +12,7 @@
 
 @interface NyayaParser () {
     NSUInteger _index;
+    NSInteger _level;
     NSString* _token;
     NSMutableArray* _errors;
 }
@@ -32,6 +33,7 @@
     if (self) {
         _input = input;
         _index = 0;
+        _level = 0;
         _errorState = NyayaUndefined;
         _errors = [NSMutableArray array];
         
@@ -107,6 +109,7 @@
     
 - (NyayaNode*)parseFormula {  // formula     = junction  [ ( "→" | "↔" ) formula }
     NyayaNode *result;
+    _level++;
     
     if (_token) {
         result = [self parseJunction];      // consumes junction
@@ -125,6 +128,8 @@
         [self addErrorDescription: NyayaErrorNoToken];
     }
     
+    _level--;
+    if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
     return result;
     
 }
@@ -156,11 +161,11 @@
         
     }
     
-    if ([_token isNegation]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
+    if ([_token isNegation] || [_token isIdentifier]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
         
     if (_token)
-        NSLog(@"token: %@", _token);
-    
+       
+        NSLog(@"token: %@", _token);     
     
     return junction;
 }

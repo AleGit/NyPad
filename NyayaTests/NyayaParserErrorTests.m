@@ -127,6 +127,32 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                    @"!::&::::22•!&:: ::::1", // kErrors
                    nil], 
                   
+                  [NSArray arrayWithObjects:
+                   @"TWO NEGATIONS", // kTitle
+                   @"a & !b!b", // kInput
+                   @"a ∧ ¬b", // kOutput
+                   [NSNumber numberWithInt:NyayaErrorNoBinaryConnector], // kErrorState
+                   @"a&!b::!::b::32", // kErrors
+                   nil],
+                  
+                  [NSArray arrayWithObjects:
+                   @"TWO IDENTIFIERS", // kTitle
+                   @"a & b c", // kInput
+                   @"a ∧ b", // kOutput
+                   [NSNumber numberWithInt:NyayaErrorNoBinaryConnector], // kErrorState
+                   @"a&b::c::::32", // kErrors
+                   nil],
+                  
+                  
+                  
+                  [NSArray arrayWithObjects:
+                   @"TWO IDENTIFIERS", // kTitle
+                   @"a & b )", // kInput
+                   @"a ∧ b", // kOutput
+                   [NSNumber numberWithInt:NyayaErrorUnusedToken], // kErrorState
+                   @"a&b::)::::64", // kErrors
+                   nil],
+                  
                   // ************************************************************************
                   nil]; // end of array
     
