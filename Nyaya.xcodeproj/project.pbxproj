@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111104B215BC0147006EB260 /* connectives in Resources */ = {isa = PBXBuildFile; fileRef = 111104B115BC0147006EB260 /* connectives */; };
+		111104BC15BC0E94006EB260 /* NyayaDefinitions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111104BB15BC0E94006EB260 /* NyayaDefinitions.plist */; };
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
 		114A801115B99226002C85B4 /* NyayaFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A801015B99226002C85B4 /* NyayaFormulaTests.m */; };
@@ -62,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
+		111104BB15BC0E94006EB260 /* NyayaDefinitions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyayaDefinitions.plist; path = Model/NyayaDefinitions.plist; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
 		114A800C15B989A8002C85B4 /* NyayaFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaFormula.h; path = Model/NyayaFormula.h; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 				116451C515B9383400CD6E16 /* NyayaStore.m */,
 				114A800C15B989A8002C85B4 /* NyayaFormula.h */,
 				114A800D15B989A8002C85B4 /* NyayaFormula.m */,
+				111104B115BC0147006EB260 /* connectives */,
+				111104BB15BC0E94006EB260 /* NyayaDefinitions.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -405,6 +411,8 @@
 				11C3760F15B3D23D005C5C9C /* second@2x.png in Resources */,
 				11C3764015B3EC48005C5C9C /* Nyaya.g in Resources */,
 				11C3764215B3FCC1005C5C9C /* ebnf in Resources */,
+				111104B215BC0147006EB260 /* connectives in Resources */,
+				111104BC15BC0E94006EB260 /* NyayaDefinitions.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

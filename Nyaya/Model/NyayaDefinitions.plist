@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>defintitions</key>
+	<dict>
+		<key>New item</key>
+		<string></string>
+		<key>exclusive disjunction</key>
+		<array>
+			<string>⊻</string>
+			<string>⊕</string>
+			<string>xor</string>
+		</array>
+		<key>bicondition</key>
+		<array>
+			<string>↔</string>
+			<string>&lt;&gt;</string>
+		</array>
+		<key>implication</key>
+		<array>
+			<string>→</string>
+			<string>&gt;</string>
+		</array>
+		<key>disjunction</key>
+		<array>
+			<string>∨</string>
+			<string>|</string>
+			<string>or</string>
+		</array>
+		<key>conjunction</key>
+		<array>
+			<string>∧</string>
+			<string>&amp;</string>
+			<string>and</string>
+		</array>
+		<key>negation</key>
+		<dict>
+			<key>symbols</key>
+			<array>
+				<string>¬</string>
+				<string>!</string>
+				<string>not</string>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
