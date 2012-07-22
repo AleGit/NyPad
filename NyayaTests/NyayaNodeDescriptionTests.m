@@ -26,9 +26,9 @@
 {
     [super setUp];
     
-    _u = [NyayaNode constant:@"U"];
-    _f = [NyayaNode constant:@"F"];
-    _t = [NyayaNode constant:@"T"];
+    _u = [NyayaNode atom:@"U"];
+    _f = [NyayaNode atom:@"F"];
+    _t = [NyayaNode atom:@"T"];
     
     _testCases = [NSDictionary dictionaryWithObjectsAndKeys:
                   // disjunctions

@@ -214,7 +214,7 @@
         NSArray *tuple = [self parseTuple]; // try to parse optional tuple 
         
         if (tuple) result = [NyayaNode function:identifier with:tuple];
-        else result = [NyayaNode constant:identifier];
+        else result = [NyayaNode atom:identifier];
     }
     else {
         [self addErrorDescription: NyayaErrorNoIdentifier];    }

@@ -12,9 +12,9 @@ enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
 typedef NSUInteger NyayaBool;
 
 enum { // NyayaUndefined=0
-    NyayaConstant=1, NyayaFunction, 
+    NyayaConstant=1, NyayaVariable,
     NyayaNegation, NyayaConjunction, NyayaDisjunction, 
-    NyayaImplication, NyayaBicondition
+    NyayaImplication, NyayaBicondition, NyayaFunction, 
 };
 typedef NSUInteger NyayaNodeType;
 
@@ -23,8 +23,10 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;
+@property (nonatomic, readonly) NyayaBool value;
+@property (nonatomic, assign) BOOL evaluation;
 
-+ (NyayaNode*)constant:(NSString*)name;
++ (NyayaNode*)atom:(NSString*)name;
 
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
@@ -33,8 +35,6 @@ typedef NSUInteger NyayaNodeType;
 + (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 
 + (NyayaNode*)function:(NSString*)name with:(NSArray*)nodes;
-
-- (NyayaBool)value;
 
 - (NyayaNode*)imf;
 - (NyayaNode*)nnf;

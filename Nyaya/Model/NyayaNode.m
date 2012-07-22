@@ -18,7 +18,8 @@
 @end
 
 #pragma mark - node sub class interfaces
-@interface NyayaNodeConstant : NyayaNode 
+
+@interface NyayaNodeConstant : NyayaNode
 @end
 
 @interface NyayaNodeNegation : NyayaNode 
@@ -36,20 +37,18 @@
 @interface NyayaNodeBicondition : NyayaNode 
 @end
 
+@interface NyayaNodeFunction : NyayaNode 
+@end
+
 #pragma mark - node sub class implementations
-
+    
 @implementation NyayaNodeConstant
-
-- (NyayaNodeType)type {
-    return NyayaConstant;
+- (NyayaNodeType)type { 
+    return NyayaConstant; 
 }
 
-- (NyayaBool)value { 
-    return _value;
-}
-
-- (NSString*)description {
-    return self.symbol;
+- (void)setEvaluation:(BOOL)evaluation {
+    // ignore because it's a constant!
 }
 @end
 
@@ -66,6 +65,10 @@
     else return NyayaUndefined;
 }
 
+- (BOOL)evaluation {
+    return ![[self nodeAtIndex:0] evaluation]; 
+}
+
 - (NSString*)description {
     NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
@@ -73,6 +76,7 @@
     
     switch(first.type) {
         case NyayaConstant:
+        case NyayaVariable:
         case NyayaNegation:
         case NyayaFunction: // NIY
             right = [first description];
@@ -103,6 +107,10 @@
     else return NyayaUndefined;
 }
 
+- (BOOL)evaluation {
+    return [[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation]; 
+}
+
 - (NSString*)description {
     NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
@@ -111,7 +119,8 @@
     NSString *right = nil;
     
     switch(first.type) {
-                case NyayaConstant:
+        case NyayaConstant:
+        case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaDisjunction:  // a ∨ b ∨ c ≡ (a ∨ b) ∨ c (left associative) 
@@ -124,6 +133,7 @@
             
             switch(second.type) {
                 case NyayaConstant:
+                case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                     // case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
@@ -156,6 +166,10 @@
     else return NyayaUndefined;
 }
 
+- (BOOL)evaluation {
+    return [[self nodeAtIndex:0] evaluation] && [[self nodeAtIndex:1] evaluation]; 
+}
+
 - (NSString*)description {
     NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
@@ -165,7 +179,8 @@
     
     
         switch(first.type) {
-                case NyayaConstant:
+            case NyayaConstant:
+            case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaConjunction: // a ∧ b ∧ c = (a ∧ b) ∧ c (left associative) 
@@ -178,6 +193,7 @@
             
             switch(second.type) {
                 case NyayaConstant:
+                case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                     // case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
@@ -211,6 +227,10 @@
     else return NyayaUndefined;
 }
 
+- (BOOL)evaluation {
+    return ![[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation]; 
+}
+
 - (NSString*)description {
     NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
@@ -219,7 +239,8 @@
     NSString *right = nil;
     
     switch(first.type) {
-                case NyayaConstant:
+        case NyayaConstant:
+        case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaConjunction:
@@ -233,6 +254,7 @@
             
             switch(second.type) {
                 case NyayaConstant:
+                case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaConjunction:
@@ -265,6 +287,11 @@
     else return NyayaFalse;
 }
 
+- (BOOL)evaluation {
+    return (![[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation])
+    && (![[self nodeAtIndex:1] evaluation] || [[self nodeAtIndex:0] evaluation]); 
+}
+
 - (NSString*)description {
     NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
@@ -275,6 +302,7 @@
     
             switch(first.type) {
                 case NyayaConstant:
+                case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaConjunction:
@@ -288,6 +316,7 @@
             
             switch(second.type) {
                 case NyayaConstant:
+                case NyayaVariable:
                 case NyayaNegation:
                 case NyayaFunction: // NIY
                 case NyayaConjunction:
@@ -305,14 +334,29 @@
 }
 @end
 
+@implementation NyayaNodeFunction
+
+- (NyayaNodeType)type {
+    return NyayaFunction;
+}
+
+- (NSString*)description {
+    NSString *right = [[self.nodes valueForKey:@"description"] componentsJoinedByString:@","];
+    return [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
+}
+
+@end
+
 #pragma mark - noder root class implementation
 @implementation NyayaNode
 
 @synthesize symbol = _symbol;
 @synthesize nodes = _nodes;
+@synthesize value = _value;
+@synthesize evaluation = _evaluation;
 
 - (NyayaNodeType)type {
-    return NyayaFunction;
+    return NyayaVariable;
 }
 
 - (void)setValue:(NyayaBool)value {
@@ -323,24 +367,26 @@
     return [_nodes count] > index ? [_nodes objectAtIndex:index] : nil;
 }
 
-+ (NyayaNode*)constant:(NSString *)name with:(NyayaBool)value {
-    NyayaNode*node=[[NyayaNodeConstant alloc] init];
-    node->_symbol = name;
-    node->_value = value;
-    return node;
-}
-
-+ (NyayaNode*)constant:(NSString*)name {
++ (NyayaNode*)atom:(NSString*)name {
     NyayaStore *store = [NyayaStore sharedInstance];
     NyayaNode *node = [store nodeForName:name];
     if (!node) {
-        if ([name isEqualToString:@"T"]) node= [self constant:name with:NyayaTrue];
-        else if ([name isEqualToString:@"1"]) node= [self constant:name with:NyayaTrue];
-        else if ([name isEqualToString:@"F"]) node= [self constant:name with:NyayaFalse];
-        else if ([name isEqualToString:@"0"]) node= [self constant:name with:NyayaFalse];
-        else node= [self constant:name with:NyayaUndefined];
+        if ([name isEqualToString:@"T"] || [name isEqualToString:@"1"]) {
+            node = [[NyayaNodeConstant alloc] init];
+            node->_value = NyayaTrue;
+            node->_evaluation = TRUE;            
+        }
+        else if ([name isEqualToString:@"F"] || [name isEqualToString:@"0"]) {
+            node = [[NyayaNodeConstant alloc] init];
+            node->_value = NyayaFalse;
+            node->_evaluation = FALSE; 
+        }
+        else {
+            node = [[NyayaNode alloc] init];
+            node->_value = NyayaUndefined;
+        };
         
-        
+        node->_symbol = name;
         [store setNode:node forName:node.symbol];
     }
     return node;
@@ -387,15 +433,17 @@
 }
 
 + (NyayaNode*)function:(NSString *)name with:(NSArray *)nodes {
-    NyayaNode*node=[[NyayaNode alloc] init];
+    NyayaNode*node=[[NyayaNodeFunction alloc] init];
+    // node->isa = [NyayaNodeFunction class];
     node->_symbol = name;
     node->_nodes = [nodes copy];
     return node;
 }
 
+ /*
 - (NyayaBool)value {
     
-    /* switch(_type) {
+    switch(_type) {
            
         case NyayaConstant:
             return _value;
@@ -428,29 +476,32 @@
         case NyayaFunction: // NIY
         default:
             return NyayaUndefined;
-    }*/ 
+    } 
     
     return NyayaUndefined;
-}
+}*/
 
 - (NSString*)treeDescription {
-    NSUInteger count = [self.nodes count];
-    NyayaNode *first = (count > 0) ? [self.nodes objectAtIndex:0] : nil;
-    NyayaNode *second = (count > 1) ? [self.nodes objectAtIndex:1] : nil;
     switch (self.type) {
+        case NyayaVariable:
         case NyayaConstant:
             return _symbol;
         case NyayaNegation:
-            return [NSString stringWithFormat:@"(%@%@)", self.symbol, [first treeDescription]];
+            return [NSString stringWithFormat:@"(%@%@)", 
+                    self.symbol, [[self nodeAtIndex:0] treeDescription]];
         case NyayaConjunction:
         case NyayaDisjunction:
         case NyayaImplication:
         case NyayaBicondition:
-            return [NSString stringWithFormat:@"(%@%@%@)", [first treeDescription], self.symbol, [second treeDescription]];
+            return [NSString stringWithFormat:@"(%@%@%@)", 
+                    [[self nodeAtIndex:0] treeDescription], 
+                    self.symbol, 
+                    [[self nodeAtIndex:1] treeDescription]];
         case NyayaFunction:
         default:
             return [NSString stringWithFormat:@"%@(%@)", 
-                    self.symbol, [[self.nodes valueForKey:@"treeDescription"] componentsJoinedByString:@","]];  
+                    self.symbol, 
+                    [[self.nodes valueForKey:@"treeDescription"] componentsJoinedByString:@","]];  
             
             
             
@@ -458,11 +509,12 @@
 }
 
 - (NSString*)description {
+    return _symbol;
+    /* 
     NSString *result = nil;
-    NSString *right = nil;
     
     switch (self.type) {
-         /*   
+           
         case NyayaConstant:
             result =  _symbol;
             break;
@@ -599,7 +651,7 @@
             }
             result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
             break;
-            */
+            
         case NyayaFunction:
             right = [[self.nodes valueForKey:@"description"] componentsJoinedByString:@","];
             result =  [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
@@ -611,7 +663,9 @@
             
         
     }
+     
     return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+     */
 }
 
 #pragma mark - cnf, dnf, nnf, imf

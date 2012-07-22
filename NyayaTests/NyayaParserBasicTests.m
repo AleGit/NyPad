@@ -21,7 +21,7 @@
     NyayaNode *n = [parser parseTerm];
     
     STAssertEqualObjects(@"x1", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
+    STAssertEquals((NyayaNodeType)NyayaVariable, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.value, nil);
     
     parser = [NyayaParser parserWithString:@"T"];
