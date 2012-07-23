@@ -49,10 +49,10 @@
     STAssertNotNil(tNode,@"tNode");
     STAssertNotNil(fNode,@"fNode"); 
     STAssertNotNil(uNode,@"uNode"); 
-    STAssertEquals(tNode.value,(NyayaBool)NyayaTrue,@"tNode");
-    STAssertEquals(fNode.value,(NyayaBool)NyayaFalse,@"fNode"); 
-    STAssertEquals(uNode.value,(NyayaBool)NyayaUndefined,@"uNode"); 
-    STAssertEquals(node.value,(NyayaBool)NyayaTrue,@"node");
+    STAssertEquals(tNode.displayValue,(NyayaBool)NyayaTrue,@"tNode");
+    STAssertEquals(fNode.displayValue,(NyayaBool)NyayaFalse,@"fNode"); 
+    STAssertEquals(uNode.displayValue,(NyayaBool)NyayaUndefined,@"uNode"); 
+    STAssertEquals(node.displayValue,(NyayaBool)NyayaTrue,@"node");
     
    
     

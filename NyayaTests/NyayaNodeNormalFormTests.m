@@ -18,20 +18,20 @@
     NyayaNode *imf = [node imf];
     
     STAssertEqualObjects(@"a → T", [node description], nil);
-    STAssertEquals((NyayaBool)NyayaTrue, node.value,nil);
+    STAssertEquals((NyayaBool)NyayaTrue, node.displayValue,nil);
     STAssertEqualObjects(@"¬a ∨ T", [imf description], nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, imf.value,[imf description]);
+    STAssertEquals((NyayaBool)NyayaTrue, imf.displayValue,[imf description]);
     
     parser = [NyayaParser parserWithString:@"!a > b | (!b > !F)"];
     node = [parser parseFormula];
     imf = [node imf];
     
     STAssertEqualObjects(@"¬a → b ∨ (¬b → ¬F)", [node description], nil);
-    STAssertEquals((NyayaBool)NyayaTrue, node.value,nil);
+    STAssertEquals((NyayaBool)NyayaTrue, node.displayValue,nil);
     STAssertEqualObjects([imf description], @"¬¬a ∨ (b ∨ (¬¬b ∨ ¬F))", nil);
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, imf.value,[imf description]);
+    STAssertEquals((NyayaBool)NyayaTrue, imf.displayValue,[imf description]);
     
 }
 
@@ -41,20 +41,20 @@
     NyayaNode *imf = [node nnf];
     
     STAssertEqualObjects(@"¬¬F", [node description], nil);
-    STAssertEquals((NyayaBool)NyayaFalse, node.value,nil);
+    STAssertEquals((NyayaBool)NyayaFalse, node.displayValue,nil);
     STAssertEqualObjects(@"F", [imf description], nil);
     STAssertEquals((NyayaNodeType)NyayaConstant, imf.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, imf.value,[imf description]);
+    STAssertEquals((NyayaBool)NyayaFalse, imf.displayValue,[imf description]);
     
     parser = [NyayaParser parserWithString:@"(!(P|(Q&!R)))"];
     node = [parser parseFormula];
     imf = [node nnf];
     
     STAssertEqualObjects(@"¬(P ∨ (Q ∧ ¬R))", [node description], nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, node.value,nil);
+    STAssertEquals((NyayaBool)NyayaUndefined, node.displayValue,nil);
     STAssertEqualObjects(@"¬P ∧ (¬Q ∨ R)", [imf description], nil);
     STAssertEquals((NyayaNodeType)NyayaConjunction, imf.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, imf.value,[imf description]);
+    STAssertEquals((NyayaBool)NyayaUndefined, imf.displayValue,[imf description]);
     
 }
 

@@ -13,7 +13,7 @@
     @protected
     NyayaBool _value;
 }
-- (void)setValue:(NyayaBool)value;
+- (void)setDisplayValue:(NyayaBool)value;
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
 @end
 
@@ -48,7 +48,7 @@
     return NyayaConstant; 
 }
 
-- (void)setEvaluation:(BOOL)evaluation {
+- (void)setEvaluationValue:(BOOL)evaluation {
     // ignore because it's a constant!
 }
 @end
@@ -59,15 +59,15 @@
     return NyayaNegation;
 }
 
-- (NyayaBool)value {
-    NyayaBool firstValue = [[self nodeAtIndex:0] value];
+- (NyayaBool)displayValue {
+    NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
     if (firstValue == NyayaFalse) return NyayaTrue;
     else if (firstValue == NyayaTrue) return NyayaFalse;
     else return NyayaUndefined;
 }
 
-- (BOOL)evaluation {
-    return ![[self nodeAtIndex:0] evaluation]; 
+- (BOOL)evaluationValue {
+    return ![[self nodeAtIndex:0] evaluationValue]; 
 }
 
 - (NSString*)description {
@@ -99,17 +99,17 @@
     return NyayaDisjunction;
 }
 
-- (NyayaBool)value { 
-    NyayaBool firstValue = [[self nodeAtIndex:0] value];
-    NyayaBool secondValue = [[self nodeAtIndex:1] value];
+- (NyayaBool)displayValue { 
+    NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
+    NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
     if (firstValue == NyayaTrue || secondValue == NyayaTrue) return NyayaTrue;
     else if (firstValue == NyayaFalse && secondValue == NyayaFalse) return NyayaFalse;
     else return NyayaUndefined;
 }
 
-- (BOOL)evaluation {
-    return [[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation]; 
+- (BOOL)evaluationValue {
+    return [[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
 }
 
 - (NSString*)description {
@@ -158,17 +158,17 @@
     return NyayaConjunction;
 }
 
-- (NyayaBool)value { 
-    NyayaBool firstValue = [[self nodeAtIndex:0] value];
-    NyayaBool secondValue = [[self nodeAtIndex:1] value];
+- (NyayaBool)displayValue { 
+    NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
+    NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
     if (firstValue == NyayaFalse || secondValue == NyayaFalse) return NyayaFalse;
     else if (firstValue == NyayaTrue && secondValue == NyayaTrue) return NyayaTrue;
     else return NyayaUndefined;
 }
 
-- (BOOL)evaluation {
-    return [[self nodeAtIndex:0] evaluation] && [[self nodeAtIndex:1] evaluation]; 
+- (BOOL)evaluationValue {
+    return [[self nodeAtIndex:0] evaluationValue] && [[self nodeAtIndex:1] evaluationValue]; 
 }
 
 - (NSString*)description {
@@ -219,17 +219,17 @@
     return NyayaImplication;
 }
 
-- (NyayaBool)value {
-    NyayaBool firstValue = [[self nodeAtIndex:0] value];
-    NyayaBool secondValue = [[self nodeAtIndex:1] value];
+- (NyayaBool)displayValue {
+    NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
+    NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
     if (firstValue == NyayaFalse || secondValue == NyayaTrue) return NyayaTrue;
     else if (firstValue == NyayaTrue && secondValue == NyayaFalse) return NyayaFalse;
     else return NyayaUndefined;
 }
 
-- (BOOL)evaluation {
-    return ![[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation]; 
+- (BOOL)evaluationValue {
+    return ![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
 }
 
 - (NSString*)description {
@@ -279,18 +279,18 @@
     return NyayaBicondition;
 }
 
-- (NyayaBool)value { 
-    NyayaBool firstValue = [[self nodeAtIndex:0] value];
-    NyayaBool secondValue = [[self nodeAtIndex:1] value];
+- (NyayaBool)displayValue { 
+    NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
+    NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
     if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) return NyayaUndefined;
     else if (firstValue == secondValue) return NyayaTrue;
     else return NyayaFalse;
 }
 
-- (BOOL)evaluation {
-    return (![[self nodeAtIndex:0] evaluation] || [[self nodeAtIndex:1] evaluation])
-    && (![[self nodeAtIndex:1] evaluation] || [[self nodeAtIndex:0] evaluation]); 
+- (BOOL)evaluationValue {
+    return (![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue])
+    && (![[self nodeAtIndex:1] evaluationValue] || [[self nodeAtIndex:0] evaluationValue]); 
 }
 
 - (NSString*)description {
@@ -353,14 +353,14 @@
 
 @synthesize symbol = _symbol;
 @synthesize nodes = _nodes;
-@synthesize value = _value;
-@synthesize evaluation = _evaluation;
+@synthesize displayValue = _value;
+@synthesize evaluationValue = _evaluation;
 
 - (NyayaNodeType)type {
     return NyayaVariable;
 }
 
-- (void)setValue:(NyayaBool)value {
+- (void)setDisplayValue:(NyayaBool)value {
     _value = value;
 }
 
@@ -493,8 +493,8 @@
         node = [[[self class] alloc] init];
     
         node->_symbol = self.symbol;
-        node->_value = self.value;
-        node->_evaluation = self.evaluation;
+        node->_value = self.displayValue;
+        node->_evaluation = self.evaluationValue;
         node->_nodes = [nodes copy];
     }    
     return node;
@@ -754,6 +754,8 @@
 }
 
 
+#pragma mark - truth tables
+
 - (NSSet*)variables {
     NSSet *result = nil;
     if (self.type == NyayaConstant) result = [NSSet set];
@@ -769,12 +771,40 @@
             else result = [result setByAddingObjectsFromSet:subset];
         }
         
-        
-        
+        // result = [self valueForKeyPath:@"nodes.@distinctUnionOfSets.variables."];
     }
     return result;
+}
+
+- (NSArray*)truthTable:(NSArray*)sortedVariables {
+    NSString *description = [self description];
+    // description = @"formula";
+    
+    NSUInteger count = [sortedVariables count];
+    NSUInteger numberOfRows = 1 << count;
+    NSMutableArray *rows = [NSMutableArray arrayWithCapacity:numberOfRows];
+    
+    for (NSUInteger eval = 0; eval < numberOfRows; eval++) {
+        NSMutableDictionary *cells = [NSMutableDictionary dictionaryWithCapacity:count+1];
+        for (NSUInteger idx = 0; idx < count; idx++) {
+            NyayaNode *variable = [sortedVariables objectAtIndex:idx];
+            variable.evaluationValue = eval & (1 << idx);
+            
+            if (variable.evaluationValue) [cells setValue:@"T" forKey:variable.symbol];
+            else [cells setValue:@"F" forKey:variable.symbol];
+        }
+        if (self.evaluationValue) [cells setValue:@"T" forKey:description];
+        else [cells setValue:@"F" forKey:description];
+        [rows addObject:cells];
+    }
+    return rows;
     
 }
+
+
+
+
+
 
 
 

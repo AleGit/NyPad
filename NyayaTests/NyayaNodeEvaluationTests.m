@@ -18,11 +18,11 @@
     NyayaNode *nnf = [imf nnf];
     NyayaNode *cnf = [nnf nnf];
     NyayaNode *dnf = [imf dnf];
-    STAssertEquals(node.evaluation, evaluation, nil);
-    STAssertEquals(imf.evaluation, evaluation, nil);
-    STAssertEquals(nnf.evaluation, evaluation, nil);
-    STAssertEquals(cnf.evaluation, evaluation, nil);
-    STAssertEquals(dnf.evaluation, evaluation, nil);
+    STAssertEquals(node.evaluationValue, evaluation, nil);
+    STAssertEquals(imf.evaluationValue, evaluation, nil);
+    STAssertEquals(nnf.evaluationValue, evaluation, nil);
+    STAssertEquals(cnf.evaluationValue, evaluation, nil);
+    STAssertEquals(dnf.evaluationValue, evaluation, nil);
     
     STAssertEquals([[node variables] count], (NSUInteger)0,nil);
 }
@@ -84,6 +84,27 @@
     [self assertDerivations:tbf expected:FALSE];
     [self assertDerivations:fbt expected:FALSE];
     [self assertDerivations:fbf expected:TRUE];
+    
+}
+
+- (void)testTruthTable {
+    
+    NyayaNode *a = [NyayaNode atom:@"a"];
+    NyayaNode *b = [NyayaNode atom:@"b"];
+    
+    NyayaNode *node = [NyayaNode bicondition:a with:b];
+    NSArray *variables = [[node variables] allObjects];
+    
+    
+    NSArray *tt1 = [node truthTable:variables];
+    NSArray *tt2 = [[[[node imf] nnf] cnf] truthTable:variables];
+    
+    NSLog(@"%@ \n %@", tt1, tt2);
+    STAssertEqualObjects(tt1, tt2,nil);
+    
+    // NSArray *header = [[tt objectAtIndex:0] allKeys];
+    
+                       
     
 }
 

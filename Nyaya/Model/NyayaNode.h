@@ -24,8 +24,8 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;
-@property (nonatomic, readonly) NyayaBool value;
-@property (nonatomic, assign) BOOL evaluation;
+@property (nonatomic, assign) NyayaBool displayValue;
+@property (nonatomic, assign) BOOL evaluationValue;
 
 + (NyayaNode*)atom:(NSString*)name;
 
@@ -51,5 +51,6 @@ typedef NSUInteger NyayaNodeType;
 - (NSArray*)sortedSubformulas;
 
 - (NSSet*)variables;
+- (NSArray*)truthTable:(NSArray*)sortedVariables;
 
 @end
