@@ -19,16 +19,20 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 
-@interface NyayaNode : NSObject
+@interface NyayaNode : NSObject {
+@protected
+    NSString *_descriptionCache;
+}
 
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;
-@property (nonatomic, assign) NyayaBool displayValue;
-@property (nonatomic, assign) BOOL evaluationValue;
+@property (nonatomic, readonly) NyayaBool displayValue;   // user evaluations (default=undefined)
+@property (nonatomic, readonly) BOOL evaluationValue;     // truth table evaluations
+
+// @property (nonatomic, readonly) NSString* de;
 
 + (NyayaNode*)atom:(NSString*)name;
-
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 + (NyayaNode*)disjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
@@ -36,6 +40,8 @@ typedef NSUInteger NyayaNodeType;
 + (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 
 + (NyayaNode*)function:(NSString*)name with:(NSArray*)nodes;
+
+- (NSUInteger)arity;
 
 - (NyayaNode*)imf;
 - (NyayaNode*)nnf;

@@ -106,7 +106,7 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                   [NSArray arrayWithObjects:
                    @"NEGATE NOTHING", // kTitle
                    @"!", // kInput
-                   @"¬(…)", // kOutput
+                   @"¬((null))", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoToken], // kErrorState
                    @"!:: ::::1", // kErrors
                    nil], 
@@ -114,7 +114,7 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                   [NSArray arrayWithObjects:
                   @"DOUBLE NEGATE NOTHING", // kTitle
                   @"!!", // kInput
-                  @"¬¬(…)", // kOutput
+                  @"¬¬((null))", // kOutput
                   [NSNumber numberWithInt:NyayaErrorNoToken], // kErrorState
                   @"!!:: ::::1", // kErrors
                   nil], 
@@ -122,7 +122,7 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                   [NSArray arrayWithObjects:
                    @"NEGATE AND", // kTitle
                    @"!&", // kInput
-                   @"¬(…)", // kOutput
+                   @"¬((null))", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
                    @"!::&::::22•!&:: ::::1", // kErrors
                    nil], 

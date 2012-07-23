@@ -10,46 +10,89 @@
 #import "NyayaStore.h"
 
 @interface NyayaNode () {
+    
     @protected
-    NyayaBool _value;
+    NyayaBool _displayValue;
+    BOOL _evaluation;
 }
-- (void)setDisplayValue:(NyayaBool)value;
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
 @end
 
 #pragma mark - node sub class interfaces
 
+// arity    abstract classes         concrete classes
+//
+// 0        NyayaNode            -   NyayaNode(Variable|Constant)
+//              |
+// 1        NyayaNodeUnary       -   NyayaNodeNegation
+//              |        
+// 2        NyayaNodeBinary      -   NyayaNode(Disjunction|Conjunction|Implication|Bicondition)
+
+@interface NyayaNodeVariable : NyayaNode
+
+- (void)setDisplayValue:(NyayaBool)displayValue;
+- (void)setEvaluationValue:(BOOL)evaluationValue;
+
+@end
+
 @interface NyayaNodeConstant : NyayaNode
 @end
 
-@interface NyayaNodeNegation : NyayaNode 
+@interface NyayaNodeUnary : NyayaNode
 @end
 
-@interface NyayaNodeConjunction : NyayaNode 
+@interface NyayaNodeNegation : NyayaNodeUnary 
 @end
 
-@interface NyayaNodeDisjunction : NyayaNode 
+@interface NyayaNodeBinary : NyayaNode
 @end
 
-@interface NyayaNodeImplication : NyayaNode 
+@interface NyayaNodeConjunction : NyayaNodeBinary 
 @end
 
-@interface NyayaNodeBicondition : NyayaNode 
+@interface NyayaNodeDisjunction : NyayaNodeBinary 
 @end
 
-@interface NyayaNodeFunction : NyayaNode 
+@interface NyayaNodeImplication : NyayaNodeBinary 
+@end
+
+@interface NyayaNodeBicondition : NyayaNodeBinary 
+@end
+
+@interface NyayaNodeFunction : NyayaNode {
+    NSUInteger _arity;
+}
 @end
 
 #pragma mark - node sub class implementations
+
+@implementation NyayaNodeVariable
+
+- (NyayaNodeType)type { 
+    return NyayaVariable; 
+}
+
+- (void)setDisplayValue:(NyayaBool)displayValue {
+    _displayValue = displayValue;
+    
+}
+- (void)setEvaluationValue:(BOOL)evaluationValue {
+    _evaluation = evaluationValue;
+}
+
+@end
     
 @implementation NyayaNodeConstant
 
 - (NyayaNodeType)type { 
     return NyayaConstant; 
 }
+@end
 
-- (void)setEvaluationValue:(BOOL)evaluation {
-    // ignore because it's a constant!
+@implementation NyayaNodeUnary 
+
+- (NSUInteger)arity {
+    return 1;
 }
 @end
 
@@ -61,9 +104,12 @@
 
 - (NyayaBool)displayValue {
     NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
-    if (firstValue == NyayaFalse) return NyayaTrue;
-    else if (firstValue == NyayaTrue) return NyayaFalse;
-    else return NyayaUndefined;
+    
+    if (firstValue == NyayaFalse) _displayValue = NyayaTrue;
+    else if (firstValue == NyayaTrue) _displayValue = NyayaFalse;
+    else return _displayValue = NyayaUndefined;
+    
+    return _displayValue;
 }
 
 - (BOOL)evaluationValue {
@@ -71,7 +117,6 @@
 }
 
 - (NSString*)description {
-    NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
     NSString *right = nil;
     
@@ -86,11 +131,18 @@
             right = [NSString stringWithFormat:@"(%@)", [first description]];
             break;
     }
-    result =  [NSString stringWithFormat:@"%@%@", self.symbol, right];
+    _descriptionCache =  [NSString stringWithFormat:@"%@%@", self.symbol, right];
     
-    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+    return _descriptionCache;
 }
 
+@end
+
+@implementation NyayaNodeBinary
+
+- (NSUInteger)arity {
+    return 2;
+}
 @end
 
 @implementation NyayaNodeDisjunction
@@ -103,9 +155,11 @@
     NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
     NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
-    if (firstValue == NyayaTrue || secondValue == NyayaTrue) return NyayaTrue;
-    else if (firstValue == NyayaFalse && secondValue == NyayaFalse) return NyayaFalse;
-    else return NyayaUndefined;
+    if (firstValue == NyayaTrue || secondValue == NyayaTrue) _displayValue = NyayaTrue;
+    else if (firstValue == NyayaFalse && secondValue == NyayaFalse) _displayValue = NyayaFalse;
+    else _displayValue = NyayaUndefined;
+    
+    return _displayValue;
 }
 
 - (BOOL)evaluationValue {
@@ -113,7 +167,6 @@
 }
 
 - (NSString*)description {
-    NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
     NyayaNode *second = [self nodeAtIndex:1];
     NSString *left = nil;
@@ -146,9 +199,9 @@
             }
             
             
-            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
             
-    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+    return _descriptionCache;
 }
 @end
 
@@ -162,9 +215,11 @@
     NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
     NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
-    if (firstValue == NyayaFalse || secondValue == NyayaFalse) return NyayaFalse;
-    else if (firstValue == NyayaTrue && secondValue == NyayaTrue) return NyayaTrue;
-    else return NyayaUndefined;
+    if (firstValue == NyayaFalse || secondValue == NyayaFalse) _displayValue = NyayaFalse;
+    else if (firstValue == NyayaTrue && secondValue == NyayaTrue) _displayValue = NyayaTrue;
+    else _displayValue = NyayaUndefined;
+    
+    return _displayValue;
 }
 
 - (BOOL)evaluationValue {
@@ -172,7 +227,6 @@
 }
 
 - (NSString*)description {
-    NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
     NyayaNode *second = [self nodeAtIndex:1];
     NSString *left = nil;
@@ -206,10 +260,10 @@
             }
             
             
-            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
             
             
-    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+    return _descriptionCache;
 }
 @end
 
@@ -223,9 +277,11 @@
     NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
     NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
-    if (firstValue == NyayaFalse || secondValue == NyayaTrue) return NyayaTrue;
-    else if (firstValue == NyayaTrue && secondValue == NyayaFalse) return NyayaFalse;
-    else return NyayaUndefined;
+    if (firstValue == NyayaFalse || secondValue == NyayaTrue) _displayValue = NyayaTrue;
+    else if (firstValue == NyayaTrue && secondValue == NyayaFalse) _displayValue = NyayaFalse;
+    else _displayValue = NyayaUndefined;
+    
+    return _displayValue;
 }
 
 - (BOOL)evaluationValue {
@@ -233,7 +289,7 @@
 }
 
 - (NSString*)description {
-    NSString *result = nil;
+    
     NyayaNode *first = [self nodeAtIndex:0];
     NyayaNode *second = [self nodeAtIndex:1];
     NSString *left = nil;
@@ -267,9 +323,9 @@
                     right = [NSString stringWithFormat:@"(%@)", [second description]];
                     break;
             }
-            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
             
-    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+    return _descriptionCache;
 }
 @end
 
@@ -283,9 +339,11 @@
     NyayaBool firstValue = [[self nodeAtIndex:0] displayValue];
     NyayaBool secondValue = [[self nodeAtIndex:1] displayValue];
     
-    if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) return NyayaUndefined;
-    else if (firstValue == secondValue) return NyayaTrue;
-    else return NyayaFalse;
+    if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
+    else if (firstValue == secondValue) _displayValue = NyayaTrue;
+    else _displayValue = NyayaFalse;
+    
+    return _displayValue;
 }
 
 - (BOOL)evaluationValue {
@@ -294,7 +352,6 @@
 }
 
 - (NSString*)description {
-    NSString *result = nil;
     NyayaNode *first = [self nodeAtIndex:0];
     NyayaNode *second = [self nodeAtIndex:1];
     NSString *left = nil;
@@ -329,9 +386,9 @@
                     right = [NSString stringWithFormat:@"(%@)", [second description]];
                     break;
             }
-            result =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
             
-    return [result stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+    return _descriptionCache;
 }
 @end
 
@@ -341,27 +398,28 @@
     return NyayaFunction;
 }
 
+- (NSUInteger) arity {
+    return [self.nodes count];
+}
+
 - (NSString*)description {
     NSString *right = [[self.nodes valueForKey:@"description"] componentsJoinedByString:@","];
-    return [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
+    _descriptionCache = [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
+    return _descriptionCache;
 }
 
 @end
 
-#pragma mark - noder root class implementation
+#pragma mark - abstract root node implementation
 @implementation NyayaNode
 
 @synthesize symbol = _symbol;
 @synthesize nodes = _nodes;
-@synthesize displayValue = _value;
+@synthesize displayValue = _displayValue;
 @synthesize evaluationValue = _evaluation;
 
 - (NyayaNodeType)type {
-    return NyayaVariable;
-}
-
-- (void)setDisplayValue:(NyayaBool)value {
-    _value = value;
+    return NyayaUndefined;
 }
 
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index {
@@ -374,20 +432,21 @@
     if (!node) {
         if ([name isEqualToString:@"T"] || [name isEqualToString:@"1"]) {
             node = [[NyayaNodeConstant alloc] init];
-            node->_value = NyayaTrue;
+            node->_displayValue = NyayaTrue;
             node->_evaluation = TRUE;            
         }
         else if ([name isEqualToString:@"F"] || [name isEqualToString:@"0"]) {
             node = [[NyayaNodeConstant alloc] init];
-            node->_value = NyayaFalse;
+            node->_displayValue = NyayaFalse;
             node->_evaluation = FALSE; 
         }
         else {
-            node = [[NyayaNode alloc] init];
-            node->_value = NyayaUndefined;
+            node = [[NyayaNodeVariable alloc] init];
+            node->_displayValue = NyayaUndefined;
         };
         
         node->_symbol = name;
+        node->_descriptionCache = name;
         [store setNode:node forName:node.symbol];
     }
     return node;
@@ -396,7 +455,7 @@
 + (NyayaNode*)negation:(NyayaNode *)firstNode {
     NyayaNode*node=[[NyayaNodeNegation alloc] init];
     node->_symbol = @"¬";
-    node->_value = NyayaUndefined;
+    node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode, nil];
     return node;
 }
@@ -404,7 +463,7 @@
 + (NyayaNode*)conjunction:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeConjunction alloc] init];
     node->_symbol = @"∧";
-    node->_value = NyayaUndefined;
+    node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     return node;
 }
@@ -412,7 +471,7 @@
 + (NyayaNode*)disjunction:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeDisjunction alloc] init];
     node->_symbol = @"∨";
-    node->_value = NyayaUndefined;
+    node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     return node;
 }
@@ -420,7 +479,7 @@
 + (NyayaNode*)implication:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeImplication alloc] init];
     node->_symbol = @"→";
-    node->_value = NyayaUndefined;
+    node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     return node;
 }
@@ -428,7 +487,7 @@
 + (NyayaNode*)bicondition:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeBicondition alloc] init];
     node->_symbol = @"↔";
-    node->_value = NyayaUndefined;
+    node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     return node;
 }
@@ -439,6 +498,10 @@
     node->_symbol = name;
     node->_nodes = [nodes copy];
     return node;
+}
+
+- (NSUInteger)arity {
+    return 0;   // constants and variables
 }
 
 - (NSString*)treeDescription {
@@ -493,7 +556,7 @@
         node = [[[self class] alloc] init];
     
         node->_symbol = self.symbol;
-        node->_value = self.displayValue;
+        node->_displayValue = self.displayValue;
         node->_evaluation = self.evaluationValue;
         node->_nodes = [nodes copy];
     }    
@@ -725,15 +788,14 @@
 #pragma mark - subformulas
 
 - (NSSet*)subformulas {
-    NSSet *set = [NSSet setWithObject:[self description]];
+    NSMutableSet *set = [NSMutableSet setWithObject:_descriptionCache];
+    NSArray *sets = [self valueForKeyPath:@"nodes.subformulas"];
+
     
-    
-    for (NSSet* subset in [self valueForKeyPath:@"nodes.subformulas.description"]) {
-       
-        set = [set setByAddingObjectsFromSet:subset];
+    for (NSSet* subset in sets) {
+       [set addObjectsFromArray:[subset allObjects]];
     }
-     
-    
+        
     // set = [set setByAddingObjectsFromSet:[self valueForKeyPath:@"nodes.subformulas.@distinctUnionOfSets.description"]];
     
     // array = [array arrayByAddingObjectsFromArray:[self valueForKeyPath:@"nodes.subformulas.description"]];
@@ -787,7 +849,7 @@
     for (NSUInteger eval = 0; eval < numberOfRows; eval++) {
         NSMutableDictionary *cells = [NSMutableDictionary dictionaryWithCapacity:count+1];
         for (NSUInteger idx = 0; idx < count; idx++) {
-            NyayaNode *variable = [sortedVariables objectAtIndex:idx];
+            NyayaNodeVariable *variable = [sortedVariables objectAtIndex:idx];
             variable.evaluationValue = eval & (1 << idx);
             
             if (variable.evaluationValue) [cells setValue:@"T" forKey:variable.symbol];

@@ -15,8 +15,8 @@
 - (void)testTest {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a & b | a"];
     NyayaNode *ast = [parser parseFormula];
-    
-    
+    NSString *description = [ast description];
+    STAssertEqualObjects(description, @"(a ∧ b) ∨ a",nil);
         
     NSString *c = [[ast sortedSubformulas] componentsJoinedByString:@"; "];
     STAssertEqualObjects(c, @"a; b; a ∧ b; (a ∧ b) ∨ a",nil);
