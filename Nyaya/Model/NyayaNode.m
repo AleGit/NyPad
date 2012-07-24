@@ -12,8 +12,9 @@
 @interface NyayaNode () {
     
     @protected
+    NSString *_descriptionCache;
     NyayaBool _displayValue;
-    BOOL _evaluation;
+    BOOL _evaluationValue;
 }
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
 @end
@@ -28,12 +29,6 @@
 //              |        
 // 2        NyayaNodeBinary      -   NyayaNode(Disjunction|Conjunction|Implication|Bicondition)
 
-@interface NyayaNodeVariable : NyayaNode
-
-- (void)setDisplayValue:(NyayaBool)displayValue;
-- (void)setEvaluationValue:(BOOL)evaluationValue;
-
-@end
 
 @interface NyayaNodeConstant : NyayaNode
 @end
@@ -77,7 +72,7 @@
     
 }
 - (void)setEvaluationValue:(BOOL)evaluationValue {
-    _evaluation = evaluationValue;
+    _evaluationValue = evaluationValue;
 }
 
 @end
@@ -113,7 +108,8 @@
 }
 
 - (BOOL)evaluationValue {
-    return ![[self nodeAtIndex:0] evaluationValue]; 
+    _evaluationValue = ![[self nodeAtIndex:0] evaluationValue];
+    return _evaluationValue; 
 }
 
 - (NSString*)description {
@@ -163,7 +159,8 @@
 }
 
 - (BOOL)evaluationValue {
-    return [[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
+    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
+    return _evaluationValue;
 }
 
 - (NSString*)description {
@@ -223,7 +220,8 @@
 }
 
 - (BOOL)evaluationValue {
-    return [[self nodeAtIndex:0] evaluationValue] && [[self nodeAtIndex:1] evaluationValue]; 
+    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] && [[self nodeAtIndex:1] evaluationValue]; 
+    return _evaluationValue;
 }
 
 - (NSString*)description {
@@ -285,7 +283,8 @@
 }
 
 - (BOOL)evaluationValue {
-    return ![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
+    _evaluationValue = ![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue];
+    return _evaluationValue;
 }
 
 - (NSString*)description {
@@ -347,8 +346,9 @@
 }
 
 - (BOOL)evaluationValue {
-    return (![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue])
+    _evaluationValue = (![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue])
     && (![[self nodeAtIndex:1] evaluationValue] || [[self nodeAtIndex:0] evaluationValue]); 
+    return _evaluationValue;
 }
 
 - (NSString*)description {
@@ -416,7 +416,7 @@
 @synthesize symbol = _symbol;
 @synthesize nodes = _nodes;
 @synthesize displayValue = _displayValue;
-@synthesize evaluationValue = _evaluation;
+@synthesize evaluationValue = _evaluationValue;
 
 - (NyayaNodeType)type {
     return NyayaUndefined;
@@ -433,12 +433,12 @@
         if ([name isEqualToString:@"T"] || [name isEqualToString:@"1"]) {
             node = [[NyayaNodeConstant alloc] init];
             node->_displayValue = NyayaTrue;
-            node->_evaluation = TRUE;            
+            node->_evaluationValue = TRUE;            
         }
         else if ([name isEqualToString:@"F"] || [name isEqualToString:@"0"]) {
             node = [[NyayaNodeConstant alloc] init];
             node->_displayValue = NyayaFalse;
-            node->_evaluation = FALSE; 
+            node->_evaluationValue = FALSE; 
         }
         else {
             node = [[NyayaNodeVariable alloc] init];
@@ -446,7 +446,6 @@
         };
         
         node->_symbol = name;
-        node->_descriptionCache = name;
         [store setNode:node forName:node.symbol];
     }
     return node;
@@ -532,7 +531,8 @@
 }
 
 - (NSString*)description {
-    return _symbol;
+    _descriptionCache = _symbol;
+    return _descriptionCache;
 }
 
 #pragma mark - cnf, dnf, nnf, imf
@@ -557,7 +557,7 @@
     
         node->_symbol = self.symbol;
         node->_displayValue = self.displayValue;
-        node->_evaluation = self.evaluationValue;
+        node->_evaluationValue = self.evaluationValue;
         node->_nodes = [nodes copy];
     }    
     return node;
@@ -787,25 +787,20 @@
 
 #pragma mark - subformulas
 
-- (NSSet*)subformulas {
+- (NSSet*)setOfSubformulas {
     NSMutableSet *set = [NSMutableSet setWithObject:_descriptionCache];
-    NSArray *sets = [self valueForKeyPath:@"nodes.subformulas"];
-
     
-    for (NSSet* subset in sets) {
-       [set addObjectsFromArray:[subset allObjects]];
+    NSArray *sets = [self valueForKeyPath:@"nodes.setOfSubformulas"];
+    for (NSSet* nodeset in sets) {
+       [set unionSet:nodeset];
     }
-        
-    // set = [set setByAddingObjectsFromSet:[self valueForKeyPath:@"nodes.subformulas.@distinctUnionOfSets.description"]];
-    
-    // array = [array arrayByAddingObjectsFromArray:[self valueForKeyPath:@"nodes.subformulas.description"]];
     
     return set;
     
 }
 
-- (NSArray*)sortedSubformulas {
-    NSArray *array = [[self subformulas] allObjects];
+- (NSArray*)sortedArrayOfSubformulas {
+    NSArray *array = [[self setOfSubformulas] allObjects];
     
     return [array sortedArrayUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {
         if ([obj1 length] < [obj2 length]) return -1;
@@ -818,7 +813,7 @@
 
 #pragma mark - truth tables
 
-- (NSSet*)variables {
+- (NSSet*)setOfVariables {
     NSSet *result = nil;
     if (self.type == NyayaConstant) result = [NSSet set];
     else if (self.type == NyayaVariable) result = [NSSet setWithObject:self];
@@ -827,7 +822,7 @@
         // result = [self.nodes valueForKeyPath:@"@distinctUnionOfSets.variables"];
         
         
-        for (NSSet* subset in [self valueForKeyPath:@"nodes.variables"]) {
+        for (NSSet* subset in [self valueForKeyPath:@"nodes.setOfVariables"]) {
         // for (NSSet* subset in [self.nodes valueForKeyPath:@"variables"]) {
             if (!result) result = subset;
             else result = [result setByAddingObjectsFromSet:subset];
@@ -839,7 +834,7 @@
 }
 
 - (NSArray*)truthTable:(NSArray*)sortedVariables {
-    NSString *description = [self description];
+    // NSString *description = [self description];
     // description = @"formula";
     
     NSUInteger count = [sortedVariables count];
@@ -855,12 +850,22 @@
             if (variable.evaluationValue) [cells setValue:@"T" forKey:variable.symbol];
             else [cells setValue:@"F" forKey:variable.symbol];
         }
-        if (self.evaluationValue) [cells setValue:@"T" forKey:description];
-        else [cells setValue:@"F" forKey:description];
+        if (self.evaluationValue) [cells setValue:@"T" forKey:@"x"];
+        else [cells setValue:@"F" forKey:@"x"];
         [rows addObject:cells];
     }
     return rows;
     
+}
+
+- (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals {
+    if (![headersAndEvals objectForKey:_descriptionCache]) {
+        [headersAndEvals setValue:[NSNumber numberWithBool:_evaluationValue] forKey:_descriptionCache];
+        
+        for (NyayaNode *node in _nodes) {
+            [node fillHeadersAndEvals:headersAndEvals];
+        }
+    }
 }
 
 

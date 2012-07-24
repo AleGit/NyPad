@@ -19,10 +19,7 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 
-@interface NyayaNode : NSObject {
-@protected
-    NSString *_descriptionCache;
-}
+@interface NyayaNode : NSObject
 
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
@@ -53,10 +50,20 @@ typedef NSUInteger NyayaNodeType;
 - (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction (AND) of disjunctions (OR) of literals: (a or b) AND (a or !b)
 - (NSArray*)disjunctionOfConjunctions; // dnf is disjunction (OR) of conjunctions (AND) of literals: (a and b) OR (a and !b)
 
-- (NSSet*)subformulas;
-- (NSArray*)sortedSubformulas;
+- (NSSet*)setOfSubformulas;
+- (NSArray*)sortedArrayOfSubformulas;
 
-- (NSSet*)variables;
-- (NSArray*)truthTable:(NSArray*)sortedVariables;
+- (NSSet*)setOfVariables;
+- (NSArray*)truthTable:(NSArray*)sortedVariables; // deprecated
+
+- (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals;
 
 @end
+
+@interface NyayaNodeVariable : NyayaNode
+
+- (void)setDisplayValue:(NyayaBool)displayValue;
+- (void)setEvaluationValue:(BOOL)evaluationValue;
+
+@end
+

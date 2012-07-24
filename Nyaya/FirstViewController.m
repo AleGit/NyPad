@@ -88,39 +88,46 @@
         dispatch_async(queue, ^{
             dispatch_queue_t mq = dispatch_get_main_queue();
             
-            NyayaNode *a = [parser parseFormula];
+            NyayaNode *node = [parser parseFormula];
+            NSString *description = [node description];       
+            
             dispatch_async(mq, ^{
-                self.ast.text = [a description];
+                self.ast.text = description;
                 if ([parser hasErrors]) self.errors.text = [parser errorDescriptions];
             });
             
             if (![parser hasErrors]) {
+                NSString *s = [[node sortedArrayOfSubformulas] componentsJoinedByString:@"; "];
                 
-                NyayaNode *i = [a imf];
+                NyayaNode *imfnode = [node imf];
+                NSString *imfdescription=[node description];
                 dispatch_async(mq, ^{
-                    self.imf.text = [i description];
+                    self.imf.text = imfdescription;
                 });
                 
                 
-                NyayaNode *n = [i nnf];
+                NyayaNode *nnfnode = [imfnode nnf];
+                NSString *nnfdescription=[node description];
                 dispatch_async(mq, ^{
-                    self.nnf.text = [n description];
+                    self.nnf.text = nnfdescription;
                 });
                 
                 
-                NyayaNode *c = [n cnf];
+                NyayaNode *cnfnode = [nnfnode cnf];
+                NSString *cnfdescription=[cnfnode description];
                 dispatch_async(mq, ^{
-                    self.cnf.text = [c description];
+                    self.cnf.text = cnfdescription;
                 });
                 
                 
-                NyayaNode *d = [n dnf];
+                NyayaNode *dnfnode = [node dnf];
+                NSString *dnfdescription=[dnfnode description];
                 dispatch_async(mq, ^{
-                    self.dnf.text = [d description];
+                    self.dnf.text = dnfdescription;
                 });
                 
                 
-                NSString *s = [[a sortedSubformulas] componentsJoinedByString:@"; "];
+                
                 
                 dispatch_async(mq, ^{
                     self.subformulas.text = s;

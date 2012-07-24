@@ -24,7 +24,7 @@
     STAssertEquals(cnf.evaluationValue, evaluation, nil);
     STAssertEquals(dnf.evaluationValue, evaluation, nil);
     
-    STAssertEquals([[node variables] count], (NSUInteger)0,nil);
+    STAssertEquals([[node setOfVariables] count], (NSUInteger)0,nil);
 }
 
 - (void)testConstantEvaluation {
@@ -93,7 +93,7 @@
     NyayaNode *b = [NyayaNode atom:@"b"];
     
     NyayaNode *node = [NyayaNode bicondition:a with:b];
-    NSArray *variables = [[node variables] allObjects];
+    NSArray *variables = [[node setOfVariables] allObjects];
     
     
     NSArray *tt1 = [node truthTable:variables];

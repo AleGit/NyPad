@@ -18,7 +18,7 @@
     NSString *description = [ast description];
     STAssertEqualObjects(description, @"(a ∧ b) ∨ a",nil);
         
-    NSString *c = [[ast sortedSubformulas] componentsJoinedByString:@"; "];
+    NSString *c = [[ast sortedArrayOfSubformulas] componentsJoinedByString:@"; "];
     STAssertEqualObjects(c, @"a; b; a ∧ b; (a ∧ b) ∨ a",nil);
 
 }

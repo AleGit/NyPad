@@ -21,7 +21,7 @@
     aAb = [NyayaNode negation:aAb];
     aAb = [[[[NyayaNode implication:b with:aAb] imf] nnf] cnf];
     
-    NSSet *set = [aAb variables];
+    NSSet *set = [aAb setOfVariables];
     STAssertEquals([set count], (NSUInteger)2,nil);
     STAssertTrue([set containsObject:a], nil);
     STAssertTrue([set containsObject:b], nil);
