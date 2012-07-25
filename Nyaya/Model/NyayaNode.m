@@ -159,7 +159,7 @@
 }
 
 - (BOOL)evaluationValue {
-    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue]; 
+    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] | [[self nodeAtIndex:1] evaluationValue]; 
     return _evaluationValue;
 }
 
@@ -220,7 +220,7 @@
 }
 
 - (BOOL)evaluationValue {
-    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] && [[self nodeAtIndex:1] evaluationValue]; 
+    _evaluationValue = [[self nodeAtIndex:0] evaluationValue] & [[self nodeAtIndex:1] evaluationValue]; 
     return _evaluationValue;
 }
 
@@ -283,7 +283,7 @@
 }
 
 - (BOOL)evaluationValue {
-    _evaluationValue = ![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue];
+    _evaluationValue = ![[self nodeAtIndex:0] evaluationValue] | [[self nodeAtIndex:1] evaluationValue];
     return _evaluationValue;
 }
 
@@ -346,8 +346,8 @@
 }
 
 - (BOOL)evaluationValue {
-    _evaluationValue = (![[self nodeAtIndex:0] evaluationValue] || [[self nodeAtIndex:1] evaluationValue])
-    && (![[self nodeAtIndex:1] evaluationValue] || [[self nodeAtIndex:0] evaluationValue]); 
+    _evaluationValue = (![[self nodeAtIndex:0] evaluationValue] | [[self nodeAtIndex:1] evaluationValue])
+    & (![[self nodeAtIndex:1] evaluationValue] | [[self nodeAtIndex:0] evaluationValue]); 
     return _evaluationValue;
 }
 

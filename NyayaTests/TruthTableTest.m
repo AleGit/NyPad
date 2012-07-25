@@ -14,7 +14,8 @@
 @implementation TruthTableTest
 
 - (void)testSimple {
-    NyayaParser *parser = [NyayaParser parserWithString:@"!x&y | (x > y)"];
+    NyayaParser *parser = [NyayaParser parserWithString:@"x&!y | (x > y) & x"];
+    // NyayaParser *parser = [NyayaParser parserWithString:@"(x > y)"];
     
     NyayaNode *formula = [parser parseFormula];
     

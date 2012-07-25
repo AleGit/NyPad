@@ -60,7 +60,8 @@
     for (NSUInteger variableIndex = 0; variableIndex < [self.variables count]; variableIndex++) {
         NyayaNodeVariable *variable = [self.variables objectAtIndex:variableIndex];
         BOOL eval = rowIndex & (1 << variableIndex);
-        variable.evaluationValue = rowIndex & (1 << variableIndex);
+        variable.evaluationValue = eval ? TRUE : FALSE;
+    
         
         [headersAndEvals setValue:[NSNumber numberWithBool:eval] forKey:[variable description]];
     }
@@ -100,7 +101,13 @@
 - (NSString*)description {
     NSMutableString *description = [NSMutableString stringWithString:@"|"];
     
-    for (NSString *header in _headers) {
+    NSArray *sortedHeaders = [_headers sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        if ([obj1 length] < [obj2 length]) return -1;
+        else if ([obj1 length] > [obj2 length]) return 1;
+        else return [obj1 compare:obj2];
+    }];
+    
+    for (NSString *header in sortedHeaders) {
         [description appendFormat:@" %@ |", header]; 
     }
     
@@ -108,7 +115,7 @@
     
     for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
         [description appendString:@"\n|"];
-        for (NSString* header in _headers) {
+        for (NSString* header in sortedHeaders) {
             BOOL eval = [self evalAtRow:rowIndex forHeader:header];
             if (eval) [description appendString: @" T"];
             else [description appendString:@" F"];
