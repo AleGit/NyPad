@@ -19,4 +19,6 @@
 - (id)initWithFormula:(NyayaNode*)formula;
 - (void)evaluateTable;
 
+- (void)setOrder: (NSArray*)variableNames;
+
 @end
