@@ -45,7 +45,7 @@
             else if (idx2 != NSNotFound) return 1;            
         }
         
-        return [obj1.symbol compare:obj2.symbol];
+        return [obj1.symbol compare:obj2.symbol options:NSNumericSearch]; // x1 < x2 < x10
     }];
     
     if (!_sortedNames || [_sortedNames count] < [_variables count]) _sortedNames = [_variables valueForKey:@"symbol"];
@@ -66,7 +66,7 @@
         
         else if ([obj1 length] < [obj2 length]) return -1;
         else if ([obj1 length] > [obj2 length]) return 1;
-        else return [obj1 compare:obj2]; // alphabetical
+        else return [obj1 compare:obj2 options:NSNumericSearch]; // x1 < x2 < x10
     }];
 }
 
