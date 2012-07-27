@@ -87,25 +87,4 @@
     
 }
 
-- (void)testTruthTable {
-    
-    NyayaNode *a = [NyayaNode atom:@"a"];
-    NyayaNode *b = [NyayaNode atom:@"b"];
-    
-    NyayaNode *node = [NyayaNode bicondition:a with:b];
-    NSArray *variables = [[node setOfVariables] allObjects];
-    
-    
-    NSArray *tt1 = [node truthTable:variables];
-    NSArray *tt2 = [[[[node imf] nnf] cnf] truthTable:variables];
-    
-    NSLog(@"%@ \n %@", tt1, tt2);
-    STAssertEqualObjects(tt1, tt2,nil);
-    
-    // NSArray *header = [[tt objectAtIndex:0] allKeys];
-    
-                       
-    
-}
-
 @end

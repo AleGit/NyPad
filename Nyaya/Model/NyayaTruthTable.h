@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NyayaNode.h"
+@class NyayaNode;
 
 @interface NyayaTruthTable : NSObject
 
-
-@property NyayaNode *formula;
-@property NSString *title;
-@property NSArray *variables;
-@property NSArray *headers;
+@property (nonatomic, readonly) NyayaNode *formula;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSArray *variables;
+@property (nonatomic, readonly) NSArray *headers;
 
 - (id)initWithFormula:(NyayaNode*)formula;
 - (void)evaluateTable;

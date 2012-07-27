@@ -7,6 +7,7 @@
 //
 
 #import "NyayaTruthTable.h"
+#import "NyayaNode.h"
 
 @interface NyayaTruthTable () {
     NSUInteger _rowsCount;
@@ -28,7 +29,10 @@
     if (self) {
         _formula = formula;
         _title = [formula description];
-        _variables = [[formula setOfVariables] allObjects];
+        _variables = [[[formula setOfVariables] allObjects] sortedArrayUsingComparator:^NSComparisonResult(NyayaNode *obj1, NyayaNode *obj2) {
+            return [obj1.symbol compare: obj2.symbol];
+            
+        } ];
         _headers = [[formula setOfSubformulas] allObjects];
         
         _rowsCount = 1 << [_variables count];
@@ -57,14 +61,11 @@
 - (BOOL)evaluateRow:(NSUInteger)rowIndex {
     NSMutableDictionary *headersAndEvals = [NSMutableDictionary dictionaryWithCapacity:[_headers count]];
     
-    for (NSUInteger variableIndex = 0; variableIndex < [self.variables count]; variableIndex++) {
-        NyayaNodeVariable *variable = [self.variables objectAtIndex:variableIndex];
-        BOOL eval = rowIndex & (1 << variableIndex);
-        variable.evaluationValue = eval ? TRUE : FALSE;
-    
-        
+    [_variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
+        BOOL eval = (rowIndex & (1 << idx)) > 0 ? TRUE : FALSE;
+        variable.evaluationValue = eval;
         [headersAndEvals setValue:[NSNumber numberWithBool:eval] forKey:[variable description]];
-    }
+    }];
     
     BOOL rowEval = [_formula evaluationValue];
     
@@ -83,7 +84,6 @@
 - (void)evaluateTable {
     for (NSUInteger rowIndex=0; rowIndex < _rowsCount; rowIndex++) {
         [self evaluateRow:rowIndex];
-        
     }
 }
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - enums
+
 enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
 typedef NSUInteger NyayaBool;
 
@@ -54,7 +56,6 @@ typedef NSUInteger NyayaNodeType;
 - (NSArray*)sortedArrayOfSubformulas;
 
 - (NSSet*)setOfVariables;
-- (NSArray*)truthTable:(NSArray*)sortedVariables; // deprecated
 
 - (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals;
 

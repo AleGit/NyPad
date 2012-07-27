@@ -11,7 +11,7 @@
 
 @interface NyayaNode () {
     
-    @protected
+@protected
     NSString *_descriptionCache;
     NyayaBool _displayValue;
     BOOL _evaluationValue;
@@ -76,7 +76,7 @@
 }
 
 @end
-    
+
 @implementation NyayaNodeConstant
 
 - (NyayaNodeType)type { 
@@ -172,32 +172,32 @@
     switch(first.type) {
         case NyayaConstant:
         case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaDisjunction:  // a ∨ b ∨ c ≡ (a ∨ b) ∨ c (left associative) 
-                    left = [first description];
-                    break;
-                default:
-                    left = [NSString stringWithFormat:@"(%@)", [first description]];
-                    break;
-            }
-            
-            switch(second.type) {
-                case NyayaConstant:
-                case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                    // case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
-                    right = [second description];
-                    break;
-                default:
-                    right = [NSString stringWithFormat:@"(%@)", [second description]];
-                    break;
-            }
-            
-            
-            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-            
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaDisjunction:  // a ∨ b ∨ c ≡ (a ∨ b) ∨ c (left associative) 
+            left = [first description];
+            break;
+        default:
+            left = [NSString stringWithFormat:@"(%@)", [first description]];
+            break;
+    }
+    
+    switch(second.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+            // case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
+            right = [second description];
+            break;
+        default:
+            right = [NSString stringWithFormat:@"(%@)", [second description]];
+            break;
+    }
+    
+    
+    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+    
     return _descriptionCache;
 }
 @end
@@ -231,36 +231,36 @@
     NSString *right = nil;
     
     
-        switch(first.type) {
-            case NyayaConstant:
-            case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaConjunction: // a ∧ b ∧ c = (a ∧ b) ∧ c (left associative) 
-                    left = [first description];
-                    break;
-                default:
-                    left = [NSString stringWithFormat:@"(%@)", [first description]];
-                    break;
-            }
-            
-            switch(second.type) {
-                case NyayaConstant:
-                case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                    // case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
-                    right = [second description];
-                    break;
-                default:
-                    right = [NSString stringWithFormat:@"(%@)", [second description]];
-                    break;
-            }
-            
-            
-            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-            
-            
+    switch(first.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaConjunction: // a ∧ b ∧ c = (a ∧ b) ∧ c (left associative) 
+            left = [first description];
+            break;
+        default:
+            left = [NSString stringWithFormat:@"(%@)", [first description]];
+            break;
+    }
+    
+    switch(second.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+            // case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
+            right = [second description];
+            break;
+        default:
+            right = [NSString stringWithFormat:@"(%@)", [second description]];
+            break;
+    }
+    
+    
+    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+    
+    
     return _descriptionCache;
 }
 @end
@@ -297,33 +297,33 @@
     switch(first.type) {
         case NyayaConstant:
         case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaConjunction:
-                case NyayaDisjunction:
-                    left = [first description];
-                    break;
-                default:
-                    left = [NSString stringWithFormat:@"(%@)", [first description]];
-                    break;
-            }
-            
-            switch(second.type) {
-                case NyayaConstant:
-                case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaConjunction:
-                case NyayaDisjunction:
-                case NyayaImplication:  // right associative
-                    right = [second description];
-                    break;
-                default:
-                    right = [NSString stringWithFormat:@"(%@)", [second description]];
-                    break;
-            }
-            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-            
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaConjunction:
+        case NyayaDisjunction:
+            left = [first description];
+            break;
+        default:
+            left = [NSString stringWithFormat:@"(%@)", [first description]];
+            break;
+    }
+    
+    switch(second.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaConjunction:
+        case NyayaDisjunction:
+        case NyayaImplication:  // right associative
+            right = [second description];
+            break;
+        default:
+            right = [NSString stringWithFormat:@"(%@)", [second description]];
+            break;
+    }
+    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+    
     return _descriptionCache;
 }
 @end
@@ -358,36 +358,36 @@
     NSString *right = nil;
     
     
-            switch(first.type) {
-                case NyayaConstant:
-                case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaConjunction:
-                case NyayaDisjunction:
-                    left = [first description];
-                    break;
-                default:
-                    left = [NSString stringWithFormat:@"(%@)", [first description]];
-                    break;
-            }
-            
-            switch(second.type) {
-                case NyayaConstant:
-                case NyayaVariable:
-                case NyayaNegation:
-                case NyayaFunction: // NIY
-                case NyayaConjunction:
-                case NyayaDisjunction:
-                case NyayaBicondition:  // right associative
-                    right = [second description];
-                    break;
-                default:
-                    right = [NSString stringWithFormat:@"(%@)", [second description]];
-                    break;
-            }
-            _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-            
+    switch(first.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaConjunction:
+        case NyayaDisjunction:
+            left = [first description];
+            break;
+        default:
+            left = [NSString stringWithFormat:@"(%@)", [first description]];
+            break;
+    }
+    
+    switch(second.type) {
+        case NyayaConstant:
+        case NyayaVariable:
+        case NyayaNegation:
+        case NyayaFunction: // NIY
+        case NyayaConjunction:
+        case NyayaDisjunction:
+        case NyayaBicondition:  // right associative
+            right = [second description];
+            break;
+        default:
+            right = [NSString stringWithFormat:@"(%@)", [second description]];
+            break;
+    }
+    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+    
     return _descriptionCache;
 }
 @end
@@ -554,7 +554,7 @@
     
     if (!node) {
         node = [[[self class] alloc] init];
-    
+        
         node->_symbol = self.symbol;
         node->_displayValue = self.displayValue;
         node->_evaluationValue = self.evaluationValue;
@@ -630,7 +630,7 @@
             case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
                 return [NyayaNode disjunction: [[NyayaNode negation:first] nnf]
                                          with: [[NyayaNode negation:second] nnf] ];
-        
+                
             default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
                 return [self copyNnf];
         }
@@ -683,7 +683,7 @@
             // dnf ((a & b) | c)) = (a | c) & (b | c)
             // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
             return [NyayaNode cnfDistribution:[[self.nodes objectAtIndex:0] cnf] 
-                                      with:[[self.nodes objectAtIndex:1] cnf]];
+                                         with:[[self.nodes objectAtIndex:1] cnf]];
             
         default:
             return self;
@@ -731,7 +731,7 @@
             // dnf ((a | b) & c)) = (a & c) | (b & c)
             // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
             return [NyayaNode dnfDistribution:[[self.nodes objectAtIndex:0] dnf] 
-                                      with:[[self.nodes objectAtIndex:1] dnf]];
+                                         with:[[self.nodes objectAtIndex:1] dnf]];
             
         default:
             return self;
@@ -792,7 +792,7 @@
     
     NSArray *sets = [self valueForKeyPath:@"nodes.setOfSubformulas"];
     for (NSSet* nodeset in sets) {
-       [set unionSet:nodeset];
+        [set unionSet:nodeset];
     }
     
     return set;
@@ -823,7 +823,7 @@
         
         
         for (NSSet* subset in [self valueForKeyPath:@"nodes.setOfVariables"]) {
-        // for (NSSet* subset in [self.nodes valueForKeyPath:@"variables"]) {
+            // for (NSSet* subset in [self.nodes valueForKeyPath:@"variables"]) {
             if (!result) result = subset;
             else result = [result setByAddingObjectsFromSet:subset];
         }
@@ -831,31 +831,6 @@
         // result = [self valueForKeyPath:@"nodes.@distinctUnionOfSets.variables."];
     }
     return result;
-}
-
-- (NSArray*)truthTable:(NSArray*)sortedVariables {
-    // NSString *description = [self description];
-    // description = @"formula";
-    
-    NSUInteger count = [sortedVariables count];
-    NSUInteger numberOfRows = 1 << count;
-    NSMutableArray *rows = [NSMutableArray arrayWithCapacity:numberOfRows];
-    
-    for (NSUInteger eval = 0; eval < numberOfRows; eval++) {
-        NSMutableDictionary *cells = [NSMutableDictionary dictionaryWithCapacity:count+1];
-        for (NSUInteger idx = 0; idx < count; idx++) {
-            NyayaNodeVariable *variable = [sortedVariables objectAtIndex:idx];
-            variable.evaluationValue = eval & (1 << idx);
-            
-            if (variable.evaluationValue) [cells setValue:@"T" forKey:variable.symbol];
-            else [cells setValue:@"F" forKey:variable.symbol];
-        }
-        if (self.evaluationValue) [cells setValue:@"T" forKey:@"x"];
-        else [cells setValue:@"F" forKey:@"x"];
-        [rows addObject:cells];
-    }
-    return rows;
-    
 }
 
 - (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals {
