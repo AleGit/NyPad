@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+/*
 enum { NyayaParserStateInput = 1, 
     NyayaParserStateSequence, NyayaParserStateFormula, NyayaParserStateJunction, NyayaParserStateNegation, NyayaParserStateTerm, NyayaParserStateTuple,
     NyayaParserStateFinished
 };
 typedef NSUInteger NyayaParserState;
+*/
 
 enum { 
     NyayaErrorNoToken = 1, 
@@ -41,6 +43,7 @@ typedef NSUInteger NyayaErrorState;
 - (NSString*)errorDescriptions;
 
 - (NSArray*)parseSequence;   // sequence    = formula   { ";" formula }
+
 - (NyayaNode*)parseFormula;  // formula     = junction  [ ( "→" | "↔" ) formula }
 - (NyayaNode*)parseJunction; // junction    = negation  { ( "∨" | "∧" ) negation }
 - (NyayaNode*)parseNegation; // negation    = "¬" negation | term | "(" formula ")"

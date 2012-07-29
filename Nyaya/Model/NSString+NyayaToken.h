@@ -8,24 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
+
 @interface NSString (NyayaToken)
 
-- (BOOL)isNegation;
-- (BOOL)isConjunction;
-- (BOOL)isDisjunction;
-- (BOOL)isJunction;
-- (BOOL)isImplication;
-- (BOOL)isBicondition;
+- (BOOL)isTrueToken;
+- (BOOL)isFalseToken;
 
-- (NSString*)complementaryLiteral;
-- (BOOL)isComplement:(NSString*)s;
+- (BOOL)isNegationToken;
+- (BOOL)isConjunctionToken;
+- (BOOL)isDisjunctionToken;
+- (BOOL)isJunctionToken;
+- (BOOL)isImplicationToken;
+- (BOOL)isBiconditionToken;
 
-- (BOOL)isIdentifier;
+- (BOOL)isIdentifierToken;
 - (BOOL)isLeftParenthesis;
 - (BOOL)isRightParenthesis;
 - (BOOL)isComma;
 - (BOOL)isSemicolon;
 
-
+- (NSString*)complementaryLiteral;
+- (BOOL)isComplementLiteral:(NSString*)s;
 
 @end

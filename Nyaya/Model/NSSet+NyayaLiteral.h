@@ -10,7 +10,7 @@
 
 @interface NSSet (NyayaLiteral)
 
-- (BOOL)containsComplement:(NSString*)literal;
+- (BOOL)containsComplementary:(NSString*)literal;
 - (BOOL)containsComplementaryLiterals;
 
 @end

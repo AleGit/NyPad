@@ -40,8 +40,8 @@
     STAssertTrue([_setA containsObject:@"a"], nil);
     STAssertFalse([_setA containsObject:@"¬a"], nil);
     
-    STAssertFalse([_setA containsComplement:@"a"], nil);
-    STAssertTrue([_setA containsComplement:@"¬a"], nil);
+    STAssertFalse([_setA containsComplementary:@"a"], nil);
+    STAssertTrue([_setA containsComplementary:@"¬a"], nil);
     
     
 }

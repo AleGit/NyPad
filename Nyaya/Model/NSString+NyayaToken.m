@@ -8,63 +8,48 @@
 
 #import "NSString+NyayaToken.h"
 
+NSString *const NYAYA_TOKENS = @"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+";
+
 @implementation NSString (NyayaToken)
 
-- (BOOL)isNegation {
-    
-    
+- (BOOL)isTrueToken {
+    return [self isEqualToString:@"T"] || [self isEqualToString:@"1"];
+}
+
+- (BOOL)isFalseToken {
+    return [self isEqualToString:@"F"] || [self isEqualToString:@"0"];
+}
+
+- (BOOL)isNegationToken {
     return [self isEqualToString:@"¬"]
     || [self isEqualToString:@"!"];
 }
 
-- (BOOL)isConjunction {
+- (BOOL)isConjunctionToken {
     return [self isEqualToString:@"∧"]
     || [self isEqualToString:@"&"];
-    
 }
 
-- (BOOL)isDisjunction {
+- (BOOL)isDisjunctionToken {
     return [self isEqualToString:@"∨"]
     || [self isEqualToString:@"|"];
-    
 }
 
-- (BOOL)isJunction {
-    return [self isDisjunction] || [self isConjunction];
+- (BOOL)isJunctionToken {
+    return [self isDisjunctionToken] || [self isConjunctionToken];
 }
 
-- (BOOL)isImplication {
-    
+- (BOOL)isImplicationToken {
     return [self isEqualToString:@"→"]
     || [self isEqualToString:@">"];
-    
 }
 
-- (BOOL)isBicondition {
-    
+- (BOOL)isBiconditionToken {
     return [self isEqualToString:@"↔"]
     || [self isEqualToString:@"<>"];
-    
 }
 
-- (NSString*)complementaryLiteral {
-    if ([self hasPrefix:@"¬"]) return [self substringFromIndex:1];
-    else return [@"¬" stringByAppendingString:self];
-}
-
-- (BOOL)isComplement:(NSString *)s {
-    
-    return ( 
-            [self length] == [s length] + 1                 // ¬atom atom
-            && [self hasPrefix:@"¬"] && [self hasSuffix:s])
-    || ( 
-        [self length] + 1 == [s length]                     // atom ¬atom
-        && [s hasPrefix:@"¬"] && [s hasSuffix:self]);
-    
-    // return [self isEqualToString:[s complementaryLiteral]];
-}
-
-- (BOOL)isIdentifier {
+- (BOOL)isIdentifierToken {
     NSCharacterSet *noids = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     NSRange range = [self rangeOfCharacterFromSet:noids];
     
@@ -85,6 +70,20 @@
 
 - (BOOL)isSemicolon {
     return [self isEqualToString:@";"];
+}
+
+- (NSString*)complementaryLiteral {
+    if ([self hasPrefix:@"¬"]) return [self substringFromIndex:1];
+    else return [@"¬" stringByAppendingString:self];
+}
+
+- (BOOL)isComplementLiteral:(NSString *)s {
+    return ( 
+            [self length] == [s length] + 1                 // ¬atom atom
+            && [self hasPrefix:@"¬"] && [self hasSuffix:s])
+    || ( 
+        [self length] + 1 == [s length]                     // atom ¬atom
+        && [s hasPrefix:@"¬"] && [s hasSuffix:self]);
 }
 
 @end

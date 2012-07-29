@@ -62,7 +62,7 @@
     NSMutableArray *tokens = [NSMutableArray array];
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression 
-                                  regularExpressionWithPattern:@"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+"
+                                  regularExpressionWithPattern:NYAYA_TOKENS // @"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+"
                                   options:NSRegularExpressionCaseInsensitive
                                   error:&error];
     
@@ -114,11 +114,11 @@
     if (_token) {
         result = [self parseJunction];      // consumes junction
         
-        if ([_token isImplication]) {
+        if ([_token isImplicationToken]) {
             [self nextToken]; // consume ">"
             result = [NyayaNode implication:result with:[self parseFormula]];
         }
-        else if ([_token isBicondition]) {
+        else if ([_token isBiconditionToken]) {
             
             [self nextToken]; // consume "<>"
             result = [NyayaNode bicondition:result with:[self parseFormula]];
@@ -137,7 +137,7 @@
 - (NyayaNode*)parseJunction { // junction    = negation  { ( "∨" | "∧" ) negation }
     NyayaNode *junction = [self parseNegation];
     
-    while ([_token isJunction]) {
+    while ([_token isJunctionToken]) {
         NSString *tok = _token;
         
         
@@ -150,7 +150,7 @@
         
         
          
-        if (node && [tok isDisjunction]) {
+        if (node && [tok isDisjunctionToken]) {
             
             junction = [NyayaNode disjunction:junction with:node];
         }
@@ -161,7 +161,7 @@
         
     }
     
-    if ([_token isNegation] || [_token isIdentifier]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
+    if ([_token isNegationToken] || [_token isIdentifierToken]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
         
     if (_token)
        
@@ -174,7 +174,7 @@
 - (NyayaNode*)parseNegation { 
     NyayaNode *result = nil;
     
-    if ([_token isNegation]) {
+    if ([_token isNegationToken]) {
         [self nextToken];       // consume "¬"
         return [NyayaNode negation:[self parseNegation]];
         
@@ -189,7 +189,7 @@
             [self addErrorDescription:NyayaErrorNoRightParenthesis];
         }
     }
-    else if ([_token isIdentifier]) {
+    else if ([_token isIdentifierToken]) {
         result = [self parseTerm];
     }
     else if (_token) {
@@ -206,7 +206,7 @@
 - (NyayaNode*)parseTerm { 
     NyayaNode *result = nil;
     
-    if ([_token isIdentifier]) {
+    if ([_token isIdentifierToken]) {
         
         NSString *identifier = _token;  // store identifier
         [self nextToken];               // consume identifier
