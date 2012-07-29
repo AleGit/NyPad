@@ -153,18 +153,17 @@
     
 }
 
-- (NSString*)description {
+- (NSString*)descriptionWithHeaders:(NSArray*)headers {
+    
     NSMutableString *description = [NSMutableString stringWithString:@"|"];
     
-    for (NSString *header in _headers) {
+    for (NSString *header in headers) {
         [description appendFormat:@" %@ |", header]; 
     }
     
-    
-    
     for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
         [description appendString:@"\n|"];
-        for (NSString* header in _headers) {
+        for (NSString* header in headers) {
             BOOL eval = [self evalAtRow:rowIndex forHeader:header];
             if (eval) [description appendString: @" T"];
             else [description appendString:@" F"];
@@ -176,9 +175,68 @@
     }
     
     return description;
+    
+}
+
+- (NSString*)description {
+    return [self descriptionWithHeaders:_headers];
+}
+
+- (NSString*)minimalDescription {
+    NSArray *headers = [[_variables valueForKeyPath:@"symbol"] arrayByAddingObject:_title];
+    
+    NSMutableString *description = [NSMutableString stringWithString:@"|"];
+    
+    for (NSString *header in headers) {
+        [description appendFormat:@" %@ |", header]; 
+    }
+    
+    headers = [headers arrayByAddingObject:_title];
+    for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
+        [description appendString:@"\n|"];
+        for (NSString* header in headers) {
+            BOOL eval = [self evalAtRow:rowIndex forHeader:header];
+            if (eval) [description appendString: @" T"];
+            else [description appendString:@" F"];
+            [description appendString:@" |"];
+        }
+    }
+    
+    return description;
 }
 
 #pragma mark - memory management
+
+- (BOOL)isEqualToTruthTable:(NyayaTruthTable*)truthTable {
+    if (self->_rowsCount != truthTable->_rowsCount) return NO;
+    
+    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
+        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
+        BOOL b = [truthTable evalAtRow:rowIdx forHeader:truthTable->_title];
+        if (a != b) return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if (object == self) 
+        return YES;
+    else if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+    return [self isEqualToTruthTable:object];
+}
+
+- (NSUInteger)hash {
+    NSUInteger hash = 0;
+    
+    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
+        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
+        if (a) hash+=1;
+        hash = hash << 1;
+    }
+    return hash;
+}
 
 - (void)dealloc {
     free(_evals);

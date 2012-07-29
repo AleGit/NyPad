@@ -132,4 +132,59 @@
     STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
 }
 
+- (void)testFormula {
+    NyayaParser *parser = [NyayaParser parserWithString:@"!x|y>x<>!y"];
+    
+    NyayaNode *ast = [parser parseFormula];
+    NyayaNode *imf = [ast imf];
+    NyayaNode *nnf = [imf nnf];
+    NyayaNode *cnf = [nnf cnf];
+    NyayaNode *dnf = [cnf dnf];
+    
+    NSArray *truthTables = [NSArray arrayWithObjects:
+                            [[NyayaTruthTable alloc] initWithFormula:ast],
+                            [[NyayaTruthTable alloc] initWithFormula:imf],
+                            [[NyayaTruthTable alloc] initWithFormula:nnf],
+                            [[NyayaTruthTable alloc] initWithFormula:cnf],
+                            [[NyayaTruthTable alloc] initWithFormula:dnf],
+                            nil];
+    
+    for (NyayaTruthTable *truthTable in truthTables) {
+        [truthTable evaluateTable];
+    }
+    
+    
+    NyayaNode *nast = [NyayaNode negation:ast];
+    NyayaTruthTable *tt = [[NyayaTruthTable alloc] initWithFormula:nast];
+    [tt evaluateTable];
+    NyayaTruthTable *aoa = [[NyayaTruthTable alloc] initWithFormula:[NyayaNode disjunction:ast with:ast]];
+    [aoa evaluateTable];
+    
+    NyayaTruthTable *aaa = [[NyayaTruthTable alloc] initWithFormula:[NyayaNode conjunction:ast with:ast]];
+    [aaa evaluateTable];
+    
+    NSUInteger expectedHash = [[truthTables objectAtIndex:0] hash];
+    
+    for (NyayaTruthTable *truthTable in truthTables) {
+        STAssertEquals([truthTable hash], expectedHash, [truthTable.formula description]);
+        STAssertEqualObjects(truthTable, [truthTables objectAtIndex:0],[truthTable.formula description]);
+        STAssertTrue([[truthTables objectAtIndex:0] isEqual: truthTable], [truthTable.formula description]);
+        
+        STAssertEquals([truthTable hash], [aoa hash], [truthTable.formula description]);
+        STAssertEqualObjects(aoa, [truthTables objectAtIndex:0],[truthTable.formula description]);
+        STAssertTrue([aoa isEqual: truthTable], [truthTable.formula description]);
+        
+        STAssertEquals([truthTable hash], [aaa hash], [truthTable.formula description]);
+        STAssertEqualObjects(aaa, [truthTables objectAtIndex:0],[truthTable.formula description]);
+        STAssertTrue([aaa isEqual: truthTable], [truthTable.formula description]);
+        
+        STAssertFalse([tt hash] == expectedHash, [truthTable.formula description]);
+        STAssertFalse([tt isEqual: truthTable], [truthTable.formula description]);
+    }
+    
+                           
+}
+
+
+
 @end
