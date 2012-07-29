@@ -18,6 +18,9 @@
     BOOL _evaluationValue;
 }
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
+- (NyayaNode*)copyImf;
+- (NyayaNode*)copyNnf;
+
 @end
 
 #pragma mark - node sub class interfaces
@@ -29,7 +32,6 @@
 // 1        NyayaNodeUnary       -   NyayaNodeNegation
 //              |        
 // 2        NyayaNodeBinary      -   NyayaNode(Disjunction|Conjunction|Implication|Bicondition)
-
 
 @interface NyayaNodeConstant : NyayaNode
 @end
@@ -102,6 +104,19 @@
 - (NyayaBool)firstValue {
     return [[self firstNode] displayValue];
 }
+
+- (NyayaNode*)imf {
+    // imf(a)   =  a
+    // imf(¬P)  = ¬imf(P)
+    // imf(P∨Q) = imf(P) ∨ imf(Q)
+    // imf(P∨Q) = imf(P) ∧ imf(Q)
+    return [self copyImf];
+}
+
+
+- (NyayaNode*)nnf {
+    return [self copyNnf];
+}
 @end
 
 @implementation NyayaNodeNegation
@@ -130,10 +145,10 @@
     NSString *right = nil;
     
     switch(first.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
+        case NyayaConstant:     // leaf                 : ¬T    ≡ ¬(T)
+        case NyayaVariable:     // leaf                 : ¬a    ≡ ¬(a)
+        case NyayaNegation:     // right associative    : ¬¬P   ≡ ¬(¬P)
+        case NyayaFunction:     // prefix notation      : ¬f(…) ≡ ¬(f(…))
             right = [first description];
             break;
         default:
@@ -143,6 +158,28 @@
     _descriptionCache =  [NSString stringWithFormat:@"%@%@", self.symbol, right];
     
     return _descriptionCache;
+}
+
+- (NyayaNode*)nnf {
+    NyayaNode *node = [self.nodes objectAtIndex:0];
+    
+    NSUInteger count = [node.nodes count];
+    NyayaNode *first = (count > 0) ? [node.nodes objectAtIndex:0] : nil;
+    NyayaNode *second = (count > 1) ? [node.nodes objectAtIndex:1] : nil;
+    
+    switch (node.type) {
+        case NyayaNegation: // nnf(!!P) = nnf(P)
+            return [first nnf];
+        case NyayaDisjunction: // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
+            return [NyayaNode conjunction: [[NyayaNode negation:first] nnf]
+                                     with: [[NyayaNode negation:second] nnf] ];
+        case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
+            return [NyayaNode disjunction: [[NyayaNode negation:first] nnf]
+                                     with: [[NyayaNode negation:second] nnf] ];
+            
+        default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
+            return [self copyNnf];
+    }
 }
 
 @end
@@ -191,11 +228,11 @@
     NSString *right = nil;
     
     switch(first.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaDisjunction:  // a ∨ b ∨ c ≡ (a ∨ b) ∨ c (left associative) 
+        case NyayaConstant:     // leaf                 : T ∨ …     ≡ (T) ∨ …
+        case NyayaVariable:     // leaf                 : a ∨ …     ≡ (a) ∨ …
+        case NyayaNegation:     // higher precedence    : ¬P ∨ …    ≡ (¬P) ∨ …
+        case NyayaDisjunction:  // left associative     : a ∨ b ∨ c ≡ (a ∨ b) ∨ c 
+        case NyayaFunction:     // prefix notation      : f(…) ∨ …  ≡ (f(…)) ∨ …
             left = [first description];
             break;
         default:
@@ -204,11 +241,11 @@
     }
     
     switch(second.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-            // case NyayaDisjunction: // a ∨ (b ∨ c) = a ∨ b ∨ c (sematnically)
+        case NyayaConstant:     // leaf                 : … ∨ T     ≡ … ∨ (T)
+        case NyayaVariable:     // leaf                 : … ∨ a     ≡ … ∨ (a)
+        case NyayaNegation:     // higher precedencd    : … ∨ ¬P    ≡ … ∨ (¬P)
+        case NyayaFunction:     // prefix notation      : … ∨ f(…)  ≡ … ∨ (f(…))
+     // case NyayaDisjunction:  // semantically equal   : a ∨ b ∨ c = a ∨ (b ∨ c)
             right = [second description];
             break;
         default:
@@ -221,6 +258,47 @@
     
     return _descriptionCache;
 }
+
+- (NyayaNode*)cnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
+    if (first.type == NyayaConjunction) {
+        NyayaNode *n11 = [first.nodes objectAtIndex:0];
+        NyayaNode *n12 = [first.nodes objectAtIndex:1];
+        
+        return [NyayaNode conjunction:[self cnfDistribution:n11 with:second] 
+                                 with:[self cnfDistribution:n12 with:second]];
+        
+        
+        
+    }
+    else if (second.type == NyayaConjunction) {
+        NyayaNode *n21 = [second.nodes objectAtIndex:0];
+        NyayaNode *n22 = [second.nodes objectAtIndex:1];
+        
+        return [NyayaNode conjunction:[self cnfDistribution:first with:n21] 
+                                 with:[self cnfDistribution:first with:n22]];
+        
+    }
+    else { // no conjunctions (literals only)
+        return [NyayaNode disjunction:first with:second];
+    }
+}
+
+- (NyayaNode*)cnf {
+    
+    // dnf (a | (b & c)) = (a | b) & (a | c)
+    // dnf ((a & b) | c)) = (a | c) & (b | c)
+    // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
+    return [self cnfDistribution:[[self.nodes objectAtIndex:0] cnf] 
+                                 with:[[self.nodes objectAtIndex:1] cnf]];
+}
+
+- (NyayaNode *)dnf {
+    return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
+     with:[[self.nodes objectAtIndex:1] dnf]];
+}
+
+
+
 @end
 
 @implementation NyayaNodeConjunction
@@ -253,11 +331,11 @@
     
     
     switch(first.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaConjunction: // a ∧ b ∧ c = (a ∧ b) ∧ c (left associative) 
+        case NyayaConstant:     // leaf                 : T ∧ …     ≡ (T) ∧ …
+        case NyayaVariable:     // leaf                 : a ∧ …     ≡ (a) ∧ …
+        case NyayaNegation:     // higher precedence    : ¬P ∧ …    ≡ (¬P) ∧ …
+        case NyayaConjunction:  // left associative     : a ∧ b ∧ c ≡ (a ∨ b) ∧ c 
+        case NyayaFunction:     // prefix notation      : f(…) ∧ …  ≡ (f(…)) ∧ … 
             left = [first description];
             break;
         default:
@@ -266,11 +344,11 @@
     }
     
     switch(second.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-            // case NyayaConjunction: // a ∧ (b ∧ c) = a ∧ b ∧ c (semantically)
+        case NyayaConstant:     // leaf                 : … ∧ T     ≡ … ∧ (T)
+        case NyayaVariable:     // leaf                 : … ∧ a     ≡ … ∧ (a)
+        case NyayaNegation:     // higher precedencd    : … ∧ ¬P    ≡ … ∧ (¬P)
+        case NyayaFunction:     // prefix notation      : … ∧ f(…)  ≡ … ∧ (f(…))
+     // case NyayaConjunction:  // semantically equal   : a ∧ b ∧ c = a ∧ (b ∧ c)
             right = [second description];
             break;
         default:
@@ -281,6 +359,44 @@
     _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
     
     return _descriptionCache;
+}
+
+- (NyayaNode*)cnf {
+    // cnf (A & B) = cnf (A) & cnf (B)
+    return [NyayaNode conjunction:[[self firstNode] cnf] 
+                             with:[[self secondNode] cnf]];
+}
+
+- (NyayaNode*)dnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
+    if (first.type == NyayaDisjunction) {
+        NyayaNode *n11 = [first.nodes objectAtIndex:0];
+        NyayaNode *n12 = [first.nodes objectAtIndex:1];
+        
+        return [NyayaNode disjunction:[self dnfDistribution:n11 with:second] 
+                                 with:[self dnfDistribution:n12 with:second]];
+        
+        
+        
+    }
+    else if (second.type == NyayaDisjunction) {
+        NyayaNode *n21 = [second.nodes objectAtIndex:0];
+        NyayaNode *n22 = [second.nodes objectAtIndex:1];
+        
+        return [NyayaNode disjunction:[self dnfDistribution:first with:n21] 
+                                 with:[self dnfDistribution:first with:n22]];
+        
+    }
+    else { // no disjunctions (literals only)
+        return [NyayaNode conjunction:first with:second];
+    }
+}
+
+- (NyayaNode*)dnf {
+    // dnf (a & (b | c)) = (a & b) | (a & c)
+    // dnf ((a | b) & c)) = (a & c) | (b & c)
+    // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
+    return [self dnfDistribution:[[self firstNode] dnf] 
+                                 with:[[self secondNode] dnf]];
 }
 @end
 
@@ -314,12 +430,12 @@
     NSString *right = nil;
     
     switch(first.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaConjunction:
-        case NyayaDisjunction:
+        case NyayaConstant:     // leaf                 : T → …     ≡ (T) → …
+        case NyayaVariable:     // leaf                 : a → …     ≡ (a) → …
+        case NyayaNegation:     // higher precedence    : ¬P → …    ≡ (¬P) → …
+        case NyayaConjunction:  // higher precedence    : P ∧ Q →   ≡ (P ∧ Q) → …
+        case NyayaDisjunction:  // higher precedence    : P ∨ Q →   ≡ (P ∨ Q) → …
+        case NyayaFunction:     // prefix notation      : f(…) → …  ≡ (f(…)) → …
             left = [first description];
             break;
         default:
@@ -328,13 +444,13 @@
     }
     
     switch(second.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaConjunction:
-        case NyayaDisjunction:
-        case NyayaImplication:  // right associative
+        case NyayaConstant:     // leaf                 : … → T     ≡ … → (T)
+        case NyayaVariable:     // leaf                 : … → a     ≡ … → (a)
+        case NyayaNegation:     // higher precedence    : … → ¬P    ≡ … → (¬P)
+        case NyayaConjunction:  // higher precedence    : … → P ∧ Q ≡ … → (P ∧ Q)
+        case NyayaDisjunction:  // higher precedence    : … → P ∨ Q ≡ … → (P ∨ Q)
+        case NyayaFunction:     // prefix notation      : f(…) → …  ≡ … → (f(…))
+        case NyayaImplication:  // right associative    : a → b → c = a → (b → c)
             right = [second description];
             break;
         default:
@@ -344,6 +460,13 @@
     _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
     
     return _descriptionCache;
+}
+
+- (NyayaNode*)imf {
+    // imf(P → Q) = ¬imf(P) ∨ imf(Q)
+    NyayaNode *first = [[self firstNode] imf];
+    NyayaNode *second = [[self secondNode] imf];
+    return [NyayaNode disjunction: [NyayaNode negation:first] with: second];
 }
 @end
 
@@ -378,12 +501,12 @@
     
     
     switch(first.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaConjunction:
-        case NyayaDisjunction:
+        case NyayaConstant:     // leaf                 : T ↔ …     ≡ (T) ↔ …
+        case NyayaVariable:     // leaf                 : a → …     ≡ (a) ↔ …
+        case NyayaNegation:     // higher precedence    : ¬P → …    ≡ (¬P) ↔ …
+        case NyayaConjunction:  // higher precedence    : P ∧ Q ↔   ≡ (P ∧ Q) ↔ …
+        case NyayaDisjunction:  // higher precedence    : P ∨ Q ↔   ≡ (P ∨ Q) ↔ …
+        case NyayaFunction:     // prefix notation      : f(…) ↔ …  ≡ (f(…)) ↔ …
             left = [first description];
             break;
         default:
@@ -392,13 +515,13 @@
     }
     
     switch(second.type) {
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        case NyayaFunction: // NIY
-        case NyayaConjunction:
-        case NyayaDisjunction:
-        case NyayaBicondition:  // right associative
+        case NyayaConstant:     // leaf                 : … ↔ T     ≡ … ↔ (T)
+        case NyayaVariable:     // leaf                 : … ↔ a     ≡ … ↔ (a)
+        case NyayaNegation:     // higher precedence    : … ↔ ¬P    ≡ … ↔ (¬P)
+        case NyayaConjunction:  // higher precedence    : … ↔ P ∧ Q ≡ … ↔ (P ∧ Q)
+        case NyayaDisjunction:  // higher precedence    : … ↔ P ∨ Q ≡ … ↔ (P ∨ Q)
+        case NyayaFunction:     // prefix notation      : … ↔ f(…)  ≡ … ↔ … ↔ (f(…))
+        case NyayaBicondition:  // right associative    : a ↔ b ↔ c = a ↔ (b → c)
             right = [second description];
             break;
         default:
@@ -408,6 +531,18 @@
     _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
     
     return _descriptionCache;
+}
+
+- (NyayaNode*)imf {
+    // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
+    NyayaNode *first = [[self firstNode] imf];
+    NyayaNode *second = [[self secondNode] imf];
+    
+    return [NyayaNode conjunction:[NyayaNode disjunction:[NyayaNode negation:first] with:second] 
+                             with:[NyayaNode disjunction:[NyayaNode negation:second] with:first]];
+    
+//    return [NyayaNode conjunction: [[NyayaNode implication:first with:second] imf]
+//                             with: [[NyayaNode implication:second with:first] imf]];
 }
 @end
 
@@ -445,6 +580,7 @@
     return [_nodes count] > index ? [_nodes objectAtIndex:index] : nil;
 }
 
+#pragma mark node factory
 + (NyayaNode*)atom:(NSString*)name {
     NyayaStore *store = [NyayaStore sharedInstance];
     NyayaNode *node = [store nodeForName:name];
@@ -518,6 +654,8 @@
     return node;
 }
 
+#pragma mark default method implementations
+
 - (NSUInteger)arity {
     return 0;   // default (constants and variables)
 }
@@ -552,8 +690,6 @@
 }
 
 #pragma mark - cnf, dnf, nnf, imf
-
-
 
 - (NyayaNode*)copyWith:(NSArray*)nodes {
     NyayaNode *node = nil;
@@ -607,159 +743,23 @@
 }
 
 - (NyayaNode*)imf {
-    if (self.type <= NyayaVariable) 
-        return self;
-    else if (self.type == NyayaImplication || self.type == NyayaBicondition) {
-        NyayaNode *first = [[self.nodes objectAtIndex:0] imf];
-        NyayaNode *second = [[self.nodes objectAtIndex:1] imf];
-        
-        if (self.type == NyayaImplication) {
-            NyayaNode *notfirst = [NyayaNode negation:first];
-            return [NyayaNode disjunction: notfirst with: second];
-        }
-        else {
-            return [NyayaNode conjunction: [[NyayaNode implication:first with:second] imf]
-                                     with: [[NyayaNode implication:second with:first] imf]];
-        }
-    }
-    else {
-        return [self copyImf];
-    }
+    // no precondition
+    return self;
 }
-
 
 - (NyayaNode*)nnf {
-    if (self.type <= NyayaVariable) 
-        return self;
-    // precondition 'self' is implication free, {¬ ∨ ∧} is a adequate set of boolean functions
-    else if (self.type == NyayaNegation) {
-        NyayaNode *node = [self.nodes objectAtIndex:0];
-        
-        NSUInteger count = [node.nodes count];
-        NyayaNode *first = (count > 0) ? [node.nodes objectAtIndex:0] : nil;
-        NyayaNode *second = (count > 1) ? [node.nodes objectAtIndex:1] : nil;
-        
-        switch (node.type) {
-            case NyayaNegation: // nnf(!!P) = nnf(P)
-                return [first nnf];
-            case NyayaDisjunction: // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
-                return [NyayaNode conjunction: [[NyayaNode negation:first] nnf]
-                                         with: [[NyayaNode negation:second] nnf] ];
-            case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
-                return [NyayaNode disjunction: [[NyayaNode negation:first] nnf]
-                                         with: [[NyayaNode negation:second] nnf] ];
-                
-            default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
-                return [self copyNnf];
-        }
-    }
-    else {
-        return [self copyNnf];
-    }
-}
-
-
-
-
-
-+ (NyayaNode*)cnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
-    if (first.type == NyayaConjunction) {
-        NyayaNode *n11 = [first.nodes objectAtIndex:0];
-        NyayaNode *n12 = [first.nodes objectAtIndex:1];
-        
-        return [NyayaNode conjunction:[NyayaNode cnfDistribution:n11 with:second] 
-                                 with:[NyayaNode cnfDistribution:n12 with:second]];
-        
-        
-        
-    }
-    else if (second.type == NyayaConjunction) {
-        NyayaNode *n21 = [second.nodes objectAtIndex:0];
-        NyayaNode *n22 = [second.nodes objectAtIndex:1];
-        
-        return [NyayaNode conjunction:[NyayaNode cnfDistribution:first with:n21] 
-                                 with:[NyayaNode cnfDistribution:first with:n22]];
-        
-    }
-    else { // no conjunctions (literals only)
-        return [NyayaNode disjunction:first with:second];
-    }
+    // precondition 'self' is implication free
+    return self;
 }
 
 - (NyayaNode*)cnf {
     // precondition 'self' is implication free and in negation normal form
-    
-    switch(self.type) {
-        case NyayaConjunction:
-            // cnf (A & B) = cnf (A) & cnf (B)
-            return [NyayaNode conjunction:[[self.nodes objectAtIndex:0] cnf] 
-                                     with:[[self.nodes objectAtIndex:1] cnf]];
-            
-            
-        case NyayaDisjunction:
-            // dnf (a | (b & c)) = (a | b) & (a | c)
-            // dnf ((a & b) | c)) = (a | c) & (b | c)
-            // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
-            return [NyayaNode cnfDistribution:[[self.nodes objectAtIndex:0] cnf] 
-                                         with:[[self.nodes objectAtIndex:1] cnf]];
-        
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation: // of variable
-        default:
-            return self;
-    }
-}
-
-
-
-+ (NyayaNode*)dnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
-    if (first.type == NyayaDisjunction) {
-        NyayaNode *n11 = [first.nodes objectAtIndex:0];
-        NyayaNode *n12 = [first.nodes objectAtIndex:1];
-        
-        return [NyayaNode disjunction:[NyayaNode dnfDistribution:n11 with:second] 
-                                 with:[NyayaNode dnfDistribution:n12 with:second]];
-        
-        
-        
-    }
-    else if (second.type == NyayaDisjunction) {
-        NyayaNode *n21 = [second.nodes objectAtIndex:0];
-        NyayaNode *n22 = [second.nodes objectAtIndex:1];
-        
-        return [NyayaNode disjunction:[NyayaNode dnfDistribution:first with:n21] 
-                                 with:[NyayaNode dnfDistribution:first with:n22]];
-        
-    }
-    else { // no disjunctions (literals only)
-        return [NyayaNode conjunction:first with:second];
-    }
+    return self;
 }
 
 - (NyayaNode *)dnf {
     // precondition 'self' is implication free and in negation normal form
-    
-    switch(self.type) {
-        case NyayaDisjunction:
-            // dnf (A | B) = dnf(A) | (dnf(B)
-            return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
-                                     with:[[self.nodes objectAtIndex:1] dnf]];
-            
-            
-        case NyayaConjunction:
-            // dnf (a & (b | c)) = (a & b) | (a & c)
-            // dnf ((a | b) & c)) = (a & c) | (b & c)
-            // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
-            return [NyayaNode dnfDistribution:[[self.nodes objectAtIndex:0] dnf] 
-                                         with:[[self.nodes objectAtIndex:1] dnf]];
-            
-        case NyayaConstant:
-        case NyayaVariable:
-        case NyayaNegation:
-        default:
-            return self;
-    }
+    return self;
 }
 
 #pragma mark - resolution
@@ -780,7 +780,6 @@
 
 - (NSArray*)clauses:(NyayaNodeType)outer clauses:(NyayaNodeType)inner {
     
-    
     NSMutableArray *result = [NSMutableArray array];
     
     for (NyayaNode *clause in [self clauses:outer]) {
@@ -795,7 +794,6 @@
     }
     
     return [result copy];
-    
 }
 
 - (NSArray*)conjunctionOfDisjunctions { // cnf is conjunction of disjunctions of literals

@@ -8,7 +8,18 @@
 
 #import "NSString+NyayaToken.h"
 
-NSString *const NYAYA_TOKENS = @"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+";
+NSString *const NYAYA_TOKENS = 
+    @"¬|!"      // negation
+    "|∧|&"      // conjunction
+    "|∨|\\|"    // disjunction
+    "|→|>"      // implication
+    "|↔|<>"     // bicondition
+    "|\\("      // left parenthesis
+    "|\\)"      // right parenthesis
+    "|,"        // comma
+    "|;"        // semicolon
+    "|\\w+"     // identifier
+    ;
 
 @implementation NSString (NyayaToken)
 

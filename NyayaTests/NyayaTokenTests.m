@@ -20,6 +20,8 @@
     STAssertFalse([@"&" isNegationToken],nil);
     STAssertFalse([@"→" isNegationToken],nil);
     STAssertFalse([@">" isNegationToken],nil);
+    STAssertFalse([@"↔" isNegationToken],nil);
+    STAssertFalse([@"<>" isNegationToken],nil);
     
     STAssertFalse([@"(" isNegationToken],nil);
     STAssertFalse([@")" isNegationToken],nil);
@@ -36,6 +38,8 @@
     STAssertTrue([@"&" isConjunctionToken],nil);
     STAssertFalse([@"→" isConjunctionToken],nil);
     STAssertFalse([@">" isConjunctionToken],nil);
+    STAssertFalse([@"↔" isConjunctionToken],nil);
+    STAssertFalse([@"<>" isConjunctionToken],nil);
     
     STAssertFalse([@"(" isConjunctionToken],nil);
     STAssertFalse([@")" isConjunctionToken],nil);
@@ -52,6 +56,8 @@
     STAssertFalse([@"&" isDisjunctionToken],nil);
     STAssertFalse([@"→" isDisjunctionToken],nil);
     STAssertFalse([@">" isDisjunctionToken],nil);
+    STAssertFalse([@"↔" isDisjunctionToken],nil);
+    STAssertFalse([@"<>" isDisjunctionToken],nil);
     
     STAssertFalse([@"(" isDisjunctionToken],nil);
     STAssertFalse([@")" isDisjunctionToken],nil);
@@ -68,6 +74,8 @@
     STAssertTrue([@"&" isJunctionToken],nil);
     STAssertFalse([@"→" isJunctionToken],nil);
     STAssertFalse([@">" isJunctionToken],nil);
+    STAssertFalse([@"↔" isJunctionToken],nil);
+    STAssertFalse([@"<>" isJunctionToken],nil);
     
     STAssertFalse([@"(" isJunctionToken],nil);
     STAssertFalse([@")" isJunctionToken],nil);
@@ -86,6 +94,8 @@
     STAssertFalse([@"&" isImplicationToken],nil);
     STAssertTrue([@"→" isImplicationToken],nil);
     STAssertTrue([@">" isImplicationToken],nil);
+    STAssertFalse([@"↔" isImplicationToken],nil);
+    STAssertFalse([@"<>" isImplicationToken],nil);
     
     STAssertFalse([@"(" isImplicationToken],nil);
     STAssertFalse([@")" isImplicationToken],nil);
@@ -93,17 +103,22 @@
     STAssertFalse([@"," isImplicationToken],nil);
 }
 
-- (void)testIsComplement {
-    STAssertTrue([@"¬atom" isComplementLiteral:@"atom"],nil);
-    STAssertTrue([@"atom" isComplementLiteral:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬¬¬atom"],nil);
+- (void)testIsBicondition {
+    STAssertFalse([@"¬" isBiconditionToken],nil);
+    STAssertFalse([@"!" isBiconditionToken],nil);
+    STAssertFalse([@"∨" isBiconditionToken],nil);
+    STAssertFalse([@"|" isBiconditionToken],nil);
+    STAssertFalse([@"∧" isBiconditionToken],nil);
+    STAssertFalse([@"&" isBiconditionToken],nil);
+    STAssertFalse([@"→" isBiconditionToken],nil);
+    STAssertFalse([@">" isBiconditionToken],nil);
+    STAssertTrue([@"↔" isBiconditionToken],nil);
+    STAssertTrue([@"<>" isBiconditionToken],nil);
     
-    STAssertFalse([@"x" isComplementLiteral:@"x"],nil);
-    STAssertFalse([@"x" isComplementLiteral:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬¬x"],nil);
-                  
+    STAssertFalse([@"(" isBiconditionToken],nil);
+    STAssertFalse([@")" isBiconditionToken],nil);
+    STAssertFalse([@";" isBiconditionToken],nil);
+    STAssertFalse([@"," isBiconditionToken],nil);
 }
 
 
@@ -117,6 +132,8 @@
     STAssertFalse([@"&" isLeftParenthesis],nil);
     STAssertFalse([@"→" isLeftParenthesis],nil);
     STAssertFalse([@">" isLeftParenthesis],nil);
+    STAssertFalse([@"↔" isLeftParenthesis],nil);
+    STAssertFalse([@"<>" isLeftParenthesis],nil);
     
     STAssertTrue([@"(" isLeftParenthesis],nil);
     STAssertFalse([@")" isLeftParenthesis],nil);
@@ -133,6 +150,8 @@
     STAssertFalse([@"&" isRightParenthesis],nil);
     STAssertFalse([@"→" isRightParenthesis],nil);
     STAssertFalse([@">" isRightParenthesis],nil);
+    STAssertFalse([@"↔" isRightParenthesis],nil);
+    STAssertFalse([@"<>" isRightParenthesis],nil);
     
     STAssertFalse([@"(" isRightParenthesis],nil);
     STAssertTrue([@")" isRightParenthesis],nil);
@@ -149,6 +168,8 @@
     STAssertFalse([@"&" isComma],nil);
     STAssertFalse([@"→" isComma],nil);
     STAssertFalse([@">" isComma],nil);
+    STAssertFalse([@"↔" isComma],nil);
+    STAssertFalse([@"<>" isComma],nil);
     
     STAssertFalse([@"(" isComma],nil);
     STAssertFalse([@")" isComma],nil);
@@ -156,7 +177,7 @@
     STAssertTrue([@"," isComma],nil);
 }
 
-- (void)sSemicolon {
+- (void)testIsSemicolon {
     STAssertFalse([@"¬" isSemicolon],nil);
     STAssertFalse([@"!" isSemicolon],nil);
     STAssertFalse([@"∨" isSemicolon],nil);
@@ -165,11 +186,28 @@
     STAssertFalse([@"&" isSemicolon],nil);
     STAssertFalse([@"→" isSemicolon],nil);
     STAssertFalse([@">" isSemicolon],nil);
+    STAssertFalse([@"↔" isSemicolon],nil);
+    STAssertFalse([@"<>" isSemicolon],nil);
     
     STAssertFalse([@"(" isSemicolon],nil);
     STAssertFalse([@")" isSemicolon],nil);
     STAssertTrue([@";" isSemicolon],nil);
     STAssertFalse([@"," isSemicolon],nil);
+}
+
+
+
+- (void)testIsComplement {
+    STAssertTrue([@"¬atom" isComplementLiteral:@"atom"],nil);
+    STAssertTrue([@"atom" isComplementLiteral:@"¬atom"],nil);
+    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬atom"],nil);
+    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬¬¬atom"],nil);
+    
+    STAssertFalse([@"x" isComplementLiteral:@"x"],nil);
+    STAssertFalse([@"x" isComplementLiteral:@"¬y"],nil);
+    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬y"],nil);
+    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬¬x"],nil);
+    
 }
 
 @end

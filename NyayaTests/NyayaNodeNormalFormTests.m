@@ -33,9 +33,19 @@
     STAssertEquals((NyayaNodeType)NyayaDisjunction, imf.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, imf.displayValue,[imf description]);
     
+    parser = [NyayaParser parserWithString:@"a <> ¬b"];
+    node = [parser parseFormula];
+    imf = [node imf];
+    
+    STAssertEqualObjects(@"a ↔ ¬b", [node description], nil);
+    STAssertEquals((NyayaBool)NyayaUndefined, node.displayValue,nil);
+    STAssertEqualObjects([imf description], @"(¬a ∨ ¬b) ∧ (¬¬b ∨ a)", nil);
+    STAssertEquals((NyayaNodeType)NyayaConjunction, imf.type,nil);
+    STAssertEquals((NyayaBool)NyayaUndefined, imf.displayValue,[imf description]);
+    
 }
 
-- (void)testNNF {
+- (void)testNnf {
     NyayaParser *parser = [NyayaParser parserWithString:@"!!F"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node nnf];
@@ -58,7 +68,7 @@
     
 }
 
-- (void)testCNF {
+- (void)testCnf {
     NyayaParser *parser = [NyayaParser parserWithString:@"(a&!b)|c"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node cnf];
@@ -75,7 +85,7 @@
     
 }
 
-- (void)testDNF {
+- (void)testDnf {
     NyayaParser *parser = [NyayaParser parserWithString:@"(a|!b)&c"];
     NyayaNode *node = [parser parseFormula];
     NyayaNode *imf = [node dnf];
@@ -105,12 +115,24 @@
     STAssertEqualObjects([cnf description], @"(¬a ∨ b) ∧ (¬b ∨ a)",nil);
     STAssertEqualObjects([dnf description], @"(¬a ∧ ¬b) ∨ (¬a ∧ a) ∨ ((b ∧ ¬b) ∨ (b ∧ a))",nil);
     
+    parser = [NyayaParser parserWithString:@"!a<>b"];
+    ast = [parser parseFormula];
+    imf = [ast imf];
+    nnf = [imf nnf];
+    cnf = [nnf cnf];
+    dnf = [nnf dnf];
+    STAssertEqualObjects([ast description], @"¬a ↔ b",nil);
+    STAssertEqualObjects([imf description], @"(¬¬a ∨ b) ∧ (¬b ∨ ¬a)",nil);
+    STAssertEqualObjects([nnf description], @"(a ∨ b) ∧ (¬b ∨ ¬a)",nil);
+    STAssertEqualObjects([cnf description], @"(a ∨ b) ∧ (¬b ∨ ¬a)",nil);
+    STAssertEqualObjects([dnf description], @"(a ∧ ¬b) ∨ (a ∧ ¬a) ∨ ((b ∧ ¬b) ∨ (b ∧ ¬a))",nil);
+    
     
     
     
 }
 
-- (void)testNormForms {
+- (void)testNormalForms {
     NyayaParser *parser = [NyayaParser parserWithString:@"a>b&!a&b>b|a|(a>b)|!(!a>a)"];
     
     NyayaNode *ast = [parser parseFormula];
