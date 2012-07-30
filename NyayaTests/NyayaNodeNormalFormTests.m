@@ -141,30 +141,30 @@
     NyayaNode *cnf = [nnf cnf];
     NyayaNode *dnf = [nnf dnf];
     
-    STAssertFalse([ast isImf], nil);
-    STAssertFalse([ast isNnf], nil);
-    STAssertFalse([ast isCnf], nil);
-    STAssertFalse([ast isDnf], nil);
+    STAssertFalse([ast isImfFormula], nil);
+    STAssertFalse([ast isNnfFormula], nil);
+    STAssertFalse([ast isCnfFormula], nil);
+    STAssertFalse([ast isDnfFormula], nil);
     
-    STAssertTrue([imf isImf], nil);
-    STAssertFalse([imf isNnf], nil);
-    STAssertFalse([imf isCnf], nil);
-    STAssertFalse([imf isDnf], nil);
+    STAssertTrue([imf isImfFormula], nil);
+    STAssertFalse([imf isNnfFormula], nil);
+    STAssertFalse([imf isCnfFormula], nil);
+    STAssertFalse([imf isDnfFormula], nil);
     
-    STAssertTrue([nnf isImf], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
-    STAssertTrue([nnf isNnf], nil);
-    STAssertFalse([nnf isCnf], nil);                // is not cnf
-    STAssertTrue([nnf isDnf], nil);                 // is allready dnf
+    STAssertTrue([nnf isImfFormula], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([nnf isNnfFormula], nil);
+    STAssertFalse([nnf isCnfFormula], nil);                // is not cnf
+    STAssertTrue([nnf isDnfFormula], nil);                 // is allready dnf
     
-    STAssertTrue([cnf isImf], nil);                 // (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))
-    STAssertTrue([cnf isNnf], nil);
-    STAssertTrue([cnf isCnf], nil);
-    STAssertFalse([cnf isDnf], nil);
+    STAssertTrue([cnf isImfFormula], nil);                 // (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))
+    STAssertTrue([cnf isNnfFormula], nil);
+    STAssertTrue([cnf isCnfFormula], nil);
+    STAssertFalse([cnf isDnfFormula], nil);
     
-    STAssertTrue([dnf isImf], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
-    STAssertTrue([dnf isNnf], nil);
-    STAssertFalse([dnf isCnf], nil);
-    STAssertTrue([dnf isDnf], nil);
+    STAssertTrue([dnf isImfFormula], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([dnf isNnfFormula], nil);
+    STAssertFalse([dnf isCnfFormula], nil);
+    STAssertTrue([dnf isDnfFormula], nil);
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSArray arrayWithObjects: [ast description], @"a → b ∧ ¬a ∧ b → b ∨ a ∨ (a → b) ∨ ¬(¬a → a)",
@@ -252,10 +252,10 @@
                              nil]) {
         
         
-        STAssertFalse([test isImf], [test description]);
-        STAssertFalse([test isNnf], [test description]);
-        STAssertFalse([test isCnf], [test description]);
-        STAssertFalse([test isDnf], [test description]);
+        STAssertFalse([test isImfFormula], [test description]);
+        STAssertFalse([test isNnfFormula], [test description]);
+        STAssertFalse([test isCnfFormula], [test description]);
+        STAssertFalse([test isDnfFormula], [test description]);
     }
 }
 
@@ -275,15 +275,17 @@
                              nil]) {
         
         
-        STAssertTrue([test isImf], [test description]);
-        STAssertFalse([test isNnf], [test description]);
-        STAssertFalse([test isCnf], [test description]);
-        STAssertFalse([test isDnf], [test description]);
+        STAssertTrue([test isImfFormula], [test description]);
+        STAssertFalse([test isNnfFormula], [test description]);
+        STAssertFalse([test isCnfFormula], [test description]);
+        STAssertFalse([test isDnfFormula], [test description]);
     }
 
     
     
     
 }
+
+
 
 @end

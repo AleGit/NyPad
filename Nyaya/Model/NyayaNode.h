@@ -21,7 +21,7 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 
-@interface NyayaNode : NSObject
+@interface NyayaNode : NSObject <NSCopying>
 
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
@@ -42,15 +42,27 @@ typedef NSUInteger NyayaNodeType;
 
 - (NSUInteger)arity;
 
-- (NyayaNode*)imf;
-- (NyayaNode*)nnf;
-- (NyayaNode*)cnf;
-- (NyayaNode*)dnf;
+- (NyayaNode*)imf;      // equivalent formula without implications or biconditions
+- (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
+- (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)
+- (NyayaNode*)dnf;      // equivalent formula in disjunctive normal form (includes nnf, imf)
 
-- (BOOL)isImf;
-- (BOOL)isNnf;
-- (BOOL)isCnf;
-- (BOOL)isDnf;
+- (BOOL)isImfFormula;   // (sub)formula is implication free
+- (BOOL)isNnfFormula;   // (sub)formula is in negation normal form
+- (BOOL)isCnfFormula;   // (sub)formula is in conjunctive normal form
+- (BOOL)isDnfFormula;   // (sub)formula is in disjunctive normal form
+
+
+- (BOOL)isImfTransformationNode;
+- (BOOL)isNnfTransformationNode;
+- (BOOL)isCnfTransformationNode;
+- (BOOL)isDnfTransformationNode;
+
+- (void)transformImf;
+- (void)transformNnf;
+- (void)transformCnf;
+- (void)transformDnf;
+
 - (BOOL)isLiteral;
 
 - (NSString*)treeDescription;

@@ -54,23 +54,27 @@ P & (Q & R) <=> (P & Q) & R
 P | (Q | R) <=> (P | Q) | R
 
 ==============================
-
-not implication free        transform to
+transformation nodes
+imf                         transform to
+---                         ------------
 P <> Q                      (!P | Q) & (!Q | P)
 P > Q                       !P | Q
 
-not negation normal form (preconditon: implication free)
+nnf
+---
 !!P                         P
 !(P | Q)                    !P & !Q
 !(P & Q)                    !P | !Q
 
-not conjunctive normal form (preconditon: negation normal form)
+cnf
+---
 P | (R & S)                 (P | R) & (P | S)
 (P & Q) | R                 (P | R) & (Q | R)
 (P & Q) | (R & S)           ((P&Q)|R) & ((P&Q)|S)   (P|R) & (Q|R) & (P|S) & (Q|S)
 (P & Q) | (R & S)           (P|(R&S)) & (Q|(R&S))   (P|R) & (P|S) & (Q|R) & (Q|S)
 
-not disjunctive normal form (preconditon: negation normal form)
+dnf
+---
 P & (R | S)                 (P & R) | (P & S)
 (P | Q) & R                 (P & R) | (Q & R)
 (P | Q) & (R | S)           ((P|Q)&R) | ((P|Q)&S)   (P&R) | (Q&R) | (P&S) | (Q|S)

@@ -49,16 +49,22 @@
 - (NyayaBool)secondValue;
 @end
 
-@interface NyayaNodeConjunction : NyayaNodeBinary 
+@interface NyayaNodeJunction : NyayaNodeBinary
 @end
 
-@interface NyayaNodeDisjunction : NyayaNodeBinary 
+@interface NyayaNodeConjunction : NyayaNodeJunction 
 @end
 
-@interface NyayaNodeImplication : NyayaNodeBinary 
+@interface NyayaNodeDisjunction : NyayaNodeJunction 
 @end
 
-@interface NyayaNodeBicondition : NyayaNodeBinary 
+@interface NyayaNodeImpBic : NyayaNodeBinary
+@end
+
+@interface NyayaNodeImplication : NyayaNodeImpBic 
+@end
+
+@interface NyayaNodeBicondition : NyayaNodeImpBic 
 @end
 
 @interface NyayaNodeFunction : NyayaNode {
@@ -69,6 +75,10 @@
 #pragma mark - node sub class implementations
 
 @implementation NyayaNodeVariable
+
+- (id)copyWithZone:(NSZone*)zone {
+    return self;
+}
 
 - (NyayaNodeType)type { 
     return NyayaVariable; 
@@ -90,6 +100,10 @@
 @end
 
 @implementation NyayaNodeConstant
+
+- (id)copyWithZone:(NSZone*)zone {
+    return self;
+}
 
 - (NyayaNodeType)type { 
     return NyayaConstant; 
@@ -122,8 +136,8 @@
     return [self copyImf];
 }
 
-- (BOOL)isImf {
-    return [[self firstNode] isImf];
+- (BOOL)isImfFormula {
+    return [[self firstNode] isImfFormula];
 }
 
 
@@ -196,13 +210,24 @@
     }
 }
 
-- (BOOL)isNnf {
+- (BOOL)isNnfFormula {
     return [self firstNode].type <= NyayaVariable;
 }
 
 - (BOOL)isLiteral {
     // a negation in nnf is a literal
-    return [self isNnf];
+    return [self isNnfFormula];
+}
+
+- (BOOL)isNnfTransformationNode {
+    switch ([self firstNode].type) {
+        case NyayaNegation:         // !!P         => P
+        case NyayaConjunction:      // !(P | Q)    => !P & !Q
+        case NyayaDisjunction:      // !(P & Q)    => !P | !Q
+            return YES;
+        default:
+            return NO;
+    }
 }
 
 @end
@@ -221,13 +246,16 @@
     return [[self secondNode] displayValue];
 }
 
-- (BOOL)isImf {
-    return [[self firstNode] isImf] && [[self secondNode] isImf];
+- (BOOL)isImfFormula {
+    return [[self firstNode] isImfFormula] && [[self secondNode] isImfFormula];
 }
 
-- (BOOL)isNnf {
-    return [[self firstNode] isNnf] && [[self secondNode] isNnf];
+- (BOOL)isNnfFormula {
+    return [[self firstNode] isNnfFormula] && [[self secondNode] isNnfFormula];
 }
+@end
+
+@implementation NyayaNodeJunction
 @end
 
 @implementation NyayaNodeDisjunction
@@ -323,9 +351,9 @@
                                  with:[[self.nodes objectAtIndex:1] cnf]];
 }
 
-- (BOOL)isCnf {
-    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaDisjunction && [[self firstNode] isCnf]))  
-    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaDisjunction && [[self secondNode] isCnf]));      
+- (BOOL)isCnfFormula {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaDisjunction && [[self firstNode] isCnfFormula]))  
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaDisjunction && [[self secondNode] isCnfFormula]));      
 }
 
 - (NyayaNode *)dnf {
@@ -333,11 +361,14 @@
      with:[[self.nodes objectAtIndex:1] dnf]];
 }
 
-- (BOOL)isDnf {
-    return [[self firstNode] isDnf] && [[self secondNode] isDnf];    
+- (BOOL)isDnfFormula {
+    return [[self firstNode] isDnfFormula] && [[self secondNode] isDnfFormula];    
 }
 
-
+- (BOOL)isCnfTransformationNode {
+    return [self firstNode].type == NyayaConjunction ||
+    [self secondNode].type == NyayaConjunction;
+}
 
 @end
 
@@ -431,8 +462,8 @@
     }
 }
 
-- (BOOL)isCnf {
-    return [[self firstNode] isCnf] && [[self secondNode] isCnf];    
+- (BOOL)isCnfFormula {
+    return [[self firstNode] isCnfFormula] && [[self secondNode] isCnfFormula];    
 }
 
 - (NyayaNode*)dnf {
@@ -443,11 +474,32 @@
                                  with:[[self secondNode] dnf]];
 }
 
-- (BOOL)isDnf {
-    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaConjunction && [[self firstNode] isDnf]))  
-    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaConjunction && [[self secondNode] isDnf]));    
+- (BOOL)isDnfFormula {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaConjunction && [[self firstNode] isDnfFormula]))  
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaConjunction && [[self secondNode] isDnfFormula]));    
 }
 
+- (BOOL)isDnfTransformationNode {
+    return [self firstNode].type == NyayaDisjunction ||
+    [self secondNode].type == NyayaDisjunction;
+}
+
+
+@end
+
+@implementation NyayaNodeImpBic
+
+- (BOOL)isImfFormula {
+    return NO;
+}
+
+- (BOOL)isNnfFormula {
+    return NO;
+}
+
+- (BOOL)isImfTransformationNode {
+    return YES;
+}
 
 @end
 
@@ -520,13 +572,6 @@
     return [NyayaNode disjunction: [NyayaNode negation:first] with: second];
 }
 
-- (BOOL)isImf {
-    return NO;
-}
-
-- (BOOL)isNnf {
-    return NO;
-}
 @end
 
 @implementation NyayaNodeBicondition
@@ -603,13 +648,6 @@
 //    return [NyayaNode conjunction: [[NyayaNode implication:first with:second] imf]
 //                             with: [[NyayaNode implication:second with:first] imf]];
 }
-
-- (BOOL)isImf {
-    return NO;
-}
-- (BOOL)isNnf {
-    return NO;
-}
 @end
 
 @implementation NyayaNodeFunction
@@ -637,6 +675,10 @@
 @synthesize nodes = _nodes;
 @synthesize displayValue = _displayValue;
 @synthesize evaluationValue = _evaluationValue;
+
+- (id)copyWithZone:(NSZone*)zone {
+    return [self copyWith:[self.nodes copy]];
+}
 
 - (NyayaNodeType)type {
     return NyayaUndefined;
@@ -776,7 +818,7 @@
         node->_symbol = self.symbol;
         node->_displayValue = self.displayValue;
         node->_evaluationValue = self.evaluationValue;
-        node->_nodes = [nodes copy];
+        node->_nodes = nodes;
     }    
     return node;
     
@@ -828,24 +870,53 @@
     return self;
 }
 
-- (BOOL)isImf {
+- (BOOL)isImfFormula {
     return YES;
 }
 
-- (BOOL)isNnf {
-    return [self isImf];
+- (BOOL)isNnfFormula {
+    return [self isImfFormula];
 }
 
-- (BOOL)isCnf {
-    return [self isNnf];
+- (BOOL)isCnfFormula {
+    return [self isNnfFormula];
 }
 
-- (BOOL)isDnf {
-    return [self isNnf];
+- (BOOL)isDnfFormula {
+    return [self isNnfFormula];
 }
 
 - (BOOL)isLiteral {
     return NO;
+}
+
+- (BOOL)isImfTransformationNode {
+    return NO;
+}
+- (BOOL)isNnfTransformationNode {
+    return NO;
+}
+- (BOOL)isCnfTransformationNode{
+    return NO;
+}
+- (BOOL)isDnfTransformationNode{
+    return NO;
+}
+
+- (void)transformImf{
+    // do nothing, see NyayaNodeImplication, NyayaNodeBicondition
+}
+
+- (void)transformNnf{
+    // do nothing, see NyayaNodeNegation
+}
+
+- (void)transformCnf{
+    // do nothing, see NyayaNodeDisjunction
+}
+
+- (void)transformDnf {
+    // do nothing, see NyayaNodeConjunction
 }
 
 #pragma mark - resolution
