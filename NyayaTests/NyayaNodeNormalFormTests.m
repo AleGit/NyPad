@@ -141,6 +141,31 @@
     NyayaNode *cnf = [nnf cnf];
     NyayaNode *dnf = [nnf dnf];
     
+    STAssertFalse([ast isImf], nil);
+    STAssertFalse([ast isNnf], nil);
+    STAssertFalse([ast isCnf], nil);
+    STAssertFalse([ast isDnf], nil);
+    
+    STAssertTrue([imf isImf], nil);
+    STAssertFalse([imf isNnf], nil);
+    STAssertFalse([imf isCnf], nil);
+    STAssertFalse([imf isDnf], nil);
+    
+    STAssertTrue([nnf isImf], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([nnf isNnf], nil);
+    STAssertFalse([nnf isCnf], nil);                // is not cnf
+    STAssertTrue([nnf isDnf], nil);                 // is allready dnf
+    
+    STAssertTrue([cnf isImf], nil);                 // (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))
+    STAssertTrue([cnf isNnf], nil);
+    STAssertTrue([cnf isCnf], nil);
+    STAssertFalse([cnf isDnf], nil);
+    
+    STAssertTrue([dnf isImf], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([dnf isNnf], nil);
+    STAssertFalse([dnf isCnf], nil);
+    STAssertTrue([dnf isDnf], nil);
+    
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSArray arrayWithObjects: [ast description], @"a → b ∧ ¬a ∧ b → b ∨ a ∨ (a → b) ∨ ¬(¬a → a)",
                            nil], @"ast",
@@ -190,6 +215,73 @@
     STAssertEqualObjects([dnf description], @"", nil);
     
     */
+    
+    
+}
+
+- (void)testNotImplicationFree {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a>b"];
+    
+    NyayaNode *node = [parser parseFormula];
+    NyayaNode *a = [NyayaNode atom:@"a"];
+    NyayaNode *b = [NyayaNode atom:@"b"];
+    NyayaNode *c = [NyayaNode negation:b];
+    
+    
+    for (NyayaNode *test in [NSArray arrayWithObjects:
+                             node, 
+                             [NyayaNode negation:node],
+                             
+                             [NyayaNode conjunction:node with:node],
+                             [NyayaNode conjunction:a with:node],
+                             [NyayaNode conjunction:node with:a],
+                             [NyayaNode conjunction:b with:node],
+                             [NyayaNode conjunction:node with:b],
+                             [NyayaNode conjunction:c with:node],
+                             [NyayaNode conjunction:node with:c],
+                             
+                             [NyayaNode disjunction:node with:node],
+                             [NyayaNode disjunction:a with:node],
+                             [NyayaNode disjunction:node with:a],
+                             [NyayaNode disjunction:b with:node],
+                             [NyayaNode disjunction:node with:b],
+                             [NyayaNode disjunction:c with:node],
+                             [NyayaNode disjunction:node with:c],
+                             
+                             
+                             nil]) {
+        
+        
+        STAssertFalse([test isImf], [test description]);
+        STAssertFalse([test isNnf], [test description]);
+        STAssertFalse([test isCnf], [test description]);
+        STAssertFalse([test isDnf], [test description]);
+    }
+}
+
+- (void)testNotNegationNormalForm {
+    NyayaNode *A = [NyayaNode atom:@"a"];
+    NyayaNode *B = [NyayaNode atom:@"b"];
+    NyayaNode *nnA = [NyayaNode negation:[NyayaNode negation:A]];
+    NyayaNode *nnB = [NyayaNode negation:[NyayaNode negation:A]];
+    NyayaNode *nAaB = [NyayaNode negation:[NyayaNode conjunction:A  with:B]];
+    NyayaNode *nAoB = [NyayaNode negation:[NyayaNode conjunction:A  with:B]];
+    
+    for (NyayaNode *test in [NSArray arrayWithObjects:
+                             nnA, nnB, nAaB, nAoB,
+                             [NyayaNode conjunction:A with: [NyayaNode disjunction: B with:nnA]],
+                             [NyayaNode conjunction:A with: [NyayaNode disjunction: B with:nAaB]],
+                             
+                             nil]) {
+        
+        
+        STAssertTrue([test isImf], [test description]);
+        STAssertFalse([test isNnf], [test description]);
+        STAssertFalse([test isCnf], [test description]);
+        STAssertFalse([test isDnf], [test description]);
+    }
+
+    
     
     
 }

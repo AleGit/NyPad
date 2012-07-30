@@ -47,6 +47,12 @@ typedef NSUInteger NyayaNodeType;
 - (NyayaNode*)cnf;
 - (NyayaNode*)dnf;
 
+- (BOOL)isImf;
+- (BOOL)isNnf;
+- (BOOL)isCnf;
+- (BOOL)isDnf;
+- (BOOL)isLiteral;
+
 - (NSString*)treeDescription;
 
 - (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction (AND) of disjunctions (OR) of literals: (a or b) AND (a or !b)

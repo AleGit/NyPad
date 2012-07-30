@@ -82,12 +82,21 @@
     _evaluationValue = evaluationValue;
 }
 
+
+- (BOOL)isLiteral {
+    return YES;
+}
+
 @end
 
 @implementation NyayaNodeConstant
 
 - (NyayaNodeType)type { 
     return NyayaConstant; 
+}
+
+- (BOOL)isLiteral {
+    return YES;
 }
 @end
 
@@ -113,10 +122,15 @@
     return [self copyImf];
 }
 
+- (BOOL)isImf {
+    return [[self firstNode] isImf];
+}
+
 
 - (NyayaNode*)nnf {
     return [self copyNnf];
 }
+
 @end
 
 @implementation NyayaNodeNegation
@@ -182,6 +196,15 @@
     }
 }
 
+- (BOOL)isNnf {
+    return [self firstNode].type <= NyayaVariable;
+}
+
+- (BOOL)isLiteral {
+    // a negation in nnf is a literal
+    return [self isNnf];
+}
+
 @end
 
 @implementation NyayaNodeBinary
@@ -196,6 +219,14 @@
 
 - (NyayaBool)secondValue {
     return [[self secondNode] displayValue];
+}
+
+- (BOOL)isImf {
+    return [[self firstNode] isImf] && [[self secondNode] isImf];
+}
+
+- (BOOL)isNnf {
+    return [[self firstNode] isNnf] && [[self secondNode] isNnf];
 }
 @end
 
@@ -292,9 +323,18 @@
                                  with:[[self.nodes objectAtIndex:1] cnf]];
 }
 
+- (BOOL)isCnf {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaDisjunction && [[self firstNode] isCnf]))  
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaDisjunction && [[self secondNode] isCnf]));      
+}
+
 - (NyayaNode *)dnf {
     return [NyayaNode disjunction:[[self.nodes objectAtIndex:0] dnf] 
      with:[[self.nodes objectAtIndex:1] dnf]];
+}
+
+- (BOOL)isDnf {
+    return [[self firstNode] isDnf] && [[self secondNode] isDnf];    
 }
 
 
@@ -391,6 +431,10 @@
     }
 }
 
+- (BOOL)isCnf {
+    return [[self firstNode] isCnf] && [[self secondNode] isCnf];    
+}
+
 - (NyayaNode*)dnf {
     // dnf (a & (b | c)) = (a & b) | (a & c)
     // dnf ((a | b) & c)) = (a & c) | (b & c)
@@ -398,6 +442,13 @@
     return [self dnfDistribution:[[self firstNode] dnf] 
                                  with:[[self secondNode] dnf]];
 }
+
+- (BOOL)isDnf {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaConjunction && [[self firstNode] isDnf]))  
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaConjunction && [[self secondNode] isDnf]));    
+}
+
+
 @end
 
 @implementation NyayaNodeImplication
@@ -467,6 +518,14 @@
     NyayaNode *first = [[self firstNode] imf];
     NyayaNode *second = [[self secondNode] imf];
     return [NyayaNode disjunction: [NyayaNode negation:first] with: second];
+}
+
+- (BOOL)isImf {
+    return NO;
+}
+
+- (BOOL)isNnf {
+    return NO;
 }
 @end
 
@@ -543,6 +602,13 @@
     
 //    return [NyayaNode conjunction: [[NyayaNode implication:first with:second] imf]
 //                             with: [[NyayaNode implication:second with:first] imf]];
+}
+
+- (BOOL)isImf {
+    return NO;
+}
+- (BOOL)isNnf {
+    return NO;
 }
 @end
 
@@ -760,6 +826,26 @@
 - (NyayaNode *)dnf {
     // precondition 'self' is implication free and in negation normal form
     return self;
+}
+
+- (BOOL)isImf {
+    return YES;
+}
+
+- (BOOL)isNnf {
+    return [self isImf];
+}
+
+- (BOOL)isCnf {
+    return [self isNnf];
+}
+
+- (BOOL)isDnf {
+    return [self isNnf];
+}
+
+- (BOOL)isLiteral {
+    return NO;
 }
 
 #pragma mark - resolution

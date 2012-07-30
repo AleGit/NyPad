@@ -12,30 +12,69 @@ Ziffer = "0" | ZifferOhneNull
 EBNF-Grammatik für Aussagenlogische Ausdrücke
 =============================================
 
-SEQUENCE = FORMULA { ";" FORMULA }                  (* left associative *)
-
-FORMULA = JUNCTION [ ( "→" | "↔" ) FORMULA ]        (* right associative *) a>b>c = a>(b>c)
-
-JUNCTION = NEGATION { ( "∨" | "∧" ) NEGATION }      (* left associative *)  a&b|c = (a&b)|c
-
-NEGATION = [ "¬" ] ( TERM | "(" FORMULA ")" )       
-
-TERM = IDENTIFIER [ "(" TUPLE ")" ]
-
-Identifier = Buchstabe { Buchstabe }
-
-TUPLE = FORMULA { "," FORMULA} | 
-
-
-===
-
 sequence    = formula   { ";" formula }
-formula     = junction  [ ( "→" | "↔" ) formula }
-junction    = negation  { ( "∨" | "∧" ) negation }
+formula     = junction  [ ( "→" | "↔" ) formula ]
+junction    = negation  { ( "∨" | "∧" ) negation } 
 negation    = "¬" negation | term | "(" formula ")"
 term        = identifier [ "(" ")" | "(" tuple ")" ]
 tuple       = formula { "," formula }
+identifier  = Alphanumeric { Alphanumeric }
 
+====================================================================
+
+Transformations:
+
+P     <=> !!P
+
+
+P&Q   <=> !!(P&Q) <=> !(!P | !Q)
+           !(P&Q)  =>   !P | !Q
+           
+P|Q   <=> !!(P|Q) <=> !(!P & !Q)
+           !(P|Q)  =>   !P & !Q
+           
+P>Q   <=> !P | Q
+!P>Q  <=> P | Q
+
+P<>Q  <=> (P>Q) & (Q>P) <=> (!P | Q) & (!Q | P)
+
+Distribution:
+
+P & (Q | R) <=> (P & Q) | (P & R)
+P | (Q & R) <=> (P | Q) & (P | R)
+
+Symmetrie
+
+P & Q <=> Q & P
+P | Q <=> Q | P
+
+Assoziativität:
+
+P & (Q & R) <=> (P & Q) & R
+P | (Q | R) <=> (P | Q) | R
+
+==============================
+
+not implication free        transform to
+P <> Q                      (!P | Q) & (!Q | P)
+P > Q                       !P | Q
+
+not negation normal form (preconditon: implication free)
+!!P                         P
+!(P | Q)                    !P & !Q
+!(P & Q)                    !P | !Q
+
+not conjunctive normal form (preconditon: negation normal form)
+P | (R & S)                 (P | R) & (P | S)
+(P & Q) | R                 (P | R) & (Q | R)
+(P & Q) | (R & S)           ((P&Q)|R) & ((P&Q)|S)   (P|R) & (Q|R) & (P|S) & (Q|S)
+(P & Q) | (R & S)           (P|(R&S)) & (Q|(R&S))   (P|R) & (P|S) & (Q|R) & (Q|S)
+
+not disjunctive normal form (preconditon: negation normal form)
+P & (R | S)                 (P & R) | (P & S)
+(P | Q) & R                 (P & R) | (Q & R)
+(P | Q) & (R | S)           ((P|Q)&R) | ((P|Q)&S)   (P&R) | (Q&R) | (P&S) | (Q|S)
+(P | Q) & (R | S)           (P|(R&S)) | (Q&(R|S))   (P|R) & (P&S) | (Q&R) | (Q|S)
 
 
 
