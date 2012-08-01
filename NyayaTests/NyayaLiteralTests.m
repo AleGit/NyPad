@@ -40,16 +40,16 @@
     STAssertTrue([_setA containsObject:@"a"], nil);
     STAssertFalse([_setA containsObject:@"¬a"], nil);
     
-    STAssertFalse([_setA containsComplementary:@"a"], nil);
-    STAssertTrue([_setA containsComplementary:@"¬a"], nil);
+    STAssertFalse([_setA containsContemplementOf:@"a"], nil);
+    STAssertTrue([_setA containsContemplementOf:@"¬a"], nil);
     
     
 }
 
 - (void)testContains {
-    STAssertFalse([_setA containsComplementaryLiterals], nil);
-    STAssertTrue([_setB containsComplementaryLiterals], nil);
-    STAssertTrue([_setC containsComplementaryLiterals], nil);
+    STAssertFalse([_setA containsContemplementaryStrings], nil);
+    STAssertTrue([_setB containsContemplementaryStrings], nil);
+    STAssertTrue([_setC containsContemplementaryStrings], nil);
 }
 
 @end

@@ -28,7 +28,7 @@ FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
 - (BOOL)isComma;
 - (BOOL)isSemicolon;
 
-- (NSString*)complementaryLiteral;
-- (BOOL)isComplementLiteral:(NSString*)s;
+- (NSString*)complementaryString;
+- (BOOL)hasComplement:(NSString*)string;
 
 @end

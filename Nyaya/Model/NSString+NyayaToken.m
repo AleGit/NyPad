@@ -83,18 +83,18 @@ NSString *const NYAYA_TOKENS =
     return [self isEqualToString:@";"];
 }
 
-- (NSString*)complementaryLiteral {
-    if ([self hasPrefix:@"¬"]) return [self substringFromIndex:1];
+- (NSString*)complementaryString {
+    if ([self hasPrefix:@"¬"] || [self hasPrefix:@"!"]) return [self substringFromIndex:1];
     else return [@"¬" stringByAppendingString:self];
 }
 
-- (BOOL)isComplementLiteral:(NSString *)s {
+- (BOOL)hasComplement:(NSString *)string {
     return ( 
-            [self length] == [s length] + 1                 // ¬atom atom
-            && [self hasPrefix:@"¬"] && [self hasSuffix:s])
+            [self length] == [string length] + 1                 // ¬string string
+            && [self hasPrefix:@"¬"] && [self hasSuffix:string])
     || ( 
-        [self length] + 1 == [s length]                     // atom ¬atom
-        && [s hasPrefix:@"¬"] && [s hasSuffix:self]);
+        [self length] + 1 == [string length]                     // string ¬string
+        && [string hasPrefix:@"¬"] && [string hasSuffix:self]);
 }
 
 @end

@@ -198,15 +198,25 @@
 
 
 - (void)testIsComplement {
-    STAssertTrue([@"¬atom" isComplementLiteral:@"atom"],nil);
-    STAssertTrue([@"atom" isComplementLiteral:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" isComplementLiteral:@"¬¬¬atom"],nil);
+    STAssertTrue([@"¬atom" hasComplement:@"atom"],nil);
+    STAssertTrue([@"atom" hasComplement:@"¬atom"],nil);
+    STAssertTrue([@"¬¬atom" hasComplement:@"¬atom"],nil);
+    STAssertTrue([@"¬¬atom" hasComplement:@"¬¬¬atom"],nil);
     
-    STAssertFalse([@"x" isComplementLiteral:@"x"],nil);
-    STAssertFalse([@"x" isComplementLiteral:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" isComplementLiteral:@"¬¬x"],nil);
+    STAssertFalse([@"x" hasComplement:@"x"],nil);
+    STAssertFalse([@"x" hasComplement:@"¬y"],nil);
+    STAssertFalse([@"¬¬x" hasComplement:@"¬y"],nil);
+    STAssertFalse([@"¬¬x" hasComplement:@"¬¬x"],nil);
+    
+    STAssertTrue([@"¬atom&y" hasComplement:@"atom&y"],nil);
+    STAssertTrue([@"atom&y" hasComplement:@"¬atom&y"],nil);
+    STAssertTrue([@"¬¬atom&y" hasComplement:@"¬atom&y"],nil);
+    STAssertTrue([@"¬¬atom&y" hasComplement:@"¬¬¬atom&y"],nil);
+    
+    STAssertFalse([@"x&y" hasComplement:@"x&y"],nil);
+    STAssertFalse([@"x&y" hasComplement:@"¬y&y"],nil);
+    STAssertFalse([@"¬¬x&y" hasComplement:@"¬y&y"],nil);
+    STAssertFalse([@"¬¬x&y" hasComplement:@"¬¬x&y"],nil);
     
 }
 

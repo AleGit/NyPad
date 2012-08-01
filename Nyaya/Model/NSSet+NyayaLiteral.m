@@ -12,14 +12,14 @@
 
 @implementation NSSet (NyayaLiteral)
 
-- (BOOL)containsComplementary:(NSString*)literal {
-    return [self containsObject:[literal complementaryLiteral]];
+- (BOOL)containsContemplementOf:(NSString*)string {
+    return [self containsObject:[string complementaryString]];
 }
 
-- (BOOL)containsComplementaryLiterals {
+- (BOOL)containsContemplementaryStrings {
     __block BOOL contains = NO;
-    [self enumerateObjectsUsingBlock:^(NSString *literal, BOOL *stop) {
-        if ([self containsComplementary:literal]) {
+    [self enumerateObjectsUsingBlock:^(NSString *string, BOOL *stop) {
+        if ([self containsContemplementOf:string]) {
             contains = YES; *stop=YES;
         }
     }];
