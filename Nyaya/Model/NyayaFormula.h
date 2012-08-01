@@ -13,19 +13,19 @@
 
 @interface NyayaFormula : NSObject
 
-@property (readonly) NyayaParser *parser;
-@property (readonly) NyayaNode *ast;
+@property (nonatomic, readonly) NyayaParser *parser;
+@property (nonatomic, readonly) NyayaNode *ast;
 
-@property (readonly) NyayaNode *imf;
-@property (readonly) NyayaNode *nnf;
-@property (readonly) NyayaNode *cnf;
-@property (readonly) NyayaNode *dnf;
+@property (nonatomic, readonly) NyayaNode *imf;
+@property (nonatomic, readonly) NyayaNode *nnf;
+@property (nonatomic, readonly) NyayaNode *cnf;
+@property (nonatomic, readonly) NyayaNode *dnf;
 
-@property (readonly) NyayaNode *nast;
-@property (readonly) NyayaNode *nimf;
-@property (readonly) NyayaNode *nnnf;
-@property (readonly) NyayaNode *ncnf;
-@property (readonly) NyayaNode *ndnf;
+@property (nonatomic, readonly) NyayaNode *nast;
+@property (nonatomic, readonly) NyayaNode *nimf;
+@property (nonatomic, readonly) NyayaNode *nnnf;
+@property (nonatomic, readonly) NyayaNode *ncnf;
+@property (nonatomic, readonly) NyayaNode *ndnf;
 
 + (NyayaFormula *)formulaWithString:(NSString*)input;
 - (id)initWithString:(NSString*)input;

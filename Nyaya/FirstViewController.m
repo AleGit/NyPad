@@ -17,15 +17,6 @@
 @end
 
 @implementation FirstViewController
-@synthesize input;
-@synthesize ast;
-@synthesize imf;
-@synthesize nnf;
-@synthesize cnf;
-@synthesize dnf;
-@synthesize subformulas;
-@synthesize errors;
-@synthesize myInputView;
 
 - (void)viewDidLoad
 {
@@ -97,7 +88,7 @@
             });
             
             if (![parser hasErrors]) {
-                NSString *s = [[node sortedArrayOfSubformulas] componentsJoinedByString:@"; "];
+                NSString *s = [[[node setOfSubformulas] allObjects] componentsJoinedByString:@"; "];
                 
                 NyayaNode *imfnode = [node imf];
                 NSString *imfdescription=[node description];

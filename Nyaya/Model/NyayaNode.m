@@ -671,11 +671,6 @@
 #pragma mark - abstract root node implementation
 @implementation NyayaNode
 
-@synthesize symbol = _symbol;
-@synthesize nodes = _nodes;
-@synthesize displayValue = _displayValue;
-@synthesize evaluationValue = _evaluationValue;
-
 - (id)copyWithZone:(NSZone*)zone {
     return [self copyWith:[self.nodes copy]];
 }
@@ -762,11 +757,11 @@
     return node;
 }
 
-#pragma mark default method implementations
-
 - (NSUInteger)arity {
     return 0;   // default (constants and variables)
 }
+
+#pragma mark default method implementations
 
 - (NSString*)treeDescription {
     switch (self.type) {
@@ -797,7 +792,7 @@
     return _descriptionCache;
 }
 
-#pragma mark - cnf, dnf, nnf, imf
+#pragma mark - normal forms
 
 - (NyayaNode*)copyWith:(NSArray*)nodes {
     NyayaNode *node = nil;
@@ -903,20 +898,13 @@
     return NO;
 }
 
-- (void)transformImf{
-    // do nothing, see NyayaNodeImplication, NyayaNodeBicondition
-}
-
-- (void)transformNnf{
-    // do nothing, see NyayaNodeNegation
-}
-
-- (void)transformCnf{
-    // do nothing, see NyayaNodeDisjunction
-}
-
-- (void)transformDnf {
-    // do nothing, see NyayaNodeConjunction
+- (void)replacNode:(NyayaNode *)n1 withNode:(NyayaNode *)n2 {
+    NSUInteger idx = [self.nodes indexOfObject:n1];
+    if (idx != NSNotFound) {
+        NSMutableArray *nodes = [self.nodes mutableCopy];
+        [nodes replaceObjectAtIndex:idx withObject:n2];
+        self->_nodes = nodes;
+    }
 }
 
 #pragma mark - resolution
@@ -977,7 +965,7 @@
     return set;
     
 }
-
+/*
 - (NSArray*)sortedArrayOfSubformulas {
     NSArray *array = [[self setOfSubformulas] allObjects];
     
@@ -986,7 +974,7 @@
         else if ([obj1 length] > [obj2 length]) return 1;
         else return [obj1 compare:obj2];
     }];
-}
+}*/
 
 
 #pragma mark - truth tables

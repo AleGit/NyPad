@@ -17,9 +17,14 @@
     NyayaNode *ast = [parser parseFormula];
     NSString *description = [ast description];
     STAssertEqualObjects(description, @"(a ∧ b) ∨ a",nil);
-        
-    NSString *c = [[ast sortedArrayOfSubformulas] componentsJoinedByString:@"; "];
-    STAssertEqualObjects(c, @"a; b; a ∧ b; (a ∧ b) ∨ a",nil);
+    
+    NSSet *set = [ast setOfSubformulas];
+    
+    STAssertEquals([set count], (NSUInteger)4, nil);
+    STAssertTrue([set containsObject:@"a"], nil);
+    STAssertTrue([set containsObject:@"b"], nil);
+    STAssertTrue([set containsObject:@"a ∧ b"], nil);
+    STAssertTrue([set containsObject:@"(a ∧ b) ∨ a"], nil);
 
 }
 

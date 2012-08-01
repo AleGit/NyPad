@@ -20,14 +20,7 @@
 
 @implementation NyayaTruthTable
 
-@synthesize formula = _formula;
-@synthesize title = _title;
-@synthesize variables = _variables;
-@synthesize headers = _headers;
-
 #pragma mark - input
-
-
 
 - (void)sortVariablesAndHeaders {
     

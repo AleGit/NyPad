@@ -10,21 +10,22 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 
+
 @implementation NyayaFormula
 
-@synthesize parser = _parser;
+@synthesize parser = _parser; 
 
-@synthesize ast = _ast;
-@synthesize imf = _imf;
-@synthesize nnf = _nnf;
-@synthesize cnf = _cnf;
-@synthesize dnf = _dnf;
+@synthesize ast = _ast;         // create
+@synthesize imf = _imf;         // ivars
+@synthesize nnf = _nnf;         // of
+@synthesize cnf = _cnf;         // right
+@synthesize dnf = _dnf;         // type
 
-@synthesize nast = _nast;
-@synthesize nimf = _nimf;
-@synthesize nnnf = _nnnf;
-@synthesize ncnf = _ncnf;
-@synthesize ndnf = _ndnf;
+@synthesize nast = _nast;       // to
+@synthesize nimf = _nimf;       // be
+@synthesize nnnf = _nnnf;       // used
+@synthesize ncnf = _ncnf;       // in
+@synthesize ndnf = _ndnf;       // getter
 
 + (id)formulaWithString:(NSString*)input {
     return [[NyayaFormula alloc] initWithString:input];

@@ -9,6 +9,8 @@
 #import "TransformTests.h"
 #import "NyayaNode.h"
 
+
+
 @implementation TransformTests
 
 - (void)testIsTransformationNode {
@@ -93,6 +95,20 @@
                              nil]) {
         STAssertTrue([test isDnfTransformationNode], [test description]);
     }
+    
+}
+
+- (void)testReplaceNodeWithNode {
+    NyayaNode *x = [NyayaNode atom:@"x"] ;
+    NyayaNode *y = [NyayaNode atom:@"y"] ;
+    NyayaNode *dis = [NyayaNode disjunction:y with:x];
+    NyayaNode *con = [NyayaNode conjunction: x with:[NyayaNode negation: dis]];
+    
+    STAssertEqualObjects([con description], @"x ∧ ¬(y ∨ x)",nil);
+    
+    [con replacNode:x withNode:dis];
+    
+    STAssertEqualObjects([con description], @"(y ∨ x) ∧ ¬(y ∨ x)",nil);
     
 }
 

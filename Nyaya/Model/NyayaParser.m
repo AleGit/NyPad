@@ -20,10 +20,6 @@
 
 @implementation NyayaParser
 
-@synthesize input = _input;
-@synthesize tokens = _tokens;
-@synthesize firstErrorState = _errorState;
-
 + (id)parserWithString:(NSString*)input {
     return [[NyayaParser alloc]initWithString:input];
 }
@@ -34,7 +30,7 @@
         _input = input;
         _index = 0;
         _level = 0;
-        _errorState = NyayaUndefined;
+        _firstErrorState = NyayaUndefined;
         _errors = [NSMutableArray array];
         
         [self tokenize];
@@ -79,8 +75,8 @@
 }
 
 - (void)addErrorDescription:(NyayaErrorState)errorState {
-    if (_errorState == NyayaUndefined) {
-        _errorState = errorState;   // first error
+    if (_firstErrorState == NyayaUndefined) {
+        _firstErrorState = errorState;   // first error
     }
     
     NSUInteger _idx = _index+1;

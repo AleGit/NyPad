@@ -31,6 +31,8 @@ typedef NSUInteger NyayaNodeType;
 
 // @property (nonatomic, readonly) NSString* de;
 
+#pragma mark - node factory
+
 + (NyayaNode*)atom:(NSString*)name;
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
@@ -42,6 +44,7 @@ typedef NSUInteger NyayaNodeType;
 
 - (NSUInteger)arity;
 
+#pragma mark - normal forms
 - (NyayaNode*)imf;      // equivalent formula without implications or biconditions
 - (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
 - (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)
@@ -52,28 +55,26 @@ typedef NSUInteger NyayaNodeType;
 - (BOOL)isCnfFormula;   // (sub)formula is in conjunctive normal form
 - (BOOL)isDnfFormula;   // (sub)formula is in disjunctive normal form
 
+- (BOOL)isLiteral;
 
 - (BOOL)isImfTransformationNode;
 - (BOOL)isNnfTransformationNode;
 - (BOOL)isCnfTransformationNode;
 - (BOOL)isDnfTransformationNode;
 
-- (void)transformImf;
-- (void)transformNnf;
-- (void)transformCnf;
-- (void)transformDnf;
+#pragma mark - transformations
 
-- (BOOL)isLiteral;
+- (void)replacNode:(NyayaNode*)n1 withNode:(NyayaNode*)n2;
+
+#pragma mark - output
 
 - (NSString*)treeDescription;
 
 - (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction (AND) of disjunctions (OR) of literals: (a or b) AND (a or !b)
 - (NSArray*)disjunctionOfConjunctions; // dnf is disjunction (OR) of conjunctions (AND) of literals: (a and b) OR (a and !b)
 
-- (NSSet*)setOfSubformulas;
-- (NSArray*)sortedArrayOfSubformulas;
-
-- (NSSet*)setOfVariables;
+- (NSSet*)setOfSubformulas;     // set of subformulas (strings)
+- (NSSet*)setOfVariables;       // set of variables (nodes)
 
 - (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals;
 
