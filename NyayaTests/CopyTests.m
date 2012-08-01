@@ -22,17 +22,18 @@
     NyayaNode *nnA = [NyayaNode negation:[NyayaNode negation:[NyayaNode atom:@"a"]]];
     NyayaNode *nA = [nnA.nodes objectAtIndex:0];
     NyayaNode *A = [nA.nodes objectAtIndex:0];
-    NyayaNode *nnAc = [nnA copy];
-    NyayaNode *nAc = [[nnAc.nodes objectAtIndex:0] copy];
-    NyayaNode *Ac = [[nAc.nodes objectAtIndex:0] copy];
     
-    STAssertTrue(A == Ac, nil);
-    STAssertFalse(nA == nAc, nil);
-    STAssertFalse(nnA == nnAc, nil);
+    NyayaNode *nnAc = [nnA copy];
+    NyayaNode *nAc = [nnAc.nodes objectAtIndex:0];
+    NyayaNode *Ac = [nAc.nodes objectAtIndex:0];
     
     STAssertEqualObjects([nnA description], [nnAc description],nil);
     STAssertEqualObjects([nA description], [nAc description],nil);
     STAssertEqualObjects([A description], [Ac description],nil);
+    
+    STAssertTrue(A == Ac, @"atoms must be singletons");
+    STAssertFalse(nA == nAc, nil);
+    STAssertFalse(nnA == nnAc, nil);
 }
 
 @end

@@ -672,7 +672,9 @@
 @implementation NyayaNode
 
 - (id)copyWithZone:(NSZone*)zone {
-    return [self copyWith:[self.nodes copy]];
+    
+    return [self copyWith:[self valueForKeyPath:@"nodes.copy"]]; // recursive copy
+    // return [self copyWith:self.nodes];
 }
 
 - (NyayaNodeType)type {
@@ -813,7 +815,7 @@
         node->_symbol = self.symbol;
         node->_displayValue = self.displayValue;
         node->_evaluationValue = self.evaluationValue;
-        node->_nodes = nodes;
+        node->_nodes = [nodes copy];
     }    
     return node;
     

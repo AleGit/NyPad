@@ -103,10 +103,22 @@
     NyayaNode *y = [NyayaNode atom:@"y"] ;
     NyayaNode *dis = [NyayaNode disjunction:y with:x];
     NyayaNode *con = [NyayaNode conjunction: x with:[NyayaNode negation: dis]];
+    NyayaNode *n1 = [con.nodes objectAtIndex:1];
     
     STAssertEqualObjects([con description], @"x ∧ ¬(y ∨ x)",nil);
     
     [con replacNode:x withNode:dis];
+    
+    NyayaNode *n2 = [con.nodes objectAtIndex:1];
+    STAssertEquals(n1, n2,@"%@ %@",[n1 description], [n2 description]);
+    
+    NyayaNode *d1 = [con.nodes objectAtIndex:0];
+    NyayaNode *d2 = [((NyayaNode *)[con.nodes objectAtIndex:1]).nodes objectAtIndex:0];
+    
+    
+    STAssertEqualObjects([d1 description], [d2 description],nil);
+    STAssertEquals(d1, d2,@"%@ %@",[d1 description], [d2 description]);
+    STAssertEquals(dis, d2,@"%@ %@",[dis description], [d2 description]);
     
     STAssertEqualObjects([con description], @"(y ∨ x) ∧ ¬(y ∨ x)",nil);
     
