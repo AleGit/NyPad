@@ -110,7 +110,7 @@
 }
 
 
-
+/*
 - (void)testParseJunction {
     
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"!x1 & a"];
@@ -155,7 +155,7 @@
     STAssertEqualObjects(@"a ∧ ¬f(a,b)", [n description],nil);
     
 }
-
+*/
 
 - (void)testParseFormula {
     

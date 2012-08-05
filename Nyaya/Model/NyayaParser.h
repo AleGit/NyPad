@@ -44,10 +44,13 @@ typedef NSUInteger NyayaErrorState;
 
 - (NSArray*)parseSequence;   // sequence    = formula   { ";" formula }
 
-- (NyayaNode*)parseFormula;  // formula     = junction  [ ( "→" | "↔" ) formula }
-- (NyayaNode*)parseJunction; // junction    = negation  { ( "∨" | "∧" ) negation }
-- (NyayaNode*)parseNegation; // negation    = "¬" negation | term | "(" formula ")"
-- (NyayaNode*)parseTerm;     // term        = identifier [ tuple ]
-- (NSArray*)parseTuple;      // tuple       = "(" formula { "," formula } ")"
+- (NyayaNode*)parseFormula;         // formula     = implication { XOR implication }
+- (NyayaNode*)parseImplication;     // implication = bicondition [ IMP implication ]
+- (NyayaNode*)parseBicondition;     // bicondition = disjunction [ BIC bicondition ]
+- (NyayaNode*)parseDisjunction;     // disjunction = conjunction { OR conjunction }
+- (NyayaNode*)parseConjunction;     // conjunction = negation    { AND negation }
+- (NyayaNode*)parseNegation;        // negation    = NOT negation | term | LPAR formula RPAR
+- (NyayaNode*)parseTerm;            // term        = identifier [ LPAR RPAR | LPAR tuple RPAR ]
+- (NSArray*)parseTuple;             // tuple       = formula { COMMA formula }
 
 @end

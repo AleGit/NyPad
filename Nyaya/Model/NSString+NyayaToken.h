@@ -21,6 +21,7 @@ FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
 - (BOOL)isJunctionToken;
 - (BOOL)isImplicationToken;
 - (BOOL)isBiconditionToken;
+- (BOOL)isXdisjunctionToken;
 
 - (BOOL)isIdentifierToken;
 - (BOOL)isLeftParenthesis;

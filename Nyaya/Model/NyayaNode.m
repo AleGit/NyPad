@@ -31,7 +31,7 @@
 //              |
 // 1        NyayaNodeUnary       -   NyayaNodeNegation
 //              |        
-// 2        NyayaNodeBinary      -   NyayaNode(Disjunction|Conjunction|Implication|Bicondition)
+// 2        NyayaNodeBinary      -   NyayaNode(Conjunction|Disjunction|Bicondition|Implication|Xdisjunction)
 
 @interface NyayaNodeConstant : NyayaNode
 @end
@@ -58,13 +58,16 @@
 @interface NyayaNodeDisjunction : NyayaNodeJunction 
 @end
 
-@interface NyayaNodeImpBic : NyayaNodeBinary
+@interface NyayaNodeExpandable : NyayaNodeBinary
 @end
 
-@interface NyayaNodeImplication : NyayaNodeImpBic 
+@interface NyayaNodeImplication : NyayaNodeExpandable 
 @end
 
-@interface NyayaNodeBicondition : NyayaNodeImpBic 
+@interface NyayaNodeBicondition : NyayaNodeExpandable 
+@end
+
+@interface NyayaNodeXdisjunction : NyayaNodeExpandable
 @end
 
 @interface NyayaNodeFunction : NyayaNode {
@@ -487,7 +490,7 @@
 
 @end
 
-@implementation NyayaNodeImpBic
+@implementation NyayaNodeExpandable
 
 - (BOOL)isImfFormula {
     return NO;
@@ -499,6 +502,29 @@
 
 - (BOOL)isImfTransformationNode {
     return YES;
+}
+
+@end
+
+@implementation NyayaNodeXdisjunction
+- (NyayaNodeType)type {
+    return NyayaXdisjunction;
+}
+
+- (NyayaBool)displayValue {
+    NyayaBool firstValue = [self firstValue];
+    NyayaBool secondValue = [self secondValue];
+    
+    if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
+    else if (firstValue == secondValue) _displayValue = NyayaFalse;
+    else _displayValue = NyayaTrue;
+    
+    return _displayValue;
+}
+
+- (BOOL)evaluationValue {
+    _evaluationValue = [[self firstNode] evaluationValue] ^ [[self secondNode] evaluationValue];
+    return _evaluationValue;
 }
 
 @end
@@ -749,6 +775,15 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     return node;
+}
+
++ (NyayaNode*)xdisjunction:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
+    NyayaNode*node=[[NyayaNodeXdisjunction alloc] init];
+    node->_symbol = @"⊻";
+    node->_displayValue = NyayaUndefined;
+    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    return node;
+    
 }
 
 + (NyayaNode*)function:(NSString *)name with:(NSArray *)nodes {

@@ -60,6 +60,12 @@ NSString *const NYAYA_TOKENS =
     || [self isEqualToString:@"<>"];
 }
 
+
+
+- (BOOL)isXdisjunctionToken {
+    return NO;
+}
+
 - (BOOL)isIdentifierToken {
     NSCharacterSet *noids = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     NSRange range = [self rangeOfCharacterFromSet:noids];

@@ -21,6 +21,31 @@ tuple       = formula { "," formula }
 identifier  = Alphanumeric { Alphanumeric }
 
 ====================================================================
+Parser v2
+
+NOT > AND > OR > BIC > IMP > XOR
+
+formula     = implication { XOR formula }
+implication = bicondition [ IMP implication ]
+bicondition = disjunction [ BIC bicondition ]
+disjunction = conjunction { OR conjunction }
+conjunction = negation    { AND negation }
+negation    = NOT negation | term | LPAR formula RPAR
+term        = identifier [ LPAR RPAR | LPAR tuple RPAR ]
+tuple       = formula { COMMA formula }
+identifier  = Alphanumeric { Alphanumeric }
+
+NOT         = "!"  | "¬"
+AND         = "&'  | "∧" | "."
+OR          = "|"  | "∨" | "+"
+BIC         = "<>" | "↔"
+IMP         = ">"  | "→"
+XOR         = "^"  | "⊻" | "⊕"
+LPAR        = "("
+RPAR        = ")"
+COMMA       = ","
+
+====================================================================
 
 Transformations:
 

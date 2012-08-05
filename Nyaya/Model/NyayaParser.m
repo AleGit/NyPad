@@ -103,25 +103,15 @@
     
 }
     
-- (NyayaNode*)parseFormula {  // formula     = junction  [ ( "→" | "↔" ) formula }
+- (NyayaNode*)parseFormula {
     NyayaNode *result;
     _level++;
     
-    if (_token) {
-        result = [self parseJunction];      // consumes junction
-        
-        if ([_token isImplicationToken]) {
-            [self nextToken]; // consume ">"
-            result = [NyayaNode implication:result with:[self parseFormula]];
-        }
-        else if ([_token isBiconditionToken]) {
-            
-            [self nextToken]; // consume "<>"
-            result = [NyayaNode bicondition:result with:[self parseFormula]];
-        }
-    }
-    else {
-        [self addErrorDescription: NyayaErrorNoToken];
+    // [v.2] formula = implication { XOR implication }
+    result = [self parseImplication];       // consumes implication(s)
+    while ([_token isXdisjunctionToken]) {
+        [self nextToken];                   // consumes XOR token
+        result = [NyayaNode xdisjunction:result with:[self parseImplication]];
     }
     
     _level--;
@@ -129,41 +119,67 @@
     return result;
     
 }
+
+- (NyayaNode*)parseImplication {
+    NyayaNode* result = nil;
+    _level++;
+
+    // [v.2] implication = bicondition [ IMP implication ]    
+    result = [self parseBicondition];       // consumes biconditon
+    if ([_token isImplicationToken]) {
+        [self nextToken];                   // consumes IMP token
+        result = [NyayaNode implication:result with:[self parseImplication]];
+    }
     
-- (NyayaNode*)parseJunction { // junction    = negation  { ( "∨" | "∧" ) negation }
-    NyayaNode *junction = [self parseNegation];
+    _level--;
+    return result;
+}
+
+- (NyayaNode*)parseBicondition {
+    NyayaNode* result = nil;
+    _level++;
+
+    // [v.2] bicondition = disjunction [ BIC bicondition ]
+    result = [self parseDisjunction];       // consumes disjunction
+    if ([_token isBiconditionToken]) {
+        [self nextToken];                   // consumes BIC token
+        result = [NyayaNode bicondition:result with:[self parseBicondition]];
+    }
     
-    while ([_token isJunctionToken]) {
-        NSString *tok = _token;
-        
-        
-        NyayaNode *node = nil; 
-        while (!node && _token) {
-            [self nextToken];
-            node = [self parseNegation];
-        }
-        
-        
-        
-         
-        if (node && [tok isDisjunctionToken]) {
-            
-            junction = [NyayaNode disjunction:junction with:node];
-        }
-        else if (node)
-            junction = [NyayaNode conjunction:junction with:node];
-        
-        // if (!node) break;
-        
+    _level--;
+    return result;
+}
+
+- (NyayaNode*)parseDisjunction {
+    NyayaNode* result = nil;
+    _level++;
+    
+    // [v.2] disjunction = conjunction { OR conjunction }
+    result = [self parseConjunction];       // consumes conjunction
+    while ([_token isDisjunctionToken]) {
+        [self nextToken];                   // consumes OR token
+        result = [NyayaNode disjunction:result with:[self parseConjunction]];
+    }
+    
+    _level--;
+    return result;
+}
+
+- (NyayaNode*)parseConjunction {
+    NyayaNode* result = nil;
+    _level++;
+    
+    // [v.2] conjunction = negation { AND negation }    
+    result = [self parseNegation];       // consumes conjunction
+    while ([_token isConjunctionToken]) {
+        [self nextToken];                   // consumes OR token
+        result = [NyayaNode conjunction: result with:[self parseNegation]];
     }
     
     if ([_token isNegationToken] || [_token isIdentifierToken]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
-        
-    if (_token)
-       
-        NSLog(@"token: %@", _token);     
     
-    return junction;
+    _level--;
+    return result;
 }
 
 // negation    = "¬" negation | "(" formula ")" | term 
