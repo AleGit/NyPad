@@ -135,7 +135,7 @@
     // imf(a)   =  a
     // imf(¬P)  = ¬imf(P)
     // imf(P∨Q) = imf(P) ∨ imf(Q)
-    // imf(P∨Q) = imf(P) ∧ imf(Q)
+    // imf(P∧Q) = imf(P) ∧ imf(Q)
     return [self copyImf];
 }
 
@@ -527,6 +527,37 @@
     return _evaluationValue;
 }
 
+- (NSString*)description {
+    
+    NyayaNode *first = [self firstNode];
+    NyayaNode *second = [self secondNode];
+    NSString *left = [first description];           // xor has lowest precedence and xor ist left associative
+    NSString *right = nil;
+    
+    switch(second.type) {
+        case NyayaXdisjunction:
+            right = [NSString stringWithFormat:@"(%@)", [second description]];
+            // a XOR (b XOR c)
+            break;
+        default:
+            right = [second description];
+            break;
+    }
+    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
+    
+    return _descriptionCache;
+}
+
+- (NyayaNode*)imf {
+    // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
+    NyayaNode *first = [[self firstNode] imf];
+    NyayaNode *second = [[self secondNode] imf];
+    return [NyayaNode conjunction:[NyayaNode disjunction:first
+                                                    with:second]
+                             with:[NyayaNode  disjunction:[NyayaNode negation:first]
+                                                     with:[NyayaNode negation:second]]];
+}
+
 @end
 
 @implementation NyayaNodeImplication
@@ -810,9 +841,10 @@
                     self.symbol, [[(NyayaNodeUnary*)self firstNode] treeDescription]];
         case NyayaConjunction:
         case NyayaDisjunction:
-        case NyayaImplication:
         case NyayaBicondition:
-            return [NSString stringWithFormat:@"(%@%@%@)", 
+        case NyayaImplication:
+        case NyayaXdisjunction:
+            return [NSString stringWithFormat:@"(%@%@%@)",
                     [[(NyayaNodeBinary*)self firstNode] treeDescription], 
                     self.symbol, 
                     [[(NyayaNodeBinary*)self secondNode] treeDescription]];

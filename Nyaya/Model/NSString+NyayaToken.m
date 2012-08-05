@@ -8,17 +8,18 @@
 
 #import "NSString+NyayaToken.h"
 
-NSString *const NYAYA_TOKENS = 
-    @"¬|!"      // negation
-    "|∧|&"      // conjunction
-    "|∨|\\|"    // disjunction
-    "|→|>"      // implication
-    "|↔|<>"     // bicondition
-    "|\\("      // left parenthesis
-    "|\\)"      // right parenthesis
-    "|,"        // comma
-    "|;"        // semicolon
-    "|\\w+"     // identifier
+NSString *const NYAYA_TOKENS = @""
+    "¬|!"       // NOT   negation
+    "|∧|&"      // AND   conjunction
+    "|∨|\\|"    // OR    disjunction
+    "|↔|<>"     // BIC   bicondition
+    "|→|>"      // IMP   implication
+    "|⊻|\\^"    // XOR   exclusive disjunction
+    "|\\("      // LPAR  left parenthesis
+    "|\\)"      // RPAR  right parenthesis
+    "|,"        // COMMA comma
+    "|;"        // SEMIC semicolon
+    "|\\w+"     // IDENT identifier
     ;
 
 @implementation NSString (NyayaToken)
@@ -63,7 +64,8 @@ NSString *const NYAYA_TOKENS =
 
 
 - (BOOL)isXdisjunctionToken {
-    return NO;
+    return [self isEqualToString:@"⊻"]
+    || [self isEqualToString:@"^"];
 }
 
 - (BOOL)isIdentifierToken {

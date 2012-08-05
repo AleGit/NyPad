@@ -203,6 +203,18 @@
 - (BOOL)isEqualToTruthTable:(NyayaTruthTable*)truthTable {
     if (self->_rowsCount != truthTable->_rowsCount) return NO;
     
+    __block BOOL sameVariables = YES;
+    
+    [self.variables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        id b = [truthTable.variables objectAtIndex:idx];
+        if (obj != b) {
+            sameVariables = NO;
+            *stop = YES;
+        }
+    }];
+    
+    if (!sameVariables) return NO;
+    
     for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
         BOOL a = [self evalAtRow:rowIdx forHeader:_title];
         BOOL b = [truthTable evalAtRow:rowIdx forHeader:truthTable->_title];
