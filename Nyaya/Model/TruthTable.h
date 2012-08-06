@@ -22,4 +22,8 @@
 - (NSString*)minimalDescription; 
 - (void)setOrder: (NSArray*)variableNames;
 
+- (BOOL)isTautology;
+- (BOOL)isContradiction;
+- (BOOL)isSatisfiable;
+
 @end

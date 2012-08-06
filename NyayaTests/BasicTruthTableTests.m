@@ -13,13 +13,16 @@
 
 @implementation BasicTruthTableTests
 
-- (void) assert:(NSString*)input truthTable:(NSString*)tt {
+- (void) assert:(NSString*)input truthTable:(NSString*)tt tautology:(BOOL)isTautology contradiction: (BOOL)isContradiction {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
     STAssertFalse(parser.hasErrors, input);
     TruthTable *astTable = [[TruthTable alloc] initWithFormula:ast];
     [astTable evaluateTable];
     STAssertEqualObjects([astTable description],tt, input);
+    STAssertTrue([astTable isTautology] == isTautology, input);
+    STAssertTrue([astTable isContradiction] == isContradiction, input);
+    STAssertTrue([astTable isSatisfiable] != isContradiction, input);
 }
 
 
@@ -29,7 +32,7 @@
     "| F | T | F     |";
     
     for (NSString *input in @[@"F&T"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:YES];
     }
 }
 
@@ -39,7 +42,7 @@
     "| F | T | T     |";
     
     for (NSString *input in @[@"F|T"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:YES contradiction:NO];
     }
 }
 
@@ -51,7 +54,7 @@
     "| F |";
     
     for (NSString *input in @[@"F"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:YES];
     }
 }
 
@@ -62,7 +65,7 @@
     "| F | T  |";
     
     for (NSString *input in @[@"!F", @"¬F"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:YES contradiction:NO];
     }
 }
 
@@ -73,7 +76,7 @@
     "| T |";
     
     for (NSString *input in @[@"T"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:YES contradiction:NO];
     }
 }
 
@@ -84,11 +87,9 @@
     "| T | F  |";
     
     for (NSString *input in @[@"!T", @"¬T"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:YES];
     }
 }
-
-
 
 - (void)testA {
     
@@ -98,7 +99,7 @@
     "| T |";
     
     for (NSString *input in @[@"a"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -110,7 +111,7 @@
     "| T | F  |";
     
     for (NSString *input in @[@"!a", @"¬a"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -122,7 +123,7 @@
     "| T | F  | T   |";
     
     for (NSString *input in @[@"!!a", @"¬¬a"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -136,7 +137,7 @@
     "| T | T | T     |";
     
     for (NSString *input in @[@"a&b", @"a∧b"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -150,7 +151,7 @@
     "| T | T | T     | F        |";
     
     for (NSString *input in @[@"!(a&b)", @"¬(a∧b)"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -164,7 +165,7 @@
     "| T | T | T     |";
     
     for (NSString *input in @[@"a|b", @"a∨b"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -178,7 +179,7 @@
     "| T | T | T     | F        |";
     
     for (NSString *input in @[@"!(a|b)", @"¬(a∨b)"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -192,7 +193,7 @@
     "| T | T | T     |";
     
     for (NSString *input in @[@"(a<>b)", @"a↔b"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
 }
 
@@ -206,9 +207,8 @@
     "| T | T | T     | F        |";
     
     for (NSString *input in @[@"!(a<>b)", @"¬(a↔b)"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
-    
 }
 
 - (void)testImp {
@@ -221,9 +221,8 @@
     "| T | T | T     |";
     
     for (NSString *input in @[@"(a>b)",@"a→b"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
-    
 }
 
 - (void)testNotImp {
@@ -236,9 +235,8 @@
     "| T | T | T     | F        |";
     
     for (NSString *input in @[@"!(a>b)", @"¬(a→b)"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
-    
 }
 
 - (void)testXor {
@@ -251,9 +249,8 @@
     "| T | T | F     |";
     
     for (NSString *input in @[@"(a^b)", @"a⊻b"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
-    
 }
 
 - (void)testNotXor {
@@ -266,9 +263,32 @@
     "| T | T | F     | T        |";
     
     for (NSString *input in @[@"!(a^b)", @"¬(a⊻b)"]) {
-        [self assert:input truthTable:tt];
+        [self assert:input truthTable:tt tautology:NO contradiction:NO];
     }
+}
+
+- (void)testContradition {
     
+    NSString *tt = @""
+    "| a | ¬a | a ∧ ¬a |\n"
+    "| F | T  | F      |\n"
+    "| T | F  | F      |";
+    
+    for (NSString *input in @[@"a&!a"]) {
+        [self assert:input truthTable:tt tautology:NO contradiction:YES];
+    }
+}
+
+- (void)testTautology {
+    
+    NSString *tt = @""
+    "| a | ¬a | a ∨ ¬a |\n"
+    "| F | T  | T      |\n"
+    "| T | F  | T      |";
+    
+    for (NSString *input in @[@"a|!a"]) {
+        [self assert:input truthTable:tt tautology:YES contradiction:NO];
+    }
 }
 
 #pragma mark - special tests

@@ -66,7 +66,7 @@ typedef NSUInteger NyayaNodeType;
 
 #pragma mark - transformations
 
-- (void)replacNode:(NyayaNode*)n1 withNode:(NyayaNode*)n2;
+- (void)replaceNode:(NyayaNode*)n1 withNode:(NyayaNode*)n2;
 
 #pragma mark - output
 

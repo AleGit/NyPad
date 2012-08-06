@@ -198,7 +198,29 @@
     return description;
 }
 
-#pragma mark - memory management
+#pragma mark - comparisons
+
+- (BOOL)isTautology {
+    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
+        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
+        if (!a) return NO;
+    }
+    return YES;
+    
+}
+
+- (BOOL)isContradiction {
+    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
+        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
+        if (a) return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isSatisfiable {
+    return ![self isContradiction];
+    
+}
 
 - (BOOL)isEqualToTruthTable:(TruthTable*)truthTable {
     if (self->_rowsCount != truthTable->_rowsCount) return NO;
@@ -242,6 +264,8 @@
     }
     return hash;
 }
+
+#pragma mark - memory management
 
 - (void)dealloc {
     free(_evals);

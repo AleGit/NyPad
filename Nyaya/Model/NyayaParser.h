@@ -42,7 +42,7 @@ typedef NSUInteger NyayaErrorState;
 - (BOOL)hasErrors;
 - (NSString*)errorDescriptions;
 
-- (NSArray*)parseSequence;   // sequence    = formula   { ";" formula }
+- (NSArray*)parseSequence;          // sequence    = formula   { ";" formula }
 
 - (NyayaNode*)parseFormula;         // formula     = implication { XOR implication }
 - (NyayaNode*)parseImplication;     // implication = bicondition [ IMP implication ]

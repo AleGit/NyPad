@@ -72,6 +72,8 @@ Symmetrie
 
 P & Q <=> Q & P
 P | Q <=> Q | P
+P ^ Q <=> Q ^ P
+ P<>Q <=> Q<>P
 
 Assoziativität:
 
@@ -84,7 +86,7 @@ imf                         transform to
 ---                         ------------
 P <> Q                      (!P | Q) & (!Q | P)
 P > Q                       !P | Q
-P ^ Q
+P ^ Q                       !(P <> Q)
 
 nnf
 ---

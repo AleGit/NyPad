@@ -107,7 +107,7 @@
     
     STAssertEqualObjects([con description], @"x ∧ ¬(y ∨ x)",nil);
     
-    [con replacNode:x withNode:dis];
+    [con replaceNode:x withNode:dis];
     
     NyayaNode *n2 = [con.nodes objectAtIndex:1];
     STAssertEquals(n1, n2,@"%@ %@",[n1 description], [n2 description]);

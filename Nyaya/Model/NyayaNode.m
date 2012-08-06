@@ -952,7 +952,7 @@
     return NO;
 }
 
-- (void)replacNode:(NyayaNode *)n1 withNode:(NyayaNode *)n2 {
+- (void)replaceNode:(NyayaNode *)n1 withNode:(NyayaNode *)n2 {
     NSUInteger idx = [self.nodes indexOfObject:n1];
     if (idx != NSNotFound) {
         NSMutableArray *nodes = [self.nodes mutableCopy];
@@ -1006,7 +1006,7 @@
     return [self clauses:NyayaDisjunction clauses:NyayaConjunction];
 }
 
-#pragma mark - subformulas
+#pragma mark - subformulas, variables and truth tables
 
 - (NSSet*)setOfSubformulas {
     NSMutableSet *set = [NSMutableSet setWithObject:_descriptionCache];
@@ -1017,21 +1017,7 @@
     }
     
     return set;
-    
 }
-/*
-- (NSArray*)sortedArrayOfSubformulas {
-    NSArray *array = [[self setOfSubformulas] allObjects];
-    
-    return [array sortedArrayUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {
-        if ([obj1 length] < [obj2 length]) return -1;
-        else if ([obj1 length] > [obj2 length]) return 1;
-        else return [obj1 compare:obj2];
-    }];
-}*/
-
-
-#pragma mark - truth tables
 
 - (NSSet*)setOfVariables {
     NSSet *result = nil;
