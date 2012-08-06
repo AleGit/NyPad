@@ -207,15 +207,6 @@
     
     }];
     
-    /*
-    STAssertEqualObjects([ast description], , nil);
-    STAssertEqualObjects([imf description], , nil);
-    STAssertEqualObjects([nnf description], , nil);
-    STAssertEqualObjects([cnf description], @"", nil);
-    STAssertEqualObjects([dnf description], @"", nil);
-    
-    */
-    
     
 }
 

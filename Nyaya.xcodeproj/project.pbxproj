@@ -15,7 +15,6 @@
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
 		114A801115B99226002C85B4 /* NyayaFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A801015B99226002C85B4 /* NyayaFormulaTests.m */; };
 		116451C615B9383400CD6E16 /* NyayaStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 116451C515B9383400CD6E16 /* NyayaStore.m */; };
-		116451D315B9566C00CD6E16 /* NyayaStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 116451D215B9566C00CD6E16 /* NyayaStoreTests.m */; };
 		1166601715B6BCE90070B5B8 /* NyayaNodeResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */; };
 		1166601A15B6DEF60070B5B8 /* NSString+NyayaToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601915B6DEF60070B5B8 /* NSString+NyayaToken.m */; };
 		1166601D15B6E7D90070B5B8 /* NyayaTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601C15B6E7D90070B5B8 /* NyayaTokenTests.m */; };
@@ -85,8 +84,6 @@
 		114A801015B99226002C85B4 /* NyayaFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaFormulaTests.m; sourceTree = "<group>"; };
 		116451C415B9383400CD6E16 /* NyayaStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaStore.h; path = Model/NyayaStore.h; sourceTree = "<group>"; };
 		116451C515B9383400CD6E16 /* NyayaStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaStore.m; path = Model/NyayaStore.m; sourceTree = "<group>"; };
-		116451D115B9566C00CD6E16 /* NyayaStoreTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaStoreTests.h; sourceTree = "<group>"; };
-		116451D215B9566C00CD6E16 /* NyayaStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaStoreTests.m; sourceTree = "<group>"; };
 		1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeResolution.h; sourceTree = "<group>"; };
 		1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeResolution.m; sourceTree = "<group>"; };
 		1166601815B6DEF60070B5B8 /* NSString+NyayaToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+NyayaToken.h"; path = "Model/NSString+NyayaToken.h"; sourceTree = "<group>"; };
@@ -193,8 +190,6 @@
 				1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */,
 				111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */,
 				111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */,
-				116451D115B9566C00CD6E16 /* NyayaStoreTests.h */,
-				116451D215B9566C00CD6E16 /* NyayaStoreTests.m */,
 				114A800F15B99226002C85B4 /* NyayaFormulaTests.h */,
 				114A801015B99226002C85B4 /* NyayaFormulaTests.m */,
 			);
@@ -526,7 +521,6 @@
 				1166602315B6F0B20070B5B8 /* NyayaLiteralTests.m in Sources */,
 				1183B6CE15B70AC10076D92C /* NyayaNodeSubFormulasTests.m in Sources */,
 				111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */,
-				116451D315B9566C00CD6E16 /* NyayaStoreTests.m in Sources */,
 				114A801115B99226002C85B4 /* NyayaFormulaTests.m in Sources */,
 				1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */,
 				1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */,

@@ -109,54 +109,6 @@
     
 }
 
-
-/*
-- (void)testParseJunction {
-    
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"!x1 & a"];
-    NyayaNode *n = [parser parseJunction];
-    
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
-    
-    parser = [NyayaParser parserWithString:@"!T | a"];
-    n = [parser parseJunction];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
-    STAssertEqualObjects(@"¬T ∨ a", [n description],nil);
-    
-    parser = [NyayaParser parserWithString:@"!0 | b"];
-    n = [parser parseJunction];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
-    
-    parser = [NyayaParser parserWithString:@"c | !f()"];
-    n = [parser parseJunction];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
-    STAssertEqualObjects(@"c ∨ ¬f()", [n description],nil);
-    
-    parser = [NyayaParser parserWithString:@"a & !f(a)"];
-    n = [parser parseJunction];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
-    STAssertEqualObjects(@"a ∧ ¬f(a)", [n description],nil);
-    
-    parser = [NyayaParser parserWithString:@"a & !f(a,b)"];
-    n = [parser parseJunction];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
-    STAssertEqualObjects(@"a ∧ ¬f(a,b)", [n description],nil);
-    
-}
-*/
-
 - (void)testParseFormula {
     
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a > !x1 & a"];
@@ -213,7 +165,6 @@
     STAssertEquals((NyayaNodeType)NyayaBicondition, n.type,nil);
     STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
     STAssertEqualObjects(@"F ↔ a ∧ ¬f(a,b)", [n description],nil);
-    
 }
 
 
