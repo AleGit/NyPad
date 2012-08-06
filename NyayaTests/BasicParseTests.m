@@ -121,5 +121,12 @@
     STAssertEquals([[result.nodes objectAtIndex:1] displayValue], F.displayValue, nil);
 }
 
+- (void)testVaribles {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"T&a&b|a>F"];
+    NyayaNode *result = [parser parseFormula];
+    STAssertEquals([result.setOfVariables count], (NSUInteger)2, nil);
+    
+}
+
 
 @end

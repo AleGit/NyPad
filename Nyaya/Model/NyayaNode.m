@@ -91,9 +91,20 @@
     [[NyayaStore sharedInstance] setEvaluationValue:evaluationValue forName:self.symbol];
 }
 
-
 - (BOOL)isLiteral {
     return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if (object == self)
+        return YES;
+    else if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+    return [self.symbol isEqual:((NyayaNodeVariable*)object).symbol];
+}
+
+- (NSUInteger)hash {
+    return [self.symbol hash];
 }
 
 @end
