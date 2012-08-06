@@ -30,6 +30,8 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NyayaBool displayValue;   // user evaluations (default=undefined)
 @property (nonatomic, readonly) BOOL evaluationValue;     // truth table evaluations
 
+@property (nonatomic, weak) NyayaNode *parent;
+
 // @property (nonatomic, readonly) NSString* de;
 
 #pragma mark - node factory

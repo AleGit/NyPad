@@ -764,6 +764,8 @@
     node->_symbol = @"¬";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -772,6 +774,8 @@
     node->_symbol = @"∧";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -780,6 +784,8 @@
     node->_symbol = @"∨";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -788,6 +794,8 @@
     node->_symbol = @"→";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -796,6 +804,8 @@
     node->_symbol = @"↔";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -804,6 +814,8 @@
     node->_symbol = @"⊻";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
     
 }
@@ -813,6 +825,8 @@
     // node->isa = [NyayaNodeFunction class];
     node->_symbol = name;
     node->_nodes = [nodes copy];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -853,7 +867,7 @@
         default:
             return [NSString stringWithFormat:@"%@(%@)", 
                     self.symbol, 
-                    [[self.nodes valueForKey:@"treeDescription"] componentsJoinedByString:@","]];  
+                    [[self valueForKeyPath:@"nodes.treeDescription"] componentsJoinedByString:@","]];
     }
 }
 
@@ -873,6 +887,8 @@
     node->_displayValue = self.displayValue;
     node->_evaluationValue = self.evaluationValue;
     node->_nodes = [nodes copy];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
     
     return node;
     

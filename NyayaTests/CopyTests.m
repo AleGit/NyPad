@@ -28,6 +28,15 @@
     NyayaNode *nAc = [nnAc.nodes objectAtIndex:0];
     NyayaNode *Ac = [nAc.nodes objectAtIndex:0];
     
+    STAssertNil(nnA.parent, nil);
+    STAssertEquals(nA.parent, nnA,nil);
+    STAssertEquals(A.parent, nA,nil);
+    
+    STAssertNil(nnAc.parent, nil);
+    STAssertEquals(nAc.parent, nnAc,nil);
+    STAssertEquals(Ac.parent, nAc,nil);
+
+    
     STAssertEquals(A.displayValue, Ac.displayValue,nil);
     STAssertEquals(A.evaluationValue, Ac.evaluationValue,nil);
     
