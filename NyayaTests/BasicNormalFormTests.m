@@ -11,34 +11,25 @@
 #import "NyayaParser.h"
 #import "NyayaTruthTable.h"
 
+enum { AST, IMF, NNF, CNF, DNF };
+
 @implementation BasicNormalFormTests
 
-- (void)testBicondition {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a↔b"];
+- (NSArray*)assert:(NSString*)input descriptions:(NSArray*)descs truthTable:(NSString*)tt {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertTrue([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
+    STAssertFalse(parser.hasErrors, input);
     
     NyayaNode *imf = [ast imf];
     NyayaNode *nnf = [imf nnf];
     NyayaNode *cnf = [nnf cnf];
     NyayaNode *dnf = [nnf dnf];
-
-    STAssertEqualObjects([ast description], @"a ↔ b", nil);
-    STAssertEqualObjects([imf description], @"(¬a ∨ b) ∧ (¬b ∨ a)", nil);
-    STAssertEqualObjects([nnf description], @"(¬a ∨ b) ∧ (¬b ∨ a)", nil);
-    STAssertEqualObjects([cnf description], @"(¬a ∨ b) ∧ (¬b ∨ a)", nil);
-    STAssertEqualObjects([dnf description], @"(¬a ∧ ¬b) ∨ (¬a ∧ a) ∨ ((b ∧ ¬b) ∨ (b ∧ a))", nil);
+    
+    STAssertEqualObjects([ast description], [descs objectAtIndex:AST], input);
+    STAssertEqualObjects([imf description], [descs objectAtIndex:IMF], input);
+    STAssertEqualObjects([nnf description], [descs objectAtIndex:NNF], input);
+    STAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], input);
+    STAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], input);
     
     NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
     NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
@@ -51,6 +42,433 @@
     [nnfTable evaluateTable];
     [cnfTable evaluateTable];
     [dnfTable evaluateTable];
+    
+    STAssertEqualObjects([astTable description],tt, input);
+    STAssertEqualObjects(astTable, imfTable, input);
+    STAssertEqualObjects(astTable, nnfTable, input);
+    STAssertEqualObjects(astTable, cnfTable, input);
+    STAssertEqualObjects(astTable, dnfTable, input);    
+    return @[ast, imf, nnf, cnf, dnf];
+}
+
+- (void)testNot {
+    NSString *input = @"!a";
+    
+    NSString *tt = @""
+    "| a | ¬a |\n"
+    "| F | T  |\n"
+    "| T | F  |";
+    
+    NSArray *descs = @[
+    @"¬a",
+    @"¬a",
+    @"¬a",
+    @"¬a",
+    @"¬a"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertTrue([ast isNnfFormula], input);
+    STAssertTrue([ast isCnfFormula], input);
+    STAssertTrue([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertTrue([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testNotNot {
+    NSString *input = @"!!a";
+    
+    NSString *tt = @""
+    "| a | ¬a | ¬¬a |\n"
+    "| F | T  | F   |\n"
+    "| T | F  | T   |";
+    
+    NSArray *descs = @[
+    @"¬¬a",
+    @"¬¬a",
+    @"a",
+    @"a",
+    @"a"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertTrue([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testAnd {
+    NSString *input = @"a & b";
+    
+    NSString *tt = @""
+    "| a | b | a ∧ b |\n"
+    "| F | F | F     |\n"
+    "| F | T | F     |\n"
+    "| T | F | F     |\n"
+    "| T | T | T     |";
+    
+    NSArray *descs = @[
+    @"a ∧ b",
+    @"a ∧ b",
+    @"a ∧ b",
+    @"a ∧ b",
+    @"a ∧ b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertTrue([ast isNnfFormula], input);
+    STAssertTrue([ast isCnfFormula], input);
+    STAssertTrue([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertTrue([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testNotAnd {
+    NSString *input = @"!(a & b)";
+    
+    NSString *tt = @""
+    "| a | b | a ∧ b | ¬(a ∧ b) |\n"
+    "| F | F | F     | T        |\n"
+    "| F | T | F     | T        |\n"
+    "| T | F | F     | T        |\n"
+    "| T | T | T     | F        |";
+    
+    NSArray *descs = @[
+    @"¬(a ∧ b)",
+    @"¬(a ∧ b)",
+    @"¬a ∨ ¬b",
+    @"¬a ∨ ¬b",
+    @"¬a ∨ ¬b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertTrue([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testOr {
+    NSString *input = @"a | b";
+    
+    NSString *tt = @""
+    "| a | b | a ∨ b |\n"
+    "| F | F | F     |\n"
+    "| F | T | T     |\n"
+    "| T | F | T     |\n"
+    "| T | T | T     |";
+    
+    NSArray *descs = @[
+    @"a ∨ b",
+    @"a ∨ b",
+    @"a ∨ b",
+    @"a ∨ b",
+    @"a ∨ b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertTrue([ast isNnfFormula], input);
+    STAssertTrue([ast isCnfFormula], input);
+    STAssertTrue([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertTrue([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testNotOr {
+    NSString *input = @"!(a | b)";
+    
+    NSString *tt = @""
+    "| a | b | a ∨ b | ¬(a ∨ b) |\n"
+    "| F | F | F     | T        |\n"
+    "| F | T | T     | F        |\n"
+    "| T | F | T     | F        |\n"
+    "| T | T | T     | F        |";
+    
+    NSArray *descs = @[
+    @"¬(a ∨ b)",
+    @"¬(a ∨ b)",
+    @"¬a ∧ ¬b",
+    @"¬a ∧ ¬b",
+    @"¬a ∧ ¬b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertTrue([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertTrue([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+}
+
+- (void)testBic {
+    NSString *input = @"a <> b";
     
     NSString *tt = @""
     "| a | b | a ↔ b |\n"
@@ -58,52 +476,69 @@
     "| F | T | F     |\n"
     "| T | F | F     |\n"
     "| T | T | T     |";
+
+    NSArray *descs = @[
+    @"a ↔ b",
+    @"(¬a ∨ b) ∧ (¬b ∨ a)",
+    @"(¬a ∨ b) ∧ (¬b ∨ a)",
+    @"(¬a ∨ b) ∧ (¬b ∨ a)",
+    @"(¬a ∧ ¬b) ∨ (¬a ∧ a) ∨ ((b ∧ ¬b) ∨ (b ∧ a))"];
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);    
+    STAssertTrue([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertTrue([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertFalse([nnf isDnfFormula], input);    
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertTrue([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertFalse([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertTrue([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertFalse([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
 }
 
 - (void)testNotBic {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"¬(a↔b)"];
-    NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertFalse([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
-    
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
-    
-    STAssertEqualObjects([ast description], @"¬(a ↔ b)", nil);
-    STAssertEqualObjects([imf description], @"¬((¬a ∨ b) ∧ (¬b ∨ a))", nil);
-    STAssertEqualObjects([nnf description], @"(a ∧ ¬b) ∨ (b ∧ ¬a)", nil);
-    STAssertEqualObjects([cnf description], @"(a ∨ b) ∧ (a ∨ ¬a) ∧ ((¬b ∨ b) ∧ (¬b ∨ ¬a))", nil);
-    STAssertEqualObjects([dnf description], @"(a ∧ ¬b) ∨ (b ∧ ¬a)", nil);
-    
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
-    
-    [astTable evaluateTable];
-    [imfTable evaluateTable];
-    [nnfTable evaluateTable];
-    [cnfTable evaluateTable];
-    [dnfTable evaluateTable];
+    NSString *input = @"!(a<>b)";
     
     NSString *tt = @""
     "| a | b | a ↔ b | ¬(a ↔ b) |\n"
@@ -112,51 +547,69 @@
     "| T | F | F     | T        |\n"
     "| T | T | T     | F        |";
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *descs = @[
+    @"¬(a ↔ b)",
+    @"¬((¬a ∨ b) ∧ (¬b ∨ a))",
+    @"(a ∧ ¬b) ∨ (b ∧ ¬a)",
+    @"(a ∨ b) ∧ (a ∨ ¬a) ∧ ((¬b ∨ b) ∧ (¬b ∨ ¬a))",
+    @"(a ∧ ¬b) ∨ (b ∧ ¬a)"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertFalse([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertTrue([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertFalse([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertFalse([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertTrue([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+
 }
 
-- (void)testImplication {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a→b"];
-    NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertTrue([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
-    
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
-    
-    STAssertEqualObjects([ast description], @"a → b", nil);
-    STAssertEqualObjects([imf description], @"¬a ∨ b", nil);
-    STAssertEqualObjects([nnf description], @"¬a ∨ b", nil);
-    STAssertEqualObjects([cnf description], @"¬a ∨ b", nil);
-    STAssertEqualObjects([dnf description], @"¬a ∨ b", nil);
-    
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
-    
-    [astTable evaluateTable];
-    [imfTable evaluateTable];
-    [nnfTable evaluateTable];
-    [cnfTable evaluateTable];
-    [dnfTable evaluateTable];
+- (void)testImp {
+    NSString *input = @"a > b";
     
     NSString *tt = @""
     "| a | b | a → b |\n"
@@ -165,51 +618,69 @@
     "| T | F | F     |\n"
     "| T | T | T     |";
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *descs = @[
+    @"a → b",
+    @"¬a ∨ b",
+    @"¬a ∨ b",
+    @"¬a ∨ b",
+    @"¬a ∨ b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertTrue([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertTrue([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+
 }
 
 - (void)testNotImp {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"!(a→b)"];
-    NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertFalse([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
-    
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
-    
-    STAssertEqualObjects([ast description], @"¬(a → b)", nil);
-    STAssertEqualObjects([imf description], @"¬(¬a ∨ b)", nil);
-    STAssertEqualObjects([nnf description], @"a ∧ ¬b", nil);
-    STAssertEqualObjects([cnf description], @"a ∧ ¬b", nil);
-    STAssertEqualObjects([dnf description], @"a ∧ ¬b", nil);
-    
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
-    
-    [astTable evaluateTable];
-    [imfTable evaluateTable];
-    [nnfTable evaluateTable];
-    [cnfTable evaluateTable];
-    [dnfTable evaluateTable];
+    NSString *input = @"!(a>b)";
     
     NSString *tt = @""
     "| a | b | a → b | ¬(a → b) |\n"
@@ -218,63 +689,69 @@
     "| T | F | F     | T        |\n"
     "| T | T | T     | F        |";
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *descs = @[
+    @"¬(a → b)",
+    @"¬(¬a ∨ b)",
+    @"a ∧ ¬b",
+    @"a ∧ ¬b",
+    @"a ∧ ¬b"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertTrue([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertTrue([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertFalse([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+
 }
 
-
-
 - (void)testXor {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a⊻b"];
-    NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertTrue([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
-    
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
-    
-    STAssertFalse([dnf isCnfFormula], nil);
-    STAssertFalse([cnf isDnfFormula], nil);
-    
-    STAssertTrue([cnf isCnfFormula], nil);
-    STAssertTrue([dnf isDnfFormula], nil);
-    STAssertTrue([cnf isNnfFormula], nil);
-    STAssertTrue([dnf isNnfFormula], nil);
-    STAssertTrue([cnf isImfFormula], nil);
-    STAssertTrue([dnf isImfFormula], nil);
-    
-    STAssertEqualObjects([ast description], @"a ⊻ b", nil);
-    STAssertEqualObjects([imf description], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
-    STAssertEqualObjects([nnf description], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
-    STAssertEqualObjects([cnf description], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
-    STAssertEqualObjects([dnf description], @"(a ∧ ¬a) ∨ (a ∧ ¬b) ∨ ((b ∧ ¬a) ∨ (b ∧ ¬b))", nil);
-    
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
-    
-    [astTable evaluateTable];
-    [imfTable evaluateTable];
-    [nnfTable evaluateTable];
-    [cnfTable evaluateTable];
-    [dnfTable evaluateTable];
+    NSString *input = @"a^b";
     
     NSString *tt = @""
     "| a | b | a ⊻ b |\n"
@@ -283,61 +760,73 @@
     "| T | F | T     |\n"
     "| T | T | F     |";
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *descs = @[
+    @"a ⊻ b",
+    @"(a ∨ b) ∧ (¬a ∨ ¬b)",
+    @"(a ∨ b) ∧ (¬a ∨ ¬b)",
+    @"(a ∨ b) ∧ (¬a ∨ ¬b)",
+    @"(a ∧ ¬a) ∨ (a ∧ ¬b) ∨ ((b ∧ ¬a) ∨ (b ∧ ¬b))"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertTrue([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertTrue([imf isNnfFormula], input);
+    STAssertTrue([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertFalse([imf isNnfTransformationNode], input);
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertTrue([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertTrue([nnf isCnfFormula], input);
+    STAssertFalse([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertFalse([nnf isCnfTransformationNode], input);
+    STAssertTrue([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertFalse([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertTrue([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertFalse([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+                                                                                // (a ∧ ¬a) ∨ (a ∧ ¬b) ∨ ((b ∧ ¬a) ∨ (b ∧ ¬b))
+    STAssertFalse([dnf isCnfTransformationNode], input);                          //                     ∨
+    STAssertTrue([[dnf.nodes objectAtIndex:0] isCnfTransformationNode], input);   //          ∨                      ∨         
+    STAssertTrue([[dnf.nodes objectAtIndex:1] isCnfTransformationNode], input);   // (a ∧ ¬a)   (a ∧ ¬b)    (b ∧ ¬a)   (b ∧ ¬b)
+    
+    STAssertFalse([dnf isDnfTransformationNode], input);
+
 }
 
 - (void)testNotXor {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"!(a⊻b)"];
-    NyayaNode *ast = [parser parseFormula];
-    
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertFalse([ast isImfTransformationNode], nil);
-    
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isNnfTransformationNode], nil);
-    
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isCnfTransformationNode], nil);
-    
-    STAssertFalse([ast isDnfFormula], nil);
-    STAssertFalse([ast isDnfTransformationNode], nil);
-    
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
-    
-    STAssertFalse([dnf isCnfFormula], nil);
-    STAssertFalse([cnf isDnfFormula], nil);
-    
-    STAssertTrue([cnf isCnfFormula], nil);
-    STAssertTrue([dnf isDnfFormula], nil);
-    STAssertTrue([cnf isNnfFormula], nil);
-    STAssertTrue([dnf isNnfFormula], nil);
-    STAssertTrue([cnf isImfFormula], nil);
-    STAssertTrue([dnf isImfFormula], nil);
-    
-    STAssertEqualObjects([ast description], @"¬(a ⊻ b)", nil);
-    STAssertEqualObjects([imf description], @"¬((a ∨ b) ∧ (¬a ∨ ¬b))", nil);
-    STAssertEqualObjects([nnf description], @"(¬a ∧ ¬b) ∨ (a ∧ b)", nil);
-    STAssertEqualObjects([cnf description], @"(¬a ∨ a) ∧ (¬a ∨ b) ∧ ((¬b ∨ a) ∧ (¬b ∨ b))", nil);
-    STAssertEqualObjects([dnf description], @"(¬a ∧ ¬b) ∨ (a ∧ b)", nil);
-    
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
-    
-    [astTable evaluateTable];
-    [imfTable evaluateTable];
-    [nnfTable evaluateTable];
-    [cnfTable evaluateTable];
-    [dnfTable evaluateTable];
+    NSString *input = @"!(a^b)";
     
     NSString *tt = @""
     "| a | b | a ⊻ b | ¬(a ⊻ b) |\n"
@@ -346,11 +835,65 @@
     "| T | F | T     | F        |\n"
     "| T | T | F     | T        |";
     
-    STAssertEqualObjects([astTable description],tt, nil);
-    STAssertEqualObjects(astTable, imfTable, nil);
-    STAssertEqualObjects(astTable, nnfTable, nil);
-    STAssertEqualObjects(astTable, cnfTable, nil);
-    STAssertEqualObjects(astTable, dnfTable, nil);
+    NSArray *descs = @[
+    @"¬(a ⊻ b)",
+    @"¬((a ∨ b) ∧ (¬a ∨ ¬b))",
+    @"(¬a ∧ ¬b) ∨ (a ∧ b)",
+    @"(¬a ∨ a) ∧ (¬a ∨ b) ∧ ((¬b ∨ a) ∧ (¬b ∨ b))",
+    @"(¬a ∧ ¬b) ∨ (a ∧ b)"];
+    
+    NSArray *frms = [self assert:input descriptions:descs truthTable:tt];
+    NyayaNode *ast = [frms objectAtIndex:AST];
+    NyayaNode *imf = [frms objectAtIndex:IMF];
+    NyayaNode *nnf = [frms objectAtIndex:NNF];
+    NyayaNode *cnf = [frms objectAtIndex:CNF];
+    NyayaNode *dnf = [frms objectAtIndex:DNF];
+    
+    STAssertFalse([ast isImfFormula], input);
+    STAssertFalse([ast isNnfFormula], input);
+    STAssertFalse([ast isCnfFormula], input);
+    STAssertFalse([ast isDnfFormula], input);
+    STAssertFalse([ast isImfTransformationNode], input);
+    STAssertFalse([ast isNnfTransformationNode], input);
+    STAssertFalse([ast isCnfTransformationNode], input);
+    STAssertFalse([ast isDnfTransformationNode], input);
+    
+    STAssertTrue([imf isImfFormula], input);
+    STAssertFalse([imf isNnfFormula], input);
+    STAssertFalse([imf isCnfFormula], input);
+    STAssertFalse([imf isDnfFormula], input);
+    STAssertFalse([imf isImfTransformationNode], input);
+    STAssertTrue([imf isNnfTransformationNode], input); 
+    STAssertFalse([imf isCnfTransformationNode], input);
+    STAssertFalse([imf isDnfTransformationNode], input);
+    
+    STAssertTrue([nnf isImfFormula], input);
+    STAssertTrue([nnf isNnfFormula], input);
+    STAssertFalse([nnf isCnfFormula], input);
+    STAssertTrue([nnf isDnfFormula], input);
+    STAssertFalse([nnf isImfTransformationNode], input);
+    STAssertFalse([nnf isNnfTransformationNode], input);
+    STAssertTrue([nnf isCnfTransformationNode], input);
+    STAssertFalse([nnf isDnfTransformationNode], input);
+    
+    STAssertTrue([cnf isImfFormula], input);
+    STAssertTrue([cnf isNnfFormula], input);
+    STAssertTrue([cnf isCnfFormula], input);
+    STAssertFalse([cnf isDnfFormula], input);
+    STAssertFalse([cnf isImfTransformationNode], input);
+    STAssertFalse([cnf isNnfTransformationNode], input);
+    STAssertFalse([cnf isCnfTransformationNode], input);
+    STAssertFalse([cnf isDnfTransformationNode], input);
+    
+    STAssertTrue([dnf isImfFormula], input);
+    STAssertTrue([dnf isNnfFormula], input);
+    STAssertFalse([dnf isCnfFormula], input);
+    STAssertTrue([dnf isDnfFormula], input);
+    STAssertFalse([dnf isImfTransformationNode], input);
+    STAssertFalse([dnf isNnfTransformationNode], input);
+    STAssertTrue([dnf isCnfTransformationNode], input);
+    STAssertFalse([dnf isDnfTransformationNode], input);
+
 }
 
 @end
