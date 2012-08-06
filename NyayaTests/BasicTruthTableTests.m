@@ -9,7 +9,7 @@
 #import "BasicTruthTableTests.h"
 #import "NyayaNode.h"
 #import "NyayaParser.h"
-#import "NyayaTruthTable.h"
+#import "TruthTable.h"
 
 @implementation BasicTruthTableTests
 
@@ -17,7 +17,7 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
     STAssertFalse(parser.hasErrors, input);
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
+    TruthTable *astTable = [[TruthTable alloc] initWithFormula:ast];
     [astTable evaluateTable];
     STAssertEqualObjects([astTable description],tt, input);
 }
@@ -276,10 +276,10 @@
 - (void)testTruthTableXorEquals {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"x ^ y"];
     NyayaNode *node = [parser parseFormula];
-    NyayaTruthTable *table1 = [[NyayaTruthTable alloc] initWithFormula:node];
+    TruthTable *table1 = [[TruthTable alloc] initWithFormula:node];
     parser = [[NyayaParser alloc] initWithString:@"a ^ b"];
     node = [parser parseFormula];
-    NyayaTruthTable *table2 = [[NyayaTruthTable alloc] initWithFormula:node];
+    TruthTable *table2 = [[TruthTable alloc] initWithFormula:node];
     [table1 evaluateTable];
     [table2 evaluateTable];
     NSString *tt1 = @""

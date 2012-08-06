@@ -9,7 +9,7 @@
 #import "BasicNormalFormTests.h"
 #import "NyayaNode.h"
 #import "NyayaParser.h"
-#import "NyayaTruthTable.h"
+#import "TruthTable.h"
 
 enum { AST, IMF, NNF, CNF, DNF };
 
@@ -31,11 +31,11 @@ enum { AST, IMF, NNF, CNF, DNF };
     STAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], input);
     STAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], input);
     
-    NyayaTruthTable *astTable = [[NyayaTruthTable alloc] initWithFormula:ast];
-    NyayaTruthTable *imfTable = [[NyayaTruthTable alloc] initWithFormula:imf];
-    NyayaTruthTable *nnfTable = [[NyayaTruthTable alloc] initWithFormula:nnf];
-    NyayaTruthTable *cnfTable = [[NyayaTruthTable alloc] initWithFormula:cnf];
-    NyayaTruthTable *dnfTable = [[NyayaTruthTable alloc] initWithFormula:dnf];
+    TruthTable *astTable = [[TruthTable alloc] initWithFormula:ast];
+    TruthTable *imfTable = [[TruthTable alloc] initWithFormula:imf];
+    TruthTable *nnfTable = [[TruthTable alloc] initWithFormula:nnf];
+    TruthTable *cnfTable = [[TruthTable alloc] initWithFormula:cnf];
+    TruthTable *dnfTable = [[TruthTable alloc] initWithFormula:dnf];
     
     [astTable evaluateTable];
     [imfTable evaluateTable];

@@ -65,24 +65,6 @@
     STAssertFalse([@"," isDisjunctionToken],nil);
 }
 
-- (void)testIsJunction {
-    STAssertFalse([@"¬" isJunctionToken],nil);
-    STAssertFalse([@"!" isJunctionToken],nil);
-    STAssertTrue([@"∨" isJunctionToken],nil);
-    STAssertTrue([@"|" isJunctionToken],nil);
-    STAssertTrue([@"∧" isJunctionToken],nil);
-    STAssertTrue([@"&" isJunctionToken],nil);
-    STAssertFalse([@"→" isJunctionToken],nil);
-    STAssertFalse([@">" isJunctionToken],nil);
-    STAssertFalse([@"↔" isJunctionToken],nil);
-    STAssertFalse([@"<>" isJunctionToken],nil);
-    
-    STAssertFalse([@"(" isJunctionToken],nil);
-    STAssertFalse([@")" isJunctionToken],nil);
-    STAssertFalse([@";" isJunctionToken],nil);
-    STAssertFalse([@"," isJunctionToken],nil);
-}
-
 
 
 - (void)testIsImplication {

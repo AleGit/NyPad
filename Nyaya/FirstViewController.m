@@ -111,7 +111,7 @@
                 });
                 
                 
-                NyayaNode *dnfnode = [node dnf];
+                NyayaNode *dnfnode = [nnfnode dnf];
                 NSString *dnfdescription=[dnfnode description];
                 dispatch_async(mq, ^{
                     self.dnf.text = dnfdescription;
