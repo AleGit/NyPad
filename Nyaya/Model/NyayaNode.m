@@ -889,27 +889,12 @@
 }
 
 - (NyayaNode*)copyImf {
-    NSMutableArray *nodes = nil;
-    
-    if (self.nodes) {
-        nodes = [NSMutableArray array];
-        for (NyayaNode *n in self.nodes) {
-            [nodes addObject:[n imf]];
-        }
-    }
-    
+    NSArray *nodes = [self valueForKeyPath:@"nodes.imf"];    
     return [self copyWith:nodes];
 }
 
 - (NyayaNode*)copyNnf {
-    NSMutableArray *nodes = nil;
-    
-    if (self.nodes) {
-        nodes = [NSMutableArray array];
-        for (NyayaNode *n in self.nodes) {
-            [nodes addObject:[n nnf]];
-        }
-    }
+    NSArray *nodes = [self valueForKeyPath:@"nodes.nnf"];
     
     return [self copyWith:nodes];
 }
