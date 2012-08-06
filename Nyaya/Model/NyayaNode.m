@@ -907,22 +907,22 @@
 
 - (NyayaNode*)imf {
     // no precondition
-    return self;
+    return [self copy];
 }
 
 - (NyayaNode*)nnf {
     // precondition 'self' is implication free
-    return self;
+    return [self copy];
 }
 
 - (NyayaNode*)cnf {
     // precondition 'self' is implication free and in negation normal form
-    return self;
+    return [self copy];
 }
 
 - (NyayaNode *)dnf {
     // precondition 'self' is implication free and in negation normal form
-    return self;
+    return [self copy];
 }
 
 - (BOOL)isImfFormula {

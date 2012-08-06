@@ -229,7 +229,7 @@
     
     [self.variables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         id b = [truthTable.variables objectAtIndex:idx];
-        if (obj != b) {
+        if (![obj isEqual: b]) {
             sameVariables = NO;
             *stop = YES;
         }

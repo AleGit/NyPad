@@ -16,6 +16,7 @@
     NyayaNode *Ac = [A copy];
     
     STAssertFalse(A == Ac, nil);
+    STAssertTrue([A isEqual: Ac], nil);
 }
 
 - (void) testNegationCopy {
@@ -36,7 +37,6 @@
     STAssertEquals(nAc.parent, nnAc,nil);
     STAssertEquals(Ac.parent, nAc,nil);
 
-    
     STAssertEquals(A.displayValue, Ac.displayValue,nil);
     STAssertEquals(A.evaluationValue, Ac.evaluationValue,nil);
     
