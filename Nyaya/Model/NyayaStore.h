@@ -7,15 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-@class NyayaNode;
+#import "NyayaNode.h"
 
 @interface NyayaStore : NSObject
 
 + (NyayaStore*)sharedInstance;
 
+/*
 - (NyayaNode*)nodeForName:(NSString*)name;
 - (void)setNode:(NyayaNode*)node forName:(NSString*)name;
 - (void)removeNodeForName:(NSString*)name;
 - (void)removeAllNodes;
+ */
+
+- (BOOL)evaluationValueForName:(NSString*)name;
+- (void)setEvaluationValue:(BOOL)eval forName:(NSString*)name;
+
+- (NyayaBool)displayValueForName:(NSString*)name;
+- (void)setDisplayValue:(NyayaBool)dval forName:(NSString*)name;
+
+- (void)clear;
 
 @end

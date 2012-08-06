@@ -17,7 +17,7 @@
 {
     [super setUp];
     
-    [[NyayaStore sharedInstance] removeAllNodes];
+    [[NyayaStore sharedInstance] clear];
     
 }
 
@@ -27,7 +27,9 @@
     [super tearDown];
 }
 
+/*
 - (void) testStore {
+    
     NSString *tName = @"T";
     NSString *fName = @"F";
     NSString *uName = @"u";
@@ -70,7 +72,7 @@
     STAssertEquals(node, uNode, nil);
     
 }
-
+*/
 
 
 @end

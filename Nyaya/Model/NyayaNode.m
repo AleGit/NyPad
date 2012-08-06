@@ -79,20 +79,16 @@
 
 @implementation NyayaNodeVariable
 
-- (id)copyWithZone:(NSZone*)zone {
-    return self;
-}
-
 - (NyayaNodeType)type { 
-    return NyayaVariable; 
+    return NyayaVariable;
 }
 
 - (void)setDisplayValue:(NyayaBool)displayValue {
-    _displayValue = displayValue;
+    [[NyayaStore sharedInstance] setDisplayValue:displayValue forName:self.symbol];
     
 }
 - (void)setEvaluationValue:(BOOL)evaluationValue {
-    _evaluationValue = evaluationValue;
+    [[NyayaStore sharedInstance] setEvaluationValue:evaluationValue forName:self.symbol];
 }
 
 
@@ -103,10 +99,6 @@
 @end
 
 @implementation NyayaNodeConstant
-
-- (id)copyWithZone:(NSZone*)zone {
-    return self;
-}
 
 - (NyayaNodeType)type { 
     return NyayaConstant; 
@@ -731,7 +723,6 @@
 - (id)copyWithZone:(NSZone*)zone {
     
     return [self copyWith:[self valueForKeyPath:@"nodes.copy"]]; // recursive copy
-    // return [self copyWith:self.nodes];
 }
 
 - (NyayaNodeType)type {
@@ -744,27 +735,16 @@
 
 #pragma mark node factory
 + (NyayaNode*)atom:(NSString*)name {
-    NyayaStore *store = [NyayaStore sharedInstance];
-    NyayaNode *node = [store nodeForName:name];
-    if (!node) {
-        if ([name isTrueToken]) {
-            node = [[NyayaNodeConstant alloc] init];
-            node->_displayValue = NyayaTrue;
-            node->_evaluationValue = TRUE;            
-        }
-        else if ([name isFalseToken]) {
-            node = [[NyayaNodeConstant alloc] init];
-            node->_displayValue = NyayaFalse;
-            node->_evaluationValue = FALSE; 
-        }
-        else { // variable name
-            node = [[NyayaNodeVariable alloc] init];
-            node->_displayValue = NyayaUndefined;
-        };
-        
-        node->_symbol = name;
-        [store setNode:node forName:node.symbol];
+    NyayaNode *node = nil;
+    if ([name isTrueToken] || [name isFalseToken]) {
+        node = [[NyayaNodeConstant alloc] init];
     }
+    else { // variable name
+        node = [[NyayaNodeVariable alloc] init];
+        [[NyayaStore sharedInstance] setDisplayValue:NyayaUndefined forName:name];
+    };
+    
+    node->_symbol = name;
     return node;
 }
 
@@ -831,6 +811,16 @@
 
 #pragma mark default method implementations
 
+- (NyayaBool)displayValue {
+    _displayValue = [[NyayaStore sharedInstance] displayValueForName:self.symbol];
+    return _displayValue;
+}
+
+- (BOOL)evaluationValue {
+    _evaluationValue = [[NyayaStore sharedInstance] evaluationValueForName:self.symbol];
+    return _evaluationValue;
+}
+
 - (NSString*)treeDescription {
     switch (self.type) {
         case NyayaVariable:
@@ -866,24 +856,13 @@
 - (NyayaNode*)copyWith:(NSArray*)nodes {
     NyayaNode *node = nil;
     
-    if (self.type == NyayaUndefined) {
-        NSLog(@"+++ '%@' '%@' +++", [self description], self.symbol);
-        node = [[NyayaStore sharedInstance] nodeForName:self.symbol];
-    }
+    node = [[[self class] alloc] init];
     
-    else if (self.type <= NyayaVariable) {
-        // node = [[NyayaStore sharedInstance] nodeForName:self.symbol];
-        node = self; // display and evaluation values are global to all formulas
-    }
+    node->_symbol = self.symbol;
+    node->_displayValue = self.displayValue;
+    node->_evaluationValue = self.evaluationValue;
+    node->_nodes = [nodes copy];
     
-    if (!node) {
-        node = [[[self class] alloc] init];
-        
-        node->_symbol = self.symbol;
-        node->_displayValue = self.displayValue;
-        node->_evaluationValue = self.evaluationValue;
-        node->_nodes = [nodes copy];
-    }    
     return node;
     
 }

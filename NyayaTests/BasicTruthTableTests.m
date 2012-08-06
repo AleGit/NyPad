@@ -267,7 +267,7 @@
     }
 }
 
-- (void)testContradition {
+- (void)xtestContradition {
     
     NSString *tt = @""
     "| a | ¬a | a ∧ ¬a |\n"
@@ -279,7 +279,7 @@
     }
 }
 
-- (void)testTautology {
+- (void)xtestTautology {
     
     NSString *tt = @""
     "| a | ¬a | a ∨ ¬a |\n"

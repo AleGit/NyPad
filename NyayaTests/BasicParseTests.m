@@ -22,7 +22,7 @@
 @implementation BasicParseTests
 
 - (void)setUp {
-    [[NyayaStore sharedInstance] removeAllNodes];
+    [[NyayaStore sharedInstance] clear];
     A = [NyayaNode atom:@"a"];
     B = [NyayaNode atom:@"b"];
     F = [NyayaNode atom:@"F"];
@@ -40,16 +40,16 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a"];
     NyayaNode *result = [parser parseFormula];
     
-    STAssertEquals(result, A, nil);
+    STAssertEquals(result.displayValue, A.displayValue, nil);
     STAssertEquals(result.displayValue, (NyayaBool)NyayaUndefined, nil);
-    STAssertEquals(result.evaluationValue, (BOOL)FALSE, nil);
+    STAssertFalse(result.evaluationValue, nil);
 }
 
 - (void)testParseF {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"F"];
     NyayaNode *result = [parser parseFormula];
     
-    STAssertEquals(result, F, nil);
+    STAssertEquals(result.displayValue, F.displayValue, nil);
     STAssertEquals(result.displayValue, (NyayaBool)NyayaFalse, nil);
     STAssertEquals(result.evaluationValue, (BOOL)FALSE, nil);
 }
@@ -58,7 +58,7 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"T"];
     NyayaNode *result = [parser parseFormula];
     
-    STAssertEquals(result, T, nil);
+    STAssertEquals(result.displayValue, T.displayValue, nil);
     STAssertEquals(result.displayValue, (NyayaBool)NyayaTrue, nil);
     STAssertEquals(result.evaluationValue, (BOOL)TRUE, nil);
 }
@@ -69,9 +69,9 @@
     
     STAssertEquals(result.type, (NyayaNodeType)NyayaNegation, nil);
     STAssertEquals(result.displayValue, (NyayaBool)NyayaUndefined, nil);
-    STAssertEquals(result.evaluationValue, (BOOL)TRUE, nil);
+    STAssertTrue(result.evaluationValue, nil);
     
-    STAssertEquals([result.nodes objectAtIndex:0], A, nil);
+    STAssertEquals([[result.nodes objectAtIndex:0] displayValue], A.displayValue, nil);
 }
 
 - (void)testNotF {
@@ -82,7 +82,7 @@
     STAssertEquals(result.displayValue, (NyayaBool)NyayaTrue, nil);
     STAssertEquals(result.evaluationValue, (BOOL)TRUE, nil);
     
-    STAssertEquals([result.nodes objectAtIndex:0], F, nil);
+    STAssertEquals([[result.nodes objectAtIndex:0] displayValue], F.displayValue, nil);
 }
 
 - (void)testNotT {
@@ -93,7 +93,7 @@
     STAssertEquals(result.displayValue, (NyayaBool)NyayaFalse, nil);
     STAssertEquals(result.evaluationValue, (BOOL)FALSE, nil);
     
-    STAssertEquals([result.nodes objectAtIndex:0], T, nil);
+    STAssertEquals([[result.nodes objectAtIndex:0] displayValue], T.displayValue, nil);
 }
 
 
@@ -105,8 +105,8 @@
     STAssertEquals(result.displayValue, (NyayaBool)NyayaTrue, nil);
     STAssertEquals(result.evaluationValue, (BOOL)TRUE, nil);
     
-    STAssertEquals([result.nodes objectAtIndex:0], A, nil);
-    STAssertEquals([result.nodes objectAtIndex:1], T, nil);
+    STAssertEquals([[result.nodes objectAtIndex:0] displayValue], A.displayValue, nil);
+    STAssertEquals([[result.nodes objectAtIndex:1] displayValue], T.displayValue, nil);
 }
 
 - (void)testParseAandF {
@@ -117,8 +117,8 @@
     STAssertEquals(result.displayValue, (NyayaBool)NyayaFalse, nil);
     STAssertEquals(result.evaluationValue, (BOOL)FALSE, nil);
     
-    STAssertEquals([result.nodes objectAtIndex:0], A, nil);
-    STAssertEquals([result.nodes objectAtIndex:1], F, nil);
+    STAssertEquals([[result.nodes objectAtIndex:0] displayValue], A.displayValue, nil);
+    STAssertEquals([[result.nodes objectAtIndex:1] displayValue], F.displayValue, nil);
 }
 
 

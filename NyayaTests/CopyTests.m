@@ -15,7 +15,7 @@
     NyayaNode *A = [NyayaNode atom:@"a"];
     NyayaNode *Ac = [A copy];
     
-    STAssertTrue(A == Ac, @"atoms must be singletons");
+    STAssertFalse(A == Ac, nil);
 }
 
 - (void) testNegationCopy {
@@ -31,7 +31,7 @@
     STAssertEqualObjects([nA description], [nAc description],nil);
     STAssertEqualObjects([A description], [Ac description],nil);
     
-    STAssertTrue(A == Ac, @"atoms must be singletons");
+    STAssertFalse(A == Ac, nil);
     STAssertFalse(nA == nAc, nil);
     STAssertFalse(nnA == nnAc, nil);
 }
