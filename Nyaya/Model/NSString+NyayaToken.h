@@ -18,7 +18,6 @@ FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
 - (BOOL)isNegationToken;
 - (BOOL)isConjunctionToken;
 - (BOOL)isDisjunctionToken;
-- (BOOL)isJunctionToken;
 - (BOOL)isImplicationToken;
 - (BOOL)isBiconditionToken;
 - (BOOL)isXdisjunctionToken;

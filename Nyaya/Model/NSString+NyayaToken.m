@@ -47,10 +47,6 @@ NSString *const NYAYA_TOKENS = @""
     || [self isEqualToString:@"|"];
 }
 
-- (BOOL)isJunctionToken {
-    return [self isDisjunctionToken] || [self isConjunctionToken];
-}
-
 - (BOOL)isImplicationToken {
     return [self isEqualToString:@"→"]
     || [self isEqualToString:@">"];
