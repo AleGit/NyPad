@@ -14,6 +14,7 @@
 - (void)testIsNegation {
     STAssertTrue([@"¬" isNegationToken],nil);
     STAssertTrue([@"!" isNegationToken],nil);
+    
     STAssertFalse([@"∨" isNegationToken],nil);
     STAssertFalse([@"|" isNegationToken],nil);
     STAssertFalse([@"∧" isNegationToken],nil);
@@ -201,5 +202,19 @@
     STAssertFalse([@"¬¬x&y" hasComplement:@"¬¬x&y"],nil);
     
 }
+
+- (void)testIsIdentifierTokenTrue {
+    for (NSString *input in @[@"ä"]) {
+        STAssertTrue([input isIdentifierToken], input);
+    }
+}
+
+
+- (void)testIsIdentifierTokenFalse {
+    for (NSString *input in @[@"frm", @"NOT", @"AND", @"OR"]) {
+        STAssertFalse([input isIdentifierToken], input);
+    }
+}
+
 
 @end

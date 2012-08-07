@@ -58,7 +58,7 @@
     NSMutableArray *tokens = [NSMutableArray array];
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression 
-                                  regularExpressionWithPattern:NYAYA_TOKENS // @"(¬|!)|(∧|&)|(∨|\\|)|(→|>)|(↔|<>)|\\(|\\)|,|;|\\w+"
+                                  regularExpressionWithPattern: NYAYA_TOKENS
                                   options:NSRegularExpressionCaseInsensitive
                                   error:&error];
     
@@ -171,8 +171,12 @@
     
     // [v.2] conjunction = negation { AND negation }    
     result = [self parseNegation];       // consumes conjunction
-    while ([_token isConjunctionToken]) {
-        [self nextToken];                   // consumes OR token
+    while ([_token isConjunctionToken]
+           // || [_token isIdentifierToken] // a b = a & b
+           ) {
+        // if ([_token isConjunctionToken])
+        [self nextToken];                   // consumes AND token
+        // else write warning 'a b' was interpreted as 'a & b'
         result = [NyayaNode conjunction: result with:[self parseNegation]];
     }
     

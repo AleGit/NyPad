@@ -74,10 +74,8 @@
 }
 
 - (void)clear {
-    
     [_dvalStore removeAllObjects];
     [_evalStore removeAllObjects];
-    
 }
 
 
