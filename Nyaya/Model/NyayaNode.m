@@ -9,6 +9,7 @@
 #import "NyayaNode.h"
 #import "NyayaStore.h"
 #import "NSString+NyayaToken.h"
+#import "NSArray+NyayaToken.h"
 
 @interface NyayaNode () {
     
@@ -747,15 +748,21 @@
 #pragma mark node factory
 + (NyayaNode*)atom:(NSString*)name {
     NyayaNode *node = nil;
-    if ([name isTrueToken] || [name isFalseToken]) {
+    if ([name isTrueToken]) {
         node = [[NyayaNodeConstant alloc] init];
+        node->_symbol = [[NSArray trueTokens] objectAtIndex:0];
+    }
+    else if ([name isFalseToken]) {
+        node = [[NyayaNodeConstant alloc] init];
+        node->_symbol = [[NSArray falseTokens] objectAtIndex:0];
     }
     else { // variable name
         node = [[NyayaNodeVariable alloc] init];
         [[NyayaStore sharedInstance] setDisplayValue:NyayaUndefined forName:name];
+        node->_symbol = name;
     };
     
-    node->_symbol = name;
+    
     return node;
 }
 

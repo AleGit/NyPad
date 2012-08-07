@@ -47,6 +47,27 @@
     }
 }
 
+- (void)testTrue {
+    NyayaParser *parser = nil;
+    NyayaNode *result = nil;
+    for (NSString *input in @[@"T", @"1", @"⊤"]) {
+        parser = [[NyayaParser alloc] initWithString:input];
+        result = [parser parseFormula];
+        STAssertEqualObjects([result description], @"T", input);
+    }
+}
+
+- (void)testFalse {
+    NyayaParser *parser = nil;
+    NyayaNode *result = nil;
+    for (NSString *input in @[@"F", @"0", @"⊥"]) {
+        parser = [[NyayaParser alloc] initWithString:input];
+        result = [parser parseFormula];
+        STAssertEqualObjects([result description], @"F", input);
+    }
+}
+
+
 - (void)testNot {
     NyayaParser *parser = nil;
     NyayaNode *result = nil;

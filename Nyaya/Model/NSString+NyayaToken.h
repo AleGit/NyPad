@@ -10,12 +10,10 @@
 
 FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
 
-enum { NYAYA_ASCII_TOKEN, NYAYA_UTF8_TOKEN, NAYAYA_TEXT_TOKEN };
-
 @interface NSString (NyayaToken)
 
-- (BOOL)isTrueToken;
-- (BOOL)isFalseToken;
+- (BOOL)isTrueToken;    // are identifiers too
+- (BOOL)isFalseToken;   // are identifiers too
 
 - (BOOL)isNegationToken;
 - (BOOL)isConjunctionToken;

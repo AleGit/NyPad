@@ -32,7 +32,7 @@
     
     parser = [NyayaParser parserWithString:@"1"];
     n = [parser parseTerm];
-    STAssertEqualObjects(@"1", n.symbol, nil);
+    STAssertEqualObjects(@"T", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
     STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
     
@@ -44,7 +44,7 @@
     
     parser = [NyayaParser parserWithString:@"0"];
     n = [parser parseTerm];
-    STAssertEqualObjects(@"0", n.symbol, nil);
+    STAssertEqualObjects(@"F", n.symbol, nil);
     STAssertEquals((NyayaNodeType)NyayaConstant, n.type,nil);
     STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
     
