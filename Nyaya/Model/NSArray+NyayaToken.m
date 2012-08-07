@@ -66,7 +66,7 @@
 {
     static dispatch_once_t pred = 0;
     __strong static NSArray* _tokens = nil;
-    dispatch_once(&pred, ^{ _tokens = [NSArray localizedTokens:@[@"<>",@"↔"]]; });
+    dispatch_once(&pred, ^{ _tokens = [NSArray localizedTokens:@[@"=",@"↔",@"<>"]]; });
     return _tokens;
 }
 
