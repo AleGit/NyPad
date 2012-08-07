@@ -91,14 +91,14 @@
                 NSString *s = [[[node setOfSubformulas] allObjects] componentsJoinedByString:@"; "];
                 
                 NyayaNode *imfnode = [node imf];
-                NSString *imfdescription=[node description];
+                NSString *imfdescription=[imfnode description];
                 dispatch_async(mq, ^{
                     self.imf.text = imfdescription;
                 });
                 
                 
                 NyayaNode *nnfnode = [imfnode nnf];
-                NSString *nnfdescription=[node description];
+                NSString *nnfdescription=[nnfnode description];
                 dispatch_async(mq, ^{
                     self.nnf.text = nnfdescription;
                 });
@@ -116,9 +116,6 @@
                 dispatch_async(mq, ^{
                     self.dnf.text = dnfdescription;
                 });
-                
-                
-                
                 
                 dispatch_async(mq, ^{
                     self.subformulas.text = s;
