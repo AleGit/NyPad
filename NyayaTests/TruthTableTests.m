@@ -185,6 +185,94 @@
                            
 }
 
+- (void)testDifferentTruthTable {
+    NyayaParser *pand = [NyayaParser parserWithString:@"x&y"];
+    NyayaParser *por = [NyayaParser parserWithString:@"x+y"];
+    
+    TruthTable *tand = [[TruthTable alloc] initWithFormula:[pand parseFormula]];
+    TruthTable *tor = [[TruthTable alloc] initWithFormula:[por parseFormula]];
+    
+    [tand evaluateTable];
+    [tor evaluateTable];
+    
+    STAssertFalse([tand isEqual:tor],nil);
+    
+    STAssertEqualObjects(tand.cnf, @"x ∧ y", nil);
+    STAssertEqualObjects(tor.cnf, @"x ∨ y", nil);
+    
+    STAssertEqualObjects(tand.dnf, @"x ∧ y", nil);
+    STAssertEqualObjects(tor.dnf, @"x ∨ y", nil);
+    
+    
+    
+}
+
+- (void)testXdisjunctionNormalForm {
+    NyayaParser *parser = [NyayaParser parserWithString:@"x^y"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    [truthTable evaluateTable];
+    NyayaNode *imf = [formula imf];
+    NyayaNode *nnf = [imf nnf];
+    NyayaNode *cnf = [nnf cnf];
+    // NyayaNode *dnf = [nnf dnf];
+    
+    STAssertEqualObjects([nnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"NNF");
+    STAssertEqualObjects([cnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"CNF");
+    // STAssertEqualObjects([dnf description], @"(x ∧ ¬y) ∨ (¬x ∧ y)", @"DNF");
+    
+    
+    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnf, @"(x ∧ ¬y) ∨ (¬x ∧ y)", @"DNF");
+    
+    
+    
+    
+}
+
+- (void)testNotXdisjunctionNormalForm {
+    NyayaParser *parser = [NyayaParser parserWithString:@"!(x^y)"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    [truthTable evaluateTable];
+    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnf, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
+    
+    
+    
+    
+}
+
+
+- (void)testImplicationNormalForms {
+    NyayaParser *parser = [NyayaParser parserWithString:@"x>y"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    [truthTable evaluateTable];
+    STAssertEqualObjects(truthTable.nnf, @"¬x ∨ y", @"NNF");
+    STAssertEqualObjects(truthTable.cnf, @"¬x ∨ y", @"CNF");
+    STAssertEqualObjects(truthTable.dnf, @"¬x ∨ y", @"DNF");
+    
+    
+    
+    
+}
+
+- (void)testBiconditionsNormalForms {
+    NyayaParser *parser = [NyayaParser parserWithString:@"x<>y"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    [truthTable evaluateTable];
+    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnf, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
+    
+    
+    
+    
+}
 
 
 @end

@@ -8,13 +8,17 @@
 
 #import "TruthTable.h"
 #import "NyayaNode.h"
+#import "NSString+NyayaToken.h"
 
 @interface TruthTable () {
     NSUInteger _rowsCount;
     NSUInteger _colsCount;
     NSUInteger _cellCount;
     NSArray *_sortedNames;
+    
     BOOL *_evals;
+    NSMutableIndexSet *_trueIndices;
+    NSMutableIndexSet *_falseIndices;
 }
 @end
 
@@ -78,6 +82,8 @@
         _cellCount = _rowsCount * _colsCount;
         
         _evals = calloc(_cellCount, sizeof(BOOL));
+        _trueIndices = [NSMutableIndexSet indexSet];
+        _falseIndices = [NSMutableIndexSet indexSet];
     }
     
     return self;
@@ -129,8 +135,14 @@
 }
 
 - (void)evaluateTable {
+    [_trueIndices removeAllIndexes];
+    [_falseIndices removeAllIndexes];
+                    
     for (NSUInteger rowIndex=0; rowIndex < _rowsCount; rowIndex++) {
-        [self evaluateRow:rowIndex];
+        BOOL rowEval = [self evaluateRow:rowIndex];
+        
+        if (rowEval) [_trueIndices addIndex:rowIndex];
+        else [_falseIndices addIndex:rowIndex];
     }
 }
 
@@ -201,24 +213,16 @@
 #pragma mark - comparisons
 
 - (BOOL)isTautology {
-    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
-        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
-        if (!a) return NO;
-    }
-    return YES;
+    return [_falseIndices count] == 0;
     
 }
 
 - (BOOL)isContradiction {
-    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
-        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
-        if (a) return NO;
-    }
-    return YES;
+    return [_trueIndices count] == 0;
 }
 
 - (BOOL)isSatisfiable {
-    return ![self isContradiction];
+    return [_trueIndices count] > 0;
     
 }
 
@@ -235,16 +239,94 @@
         }
     }];
     
-    if (!sameVariables) return NO;
+    return sameVariables && [_trueIndices isEqual:truthTable->_trueIndices];
+}
+
+#pragma mark - normal forms
+
+
+
+
+- (NSString*)disjRow:(NSUInteger)idx negate:(BOOL)negate {
+    NSMutableArray *literals = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+    for (NSString *name in _sortedNames) {
+        BOOL eval = [self evalAtRow:idx forHeader:name];
+        if (eval != negate) {
+            [literals addObject:name];
+        }
+        else [literals addObject:[name complementaryString]];
+        
+    }
+    return [literals componentsJoinedByString:@" ∨ "];
     
-    for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
-        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
-        BOOL b = [truthTable evalAtRow:rowIdx forHeader:truthTable->_title];
-        if (a != b) return NO;
+}
+
+- (NSString*)conjRow:(NSUInteger)idx negate:(BOOL)negate {
+    NSMutableArray *literals = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+    for (NSString *name in _sortedNames) {
+        BOOL eval = [self evalAtRow:idx forHeader:name];
+        if (eval != negate) {
+            [literals addObject:[name complementaryString]];
+        }
+        else [literals addObject:name];
+        
+    }
+    return [literals componentsJoinedByString:@" ∧ "];
+}
+
+
+
+- (NSString*)snf {
+    NSString *result = nil;
+    if ([_trueIndices count] == 0) result = @"F";
+    else if ([_falseIndices count] == 0) result = @"T";
+    
+    
+    else if ([_trueIndices count] == 1) {
+        NSUInteger idx = [_trueIndices firstIndex];
+        result = [self conjRow:idx negate:YES];
+        
+    }
+    else if ([_falseIndices count] == 1) {
+        NSUInteger idx = [_falseIndices firstIndex];
+        result = [self disjRow:idx negate:YES];
     }
     
-    return YES;
+    return result;
 }
+
+- (NSString*)cnf {
+    NSString *result = [self snf];
+    if (!result) {
+        NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_falseIndices count]];
+        [_falseIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
+            [clauses addObject:[self disjRow:idx negate:NO]];
+        }];
+        result = [NSString stringWithFormat:@"(%@)", [clauses componentsJoinedByString:@") ∧ ("]];
+    }
+    
+    return result;
+}
+
+- (NSString*)dnf {
+    NSString *result = [self snf];
+    if (!result) {
+        NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_trueIndices count]];
+        [_trueIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
+            [clauses addObject:[self conjRow:idx negate:NO]];
+        }];
+        result = [NSString stringWithFormat:@"(%@)", [clauses componentsJoinedByString:@") ∨ ("]];
+    }
+    
+    return result;
+}
+
+- (NSString*)nnf {
+    if ([_falseIndices count] <= [_trueIndices count]) return [self cnf];
+    else return [self dnf];
+}
+
+#pragma mark - protocol NSObject
 
 - (BOOL)isEqual:(id)object {
     if (object == self) 

@@ -824,7 +824,7 @@
 
 + (NyayaNode*)xdisjunction:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeXdisjunction alloc] init];
-    node->_symbol = @"⊻";
+    node->_symbol = @"⊻"; // @"⊕"; 
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     

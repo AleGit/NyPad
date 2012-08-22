@@ -26,4 +26,9 @@
 - (BOOL)isContradiction;
 - (BOOL)isSatisfiable;
 
+- (NSString*)nnf;
+- (NSString*)cnf; // conjunctive array of disjunctive arrays
+- (NSString*)dnf; // disjunctive array of conjunctive arrays
+
+
 @end
