@@ -8,11 +8,12 @@
 
 #import "SecondViewController.h"
 
-@interface SecondViewController ()
+@interface SecondViewController () <UIWebViewDelegate>
 
 @end
 
 @implementation SecondViewController
+@synthesize webView;
 
 - (void)viewDidLoad
 {
@@ -22,6 +23,7 @@
 
 - (void)viewDidUnload
 {
+    [self setWebView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -29,6 +31,15 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.webView.delegate = self;
+    NSURL *webUrl = [NSURL URLWithString:@"http://colo6-c703.uibk.ac.at/ttt2/interface_new/booltool/"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:webUrl];
+    [self.webView loadRequest:request];
 }
 
 @end
