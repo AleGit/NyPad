@@ -475,6 +475,7 @@
                         <segue destination="P7z-VW-2I9" kind="relationship" relationship="viewControllers" id="Ogt-uA-tfs"/>
                         <segue destination="NqH-PB-plD" kind="relationship" relationship="viewControllers" id="LQI-r5-GI1"/>
                         <segue destination="X7K-51-h76" kind="relationship" relationship="viewControllers" id="hJv-Sd-8bV"/>
+                        <segue destination="39e-ND-YaP" kind="relationship" relationship="viewControllers" id="xAd-l7-aT9"/>
                     </connections>
                 </tabBarController>
             </objects>
@@ -718,69 +719,132 @@
             </objects>
             <point key="canvasLocation" x="2653" y="1042"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vhV-US-N9P">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ozh-K9-lbd" sceneMemberID="firstResponder"/>
+                <navigationController id="oeJ-Wx-oIq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="7qz-eG-vJw">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eMm-lv-59L" kind="relationship" relationship="rootViewController" id="M8e-kV-3rb"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="3359" y="2056"/>
+        </scene>
+        <!--Ny Gl Detail View Controller - Detail-->
+        <scene sceneID="syC-YZ-gn7">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WX1-QR-08z" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="" title="Detail" id="ZYB-p6-LJ0" customClass="NyGlDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FVR-M3-MCL">
+                        <rect key="frame" x="0.0" y="64" width="703" height="655"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Krc-YI-vH0">
+                                <rect key="frame" x="20" y="316" width="663" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Detail" id="jYn-wK-DyK"/>
+                    <connections>
+                        <outlet property="detailDescriptionLabel" destination="Krc-YI-vH0" id="bHp-Go-UJf"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3359" y="2934"/>
+        </scene>
+        <!--Split View Controller - Playground-->
+        <scene sceneID="6vO-Qz-2mI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="onB-wJ-GDA" sceneMemberID="firstResponder"/>
+                <splitViewController id="39e-ND-YaP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Playground" image="i4.png" id="Hrd-gI-2iP"/>
+                    <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="oeJ-Wx-oIq" kind="relationship" relationship="masterViewController" id="rmg-eO-gq1"/>
+                        <segue destination="t0I-P4-I4c" kind="relationship" relationship="detailViewController" id="bON-le-Dre"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="2224" y="2056"/>
+        </scene>
+        <!--Ny Gl Master View Controller - Master-->
+        <scene sceneID="wmu-9p-5oR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="knP-9o-1cc" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="eMm-lv-59L" customClass="NyGlMasterViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aCv-UU-tnR">
+                        <rect key="frame" x="0.0" y="64" width="320" height="655"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ROs-nx-hyT" style="IBUITableViewCellStyleDefault" id="V6k-8X-8yI">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ROs-nx-hyT">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="eMm-lv-59L" id="nP5-87-d98"/>
+                            <outlet property="delegate" destination="eMm-lv-59L" id="TDT-33-PIH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Master" id="mgN-Sj-TC5"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="3770" y="2055"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="o1S-1K-Yed">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9J-dV-63o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="t0I-P4-I4c" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kUA-rc-sHE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZYB-p6-LJ0" kind="relationship" relationship="rootViewController" id="d5c-Xg-gBl"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2545" y="2934"/>
+        </scene>
     </scenes>
     <resources>
         <image name="i1.png" width="30" height="30"/>
         <image name="i2.png" width="30" height="30"/>
         <image name="i3.png" width="30" height="30"/>
+        <image name="i4.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="FirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="compute:"/>
-                <relationship kind="action" name="delete:" candidateClass="UIButton"/>
-                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
-                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
-                <relationship kind="action" name="press:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ast" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="cnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="errors" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="imf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="input" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="myInputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="nnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="subformulas" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NyDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
-        </class>
-        <class className="NyMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
-        </class>
-        <class className="NyPgDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
-        </class>
-        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
-        </class>
-        <class className="NyWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
-        </class>
-        <class className="SecondViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

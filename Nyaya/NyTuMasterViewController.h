@@ -6,10 +6,8 @@
 //  Copyright (c) 2012 Alexander Maringele. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "NyMasterViewController.h"
-
-@class NyTuDetailViewController;
+#import "NyTuDetailViewController.h"
 
 @interface NyTuMasterViewController : NyMasterViewController
 

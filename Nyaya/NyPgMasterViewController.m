@@ -8,10 +8,7 @@
 
 #import "NyPgMasterViewController.h"
 
-#import "NyPgDetailViewController.h"
-
-@interface NyPgMasterViewController () {
-}
+@interface NyPgMasterViewController ()
 @end
 
 @implementation NyPgMasterViewController

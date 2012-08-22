@@ -8,11 +8,7 @@
 
 #import "NyTuMasterViewController.h"
 
-#import "NyTuDetailViewController.h"
-
-@interface NyTuMasterViewController () {
-    NSMutableArray *_objects;
-}
+@interface NyTuMasterViewController ()
 @end
 
 @implementation NyTuMasterViewController

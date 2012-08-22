@@ -13,6 +13,10 @@
 		110476A815E4BF380024EDDF /* NyPgMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476A615E4BF380024EDDF /* NyPgMasterViewController.m */; };
 		110476AC15E4C14E0024EDDF /* NyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476AB15E4C14E0024EDDF /* NyDetailViewController.m */; };
 		110476AF15E4C34E0024EDDF /* NyMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476AE15E4C34E0024EDDF /* NyMasterViewController.m */; };
+		110476B815E4D7F00024EDDF /* NyGlDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476B715E4D7F00024EDDF /* NyGlDetailViewController.m */; };
+		110476BB15E4D80A0024EDDF /* NyGlMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476BA15E4D80A0024EDDF /* NyGlMasterViewController.m */; };
+		110476BE15E4DAA00024EDDF /* NyBtMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476BD15E4DAA00024EDDF /* NyBtMasterViewController.m */; };
+		110476C115E4DADB0024EDDF /* NyBtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110476C015E4DADB0024EDDF /* NyBtDetailViewController.m */; };
 		1105107415DA73B4000219C9 /* PropositionalLogic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1105107315DA73B4000219C9 /* PropositionalLogic.txt */; };
 		1105107715DA773C000219C9 /* 101.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1105107615DA773C000219C9 /* 101.txt */; };
 		111104B215BC0147006EB260 /* connectives in Resources */ = {isa = PBXBuildFile; fileRef = 111104B115BC0147006EB260 /* connectives */; };
@@ -122,6 +126,14 @@
 		110476AB15E4C14E0024EDDF /* NyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyDetailViewController.m; path = Nyaya/NyDetailViewController.m; sourceTree = "<group>"; };
 		110476AD15E4C34E0024EDDF /* NyMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyMasterViewController.h; path = Nyaya/NyMasterViewController.h; sourceTree = "<group>"; };
 		110476AE15E4C34E0024EDDF /* NyMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyMasterViewController.m; path = Nyaya/NyMasterViewController.m; sourceTree = "<group>"; };
+		110476B615E4D7F00024EDDF /* NyGlDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyGlDetailViewController.h; sourceTree = "<group>"; };
+		110476B715E4D7F00024EDDF /* NyGlDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyGlDetailViewController.m; sourceTree = "<group>"; };
+		110476B915E4D80A0024EDDF /* NyGlMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyGlMasterViewController.h; sourceTree = "<group>"; };
+		110476BA15E4D80A0024EDDF /* NyGlMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyGlMasterViewController.m; sourceTree = "<group>"; };
+		110476BC15E4DAA00024EDDF /* NyBtMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyBtMasterViewController.h; sourceTree = "<group>"; };
+		110476BD15E4DAA00024EDDF /* NyBtMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyBtMasterViewController.m; sourceTree = "<group>"; };
+		110476BF15E4DADB0024EDDF /* NyBtDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyBtDetailViewController.h; sourceTree = "<group>"; };
+		110476C015E4DADB0024EDDF /* NyBtDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyBtDetailViewController.m; sourceTree = "<group>"; };
 		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
 		1105107615DA773C000219C9 /* 101.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 101.txt; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
@@ -298,6 +310,10 @@
 		110476B415E4D59C0024EDDF /* NyGlossary */ = {
 			isa = PBXGroup;
 			children = (
+				110476B615E4D7F00024EDDF /* NyGlDetailViewController.h */,
+				110476B715E4D7F00024EDDF /* NyGlDetailViewController.m */,
+				110476B915E4D80A0024EDDF /* NyGlMasterViewController.h */,
+				110476BA15E4D80A0024EDDF /* NyGlMasterViewController.m */,
 			);
 			name = NyGlossary;
 			path = Nyaya;
@@ -384,6 +400,10 @@
 		116D220515D9255C003DBD88 /* NyBoolTool */ = {
 			isa = PBXGroup;
 			children = (
+				110476BF15E4DADB0024EDDF /* NyBtDetailViewController.h */,
+				110476C015E4DADB0024EDDF /* NyBtDetailViewController.m */,
+				110476BC15E4DAA00024EDDF /* NyBtMasterViewController.h */,
+				110476BD15E4DAA00024EDDF /* NyBtMasterViewController.m */,
 			);
 			name = NyBoolTool;
 			path = Nyaya;
@@ -808,6 +828,10 @@
 				110476A815E4BF380024EDDF /* NyPgMasterViewController.m in Sources */,
 				110476AC15E4C14E0024EDDF /* NyDetailViewController.m in Sources */,
 				110476AF15E4C34E0024EDDF /* NyMasterViewController.m in Sources */,
+				110476B815E4D7F00024EDDF /* NyGlDetailViewController.m in Sources */,
+				110476BB15E4D80A0024EDDF /* NyGlMasterViewController.m in Sources */,
+				110476BE15E4DAA00024EDDF /* NyBtMasterViewController.m in Sources */,
+				110476C115E4DADB0024EDDF /* NyBtDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

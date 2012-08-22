@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Alexander Maringele. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "NyDetailViewController.h"
 
 @interface NyPgDetailViewController : NyDetailViewController
