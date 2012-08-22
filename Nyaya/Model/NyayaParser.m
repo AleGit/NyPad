@@ -105,20 +105,9 @@
 }
     
 - (NyayaNode*)parseFormula {
-    NyayaNode *result;
-    _level++;
-    
-    // [v.2] formula = implication { XOR implication }
-    result = [self parseImplication];       // consumes implication(s)
-    while ([_token isXdisjunctionToken]) {
-        [self nextToken];                   // consumes XOR token
-        result = [NyayaNode xdisjunction:result with:[self parseImplication]];
-    }
-    
-    _level--;
+    NyayaNode* result = [self parseImplication];
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
     return result;
-    
 }
 
 - (NyayaNode*)parseImplication {
@@ -139,9 +128,10 @@
 - (NyayaNode*)parseBicondition {
     NyayaNode* result = nil;
     _level++;
-
+    
     // [v.2] bicondition = disjunction [ BIC bicondition ]
-    result = [self parseDisjunction];       // consumes disjunction
+    // [v.3] bicondition = xdisjunction [ BIC bicondition ]
+    result = [self parseXdisjunction];       // consumes xdisjunction
     if ([_token isBiconditionToken]) {
         [self nextToken];                   // consumes BIC token
         result = [NyayaNode bicondition:result with:[self parseBicondition]];
@@ -149,6 +139,24 @@
     
     _level--;
     return result;
+}
+
+- (NyayaNode*)parseXdisjunction {
+    NyayaNode *result;
+    _level++;
+    
+    // [v.2] formula = implication { XOR implication }
+    // [v.3] xdisjunction = disjunction { XOR disjunction }
+    result = [self parseDisjunction];       // consumes disjunction
+    while ([_token isXdisjunctionToken]) {
+        [self nextToken];                   // consumes XOR token
+        result = [NyayaNode xdisjunction:result with:[self parseDisjunction]];
+    }
+    
+    _level--;
+    if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
+    return result;
+    
 }
 
 - (NyayaNode*)parseDisjunction {

@@ -319,7 +319,7 @@
 			path = Nyaya;
 			sourceTree = "<group>";
 		};
-		110476B515E4D5BF0024EDDF /* Ny */ = {
+		110476B515E4D5BF0024EDDF /* NyBranches */ = {
 			isa = PBXGroup;
 			children = (
 				110476AA15E4C14E0024EDDF /* NyDetailViewController.h */,
@@ -332,8 +332,20 @@
 				110476B415E4D59C0024EDDF /* NyGlossary */,
 				116D220515D9255C003DBD88 /* NyBoolTool */,
 			);
-			name = Ny;
+			name = NyBranches;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		110476C215E4E3EC0024EDDF /* NyRoot */ = {
+			isa = PBXGroup;
+			children = (
+				11C375FC15B3D23D005C5C9C /* AppDelegate.h */,
+				11C375FD15B3D23D005C5C9C /* AppDelegate.m */,
+				11C375FF15B3D23D005C5C9C /* MainStoryboard.storyboard */,
+				1158F20C15D19EDD00B422FD /* NyayaTabBarViewController.h */,
+				116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */,
+			);
+			name = NyRoot;
 			sourceTree = "<group>";
 		};
 		1105107815DA8054000219C9 /* TabBarIcons */ = {
@@ -388,13 +400,6 @@
 				116D220A15D92656003DBD88 /* NyWelcomeViewController.m */,
 			);
 			name = NyWelcome;
-			sourceTree = "<group>";
-		};
-		116D220415D92552003DBD88 /* Glossary */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Glossary;
 			sourceTree = "<group>";
 		};
 		116D220515D9255C003DBD88 /* NyBoolTool */ = {
@@ -479,13 +484,6 @@
 			name = Tutorial;
 			sourceTree = "<group>";
 		};
-		1186B07D15D196DE00D47C68 /* Playground */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Playground;
-			sourceTree = "<group>";
-		};
 		1187E23715D0D6640048E153 /* Unused */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,24 +538,18 @@
 		11C375F315B3D23D005C5C9C /* Nyaya */ = {
 			isa = PBXGroup;
 			children = (
-				110476B515E4D5BF0024EDDF /* Ny */,
+				110476C215E4E3EC0024EDDF /* NyRoot */,
+				110476B515E4D5BF0024EDDF /* NyBranches */,
 				11436C0715E3761100A4457F /* AppIcons */,
 				1105107815DA8054000219C9 /* TabBarIcons */,
 				116D221015D927C9003DBD88 /* html */,
 				116D220815D925B0003DBD88 /* Deprecated */,
-				116D220415D92552003DBD88 /* Glossary */,
-				1186B07D15D196DE00D47C68 /* Playground */,
 				1186B04415D194B000D47C68 /* Tutorial */,
 				1187E23915D0D68F0048E153 /* Documents */,
 				1187E23715D0D6640048E153 /* Unused */,
 				11EC4D2215CFBA320090EBAB /* BDD */,
 				11C3762D15B3D258005C5C9C /* Model */,
-				11C375FC15B3D23D005C5C9C /* AppDelegate.h */,
-				11C375FD15B3D23D005C5C9C /* AppDelegate.m */,
-				11C375FF15B3D23D005C5C9C /* MainStoryboard.storyboard */,
 				11C375F415B3D23D005C5C9C /* Supporting Files */,
-				1158F20C15D19EDD00B422FD /* NyayaTabBarViewController.h */,
-				116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */,
 			);
 			path = Nyaya;
 			sourceTree = "<group>";

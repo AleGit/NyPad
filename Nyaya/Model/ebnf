@@ -1,11 +1,31 @@
-====================================================================
-Parser v2
 
-NOT > AND > OR > BIC > IMP > XOR
+Parser v3: NOT > AND > OR > XOR > BIC > IMP
+
+formula      = implication                          // CHANGED   from 2.1
+implication  = bicondition [ IMP implication ]      // UNCHANGED from 2.1
+bicondition  = xdisjunction [ BIC bicondition ]     // CHANGED   from 2.1
+xdisjunction = disjunction { XOR disjunction }      // CHANGED   from 2.1
+disjunction  = conjunction { OR conjunction }
+conjunction  = negation    { AND negation }
+negation     = NOT negation | term | LPAR formula RPAR
+term         = identifier [ LPAR RPAR | LPAR tuple RPAR ]
+tuple        = formula { COMMA formula }
+identifier   = Alphanumeric { Alphanumeric }
+
+====================================================================
+Parser v2.1: NOT > AND > OR > BIC > IMP > XOR
+
+formula      = xdisjunction
+xdisjunction = implication { XOR xdisjunction }
+...
+
+====================================================================
+Parser v2: NOT > AND > OR > BIC > IMP > XOR
 
 formula     = implication { XOR formula }
 implication = bicondition [ IMP implication ]
 bicondition = disjunction [ BIC bicondition ]
+
 disjunction = conjunction { OR conjunction }
 conjunction = negation    { AND negation }
 negation    = NOT negation | term | LPAR formula RPAR
