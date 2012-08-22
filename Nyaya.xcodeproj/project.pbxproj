@@ -118,10 +118,10 @@
 		110476A415E4BF380024EDDF /* NyPgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyPgDetailViewController.m; sourceTree = "<group>"; };
 		110476A515E4BF380024EDDF /* NyPgMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyPgMasterViewController.h; sourceTree = "<group>"; };
 		110476A615E4BF380024EDDF /* NyPgMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyPgMasterViewController.m; sourceTree = "<group>"; };
-		110476AA15E4C14E0024EDDF /* NyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyDetailViewController.h; sourceTree = "<group>"; };
-		110476AB15E4C14E0024EDDF /* NyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyDetailViewController.m; sourceTree = "<group>"; };
-		110476AD15E4C34E0024EDDF /* NyMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyMasterViewController.h; sourceTree = "<group>"; };
-		110476AE15E4C34E0024EDDF /* NyMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyMasterViewController.m; sourceTree = "<group>"; };
+		110476AA15E4C14E0024EDDF /* NyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyDetailViewController.h; path = Nyaya/NyDetailViewController.h; sourceTree = "<group>"; };
+		110476AB15E4C14E0024EDDF /* NyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyDetailViewController.m; path = Nyaya/NyDetailViewController.m; sourceTree = "<group>"; };
+		110476AD15E4C34E0024EDDF /* NyMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyMasterViewController.h; path = Nyaya/NyMasterViewController.h; sourceTree = "<group>"; };
+		110476AE15E4C34E0024EDDF /* NyMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyMasterViewController.m; path = Nyaya/NyMasterViewController.m; sourceTree = "<group>"; };
 		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
 		1105107615DA773C000219C9 /* 101.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 101.txt; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
@@ -280,6 +280,7 @@
 				1104767F15E4A16A0024EDDF /* NyTuMasterViewController.m */,
 			);
 			name = NyTutorial;
+			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		1104768F15E4A6320024EDDF /* NyPlayground */ = {
@@ -291,6 +292,32 @@
 				110476A615E4BF380024EDDF /* NyPgMasterViewController.m */,
 			);
 			name = NyPlayground;
+			path = Nyaya;
+			sourceTree = "<group>";
+		};
+		110476B415E4D59C0024EDDF /* NyGlossary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NyGlossary;
+			path = Nyaya;
+			sourceTree = "<group>";
+		};
+		110476B515E4D5BF0024EDDF /* Ny */ = {
+			isa = PBXGroup;
+			children = (
+				110476AA15E4C14E0024EDDF /* NyDetailViewController.h */,
+				110476AB15E4C14E0024EDDF /* NyDetailViewController.m */,
+				110476AD15E4C34E0024EDDF /* NyMasterViewController.h */,
+				110476AE15E4C34E0024EDDF /* NyMasterViewController.m */,
+				116D220215D9252C003DBD88 /* NyWelcome */,
+				1104767C15E4A1230024EDDF /* NyTutorial */,
+				1104768F15E4A6320024EDDF /* NyPlayground */,
+				110476B415E4D59C0024EDDF /* NyGlossary */,
+				116D220515D9255C003DBD88 /* NyBoolTool */,
+			);
+			name = Ny;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		1105107815DA8054000219C9 /* TabBarIcons */ = {
@@ -337,15 +364,14 @@
 			name = AppIcons;
 			sourceTree = "<group>";
 		};
-		116D220215D9252C003DBD88 /* Welcome */ = {
+		116D220215D9252C003DBD88 /* NyWelcome */ = {
 			isa = PBXGroup;
 			children = (
 				116D221115D92848003DBD88 /* welcome.html */,
 				116D220915D92656003DBD88 /* NyWelcomeViewController.h */,
 				116D220A15D92656003DBD88 /* NyWelcomeViewController.m */,
 			);
-			name = Welcome;
-			path = ..;
+			name = NyWelcome;
 			sourceTree = "<group>";
 		};
 		116D220415D92552003DBD88 /* Glossary */ = {
@@ -355,11 +381,12 @@
 			name = Glossary;
 			sourceTree = "<group>";
 		};
-		116D220515D9255C003DBD88 /* BoolTool */ = {
+		116D220515D9255C003DBD88 /* NyBoolTool */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = BoolTool;
+			name = NyBoolTool;
+			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		116D220815D925B0003DBD88 /* Deprecated */ = {
@@ -493,19 +520,12 @@
 		11C375F315B3D23D005C5C9C /* Nyaya */ = {
 			isa = PBXGroup;
 			children = (
-				110476AA15E4C14E0024EDDF /* NyDetailViewController.h */,
-				110476AB15E4C14E0024EDDF /* NyDetailViewController.m */,
-				110476AD15E4C34E0024EDDF /* NyMasterViewController.h */,
-				110476AE15E4C34E0024EDDF /* NyMasterViewController.m */,
-				1104767C15E4A1230024EDDF /* NyTutorial */,
-				1104768F15E4A6320024EDDF /* NyPlayground */,
+				110476B515E4D5BF0024EDDF /* Ny */,
 				11436C0715E3761100A4457F /* AppIcons */,
 				1105107815DA8054000219C9 /* TabBarIcons */,
 				116D221015D927C9003DBD88 /* html */,
 				116D220815D925B0003DBD88 /* Deprecated */,
-				116D220515D9255C003DBD88 /* BoolTool */,
 				116D220415D92552003DBD88 /* Glossary */,
-				116D220215D9252C003DBD88 /* Welcome */,
 				1186B07D15D196DE00D47C68 /* Playground */,
 				1186B04415D194B000D47C68 /* Tutorial */,
 				1187E23915D0D68F0048E153 /* Documents */,
