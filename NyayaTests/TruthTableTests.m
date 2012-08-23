@@ -132,6 +132,38 @@
     STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
 }
 
+- (void)testTrueTop {
+    NyayaParser *parser = [NyayaParser parserWithString:@"T"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    
+    STAssertEqualObjects(truthTable.formula, formula,nil);
+    STAssertEqualObjects(truthTable.title, @"T",nil);
+    [truthTable evaluateTable];
+    
+    NSString *expected = @"| T |\n| T |";
+    NSString *actual = truthTable.description;
+    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    
+    
+}
+
+- (void)testFalseBottom {
+    NyayaParser *parser = [NyayaParser parserWithString:@"F"];
+    NyayaNode *formula = [parser parseFormula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    
+    STAssertEqualObjects(truthTable.formula, formula,nil);
+    STAssertEqualObjects(truthTable.title, @"F",nil);
+    [truthTable evaluateTable];
+    
+    NSString *expected = @"| F |\n| F |";
+    NSString *actual = truthTable.description;
+    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    
+    
+}
+
 - (void)xtestFormula {
     NyayaParser *parser = [NyayaParser parserWithString:@"!x|y>x<>!y"];
     
@@ -197,11 +229,11 @@
     
     STAssertFalse([tand isEqual:tor],nil);
     
-    STAssertEqualObjects(tand.cnf, @"x ∧ y", nil);
-    STAssertEqualObjects(tor.cnf, @"x ∨ y", nil);
+    STAssertEqualObjects(tand.cnfDescription, @"x ∧ y", nil);
+    STAssertEqualObjects(tor.cnfDescription, @"x ∨ y", nil);
     
-    STAssertEqualObjects(tand.dnf, @"x ∧ y", nil);
-    STAssertEqualObjects(tor.dnf, @"x ∨ y", nil);
+    STAssertEqualObjects(tand.dnfDescription, @"x ∧ y", nil);
+    STAssertEqualObjects(tor.dnfDescription, @"x ∨ y", nil);
     
     
     
@@ -222,9 +254,9 @@
     // STAssertEqualObjects([dnf description], @"(x ∧ ¬y) ∨ (¬x ∧ y)", @"DNF");
     
     
-    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"NNF");
-    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"CNF");
-    STAssertEqualObjects(truthTable.dnf, @"(x ∧ ¬y) ∨ (¬x ∧ y)", @"DNF");
+    STAssertEqualObjects(truthTable.nnfDescription, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnfDescription, @"(¬x ∨ ¬y) ∧ (x ∨ y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnfDescription, @"(x ∧ ¬y) ∨ (¬x ∧ y)", @"DNF");
     
     
     
@@ -236,9 +268,9 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
     [truthTable evaluateTable];
-    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
-    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
-    STAssertEqualObjects(truthTable.dnf, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
+    STAssertEqualObjects(truthTable.nnfDescription, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnfDescription, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnfDescription, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
     
     
     
@@ -251,9 +283,9 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
     [truthTable evaluateTable];
-    STAssertEqualObjects(truthTable.nnf, @"¬x ∨ y", @"NNF");
-    STAssertEqualObjects(truthTable.cnf, @"¬x ∨ y", @"CNF");
-    STAssertEqualObjects(truthTable.dnf, @"¬x ∨ y", @"DNF");
+    STAssertEqualObjects(truthTable.nnfDescription, @"¬x ∨ y", @"NNF");
+    STAssertEqualObjects(truthTable.cnfDescription, @"¬x ∨ y", @"CNF");
+    STAssertEqualObjects(truthTable.dnfDescription, @"¬x ∨ y", @"DNF");
     
     
     
@@ -265,9 +297,9 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
     [truthTable evaluateTable];
-    STAssertEqualObjects(truthTable.nnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
-    STAssertEqualObjects(truthTable.cnf, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
-    STAssertEqualObjects(truthTable.dnf, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
+    STAssertEqualObjects(truthTable.nnfDescription, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"NNF");
+    STAssertEqualObjects(truthTable.cnfDescription, @"(¬x ∨ y) ∧ (x ∨ ¬y)", @"CNF");
+    STAssertEqualObjects(truthTable.dnfDescription, @"(x ∧ y) ∨ (¬x ∧ ¬y)", @"DNF");
     
     
     

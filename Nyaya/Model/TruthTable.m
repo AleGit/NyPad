@@ -137,7 +137,8 @@
 - (void)evaluateTable {
     [_trueIndices removeAllIndexes];
     [_falseIndices removeAllIndexes];
-                    
+    
+                        
     for (NSUInteger rowIndex=0; rowIndex < _rowsCount; rowIndex++) {
         BOOL rowEval = [self evaluateRow:rowIndex];
         
@@ -245,8 +246,6 @@
 #pragma mark - normal forms
 
 
-
-
 - (NSString*)disjRow:(NSUInteger)idx negate:(BOOL)negate {
     NSMutableArray *literals = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
     for (NSString *name in _sortedNames) {
@@ -295,7 +294,7 @@
     return result;
 }
 
-- (NSString*)cnf {
+- (NSString*)cnfDescription {
     NSString *result = [self snf];
     if (!result) {
         NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_falseIndices count]];
@@ -308,7 +307,7 @@
     return result;
 }
 
-- (NSString*)dnf {
+- (NSString*)dnfDescription {
     NSString *result = [self snf];
     if (!result) {
         NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_trueIndices count]];
@@ -321,9 +320,80 @@
     return result;
 }
 
-- (NSString*)nnf {
-    if ([_falseIndices count] <= [_trueIndices count]) return [self cnf];
-    else return [self dnf];
+- (NSString*)nnfDescription {
+    if ([_falseIndices count] <= [_trueIndices count]) return [self cnfDescription];
+    else return [self dnfDescription];
+}
+
+#pragma mark - cnf array
+
+- (NSArray*)cnfArray {
+    NSArray* conjunction = nil;
+    if ([_falseIndices count] == 0) { // valid, tautology, top, T
+        conjunction = @[];         // ∧{} = T
+    }
+    else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
+        conjunction = @[@[]]; // ∧{∨{}} = ∧{F} = F
+    }
+    else if ([_trueIndices count] == 1) { // conjunction of literals: { {x} {¬y} {z} }
+        NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+        NSUInteger idx = [_trueIndices firstIndex];
+        for (NSString *name in _sortedNames) {
+            BOOL eval = [self evalAtRow:idx forHeader:name];
+            [c addObject: @[eval ? name : [name complementaryString]]];
+        }
+        conjunction = c;
+    }
+    else { // conjunction of "negated 0-rows"
+        //              = "negated conjunction of literals"
+        //              = "disjunction of negated literals"
+        //              = "disjunction of complementary literals"
+        NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_falseIndices count]];
+        [_falseIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
+            NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+            for (NSString *name in _sortedNames) {
+                BOOL eval = [self evalAtRow:idx forHeader:name];
+                [d addObject: !eval ? name : [name complementaryString]];
+            }
+            [c addObject:d];
+        }];
+        conjunction = c;
+    }
+    return conjunction;
+}
+
+- (NSArray*)dnfArray {
+    NSArray* disjunction = nil;
+    if ([_falseIndices count] == 0) { // valid, tautology, top, T
+        disjunction = @[@[]];         // ∨{∧{}} = T
+    }
+    else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
+        disjunction = @[]; // ∨{} = F
+    }
+    else if ([_falseIndices count] == 1) { // disjunction of complementary literals
+        NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+        NSUInteger idx = [_falseIndices firstIndex];
+        for (NSString *name in _sortedNames) {
+            BOOL eval = [self evalAtRow:idx forHeader:name];
+            [d addObject: @[!eval ? name : [name complementaryString]]];
+        }
+        disjunction = d;
+        
+    }
+    else { // disjunction of "1-rows"
+        //              = "conjunction of literals"
+        NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_trueIndices count]];
+        [_trueIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
+            NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+            for (NSString *name in _sortedNames) {
+                BOOL eval = [self evalAtRow:idx forHeader:name];
+                [c addObject: eval ? name : [name complementaryString]];
+            }
+            [d addObject:c];
+        }];
+        disjunction = d;
+    }
+    return disjunction;
 }
 
 #pragma mark - protocol NSObject
