@@ -22,91 +22,83 @@
 }
 
 - (void)testTrueTop {
-    for (NSString *input in @[@"x+!x",@"!(x&!x)", @"T", @"!F"]) {
+    NSSet *expectedDnf = [NSSet setWithObject:[NSSet set]];         // OR ( AND (EMPTY) ) = TRUE
+    NSSet *expectedCnf = [NSSet set];                               // AND ( EMPTY ) = TRUE
+
+    for (NSString *input in @[@"x+!x",@"!(x&!x)", @"T", @"!F",@"!(x&!x)|(z>a)",@"(x&!x)|T"]) {
         TruthTable *truthTable = [self truthTableWithInput:input];
-        
-        NSArray *cnf = truthTable.cnfArray;
-        NSArray *dnf = truthTable.dnfArray;
-        
-        STAssertEquals([cnf count], (NSUInteger)0, input);
-        STAssertEquals([dnf count], (NSUInteger)1, input);
-        STAssertEquals([[dnf objectAtIndex:0] count], (NSUInteger)0, input);
-        
-        // NSLog(@" T: %@ \n cnf: %@ \n dnf: %@ ", input, cnf, dnf);
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);
     }
 }
 - (void)testFalseBottom {
-    for (NSString *input in @[@"x&!x",@"!(x|!x)", @"!T", @"F"]) {
+    NSSet *expectedCnf = [NSSet setWithObject:[NSSet set]];         // AND ( OR (EMPTY) ) = FALSE
+    NSSet *expectedDnf = [NSSet set];                               // OR ( EMPTY ) = FALSE
+    
+    for (NSString *input in @[@"x&!x",@"!(x|!x)", @"!T", @"F",@"F&(x|!x)"]) {
         TruthTable *truthTable = [self truthTableWithInput:input];
-        
-        NSArray *cnf = truthTable.cnfArray;
-        NSArray *dnf = truthTable.dnfArray;
-        
-        STAssertEquals([cnf count], (NSUInteger)1, input);
-        STAssertEquals([[cnf objectAtIndex:0] count], (NSUInteger)0, input);
-        STAssertEquals([dnf count], (NSUInteger)0, input);
-        
-        // NSLog(@" F: %@ \n cnf: %@ \n dnf: %@ ", input, cnf, dnf);
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);
     }  
 }
 
-- (void)testXandY {
+- (void)testX_and_Y {
+    NSSet *expectedDnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x",@"y"]] ]];
+    NSSet *expectedCnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x"]], [NSSet setWithArray:@[@"y"]] ]];
+    
     for ( NSString *input in @[ @" x & y ", @"!(!x|!y)"]) {
         TruthTable *truthTable = [self truthTableWithInput:input];
-        NSArray *cnf = truthTable.cnfArray;
-        NSArray *dnf = truthTable.dnfArray;
-        
-        STAssertEquals([cnf count], (NSUInteger)2, input);
-        STAssertEqualObjects([[cnf objectAtIndex:0] objectAtIndex:0], @"x", input);
-        STAssertEqualObjects([[cnf objectAtIndex:1] objectAtIndex:0], @"y", input);
-        
-        STAssertEquals([dnf count], (NSUInteger)1, input);
-        STAssertEquals([[dnf objectAtIndex:0] count],(NSUInteger)2, input);
-        
-        NSString *x = [[dnf objectAtIndex:0] objectAtIndex:0];
-        NSString *y = [[dnf objectAtIndex:0] objectAtIndex:1];
-        STAssertEqualObjects(x, @"x", input);
-        STAssertEqualObjects(y, @"y", input);
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);
     }
-    
-    
 }
 
-- (void)testXorY {
+- (void)testX_or_Y {
+    NSSet *expectedCnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x",@"y"]] ]];
+    NSSet *expectedDnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x"]], [NSSet setWithArray:@[@"y"]] ]];
+    
+    
     for ( NSString *input in @[ @" x | y ", @"!(!x&!y)", @" x | y | !!x | !!y"] ) {
         TruthTable *truthTable = [self truthTableWithInput:input];
-        NSArray *cnf = truthTable.cnfArray;
-        NSArray *dnf = truthTable.dnfArray;
-        
-        STAssertEquals([dnf count], (NSUInteger)2, input);
-        STAssertEqualObjects([[dnf objectAtIndex:0] objectAtIndex:0], @"x", input);
-        STAssertEqualObjects([[dnf objectAtIndex:1] objectAtIndex:0], @"y", input);
-        
-        STAssertEquals([cnf count], (NSUInteger)1, input);
-        STAssertEquals([[cnf objectAtIndex:0] count],(NSUInteger)2, input);
-        STAssertEqualObjects([[cnf objectAtIndex:0] objectAtIndex:0], @"x", input);
-        STAssertEqualObjects([[cnf objectAtIndex:0] objectAtIndex:1], @"y", input);
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);
     }
-    
 }
 
 - (void)testX_xor_Y {
+    NSSet *expectedCnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x",@"y"]], [NSSet setWithArray:@[@"¬x",@"¬y"]] ]];
+    NSSet *expectedDnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"¬x",@"y"]], [NSSet setWithArray:@[@"x",@"¬y"]] ]];
+    
     for ( NSString *input in @[ @" x ^ y ", @"!(x<>y)"] ) {
         TruthTable *truthTable = [self truthTableWithInput:input];
-        NSArray *cnf = truthTable.cnfArray;
-        NSArray *dnf = truthTable.dnfArray;
-        
-        STAssertEquals([cnf count], (NSUInteger)2, input);
-        STAssertEquals([[cnf objectAtIndex:0] count],  (NSUInteger)2, input);
-        STAssertEquals([[cnf objectAtIndex:1] count],  (NSUInteger)2, input);
-        
-        STAssertEquals([dnf count], (NSUInteger)2, input);
-        STAssertEquals([[dnf objectAtIndex:0] count],  (NSUInteger)2, input);
-        STAssertEquals([[dnf objectAtIndex:1] count],  (NSUInteger)2, input);
-        
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input); 
     }
-    
 }
+
+- (void)testX_bic_Y {
+    NSSet *expectedDnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"x",@"y"]], [NSSet setWithArray:@[@"¬x",@"¬y"]] ]];
+    NSSet *expectedCnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"¬x",@"y"]], [NSSet setWithArray:@[@"x",@"¬y"]] ]];
+    
+    for ( NSString *input in @[ @" !(x ^ y) ", @"(x<>y)"] ) {
+        TruthTable *truthTable = [self truthTableWithInput:input];
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);  
+    }
+}
+
+- (void)testX_impl_Y {
+    NSSet *expectedDnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"¬x",]], [NSSet setWithArray:@[@"y"]] ]];
+    NSSet *expectedCnf = [NSSet setWithArray: @[ [NSSet setWithArray:@[@"¬x",@"y"]] ]];
+    
+    for ( NSString *input in @[ @" x > y", @"!x|y", @"!(x&!y)"] ) {
+        TruthTable *truthTable = [self truthTableWithInput:input];
+        STAssertEqualObjects(truthTable.cnfSet, expectedCnf, input);
+        STAssertEqualObjects(truthTable.dnfSet, expectedDnf, input);       
+    }
+}
+
+
 
 
 @end

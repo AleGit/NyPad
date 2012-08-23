@@ -245,102 +245,21 @@
 
 #pragma mark - normal forms
 
-
-- (NSString*)disjRow:(NSUInteger)idx negate:(BOOL)negate {
-    NSMutableArray *literals = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
-    for (NSString *name in _sortedNames) {
-        BOOL eval = [self evalAtRow:idx forHeader:name];
-        if (eval != negate) {
-            [literals addObject:name];
-        }
-        else [literals addObject:[name complementaryString]];
-        
-    }
-    return [literals componentsJoinedByString:@" ∨ "];
-    
-}
-
-- (NSString*)conjRow:(NSUInteger)idx negate:(BOOL)negate {
-    NSMutableArray *literals = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
-    for (NSString *name in _sortedNames) {
-        BOOL eval = [self evalAtRow:idx forHeader:name];
-        if (eval != negate) {
-            [literals addObject:[name complementaryString]];
-        }
-        else [literals addObject:name];
-        
-    }
-    return [literals componentsJoinedByString:@" ∧ "];
-}
-
-
-
-- (NSString*)snf {
-    NSString *result = nil;
-    if ([_trueIndices count] == 0) result = @"F";
-    else if ([_falseIndices count] == 0) result = @"T";
-    
-    
-    else if ([_trueIndices count] == 1) {
-        NSUInteger idx = [_trueIndices firstIndex];
-        result = [self conjRow:idx negate:YES];
-        
-    }
-    else if ([_falseIndices count] == 1) {
-        NSUInteger idx = [_falseIndices firstIndex];
-        result = [self disjRow:idx negate:YES];
-    }
-    
-    return result;
-}
-
-- (NSString*)cnfDescription {
-    NSString *result = [self snf];
-    if (!result) {
-        NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_falseIndices count]];
-        [_falseIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            [clauses addObject:[self disjRow:idx negate:NO]];
-        }];
-        result = [NSString stringWithFormat:@"(%@)", [clauses componentsJoinedByString:@") ∧ ("]];
-    }
-    
-    return result;
-}
-
-- (NSString*)dnfDescription {
-    NSString *result = [self snf];
-    if (!result) {
-        NSMutableArray *clauses = [NSMutableArray arrayWithCapacity:[_trueIndices count]];
-        [_trueIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            [clauses addObject:[self conjRow:idx negate:NO]];
-        }];
-        result = [NSString stringWithFormat:@"(%@)", [clauses componentsJoinedByString:@") ∨ ("]];
-    }
-    
-    return result;
-}
-
-- (NSString*)nnfDescription {
-    if ([_falseIndices count] <= [_trueIndices count]) return [self cnfDescription];
-    else return [self dnfDescription];
-}
-
-#pragma mark - cnf array
-
-- (NSArray*)cnfArray {
-    NSArray* conjunction = nil;
+- (NSSet*)cnfSet {
+    NSMutableSet* conjunction = nil;
     if ([_falseIndices count] == 0) { // valid, tautology, top, T
-        conjunction = @[];         // ∧{} = T
+        conjunction = [NSSet set];         // ∧{} = T
     }
     else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
-        conjunction = @[@[]]; // ∧{∨{}} = ∧{F} = F
+        conjunction = [NSSet setWithObject:[NSSet set]]; // ∧{∨{}} = ∧{F} = F
     }
     else if ([_trueIndices count] == 1) { // conjunction of literals: { {x} {¬y} {z} }
-        NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+        NSMutableSet *c = [NSMutableSet setWithCapacity:[_sortedNames count]];
         NSUInteger idx = [_trueIndices firstIndex];
         for (NSString *name in _sortedNames) {
             BOOL eval = [self evalAtRow:idx forHeader:name];
-            [c addObject: @[eval ? name : [name complementaryString]]];
+            NSSet *d = [NSSet setWithArray:@[eval ? name : [name complementaryString]]];
+            [c addObject: d];
         }
         conjunction = c;
     }
@@ -348,9 +267,9 @@
         //              = "negated conjunction of literals"
         //              = "disjunction of negated literals"
         //              = "disjunction of complementary literals"
-        NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_falseIndices count]];
+        NSMutableSet *c = [NSMutableSet setWithCapacity:[_falseIndices count]];
         [_falseIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+            NSMutableSet *d = [NSMutableSet setWithCapacity:[_sortedNames count]];
             for (NSString *name in _sortedNames) {
                 BOOL eval = [self evalAtRow:idx forHeader:name];
                 [d addObject: !eval ? name : [name complementaryString]];
@@ -362,29 +281,30 @@
     return conjunction;
 }
 
-- (NSArray*)dnfArray {
-    NSArray* disjunction = nil;
+- (NSSet*)dnfSet {
+    NSMutableSet* disjunction = nil;
     if ([_falseIndices count] == 0) { // valid, tautology, top, T
-        disjunction = @[@[]];         // ∨{∧{}} = T
+        disjunction = [NSSet setWithObject:[NSSet set]];         // ∨{∧{}} = ∨{T} = T
     }
     else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
-        disjunction = @[]; // ∨{} = F
+        disjunction = [NSSet set]; // ∨{} = F
     }
     else if ([_falseIndices count] == 1) { // disjunction of complementary literals
-        NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+        NSMutableSet *d = [NSMutableSet setWithCapacity:[_sortedNames count]];
         NSUInteger idx = [_falseIndices firstIndex];
         for (NSString *name in _sortedNames) {
             BOOL eval = [self evalAtRow:idx forHeader:name];
-            [d addObject: @[!eval ? name : [name complementaryString]]];
+            NSSet *c = [NSSet setWithArray:@[!eval ? name : [name complementaryString]]];
+            [d addObject: c];
         }
         disjunction = d;
         
     }
     else { // disjunction of "1-rows"
         //              = "conjunction of literals"
-        NSMutableArray *d = [NSMutableArray arrayWithCapacity:[_trueIndices count]];
+        NSMutableSet *d = [NSMutableSet setWithCapacity:[_trueIndices count]];
         [_trueIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            NSMutableArray *c = [NSMutableArray arrayWithCapacity:[_sortedNames count]];
+            NSMutableSet *c = [NSMutableSet setWithCapacity:[_sortedNames count]];
             for (NSString *name in _sortedNames) {
                 BOOL eval = [self evalAtRow:idx forHeader:name];
                 [c addObject: eval ? name : [name complementaryString]];

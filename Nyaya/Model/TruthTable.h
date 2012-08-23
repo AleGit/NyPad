@@ -26,12 +26,8 @@
 - (BOOL)isContradiction;
 - (BOOL)isSatisfiable;
 
-- (NSString*)nnfDescription;
-- (NSString*)cnfDescription;
-- (NSString*)dnfDescription;
-
-- (NSArray*)cnfArray;
-- (NSArray*)dnfArray;
+- (NSSet*)cnfSet;
+- (NSSet*)dnfSet;
 
 
 @end
