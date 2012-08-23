@@ -240,7 +240,8 @@
         }
     }];
     
-    return sameVariables && [_trueIndices isEqual:truthTable->_trueIndices];
+    return sameVariables && [_trueIndices isEqualToIndexSet:truthTable->_trueIndices];
+    // return [[self cnfSet] isEqualToSet:[truthTable cnfSet]];
 }
 
 #pragma mark - normal forms
