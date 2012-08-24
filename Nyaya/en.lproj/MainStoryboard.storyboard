@@ -408,7 +408,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Demo" image="first.png" id="7"/>
+                    <tabBarItem key="tabBarItem" title="Demo" image="t4use.png" id="7"/>
                     <connections>
                         <outlet property="ast" destination="mAr-co-VoA" id="jHa-dj-efC"/>
                         <outlet property="cnf" destination="6dq-z3-ku3" id="SDz-er-TDa"/>
@@ -925,12 +925,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first.png" width="30" height="30"/>
         <image name="i1.png" width="30" height="30"/>
         <image name="i2.png" width="30" height="30"/>
         <image name="i3.png" width="30" height="30"/>
         <image name="i4.png" width="30" height="30"/>
         <image name="i5.png" width="30" height="30"/>
+        <image name="t4use.png" width="30" height="30"/>
     </resources>
     <classes>
         <class className="FirstViewController" superclassName="UIViewController">
