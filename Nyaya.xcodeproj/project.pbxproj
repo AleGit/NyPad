@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1105107415DA73B4000219C9 /* PropositionalLogic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1105107315DA73B4000219C9 /* PropositionalLogic.txt */; };
-		1105107715DA773C000219C9 /* 101.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1105107615DA773C000219C9 /* 101.txt */; };
-		111104B215BC0147006EB260 /* connectives in Resources */ = {isa = PBXBuildFile; fileRef = 111104B115BC0147006EB260 /* connectives */; };
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		11436C9A15E3A69100A4457F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 11436C9615E3A69100A4457F /* Icon-72.png */; };
@@ -95,8 +92,6 @@
 		11C3761815B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C3761915B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C3762115B3D23D005C5C9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11C3761F15B3D23D005C5C9C /* InfoPlist.strings */; };
-		11C3764015B3EC48005C5C9C /* Nyaya.g in Resources */ = {isa = PBXBuildFile; fileRef = 11C3763F15B3EC48005C5C9C /* Nyaya.g */; };
-		11C3764215B3FCC1005C5C9C /* ebnf in Resources */ = {isa = PBXBuildFile; fileRef = 11C3764115B3FCC1005C5C9C /* ebnf */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* NyayaBdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* NyayaBdd.m */; };
 		11F906C615CEC164001CD0F3 /* BasicParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C515CEC164001CD0F3 /* BasicParseTests.m */; };
@@ -741,13 +736,8 @@
 			files = (
 				11C375F815B3D23D005C5C9C /* InfoPlist.strings in Resources */,
 				11C3760115B3D23D005C5C9C /* MainStoryboard.storyboard in Resources */,
-				11C3764015B3EC48005C5C9C /* Nyaya.g in Resources */,
-				11C3764215B3FCC1005C5C9C /* ebnf in Resources */,
-				111104B215BC0147006EB260 /* connectives in Resources */,
 				1187E24115D1072C0048E153 /* Localizable.strings in Resources */,
 				116D221415D92851003DBD88 /* formate.css in Resources */,
-				1105107415DA73B4000219C9 /* PropositionalLogic.txt in Resources */,
-				1105107715DA773C000219C9 /* 101.txt in Resources */,
 				11436C9A15E3A69100A4457F /* Icon-72.png in Resources */,
 				11436C9B15E3A69100A4457F /* Icon-72@2x.png in Resources */,
 				11436C9C15E3A69100A4457F /* Icon.png in Resources */,
