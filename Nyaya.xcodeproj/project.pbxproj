@@ -110,7 +110,6 @@
 
 /* Begin PBXFileReference section */
 		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
-		1105107615DA773C000219C9 /* 101.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 101.txt; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
@@ -481,7 +480,6 @@
 			isa = PBXGroup;
 			children = (
 				1105107315DA73B4000219C9 /* PropositionalLogic.txt */,
-				1105107615DA773C000219C9 /* 101.txt */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
