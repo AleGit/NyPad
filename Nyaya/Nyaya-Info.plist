@@ -16,6 +16,11 @@
 			<array>
 				<string>Icon-72.png</string>
 				<string>Icon-72@2x.png</string>
+				<string>Default-Landscape~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Landscape~ipad.png</string>
 			</array>
 		</dict>
 	</dict>
