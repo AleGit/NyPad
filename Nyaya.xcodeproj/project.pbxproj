@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
-		11436C9A15E3A69100A4457F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 11436C9615E3A69100A4457F /* Icon-72.png */; };
-		11436C9B15E3A69100A4457F /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11436C9715E3A69100A4457F /* Icon-72@2x.png */; };
-		11436C9C15E3A69100A4457F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11436C9815E3A69100A4457F /* Icon.png */; };
-		11436C9D15E3A69100A4457F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11436C9915E3A69100A4457F /* Icon@2x.png */; };
 		1144248815C68918000B3CD9 /* TransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248715C68918000B3CD9 /* TransformTests.m */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
@@ -29,10 +25,6 @@
 		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		116D220715D925A2003DBD88 /* NyayaTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */; };
 		116D221415D92851003DBD88 /* formate.css in Resources */ = {isa = PBXBuildFile; fileRef = 116D221315D92851003DBD88 /* formate.css */; };
-		1177494915E7CF6C00B5C071 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494815E7CF6C00B5C071 /* Default-Landscape~ipad.png */; };
-		1177494B15E7CF7300B5C071 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494A15E7CF7300B5C071 /* Default-Portrait~ipad.png */; };
-		1177494E15E7D09A00B5C071 /* AppIconBgLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494C15E7D09A00B5C071 /* AppIconBgLandscape.png */; };
-		1177494F15E7D09A00B5C071 /* AppIconBgPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494D15E7D09A00B5C071 /* AppIconBgPortrait.png */; };
 		1177495115E7D2BF00B5C071 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177495015E7D2BF00B5C071 /* abc.png */; };
 		1177495315E7D34500B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495215E7D34500B5C071 /* impressum.html */; };
 		1177495515E7D36900B5C071 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495415E7D36900B5C071 /* welcome.html */; };
@@ -124,10 +116,6 @@
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
-		11436C9615E3A69100A4457F /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		11436C9715E3A69100A4457F /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
-		11436C9815E3A69100A4457F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		11436C9915E3A69100A4457F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
 		1144248715C68918000B3CD9 /* TransformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTests.m; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
@@ -159,10 +147,6 @@
 		1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeVariablesTests.m; sourceTree = "<group>"; };
 		116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaTabBarViewController.m; sourceTree = "<group>"; };
 		116D221315D92851003DBD88 /* formate.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = formate.css; path = html/formate.css; sourceTree = "<group>"; };
-		1177494815E7CF6C00B5C071 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		1177494A15E7CF7300B5C071 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		1177494C15E7D09A00B5C071 /* AppIconBgLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBgLandscape.png; sourceTree = SOURCE_ROOT; };
-		1177494D15E7D09A00B5C071 /* AppIconBgPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBgPortrait.png; sourceTree = SOURCE_ROOT; };
 		1177495015E7D2BF00B5C071 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abc.png; path = html/abc.png; sourceTree = "<group>"; };
 		1177495215E7D34500B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = impressum.html; path = html/impressum.html; sourceTree = "<group>"; };
 		1177495415E7D36900B5C071 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = html/welcome.html; sourceTree = "<group>"; };
@@ -406,12 +390,6 @@
 				117749B815E7DB6B00B5C071 /* Icon-72@2x.png */,
 				117749B915E7DB6B00B5C071 /* Icon.png */,
 				117749BA15E7DB6B00B5C071 /* Icon@2x.png */,
-				1177494C15E7D09A00B5C071 /* AppIconBgLandscape.png */,
-				1177494D15E7D09A00B5C071 /* AppIconBgPortrait.png */,
-				11436C9615E3A69100A4457F /* Icon-72.png */,
-				11436C9715E3A69100A4457F /* Icon-72@2x.png */,
-				11436C9815E3A69100A4457F /* Icon.png */,
-				11436C9915E3A69100A4457F /* Icon@2x.png */,
 			);
 			name = AppIcons;
 			sourceTree = "<group>";
@@ -532,8 +510,6 @@
 		11C375DE15B3D23D005C5C9C = {
 			isa = PBXGroup;
 			children = (
-				1177494A15E7CF7300B5C071 /* Default-Portrait~ipad.png */,
-				1177494815E7CF6C00B5C071 /* Default-Landscape~ipad.png */,
 				11C375F315B3D23D005C5C9C /* Nyaya */,
 				11C3761C15B3D23D005C5C9C /* NyayaTests */,
 				11C375EC15B3D23D005C5C9C /* Frameworks */,
@@ -756,14 +732,6 @@
 				11C3760115B3D23D005C5C9C /* MainStoryboard.storyboard in Resources */,
 				1187E24115D1072C0048E153 /* Localizable.strings in Resources */,
 				116D221415D92851003DBD88 /* formate.css in Resources */,
-				11436C9A15E3A69100A4457F /* Icon-72.png in Resources */,
-				11436C9B15E3A69100A4457F /* Icon-72@2x.png in Resources */,
-				11436C9C15E3A69100A4457F /* Icon.png in Resources */,
-				11436C9D15E3A69100A4457F /* Icon@2x.png in Resources */,
-				1177494915E7CF6C00B5C071 /* Default-Landscape~ipad.png in Resources */,
-				1177494B15E7CF7300B5C071 /* Default-Portrait~ipad.png in Resources */,
-				1177494E15E7D09A00B5C071 /* AppIconBgLandscape.png in Resources */,
-				1177494F15E7D09A00B5C071 /* AppIconBgPortrait.png in Resources */,
 				1177495115E7D2BF00B5C071 /* abc.png in Resources */,
 				1177495315E7D34500B5C071 /* impressum.html in Resources */,
 				1177495515E7D36900B5C071 /* welcome.html in Resources */,
