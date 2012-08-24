@@ -66,8 +66,6 @@
 		116D220B15D92656003DBD88 /* NyWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220A15D92656003DBD88 /* NyWelcomeViewController.m */; };
 		116D221215D92848003DBD88 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 116D221115D92848003DBD88 /* welcome.html */; };
 		116D221415D92851003DBD88 /* formate.css in Resources */ = {isa = PBXBuildFile; fileRef = 116D221315D92851003DBD88 /* formate.css */; };
-		1177493215E77A1C00B5C071 /* AppIconv5-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177493015E77A1C00B5C071 /* AppIconv5-72.png */; };
-		1177493315E77A1C00B5C071 /* AppIconv5-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177493115E77A1C00B5C071 /* AppIconv5-72@2x.png */; };
 		1177493915E7839F00B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177493815E7839F00B5C071 /* impressum.html */; };
 		1177494315E7A83A00B5C071 /* AppIconBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494215E7A83A00B5C071 /* AppIconBg.png */; };
 		1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9C15B5005300FD21CA /* NyayaNode.m */; };
@@ -205,8 +203,6 @@
 		116D220A15D92656003DBD88 /* NyWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyWelcomeViewController.m; path = Nyaya/Welcome/NyWelcomeViewController.m; sourceTree = "<group>"; };
 		116D221115D92848003DBD88 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = Nyaya/html/welcome.html; sourceTree = "<group>"; };
 		116D221315D92851003DBD88 /* formate.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = formate.css; path = html/formate.css; sourceTree = "<group>"; };
-		1177493015E77A1C00B5C071 /* AppIconv5-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconv5-72.png"; sourceTree = "<group>"; };
-		1177493115E77A1C00B5C071 /* AppIconv5-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconv5-72@2x.png"; sourceTree = "<group>"; };
 		1177493815E7839F00B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = impressum.html; sourceTree = "<group>"; };
 		1177494215E7A83A00B5C071 /* AppIconBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBg.png; sourceTree = "<group>"; };
 		1178CC9B15B5005300FD21CA /* NyayaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaNode.h; path = Model/NyayaNode.h; sourceTree = "<group>"; };
@@ -401,8 +397,6 @@
 		11436C0715E3761100A4457F /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
-				1177493015E77A1C00B5C071 /* AppIconv5-72.png */,
-				1177493115E77A1C00B5C071 /* AppIconv5-72@2x.png */,
 				11436C9615E3A69100A4457F /* Icon-72.png */,
 				11436C9715E3A69100A4457F /* Icon-72@2x.png */,
 				11436C9815E3A69100A4457F /* Icon.png */,
@@ -785,8 +779,6 @@
 				11436CAB15E3B52300A4457F /* t3lookup@2x.png in Resources */,
 				11436CAC15E3B52300A4457F /* t4use.png in Resources */,
 				11436CAD15E3B52300A4457F /* t4use@2x.png in Resources */,
-				1177493215E77A1C00B5C071 /* AppIconv5-72.png in Resources */,
-				1177493315E77A1C00B5C071 /* AppIconv5-72@2x.png in Resources */,
 				1177493915E7839F00B5C071 /* impressum.html in Resources */,
 				1177494315E7A83A00B5C071 /* AppIconBg.png in Resources */,
 			);
