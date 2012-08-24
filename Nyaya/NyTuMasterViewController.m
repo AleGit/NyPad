@@ -17,4 +17,13 @@
     return (NyTuDetailViewController*)super.detailViewController;
 }
 
+- (BOOL)tableViewIsEditable {
+#ifdef DEBUG
+#warning code is for testing only
+    if (!_objects) _objects = [NSMutableArray array];
+    if ([_objects count] == 0) [_objects addObject:@"Hello, World"];
+#endif
+    return NO;
+}
+
 @end
