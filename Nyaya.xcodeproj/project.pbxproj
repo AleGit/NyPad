@@ -64,14 +64,14 @@
 		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		116D220715D925A2003DBD88 /* NyayaTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */; };
 		116D220B15D92656003DBD88 /* NyWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220A15D92656003DBD88 /* NyWelcomeViewController.m */; };
-		116D221215D92848003DBD88 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 116D221115D92848003DBD88 /* welcome.html */; };
 		116D221415D92851003DBD88 /* formate.css in Resources */ = {isa = PBXBuildFile; fileRef = 116D221315D92851003DBD88 /* formate.css */; };
-		1177493915E7839F00B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177493815E7839F00B5C071 /* impressum.html */; };
-		1177494315E7A83A00B5C071 /* AppIconBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494215E7A83A00B5C071 /* AppIconBg.png */; };
 		1177494915E7CF6C00B5C071 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494815E7CF6C00B5C071 /* Default-Landscape~ipad.png */; };
 		1177494B15E7CF7300B5C071 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494A15E7CF7300B5C071 /* Default-Portrait~ipad.png */; };
 		1177494E15E7D09A00B5C071 /* AppIconBgLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494C15E7D09A00B5C071 /* AppIconBgLandscape.png */; };
 		1177494F15E7D09A00B5C071 /* AppIconBgPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177494D15E7D09A00B5C071 /* AppIconBgPortrait.png */; };
+		1177495115E7D2BF00B5C071 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177495015E7D2BF00B5C071 /* abc.png */; };
+		1177495315E7D34500B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495215E7D34500B5C071 /* impressum.html */; };
+		1177495515E7D36900B5C071 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495415E7D36900B5C071 /* welcome.html */; };
 		1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9C15B5005300FD21CA /* NyayaNode.m */; };
 		1178CCA015B5176900FD21CA /* NyayaNodeValueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */; };
 		1178CCA615B5270000FD21CA /* NyayaNodeDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */; };
@@ -205,14 +205,14 @@
 		116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaTabBarViewController.m; sourceTree = "<group>"; };
 		116D220915D92656003DBD88 /* NyWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyWelcomeViewController.h; path = Nyaya/Welcome/NyWelcomeViewController.h; sourceTree = "<group>"; };
 		116D220A15D92656003DBD88 /* NyWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyWelcomeViewController.m; path = Nyaya/Welcome/NyWelcomeViewController.m; sourceTree = "<group>"; };
-		116D221115D92848003DBD88 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = Nyaya/html/welcome.html; sourceTree = "<group>"; };
 		116D221315D92851003DBD88 /* formate.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = formate.css; path = html/formate.css; sourceTree = "<group>"; };
-		1177493815E7839F00B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = impressum.html; sourceTree = "<group>"; };
-		1177494215E7A83A00B5C071 /* AppIconBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBg.png; sourceTree = "<group>"; };
 		1177494815E7CF6C00B5C071 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		1177494A15E7CF7300B5C071 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		1177494C15E7D09A00B5C071 /* AppIconBgLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBgLandscape.png; sourceTree = SOURCE_ROOT; };
 		1177494D15E7D09A00B5C071 /* AppIconBgPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconBgPortrait.png; sourceTree = SOURCE_ROOT; };
+		1177495015E7D2BF00B5C071 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abc.png; path = html/abc.png; sourceTree = "<group>"; };
+		1177495215E7D34500B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = impressum.html; path = html/impressum.html; sourceTree = "<group>"; };
+		1177495415E7D36900B5C071 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = html/welcome.html; sourceTree = "<group>"; };
 		1178CC9B15B5005300FD21CA /* NyayaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaNode.h; path = Model/NyayaNode.h; sourceTree = "<group>"; };
 		1178CC9C15B5005300FD21CA /* NyayaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaNode.m; path = Model/NyayaNode.m; sourceTree = "<group>"; };
 		1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeValueTests.h; sourceTree = "<group>"; };
@@ -418,9 +418,6 @@
 		116D220215D9252C003DBD88 /* NyWelcome */ = {
 			isa = PBXGroup;
 			children = (
-				1177494215E7A83A00B5C071 /* AppIconBg.png */,
-				116D221115D92848003DBD88 /* welcome.html */,
-				1177493815E7839F00B5C071 /* impressum.html */,
 				116D220915D92656003DBD88 /* NyWelcomeViewController.h */,
 				116D220A15D92656003DBD88 /* NyWelcomeViewController.m */,
 			);
@@ -451,6 +448,9 @@
 		116D221015D927C9003DBD88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				1177495415E7D36900B5C071 /* welcome.html */,
+				1177495215E7D34500B5C071 /* impressum.html */,
+				1177495015E7D2BF00B5C071 /* abc.png */,
 				116D221315D92851003DBD88 /* formate.css */,
 			);
 			name = html;
@@ -761,7 +761,6 @@
 				11C3764215B3FCC1005C5C9C /* ebnf in Resources */,
 				111104B215BC0147006EB260 /* connectives in Resources */,
 				1187E24115D1072C0048E153 /* Localizable.strings in Resources */,
-				116D221215D92848003DBD88 /* welcome.html in Resources */,
 				116D221415D92851003DBD88 /* formate.css in Resources */,
 				1105107415DA73B4000219C9 /* PropositionalLogic.txt in Resources */,
 				1105107715DA773C000219C9 /* 101.txt in Resources */,
@@ -791,12 +790,13 @@
 				11436CAB15E3B52300A4457F /* t3lookup@2x.png in Resources */,
 				11436CAC15E3B52300A4457F /* t4use.png in Resources */,
 				11436CAD15E3B52300A4457F /* t4use@2x.png in Resources */,
-				1177493915E7839F00B5C071 /* impressum.html in Resources */,
-				1177494315E7A83A00B5C071 /* AppIconBg.png in Resources */,
 				1177494915E7CF6C00B5C071 /* Default-Landscape~ipad.png in Resources */,
 				1177494B15E7CF7300B5C071 /* Default-Portrait~ipad.png in Resources */,
 				1177494E15E7D09A00B5C071 /* AppIconBgLandscape.png in Resources */,
 				1177494F15E7D09A00B5C071 /* AppIconBgPortrait.png in Resources */,
+				1177495115E7D2BF00B5C071 /* abc.png in Resources */,
+				1177495315E7D34500B5C071 /* impressum.html in Resources */,
+				1177495515E7D36900B5C071 /* welcome.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
