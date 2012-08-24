@@ -91,7 +91,6 @@
 		11C3760415B3D23D005C5C9C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3760315B3D23D005C5C9C /* FirstViewController.m */; };
 		11C3760615B3D23D005C5C9C /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C3760515B3D23D005C5C9C /* first.png */; };
 		11C3760815B3D23D005C5C9C /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C3760715B3D23D005C5C9C /* first@2x.png */; };
-		11C3760B15B3D23D005C5C9C /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3760A15B3D23D005C5C9C /* SecondViewController.m */; };
 		11C3760D15B3D23D005C5C9C /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C3760C15B3D23D005C5C9C /* second.png */; };
 		11C3760F15B3D23D005C5C9C /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C3760E15B3D23D005C5C9C /* second@2x.png */; };
 		11C3761715B3D23D005C5C9C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C3761615B3D23D005C5C9C /* SenTestingKit.framework */; };
@@ -246,8 +245,6 @@
 		11C3760315B3D23D005C5C9C /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		11C3760515B3D23D005C5C9C /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		11C3760715B3D23D005C5C9C /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		11C3760915B3D23D005C5C9C /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		11C3760A15B3D23D005C5C9C /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		11C3760C15B3D23D005C5C9C /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		11C3760E15B3D23D005C5C9C /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		11C3761515B3D23D005C5C9C /* NyayaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyayaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,8 +440,6 @@
 			children = (
 				11C3760215B3D23D005C5C9C /* FirstViewController.h */,
 				11C3760315B3D23D005C5C9C /* FirstViewController.m */,
-				11C3760915B3D23D005C5C9C /* SecondViewController.h */,
-				11C3760A15B3D23D005C5C9C /* SecondViewController.m */,
 			);
 			name = Deprecated;
 			sourceTree = "<group>";
@@ -831,7 +826,6 @@
 				11C375FA15B3D23D005C5C9C /* main.m in Sources */,
 				11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */,
 				11C3760415B3D23D005C5C9C /* FirstViewController.m in Sources */,
-				11C3760B15B3D23D005C5C9C /* SecondViewController.m in Sources */,
 				1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */,
 				1178CCA915B5313A00FD21CA /* NyayaParser.m in Sources */,
 				1166601A15B6DEF60070B5B8 /* NSString+NyayaToken.m in Sources */,
