@@ -52,7 +52,9 @@
     return YES;
 }
 
+// ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
@@ -66,19 +68,25 @@
 
 #pragma mark - Table View
 
+// ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+// ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _objects.count;
 }
 
+// ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -120,7 +128,9 @@
  }
  */
 
+// ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDate *object = [_objects objectAtIndex:indexPath.row];

@@ -18,4 +18,5 @@
 
 @property (strong, nonatomic) NyDetailViewController *detailViewController;
 
+
 @end
