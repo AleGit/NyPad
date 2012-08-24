@@ -13,8 +13,13 @@
 
 @implementation NyBtDetailViewController
 
+- (NSString*)localizedBarButtonItemTitle {
+    return NSLocalizedString(@"BoolTool", @"BoolTool");
+}
+
 - (void)configureView
 {
+    [super configureView];
     // Update the user interface for the detail item.
     
     if (self.detailItem) {

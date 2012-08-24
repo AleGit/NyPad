@@ -43,9 +43,16 @@
 
 #pragma mark - Split view
 
+// ****************************
+// !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
+- (NSString*)localizedBarButtonItemTitle {
+    return NSLocalizedString(@"MASTER", @"Override in subclasses!");
+}
+
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    barButtonItem.title = [self localizedBarButtonItemTitle];
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
@@ -57,11 +64,25 @@
     self.masterPopoverController = nil;
 }
 
+- (BOOL)splitViewController:(UISplitViewController*)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return YES; // TODO: make it user configurable
+}
+
 
 #pragma mark - Managing the detail item
 
+
+
+
+// ****************************
+// !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (void)configureView {
-    // abstract function does nothing
+    if (_detailItem) self.navigationItem.title = [_detailItem description];
+    else self.navigationItem.title = [self localizedBarButtonItemTitle];
 }
 
 - (void)setDetailItem:(id)newDetailItem

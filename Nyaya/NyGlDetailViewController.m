@@ -13,8 +13,13 @@
 
 @implementation NyGlDetailViewController
 
+- (NSString*)localizedBarButtonItemTitle {
+    return NSLocalizedString(@"Glossary", @"Glossary");
+}
+
 - (void)configureView
 {
+    [super configureView];
     // Update the user interface for the detail item.
     
     if (self.detailItem) {

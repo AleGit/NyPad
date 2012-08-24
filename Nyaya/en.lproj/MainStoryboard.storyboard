@@ -510,7 +510,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="Wi4-e6-Lcg"/>
+                    <navigationItem key="navigationItem" title="Tutorial" id="Wi4-e6-Lcg"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="b2i-0A-KYz" id="AdX-cy-bap"/>
                     </connections>
@@ -572,7 +572,7 @@
                             <outlet property="delegate" destination="fDq-m6-kVc" id="3vP-gN-Aar"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="m1W-Q8-NYc"/>
+                    <navigationItem key="navigationItem" title="Tutorials" id="m1W-Q8-NYc"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="3562" y="-1643"/>
@@ -629,7 +629,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="be5-hE-dL5"/>
+                    <navigationItem key="navigationItem" title="Sheet" id="be5-hE-dL5"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="zD2-En-Uuf" id="wtz-dO-Azr"/>
                     </connections>
@@ -691,7 +691,7 @@
                             <outlet property="delegate" destination="y8j-nK-SqU" id="bKu-Ah-Jya"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="zPu-3U-yul"/>
+                    <navigationItem key="navigationItem" title="Sheets" id="zPu-3U-yul"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="3878" y="163"/>
@@ -748,7 +748,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="jYn-wK-DyK"/>
+                    <navigationItem key="navigationItem" title="Entry" id="jYn-wK-DyK"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="Krc-YI-vH0" id="bHp-Go-UJf"/>
                     </connections>
@@ -810,7 +810,7 @@
                             <outlet property="delegate" destination="eMm-lv-59L" id="TDT-33-PIH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="mgN-Sj-TC5"/>
+                    <navigationItem key="navigationItem" title="Glossary" id="mgN-Sj-TC5"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="3770" y="2055"/>
@@ -867,7 +867,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="i5X-ak-Cbk"/>
+                    <navigationItem key="navigationItem" title="Formula" id="i5X-ak-Cbk"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="nYc-pO-N20" id="Ri9-2E-kqd"/>
                     </connections>
@@ -929,7 +929,7 @@
                             <outlet property="delegate" destination="DLb-tQ-pdz" id="GwJ-29-T6w"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Mfy-ah-6TK"/>
+                    <navigationItem key="navigationItem" title="Formulas" id="Mfy-ah-6TK"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2022" y="3323"/>
@@ -959,6 +959,84 @@
         <image name="i5.png" width="30" height="30"/>
         <image name="second.png" width="30" height="30"/>
     </resources>
+    <classes>
+        <class className="FirstViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="compute:"/>
+                <relationship kind="action" name="delete:" candidateClass="UIButton"/>
+                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
+                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
+                <relationship kind="action" name="press:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="ast" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="cnf" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dnf" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="errors" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="imf" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="input" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="myInputView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="nnf" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="subformulas" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NyBtDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
+        </class>
+        <class className="NyDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
+        </class>
+        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
+        </class>
+        <class className="NyMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
+        </class>
+        <class className="NyPgDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
+        </class>
+        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
+        </class>
+        <class className="NyWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
+        </class>
+        <class className="SecondViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

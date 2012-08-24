@@ -13,8 +13,13 @@
 
 @implementation NyTuDetailViewController
 
+- (NSString*)localizedBarButtonItemTitle {
+    return NSLocalizedString(@"Tutorials", @"Tutorials");
+}
+
 - (void)configureView
 {
+    [super configureView];
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
