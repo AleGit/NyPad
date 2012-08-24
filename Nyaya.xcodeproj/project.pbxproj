@@ -72,6 +72,23 @@
 		1177495115E7D2BF00B5C071 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177495015E7D2BF00B5C071 /* abc.png */; };
 		1177495315E7D34500B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495215E7D34500B5C071 /* impressum.html */; };
 		1177495515E7D36900B5C071 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495415E7D36900B5C071 /* welcome.html */; };
+		1177495A15E7D5D700B5C071 /* NyTuDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177495715E7D5D700B5C071 /* NyTuDetailViewController.m */; };
+		1177495B15E7D5D700B5C071 /* NyTuMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177495915E7D5D700B5C071 /* NyTuMasterViewController.m */; };
+		1177496015E7D62000B5C071 /* NyPgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177495D15E7D62000B5C071 /* NyPgDetailViewController.m */; };
+		1177496115E7D62000B5C071 /* NyPgMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177495F15E7D62000B5C071 /* NyPgMasterViewController.m */; };
+		1177496615E7D65E00B5C071 /* NyBtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496315E7D65E00B5C071 /* NyBtDetailViewController.m */; };
+		1177496715E7D65E00B5C071 /* NyBtMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496515E7D65E00B5C071 /* NyBtMasterViewController.m */; };
+		1177496C15E7D67100B5C071 /* NyBtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496915E7D67100B5C071 /* NyBtDetailViewController.m */; };
+		1177496D15E7D67100B5C071 /* NyBtMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496B15E7D67100B5C071 /* NyBtMasterViewController.m */; };
+		1177497215E7D68B00B5C071 /* NyPgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */; };
+		1177497315E7D68B00B5C071 /* NyPgMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */; };
+		1177497815E7D6A500B5C071 /* NyTuDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177497515E7D6A500B5C071 /* NyTuDetailViewController.m */; };
+		1177497915E7D6A500B5C071 /* NyTuMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177497715E7D6A500B5C071 /* NyTuMasterViewController.m */; };
+		1177497C15E7D6BA00B5C071 /* NyWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177497B15E7D6BA00B5C071 /* NyWelcomeViewController.m */; };
+		1177498115E7D70600B5C071 /* NyGlDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177497E15E7D70600B5C071 /* NyGlDetailViewController.m */; };
+		1177498215E7D70600B5C071 /* NyGlMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177498015E7D70600B5C071 /* NyGlMasterViewController.m */; };
+		1177498715E7D74A00B5C071 /* NyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177498415E7D74900B5C071 /* NyDetailViewController.m */; };
+		1177498815E7D74A00B5C071 /* NyMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177498615E7D74900B5C071 /* NyMasterViewController.m */; };
 		1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9C15B5005300FD21CA /* NyayaNode.m */; };
 		1178CCA015B5176900FD21CA /* NyayaNodeValueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CC9F15B5176900FD21CA /* NyayaNodeValueTests.m */; };
 		1178CCA615B5270000FD21CA /* NyayaNodeDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCA515B5270000FD21CA /* NyayaNodeDescriptionTests.m */; };
@@ -213,6 +230,40 @@
 		1177495015E7D2BF00B5C071 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abc.png; path = html/abc.png; sourceTree = "<group>"; };
 		1177495215E7D34500B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = impressum.html; path = html/impressum.html; sourceTree = "<group>"; };
 		1177495415E7D36900B5C071 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = html/welcome.html; sourceTree = "<group>"; };
+		1177495615E7D5D700B5C071 /* NyTuDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuDetailViewController.h; path = Tutorials/NyTuDetailViewController.h; sourceTree = "<group>"; };
+		1177495715E7D5D700B5C071 /* NyTuDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuDetailViewController.m; path = Tutorials/NyTuDetailViewController.m; sourceTree = "<group>"; };
+		1177495815E7D5D700B5C071 /* NyTuMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuMasterViewController.h; path = Tutorials/NyTuMasterViewController.h; sourceTree = "<group>"; };
+		1177495915E7D5D700B5C071 /* NyTuMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuMasterViewController.m; path = Tutorials/NyTuMasterViewController.m; sourceTree = "<group>"; };
+		1177495C15E7D62000B5C071 /* NyPgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyPgDetailViewController.h; path = Playground/NyPgDetailViewController.h; sourceTree = "<group>"; };
+		1177495D15E7D62000B5C071 /* NyPgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgDetailViewController.m; path = Playground/NyPgDetailViewController.m; sourceTree = "<group>"; };
+		1177495E15E7D62000B5C071 /* NyPgMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyPgMasterViewController.h; path = Playground/NyPgMasterViewController.h; sourceTree = "<group>"; };
+		1177495F15E7D62000B5C071 /* NyPgMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgMasterViewController.m; path = Playground/NyPgMasterViewController.m; sourceTree = "<group>"; };
+		1177496215E7D65E00B5C071 /* NyBtDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBtDetailViewController.h; path = BoolTool/NyBtDetailViewController.h; sourceTree = "<group>"; };
+		1177496315E7D65E00B5C071 /* NyBtDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyBtDetailViewController.m; path = BoolTool/NyBtDetailViewController.m; sourceTree = "<group>"; };
+		1177496415E7D65E00B5C071 /* NyBtMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBtMasterViewController.h; path = BoolTool/NyBtMasterViewController.h; sourceTree = "<group>"; };
+		1177496515E7D65E00B5C071 /* NyBtMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyBtMasterViewController.m; path = BoolTool/NyBtMasterViewController.m; sourceTree = "<group>"; };
+		1177496815E7D67100B5C071 /* NyBtDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBtDetailViewController.h; path = NyBoolTool/NyBtDetailViewController.h; sourceTree = "<group>"; };
+		1177496915E7D67100B5C071 /* NyBtDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyBtDetailViewController.m; path = NyBoolTool/NyBtDetailViewController.m; sourceTree = "<group>"; };
+		1177496A15E7D67100B5C071 /* NyBtMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBtMasterViewController.h; path = NyBoolTool/NyBtMasterViewController.h; sourceTree = "<group>"; };
+		1177496B15E7D67100B5C071 /* NyBtMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyBtMasterViewController.m; path = NyBoolTool/NyBtMasterViewController.m; sourceTree = "<group>"; };
+		1177496E15E7D68B00B5C071 /* NyPgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyPgDetailViewController.h; path = NyPlayground/NyPgDetailViewController.h; sourceTree = "<group>"; };
+		1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgDetailViewController.m; path = NyPlayground/NyPgDetailViewController.m; sourceTree = "<group>"; };
+		1177497015E7D68B00B5C071 /* NyPgMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyPgMasterViewController.h; path = NyPlayground/NyPgMasterViewController.h; sourceTree = "<group>"; };
+		1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgMasterViewController.m; path = NyPlayground/NyPgMasterViewController.m; sourceTree = "<group>"; };
+		1177497415E7D6A500B5C071 /* NyTuDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuDetailViewController.h; path = NyTutorials/NyTuDetailViewController.h; sourceTree = "<group>"; };
+		1177497515E7D6A500B5C071 /* NyTuDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuDetailViewController.m; path = NyTutorials/NyTuDetailViewController.m; sourceTree = "<group>"; };
+		1177497615E7D6A500B5C071 /* NyTuMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuMasterViewController.h; path = NyTutorials/NyTuMasterViewController.h; sourceTree = "<group>"; };
+		1177497715E7D6A500B5C071 /* NyTuMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuMasterViewController.m; path = NyTutorials/NyTuMasterViewController.m; sourceTree = "<group>"; };
+		1177497A15E7D6BA00B5C071 /* NyWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyWelcomeViewController.h; path = Nyaya/NyWelcome/NyWelcomeViewController.h; sourceTree = "<group>"; };
+		1177497B15E7D6BA00B5C071 /* NyWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyWelcomeViewController.m; path = Nyaya/NyWelcome/NyWelcomeViewController.m; sourceTree = "<group>"; };
+		1177497D15E7D70600B5C071 /* NyGlDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyGlDetailViewController.h; path = NyGlossary/NyGlDetailViewController.h; sourceTree = "<group>"; };
+		1177497E15E7D70600B5C071 /* NyGlDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyGlDetailViewController.m; path = NyGlossary/NyGlDetailViewController.m; sourceTree = "<group>"; };
+		1177497F15E7D70600B5C071 /* NyGlMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyGlMasterViewController.h; path = NyGlossary/NyGlMasterViewController.h; sourceTree = "<group>"; };
+		1177498015E7D70600B5C071 /* NyGlMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyGlMasterViewController.m; path = NyGlossary/NyGlMasterViewController.m; sourceTree = "<group>"; };
+		1177498315E7D74800B5C071 /* NyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyDetailViewController.h; path = Nyaya/NyBranches/NyDetailViewController.h; sourceTree = "<group>"; };
+		1177498415E7D74900B5C071 /* NyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyDetailViewController.m; path = Nyaya/NyBranches/NyDetailViewController.m; sourceTree = "<group>"; };
+		1177498515E7D74900B5C071 /* NyMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyMasterViewController.h; path = Nyaya/NyBranches/NyMasterViewController.h; sourceTree = "<group>"; };
+		1177498615E7D74900B5C071 /* NyMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyMasterViewController.m; path = Nyaya/NyBranches/NyMasterViewController.m; sourceTree = "<group>"; };
 		1178CC9B15B5005300FD21CA /* NyayaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaNode.h; path = Model/NyayaNode.h; sourceTree = "<group>"; };
 		1178CC9C15B5005300FD21CA /* NyayaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaNode.m; path = Model/NyayaNode.m; sourceTree = "<group>"; };
 		1178CC9E15B5176900FD21CA /* NyayaNodeValueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeValueTests.h; sourceTree = "<group>"; };
@@ -298,6 +349,14 @@
 		1104767C15E4A1230024EDDF /* NyTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				1177497415E7D6A500B5C071 /* NyTuDetailViewController.h */,
+				1177497515E7D6A500B5C071 /* NyTuDetailViewController.m */,
+				1177497615E7D6A500B5C071 /* NyTuMasterViewController.h */,
+				1177497715E7D6A500B5C071 /* NyTuMasterViewController.m */,
+				1177495615E7D5D700B5C071 /* NyTuDetailViewController.h */,
+				1177495715E7D5D700B5C071 /* NyTuDetailViewController.m */,
+				1177495815E7D5D700B5C071 /* NyTuMasterViewController.h */,
+				1177495915E7D5D700B5C071 /* NyTuMasterViewController.m */,
 				1104768015E4A16A0024EDDF /* NyTuDetailViewController.h */,
 				1104768115E4A16A0024EDDF /* NyTuDetailViewController.m */,
 				1104767E15E4A16A0024EDDF /* NyTuMasterViewController.h */,
@@ -310,6 +369,14 @@
 		1104768F15E4A6320024EDDF /* NyPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				1177496E15E7D68B00B5C071 /* NyPgDetailViewController.h */,
+				1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */,
+				1177497015E7D68B00B5C071 /* NyPgMasterViewController.h */,
+				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
+				1177495C15E7D62000B5C071 /* NyPgDetailViewController.h */,
+				1177495D15E7D62000B5C071 /* NyPgDetailViewController.m */,
+				1177495E15E7D62000B5C071 /* NyPgMasterViewController.h */,
+				1177495F15E7D62000B5C071 /* NyPgMasterViewController.m */,
 				110476A315E4BF380024EDDF /* NyPgDetailViewController.h */,
 				110476A415E4BF380024EDDF /* NyPgDetailViewController.m */,
 				110476A515E4BF380024EDDF /* NyPgMasterViewController.h */,
@@ -322,6 +389,10 @@
 		110476B415E4D59C0024EDDF /* NyGlossary */ = {
 			isa = PBXGroup;
 			children = (
+				1177497D15E7D70600B5C071 /* NyGlDetailViewController.h */,
+				1177497E15E7D70600B5C071 /* NyGlDetailViewController.m */,
+				1177497F15E7D70600B5C071 /* NyGlMasterViewController.h */,
+				1177498015E7D70600B5C071 /* NyGlMasterViewController.m */,
 				110476B615E4D7F00024EDDF /* NyGlDetailViewController.h */,
 				110476B715E4D7F00024EDDF /* NyGlDetailViewController.m */,
 				110476B915E4D80A0024EDDF /* NyGlMasterViewController.h */,
@@ -334,6 +405,10 @@
 		110476B515E4D5BF0024EDDF /* NyBranches */ = {
 			isa = PBXGroup;
 			children = (
+				1177498315E7D74800B5C071 /* NyDetailViewController.h */,
+				1177498415E7D74900B5C071 /* NyDetailViewController.m */,
+				1177498515E7D74900B5C071 /* NyMasterViewController.h */,
+				1177498615E7D74900B5C071 /* NyMasterViewController.m */,
 				110476AA15E4C14E0024EDDF /* NyDetailViewController.h */,
 				110476AB15E4C14E0024EDDF /* NyDetailViewController.m */,
 				110476AD15E4C34E0024EDDF /* NyMasterViewController.h */,
@@ -418,6 +493,8 @@
 		116D220215D9252C003DBD88 /* NyWelcome */ = {
 			isa = PBXGroup;
 			children = (
+				1177497A15E7D6BA00B5C071 /* NyWelcomeViewController.h */,
+				1177497B15E7D6BA00B5C071 /* NyWelcomeViewController.m */,
 				116D220915D92656003DBD88 /* NyWelcomeViewController.h */,
 				116D220A15D92656003DBD88 /* NyWelcomeViewController.m */,
 			);
@@ -427,6 +504,14 @@
 		116D220515D9255C003DBD88 /* NyBoolTool */ = {
 			isa = PBXGroup;
 			children = (
+				1177496815E7D67100B5C071 /* NyBtDetailViewController.h */,
+				1177496915E7D67100B5C071 /* NyBtDetailViewController.m */,
+				1177496A15E7D67100B5C071 /* NyBtMasterViewController.h */,
+				1177496B15E7D67100B5C071 /* NyBtMasterViewController.m */,
+				1177496215E7D65E00B5C071 /* NyBtDetailViewController.h */,
+				1177496315E7D65E00B5C071 /* NyBtDetailViewController.m */,
+				1177496415E7D65E00B5C071 /* NyBtMasterViewController.h */,
+				1177496515E7D65E00B5C071 /* NyBtMasterViewController.m */,
 				110476BF15E4DADB0024EDDF /* NyBtDetailViewController.h */,
 				110476C015E4DADB0024EDDF /* NyBtDetailViewController.m */,
 				110476BC15E4DAA00024EDDF /* NyBtMasterViewController.h */,
@@ -855,6 +940,23 @@
 				110476BB15E4D80A0024EDDF /* NyGlMasterViewController.m in Sources */,
 				110476BE15E4DAA00024EDDF /* NyBtMasterViewController.m in Sources */,
 				110476C115E4DADB0024EDDF /* NyBtDetailViewController.m in Sources */,
+				1177495A15E7D5D700B5C071 /* NyTuDetailViewController.m in Sources */,
+				1177495B15E7D5D700B5C071 /* NyTuMasterViewController.m in Sources */,
+				1177496015E7D62000B5C071 /* NyPgDetailViewController.m in Sources */,
+				1177496115E7D62000B5C071 /* NyPgMasterViewController.m in Sources */,
+				1177496615E7D65E00B5C071 /* NyBtDetailViewController.m in Sources */,
+				1177496715E7D65E00B5C071 /* NyBtMasterViewController.m in Sources */,
+				1177496C15E7D67100B5C071 /* NyBtDetailViewController.m in Sources */,
+				1177496D15E7D67100B5C071 /* NyBtMasterViewController.m in Sources */,
+				1177497215E7D68B00B5C071 /* NyPgDetailViewController.m in Sources */,
+				1177497315E7D68B00B5C071 /* NyPgMasterViewController.m in Sources */,
+				1177497815E7D6A500B5C071 /* NyTuDetailViewController.m in Sources */,
+				1177497915E7D6A500B5C071 /* NyTuMasterViewController.m in Sources */,
+				1177497C15E7D6BA00B5C071 /* NyWelcomeViewController.m in Sources */,
+				1177498115E7D70600B5C071 /* NyGlDetailViewController.m in Sources */,
+				1177498215E7D70600B5C071 /* NyGlMasterViewController.m in Sources */,
+				1177498715E7D74A00B5C071 /* NyDetailViewController.m in Sources */,
+				1177498815E7D74A00B5C071 /* NyMasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
