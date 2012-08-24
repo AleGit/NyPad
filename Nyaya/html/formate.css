@@ -1,21 +1,20 @@
 @charset "UTF-8";
 
-body { margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px }
+body { margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px; background-color:#F8F8F8; background-image:url(AppIconBg.png);}
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
-    font-family:Helvetica,Arial,sans-serif; }
+    font-family:Helvetica,Arial,sans-serif; color:#333333;
+    margin-top:6px; margin-bottom:0px;}
 
-h1 { font-size:26px; margin-bottom:18px; }
+h1 { font-size:37px; margin-bottom:18px; color:#666666;}
 
-h2 { font-size:21px; margin-bottom:18px; }
+h2 { font-size:25px; margin-bottom:18px; }
 
-h2 { font-size:21px; }
+h3 { font-size:19px; margin-top:12px;}
 
-h3 { font-size:16px; }
+h4 { font-size:16px; }
 
-h4 { font-size:13px; }
-
-p,ul,ol,li,div,td,th,address,blockquote { font-size:13px}
+p,ul,ol,li,div,td,th,address,blockquote { font-size:16px}
 
 li { margin-top:3px; }
 

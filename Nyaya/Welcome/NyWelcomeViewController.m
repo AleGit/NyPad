@@ -49,14 +49,24 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"welcome" ofType:@"html"];
     NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
     NSURLRequest *request = [NSURLRequest requestWithURL:fileUrl];
-    [self.webView loadRequest:request];
+    [(UIWebView*)(self.view) loadRequest:request];
 }
 
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
     
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        if (request.URL.isFileURL) {
+            return YES;
+        }
+        else {
+            [[UIApplication sharedApplication] openURL:request.URL];
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     
