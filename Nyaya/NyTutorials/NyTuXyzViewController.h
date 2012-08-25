@@ -1,5 +1,5 @@
 //
-//  NyTu101ViewController.h
+//  NyTuXyzViewController.h
 //  Nyaya
 //
 //  Created by Alexander Maringele on 25.08.12.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NyTuXyzViewController.h"
 
-@interface NyTu101ViewController : NyTuXyzViewController
+@interface NyTuXyzViewController : UIViewController
 
 @end
