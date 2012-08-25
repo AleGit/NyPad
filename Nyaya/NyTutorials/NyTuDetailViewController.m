@@ -8,7 +8,9 @@
 
 #import "NyTuDetailViewController.h"
 
-@interface NyTuDetailViewController ()
+@interface NyTuDetailViewController () 
+
+@property (strong, nonatomic) UIViewController *exerciseViewController;
 @end
 
 @implementation NyTuDetailViewController
@@ -19,12 +21,53 @@
 
 - (void)configureView
 {
-    [super configureView];
-    // Update the user interface for the detail item.
-
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        NSString *sectionTitle = [self.detailItem objectAtIndex:0];
+        NSArray *tutorial = [self.detailItem objectAtIndex:1];
+        
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@",sectionTitle, [tutorial objectAtIndex:0]];
+        
+        NSString *tutorialKey = [tutorial objectAtIndex:1];
+        
+        NSString *name = [NSString stringWithFormat:@"tutorial%@", tutorialKey];
+        NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"html"];
+        if (url) {
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [self.webView loadRequest:request];
+        }
+        else {
+            NSLog(@"%@.html does not exist",name);
+        }
+        
+        name = [NSString stringWithFormat:@"NyTu%@ViewController", tutorialKey];
+        if ([[NSBundle mainBundle] pathForResource:name ofType:@"nib"] != nil) {
+            
+            self.exerciseViewController = [[NSClassFromString(name) alloc] initWithNibName:name bundle:nil];
+            self.exerciseButton.hidden = NO;
+        }
+        else {
+            self.exerciseViewController = nil;
+            self.exerciseButton.hidden = YES;
+            NSLog(@"%@.xib does not exist",name);
+        }
+        
     }
 }
 
+- (void)viewDidUnload {
+    self.webView = nil;
+    self.exerciseButton = nil;
+    self.exerciseViewController = nil;
+    [super viewDidUnload];
+}
+- (IBAction)exercise:(id)sender {
+    if (self.exerciseViewController) {
+        // CGRect f = self.exerciseViewController.view.frame;
+        self.exerciseViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        // [self.exerciseViewController.delegate = self;
+        [self presentModalViewController:self.exerciseViewController animated:YES];
+        // self.exerciseViewController.view.frame = f;
+    }
+}
 @end

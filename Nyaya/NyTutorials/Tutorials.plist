@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Tutorials</string>
+	<array>
+		<string>Motivation</string>
+		<array>
+			<string>Introduction</string>
+			<string>101</string>
+		</array>
+		<array>
+			<string>Pitfalls</string>
+			<string>102</string>
+		</array>
+	</array>
+	<array>
+		<string>Syntax</string>
+		<array>
+			<string>Introduction</string>
+			<string>202</string>
+		</array>
+	</array>
+	<array>
+		<string>Semantics</string>
+		<array>
+			<string>Introduction</string>
+			<string>301</string>
+		</array>
+		<array>
+			<string>Semantics cont.</string>
+			<string>303</string>
+		</array>
+	</array>
+</array>
+</plist>

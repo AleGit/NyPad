@@ -10,5 +10,9 @@
 
 @interface NyTuDetailViewController : NyDetailViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) IBOutlet UIButton *exerciseButton;
+
+- (IBAction)exercise:(id)sender;
+
 @end

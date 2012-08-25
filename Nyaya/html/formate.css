@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
+/* 
+
 body { margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px;
-    background-color:#F8F8F8; background-image:url(abc.png);}
+    background-color:#F8F8F8; background-image:url(abc.png);} */
+
+body { background-color:#F8F8F8;}
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
     font-family:Helvetica,Arial,sans-serif; color:#333333;
@@ -20,7 +24,7 @@ p,ul,ol,li,div,td,th,address,blockquote { font-size:16px}
 li { margin-top:3px; }
 
 
-
+/*
 
 pre { font-family:Courier New,Courier; font-size:13px; color:#0000C0; }
 
@@ -46,7 +50,7 @@ blockquote,cite { font-style:italic; }
 
 pre.normal { color:#000000; }
 
-
+*/
 
 a:link { color:#AA5522; text-decoration:underline; }
 
@@ -56,7 +60,7 @@ a:active { color:#000000; text-decoration:none; }
 
 a.an { text-decoration:none; }
 
-
+/*
 
 .unicode { font-size:15px; font-family:Arial Unicode MS,Arial,sans-serif }
 
@@ -64,3 +68,4 @@ ins { color:#009900; font-weight:bold; text-decoration:none; }
 
 del { color:#990000; font-weight:bold; text-decoration:line-through; }
 
+ */

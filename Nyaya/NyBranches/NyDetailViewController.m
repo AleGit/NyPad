@@ -68,21 +68,17 @@
    shouldHideViewController:(UIViewController *)vc
               inOrientation:(UIInterfaceOrientation)orientation
 {
-    return YES; // TODO: make it user configurable
+    return YES; // this method will be called only once per orientation
 }
 
-
 #pragma mark - Managing the detail item
-
-
-
 
 // ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
 // ****************************
 - (void)configureView {
     if (_detailItem) self.navigationItem.title = [_detailItem description];
-    else self.navigationItem.title = [self localizedBarButtonItemTitle];
+    else self.navigationItem.title = [_detailItem description];
 }
 
 - (void)setDetailItem:(id)newDetailItem

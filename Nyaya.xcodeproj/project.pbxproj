@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
+		111F923415E89B1400EB6B1D /* Tutorials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111F923315E89B1400EB6B1D /* Tutorials.plist */; };
+		111F923915E89D6800EB6B1D /* tutorial101.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923615E89D6800EB6B1D /* tutorial101.html */; };
+		111F923A15E89D6800EB6B1D /* tutorial201.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923715E89D6800EB6B1D /* tutorial201.html */; };
+		111F923B15E89D6800EB6B1D /* tutorial202.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923815E89D6800EB6B1D /* tutorial202.html */; };
+		111F923F15E89FAA00EB6B1D /* NyTu101ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */; };
+		111F924015E89FAA00EB6B1D /* NyTu101ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		1144248815C68918000B3CD9 /* TransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248715C68918000B3CD9 /* TransformTests.m */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
@@ -113,6 +119,13 @@
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
+		111F923315E89B1400EB6B1D /* Tutorials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tutorials.plist; path = NyTutorials/Tutorials.plist; sourceTree = "<group>"; };
+		111F923615E89D6800EB6B1D /* tutorial101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial101.html; path = html/tutorial101.html; sourceTree = "<group>"; };
+		111F923715E89D6800EB6B1D /* tutorial201.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial201.html; path = html/tutorial201.html; sourceTree = "<group>"; };
+		111F923815E89D6800EB6B1D /* tutorial202.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial202.html; path = html/tutorial202.html; sourceTree = "<group>"; };
+		111F923C15E89FAA00EB6B1D /* NyTu101ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTu101ViewController.h; path = NyTutorials/NyTu101ViewController.h; sourceTree = "<group>"; };
+		111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTu101ViewController.m; path = NyTutorials/NyTu101ViewController.m; sourceTree = "<group>"; };
+		111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTu101ViewController.xib; path = NyTutorials/NyTu101ViewController.xib; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
@@ -284,6 +297,10 @@
 				1177497515E7D6A500B5C071 /* NyTuDetailViewController.m */,
 				1177497615E7D6A500B5C071 /* NyTuMasterViewController.h */,
 				1177497715E7D6A500B5C071 /* NyTuMasterViewController.m */,
+				111F923315E89B1400EB6B1D /* Tutorials.plist */,
+				111F923C15E89FAA00EB6B1D /* NyTu101ViewController.h */,
+				111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */,
+				111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */,
 			);
 			name = NyTutorial;
 			path = Nyaya;
@@ -426,6 +443,9 @@
 		116D221015D927C9003DBD88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				111F923615E89D6800EB6B1D /* tutorial101.html */,
+				111F923715E89D6800EB6B1D /* tutorial201.html */,
+				111F923815E89D6800EB6B1D /* tutorial202.html */,
 				1177495415E7D36900B5C071 /* welcome.html */,
 				1177495215E7D34500B5C071 /* impressum.html */,
 				1177495015E7D2BF00B5C071 /* abc.png */,
@@ -761,6 +781,11 @@
 				117749BE15E7DB6B00B5C071 /* Icon-72@2x.png in Resources */,
 				117749BF15E7DB6B00B5C071 /* Icon.png in Resources */,
 				117749C015E7DB6B00B5C071 /* Icon@2x.png in Resources */,
+				111F923415E89B1400EB6B1D /* Tutorials.plist in Resources */,
+				111F923915E89D6800EB6B1D /* tutorial101.html in Resources */,
+				111F923A15E89D6800EB6B1D /* tutorial201.html in Resources */,
+				111F923B15E89D6800EB6B1D /* tutorial202.html in Resources */,
+				111F924015E89FAA00EB6B1D /* NyTu101ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,6 +844,7 @@
 				1177498215E7D70600B5C071 /* NyGlMasterViewController.m in Sources */,
 				1177498715E7D74A00B5C071 /* NyDetailViewController.m in Sources */,
 				1177498815E7D74A00B5C071 /* NyMasterViewController.m in Sources */,
+				111F923F15E89FAA00EB6B1D /* NyTu101ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
