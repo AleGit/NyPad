@@ -4,32 +4,32 @@
 <array>
 	<string>Tutorials</string>
 	<array>
-		<string>Motivation</string>
+		<string>1 Motivation</string>
 		<array>
-			<string>Introduction</string>
+			<string>1.1 Introduction</string>
 			<string>101</string>
 		</array>
 		<array>
-			<string>Pitfalls</string>
+			<string>1.2 Pitfalls</string>
 			<string>102</string>
 		</array>
 	</array>
 	<array>
-		<string>Syntax</string>
+		<string>2 Syntax</string>
 		<array>
-			<string>Introduction</string>
-			<string>202</string>
+			<string>2.1 Introduction</string>
+			<string>201</string>
 		</array>
 	</array>
 	<array>
-		<string>Semantics</string>
+		<string>3 Semantics</string>
 		<array>
-			<string>Introduction</string>
+			<string>3.1 Introduction</string>
 			<string>301</string>
 		</array>
 		<array>
-			<string>Semantics cont.</string>
-			<string>303</string>
+			<string>3.2 Semantics cont.</string>
+			<string>302</string>
 		</array>
 	</array>
 </array>

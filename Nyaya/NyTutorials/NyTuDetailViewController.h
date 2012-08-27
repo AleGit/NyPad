@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *exerciseButton;
 
 - (IBAction)exercise:(id)sender;
+- (void)exerciseDone;
 
 @end

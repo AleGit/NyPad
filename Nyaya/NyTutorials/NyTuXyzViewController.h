@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class NyTuDetailViewController;
+
 @interface NyTuXyzViewController : UIViewController
+
+@property (nonatomic, weak) NyTuDetailViewController *delegate;
+
+- (IBAction)done:(id)sender;
 
 @end

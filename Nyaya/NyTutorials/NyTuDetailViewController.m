@@ -7,10 +7,11 @@
 //
 
 #import "NyTuDetailViewController.h"
+#import "NyTuXyzViewController.h"
 
 @interface NyTuDetailViewController () 
 
-@property (strong, nonatomic) UIViewController *exerciseViewController;
+@property (strong, nonatomic) NyTuXyzViewController *exerciseViewController;
 @end
 
 @implementation NyTuDetailViewController
@@ -43,6 +44,9 @@
         if ([[NSBundle mainBundle] pathForResource:name ofType:@"nib"] != nil) {
             
             self.exerciseViewController = [[NSClassFromString(name) alloc] initWithNibName:name bundle:nil];
+            self.exerciseViewController.delegate = self;
+            self.exerciseViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
             self.exerciseButton.hidden = NO;
         }
         else {
@@ -54,20 +58,30 @@
     }
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.exerciseButton.hidden = YES;
+}
+
 - (void)viewDidUnload {
     self.webView = nil;
     self.exerciseButton = nil;
     self.exerciseViewController = nil;
     [super viewDidUnload];
 }
+
 - (IBAction)exercise:(id)sender {
     if (self.exerciseViewController) {
-        // CGRect f = self.exerciseViewController.view.frame;
-        self.exerciseViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        // [self.exerciseViewController.delegate = self;
+        
+        
         [self presentModalViewController:self.exerciseViewController animated:YES];
-        // self.exerciseViewController.view.frame = f;
+        // self.exerciseViewController.view.bounds = CGRectMake(40,40,708,964);
+        
+        
     }
+}
+
+- (void)exerciseDone {
+    [self.exerciseViewController dismissModalViewControllerAnimated:YES];
 }
 @end

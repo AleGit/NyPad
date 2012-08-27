@@ -7,6 +7,7 @@
 //
 
 #import "NyTuXyzViewController.h"
+#import "NyTuDetailViewController.h"
 
 @interface NyTuXyzViewController ()
 
@@ -38,6 +39,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+- (void)done:(id)sender {
+    [self.delegate exerciseDone];
 }
 
 @end
