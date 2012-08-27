@@ -1,66 +1,20 @@
 @charset "UTF-8";
 
-body { margin-left:35px; margin-right:35px; margin-top:35px; margin-bottom:35px;
-    background-color:#F8F8F8; background-image:url(paper@2x.png); background-size:17px 17px}
+body {
+    margin-left:35px; margin-right:35px; margin-top:35px; margin-bottom:35px;
+    background-color:#F8F8F8; background-image:url(paper.png);
+}
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
     font-family:Helvetica,Arial,sans-serif; color:#333333;
 }
 
-/*
- 
-h1 { font-size:37px; margin-bottom:18px; color:#666666;}
+/****************************************
+ *** definitions for hi-res rendering ***
+ ****************************************/
 
-h2 { font-size:25px; margin-bottom:18px; }
-
-h3 { font-size:19px; margin-top:12px;}
-
-h4 { font-size:16px; }
-
-p,ul,ol,li,div,td,th,address,blockquote { font-size:16px}
-
-li { margin-top:3px; }
-
-
-
-
-pre { font-family:Courier New,Courier; font-size:13px; color:#0000C0; }
-
-code,kbd,tt { font-family:Courier New,Courier; color:#0000C0; }
-
-var { font-style:normal; color:#0000C0; }
-
-blockquote,cite { font-style:italic; }
-
-.xmpcode { border-width:10px; border-style:solid; border-color:#EEEEEE; background-color:#FFFFE0; }
-
-.code { background-color:#FFFFE0; }
-
-.tabxpl { background-color:#E4EEFF; }
-
-.doc { background-color:#EEEEEE; }
-
-.nav { background-color:#FFEEDD; }
-
-.qbar { background-color:#FFFFE0; font-size:13px; font-family:Arial,sans-serif; }
-
-.blue { color:#0000C0; }
-
-pre.normal { color:#000000; }
-
-
-a:link { color:#AA5522; text-decoration:underline; }
-
-a:visited { color:#772200; text-decoration:underline; }
-
-a:active { color:#000000; text-decoration:none; }
-
-a.an { text-decoration:none; }
-
-.unicode { font-size:15px; font-family:Arial Unicode MS,Arial,sans-serif }
-
-ins { color:#009900; font-weight:bold; text-decoration:none; }
-
-del { color:#990000; font-weight:bold; text-decoration:line-through; }
-
- */
+@media (-webkit-min-device-pixel-ratio:2.0)     /* does not work on iPadSimulator 5.0 but 5.1 */
+,(min--moz-device-pixel-ratio:2.0)              /* works in firexox with zoom */
+{
+    body { background-image:url(paper@2x.png); background-size:17px 17px; }
+}
