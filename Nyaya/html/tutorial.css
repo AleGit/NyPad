@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body { margin-left:35px; margin-right:35px; margin-top:35px; margin-bottom:35px;
-    background-color:#F8F8F8; background-image:url(paper.png);}
+    background-color:#F8F8F8; background-image:url(paper@2x.png); background-size:17px 17px}
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
     font-family:Helvetica,Arial,sans-serif; color:#333333;

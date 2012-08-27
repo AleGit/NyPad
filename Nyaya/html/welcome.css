@@ -1,11 +1,21 @@
 @charset "UTF-8";
 
 body { margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px;
-    background-color:#F8F8F8; background-image:url(syntaxtree.png);}
+    background-color:#F8F8F8; background-image:url(paper.png);}
+
+/* @media screen and (-webkit-min-device-pixel-ratio: 2) */
+/* @media screen and (-webkit-device-pixel-ratio:2) does not work in uiwebvie*/
+@media (-webkit-min-device-pixel-ratio:1.0)  /* take hires pics for all devices */
+,(min--moz-device-pixel-ratio:2.0) /* works with firexox */
+{
+    body { margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px;
+        background-color:#F8F8F8; background-image:url(syntaxtree@2x.png); background-size:1024px 1024px}
+}
+
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
     font-family:Helvetica,Arial,sans-serif; color:#555555;
-    }
+}
 
 h1 { font-size:42px; }
 

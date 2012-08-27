@@ -106,6 +106,8 @@
 		11C61BB315E91DAC00F5BB28 /* Paper1.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C61BB115E91DAC00F5BB28 /* Paper1.png */; };
 		11C61BB415E91DAC00F5BB28 /* Paper1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C61BB215E91DAC00F5BB28 /* Paper1@2x.png */; };
 		11C61BB715E91FF000F5BB28 /* NyTuXyzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C61BB615E91FF000F5BB28 /* NyTuXyzViewController.m */; };
+		11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0B15EB63A200DFC94A /* iPadIcon.png */; };
+		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* NyayaBdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* NyayaBdd.m */; };
 		11F906C615CEC164001CD0F3 /* BasicParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C515CEC164001CD0F3 /* BasicParseTests.m */; };
@@ -273,6 +275,8 @@
 		11C61BB215E91DAC00F5BB28 /* Paper1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Paper1@2x.png"; path = "html/Paper1@2x.png"; sourceTree = "<group>"; };
 		11C61BB515E91FF000F5BB28 /* NyTuXyzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuXyzViewController.h; path = NyTutorials/NyTuXyzViewController.h; sourceTree = "<group>"; };
 		11C61BB615E91FF000F5BB28 /* NyTuXyzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuXyzViewController.m; path = NyTutorials/NyTuXyzViewController.m; sourceTree = "<group>"; };
+		11DDBF0B15EB63A200DFC94A /* iPadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPadIcon.png; path = AppIcons/iPadIcon.png; sourceTree = "<group>"; };
+		11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPadIcon@2x.png"; path = "AppIcons/iPadIcon@2x.png"; sourceTree = "<group>"; };
 		11EC4D1F15CFBA210090EBAB /* NyayaBdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaBdd.h; path = BDD/NyayaBdd.h; sourceTree = "<group>"; };
 		11EC4D2415CFC3750090EBAB /* BasicBddTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicBddTests.h; path = BddTests/BasicBddTests.h; sourceTree = "<group>"; };
 		11EC4D2515CFC3750090EBAB /* BasicBddTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicBddTests.m; path = BddTests/BasicBddTests.m; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 		11436C0715E3761100A4457F /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
+				11DDBF0B15EB63A200DFC94A /* iPadIcon.png */,
+				11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */,
 				11281B8D15EB479C00B377B3 /* Default-Landscape@2x~ipad.png */,
 				11281B8E15EB479C00B377B3 /* Default-Landscape~ipad.png */,
 				11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */,
@@ -835,6 +841,8 @@
 				11281B9215EB479C00B377B3 /* Default-Landscape~ipad.png in Resources */,
 				11281B9315EB479C00B377B3 /* Default-Portrait@2x~ipad.png in Resources */,
 				11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */,
+				11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */,
+				11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
