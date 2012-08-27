@@ -15,5 +15,4 @@
 
 - (IBAction)exercise:(id)sender;
 - (void)exerciseDone;
-
 @end

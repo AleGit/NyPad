@@ -16,6 +16,22 @@
 
 @implementation NyTuDetailViewController
 
+- (UIStoryboard*)tustoryboard {
+    static UIStoryboard *_tustoryboard;
+    if (!_tustoryboard) {
+        _tustoryboard = [UIStoryboard storyboardWithName:@"NyTuXyz" bundle:nil];
+    }
+    return _tustoryboard;
+}
+
+- (UIColor*)tubackground {
+    static UIColor *_tubackground;
+    if (!_tubackground) {
+        _tubackground = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"paper"]];
+    }
+    return _tubackground;
+}
+
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Tutorials", @"Tutorials");
 }
@@ -40,19 +56,24 @@
             NSLog(@"%@.html does not exist",name);
         }
         
-        name = [NSString stringWithFormat:@"NyTu%@ViewController", tutorialKey];
-        if ([[NSBundle mainBundle] pathForResource:name ofType:@"nib"] != nil) {
-            
-            self.exerciseViewController = [[NSClassFromString(name) alloc] initWithNibName:name bundle:nil];
-            self.exerciseViewController.delegate = self;
-            self.exerciseViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            self.exerciseButton.hidden = NO;
+        NSString *identifier = [NSString stringWithFormat:@"NyTu%@ViewController", tutorialKey];
+        if (![[[self.exerciseViewController class] description] isEqualToString:identifier]) {
+            @try {
+                self.exerciseViewController = [[self tustoryboard] instantiateViewControllerWithIdentifier:identifier];
+                self.exerciseViewController.delegate = self;
+                self.exerciseViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                self.exerciseViewController.view.backgroundColor = [self tubackground];
+                self.exerciseButton.hidden = NO;
+            }
+            @catch (NSException *ex) {
+                NSLog(@"%@ does not exist in storyboard.", identifier);
+                self.exerciseViewController = nil;
+                self.exerciseButton.hidden = YES;
+            }
         }
         else {
-            self.exerciseViewController = nil;
-            self.exerciseButton.hidden = YES;
-            NSLog(@"%@.xib does not exist",name);
+            NSLog(@"%@ allready created", identifier);
         }
         
     }

@@ -13,8 +13,6 @@
 		111F923A15E89D6800EB6B1D /* tutorial201.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923715E89D6800EB6B1D /* tutorial201.html */; };
 		111F923B15E89D6800EB6B1D /* tutorial202.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923815E89D6800EB6B1D /* tutorial202.html */; };
 		111F923F15E89FAA00EB6B1D /* NyTu101ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */; };
-		111F924015E89FAA00EB6B1D /* NyTu101ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */; };
-		111F924215E9113400EB6B1D /* tutorial.css in Resources */ = {isa = PBXBuildFile; fileRef = 111F924115E9113400EB6B1D /* tutorial.css */; };
 		11281B7A15EB452700B377B3 /* syntaxtree.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B7815EB452700B377B3 /* syntaxtree.png */; };
 		11281B7B15EB452700B377B3 /* syntaxtree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B7915EB452700B377B3 /* syntaxtree@2x.png */; };
 		11281B9115EB479C00B377B3 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8D15EB479C00B377B3 /* Default-Landscape@2x~ipad.png */; };
@@ -37,8 +35,7 @@
 		1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */; };
 		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		116D220715D925A2003DBD88 /* NyayaTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */; };
-		116D221415D92851003DBD88 /* welcome.css in Resources */ = {isa = PBXBuildFile; fileRef = 116D221315D92851003DBD88 /* welcome.css */; };
-		1177495115E7D2BF00B5C071 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 1177495015E7D2BF00B5C071 /* abc.png */; };
+		116D221415D92851003DBD88 /* format.css in Resources */ = {isa = PBXBuildFile; fileRef = 116D221315D92851003DBD88 /* format.css */; };
 		1177495315E7D34500B5C071 /* impressum.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495215E7D34500B5C071 /* impressum.html */; };
 		1177495515E7D36900B5C071 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 1177495415E7D36900B5C071 /* welcome.html */; };
 		1177496C15E7D67100B5C071 /* NyBtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1177496915E7D67100B5C071 /* NyBtDetailViewController.m */; };
@@ -108,6 +105,7 @@
 		11C61BB715E91FF000F5BB28 /* NyTuXyzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C61BB615E91FF000F5BB28 /* NyTuXyzViewController.m */; };
 		11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0B15EB63A200DFC94A /* iPadIcon.png */; };
 		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
+		11DDBF1415EB941A00DFC94A /* NyTuXyz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF1315EB941A00DFC94A /* NyTuXyz.storyboard */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* NyayaBdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* NyayaBdd.m */; };
 		11F906C615CEC164001CD0F3 /* BasicParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C515CEC164001CD0F3 /* BasicParseTests.m */; };
@@ -137,8 +135,6 @@
 		111F923815E89D6800EB6B1D /* tutorial202.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial202.html; path = html/tutorial202.html; sourceTree = "<group>"; };
 		111F923C15E89FAA00EB6B1D /* NyTu101ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTu101ViewController.h; path = Nyaya/NyTutorials/NyTu101ViewController.h; sourceTree = "<group>"; };
 		111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTu101ViewController.m; path = Nyaya/NyTutorials/NyTu101ViewController.m; sourceTree = "<group>"; };
-		111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTu101ViewController.xib; path = Nyaya/NyTutorials/NyTu101ViewController.xib; sourceTree = "<group>"; };
-		111F924115E9113400EB6B1D /* tutorial.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = tutorial.css; path = html/tutorial.css; sourceTree = "<group>"; };
 		11281B7815EB452700B377B3 /* syntaxtree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = syntaxtree.png; path = html/syntaxtree.png; sourceTree = "<group>"; };
 		11281B7915EB452700B377B3 /* syntaxtree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "syntaxtree@2x.png"; path = "html/syntaxtree@2x.png"; sourceTree = "<group>"; };
 		11281B8D15EB479C00B377B3 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "AppIcons/Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -177,8 +173,7 @@
 		1169DC5815BC5C1B000BD3D0 /* NyayaNodeVariablesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeVariablesTests.h; sourceTree = "<group>"; };
 		1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeVariablesTests.m; sourceTree = "<group>"; };
 		116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaTabBarViewController.m; sourceTree = "<group>"; };
-		116D221315D92851003DBD88 /* welcome.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = welcome.css; path = html/welcome.css; sourceTree = "<group>"; };
-		1177495015E7D2BF00B5C071 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abc.png; path = html/abc.png; sourceTree = "<group>"; };
+		116D221315D92851003DBD88 /* format.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = format.css; path = html/format.css; sourceTree = "<group>"; };
 		1177495215E7D34500B5C071 /* impressum.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = impressum.html; path = html/impressum.html; sourceTree = "<group>"; };
 		1177495415E7D36900B5C071 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = welcome.html; path = html/welcome.html; sourceTree = "<group>"; };
 		1177496815E7D67100B5C071 /* NyBtDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBtDetailViewController.h; path = NyBoolTool/NyBtDetailViewController.h; sourceTree = "<group>"; };
@@ -277,6 +272,7 @@
 		11C61BB615E91FF000F5BB28 /* NyTuXyzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuXyzViewController.m; path = NyTutorials/NyTuXyzViewController.m; sourceTree = "<group>"; };
 		11DDBF0B15EB63A200DFC94A /* iPadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPadIcon.png; path = AppIcons/iPadIcon.png; sourceTree = "<group>"; };
 		11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPadIcon@2x.png"; path = "AppIcons/iPadIcon@2x.png"; sourceTree = "<group>"; };
+		11DDBF1315EB941A00DFC94A /* NyTuXyz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = NyTuXyz.storyboard; path = Nyaya/NyTutorials/NyTuXyz.storyboard; sourceTree = "<group>"; };
 		11EC4D1F15CFBA210090EBAB /* NyayaBdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaBdd.h; path = BDD/NyayaBdd.h; sourceTree = "<group>"; };
 		11EC4D2415CFC3750090EBAB /* BasicBddTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicBddTests.h; path = BddTests/BasicBddTests.h; sourceTree = "<group>"; };
 		11EC4D2515CFC3750090EBAB /* BasicBddTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicBddTests.m; path = BddTests/BasicBddTests.m; sourceTree = "<group>"; };
@@ -478,13 +474,11 @@
 				11C61BB215E91DAC00F5BB28 /* Paper1@2x.png */,
 				11C61BAB15E9190900F5BB28 /* paper.png */,
 				11C61BAD15E91BC400F5BB28 /* paper@2x.png */,
-				1177495015E7D2BF00B5C071 /* abc.png */,
 				1177495215E7D34500B5C071 /* impressum.html */,
-				111F924115E9113400EB6B1D /* tutorial.css */,
 				111F923615E89D6800EB6B1D /* tutorial101.html */,
 				111F923715E89D6800EB6B1D /* tutorial201.html */,
 				111F923815E89D6800EB6B1D /* tutorial202.html */,
-				116D221315D92851003DBD88 /* welcome.css */,
+				116D221315D92851003DBD88 /* format.css */,
 				1177495415E7D36900B5C071 /* welcome.html */,
 			);
 			name = html;
@@ -680,9 +674,9 @@
 		11C61BB815E91FFC00F5BB28 /* NyTuXyz */ = {
 			isa = PBXGroup;
 			children = (
+				11DDBF1315EB941A00DFC94A /* NyTuXyz.storyboard */,
 				111F923C15E89FAA00EB6B1D /* NyTu101ViewController.h */,
 				111F923D15E89FAA00EB6B1D /* NyTu101ViewController.m */,
-				111F923E15E89FAA00EB6B1D /* NyTu101ViewController.xib */,
 			);
 			name = NyTuXyz;
 			sourceTree = "<group>";
@@ -795,8 +789,7 @@
 				11C375F815B3D23D005C5C9C /* InfoPlist.strings in Resources */,
 				11C3760115B3D23D005C5C9C /* MainStoryboard.storyboard in Resources */,
 				1187E24115D1072C0048E153 /* Localizable.strings in Resources */,
-				116D221415D92851003DBD88 /* welcome.css in Resources */,
-				1177495115E7D2BF00B5C071 /* abc.png in Resources */,
+				116D221415D92851003DBD88 /* format.css in Resources */,
 				1177495315E7D34500B5C071 /* impressum.html in Resources */,
 				1177495515E7D36900B5C071 /* welcome.html in Resources */,
 				1177499F15E7D8C300B5C071 /* i1.png in Resources */,
@@ -829,8 +822,6 @@
 				111F923915E89D6800EB6B1D /* tutorial101.html in Resources */,
 				111F923A15E89D6800EB6B1D /* tutorial201.html in Resources */,
 				111F923B15E89D6800EB6B1D /* tutorial202.html in Resources */,
-				111F924015E89FAA00EB6B1D /* NyTu101ViewController.xib in Resources */,
-				111F924215E9113400EB6B1D /* tutorial.css in Resources */,
 				11C61BAC15E9190900F5BB28 /* paper.png in Resources */,
 				11C61BAE15E91BC400F5BB28 /* paper@2x.png in Resources */,
 				11C61BB315E91DAC00F5BB28 /* Paper1.png in Resources */,
@@ -843,6 +834,7 @@
 				11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */,
 				11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */,
 				11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */,
+				11DDBF1415EB941A00DFC94A /* NyTuXyz.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
