@@ -24,7 +24,7 @@
     return NO;
 }
 
-- (void)readTutorials {
+- (void)readMasterData {
     if (!self.tutorialSections) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorials" ofType:@"plist"]; 
         self.tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
@@ -37,7 +37,6 @@
 // **********************************
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [self readTutorials];
     return [self.tutorialSections count] -1;
     // the first elment of the array is a string
 }

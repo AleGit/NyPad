@@ -9,15 +9,23 @@ h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
     font-family:Helvetica,Arial,sans-serif; color:#555555;
 }
 
-h1 { font-size:42px; }
+span.sb { color:green; border:solid 1px orange; }
 
-a:link { color:#AA5522; }
+h1 { font-size:42px; text-decoration:none; }
 
-a:visited { color:#772200; }
+a:link { color:#AA5522; text-decoration:none; }
 
-a:active { color:#000000; }
+a:visited { color:#772200; text-decoration:none; }
+
+a:active { color:#000000;  text-decoration:none; }
 
 a.an { text-decoration:none; }
+
+table { float:left; margin:3px 20px 10px 0px; border:solid 1px black; border-collapse:collapse; }
+
+tr, th, td { border:dotted 1px black; }
+
+
 
 /****************************************
  *** definitions for hi-res rendering ***

@@ -38,6 +38,13 @@
     return YES;
 }
 
+// ****************************
+// !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
+- (void)readMasterData {
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,6 +58,8 @@
         self.navigationItem.rightBarButtonItem = addButton;
     }
     self.detailViewController = (NyDetailViewController*)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    [self readMasterData];
 }
 
 - (void)viewDidUnload
@@ -145,8 +154,7 @@
 // ****************************
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    self.detailViewController.detailItem = object;
+    self.detailViewController.detailItem = [_objects objectAtIndex:indexPath.row];
 }
 
 @end

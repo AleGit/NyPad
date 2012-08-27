@@ -7,11 +7,16 @@
 //
 
 #import "NyGlDetailViewController.h"
+#import "NyGlossaryEntry.h"
 
-@interface NyGlDetailViewController ()
+@interface NyGlDetailViewController () {
+    NSURL *_baseurl;
+}
+
 @end
 
 @implementation NyGlDetailViewController
+@synthesize webView;
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Glossary", @"Glossary");
@@ -20,12 +25,26 @@
 - (void)configureView
 {
     [super configureView];
-    // Update the user interface for the detail item.
     
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    NyGlossaryEntry *entry = (NyGlossaryEntry*)self.detailItem;
+    
+    NSURL *newUrl = [NSURL URLWithString:[NSString stringWithFormat:@"#%@",entry.entryId] relativeToURL:_baseurl];
+    NSURLRequest *request = [NSURLRequest requestWithURL: newUrl];
+    [self.webView loadRequest:request];
+
+}
+
+- (void)viewDidLoad {
+    // self.webView.delegate = self;
+    _baseurl = [[NSBundle mainBundle] URLForResource:@"glossary" withExtension:@"html"];
+    if (_baseurl) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:_baseurl];
+        [self.webView loadRequest:request];
     }
 }
 
-
+- (void)viewDidUnload {
+    [self setWebView:nil];
+    [super viewDidUnload];
+}
 @end
