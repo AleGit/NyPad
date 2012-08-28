@@ -9,7 +9,10 @@
         <!-- Inhalt der Datei -->
         <!-- <h3>A Learning environment for BoolTool</h3> -->
         
-        <h3><span id="biconditional">Biconditonal</span>
+        <h3 id="atom">Atom</h3>
+        
+        <h3>
+            <span id="biconditional">Biconditonal</span>
             <span class="sb" id="if_then">BIC</span>
             <span class="sb" id="left_right_arrow">↔</span> 
             <span class="sb" id="lg_than_sign">&lt;&gt;</span>
@@ -25,11 +28,10 @@
         
         <p>A relation between two propositions that is true only when both propositions are simultaneously true or false.</p>
         
-        <p>Nyāya accepts “P BIC Q”, “P↔Q”, and “P&lt;&gt;Q” as input.</p>
+        <p>BoolTool does not support Biconditional, but “!(P^Q)” is equivalent. Nyāya accepts “P BIC Q”, “P↔Q”, and “P&lt;&gt;Q” as input.</p>
         
-        <div style="clear:both;"></div>
-        
-        <h3><span id="conjunction">Conjunction</span> 
+        <h3>
+            <span id="conjunction">Conjunction</span>
             <span class="sb" id="and">AND</span>
             <span class="sb" id="logical_and">∧</span> 
             <span class="sb" id="mutliply">.</span> 
@@ -59,11 +61,14 @@
         
         <p>A relation between two propositions that is true only when both propositions are true.</p>
         
-        <p>Nyāya accepts “P AND Q”, “P∧Q”, “P.Q”, and “P&amp;Q” as input.</p>
+        <p>BoolTool supports “P&amp;Q”, Nyāya accepts “P AND Q”, “P∧Q”, “P.Q”, and “P&amp;Q” as input.</p>
         
-        <div style="clear:both;"></div>
+        <h3 id="connective">Connective</h3>
         
-        <h3><span id="disjunction">Disjunction<span>
+        <p>Connects one ore more <a href="formula">formulas</a> as <a href="#subformual">sub formulas</a> of a new formula.</p>
+        
+        <h3>
+            <span id="disjunction">Disjunction<span>
             <span class="sb" id="or">OR</span>
             <span class="sb" id="logical_or">∨</span> 
             <span class="sb" id="plus">+</span> 
@@ -88,11 +93,10 @@
         
         <p>A relation between two propositions that is true when one or both propositions are true.</p>
         
-        <p>Nyāya accepts “P OR Q”, “P∨Q”, “P+Q”, and “P|Q” as input.</p>
+        <p>BoolTool supports “P|Q” and “P+Q”, Nyāya accepts “P OR Q”, “P∨Q”, “P+Q”, and “P|Q” as input.</p>
                     
-        <div style="clear:both;"></div>
-        
-        <h3><span id="exclusive_or">Exclusive Disjunction</span>
+        <h3>
+            <span id="exclusive_or">Exclusive Disjunction</span>
             <span class="sb" id="xor">XOR</span>
             <span class="sb" id="xor_sign">⊻</span> 
             <span class="sb" id"=circled_plus">⊕</span> 
@@ -117,11 +121,12 @@
         
         <p>A relation between two propositions that is true when exactly one proposition is true.</p>
         
-        <p>Nyāya accepts “P XOR Q”, “P⊻Q”, “P⊕Q”, and “P^Q” as input.</p>
+        <p>BoolTool supports “P^Q”, Nyāya accepts “P XOR Q”, “P⊻Q”, “P⊕Q”, and “P^Q” as input.</p>
         
-        <div style="clear:both;"></div>
+        <h3 id="formula">Formula</a></h3>
         
-        <h3><span id="implication">Implication</span>
+        <h3>
+            <span id="implication">Implication</span>
             <span class="sb" id="if_then">IMP</span>
             <span class="sb" id="rightwards_arrow">→</span> 
             <span class="sb" id="greater_than_sign">&gt;</span>
@@ -139,11 +144,10 @@
         
         
         
-        <p>Nyāya accepts “P IMP Q”, “P→Q”, and “P>Q” as input.</p>
+        <p>BoolTool supports “P>Q”, Nyāya accepts “P IMP Q”, “P→Q”, and “P>Q” as input.</p>
         
-        <div style="clear:both;"></div>
-        
-        <h3><span id="negation">Negation</span>
+        <h3>
+            <span id="negation">Negation</span>
             <span class="sb" id="not">NOT</span>
             <span class="sb" id="not_sign">¬</span> 
             <span class="sb" id="exlamation_mark">!</span>
@@ -167,38 +171,86 @@
         
         <p>Nyāya accepts “NOT P”, “¬P”, and “!P” as input.</p>
         
-        <div style="clear:both;"></div>
+        <h3>
+            <span id="parenthesis">Parenthesis</span>
+            <span class="sb" id="lpar">(</span>
+            <span class="sb" id="lpar">)</span>
+        </h3>
         
         
+        <h3><span id="precedence">Precedence</span> conventions, <span id="order_of_ops">Order Of Operations</span></h3>
         
-        <h3 id="precedence">Precedence</h3>
-        
-        <p>
-        <span style="border:1px solid blue">&nbsp;
+        <!--
+        <div style="float:left">
+        <p class="precedence">&nbsp;
             <a href="#negation">NOT</a> ⊐
             <a href="#conjunction">AND</a> ⊐
             <a href="#disjunction">OR</a> ⊐
             <a href="#exclusive_or">XOR</a> ⊐
             <a href="#biconditional">BIC</a> ⊐
             <a href="#implication">IMP</a>
-        </span> &nbsp;
+        &nbsp;</p>
         
-        <span style="border:1px solid blue">&nbsp;
-            <a href="#negation">¬</a> ⊐
-            <a href="#conjunction">∧</a> ⊐
-            <a href="#disjunction">∨</a> ⊐
-            <a href="#exclusive_or">⊻</a> ⊐
-            <a href="#biconditional">↔</a> ⊐
-            <a href="#implication">→</a>
-        &nbsp;</span> &nbsp;
+        <p class="precedence">&nbsp;
+            &nbsp;<a href="#negation">¬</a>&nbsp; ⊐
+            &nbsp;<a href="#conjunction">∧</a>&nbsp; ⊐
+            &nbsp;<a href="#disjunction">∨</a> ⊐
+            &nbsp;<a href="#exclusive_or">⊻</a>&nbsp; ⊐
+            &nbsp;<a href="#biconditional">↔</a> ⊐
+            &nbsp;<a href="#implication">→</a>&nbsp;
+        &nbsp;</p>
         
-        <span style="border:1px solid blue">&nbsp;
-            <a href="#negation">!</a> ⊐
-            <a href="#conjunction">.</a> ⊐
-            <a href="#disjunction">+</a> ⊐
-            <a href="#exclusive_or">⊕</a>
-        &nbsp;</span>
-        </p>
+        <p class="precedence">&nbsp;
+            &nbsp;<a href="#negation">!</a>&nbsp; ⊐
+            &nbsp;<a href="#conjunction">.</a>&nbsp; ⊐
+            &nbsp;<a href="#disjunction">+</a> ⊐
+            &nbsp;<a href="#exclusive_or">⊕</a>&nbsp;
+        &nbsp;</p> </div> -->
+        
+        <table>
+            <tr>
+                <td><a href="#negation">NOT</a></td><td>⊐</td>
+                <td><a href="#conjunction">AND</a></td><td>⊐</td>
+                <td><a href="#disjunction">OR</a></td><td>⊐</td>
+                <td><a href="#exclusive_or">XOR</a></td><td>⊐</td>
+                <td><a href="#biconditional">BIC</a></td><td>⊐</td>
+                <td><a href="#implication">IMP</a>
+            </tr><tr>
+                <td><a href="#negation">¬</a></td><td>⊐</td>
+                <td><a href="#conjunction">∧</a></td><td>⊐</td>
+                <td><a href="#disjunction">∨</a></td><td>⊐</td>
+                <td><a href="#exclusive_or">⊻</a></td><td>⊐</td>
+                <td><a href="#biconditional">↔</a></td><td>⊐</td>
+                <td><a href="#implication">→</a>
+            </tr><tr>
+                <td><a href="#negation">!</a></td><td>⊐</td>
+                <td><a href="#conjunction">.</a></td><td>⊐</td>
+                <td><a href="#disjunction">+</a></td><td>⊐</td>
+                <td><a href="#exclusive_or">⊕</a></td><td></td>
+                <td></td><td></td>
+                <td></td>
+            </tr><tr>
+                <td><a href="#negation"></a></td><td>⊐</td>
+                <td><a href="#conjunction">&amp;</a></td><td>⊐</td>
+                <td><a href="#disjunction">|</a></td><td>⊐</td>
+                <td><a href="#exclusive_or">^</a></td><td></td>
+                <td><a href="#biconditional">&lt;&gt;</a></td><td>⊐</td>
+                <td><a href="#implication">&gt;</a>
+            </tr>
+        </table>
+        
+        <p>Precedence of connectives is used to get rid of too many parenthesis.
+        The artihmetic expression <tt>a.b+c</tt> means (a.b)+c, while a.(b+c) can&rsquo;t be written without parenthesis.
+        So . has a higher precedence than +.
+        Similar conventions are used in propositional logic.</p>
+        
+        <p>Precedence determines the <a href="#syntax_tree">syntax tree</a>,
+        i.e. the order of <a href="#valuation">valuation</a>
+        of a composite <a href="#formula">formula</a>.
+        A symbol with higher precedence is evaluated before a symbol with lower precedence.
+        <a href="#atom">Atoms</a> in propositional formual has the highest precedence implicitly because the must be evaluated before connectives can be evaluated.<p>
+        
+        <h3 id="subformula">Sub formula</h3>
         
         <p></p>
         
@@ -216,13 +268,16 @@
         
         <p></p>
         
-        <div style="clear:both;"></div>
-        
         <h3 id="semantics">Semantics</h3>
         
         <p></p>
         
         <p></p>
+        
+        <h3>
+            <span id="valuation">Valuation</span>,
+            <span id="truht_assignment">Truth Assignment</span>
+        </h3>
         
                 
     </body>

@@ -36,7 +36,9 @@
         [components enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
             
             if ([obj hasSuffix:@" id"]) {
-                _entryId = [[components objectAtIndex:idx+1] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]];
+                NSString *e = [components objectAtIndex:idx+1];
+                NSRange range = [e rangeOfString:@"\"" options:0 range:NSMakeRange(1, [e length] - 1)];
+                _entryId = [e substringWithRange:NSMakeRange(1, range.location -1)];
             }
             
             if ([obj isEqual:@"/"]) {
@@ -47,7 +49,7 @@
         }];
         
     }
-    NSLog(@"%@", string);
+    NSLog(@"IN: %@ *** OUT: %@ #%@", string, _entryTitle, _entryId);
     return self;
     
 }

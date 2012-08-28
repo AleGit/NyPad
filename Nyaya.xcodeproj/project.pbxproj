@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1102560215EBB4E0008B38F9 /* glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560115EBB4E0008B38F9 /* glossary.html */; };
 		1102560615EBB906008B38F9 /* NyGlossaryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1102560515EBB906008B38F9 /* NyGlossaryEntry.m */; };
+		1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */ = {isa = PBXBuildFile; fileRef = 1102560A15ECAE01008B38F9 /* selfhtmlcss.css */; };
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		111F923415E89B1400EB6B1D /* Tutorials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111F923315E89B1400EB6B1D /* Tutorials.plist */; };
 		111F923915E89D6800EB6B1D /* tutorial101.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923615E89D6800EB6B1D /* tutorial101.html */; };
@@ -130,6 +131,7 @@
 		1102560115EBB4E0008B38F9 /* glossary.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = glossary.html; path = html/glossary.html; sourceTree = "<group>"; };
 		1102560415EBB906008B38F9 /* NyGlossaryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyGlossaryEntry.h; path = NyGlossary/NyGlossaryEntry.h; sourceTree = "<group>"; };
 		1102560515EBB906008B38F9 /* NyGlossaryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyGlossaryEntry.m; path = NyGlossary/NyGlossaryEntry.m; sourceTree = "<group>"; };
+		1102560A15ECAE01008B38F9 /* selfhtmlcss.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = selfhtmlcss.css; path = html/selfhtmlcss.css; sourceTree = "<group>"; };
 		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 		116D221015D927C9003DBD88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				1102560A15ECAE01008B38F9 /* selfhtmlcss.css */,
 				1102560115EBB4E0008B38F9 /* glossary.html */,
 				11281B7815EB452700B377B3 /* syntaxtree.png */,
 				11281B7915EB452700B377B3 /* syntaxtree@2x.png */,
@@ -844,6 +847,7 @@
 				11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */,
 				11DDBF1415EB941A00DFC94A /* NyTuXyz.storyboard in Resources */,
 				1102560215EBB4E0008B38F9 /* glossary.html in Resources */,
+				1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

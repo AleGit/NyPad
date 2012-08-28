@@ -2,16 +2,19 @@
 
 body {
     margin-left:70px; margin-right:70px; margin-top:70px; margin-bottom:70px;
-    background-color:#F8F8F8; background-image:url(syntaxtree.png);
+    background-color:#F8F8F8; background-image:url(paper.png);
 }
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
-    font-family:Helvetica,Arial,sans-serif; color:#555555;
+    font-family:Arial,Helvetica,sans-serif; color:#555555;
 }
+
+h1,h2,h3 {clear:both;}
+
+h1 { font-size:42px; text-decoration:none; }
 
 span.sb { color:green; border:solid 1px orange; }
 
-h1 { font-size:42px; text-decoration:none; }
 
 a:link { color:#AA5522; text-decoration:none; }
 
@@ -21,9 +24,10 @@ a:active { color:#000000;  text-decoration:none; }
 
 a.an { text-decoration:none; }
 
-table { float:left; margin:3px 20px 10px 0px; border:solid 1px black; border-collapse:collapse; }
 
-tr, th, td { border:dotted 1px black; }
+table { float:left; margin:3px 20px 16px 0px; border:solid 1px black; border-collapse:collapse; }
+
+tr, th, td { border:dotted 1px black; text-align:center;}
 
 
 
@@ -35,4 +39,21 @@ tr, th, td { border:dotted 1px black; }
 ,(min--moz-device-pixel-ratio:2.0)              /* works in firexox with zoom */
 {
     body { background-image:url(syntaxtree@2x.png); background-size:1024px 1024px; }
+}
+
+/****************************************
+ *** definitions for print            ***
+ ****************************************/
+
+@media print {
+    h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
+        color:#000000;
+    }
+    
+    table { float:left; margin:3px 20px 16px 0px; border:solid 0.5pt black; border-collapse:expanded; }
+    
+    tr, th, td { border:solid 0.2pt grey; text-align:center;}
+    
+    span.sb { color:green; border:solid 0.2pt orange; }
+    
 }
