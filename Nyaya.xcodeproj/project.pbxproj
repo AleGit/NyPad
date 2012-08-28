@@ -10,25 +10,25 @@
 		1102560215EBB4E0008B38F9 /* glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560115EBB4E0008B38F9 /* glossary.html */; };
 		1102560615EBB906008B38F9 /* NyGlossaryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1102560515EBB906008B38F9 /* NyGlossaryEntry.m */; };
 		1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */ = {isa = PBXBuildFile; fileRef = 1102560A15ECAE01008B38F9 /* selfhtmlcss.css */; };
-		1102562015ECCE2E008B38F9 /* tutorial106.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560D15ECCE2E008B38F9 /* tutorial106.html */; };
-		1102562115ECCE2E008B38F9 /* tutorial111.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560E15ECCE2E008B38F9 /* tutorial111.html */; };
+		1102562015ECCE2E008B38F9 /* tutorial102.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560D15ECCE2E008B38F9 /* tutorial102.html */; };
+		1102562115ECCE2E008B38F9 /* tutorial103.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560E15ECCE2E008B38F9 /* tutorial103.html */; };
 		1102562215ECCE2E008B38F9 /* tutorial201.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560F15ECCE2E008B38F9 /* tutorial201.html */; };
-		1102562315ECCE2E008B38F9 /* tutorial206.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561015ECCE2E008B38F9 /* tutorial206.html */; };
-		1102562415ECCE2E008B38F9 /* tutorial211.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561115ECCE2E008B38F9 /* tutorial211.html */; };
-		1102562515ECCE2E008B38F9 /* tutorial216.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561215ECCE2E008B38F9 /* tutorial216.html */; };
-		1102562615ECCE2E008B38F9 /* tutorial221.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561315ECCE2E008B38F9 /* tutorial221.html */; };
-		1102562715ECCE2E008B38F9 /* tutorial226.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561415ECCE2E008B38F9 /* tutorial226.html */; };
+		1102562315ECCE2E008B38F9 /* tutorial202.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561015ECCE2E008B38F9 /* tutorial202.html */; };
+		1102562415ECCE2E008B38F9 /* tutorial203.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561115ECCE2E008B38F9 /* tutorial203.html */; };
+		1102562515ECCE2E008B38F9 /* tutorial204.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561215ECCE2E008B38F9 /* tutorial204.html */; };
+		1102562615ECCE2E008B38F9 /* tutorial205.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561315ECCE2E008B38F9 /* tutorial205.html */; };
 		1102562815ECCE2E008B38F9 /* tutorial301.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561515ECCE2E008B38F9 /* tutorial301.html */; };
-		1102562915ECCE2E008B38F9 /* tutorial306.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561615ECCE2E008B38F9 /* tutorial306.html */; };
-		1102562A15ECCE2E008B38F9 /* tutorial311.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561715ECCE2E008B38F9 /* tutorial311.html */; };
-		1102562B15ECCE2E008B38F9 /* tutorial316.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561815ECCE2E008B38F9 /* tutorial316.html */; };
-		1102562C15ECCE2E008B38F9 /* tutorial321.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561915ECCE2E008B38F9 /* tutorial321.html */; };
-		1102562D15ECCE2E008B38F9 /* tutorial326.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561A15ECCE2E008B38F9 /* tutorial326.html */; };
-		1102562E15ECCE2E008B38F9 /* tutorial331.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561B15ECCE2E008B38F9 /* tutorial331.html */; };
-		1102562F15ECCE2E008B38F9 /* tutorial336.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561C15ECCE2E008B38F9 /* tutorial336.html */; };
+		1102562915ECCE2E008B38F9 /* tutorial302.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561615ECCE2E008B38F9 /* tutorial302.html */; };
+		1102562A15ECCE2E008B38F9 /* tutorial303.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561715ECCE2E008B38F9 /* tutorial303.html */; };
+		1102562B15ECCE2E008B38F9 /* tutorial304.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561815ECCE2E008B38F9 /* tutorial304.html */; };
+		1102562C15ECCE2E008B38F9 /* tutorial311.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561915ECCE2E008B38F9 /* tutorial311.html */; };
+		1102562D15ECCE2E008B38F9 /* tutorial312.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561A15ECCE2E008B38F9 /* tutorial312.html */; };
+		1102562E15ECCE2E008B38F9 /* tutorial313.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561B15ECCE2E008B38F9 /* tutorial313.html */; };
+		1102562F15ECCE2E008B38F9 /* tutorial314.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561C15ECCE2E008B38F9 /* tutorial314.html */; };
 		1102563015ECCE2E008B38F9 /* tutorial401.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561D15ECCE2E008B38F9 /* tutorial401.html */; };
-		1102563115ECCE2E008B38F9 /* tutorial406.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561E15ECCE2E008B38F9 /* tutorial406.html */; };
-		1102563215ECCE2E008B38F9 /* tutorial411.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561F15ECCE2E008B38F9 /* tutorial411.html */; };
+		1102563115ECCE2E008B38F9 /* tutorial402.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561E15ECCE2E008B38F9 /* tutorial402.html */; };
+		1102563215ECCE2E008B38F9 /* tutorial403.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561F15ECCE2E008B38F9 /* tutorial403.html */; };
+		1102563415ECE8F2008B38F9 /* tutorial211.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102563315ECE8F0008B38F9 /* tutorial211.html */; };
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		111F923415E89B1400EB6B1D /* Tutorials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111F923315E89B1400EB6B1D /* Tutorials.plist */; };
 		111F923915E89D6800EB6B1D /* tutorial101.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923615E89D6800EB6B1D /* tutorial101.html */; };
@@ -149,25 +149,25 @@
 		1102560415EBB906008B38F9 /* NyGlossaryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyGlossaryEntry.h; path = NyGlossary/NyGlossaryEntry.h; sourceTree = "<group>"; };
 		1102560515EBB906008B38F9 /* NyGlossaryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyGlossaryEntry.m; path = NyGlossary/NyGlossaryEntry.m; sourceTree = "<group>"; };
 		1102560A15ECAE01008B38F9 /* selfhtmlcss.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = selfhtmlcss.css; path = html/selfhtmlcss.css; sourceTree = "<group>"; };
-		1102560D15ECCE2E008B38F9 /* tutorial106.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial106.html; path = html/tutorial106.html; sourceTree = "<group>"; };
-		1102560E15ECCE2E008B38F9 /* tutorial111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial111.html; path = html/tutorial111.html; sourceTree = "<group>"; };
+		1102560D15ECCE2E008B38F9 /* tutorial102.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial102.html; path = html/tutorial102.html; sourceTree = "<group>"; };
+		1102560E15ECCE2E008B38F9 /* tutorial103.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial103.html; path = html/tutorial103.html; sourceTree = "<group>"; };
 		1102560F15ECCE2E008B38F9 /* tutorial201.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial201.html; path = html/tutorial201.html; sourceTree = "<group>"; };
-		1102561015ECCE2E008B38F9 /* tutorial206.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial206.html; path = html/tutorial206.html; sourceTree = "<group>"; };
-		1102561115ECCE2E008B38F9 /* tutorial211.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial211.html; path = html/tutorial211.html; sourceTree = "<group>"; };
-		1102561215ECCE2E008B38F9 /* tutorial216.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial216.html; path = html/tutorial216.html; sourceTree = "<group>"; };
-		1102561315ECCE2E008B38F9 /* tutorial221.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial221.html; path = html/tutorial221.html; sourceTree = "<group>"; };
-		1102561415ECCE2E008B38F9 /* tutorial226.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial226.html; path = html/tutorial226.html; sourceTree = "<group>"; };
+		1102561015ECCE2E008B38F9 /* tutorial202.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial202.html; path = html/tutorial202.html; sourceTree = "<group>"; };
+		1102561115ECCE2E008B38F9 /* tutorial203.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial203.html; path = html/tutorial203.html; sourceTree = "<group>"; };
+		1102561215ECCE2E008B38F9 /* tutorial204.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial204.html; path = html/tutorial204.html; sourceTree = "<group>"; };
+		1102561315ECCE2E008B38F9 /* tutorial205.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial205.html; path = html/tutorial205.html; sourceTree = "<group>"; };
 		1102561515ECCE2E008B38F9 /* tutorial301.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial301.html; path = html/tutorial301.html; sourceTree = "<group>"; };
-		1102561615ECCE2E008B38F9 /* tutorial306.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial306.html; path = html/tutorial306.html; sourceTree = "<group>"; };
-		1102561715ECCE2E008B38F9 /* tutorial311.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial311.html; path = html/tutorial311.html; sourceTree = "<group>"; };
-		1102561815ECCE2E008B38F9 /* tutorial316.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial316.html; path = html/tutorial316.html; sourceTree = "<group>"; };
-		1102561915ECCE2E008B38F9 /* tutorial321.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial321.html; path = html/tutorial321.html; sourceTree = "<group>"; };
-		1102561A15ECCE2E008B38F9 /* tutorial326.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial326.html; path = html/tutorial326.html; sourceTree = "<group>"; };
-		1102561B15ECCE2E008B38F9 /* tutorial331.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial331.html; path = html/tutorial331.html; sourceTree = "<group>"; };
-		1102561C15ECCE2E008B38F9 /* tutorial336.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial336.html; path = html/tutorial336.html; sourceTree = "<group>"; };
+		1102561615ECCE2E008B38F9 /* tutorial302.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial302.html; path = html/tutorial302.html; sourceTree = "<group>"; };
+		1102561715ECCE2E008B38F9 /* tutorial303.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial303.html; path = html/tutorial303.html; sourceTree = "<group>"; };
+		1102561815ECCE2E008B38F9 /* tutorial304.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial304.html; path = html/tutorial304.html; sourceTree = "<group>"; };
+		1102561915ECCE2E008B38F9 /* tutorial311.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial311.html; path = html/tutorial311.html; sourceTree = "<group>"; };
+		1102561A15ECCE2E008B38F9 /* tutorial312.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial312.html; path = html/tutorial312.html; sourceTree = "<group>"; };
+		1102561B15ECCE2E008B38F9 /* tutorial313.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial313.html; path = html/tutorial313.html; sourceTree = "<group>"; };
+		1102561C15ECCE2E008B38F9 /* tutorial314.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial314.html; path = html/tutorial314.html; sourceTree = "<group>"; };
 		1102561D15ECCE2E008B38F9 /* tutorial401.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial401.html; path = html/tutorial401.html; sourceTree = "<group>"; };
-		1102561E15ECCE2E008B38F9 /* tutorial406.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial406.html; path = html/tutorial406.html; sourceTree = "<group>"; };
-		1102561F15ECCE2E008B38F9 /* tutorial411.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial411.html; path = html/tutorial411.html; sourceTree = "<group>"; };
+		1102561E15ECCE2E008B38F9 /* tutorial402.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial402.html; path = html/tutorial402.html; sourceTree = "<group>"; };
+		1102561F15ECCE2E008B38F9 /* tutorial403.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial403.html; path = html/tutorial403.html; sourceTree = "<group>"; };
+		1102563315ECE8F0008B38F9 /* tutorial211.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial211.html; path = html/tutorial211.html; sourceTree = "<group>"; };
 		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
@@ -356,25 +356,25 @@
 			isa = PBXGroup;
 			children = (
 				111F923615E89D6800EB6B1D /* tutorial101.html */,
-				1102560D15ECCE2E008B38F9 /* tutorial106.html */,
-				1102560E15ECCE2E008B38F9 /* tutorial111.html */,
+				1102560D15ECCE2E008B38F9 /* tutorial102.html */,
+				1102560E15ECCE2E008B38F9 /* tutorial103.html */,
 				1102560F15ECCE2E008B38F9 /* tutorial201.html */,
-				1102561015ECCE2E008B38F9 /* tutorial206.html */,
-				1102561115ECCE2E008B38F9 /* tutorial211.html */,
-				1102561215ECCE2E008B38F9 /* tutorial216.html */,
-				1102561315ECCE2E008B38F9 /* tutorial221.html */,
-				1102561415ECCE2E008B38F9 /* tutorial226.html */,
+				1102561015ECCE2E008B38F9 /* tutorial202.html */,
+				1102561115ECCE2E008B38F9 /* tutorial203.html */,
+				1102561215ECCE2E008B38F9 /* tutorial204.html */,
+				1102561315ECCE2E008B38F9 /* tutorial205.html */,
+				1102563315ECE8F0008B38F9 /* tutorial211.html */,
 				1102561515ECCE2E008B38F9 /* tutorial301.html */,
-				1102561615ECCE2E008B38F9 /* tutorial306.html */,
-				1102561715ECCE2E008B38F9 /* tutorial311.html */,
-				1102561815ECCE2E008B38F9 /* tutorial316.html */,
-				1102561915ECCE2E008B38F9 /* tutorial321.html */,
-				1102561A15ECCE2E008B38F9 /* tutorial326.html */,
-				1102561B15ECCE2E008B38F9 /* tutorial331.html */,
-				1102561C15ECCE2E008B38F9 /* tutorial336.html */,
+				1102561615ECCE2E008B38F9 /* tutorial302.html */,
+				1102561715ECCE2E008B38F9 /* tutorial303.html */,
+				1102561815ECCE2E008B38F9 /* tutorial304.html */,
+				1102561915ECCE2E008B38F9 /* tutorial311.html */,
+				1102561A15ECCE2E008B38F9 /* tutorial312.html */,
+				1102561B15ECCE2E008B38F9 /* tutorial313.html */,
+				1102561C15ECCE2E008B38F9 /* tutorial314.html */,
 				1102561D15ECCE2E008B38F9 /* tutorial401.html */,
-				1102561E15ECCE2E008B38F9 /* tutorial406.html */,
-				1102561F15ECCE2E008B38F9 /* tutorial411.html */,
+				1102561E15ECCE2E008B38F9 /* tutorial402.html */,
+				1102561F15ECCE2E008B38F9 /* tutorial403.html */,
 			);
 			name = htmltutorials;
 			sourceTree = "<group>";
@@ -905,25 +905,25 @@
 				11DDBF1415EB941A00DFC94A /* NyTuXyz.storyboard in Resources */,
 				1102560215EBB4E0008B38F9 /* glossary.html in Resources */,
 				1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */,
-				1102562015ECCE2E008B38F9 /* tutorial106.html in Resources */,
-				1102562115ECCE2E008B38F9 /* tutorial111.html in Resources */,
+				1102562015ECCE2E008B38F9 /* tutorial102.html in Resources */,
+				1102562115ECCE2E008B38F9 /* tutorial103.html in Resources */,
 				1102562215ECCE2E008B38F9 /* tutorial201.html in Resources */,
-				1102562315ECCE2E008B38F9 /* tutorial206.html in Resources */,
-				1102562415ECCE2E008B38F9 /* tutorial211.html in Resources */,
-				1102562515ECCE2E008B38F9 /* tutorial216.html in Resources */,
-				1102562615ECCE2E008B38F9 /* tutorial221.html in Resources */,
-				1102562715ECCE2E008B38F9 /* tutorial226.html in Resources */,
+				1102562315ECCE2E008B38F9 /* tutorial202.html in Resources */,
+				1102562415ECCE2E008B38F9 /* tutorial203.html in Resources */,
+				1102562515ECCE2E008B38F9 /* tutorial204.html in Resources */,
+				1102562615ECCE2E008B38F9 /* tutorial205.html in Resources */,
 				1102562815ECCE2E008B38F9 /* tutorial301.html in Resources */,
-				1102562915ECCE2E008B38F9 /* tutorial306.html in Resources */,
-				1102562A15ECCE2E008B38F9 /* tutorial311.html in Resources */,
-				1102562B15ECCE2E008B38F9 /* tutorial316.html in Resources */,
-				1102562C15ECCE2E008B38F9 /* tutorial321.html in Resources */,
-				1102562D15ECCE2E008B38F9 /* tutorial326.html in Resources */,
-				1102562E15ECCE2E008B38F9 /* tutorial331.html in Resources */,
-				1102562F15ECCE2E008B38F9 /* tutorial336.html in Resources */,
+				1102562915ECCE2E008B38F9 /* tutorial302.html in Resources */,
+				1102562A15ECCE2E008B38F9 /* tutorial303.html in Resources */,
+				1102562B15ECCE2E008B38F9 /* tutorial304.html in Resources */,
+				1102562C15ECCE2E008B38F9 /* tutorial311.html in Resources */,
+				1102562D15ECCE2E008B38F9 /* tutorial312.html in Resources */,
+				1102562E15ECCE2E008B38F9 /* tutorial313.html in Resources */,
+				1102562F15ECCE2E008B38F9 /* tutorial314.html in Resources */,
 				1102563015ECCE2E008B38F9 /* tutorial401.html in Resources */,
-				1102563115ECCE2E008B38F9 /* tutorial406.html in Resources */,
-				1102563215ECCE2E008B38F9 /* tutorial411.html in Resources */,
+				1102563115ECCE2E008B38F9 /* tutorial402.html in Resources */,
+				1102563215ECCE2E008B38F9 /* tutorial403.html in Resources */,
+				1102563415ECE8F2008B38F9 /* tutorial211.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

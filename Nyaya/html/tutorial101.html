@@ -7,20 +7,100 @@
                 </head>
     <body>
         
-        <h1>Tutorial 1 - H1</h1>
+        <h3>Motivation</h3>
         
-        <h2>Tutorial 1 - H2</h2>
+        <h4>Everyday life</h4>
         
-        <h3>Tutorial 1 - H3</h3>
+        <p>The aim of logic in general is to reason about situations. <a href="welcome.html#LICS">[LICS,1]</a>:</p>
         
-        <h4>Tutorial 1 - H4</h4>
+        <blockquote>If the train arrives late and there are no taxis at the station, then John is late for his meeting.
+            John is not late for his meeting.
+            The train did arrive late.
+            <i>Therefore</i>, there were taxis a the station.
+        </blockquote>
         
-        <h5>Tutorial 1 - H5</h5>
+        <blockquote>If it is raining and Jane does not have her umbrella with her, then she will get wet.
+            Jane is not wet.
+            It is raining.
+            <i>Therefore</i>, Jan has her ubrella with her.
+        </blockquote>
         
-        <h6>Tutorial 1 - H6</h6>
+                
+        <table class="right">
+            <tr><th></th><th>first example</th><th>second example</th></tr>
+            <tr>
+                <td><code>p</code></td><td>the train is late</td><td>it is raining</td>
+            </tr>
+            <tr>
+                <td><code>q</code></td><td>there are taxis <br />in the station</td><td>Jane has her<br />umbrella with her</td>
+            </tr>
+            <tr>
+                <td><code>r</code></td><td>John is late<br />for his meeting</td><td>Jane gets wet</td>
+            </tr>
+        </table>
         
-        <p>This is a paragraph. </p>
+        <p>Both arguments seam valid. And both arguments have the same structure.</p>
         
+        <blockquote>If <code>p</code> and not <code>q</code>, then <code>r</code>. Not <code>r</code>. <code>p</code>. <i>Therefore</i>,&nbsp;<code>q</code>.</blockquote>
+        
+        <!--
+        <p>Later we will write the semantic entailment</p> <blockquote><code>p ∧ ¬q → r, ¬r, p ⊨ q</code></blockquote>
+        
+        <p>which holds in all situations -->
+        
+        <h4>Tic-Tac-Toe</h4>
+        
+        <p>Of course propositional logic is used to implement game logic.<p>
+        
+        <table class="left">
+            <tr><td>A</td><td>B</td><td>C</td></tr>
+            <tr><td>D</td><td>E</td><td>F</td></tr>
+            <tr><td>G</td><td>H</td><td>J</td></tr>
+        </table>
+        
+        <table class="left">
+            <tr><td>O</td><td></td><td>X</td></tr>
+            <tr><td>&nbsp;</td><td>O</td><td>&nbsp;</td></tr>
+            <tr><td>X</td><td>X</td><td>O</td></tr>
+        </table>
+            
+        <p>We can build 18 basic sentences to describe a tic-tac-toe-field.
+        “A holds O”, “A holds X”, … <code>ao ax bo bx co cx do dx eo ex fo fx go gx jo jx</code>.
+        (An empty field is discribed as
+        “not <code>ao</code> and not <code>ax</code> and
+        not <code>bo</code> and not <code>bx</code> and
+        not <code>co</code> and not <code>cx</code> and
+        not <code>do</code> and not <code>dx</code> and
+        not <code>eo</code> and not <code>ex</code> and
+        not <code>fo</code> and not <code>fx</code> and
+        not <code>go</code> and not <code>gx</code> and
+        not <code>ho</code> and not <code>hx</code> and
+        not <code>jo</code> and not <code>jx</code>”).
+        Of course there are some rules. If A holds O, then A does not hold X.
+        If <code>ao</code> then not <code>ax</code>. If <code>ax</code> then not <code>ao</code>.<p>
+        
+        <table class="right">
+            <tr><th>symbol</h><th>meaning</th></tr>
+            <tr><td><code>%o</code></td><td>Field % holds O</td></tr>
+            <tr><td><code>%x</code></td><td>Field % holds X</td></tr>
+            <tr><td><code>oiw</code></td><td>O is the winner</td></tr>
+            <tr><td><code>xiw</code></td><td>X is the winner</td></tr>
+        </table>
+        
+        <p>Now we can check for a winner: If (<code>ao</code> and <code>bo</code> and <code>co</code>) or
+            (<code>ao</code> and <code>eo</code> and <code>jo</code>) or
+            (<code>ao</code> and <code>do</code> and <code>go</code>) or
+        
+        (<code>bo</code> and <code>eo</code> and <code>ho</code>) or
+        
+        (<code>co</code> and <code>fo</code> and <code>jo</code>) or
+        (<code>co</code> and <code>eo</code> and <code>go</code>) or
+        
+        (<code>do</code> and <code>eo</code> and <code>fo</code>) or
+        
+        (<code>go</code> and <code>ho</code> and <code>jo</code>)
+        
+        then <code>oiw</code>. <code>ao</code>. <code>eo</code>. <code>jo</code>. <i>Therefore, <code>oiw</code>.</p>
         
         
     </body>

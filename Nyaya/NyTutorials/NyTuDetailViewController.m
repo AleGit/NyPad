@@ -61,7 +61,9 @@
             @try {
                 self.exerciseViewController = [[self tustoryboard] instantiateViewControllerWithIdentifier:identifier];
                 self.exerciseViewController.delegate = self;
-                self.exerciseViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                
+                NSLog(@"BEFORE %@", NSStringFromCGRect(self.exerciseViewController.view.bounds));
+                self.exerciseViewController.modalPresentationStyle = UIModalPresentationFormSheet;
                 self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 self.exerciseViewController.view.backgroundColor = [self tubackground];
                 self.exerciseButton.hidden = NO;
@@ -99,6 +101,7 @@
         // self.exerciseViewController.view.bounds = CGRectMake(40,40,708,964);
         
         
+        NSLog(@"AFTER %@", NSStringFromCGRect(self.exerciseViewController.view.bounds));
     }
 }
 

@@ -25,9 +25,12 @@ a:active { color:#000000;  text-decoration:none; }
 a.an { text-decoration:none; }
 
 
-table { float:left; margin:3px 20px 16px 0px; border:solid 1px black; border-collapse:collapse; }
+table { border:solid 1px black; border-collapse:collapse; }
 
-tr, th, td { border:dotted 1px black; text-align:center;}
+table.left { float:left; margin:3px 20px 16px 0px; }
+table.right { float:right; margin:3px 0px 16px 20px; }
+
+tr, th, td { border:dotted 1px black; text-align:center; padding:2px 3px 2px 3px;}
 
 code,kbd,tt,samp { font-family:Courier New,Courier; color:#0000C0; }
 
