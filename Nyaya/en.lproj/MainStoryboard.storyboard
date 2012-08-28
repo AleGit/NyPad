@@ -476,20 +476,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="703" height="655"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="2K8-We-cG2">
-                                <rect key="frame" x="657" y="608" width="29" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6FW-Qk-Fgs">
+                                <rect key="frame" x="666" y="11" width="29" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal" title="⬅">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="exercise:" destination="Ekn-df-hE0" eventType="touchUpInside" id="rj6-8W-GgU"/>
+                                    <action selector="back:" destination="Ekn-df-hE0" eventType="touchUpInside" id="dBv-z2-cdC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -497,9 +498,15 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Tutorial" id="Wi4-e6-Lcg"/>
+                    <navigationItem key="navigationItem" title="Tutorial" id="Wi4-e6-Lcg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="cbo-qK-sxa">
+                            <connections>
+                                <action selector="exercise:" destination="Ekn-df-hE0" id="tGm-Kf-LYd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="exerciseButton" destination="2K8-We-cG2" id="PXV-ea-EqO"/>
+                        <outlet property="backButton" destination="6FW-Qk-Fgs" id="8RM-wR-Ktq"/>
                         <outlet property="webView" destination="INa-cD-A8v" id="wrm-gl-lBE"/>
                     </connections>
                 </viewController>
@@ -999,8 +1006,9 @@
         <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="back:"/>
                 <relationship kind="action" name="exercise:"/>
-                <relationship kind="outlet" name="exerciseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>

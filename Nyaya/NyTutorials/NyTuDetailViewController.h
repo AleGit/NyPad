@@ -11,8 +11,10 @@
 @interface NyTuDetailViewController : NyDetailViewController
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong, nonatomic) IBOutlet UIButton *exerciseButton;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 
+- (IBAction)back:(id)sender;
 - (IBAction)exercise:(id)sender;
+
 - (void)exerciseDone;
 @end

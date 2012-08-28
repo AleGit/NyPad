@@ -9,9 +9,10 @@
 #import "NyTuDetailViewController.h"
 #import "NyTuXyzViewController.h"
 
-@interface NyTuDetailViewController () 
+@interface NyTuDetailViewController () <UIWebViewDelegate>
 
 @property (strong, nonatomic) NyTuXyzViewController *exerciseViewController;
+@property (strong, nonatomic) NSString *tutorialFileName;
 @end
 
 @implementation NyTuDetailViewController
@@ -38,6 +39,9 @@
 
 - (void)configureView
 {
+    self.backButton.hidden = YES;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
     if (self.detailItem) {
         NSString *sectionTitle = [self.detailItem objectAtIndex:0];
         NSArray *tutorial = [self.detailItem objectAtIndex:1];
@@ -48,9 +52,12 @@
         
         NSString *name = [NSString stringWithFormat:@"tutorial%@", tutorialKey];
         NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"html"];
+        _tutorialFileName = [url lastPathComponent];
         if (url) {
+            self.webView.delegate = self;
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             [self.webView loadRequest:request];
+           
         }
         else {
             NSLog(@"%@.html does not exist",name);
@@ -62,20 +69,14 @@
                 self.exerciseViewController = [[self tustoryboard] instantiateViewControllerWithIdentifier:identifier];
                 self.exerciseViewController.delegate = self;
                 
-                NSLog(@"BEFORE %@", NSStringFromCGRect(self.exerciseViewController.view.bounds));
                 self.exerciseViewController.modalPresentationStyle = UIModalPresentationFormSheet;
                 self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 self.exerciseViewController.view.backgroundColor = [self tubackground];
-                self.exerciseButton.hidden = NO;
+                self.navigationItem.rightBarButtonItem.enabled = YES;
             }
             @catch (NSException *ex) {
-                NSLog(@"%@ does not exist in storyboard.", identifier);
                 self.exerciseViewController = nil;
-                self.exerciseButton.hidden = YES;
             }
-        }
-        else {
-            NSLog(@"%@ allready created", identifier);
         }
         
     }
@@ -83,25 +84,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.exerciseButton.hidden = YES;
+    
+    self.backButton.hidden = YES;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)viewDidUnload {
     self.webView = nil;
-    self.exerciseButton = nil;
     self.exerciseViewController = nil;
+    self.backButton = nil;
+    
     [super viewDidUnload];
+}
+
+- (IBAction)back:(id)sender {
+    [self.webView goBack];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.backButton.hidden = !self.webView.canGoBack || [_tutorialFileName isEqual:[webView.request.URL lastPathComponent]];
 }
 
 - (IBAction)exercise:(id)sender {
     if (self.exerciseViewController) {
-        
-        
         [self presentModalViewController:self.exerciseViewController animated:YES];
-        // self.exerciseViewController.view.bounds = CGRectMake(40,40,708,964);
-        
-        
-        NSLog(@"AFTER %@", NSStringFromCGRect(self.exerciseViewController.view.bounds));
     }
 }
 
