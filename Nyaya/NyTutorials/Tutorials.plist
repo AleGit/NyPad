@@ -4,32 +4,92 @@
 <array>
 	<string>Tutorials</string>
 	<array>
-		<string>1 Motivation</string>
+		<string>Introduction</string>
 		<array>
-			<string>1.1 Introduction</string>
+			<string>Motivation</string>
 			<string>101</string>
 		</array>
 		<array>
-			<string>1.2 Pitfalls</string>
-			<string>102</string>
+			<string>Examples</string>
+			<string>106</string>
 		</array>
 	</array>
 	<array>
-		<string>2 Syntax</string>
+		<string>Syntax</string>
 		<array>
-			<string>2.1 Introduction</string>
+			<string>Definition</string>
 			<string>201</string>
 		</array>
+		<array>
+			<string>Conventions</string>
+			<string>206</string>
+		</array>
+		<array>
+			<string>Syntax tree</string>
+			<string>211</string>
+		</array>
+		<array>
+			<string>Sub formulas</string>
+			<string>216</string>
+		</array>
+		<array>
+			<string>Top, Bottom</string>
+			<string>221</string>
+		</array>
+		<array>
+			<string>Basic Deduction Rules</string>
+			<string>226</string>
+		</array>
 	</array>
 	<array>
-		<string>3 Semantics</string>
+		<string>Semantics</string>
 		<array>
-			<string>3.1 Introduction</string>
+			<string>Valuation</string>
 			<string>301</string>
 		</array>
 		<array>
-			<string>3.2 Semantics cont.</string>
-			<string>302</string>
+			<string>Truth Tables</string>
+			<string>306</string>
+		</array>
+		<array>
+			<string>Entailment and Equivalence</string>
+			<string>311</string>
+		</array>
+		<array>
+			<string>Satisfiability and Validity</string>
+			<string>316</string>
+		</array>
+		<array>
+			<string>Implication Free Form</string>
+			<string>321</string>
+		</array>
+		<array>
+			<string>Negation Normal Form</string>
+			<string>326</string>
+		</array>
+		<array>
+			<string>Conjunctive Normal Form</string>
+			<string>331</string>
+		</array>
+        <array>
+			<string>Disjunctive Normal Form</string>
+			<string>336</string>
+		</array>
+        
+	</array>
+	<array>
+		<string>Binary Decision Diagrams</string>
+		<array>
+			<string>Boolean Functions</string>
+			<string>401</string>
+		</array>
+		<array>
+			<string>Trees</string>
+			<string>406</string>
+		</array>
+		<array>
+			<string>Reduced BDDs</string>
+			<string>411</string>
 		</array>
 	</array>
 </array>

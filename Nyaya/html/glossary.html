@@ -9,6 +9,18 @@
         <!-- Inhalt der Datei -->
         <!-- <h3>A Learning environment for BoolTool</h3> -->
         
+        <h3 id="associativity">Associativity</h3>
+        
+        <table>
+            <tr><th>input</th><th>valuation</th><th>property</th></tr>
+            <tr><td>¬¬a</td><td>¬(¬a)</td><td></td></tr>
+            <tr><td>a∧b∧c</td><td>(a∧b)∧c</td><td>associativ</td></tr>
+            <tr><td>a∨b∨c</td><td>(a∨b)∨c</td><td>associativ</td></tr>
+            <tr><td>a⊻b⊻c</td><td>(a⊻b)⊻c</td><td>left associativ</td></tr>
+            <tr><td>a↔b↔c</td><td>a↔(b↔c)</td><td>right associativ</td></tr>
+            <tr><td>a→b→c</td><td>a→(b→c)</td><td>right associativ</td></tr>
+        </table>
+        
         <h3 id="atom">Atom</h3>
         
         <h3>
@@ -28,7 +40,7 @@
         
         <p>A relation between two propositions that is true only when both propositions are simultaneously true or false.</p>
         
-        <p>BoolTool does not support Biconditional, but “!(P^Q)” is equivalent. Nyāya accepts “P BIC Q”, “P↔Q”, and “P&lt;&gt;Q” as input.</p>
+        <p>BoolTool does not support Biconditional, but <code>!(P^Q)</code> is equivalent. Nyāya accepts <code>P BIC Q</code>, <code>P↔Q</code>, and <code>P&lt;&gt;Q</code> as input.</p>
         
         <h3>
             <span id="conjunction">Conjunction</span>
@@ -61,7 +73,7 @@
         
         <p>A relation between two propositions that is true only when both propositions are true.</p>
         
-        <p>BoolTool supports “P&amp;Q”, Nyāya accepts “P AND Q”, “P∧Q”, “P.Q”, and “P&amp;Q” as input.</p>
+        <p>BoolTool supports <code>P&amp;Q</code>, Nyāya accepts <code>P AND Q</code>, <code>P∧Q</code>, <code>P.Q</code>, and <code>P&amp;Q</code> as input.</p>
         
         <h3 id="connective">Connective</h3>
         
@@ -93,7 +105,7 @@
         
         <p>A relation between two propositions that is true when one or both propositions are true.</p>
         
-        <p>BoolTool supports “P|Q” and “P+Q”, Nyāya accepts “P OR Q”, “P∨Q”, “P+Q”, and “P|Q” as input.</p>
+        <p>BoolTool supports <code>P|Q</code> and <code>P+Q</code>, Nyāya accepts <code>P OR Q</code>, <code>P∨Q</code>, <code>P+Q</code>, and <code>P|Q</code> as input.</p>
                     
         <h3>
             <span id="exclusive_or">Exclusive Disjunction</span>
@@ -121,7 +133,7 @@
         
         <p>A relation between two propositions that is true when exactly one proposition is true.</p>
         
-        <p>BoolTool supports “P^Q”, Nyāya accepts “P XOR Q”, “P⊻Q”, “P⊕Q”, and “P^Q” as input.</p>
+        <p>BoolTool supports <code>P^Q</code>, Nyāya accepts <code>P XOR Q</code>, <code>P⊻Q</code>, <code>P⊕Q</code>, and <code>P^Q</code> as input.</p>
         
         <h3 id="formula">Formula</a></h3>
         
@@ -144,7 +156,7 @@
         
         
         
-        <p>BoolTool supports “P>Q”, Nyāya accepts “P IMP Q”, “P→Q”, and “P>Q” as input.</p>
+        <p>BoolTool supports <code>P>Q</code>, Nyāya accepts <code>P IMP Q</code>, <code>P→Q</code>, and <code>P>Q</code> as input.</p>
         
         <h3>
             <span id="negation">Negation</span>
@@ -169,7 +181,7 @@
         
         
         
-        <p>Nyāya accepts “NOT P”, “¬P”, and “!P” as input.</p>
+        <p>Nyāya accepts <code>NOT P</code>, <code>¬P</code>, and <code>!P</code> as input.</p>
         
         <h3>
             <span id="parenthesis">Parenthesis</span>
@@ -178,7 +190,7 @@
         </h3>
         
         
-        <h3><span id="precedence">Precedence</span> conventions, <span id="order_of_ops">Order Of Operations</span></h3>
+        <h3 id="precedence">Precedence</h3>
         
         <!--
         <div style="float:left">
@@ -240,8 +252,8 @@
         </table>
         
         <p>Precedence of connectives is used to get rid of too many parenthesis.
-        The artihmetic expression <tt>a.b+c</tt> means (a.b)+c, while a.(b+c) can&rsquo;t be written without parenthesis.
-        So . has a higher precedence than +.
+        The artihmetic expression <code>a.b+c</code> is to be read as <code>(a.b)+c</code>, while <code>a.(b+c)</code> can&rsquo;t be written without parenthesis.
+        This is because by convention mutltiplication has a higher precedence than addition.
         Similar conventions are used in propositional logic.</p>
         
         <p>Precedence determines the <a href="#syntax_tree">syntax tree</a>,
