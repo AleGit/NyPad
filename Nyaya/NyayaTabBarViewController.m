@@ -36,6 +36,10 @@
             splitViewController.delegate = (id)navigationController.topViewController;
         }
     }];
+  
+#ifdef DEBUG
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
+#endif
 }
 
 - (void)viewDidUnload

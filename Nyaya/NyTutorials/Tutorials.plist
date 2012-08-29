@@ -11,7 +11,11 @@
 		</array>
 		<array>
 			<string>Propositions</string>
-			<string>102</string>
+			<string>111</string>
+		</array>
+		<array>
+			<string>Limits</string>
+			<string>121</string>
 		</array>
 	</array>
 	<array>
@@ -22,23 +26,23 @@
 		</array>
 		<array>
 			<string>Conventions</string>
-			<string>202</string>
+			<string>211</string>
 		</array>
 		<array>
 			<string>Syntax tree</string>
-			<string>203</string>
+			<string>221</string>
 		</array>
 		<array>
 			<string>Sub formulas</string>
-			<string>204</string>
+			<string>231</string>
 		</array>
 		<array>
 			<string>Top, Bottom</string>
-			<string>205</string>
+			<string>241</string>
 		</array>
 		<array>
 			<string>Basic Deduction Rules</string>
-			<string>211</string>
+			<string>251</string>
 		</array>
 	</array>
 	<array>
@@ -49,31 +53,31 @@
 		</array>
 		<array>
 			<string>Truth Tables</string>
-			<string>302</string>
-		</array>
-		<array>
-			<string>Entailment and Equivalence</string>
-			<string>303</string>
-		</array>
-		<array>
-			<string>Satisfiability and Validity</string>
-			<string>304</string>
-		</array>
-		<array>
-			<string>Implication Free Form</string>
 			<string>311</string>
 		</array>
 		<array>
+			<string>Entailment and Equivalence</string>
+			<string>321</string>
+		</array>
+		<array>
+			<string>Satisfiability and Validity</string>
+			<string>331</string>
+		</array>
+		<array>
+			<string>Implication Free Form</string>
+			<string>341</string>
+		</array>
+		<array>
 			<string>Negation Normal Form</string>
-			<string>312</string>
+			<string>351</string>
 		</array>
 		<array>
 			<string>Conjunctive Normal Form</string>
-			<string>313</string>
+			<string>361</string>
 		</array>
 		<array>
 			<string>Disjunctive Normal Form</string>
-			<string>314</string>
+			<string>371</string>
 		</array>
 	</array>
 	<array>
@@ -84,11 +88,11 @@
 		</array>
 		<array>
 			<string>Trees</string>
-			<string>402</string>
+			<string>411</string>
 		</array>
 		<array>
 			<string>Reduced BDDs</string>
-			<string>403</string>
+			<string>421</string>
 		</array>
 	</array>
 </array>

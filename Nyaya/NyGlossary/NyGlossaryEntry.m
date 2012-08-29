@@ -27,28 +27,30 @@
 }
 
 - (id)initWithString:(NSString *)string {
-    self = [super init];
-    if (self) {
-        NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>="]];
-        // _entryTitle = [components componentsJoinedByString:@"@"];
-        
-        [components enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+    @autoreleasepool {
+        self = [super init];
+        if (self) {
+            NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>="]];
             
-            if ([obj hasSuffix:@" id"]) {
-                NSString *e = [components objectAtIndex:idx+1];
-                NSRange range = [e rangeOfString:@"\"" options:0 range:NSMakeRange(1, [e length] - 1)];
-                _entryId = [e substringWithRange:NSMakeRange(1, range.location -1)];
-            }
-            
-            if ([obj isEqual:@"/"]) {
-                // _entryTitle = [NSString stringWithFormat:@"%@ %@", [components objectAtIndex:idx-1], _entryId];
-                _entryTitle = [self cleanString:[[components objectAtIndex:idx-1] mutableCopy]];
+            [components enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
                 
-            }
-        }];
-        
+                if ([obj hasSuffix:@" id"]) {
+                    NSString *e = [components objectAtIndex:idx+1];
+                    NSRange range = [e rangeOfString:@"\"" options:0 range:NSMakeRange(1, [e length] - 1)];
+                    _entryId = [e substringWithRange:NSMakeRange(1, range.location -1)];
+                }
+                
+                if ([obj isEqual:@"/"]) {
+                    // _entryTitle = [NSString stringWithFormat:@"%@ %@", [components objectAtIndex:idx-1], _entryId];
+                    _entryTitle = [self cleanString:[[components objectAtIndex:idx-1] mutableCopy]];
+                    
+                    if ([_entryTitle length] > 30) NSLog(@"%@\n%@\n%@", _entryTitle, _entryId, string);
+                    
+                }
+            }];
+            
+        }
     }
-    NSLog(@"IN: %@ *** OUT: %@ #%@", string, _entryTitle, _entryId);
     return self;
     
 }

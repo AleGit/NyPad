@@ -7,34 +7,25 @@
 //
 
 #import "NyTuDetailViewController.h"
-#import "NyTuXyzViewController.h"
+#import "NyTuTestViewController.h"
 
 @interface NyTuDetailViewController () <UIWebViewDelegate>
 
-@property (strong, nonatomic) NyTuXyzViewController *exerciseViewController;
-@property (strong, nonatomic) NSString *tutorialFileName;
+@property (strong, nonatomic) NSString *tutorialHtml;
 @end
 
 @implementation NyTuDetailViewController
 
-- (UIStoryboard*)tustoryboard {
+- (UIStoryboard*)testStoryboard {
     static UIStoryboard *_tustoryboard;
     if (!_tustoryboard) {
-        _tustoryboard = [UIStoryboard storyboardWithName:@"NyTuXyz" bundle:nil];
+        _tustoryboard = [UIStoryboard storyboardWithName:@"NyTuTest" bundle:nil];
     }
     return _tustoryboard;
 }
 
-- (UIColor*)tubackground {
-    static UIColor *_tubackground;
-    if (!_tubackground) {
-        _tubackground = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"paper"]];
-    }
-    return _tubackground;
-}
-
 - (NSString*)localizedBarButtonItemTitle {
-    return NSLocalizedString(@"Tutorials", @"Tutorials");
+    return NSLocalizedString(@"Choose Tutorial", @"user can choose tutorial freely");
 }
 
 - (void)configureView
@@ -44,41 +35,29 @@
     
     if (self.detailItem) {
         NSString *sectionTitle = [self.detailItem objectAtIndex:0];
+        
         NSArray *tutorial = [self.detailItem objectAtIndex:1];
-        
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@",sectionTitle, [tutorial objectAtIndex:0]];
-        
+        NSString *tutorialTitle = [tutorial objectAtIndex:0];
         NSString *tutorialKey = [tutorial objectAtIndex:1];
+        NSString *tutorialFileName = [NSString stringWithFormat:@"tutorial%@", tutorialKey];
+        NSURL *tutorialUrl = [[NSBundle mainBundle] URLForResource:tutorialFileName withExtension:@"html"];
+       
         
-        NSString *name = [NSString stringWithFormat:@"tutorial%@", tutorialKey];
-        NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"html"];
-        _tutorialFileName = [url lastPathComponent];
-        if (url) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@",sectionTitle, tutorialTitle];
+        
+        if (tutorialUrl) {
+            self.navigationItem.rightBarButtonItem.enabled=YES;
+            self.tutorialHtml = [tutorialUrl lastPathComponent];
             self.webView.delegate = self;
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            [self.webView loadRequest:request];
+            
+            [self.webView loadRequest:[NSURLRequest requestWithURL:tutorialUrl]];
            
         }
         else {
-            NSLog(@"%@.html does not exist",name);
+            self.tutorialHtml = nil;
+            self.webView.delegate = nil;
+            NSLog(@"%@.html does not exist",tutorialFileName);
         }
-        
-        NSString *identifier = [NSString stringWithFormat:@"NyTu%@ViewController", tutorialKey];
-        if (![[[self.exerciseViewController class] description] isEqualToString:identifier]) {
-            @try {
-                self.exerciseViewController = [[self tustoryboard] instantiateViewControllerWithIdentifier:identifier];
-                self.exerciseViewController.delegate = self;
-                
-                self.exerciseViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-                self.exerciseViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                self.exerciseViewController.view.backgroundColor = [self tubackground];
-                self.navigationItem.rightBarButtonItem.enabled = YES;
-            }
-            @catch (NSException *ex) {
-                self.exerciseViewController = nil;
-            }
-        }
-        
     }
 }
 
@@ -91,7 +70,6 @@
 
 - (void)viewDidUnload {
     self.webView = nil;
-    self.exerciseViewController = nil;
     self.backButton = nil;
     
     [super viewDidUnload];
@@ -99,19 +77,22 @@
 
 - (IBAction)back:(id)sender {
     [self.webView goBack];
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.backButton.hidden = !self.webView.canGoBack || [_tutorialFileName isEqual:[webView.request.URL lastPathComponent]];
+    self.backButton.hidden = !self.webView.canGoBack || [self.tutorialHtml isEqual:[webView.request.URL lastPathComponent]];
 }
 
-- (IBAction)exercise:(id)sender {
-    if (self.exerciseViewController) {
-        [self presentModalViewController:self.exerciseViewController animated:YES];
-    }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NyTuTestViewController *testViewController = (NyTuTestViewController*)segue.destinationViewController;
+    testViewController.instructionsName = [NSString stringWithFormat:@"instructions%@", [[self.detailItem objectAtIndex:1] objectAtIndex:1]];
+    
+    // testViewController.delegate = self;  
+    
+    NSLog(@"“%@” ‘%@’ ‘%@’ \n%@", segue.identifier, [segue.sourceViewController class], [segue.destinationViewController class]
+          , testViewController.instructionsName);
 }
 
-- (void)exerciseDone {
-    [self.exerciseViewController dismissModalViewControllerAnimated:YES];
-}
 @end

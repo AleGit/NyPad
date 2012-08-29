@@ -30,13 +30,27 @@
         self.tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
         
     }
+    
+
 }
+
+
 
 // **********************************
 // !!! OVERRIDDEN FROM SUPERCLASS !!!
 // **********************************
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#ifdef DEBUG
+
+    if (self.detailViewController && !self.detailViewController.detailItem) {
+        NSArray *tutorialSection = [self.tutorialSections objectAtIndex:1];
+        NSString *sectionTitle = [tutorialSection objectAtIndex:0];
+        NSArray *tutorial = [tutorialSection objectAtIndex:1];
+        self.detailViewController.detailItem = @[sectionTitle, tutorial];
+    }
+#endif
+    
     return [self.tutorialSections count] -1;
     // the first elment of the array is a string
 }

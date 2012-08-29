@@ -17,6 +17,7 @@
 @end
 
 @implementation FirstViewController
+@synthesize accessoryView;
 
 - (void)viewDidLoad
 {
@@ -37,8 +38,19 @@
          forControlEvents:UIControlEventTouchUpInside];
     [inputAccessoryView addSubview:compButton];*/
     
-    self.input.inputView = self.myInputView;
-    // self.input.inputAccessoryView = self.myInputView;
+    // self.input.inputView = self.myInputView;
+    if (!self.inputAccessoryView) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyAccessoryView" owner:self options:nil];
+        self.input.inputAccessoryView = self.accessoryView;
+        
+        self.accessoryView = nil;
+        
+    }
+    
+    
+    
+    
+    [self.input addTarget:self action:@selector(compute:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.input becomeFirstResponder];
     
     // self.input.inputView = self.myInputView;
@@ -57,8 +69,8 @@
     [self setCnf:nil];
     [self setDnf:nil];
     [self setSubformulas:nil];
-    [self setMyInputView:nil];
     [self setErrors:nil];
+    [self setAccessoryView:nil];
     [super viewDidUnload];
     
     dispatch_release(queue);
