@@ -7,6 +7,7 @@
 //
 
 #import "NyGlossaryEntry.h"
+#import "NSString+NyayaToken.h"
 
 @implementation NyGlossaryEntry
 
@@ -18,34 +19,22 @@
     return [NSString stringWithFormat:@"%@ %@", self.entryTitle, self.entryId];
 }
 
-- (NSString*)cleanString:(NSMutableString*)input {
-    [input replaceOccurrencesOfString:@"&amp;" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [input length])];
-    [input replaceOccurrencesOfString:@"&gt;" withString:@">" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [input length])];
-    [input replaceOccurrencesOfString:@"&lt;" withString:@"<" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [input length])];
-    return [input capitalizedString];
-    
-}
+
 
 - (id)initWithString:(NSString *)string {
     @autoreleasepool {
         self = [super init];
         if (self) {
-            NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>="]];
+            NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>=\""]];
             
-            [components enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+            [components enumerateObjectsWithOptions:0 usingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
                 
                 if ([obj hasSuffix:@" id"]) {
-                    NSString *e = [components objectAtIndex:idx+1];
-                    NSRange range = [e rangeOfString:@"\"" options:0 range:NSMakeRange(1, [e length] - 1)];
-                    _entryId = [e substringWithRange:NSMakeRange(1, range.location -1)];
+                    _entryId = [components objectAtIndex:idx+2];
                 }
                 
-                if ([obj isEqual:@"/"]) {
-                    // _entryTitle = [NSString stringWithFormat:@"%@ %@", [components objectAtIndex:idx-1], _entryId];
-                    _entryTitle = [self cleanString:[[components objectAtIndex:idx-1] mutableCopy]];
-                    
-                    if ([_entryTitle length] > 30) NSLog(@"%@\n%@\n%@", _entryTitle, _entryId, string);
-                    
+                else if ([obj isEqual:@"/"]) {
+                    _entryTitle = [[components objectAtIndex:idx-1] capitalizedHtmlEntityFreeString];
                 }
             }];
             

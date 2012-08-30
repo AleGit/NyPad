@@ -35,7 +35,7 @@
                                       error:&error];
         
         [regex enumerateMatchesInString:input
-                                options:0
+                                options:0 
                                   range:NSMakeRange(0, [input length])
                              usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
                                  

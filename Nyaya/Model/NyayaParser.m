@@ -97,30 +97,21 @@
 - (NSString*)errorDescriptions {
     return [_errors componentsJoinedByString:@"•"];
 }
-
-
-- (NSArray*)parseSequence {   // sequence    = [identifier "=" ] formula   { ";" [identifier "=" ] formula }
-    return nil;
-    
-}
     
 - (NyayaNode*)parseFormula {
-    NyayaNode* result = [self parseImplication];
+    NyayaNode* result = [self parseSequence];
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
     return result;
 }
 
-- (NyayaNode*)parseImplication {
+- (NyayaNode*)parseSequence {
     NyayaNode* result = nil;
     _level++;
-
-    // [v.2] implication = bicondition [ IMP implication ]    
-    result = [self parseBicondition];       // consumes biconditon
-    if ([_token isImplicationToken]) {
-        [self nextToken];                   // consumes IMP token
-        result = [NyayaNode implication:result with:[self parseImplication]];
+    result = [self parseBicondition];
+    while ([_token isSemicolon]) {
+        [self nextToken];                   // consumes , token
+        result = [NyayaNode sequence:result with:[self parseBicondition]];
     }
-    
     _level--;
     return result;
 }
@@ -129,12 +120,29 @@
     NyayaNode* result = nil;
     _level++;
     
-    // [v.2] bicondition = disjunction [ BIC bicondition ]
-    // [v.3] bicondition = xdisjunction [ BIC bicondition ]
-    result = [self parseXdisjunction];       // consumes xdisjunction
+    // [v2] bicondition = disjunction [ BIC bicondition ]
+    // [v3] bicondition = xdisjunction [ BIC bicondition ]
+    // [v3.1] bicondition = implication [ BIC bicondition ]
+    result = [self parseImplication];       // consumes xdisjunction
     if ([_token isBiconditionToken]) {
         [self nextToken];                   // consumes BIC token
         result = [NyayaNode bicondition:result with:[self parseBicondition]];
+    }
+    
+    _level--;
+    return result;
+}
+
+- (NyayaNode*)parseImplication {
+    NyayaNode* result = nil;
+    _level++;
+
+    // [v2] implication = bicondition [ IMP implication ]
+    // [v3.1] implication = xdisjunction [ IMP implication ]
+    result = [self parseXdisjunction];       // consumes biconditon
+    if ([_token isImplicationToken]) {
+        [self nextToken];                   // consumes IMP token
+        result = [NyayaNode implication:result with:[self parseImplication]];
     }
     
     _level--;
@@ -250,6 +258,7 @@
 // tuple = "(" formula { "," formula } ")"
 - (NSArray*)parseTuple {
     NSMutableArray* result = nil;
+    
     
     if ([_token isLeftParenthesis]) {                   // a tuple starts with "("
         

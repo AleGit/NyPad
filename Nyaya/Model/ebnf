@@ -1,3 +1,10 @@
+Parser v3.1: NOT > AND > OR > XOR > BIC > IMP
+
+formula      = sequence                             // CHANGED   from v3
+sequence     = bicondition { COMMA bicondition }
+bicondition  = implication [ BIC bicondition ]      // CHANGED   from v3
+implication  = xdisjunction [ BIC implication ]     // CHANGED   from v3
+
 
 Parser v3: NOT > AND > OR > XOR > BIC > IMP
 

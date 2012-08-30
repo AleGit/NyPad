@@ -16,7 +16,7 @@ typedef NSUInteger NyayaBool;
 enum { // NyayaUndefined=0
     NyayaConstant=1, NyayaVariable,
     NyayaNegation,
-    NyayaConjunction, NyayaDisjunction, NyayaBicondition, NyayaImplication, NyayaXdisjunction,
+    NyayaConjunction, NyayaSequence, NyayaDisjunction, NyayaBicondition, NyayaImplication, NyayaXdisjunction,
     NyayaFunction
 };
 typedef NSUInteger NyayaNodeType;
@@ -40,9 +40,10 @@ typedef NSUInteger NyayaNodeType;
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 + (NyayaNode*)disjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)implication:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 + (NyayaNode*)xdisjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
++ (NyayaNode*)implication:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
++ (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
++ (NyayaNode*)sequence:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
 
 + (NyayaNode*)function:(NSString*)name with:(NSArray*)nodes;
 

@@ -69,14 +69,23 @@
     STAssertEqualObjects([node treeDescription], expected2, nil);
 }
 
+- (void)testSequence {
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a=b;a&b=c"];
+    NyayaNode *node = [parser parseFormula];
+    NSString *expected = @"a ↔ b; a ∧ b ↔ c";
+    NSString *expected2 = @"((a↔b);((a∧b)↔c))";
+    STAssertEqualObjects([node description], expected, nil);
+    STAssertEqualObjects([node treeDescription], expected2, nil);
+}
+
 - (void)testComplex {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a^b→a↔b∨a∧!b"];
     NyayaNode *node = [parser parseFormula];
-    NSString *expected = @"a ⊻ b → (a ↔ b ∨ (a ∧ ¬b))";
-    NSString *expected2 = @"((a⊻b)→(a↔(b∨(a∧(¬b)))))";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaImplication, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaXdisjunction, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaBicondition, nil);
+    NSString *expected = @"(a ⊻ b → a) ↔ b ∨ (a ∧ ¬b)";
+    NSString *expected2 = @"(((a⊻b)→a)↔(b∨(a∧(¬b))))";
+    STAssertEquals(node.type, (NyayaNodeType)NyayaBicondition, nil);
+    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaImplication, nil);
+    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaDisjunction, nil);
     STAssertEqualObjects([node description], expected, [[node description] commonPrefixWithString:expected options:0]);
     STAssertEqualObjects([node treeDescription], expected2, nil);
 }

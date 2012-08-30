@@ -25,7 +25,7 @@
         
         <h3>
             <span id="biconditional">Biconditonal</span>
-            <span class="sb" id="if_then">BIC</span>
+            <span class="sb" id="bic">BIC</span>
             <span class="sb" id="left_right_arrow">↔</span> 
             <span class="sb" id="lg_than_sign">&lt;&gt;</span>
         </h3>
@@ -139,7 +139,7 @@
         
         <h3>
             <span id="implication">Implication</span>
-            <span class="sb" id="if_then">IMP</span>
+            <span class="sb" id="imp">IMP</span>
             <span class="sb" id="rightwards_arrow">→</span> 
             <span class="sb" id="greater_than_sign">&gt;</span>
         </h3>
@@ -192,62 +192,35 @@
         
         <h3 id="precedence">Precedence</h3>
         
-        <!--
-        <div style="float:left">
-        <p class="precedence">&nbsp;
-            <a href="#negation">NOT</a> ⊐
-            <a href="#conjunction">AND</a> ⊐
-            <a href="#disjunction">OR</a> ⊐
-            <a href="#exclusive_or">XOR</a> ⊐
-            <a href="#biconditional">BIC</a> ⊐
-            <a href="#implication">IMP</a>
-        &nbsp;</p>
-        
-        <p class="precedence">&nbsp;
-            &nbsp;<a href="#negation">¬</a>&nbsp; ⊐
-            &nbsp;<a href="#conjunction">∧</a>&nbsp; ⊐
-            &nbsp;<a href="#disjunction">∨</a> ⊐
-            &nbsp;<a href="#exclusive_or">⊻</a>&nbsp; ⊐
-            &nbsp;<a href="#biconditional">↔</a> ⊐
-            &nbsp;<a href="#implication">→</a>&nbsp;
-        &nbsp;</p>
-        
-        <p class="precedence">&nbsp;
-            &nbsp;<a href="#negation">!</a>&nbsp; ⊐
-            &nbsp;<a href="#conjunction">.</a>&nbsp; ⊐
-            &nbsp;<a href="#disjunction">+</a> ⊐
-            &nbsp;<a href="#exclusive_or">⊕</a>&nbsp;
-        &nbsp;</p> </div> -->
-        
         <table class="right">
             <tr>
-                <td><a href="#negation">NOT</a></td><td>⊐</td>
-                <td><a href="#conjunction">AND</a></td><td>⊐</td>
-                <td><a href="#disjunction">OR</a></td><td>⊐</td>
-                <td><a href="#exclusive_or">XOR</a></td><td>⊐</td>
-                <td><a href="#biconditional">BIC</a></td><td>⊐</td>
-                <td><a href="#implication">IMP</a>
+                <td><a href="#negation">NOT</a></td><td rowspan="4">⊐</td>
+                <td><a href="#conjunction">AND</a></td><td rowspan="4">⊐</td>
+                <td><a href="#disjunction">OR</a></td><td rowspan="4">⊐</td>
+                <td><a href="#exclusive_or">XOR</a></td><td rowspan="4">⊐</td>
+                <td><a href="#implication">IMP</a></td><td rowspan="4">⊐</td>
+                <td><a href="#biconditional">BIC</a></td>
             </tr><tr>
-                <td><a href="#negation">¬</a></td><td>⊐</td>
-                <td><a href="#conjunction">∧</a></td><td>⊐</td>
-                <td><a href="#disjunction">∨</a></td><td>⊐</td>
-                <td><a href="#exclusive_or">⊻</a></td><td>⊐</td>
-                <td><a href="#biconditional">↔</a></td><td>⊐</td>
-                <td><a href="#implication">→</a>
+                <td><a href="#negation">¬</a></td>
+                <td><a href="#conjunction">∧</a></td>
+                <td><a href="#disjunction">∨</a></td>
+                <td><a href="#exclusive_or">⊻</a></td>
+                <td><a href="#implication">→</a></td>
+                <td><a href="#biconditional">↔</a></td>
             </tr><tr>
-                <td><a href="#negation">!</a></td><td>⊐</td>
-                <td><a href="#conjunction">.</a></td><td>⊐</td>
-                <td><a href="#disjunction">+</a></td><td>⊐</td>
-                <td><a href="#exclusive_or">⊕</a></td><td></td>
-                <td></td><td></td>
+                <td><a href="#negation">!</a></td>
+                <td><a href="#conjunction">.</a></td>
+                <td><a href="#disjunction">+</a></td>
+                <td><a href="#exclusive_or">⊕</a></td>
+                <td></td>
                 <td></td>
             </tr><tr>
-                <td><a href="#negation"></a></td><td>⊐</td>
-                <td><a href="#conjunction">&amp;</a></td><td>⊐</td>
-                <td><a href="#disjunction">|</a></td><td>⊐</td>
-                <td><a href="#exclusive_or">^</a></td><td></td>
-                <td><a href="#biconditional">&lt;&gt;</a></td><td>⊐</td>
-                <td><a href="#implication">&gt;</a>
+                <td><a href="#negation"></a></td>
+                <td><a href="#conjunction">&amp;</a></td>
+                <td><a href="#disjunction">|</a></td>
+                <td><a href="#exclusive_or">^</a></td>
+                <td><a href="#implication">&gt;</a></td>
+                <td><a href="#biconditional">=</a></td>
             </tr>
         </table>
         

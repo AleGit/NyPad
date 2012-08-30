@@ -26,7 +26,6 @@ a.an { text-decoration:none; }
 
 
 table { border:solid 1px black; border-collapse:collapse; }
-
 table.left { float:left; margin:3px 20px 13px 0px; }
 table.right { float:right; margin:3px 0px 13px 20px; }
 

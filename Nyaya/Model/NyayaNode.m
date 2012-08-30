@@ -56,6 +56,9 @@
 @interface NyayaNodeConjunction : NyayaNodeJunction 
 @end
 
+@interface NyayaNodeSequence : NyayaNodeConjunction
+@end
+
 @interface NyayaNodeDisjunction : NyayaNodeJunction 
 @end
 
@@ -208,7 +211,9 @@
         case NyayaDisjunction: // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
             return [NyayaNode conjunction: [[NyayaNode negation:first] nnf]
                                      with: [[NyayaNode negation:second] nnf] ];
+            
         case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
+        case NyayaSequence:
             return [NyayaNode disjunction: [[NyayaNode negation:first] nnf]
                                      with: [[NyayaNode negation:second] nnf] ];
             
@@ -229,8 +234,9 @@
 - (BOOL)isNnfTransformationNode {
     switch ([self firstNode].type) {
         case NyayaNegation:         // !!P         => P
-        case NyayaConjunction:      // !(P | Q)    => !P & !Q
-        case NyayaDisjunction:      // !(P & Q)    => !P | !Q
+        case NyayaConjunction:      // !(P & Q)    => !P | !Q
+        case NyayaSequence:         // !(P ; Q)    => !P | !Q
+        case NyayaDisjunction:      // !(P | Q)    => !P & !Q
             return YES;
         default:
             return NO;
@@ -377,6 +383,21 @@
 - (BOOL)isCnfTransformationNode {
     return [self firstNode].type == NyayaConjunction ||
     [self secondNode].type == NyayaConjunction;
+}
+
+@end
+
+@implementation NyayaNodeSequence
+
+- (NyayaNodeType)type {
+    return NyayaSequence;
+}
+
+- (NSString*)description {
+    NyayaNode *first = [self firstNode];
+    NyayaNode *second = [self secondNode];
+    _descriptionCache =   [NSString stringWithFormat:@"%@%@ %@", [first description], [self symbol], [second description]];
+    return _descriptionCache;
 }
 
 @end
@@ -792,6 +813,16 @@
     return node;
 }
 
++ (NyayaNode*)sequence:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
+    NyayaNode*node=[[NyayaNodeSequence alloc] init];
+    node->_symbol = @";";
+    node->_displayValue = NyayaUndefined;
+    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
+    return node;
+}
+
 + (NyayaNode*)disjunction:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeDisjunction alloc] init];
     node->_symbol = @"∨";
@@ -868,6 +899,7 @@
             return [NSString stringWithFormat:@"(%@%@)", 
                     self.symbol, [[(NyayaNodeUnary*)self firstNode] treeDescription]];
         case NyayaConjunction:
+        case NyayaSequence:
         case NyayaDisjunction:
         case NyayaBicondition:
         case NyayaImplication:

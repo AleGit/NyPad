@@ -126,4 +126,15 @@ NSString *const NYAYA_TOKENS =
         && [string hasPrefix:@"¬"] && [string hasSuffix:self]);
 }
 
+
+- (NSString*)capitalizedHtmlEntityFreeString {
+    NSMutableString *mutableInput=[self mutableCopy];
+    
+    [mutableInput replaceOccurrencesOfString:@"&amp;" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableInput length])];
+    [mutableInput replaceOccurrencesOfString:@"&gt;" withString:@">" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableInput length])];
+    [mutableInput replaceOccurrencesOfString:@"&lt;" withString:@"<" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableInput length])];
+    
+    return [mutableInput capitalizedString];
+}
+
 @end

@@ -9,25 +9,25 @@
 // tokenizer
 
 "NYAYA_TOKENS_PATTERN" = "⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
-//                         T F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
+//                        T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
 
 // parser
 // token key = comma separated list of (additional) localized names
 // there are implicit declared tokens too
 // you can only use symbols which matches NYAYA_TOKENIZER_PATTERN
 
-"CONNECTIVES_ASCII"    = "F,T,!,&,|,=,>,^";      // comma separated list of ascii symbols for connectives
-"CONNECTIVES_STANDARD" = "⊥,⊤,¬,∧,∨,↔,→,⊻";      // comma separated list of standard symbols for connectives
-"CONNECTIVES_BOOLEAN"  = "0,1,!,.,+,=,>,⊕";      // comma separated list of boolean symbols for connectives
+"CONNECTIVES_ASCII"    = "F,T,!,&,|,^,=,>";      // comma separated list of ascii symbols for connectives
+"CONNECTIVES_STANDARD" = "⊥,⊤,¬,∧,∨,⊻,↔,→";      // comma separated list of standard symbols for connectives
+"CONNECTIVES_BOOLEAN"  = "0,1,!,.,+,⊕,↔,→";      // comma separated list of boolean symbols for connectives
 
 "F"  = "FALSE,BOTTOM";
 "T"  = "TRUE,TOP";
 "!"  = "NOT";
 "&"  = "AND";
 "|"  = "OR";
-"="  = "XNOR";
-">"  = "IMPL";
-"^"  = "XOR";
+"="  = "XNOR,BIC,EQ";
+">"  = "IMPL,IMP";
+"^"  = "XOR,EOR";
 
 // "~&" = "NAND";
 // "~|" = "NOR";

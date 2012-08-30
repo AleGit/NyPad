@@ -704,7 +704,7 @@
 			children = (
 				113A209415E628A300338F5E /* TruthTableTests */,
 				11EC4D2315CFC2B80090EBAB /* NyayaBddTests */,
-				11F906C315CEBFEB001CD0F3 /* NyayaParser_v2_Tests */,
+				11F906C315CEBFEB001CD0F3 /* NyayaParser_v3_Tests */,
 				1183B6D115B70AE20076D92C /* NyayaNodeTests */,
 				1183B6D015B70AC60076D92C /* NyayaParserTests */,
 				11C3762E15B3D269005C5C9C /* NyayaExtensionsTests */,
@@ -780,7 +780,7 @@
 			name = NyayaBddTests;
 			sourceTree = "<group>";
 		};
-		11F906C315CEBFEB001CD0F3 /* NyayaParser_v2_Tests */ = {
+		11F906C315CEBFEB001CD0F3 /* NyayaParser_v3_Tests */ = {
 			isa = PBXGroup;
 			children = (
 				11F906C415CEC164001CD0F3 /* BasicParseTests.h */,
@@ -794,7 +794,7 @@
 				1187E23C15D0F3940048E153 /* SimpleParseTests.h */,
 				1187E23D15D0F3940048E153 /* SimpleParseTests.m */,
 			);
-			name = NyayaParser_v2_Tests;
+			name = NyayaParser_v3_Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

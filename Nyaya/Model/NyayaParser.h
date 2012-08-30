@@ -42,11 +42,10 @@ typedef NSUInteger NyayaErrorState;
 - (BOOL)hasErrors;
 - (NSString*)errorDescriptions;
 
-- (NSArray*)parseSequence;          // sequence    = formula   { ";" formula }
-
-- (NyayaNode*)parseFormula;         // formula      = implication
-- (NyayaNode*)parseImplication;     // implication  = bicondition [ IMP implication ]
-- (NyayaNode*)parseBicondition;     // bicondition  = xdisjunction [ BIC xdisjunction ]
+- (NyayaNode*)parseFormula;         // formula      = sequence
+- (NyayaNode*)parseSequence;        // sequence     = bicondition { COMMA bicondition }
+- (NyayaNode*)parseBicondition;     // bicondition  = implication[ BIC bicondition ]
+- (NyayaNode*)parseImplication;     // implication  = xdisjunction [ IMP implication ]
 - (NyayaNode*)parseXdisjunction;    // xdisjunction = disjunction { XOR disjunction } 
 - (NyayaNode*)parseDisjunction;     // disjunction  = conjunction { OR conjunction }
 - (NyayaNode*)parseConjunction;     // conjunction  = negation    { AND negation }

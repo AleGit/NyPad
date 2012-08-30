@@ -31,4 +31,6 @@ FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
 - (NSString*)complementaryString;
 - (BOOL)hasComplement:(NSString*)string;
 
+- (NSString*)capitalizedHtmlEntityFreeString;
+
 @end
