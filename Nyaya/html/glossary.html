@@ -11,14 +11,15 @@
         
         <h3 id="associativity">Associativity</h3>
         
+        <p>A binary connective is associative when the evaluation order does not matter for the result.<p>
+        
         <table class="left">
-            <tr><th>input</th><th>valuation</th><th>property</th></tr>
-            <tr><td>¬¬a</td><td>¬(¬a)</td><td></td></tr>
-            <tr><td>a∧b∧c</td><td>(a∧b)∧c</td><td>associativ</td></tr>
-            <tr><td>a∨b∨c</td><td>(a∨b)∨c</td><td>associativ</td></tr>
-            <tr><td>a⊻b⊻c</td><td>(a⊻b)⊻c</td><td>left associativ</td></tr>
-            <tr><td>a↔b↔c</td><td>a↔(b↔c)</td><td>right associativ</td></tr>
-            <tr><td>a→b→c</td><td>a→(b→c)</td><td>right associativ</td></tr>
+            <tr><th>input</th><td></th><th>syntax</th><th></th><th>semantics</th><td></td></tr>
+            <tr><td>a∧b∧c</td><td>≣</td><td>(a∧b)∧c</td><td>=</td><td>a∧(b∧c)</td><td>associative</td></tr>
+            <tr><td>a∨b∨c</td><td>≣</td><td>(a∨b)∨c</td><td>=</td><td>a∨(b∨c)</td><td>associative</td></tr>
+            <tr><td>a⊻b⊻c</td><td>≣</td><td>(a⊻b)⊻c</td><td>=</td><td>a⊻(b⊻c)</td><td>associative</td></tr>
+            <tr><td>a→b→c</td><td>≣</td><td>a→(b→c)</td><td>≠</td><td>(a→b)→c</td><td>right associative</td></tr>
+            <tr><td>a↔b↔c</td><td>≣</td><td>a↔(b↔c)</td><td>=</td><td>(a↔b)↔c</td><td>associative</td></tr>
         </table>
         
         <h3 id="atom">Atom</h3>
@@ -77,7 +78,7 @@
         
         <h3 id="connective">Connective</h3>
         
-        <p>Connects one ore more <a href="formula">formulas</a> as <a href="#subformual">sub formulas</a> of a new formula.</p>
+        <p>Connects one ore more <a href="formula">formulas</a> as <a href="#subformula">sub formulas</a> of a new formula.</p>
         
         <h3>
             <span id="disjunction">Disjunction<span>
@@ -229,11 +230,34 @@
         This is because by convention mutltiplication has a higher precedence than addition.
         Similar conventions are used in propositional logic.</p>
         
+        <table class="left">
+            <tr><td>꠷</td>
+                <td>∧</td>
+                <td>∨</td>
+                <td>⊻</td>
+                <td>→</td>
+                <td>↔</td>
+                </tr>
+            <tr>
+                <td>¬ a ꠷ b</td><td>(¬a) ∧ b</td><td>(¬a) ∨ b</td><td>(¬a) ⊻ b</td><td>(¬a) → b</td><td>(¬a) ↔ b</td>
+            </tr><tr>
+                <td>a ∧ b ꠷ c</td><td class="green">(a ∧ b) ∧ c</td><td>(a ∧ b) ∨ c</td><td>(a ∧ b) ⊻ c</td><td>(a ∧ b) → c</td><td>(a ∧ b) ↔ c</td>
+            </tr><tr>
+                <td>a ∨ b ꠷ c</td><td>a ∨ (b ∧ c)</td><td class="green">(a ∨ b) ∨ c</td><td>(a ∨ b) ⊻ c</td><td>(a ∨ b) → c</td><td>(a ∨ b) ↔ c</td>
+            </tr><tr>
+                <td>a ⊻ b ꠷ c</td><td>a ⊻ (b ∧ c)</td><td>a ⊻ (b ∨ c)</td><td class="green">(a ⊻ b) ⊻ c</td><td>(a ⊻ b) → c</td><td>(a ⊻ b) ↔ c</td>
+            </tr><tr>
+                <td>a → b ꠷ c</td><td>a → (b ∧ c)</td><td>a → (b ∨ c)</td><td>a → (b ⊻ c)</td><td class="red">a → (b → c)</td><td>(a → b) ↔ c</td>
+            </tr><tr>
+                <td>a ↔ b ꠷ c</td><td>a ↔ (b ∧ c)</td><td>a ↔ (b ∨ c)</td><td>a ↔ (b ⊻ c)</td><td>a ↔ (b → c)</td><td class="green">a ↔ (b ↔ c)</td>
+            </tr>
+            </table>
+        
         <p>Precedence determines the <a href="#syntax_tree">syntax tree</a>,
         i.e. the order of <a href="#valuation">valuation</a>
         of a composite <a href="#formula">formula</a>.
         A symbol with higher precedence is evaluated before a symbol with lower precedence.
-        <a href="#atom">Atoms</a> in propositional formual has the highest precedence implicitly because the must be evaluated before connectives can be evaluated.<p>
+        Implicitly <a href="#atom">Atoms</a> in propositional formulas has the highest precedence because they must be evaluated before connectives can be evaluated. Most connectives are <a href="#associativity">associative</a>, but not the implication (<code>→</code>).<p>
         
         <h3 id="subformula">Sub formula</h3>
         

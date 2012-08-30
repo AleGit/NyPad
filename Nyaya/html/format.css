@@ -13,7 +13,7 @@ h1,h2,h3 {clear:both;}
 
 h1 { font-size:42px; text-decoration:none; }
 
-span.sb { color:green; border:solid 1px orange; font-family:Courier New;}
+span.sb { color:green; /*font-family:Verdana;*/ font-weight:normal}
 
 
 a:link { color:#AA5522; text-decoration:none; }
@@ -30,8 +30,11 @@ table.left { float:left; margin:3px 20px 13px 0px; }
 table.right { float:right; margin:3px 0px 13px 20px; }
 
 tr, th, td { border:dotted 1px black; text-align:center; padding:2px 3px 2px 3px;}
+td.green { background-color:#DDFFDD; }
+td.red { background-color:#FFDDDD; }
 
-code,kbd,tt,samp { font-family:Courier New,Courier; color:#0000C0; }
+code { font-family:Arial,Helvetica; color:#0000C0; font-weight:normal;}
+/* kbd,tt,samp { font-family:Courier New,Courier; color:#0000C0; } */
 
 /****************************************
  *** definitions for hi-res rendering ***

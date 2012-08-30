@@ -42,6 +42,7 @@ NSString *const NYAYA_TOKENS =
         [_keywords addObjectsFromArray:[NSArray lparTokens]];
         [_keywords addObjectsFromArray:[NSArray rparTokens]];
         [_keywords addObjectsFromArray:[NSArray commaTokens]];
+        [_keywords addObjectsFromArray:[NSArray semicolonTokens]];
     });
     return _keywords;
 

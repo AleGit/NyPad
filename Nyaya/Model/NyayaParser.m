@@ -109,7 +109,7 @@
     _level++;
     result = [self parseBicondition];
     while ([_token isSemicolon]) {
-        [self nextToken];                   // consumes , token
+        [self nextToken];                   // consumes ; token
         result = [NyayaNode sequence:result with:[self parseBicondition]];
     }
     _level--;

@@ -105,6 +105,7 @@
                 NyayaNode *imfnode = [node imf];
                 NSString *imfdescription=[imfnode description];
                 dispatch_async(mq, ^{
+                    self.errors.text = @"";
                     self.imf.text = imfdescription;
                 });
                 
