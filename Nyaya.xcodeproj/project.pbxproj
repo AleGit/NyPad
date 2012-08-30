@@ -29,10 +29,8 @@
 		11061F1515EE0FE500345516 /* tutorial361.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1315EE0FE500345516 /* tutorial361.html */; };
 		11061F1615EE0FE500345516 /* tutorial371.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1415EE0FE500345516 /* tutorial371.html */; };
 		11061F1815EE0FFB00345516 /* tutorial411.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1715EE0FFB00345516 /* tutorial411.html */; };
-		11061F1B15EE10F800345516 /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1A15EE10F800345516 /* instructions111.html */; };
 		11061F1D15EE131E00345516 /* instructions.css in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1C15EE131E00345516 /* instructions.css */; };
 		11061F2315EE406D00345516 /* NyAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11061F2215EE406D00345516 /* NyAccessoryView.xib */; };
-		11061F2515EE67E200345516 /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F2415EE67E200345516 /* instructions101.html */; };
 		11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11061F2715EF5D8900345516 /* NyayaAssociativityTests.m */; };
 		11061F3115EF9BBD00345516 /* NyTuTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 11061F3015EF9BBD00345516 /* NyTuTester.m */; };
 		11061F3315EFA6EF00345516 /* NyTuTester111.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11061F3215EFA6EF00345516 /* NyTuTester111.plist */; };
@@ -113,6 +111,8 @@
 		1187E24115D1072C0048E153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1187E24315D1072C0048E153 /* Localizable.strings */; };
 		1187E24615D13BAD0048E153 /* NSArray+NyayaToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1187E24515D13BAD0048E153 /* NSArray+NyayaToken.m */; };
 		11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */; };
+		11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions101.html */; };
+		11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26815EFEC13006AFBFC /* instructions111.html */; };
 		11C375EE15B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C375F015B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C375F215B3D23D005C5C9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375F115B3D23D005C5C9C /* CoreGraphics.framework */; };
@@ -175,10 +175,8 @@
 		11061F1315EE0FE500345516 /* tutorial361.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial361.html; path = html/tutorial361.html; sourceTree = "<group>"; };
 		11061F1415EE0FE500345516 /* tutorial371.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial371.html; path = html/tutorial371.html; sourceTree = "<group>"; };
 		11061F1715EE0FFB00345516 /* tutorial411.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial411.html; path = html/tutorial411.html; sourceTree = "<group>"; };
-		11061F1A15EE10F800345516 /* instructions111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions111.html; path = html/instructions111.html; sourceTree = "<group>"; };
 		11061F1C15EE131E00345516 /* instructions.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = instructions.css; path = html/instructions.css; sourceTree = "<group>"; };
 		11061F2215EE406D00345516 /* NyAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyAccessoryView.xib; path = Nyaya/NyBranches/NyAccessoryView.xib; sourceTree = "<group>"; };
-		11061F2415EE67E200345516 /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
 		11061F2615EF5D8900345516 /* NyayaAssociativityTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaAssociativityTests.h; sourceTree = "<group>"; };
 		11061F2715EF5D8900345516 /* NyayaAssociativityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaAssociativityTests.m; sourceTree = "<group>"; };
 		11061F2F15EF9BBD00345516 /* NyTuTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuTester.h; path = Nyaya/NyTutorials/NyTuTester.h; sourceTree = "<group>"; };
@@ -300,6 +298,8 @@
 		1187E24415D13BAD0048E153 /* NSArray+NyayaToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+NyayaToken.h"; path = "Model/NSArray+NyayaToken.h"; sourceTree = "<group>"; };
 		1187E24515D13BAD0048E153 /* NSArray+NyayaToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+NyayaToken.m"; path = "Model/NSArray+NyayaToken.m"; sourceTree = "<group>"; };
 		11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester101.plist; path = Nyaya/NyTutorials/NyTuTester101.plist; sourceTree = "<group>"; };
+		11B0B26715EFEC13006AFBFC /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
+		11B0B26815EFEC13006AFBFC /* instructions111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions111.html; path = html/instructions111.html; sourceTree = "<group>"; };
 		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -494,9 +494,9 @@
 		11061F1915EE10DC00345516 /* htmlinstructions */ = {
 			isa = PBXGroup;
 			children = (
+				11B0B26715EFEC13006AFBFC /* instructions101.html */,
+				11B0B26815EFEC13006AFBFC /* instructions111.html */,
 				11061F1C15EE131E00345516 /* instructions.css */,
-				11061F2415EE67E200345516 /* instructions101.html */,
-				11061F1A15EE10F800345516 /* instructions111.html */,
 			);
 			name = htmlinstructions;
 			sourceTree = "<group>";
@@ -951,12 +951,12 @@
 				11061F1515EE0FE500345516 /* tutorial361.html in Resources */,
 				11061F1615EE0FE500345516 /* tutorial371.html in Resources */,
 				11061F1815EE0FFB00345516 /* tutorial411.html in Resources */,
-				11061F1B15EE10F800345516 /* instructions111.html in Resources */,
 				11061F1D15EE131E00345516 /* instructions.css in Resources */,
 				11061F2315EE406D00345516 /* NyAccessoryView.xib in Resources */,
-				11061F2515EE67E200345516 /* instructions101.html in Resources */,
 				11061F3315EFA6EF00345516 /* NyTuTester111.plist in Resources */,
 				11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */,
+				11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */,
+				11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

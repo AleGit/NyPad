@@ -7,7 +7,7 @@
 		<key>If the barmoter falls, then it will rain or it will snow.</key>
 		<string>if p then q or r</string>
 		<key>When the sun shines today, it won‘t shine tommorrow.</key>
-		<string>if p then q</string>
+		<string>if p then not q</string>
 		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
 		<string>p or not q</string>
 	</dict>

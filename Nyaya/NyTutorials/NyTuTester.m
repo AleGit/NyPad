@@ -160,6 +160,7 @@
 @implementation  NyTuTester101
 - (void)firstTest:(UIView *)view {
     [super firstTest:view];
+    view.superview.frame = CGRectMake(10,10,100,100);
     self.inputField.inputAccessoryView = nil;
 }
 @end
