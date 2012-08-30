@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<dict>
+		<key>If the barmoter falls, then it will rain or it will snow.</key>
+		<string>if p then q or r</string>
+		<key>When the sun shines today, it won‘t shine tommorrow.</key>
+		<string>if p then q</string>
+		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
+		<string>p or not q</string>
+	</dict>
+	<key>keyLabel</key>
+	<string>Guess the structure of composite sentences</string>
+	<key>inputLabel</key>
+	<string>Use only “if”, “then”, “and”, “or“, “not”, “p”, “q”, “r”.</string>
+	<key>valueLabel</key>
+	<string>Sample solution</string>
+</dict>
+</plist>

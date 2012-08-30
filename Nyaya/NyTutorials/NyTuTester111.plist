@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<dict>
+		<key>If the barmoter falls, then it will rain or it will snow.</key>
+		<string>the barometer falls; it will rains; it will snow</string>
+		<key>When the sun shines today, it won‘t shine tommorrow.</key>
+		<string>the sun shines today; it will shine tommorow</string>
+		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
+		<string>Robert was jealous of Yvonne;  he was in a good mood</string>
+		<key>If interest rates go up, share prices go down.</key>
+		<string>interest rates go up; share prices go down</string>
+	</dict>
+	<key>keyLabel</key>
+	<string>Find the Propositions</string>
+	<key>inputLabel</key>
+	<string>Your list of propositions without “if”, “then”, “and”, “or“, and “not”</string>
+	<key>valueLabel</key>
+	<string>Sample solution</string>
+</dict>
+</plist>

@@ -8,6 +8,7 @@
 
 #import "NyTuTestViewController.h"
 #import "NyTuDetailViewController.h"
+#import "NyTuTester.h"
 
 @interface NyTuTestViewController ()
 
@@ -32,11 +33,18 @@
     NSURL *url = [[NSBundle mainBundle] URLForResource:self.instructionsName withExtension:@"html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.instructionsView loadRequest:request];
+    
+    self.nextButton.enabled = NO;
+    [self.tester firstTest:self.view];
 }
 
 - (void)viewDidUnload
 {
     [self setInstructionsView:nil];
+    [self setCheckButton:nil];
+    [self setNextButton:nil];
+    [self setNextButton:nil];
+    [self setDoneButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -47,16 +55,19 @@
 }
 
 - (void)done:(id)sender {
-    NSLog(@"%@", NSStringFromClass([self.presentingViewController class]));
+    [self.tester removeTest];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)check:(id)sender {
-    NSLog(@"check");
+    
+    self.nextButton.enabled = YES;
+    [self.tester checkTest];
 }
 
 - (IBAction)next:(id)sender {
-    NSLog(@"next");
+    self.nextButton.enabled = NO;
+    [self.tester nextTest];
 }
 
 @end

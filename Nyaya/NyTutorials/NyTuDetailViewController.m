@@ -8,10 +8,12 @@
 
 #import "NyTuDetailViewController.h"
 #import "NyTuTestViewController.h"
+#import "NyTuTester.h"
 
 @interface NyTuDetailViewController () <UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString *tutorialHtml;
+@property (strong, nonatomic) NSString *tutorialKey;
 @end
 
 @implementation NyTuDetailViewController
@@ -38,15 +40,14 @@
         
         NSArray *tutorial = [self.detailItem objectAtIndex:1];
         NSString *tutorialTitle = [tutorial objectAtIndex:0];
-        NSString *tutorialKey = [tutorial objectAtIndex:1];
-        NSString *tutorialFileName = [NSString stringWithFormat:@"tutorial%@", tutorialKey];
+        self.tutorialKey = [tutorial objectAtIndex:1];
+        NSString *tutorialFileName = [NSString stringWithFormat:@"tutorial%@", self.tutorialKey];
         NSURL *tutorialUrl = [[NSBundle mainBundle] URLForResource:tutorialFileName withExtension:@"html"];
-       
-        
+
         self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@",sectionTitle, tutorialTitle];
         
         if (tutorialUrl) {
-            self.navigationItem.rightBarButtonItem.enabled=YES;
+            self.navigationItem.rightBarButtonItem.enabled=[NyTuTester testerExistsForKey:self.tutorialKey];
             self.tutorialHtml = [tutorialUrl lastPathComponent];
             self.webView.delegate = self;
             
@@ -88,7 +89,8 @@
     
     NyTuTestViewController *testViewController = (NyTuTestViewController*)segue.destinationViewController;
     testViewController.instructionsName = [NSString stringWithFormat:@"instructions%@", [[self.detailItem objectAtIndex:1] objectAtIndex:1]];
-    
+    testViewController.tester = [NyTuTester testerForKey:self.tutorialKey];
+    testViewController.tester.delegate = testViewController;
     // testViewController.delegate = self;  
     
     NSLog(@"“%@” ‘%@’ ‘%@’ \n%@", segue.identifier, [segue.sourceViewController class], [segue.destinationViewController class]
