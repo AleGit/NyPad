@@ -9,15 +9,13 @@
 #import "NyGlDetailViewController.h"
 #import "NyGlossaryEntry.h"
 
-@interface NyGlDetailViewController () <UISearchBarDelegate> {
+@interface NyGlDetailViewController () {
     NSURL *_baseurl;
 }
 
 @end
 
 @implementation NyGlDetailViewController
-@synthesize webView;
-@synthesize searchBar;
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Glossary", @"Glossary");
@@ -46,12 +44,6 @@
 
 - (void)viewDidUnload {
     [self setWebView:nil];
-    [self setSearchBar:nil];
     [super viewDidUnload];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    
-    
 }
 @end

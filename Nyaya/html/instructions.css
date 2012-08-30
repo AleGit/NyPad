@@ -2,7 +2,8 @@
 
 body {
     margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;
-    background-color:#F8F8F8; 
+    /* background-color:#F8F8F8; */
+    background-image: -webkit-linear-gradient(top left, #EEFFEE 25%, #BBFFBB 95%);
 }
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {

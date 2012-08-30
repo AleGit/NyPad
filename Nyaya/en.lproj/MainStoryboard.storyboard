@@ -236,7 +236,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tutorial" id="Wi4-e6-Lcg">
-                        <barButtonItem key="rightBarButtonItem" title="Open Test" id="cbo-qK-sxa">
+                        <barButtonItem key="rightBarButtonItem" title="open test" id="cbo-qK-sxa">
                             <connections>
                                 <action selector="exercise:" destination="Ekn-df-hE0" id="tGm-Kf-LYd"/>
                                 <segue destination="egB-da-fIt" kind="modal" identifier="OpenTestModally" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="QND-Bv-tS8"/>
@@ -264,9 +264,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="4dw-FZ-aR6"/>
+                                    <barButtonItem title="check anwswer" id="UYl-bC-CCN">
+                                        <connections>
+                                            <action selector="check:" destination="egB-da-fIt" id="f6f-gi-7DW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="next question" id="4dw-FZ-aR6">
+                                        <connections>
+                                            <action selector="next:" destination="egB-da-fIt" id="EHc-cs-w2D"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HT7-of-CJ7"/>
-                                    <barButtonItem title="Close Test" id="lm6-vy-jjd">
+                                    <barButtonItem title="close test" id="lm6-vy-jjd">
                                         <connections>
                                             <action selector="done:" destination="egB-da-fIt" id="ZlX-TX-KeS"/>
                                         </connections>
@@ -274,11 +283,16 @@
                                 </items>
                             </toolbar>
                             <webView contentMode="scaleToFill" id="oFz-Le-iqp">
-                                <rect key="frame" x="0.0" y="345" width="540" height="280"/>
+                                <rect key="frame" x="0.0" y="335" width="540" height="290"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
+                            <view contentMode="scaleToFill" id="0kJ-vn-YoD">
+                                <rect key="frame" x="20" y="52" width="500" height="275"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -513,16 +527,8 @@
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" id="EpU-3m-YLL">
-                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ZYB-p6-LJ0" id="p1r-8D-qMq"/>
-                                </connections>
-                            </searchBar>
                             <webView contentMode="scaleToFill" id="ur1-7m-3tH">
-                                <rect key="frame" x="0.0" y="44" width="703" height="611"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="655"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -533,7 +539,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Entry" id="jYn-wK-DyK"/>
                     <connections>
-                        <outlet property="searchBar" destination="EpU-3m-YLL" id="Z32-te-MhG"/>
                         <outlet property="webView" destination="ur1-7m-3tH" id="VnV-Pc-CMv"/>
                     </connections>
                 </viewController>
@@ -742,90 +747,6 @@
         <image name="i5.png" width="30" height="30"/>
         <image name="t4use.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="FirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="compute:"/>
-                <relationship kind="action" name="delete:" candidateClass="UIButton"/>
-                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
-                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
-                <relationship kind="action" name="press:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="ast" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="cnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="errors" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="imf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="input" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nnf" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="subformulas" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NyBtDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
-        </class>
-        <class className="NyDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
-        </class>
-        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
-        </class>
-        <class className="NyMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
-        </class>
-        <class className="NyPgDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
-        </class>
-        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
-        </class>
-        <class className="NyTuTestViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuTestViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="check:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="next:"/>
-                <relationship kind="outlet" name="instructionsView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

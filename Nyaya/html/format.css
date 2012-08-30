@@ -2,7 +2,10 @@
 
 body {
     margin-left:70px; margin-right:70px; margin-top:40px; margin-bottom:70px;
-    background-color:#F8F8F8; background-image:url(syntaxtree.png);
+    /*  background-color:#F8F8F8;
+    background-image: -webkit-linear-gradient(top left, #EEFFEE 25%, #CCFFCC 75%); */
+    background-image:url(syntaxtree.png), -webkit-linear-gradient(top left, #F9F9F9 25%, #E6E6E6 75%);
+    
 }
 
 h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
@@ -25,11 +28,11 @@ a:active { color:#000000;  text-decoration:none; }
 a.an { text-decoration:none; }
 
 
-table { border:solid 1px black; border-collapse:collapse; }
+table { border:solid 1px #555555; border-collapse:collapse; }
 table.left { float:left; margin:3px 20px 13px 0px; }
 table.right { float:right; margin:3px 0px 13px 20px; }
 
-tr, th, td { border:dotted 1px black; text-align:center; padding:2px 3px 2px 3px;}
+tr, th, td { border:solid 1px #AAAAAA; text-align:center; padding:2px 3px 2px 3px;}
 td.green { background-color:#DDFFDD; }
 td.red { background-color:#FFDDDD; }
 
