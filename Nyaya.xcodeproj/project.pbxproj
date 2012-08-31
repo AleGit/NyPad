@@ -124,7 +124,6 @@
 		11C375FA15B3D23D005C5C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C375F915B3D23D005C5C9C /* main.m */; };
 		11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C375FD15B3D23D005C5C9C /* AppDelegate.m */; };
 		11C3760115B3D23D005C5C9C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11C375FF15B3D23D005C5C9C /* MainStoryboard.storyboard */; };
-		11C3760415B3D23D005C5C9C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3760315B3D23D005C5C9C /* FirstViewController.m */; };
 		11C3761715B3D23D005C5C9C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C3761615B3D23D005C5C9C /* SenTestingKit.framework */; };
 		11C3761815B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C3761915B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
@@ -320,8 +319,6 @@
 		11C375FC15B3D23D005C5C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		11C375FD15B3D23D005C5C9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		11C3760015B3D23D005C5C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		11C3760215B3D23D005C5C9C /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		11C3760315B3D23D005C5C9C /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		11C3761515B3D23D005C5C9C /* NyayaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyayaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C3761615B3D23D005C5C9C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		11C3761E15B3D23D005C5C9C /* NyayaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NyayaTests-Info.plist"; sourceTree = "<group>"; };
@@ -564,15 +561,6 @@
 			path = Nyaya;
 			sourceTree = "<group>";
 		};
-		116D220815D925B0003DBD88 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				11C3760215B3D23D005C5C9C /* FirstViewController.h */,
-				11C3760315B3D23D005C5C9C /* FirstViewController.m */,
-			);
-			name = Deprecated;
-			sourceTree = "<group>";
-		};
 		116D221015D927C9003DBD88 /* html */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,7 +677,6 @@
 			children = (
 				11436C0715E3761100A4457F /* AppIcons */,
 				11EC4D2215CFBA320090EBAB /* BDD */,
-				116D220815D925B0003DBD88 /* Deprecated */,
 				1187E23915D0D68F0048E153 /* Documents */,
 				116D221015D927C9003DBD88 /* html */,
 				11061F1915EE10DC00345516 /* htmlinstructions */,
@@ -1002,7 +989,6 @@
 			files = (
 				11C375FA15B3D23D005C5C9C /* main.m in Sources */,
 				11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */,
-				11C3760415B3D23D005C5C9C /* FirstViewController.m in Sources */,
 				1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */,
 				1178CCA915B5313A00FD21CA /* NyayaParser.m in Sources */,
 				1166601A15B6DEF60070B5B8 /* NSString+NyayaToken.m in Sources */,
