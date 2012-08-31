@@ -4,7 +4,7 @@
 <array>
 	<string>Tutorials</string>
 	<array>
-		<string>Introduction</string>
+		<string>Overview</string>
 		<array>
 			<string>Motivation</string>
 			<string>101</string>
@@ -14,8 +14,12 @@
 			<string>111</string>
 		</array>
 		<array>
-			<string>Limits</string>
+			<string>Symbols</string>
 			<string>121</string>
+		</array>
+		<array>
+			<string>Limits</string>
+			<string>131</string>
 		</array>
 	</array>
 	<array>

@@ -44,6 +44,7 @@
 		11281B9315EB479C00B377B3 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */; };
 		11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
+		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
 		1144248815C68918000B3CD9 /* TransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248715C68918000B3CD9 /* TransformTests.m */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
@@ -195,6 +196,7 @@
 		11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "AppIcons/Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
+		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
 		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
 		1144248715C68918000B3CD9 /* TransformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTests.m; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				111F923615E89D6800EB6B1D /* tutorial101.html */,
 				1102560D15ECCE2E008B38F9 /* tutorial111.html */,
 				1102560E15ECCE2E008B38F9 /* tutorial121.html */,
+				113FF75715F07AB40073A410 /* tutorial131.html */,
 				1102560F15ECCE2E008B38F9 /* tutorial201.html */,
 				11061F1115EE0F9A00345516 /* tutorial211.html */,
 				1102561115ECCE2E008B38F9 /* tutorial221.html */,
@@ -957,6 +960,7 @@
 				11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */,
 				11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */,
 				11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */,
+				113FF75815F07AB40073A410 /* tutorial131.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
