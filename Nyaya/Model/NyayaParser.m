@@ -81,12 +81,17 @@
     }
     
     NSUInteger _idx = _index+1;
-    
-    NSString* description = [NSString stringWithFormat:@"%@::%@::%@::%d",
+    NSString* description = nil;
+    if (errorState != NyayaErrorFunctionNotSupported) {
+        description = [NSString stringWithFormat:@"%@::%@::%@::%d",
                              [[_tokens subarrayWithRange:NSMakeRange(0, _index)] componentsJoinedByString:@""],
                              _token ? _token : @" ",
                              _idx < [_tokens count] ? [[_tokens subarrayWithRange:NSMakeRange(_idx, [_tokens count]-_idx)] componentsJoinedByString:@""] : @"",
                              errorState];
+    }
+    else {
+        description = [NSString stringWithFormat:@"%u",errorState];
+    }
     [_errors addObject:description];
 }
 

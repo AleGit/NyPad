@@ -42,44 +42,44 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
                    @"::,::a&b::22", // kErrors
                    nil], 
-                  /*
+                  
                   [NSArray arrayWithObjects:
                    @"EMPTY 2-TUPLE", // kTitle
                    @"f(,)&a", // kInput
                    @"f() ∧ a", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
-                   @"f(::,::)&a::22•f(,::)::&a::22", // kErrors
-                   nil], */
+                   @"f(::,::)&a::22•f(,::)::&a::22•128", // kErrors
+                   nil], 
                   
-                  /*
+                  
                   [NSArray arrayWithObjects:
                    @"FIRST HALF EMPTY 2-TUPLE", // kTitle
                    @"f(,a|b)&a", // kInput
                    @"f(a ∨ b) ∧ a", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
-                   @"f(::,::a|b)&a::22", // kErrors
+                   @"f(::,::a|b)&a::22•128", // kErrors
                    nil],
-                  */
                   
-                  /*
+                  
+                  
                   [NSArray arrayWithObjects:
                    @"SECOND HALF EMPTY 2-TUPLE", // kTitle
                    @"f(a|b,)&a", // kInput
                    @"f(a ∨ b) ∧ a", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
-                   @"f(a|b,::)::&a::22", // kErrors
+                   @"f(a|b,::)::&a::22•128", // kErrors
                    nil],
-                   */
+                   
                   
-                  /*
+                  
                   [NSArray arrayWithObjects:
                    @"no right parenthesis", // kTitle
                    @"f(a&a", // kInput
                    @"f(a ∧ a)", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoRightParenthesis], // kErrorState
-                   @"f(a&a:: ::::8", // kErrors
+                   @"f(a&a:: ::::8•128", // kErrors
                    nil], // kC      
-                   */
+                   
                   
                   [NSArray arrayWithObjects:
                    @"double connect", // kTitle
@@ -90,14 +90,14 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
                    nil],                    
                      
 
-                  /*
+                  
                   [NSArray arrayWithObjects:
                    @"WRONG TUPLES", // kTitle
                    @"f(,a|b)&g(,x,))", // kInput
                    @"f(a ∨ b) ∧ g(x)", // kOutput
                    [NSNumber numberWithInt:NyayaErrorNoIdentifier|NyayaErrorNoLeftParenthesis|NyayaErrorNoNegation], // kErrorState
-                   @"f(::,::a|b)&g(,x,))::22•f(,a|b)&g(::,::x,))::22•f(,a|b)&g(,x,::)::)::22", // kErrors
-                   nil],*/
+                   @"f(::,::a|b)&g(,x,))::22•128•f(,a|b)&g(::,::x,))::22•f(,a|b)&g(,x,::)::)::22•128", // kErrors
+                   nil],
                   
                   [NSArray arrayWithObjects:
                    @"NO BINARY CONNECTOR", // kTitle
