@@ -34,10 +34,6 @@
 @property (nonatomic, strong) UITextField *valueField;
 @property (nonatomic, strong) UITextField *inputField;
 
-@property (nonatomic, strong) UIColor *greyColor;
-@property (nonatomic, strong) UIColor *wrongColor;
-@property (nonatomic, strong) UIColor *rightColor;
-
 @end
 
 @interface NyTuTesterPlist : NyTuTester

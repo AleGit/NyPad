@@ -37,6 +37,7 @@
 		111B157615B7C71F0011A91A /* NyayaParserErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */; };
 		111F923415E89B1400EB6B1D /* Tutorials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111F923315E89B1400EB6B1D /* Tutorials.plist */; };
 		111F923915E89D6800EB6B1D /* tutorial101.html in Resources */ = {isa = PBXBuildFile; fileRef = 111F923615E89D6800EB6B1D /* tutorial101.html */; };
+		1122563D15F0E68E00DBEE30 /* UIColor+Nyaya.m in Sources */ = {isa = PBXBuildFile; fileRef = 1122563C15F0E68E00DBEE30 /* UIColor+Nyaya.m */; };
 		11281B7A15EB452700B377B3 /* syntaxtree.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B7815EB452700B377B3 /* syntaxtree.png */; };
 		11281B7B15EB452700B377B3 /* syntaxtree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B7915EB452700B377B3 /* syntaxtree@2x.png */; };
 		11281B9115EB479C00B377B3 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8D15EB479C00B377B3 /* Default-Landscape@2x~ipad.png */; };
@@ -173,7 +174,6 @@
 		1102561D15ECCE2E008B38F9 /* tutorial401.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial401.html; path = html/tutorial401.html; sourceTree = "<group>"; };
 		1102561F15ECCE2E008B38F9 /* tutorial421.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial421.html; path = html/tutorial421.html; sourceTree = "<group>"; };
 		1102563315ECE8F0008B38F9 /* tutorial251.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial251.html; path = html/tutorial251.html; sourceTree = "<group>"; };
-		1105107315DA73B4000219C9 /* PropositionalLogic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PropositionalLogic.txt; sourceTree = "<group>"; };
 		11061F1115EE0F9A00345516 /* tutorial211.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial211.html; path = html/tutorial211.html; sourceTree = "<group>"; };
 		11061F1315EE0FE500345516 /* tutorial361.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial361.html; path = html/tutorial361.html; sourceTree = "<group>"; };
 		11061F1415EE0FE500345516 /* tutorial371.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial371.html; path = html/tutorial371.html; sourceTree = "<group>"; };
@@ -190,6 +190,8 @@
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
 		111F923315E89B1400EB6B1D /* Tutorials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tutorials.plist; path = NyTutorials/Tutorials.plist; sourceTree = "<group>"; };
 		111F923615E89D6800EB6B1D /* tutorial101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial101.html; path = html/tutorial101.html; sourceTree = "<group>"; };
+		1122563B15F0E68E00DBEE30 /* UIColor+Nyaya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Nyaya.h"; sourceTree = "<group>"; };
+		1122563C15F0E68E00DBEE30 /* UIColor+Nyaya.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Nyaya.m"; sourceTree = "<group>"; };
 		11281B7815EB452700B377B3 /* syntaxtree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = syntaxtree.png; path = html/syntaxtree.png; sourceTree = "<group>"; };
 		11281B7915EB452700B377B3 /* syntaxtree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "syntaxtree@2x.png"; path = "html/syntaxtree@2x.png"; sourceTree = "<group>"; };
 		11281B8D15EB479C00B377B3 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "AppIcons/Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -467,6 +469,8 @@
 				11C375FF15B3D23D005C5C9C /* MainStoryboard.storyboard */,
 				1158F20C15D19EDD00B422FD /* NyayaTabBarViewController.h */,
 				116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */,
+				1122563B15F0E68E00DBEE30 /* UIColor+Nyaya.h */,
+				1122563C15F0E68E00DBEE30 /* UIColor+Nyaya.m */,
 			);
 			name = NyRoot;
 			sourceTree = "<group>";
@@ -629,14 +633,6 @@
 			name = NyayaNodeTests;
 			sourceTree = "<group>";
 		};
-		1186B04415D194B000D47C68 /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				1105107315DA73B4000219C9 /* PropositionalLogic.txt */,
-			);
-			name = Tutorial;
-			sourceTree = "<group>";
-		};
 		1187E23715D0D6640048E153 /* Unused */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,7 +699,6 @@
 				110476C215E4E3EC0024EDDF /* NyRoot */,
 				11C375F415B3D23D005C5C9C /* Supporting Files */,
 				1105107815DA8054000219C9 /* TabBarIcons */,
-				1186B04415D194B000D47C68 /* Tutorial */,
 				1187E23715D0D6640048E153 /* Unused */,
 			);
 			path = Nyaya;
@@ -1032,6 +1027,7 @@
 				11C61BB715E91FF000F5BB28 /* NyTuTestViewController.m in Sources */,
 				1102560615EBB906008B38F9 /* NyGlossaryEntry.m in Sources */,
 				11061F3115EF9BBD00345516 /* NyTuTester.m in Sources */,
+				1122563D15F0E68E00DBEE30 /* UIColor+Nyaya.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

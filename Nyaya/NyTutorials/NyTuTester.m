@@ -7,6 +7,7 @@
 //
 
 #import "NyTuTester.h"
+#import "UIColor+Nyaya.h"
 
 @interface NyTuTester ()
 
@@ -62,10 +63,6 @@
     self.inputField = (UITextField*)[view viewWithTag:4];
     self.valueLabel = (UILabel*)[view viewWithTag:5];
     self.valueField = (UITextField*)[view viewWithTag:6];
-    
-    self.greyColor = self.keyField.backgroundColor;
-    self.rightColor = self.inputField.backgroundColor;
-    self.wrongColor = self.valueField.backgroundColor;
 }
 
 - (void)layoutSubviews:(UIView*)view {
@@ -73,8 +70,8 @@
 }
 
 - (void)configureSubviews:(UIView*)view {
-    self.keyField.backgroundColor = self.greyColor;
-    self.valueField.backgroundColor = self.greyColor;
+    self.keyField.backgroundColor = [UIColor nyLightGreyColor];
+    self.valueField.backgroundColor = [UIColor nyLightGreyColor];
 }
 
 
@@ -147,9 +144,7 @@
 
 - (void)nextTest {
     NSLog(@"%@ nextTest", [self class] );
-    self.keyField.backgroundColor = self.greyColor;
     self.inputField.backgroundColor = nil;
-    self.valueField.backgroundColor = self.greyColor;
     
     self.inputField.text = @"";
     self.valueField.text = @"";
@@ -240,7 +235,8 @@
     NSString *aca = [regex stringByReplacingMatchesInString:aCorrectAnswer options:0 range:NSMakeRange(0, [aCorrectAnswer length]) withTemplate:@""];
     NSString *yan = [regex stringByReplacingMatchesInString:yourAnswer options:0 range:NSMakeRange(0, [yourAnswer length]) withTemplate:@""];
     
-    if ([aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0) self.inputField.backgroundColor = self.rightColor;
+    if ([aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0) self.inputField.backgroundColor = [UIColor nyRightColor];
+    else self.inputField.backgroundColor = [UIColor nyWrongColor];
     
     self.valueField.text = aCorrectAnswer;
     
