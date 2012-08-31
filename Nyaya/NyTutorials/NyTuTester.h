@@ -57,3 +57,6 @@
 
 @interface NyTuTester111 : NyTuTesterPlist
 @end
+
+@interface NyTuTester121 : NyTuTesterPlist
+@end

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<dict>
+		<key>If the barmoter falls, then it will rain or it will snow.</key>
+		<string>p → q ∨ r</string>
+		<key>When the sun shines today, it won‘t shine tommorrow.</key>
+		<string>p → ¬q</string>
+		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
+		<string>p ∨ ¬ q</string>
+		<key>If interest rates go up, share prices go down.</key>
+		<string>p → q</string>
+	</dict>
+	<key>keyLabel</key>
+	<string>Find a model</string>
+	<key>inputLabel</key>
+	<string>Use only “¬ ∧ ∨ → p q r”</string>
+	<key>valueLabel</key>
+	<string>Sample solution</string>
+</dict>
+</plist>

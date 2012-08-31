@@ -167,3 +167,6 @@
 
 @implementation  NyTuTester111
 @end
+
+@implementation  NyTuTester121
+@end

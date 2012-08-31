@@ -45,6 +45,8 @@
 		11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
+		113FF75B15F07CA80073A410 /* instructions121.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75A15F07CA80073A410 /* instructions121.html */; };
+		113FF75D15F07ED90073A410 /* NyTuTester121.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* NyTuTester121.plist */; };
 		1144248815C68918000B3CD9 /* TransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248715C68918000B3CD9 /* TransformTests.m */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
@@ -197,6 +199,8 @@
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
+		113FF75A15F07CA80073A410 /* instructions121.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions121.html; path = html/instructions121.html; sourceTree = "<group>"; };
+		113FF75C15F07ED90073A410 /* NyTuTester121.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester121.plist; path = Nyaya/NyTutorials/NyTuTester121.plist; sourceTree = "<group>"; };
 		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
 		1144248715C68918000B3CD9 /* TransformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTests.m; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 			children = (
 				11B0B26715EFEC13006AFBFC /* instructions101.html */,
 				11B0B26815EFEC13006AFBFC /* instructions111.html */,
+				113FF75A15F07CA80073A410 /* instructions121.html */,
 				11061F1C15EE131E00345516 /* instructions.css */,
 			);
 			name = htmlinstructions;
@@ -776,6 +781,7 @@
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
 				11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */,
 				11061F3215EFA6EF00345516 /* NyTuTester111.plist */,
+				113FF75C15F07ED90073A410 /* NyTuTester121.plist */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
 				11C61BB615E91FF000F5BB28 /* NyTuTestViewController.m */,
 			);
@@ -961,6 +967,8 @@
 				11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */,
 				11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */,
 				113FF75815F07AB40073A410 /* tutorial131.html in Resources */,
+				113FF75B15F07CA80073A410 /* instructions121.html in Resources */,
+				113FF75D15F07ED90073A410 /* NyTuTester121.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
