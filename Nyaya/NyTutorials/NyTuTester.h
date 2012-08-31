@@ -7,13 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NyAccessoryController.h"
 
 @class NyTuTestViewController;
 
-@interface NyTuTester : NSObject
+@protocol NyTuTester <NSObject>
 
-@property (weak, nonatomic) NyTuTestViewController *delegate;
-@property (strong, nonatomic) IBOutlet UIView *accessoryView;
+@property (weak, nonatomic) id delegate;
++ (BOOL)testerExistsForKey:(NSString*)key;
++ (id)testerForKey:(NSString*)key;
+
+- (void)firstTest:(UIView*)view;
+- (void)checkTest;
+- (void)nextTest;
+- (void)removeTest;
+
+@end
+
+@interface NyTuTester : NSObject <NyTuTester, NyAccessoryController>
 
 @property (nonatomic, strong) UILabel *keyLabel;
 @property (nonatomic, strong) UILabel *valueLabel;
@@ -27,26 +38,15 @@
 @property (nonatomic, strong) UIColor *wrongColor;
 @property (nonatomic, strong) UIColor *rightColor;
 
-+ (BOOL)testerExistsForKey:(NSString*)key;
-+ (id)testerForKey:(NSString*)key;
-
-- (void)firstTest:(UIView*)view;
-- (void)checkTest;
-- (void)nextTest;
-- (void)removeTest;
-
-- (IBAction)press:(UIButton *)sender;
-- (IBAction)parenthesize:(UIButton *)sender;
-- (IBAction)negate:(UIButton *)sender;
-
 @end
 
 @interface NyTuTesterPlist : NyTuTester
+
 @property (nonatomic, strong) NSDictionary *testDictionary;
 @property (nonatomic, strong) NSDictionary *questionsDictionary;
-@property (nonatomic, strong) NSString *keyLabelKey;
-@property (nonatomic, strong) NSString *inputLabelKey;
-@property (nonatomic, strong) NSString *valueLabelKey;
+@property (nonatomic, strong) NSString *keyLabelText;
+@property (nonatomic, strong) NSString *inputLabelText;
+@property (nonatomic, strong) NSString *valueLabelText;
 
 @property (nonatomic, strong) NSString *key;
 

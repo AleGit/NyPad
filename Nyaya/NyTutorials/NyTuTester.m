@@ -8,7 +8,36 @@
 
 #import "NyTuTester.h"
 
+@interface NyTuTester ()
+
+- (void)connectSubviews:(UIView*)view;
+- (void)layoutSubviews:(UIView*)view;
+- (void)configureSubviews:(UIView*)view;
+
+- (BOOL)accessoryViewShouldBeVisible;
+- (void)loadAccessoryView;
+- (void)configureAccessoryView;
+
+- (void)configureKeyboard;
+
+@end
+
 @implementation NyTuTester
+
+// NyTuTester protocol properties
+@synthesize delegate;
+// NyAccessoryDelegate protocol properties
+@synthesize accessoryView;
+@synthesize notButton;
+@synthesize andButton;
+@synthesize orButton;
+@synthesize xorButton;
+@synthesize bicButton;
+@synthesize lparButton;
+@synthesize impButton;
+@synthesize rparButton;
+@synthesize parButton;
+@synthesize nparButton;
 
 + (NSString*)testerClassNameForKey:(NSString*)key {
     return [NSString stringWithFormat:@"NyTuTester%@", key];
@@ -26,9 +55,7 @@
     return [[[self testerClassForKey:key] alloc] init];
 }
 
-- (void)firstTest:(UIView *)view {
-     NSLog(@"%@ firstTest", [self class] );
-    
+- (void)connectSubviews:(UIView*)view {
     self.keyLabel = (UILabel*)[view viewWithTag:1];
     self.keyField = (UITextField*)[view viewWithTag:2];
     self.inputLabel = (UILabel*)[view viewWithTag:3];
@@ -37,15 +64,79 @@
     self.valueField = (UITextField*)[view viewWithTag:6];
     
     self.greyColor = self.keyField.backgroundColor;
-    self.wrongColor = self.valueField.backgroundColor;
     self.rightColor = self.inputField.backgroundColor;
+    self.wrongColor = self.valueField.backgroundColor;
+}
+
+- (void)layoutSubviews:(UIView*)view {
     
-    [[NSBundle mainBundle] loadNibNamed:@"NyAccessoryView" owner:self options:nil];
-    self.inputField.inputAccessoryView = self.accessoryView;
-    [self.inputField addTarget:self.delegate action:@selector(check:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    
+}
+
+- (void)configureSubviews:(UIView*)view {
     self.keyField.backgroundColor = self.greyColor;
     self.valueField.backgroundColor = self.greyColor;
+}
+
+
+
+- (BOOL)accessoryViewShouldBeVisible {
+    return YES;
+}
+
+- (void)loadAccessoryView {
+    if ([self accessoryViewShouldBeVisible]) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyAccessoryView" owner:self options:nil];
+        self.inputField.inputAccessoryView = self.accessoryView;
+    }
+    else {
+        self.inputField.inputAccessoryView = nil;
+        self.accessoryView = nil;
+    }
+}
+
+- (void)disableControls: (NSArray*)controls {
+    for (UIControl *control in controls) {
+        control.enabled = NO;
+    }
+}
+
+- (void)enableControls: (NSArray*)controls {
+    for (UIControl *control in controls) {
+        control.enabled = YES;
+    }
+}
+
+- (void)hideViews: (NSArray*)views {
+    for (UIView *view in views) {
+        view.hidden = YES;
+    }
+}
+
+- (void)showViews: (NSArray*)views {
+    for (UIView *view in views) {
+        view.hidden = NO;
+    }
+}
+
+- (void)configureAccessoryView {
+    
+}
+
+- (void)configureKeyboard {
+    [self.inputField addTarget:self.delegate action:@selector(check:) forControlEvents:UIControlEventEditingDidEndOnExit];
+}
+
+- (void)firstTest:(UIView *)view {
+     NSLog(@"%@ firstTest", [self class] );
+    
+    [self connectSubviews:view];
+    [self layoutSubviews:view];
+    [self configureSubviews:view];
+    
+    [self loadAccessoryView];
+    [self configureAccessoryView];
+    
+    [self configureKeyboard];
     
     [self nextTest];
 }
@@ -56,6 +147,14 @@
 
 - (void)nextTest {
     NSLog(@"%@ nextTest", [self class] );
+    self.keyField.backgroundColor = self.greyColor;
+    self.inputField.backgroundColor = nil;
+    self.valueField.backgroundColor = self.greyColor;
+    
+    self.inputField.text = @"";
+    self.valueField.text = @"";
+    
+    self.inputField.enabled = YES;
 }
 
 - (void)removeTest {
@@ -74,6 +173,8 @@
     self.valueLabel = nil;
     self.valueField = nil;
 }
+
+#pragma mark NyAccessoryViewDelegate
 
 - (IBAction)press:(UIButton *)sender {
     [self.inputField insertText:sender.currentTitle];
@@ -104,44 +205,33 @@
         self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
         self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
         
-        self.keyLabelKey = [self.testDictionary objectForKey:@"keyLabel"];
-        self.inputLabelKey = [self.testDictionary objectForKey:@"inputLabel"];
-        self.valueLabelKey = [self.testDictionary objectForKey:@"valueLabel"];
-        
-        
+        self.keyLabelText = [self.testDictionary objectForKey:@"keyLabelText"];
+        self.inputLabelText = [self.testDictionary objectForKey:@"inputLabelText"];
+        self.valueLabelText = [self.testDictionary objectForKey:@"valueLabelText"];
     }
     return self;
 }
 
-- (void)firstTest:(UIView *)view {
-    [super firstTest:view];
+- (void)configureSubviews:(UIView *)view {
+    [super configureSubviews:view];
     
-    self.keyLabel.text = NSLocalizedString(self.keyLabelKey, nil);
-    self.inputLabel.text = NSLocalizedString(self.inputLabelKey, nil);
-    self.valueLabel.text = NSLocalizedString(self.valueLabelKey, nil);
- 
+    self.keyLabel.text = self.keyLabelText;
+    self.inputLabel.text = self.inputLabelText;
+    self.valueLabel.text = self.valueLabelText;
 }
 
 - (void)nextTest {
     [super nextTest];
     
-    // reset all fields
-    self.inputField.backgroundColor = nil; // default
-   
-    self.inputField.text = @"";
-    self.valueField.text = @"";
-    
     NSUInteger idx = arc4random() % [self.questionsDictionary count];
-    self.inputField.enabled = YES;
     
     self.key = [[self.questionsDictionary allKeys] objectAtIndex:idx];
-    
     self.keyField.text = self.key;
-    self.valueField.text = @"";
 }
 
 - (void)checkTest {
     [super checkTest];
+    
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ .,;]*" options:0 error:nil];
     
     NSString *aCorrectAnswer = [self.questionsDictionary valueForKey:self.key];
@@ -155,18 +245,29 @@
     self.valueField.text = aCorrectAnswer;
     
 }
+
 @end
 
 @implementation  NyTuTester101
-- (void)firstTest:(UIView *)view {
-    [super firstTest:view];
-    view.superview.frame = CGRectMake(10,10,100,100);
-    self.inputField.inputAccessoryView = nil;
+
+- (BOOL)accessoryViewShouldBeVisible {
+    return NO;
 }
+
 @end
 
 @implementation  NyTuTester111
+
+- (BOOL)accessoryViewShouldBeVisible {
+    return NO;
+}
+
 @end
 
 @implementation  NyTuTester121
+
+- (void)configureAccessoryView {
+    [self disableControls:@[self.xorButton, self.bicButton, self.lparButton, self.rparButton, self.parButton, self.nparButton]];
+}
+
 @end

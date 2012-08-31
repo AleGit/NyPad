@@ -201,6 +201,7 @@
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
 		113FF75A15F07CA80073A410 /* instructions121.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions121.html; path = html/instructions121.html; sourceTree = "<group>"; };
 		113FF75C15F07ED90073A410 /* NyTuTester121.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester121.plist; path = Nyaya/NyTutorials/NyTuTester121.plist; sourceTree = "<group>"; };
+		113FF75E15F0850D0073A410 /* NyAccessoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyAccessoryController.h; path = Nyaya/NyBranches/NyAccessoryController.h; sourceTree = "<group>"; };
 		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
 		1144248715C68918000B3CD9 /* TransformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTests.m; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
@@ -441,6 +442,7 @@
 		110476B515E4D5BF0024EDDF /* NyBranches */ = {
 			isa = PBXGroup;
 			children = (
+				113FF75E15F0850D0073A410 /* NyAccessoryController.h */,
 				11061F2215EE406D00345516 /* NyAccessoryView.xib */,
 				116D220515D9255C003DBD88 /* NyBoolTool */,
 				1177498315E7D74800B5C071 /* NyDetailViewController.h */,
@@ -449,8 +451,8 @@
 				1177498515E7D74900B5C071 /* NyMasterViewController.h */,
 				1177498615E7D74900B5C071 /* NyMasterViewController.m */,
 				1104768F15E4A6320024EDDF /* NyPlayground */,
-				1104767C15E4A1230024EDDF /* NyTutorial */,
 				11C61BB815E91FFC00F5BB28 /* NyTuTests */,
+				1104767C15E4A1230024EDDF /* NyTutorial */,
 				116D220215D9252C003DBD88 /* NyWelcome */,
 			);
 			name = NyBranches;

@@ -13,11 +13,11 @@
 		<key>If interest rates go up, share prices go down.</key>
 		<string>interest rates go up; share prices go down</string>
 	</dict>
-	<key>keyLabel</key>
+	<key>keyLabelText</key>
 	<string>Find the Propositions</string>
-	<key>inputLabel</key>
+	<key>inputLabelText</key>
 	<string>Your list of propositions without “if”, “then”, “and”, “or“, and “not”</string>
-	<key>valueLabel</key>
+	<key>valueLabelText</key>
 	<string>Sample solution</string>
 </dict>
 </plist>

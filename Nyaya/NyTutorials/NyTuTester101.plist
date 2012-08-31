@@ -11,11 +11,11 @@
 		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
 		<string>p or not q</string>
 	</dict>
-	<key>keyLabel</key>
+	<key>keyLabelText</key>
 	<string>Guess the structure of composite sentences</string>
-	<key>inputLabel</key>
+	<key>inputLabelText</key>
 	<string>Use only “if”, “then”, “and”, “or“, “not”, “p”, “q”, “r”.</string>
-	<key>valueLabel</key>
+	<key>valueLabelText</key>
 	<string>Sample solution</string>
 </dict>
 </plist>

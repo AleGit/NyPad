@@ -18,16 +18,28 @@
 
 @implementation NyTuDetailViewController
 
-- (UIStoryboard*)testStoryboard {
-    static UIStoryboard *_tustoryboard;
-    if (!_tustoryboard) {
-        _tustoryboard = [UIStoryboard storyboardWithName:@"NyTuTest" bundle:nil];
-    }
-    return _tustoryboard;
-}
-
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Choose Tutorial", @"user can choose tutorial freely");
+}
+
+- (NSString*)sectionTitle {
+    return [self.detailItem objectAtIndex:0];
+}
+
+- (NSArray*)tutorial {
+    return [self.detailItem objectAtIndex:1];
+}
+
+- (NSString*)tutorialTitle {
+    return [self.tutorial objectAtIndex:0];
+}
+
+- (NSString*)tutorialKey {
+    return [self.tutorial objectAtIndex:1];
+}
+
+- (NSString*)tutorialFileName {
+    return [NSString stringWithFormat:@"tutorial%@", self.tutorialKey];
 }
 
 - (void)configureView
@@ -36,15 +48,9 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     if (self.detailItem) {
-        NSString *sectionTitle = [self.detailItem objectAtIndex:0];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@", self.sectionTitle, self.tutorialTitle];
         
-        NSArray *tutorial = [self.detailItem objectAtIndex:1];
-        NSString *tutorialTitle = [tutorial objectAtIndex:0];
-        self.tutorialKey = [tutorial objectAtIndex:1];
-        NSString *tutorialFileName = [NSString stringWithFormat:@"tutorial%@", self.tutorialKey];
-        NSURL *tutorialUrl = [[NSBundle mainBundle] URLForResource:tutorialFileName withExtension:@"html"];
-
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@",sectionTitle, tutorialTitle];
+        NSURL *tutorialUrl = [[NSBundle mainBundle] URLForResource:self.tutorialFileName withExtension:@"html"];
         
         if (tutorialUrl) {
             self.navigationItem.rightBarButtonItem.enabled=[NyTuTester testerExistsForKey:self.tutorialKey];
@@ -57,7 +63,7 @@
         else {
             self.tutorialHtml = nil;
             self.webView.delegate = nil;
-            NSLog(@"%@.html does not exist",tutorialFileName);
+            NSLog(@"%@.html does not exist", self.tutorialFileName);
         }
     }
 }
@@ -78,7 +84,6 @@
 
 - (IBAction)back:(id)sender {
     [self.webView goBack];
-    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -86,15 +91,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     NyTuTestViewController *testViewController = (NyTuTestViewController*)segue.destinationViewController;
     testViewController.instructionsName = [NSString stringWithFormat:@"instructions%@", [[self.detailItem objectAtIndex:1] objectAtIndex:1]];
     testViewController.tester = [NyTuTester testerForKey:self.tutorialKey];
     testViewController.tester.delegate = testViewController;
-    // testViewController.delegate = self;  
-    
-    NSLog(@"“%@” ‘%@’ ‘%@’ \n%@", segue.identifier, [segue.sourceViewController class], [segue.destinationViewController class]
-          , testViewController.instructionsName);
 }
 
 @end
