@@ -68,18 +68,31 @@
 }
 
 - (id)initWithFormula:(NyayaNode *)formula {
+    return [self initWithFormula:formula compact:NO];
+}
+
+- (id)initWithFormula:(NyayaNode *)formula compact:(BOOL)compact {
     self = [super init];
     if (self) {
         _formula = formula;
         _title = [formula description];
         _variables = [[formula setOfVariables] allObjects];
-        _headers = [[formula setOfSubformulas] allObjects];
+        if (compact)
+            _headers = [[_variables valueForKeyPath:@"description"] arrayByAddingObject:_title];
+        else 
+            _headers = [[formula setOfSubformulas] allObjects];
         
         [self sortVariablesAndHeaders];
+        
+        
         
         _rowsCount = 1 << [_variables count];
         _colsCount = [_headers count];
         _cellCount = _rowsCount * _colsCount;
+        
+        long size = _cellCount * sizeof(BOOL);
+        if (size > 30*1000*1000)
+            NSLog(@"calloc(%u,%lu) = %lu", _cellCount, sizeof(BOOL), size);
         
         _evals = calloc(_cellCount, sizeof(BOOL));
         _trueIndices = [NSMutableIndexSet indexSet];
@@ -315,6 +328,35 @@
         disjunction = d;
     }
     return disjunction;
+}
+
+- (NSString*)descriptionFromSet:(NSSet*)set outer:(NSString*)co inner:(NSString*)ci {
+    if ([self isContradiction]) return @"F";
+    if ([self isTautology]) return @"T";
+
+    NSMutableArray *outerArray = [NSMutableArray arrayWithCapacity:[set count]];
+    for (NSSet *innerSet in set) {
+        if ([innerSet count] == 1)
+            [outerArray addObject:[innerSet anyObject]];
+        else {
+            NSString *innerString = [[innerSet allObjects] componentsJoinedByString:ci];
+            [outerArray addObject:[NSString stringWithFormat:@"(%@)", innerString]];
+        }
+    }
+    return [outerArray componentsJoinedByString:co];
+}
+
+- (NSString *)cnfDescription {
+    NSSet *set = [self cnfSet];
+    NSLog(@"%@",set);
+    
+    return [self descriptionFromSet:set outer:@" ∧ " inner: @" ∨ "];
+}
+
+- (NSString *)dnfDescription {
+    NSSet *set = [self dnfSet];
+    NSLog(@"%@",set);
+    return [self descriptionFromSet:set outer:@" ∨ " inner: @" ∧ "];
 }
 
 #pragma mark - protocol NSObject

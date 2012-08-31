@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) NSArray *headers;
 
 - (id)initWithFormula:(NyayaNode*)formula;
+- (id)initWithFormula:(NyayaNode *)formula compact:(BOOL)compact;
 - (void)evaluateTable;
 
 - (NSString*)minimalDescription; 
@@ -28,6 +29,9 @@
 
 - (NSSet*)cnfSet;
 - (NSSet*)dnfSet;
+- (NSString *)cnfDescription;
+- (NSString *)dnfDescription;
+
 
 
 @end

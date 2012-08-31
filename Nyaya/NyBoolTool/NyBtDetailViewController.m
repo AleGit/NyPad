@@ -14,7 +14,7 @@
 #import "TruthTable.h"
 
 @interface NyBtDetailViewController () <NyAccessoryController> {
-     dispatch_queue_t queue;
+    dispatch_queue_t queue;
 }
 @end
 
@@ -47,7 +47,7 @@
     // Update the user interface for the detail item.
     
     if (self.detailItem) {
-        [self.inputField becomeFirstResponder];        
+        [self.inputField becomeFirstResponder];
     }
 }
 
@@ -78,7 +78,7 @@
         self.accessoryView = nil;
         
     }
-    queue = dispatch_queue_create("at.maringele.nyaya.booltool.queue", NULL);
+    queue = dispatch_queue_create("at.maringele.nyaya.booltool.queue", DISPATCH_QUEUE_SERIAL);
 }
 
 - (void)viewDidUnload {
@@ -127,6 +127,7 @@
 }
 
 - (IBAction)editingChanged:(id)sender {
+    [self resetOutputViews];
     [self parse];
 }
 
@@ -144,7 +145,7 @@
         NyayaNode *a = [parser parseFormula];
         dispatch_async(mq, ^{
             self.parsedField.text = [[a description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
-            self.parsedLabel.backgroundColor = parser.hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];            
+            self.parsedLabel.backgroundColor = parser.hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
         });
     });
 }
@@ -168,45 +169,171 @@
             });
             
             if (!hasErrors) {
-                TruthTable *truthTable = [[TruthTable alloc] initWithFormula:node];
+                TruthTable *truthTable = [[TruthTable alloc] initWithFormula:node compact:YES];
                 [truthTable evaluateTable];
                 
                 BOOL sat = truthTable.isSatisfiable;
                 BOOL tau = truthTable.isTautology;
                 BOOL con = truthTable.isContradiction;
                 
+                NSString *nf = nil;
+                if (tau) nf = @"T";
+                else if (con) nf = @"F";
+                
                 dispatch_async(mq, ^{
                     self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                     self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : [UIColor nyLightGreyColor];
                     self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : [UIColor nyLightGreyColor];
+                    if (nf) {
+                        self.nnfField.text = nf;
+                        self.cnfField.text = nf;
+                        self.dnfField.text = nf;
+                    }
                 });
                 
+                if (!nf) {
+                    
+                    NSString *nnfdescription = nil;
+                    NSString *cnfdescription = nil;
+                    NSString *dnfdescription = nil;
+                    
+                                        
+                    if ([truthTable.variables count] < 6) {
+                        /* transformations with many variables are too expensive */
+
+                        NyayaNode *imfnode = [node imf];
+                        
+                        NyayaNode *nnfnode = [imfnode nnf];
+                        nnfdescription = nf ? nf : [nnfnode description];
+                        dispatch_async(mq, ^{
+                            self.nnfField.text = nnfdescription;
+                            self.nnfField.backgroundColor = [UIColor nyLightGreyColor];
+                        });
+                        
+                        NyayaNode *cnfnode = [nnfnode cnf];
+                        cnfdescription = nf ? nf : [cnfnode description];
+                        dispatch_async(mq, ^{
+                            self.cnfField.text = cnfdescription;
+                            self.cnfField.backgroundColor = [UIColor nyLightGreyColor];
+                        });
+                        
+                        
+                        NyayaNode *dnfnode = [nnfnode dnf];
+                        dnfdescription = nf ? nf : [dnfnode description];
+                        
+                        dispatch_async(mq, ^{
+                            self.dnfField.text = dnfdescription;
+                            self.dnfField.backgroundColor = [UIColor nyLightGreyColor];
+                        });
+                    } 
+                    
+                    NSString *ttcnf = [truthTable cnfDescription];
+                    NSString *ttdnf = [truthTable dnfDescription];
+                    
+                    NSString *ttnnf = [ttcnf length] <= [ttdnf length] ? ttcnf : ttcnf;
+                    
+                    if (!nnfdescription || [ttnnf length] < [nnfdescription length]) {
+                        dispatch_async(mq, ^{
+                            self.nnfField.text = ttnnf;
+#ifdef DEBUG
+                            self.nnfField.backgroundColor = [UIColor nyRightColor];
+#endif
+                        });
+                    }
+                    
+                    if (!cnfdescription || [ttcnf length] < [cnfdescription length]) {
+                        dispatch_async(mq, ^{
+                            self.cnfField.text = ttcnf;
+#ifdef DEBUG
+                            self.cnfField.backgroundColor = [UIColor nyRightColor];
+#endif
+                        });
+                    }
+                    
+                    if (!dnfdescription || [ttdnf length] < [dnfdescription length]) {
+                        dispatch_async(mq, ^{
+                            self.dnfField.text = ttdnf;
+                            
+#ifdef DEBUG
+                            self.dnfField.backgroundColor = [UIColor nyRightColor];
+#endif
+                        });
+                    }
+                }
                 
-                NyayaNode *imfnode = [node imf];
-                
-                NyayaNode *nnfnode = [imfnode nnf];
-                NSString *nnfdescription=[nnfnode description];
                 dispatch_async(mq, ^{
-                    self.nnfField.text = nnfdescription;
+                    [self adjustNormalForms];
                 });
                 
                 
-                
-                NyayaNode *cnfnode = [nnfnode cnf];
-                NSString *cnfdescription=[cnfnode description];
-                dispatch_async(mq, ^{
-                    self.cnfField.text = cnfdescription;
-                });
-                
-                
-                NyayaNode *dnfnode = [nnfnode dnf];
-                NSString *dnfdescription=[dnfnode description];
-                dispatch_async(mq, ^{
-                    self.dnfField.text = dnfdescription;
-                });
             }
             
         });
     }
+}
+
+- (CGSize)textViewSize:(UITextView*)textView {
+    CGFloat height = textView.contentSize.height-16;
+    if (height > 120.0) {
+        textView.scrollEnabled = YES;
+        height = 120.0;
+    }
+    else textView.scrollEnabled = NO;
+    
+    return CGSizeMake(textView.contentSize.width, height);
+    
+    //    float fudgeFactor = 16.0;
+    //    CGSize tallerSize = CGSizeMake(textView.frame.size.width-fudgeFactor, 72); //kMaxFieldHeight);
+    //    NSString *testString = @" ";
+    //    if ([textView.text length] > 0) {
+    //        testString = textView.text;
+    //    }
+    //    CGSize stringSize = [testString sizeWithFont:textView.font constrainedToSize:tallerSize lineBreakMode:UILineBreakModeWordWrap];
+    //    return stringSize;
+}
+
+- (CGFloat)resizeTextView:(UITextView*)textView toSize:(CGSize)size yOffset:(CGFloat)yoffset {
+    CGFloat height = textView.frame.size.height;
+    
+    [textView setFrame:CGRectMake(textView.frame.origin.x,
+                                  textView.frame.origin.y + yoffset,
+                                  textView.frame.size.width,
+                                  size.height+16)];
+    return textView.frame.size.height - height;
+}
+
+
+
+- (void)align:(UIView*)textLabel toTopY:(CGRect)r {
+    CGRect f = textLabel.frame;
+    textLabel.frame = CGRectMake(f.origin.x, r.origin.y, f.size.width, f.size.height);
+}
+
+- (void)adjustNormalForms {
+    CGFloat yoffset = 0.0;
+    
+    CGSize size = [self textViewSize: self.parsedField];
+    yoffset += [self resizeTextView: self.parsedField toSize:size yOffset:yoffset];
+    NSLog(@"parseField offset %f", yoffset);
+    
+    if (yoffset != 0.0) {
+        
+        CGRect f = self.propertyView.frame;
+        self.propertyView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, f.size.height);
+    }
+    
+    
+    for (UITextView *textView in @[nnfField, cnfField, dnfField]) {
+        CGSize size = [self textViewSize: textView];
+        yoffset += [self resizeTextView: textView toSize:size yOffset:yoffset];
+        NSLog(@"offset %f", yoffset);
+    }
+    
+    [self align:self.nnfLabel toTopY:self.nnfField.frame];
+    [self align:self.cnfLabel toTopY:self.cnfField.frame];
+    [self align:self.dnfLabel toTopY:self.dnfField.frame];
+    
+    self.normalFormView.contentSize = CGSizeMake(self.normalFormView.frame.size.width, self.dnfField.frame.origin.y + self.dnfField.frame.size.height);
+    
 }
 @end
