@@ -1,7 +1,13 @@
+Parser v3.2 (niy)
+
+formula = entailment
+entailment = sequence [ ⊨ entailment ]
+
+
 Parser v3.1: NOT > AND > OR > XOR > BIC > IMP
 
 formula      = sequence                             // CHANGED   from v3
-sequence     = bicondition { COMMA bicondition }
+sequence     = bicondition { SEMICOLON bicondition }
 bicondition  = implication [ BIC bicondition ]      // CHANGED   from v3
 implication  = xdisjunction [ BIC implication ]     // CHANGED   from v3
 
@@ -49,6 +55,7 @@ XOR         = "^"  | "⊻" | "⊕" | "XOR" | "xor"
 LPAR        = "("
 RPAR        = ")"
 COMMA       = ","
+SEMICOLON   = ";"
 
 ====================================================================
 

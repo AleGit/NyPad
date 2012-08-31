@@ -43,6 +43,8 @@ NSString *const NYAYA_TOKENS =
         [_keywords addObjectsFromArray:[NSArray rparTokens]];
         [_keywords addObjectsFromArray:[NSArray commaTokens]];
         [_keywords addObjectsFromArray:[NSArray semicolonTokens]];
+        
+        [_keywords addObjectsFromArray:[NSArray entailmentTokens]];
     });
     return _keywords;
 
@@ -95,6 +97,10 @@ NSString *const NYAYA_TOKENS =
 
 - (BOOL)isSemicolon {
     return [[NSArray semicolonTokens] indexOfObject:self] != NSNotFound;
+}
+
+- (BOOL)isEntailment {
+    return [self isEqualToString:@"⊨"];
 }
 
 - (BOOL)isIdentifierToken {

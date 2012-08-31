@@ -22,5 +22,6 @@
 + (NSArray*)rparTokens;
 + (NSArray*)commaTokens;
 + (NSArray*)semicolonTokens;
++ (NSArray*)entailmentTokens;
 
 @end

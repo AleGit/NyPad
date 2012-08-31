@@ -8,8 +8,8 @@
 
 // tokenizer
 
-"NYAYA_TOKENS_PATTERN" = "⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
-//                        T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
+"NYAYA_TOKENS_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
+//                          T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
 
 // parser
 // token key = comma separated list of (additional) localized names

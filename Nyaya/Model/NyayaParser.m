@@ -99,9 +99,24 @@
 }
     
 - (NyayaNode*)parseFormula {
-    NyayaNode* result = [self parseSequence];
+    NyayaNode* result = [self parseEntailment];
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
+    NSLog(@"%@", _errors);
     return result;
+}
+
+- (NyayaNode*)parseEntailment {
+    NyayaNode* result = nil;
+    _level++;
+    result = [self parseSequence];
+    if ([_token isEntailment]) {
+        [self nextToken];
+        result = [NyayaNode entailment:result with:[self parseEntailment]];
+    }
+    
+    _level--;
+    return result;
+    
 }
 
 - (NyayaNode*)parseSequence {

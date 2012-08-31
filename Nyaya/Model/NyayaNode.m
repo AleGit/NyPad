@@ -68,6 +68,9 @@
 @interface NyayaNodeImplication : NyayaNodeExpandable 
 @end
 
+@interface NyayaNodeEntailment : NyayaNodeImplication
+@end
+
 @interface NyayaNodeBicondition : NyayaNodeExpandable 
 @end
 
@@ -660,6 +663,21 @@
 
 @end
 
+@implementation NyayaNodeEntailment
+
+- (NyayaNodeType)type {
+    return NyayaEntailment;
+}
+
+- (NSString*)description {
+    NyayaNode *first = [self firstNode];
+    NyayaNode *second = [self secondNode];
+    _descriptionCache =   [NSString stringWithFormat:@"%@ %@ %@", [first description], [self symbol], [second description]];
+    return _descriptionCache;
+}
+
+@end
+
 @implementation NyayaNodeBicondition
 
 - (NyayaNodeType)type {
@@ -836,6 +854,16 @@
 + (NyayaNode*)implication:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
     NyayaNode*node=[[NyayaNodeImplication alloc] init];
     node->_symbol = @"→";
+    node->_displayValue = NyayaUndefined;
+    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    
+    [node setValue:node forKeyPath:@"nodes.parent"];
+    return node;
+}
+
++ (NyayaNode*)entailment:(NyayaNode *)firstNode with:(NyayaNode *)secondNode {
+    NyayaNode*node=[[NyayaNodeEntailment alloc] init];
+    node->_symbol = @"⊨";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
     
