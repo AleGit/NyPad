@@ -9,15 +9,15 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 
-@interface NyTuTester ()
+@interface NyTuTester () {
+    BOOL checked;
+}
 
 - (void)connectSubviews:(UIView*)view;
 - (void)layoutSubviews:(UIView*)view;
 - (void)configureSubviews:(UIView*)view;
 
-- (BOOL)accessoryViewShouldBeVisible;
-- (void)loadAccessoryView;
-- (void)configureAccessoryView;
+
 
 - (void)configureKeyboard;
 
@@ -27,18 +27,9 @@
 
 // NyTuTester protocol properties
 @synthesize delegate;
+
 // NyAccessoryDelegate protocol properties
-@synthesize accessoryView;
-@synthesize notButton;
-@synthesize andButton;
-@synthesize orButton;
-@synthesize xorButton;
-@synthesize bicButton;
-@synthesize lparButton;
-@synthesize impButton;
-@synthesize rparButton;
-@synthesize parButton;
-@synthesize nparButton;
+@synthesize accessoryView, backButton, actionButton, dismissButton;
 
 + (NSString*)testerClassNameForKey:(NSString*)key {
     return [NSString stringWithFormat:@"NyTuTester%@", key];
@@ -74,7 +65,7 @@
     self.valueField.backgroundColor = [UIColor nyLightGreyColor];
 }
 
-
+#pragma mark - ny accessory controller protocols
 
 - (BOOL)accessoryViewShouldBeVisible {
     return YES;
@@ -82,46 +73,86 @@
 
 - (void)loadAccessoryView {
     if ([self accessoryViewShouldBeVisible]) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyAccessoryView" owner:self options:nil];
-        self.inputField.inputAccessoryView = self.accessoryView;
+        [[NSBundle mainBundle] loadNibNamed:@"NyBasicKeysView" owner:self options:nil];
+        [self configureAccessoryView];
     }
     else {
-        self.inputField.inputAccessoryView = nil;
-        self.accessoryView = nil;
-    }
-}
-
-- (void)disableControls: (NSArray*)controls {
-    for (UIControl *control in controls) {
-        control.enabled = NO;
-    }
-}
-
-- (void)enableControls: (NSArray*)controls {
-    for (UIControl *control in controls) {
-        control.enabled = YES;
-    }
-}
-
-- (void)hideViews: (NSArray*)views {
-    for (UIView *view in views) {
-        view.hidden = YES;
-    }
-}
-
-- (void)showViews: (NSArray*)views {
-    for (UIView *view in views) {
-        view.hidden = NO;
+        [self unloadAccessoryView];
     }
 }
 
 - (void)configureAccessoryView {
+    self.inputField.inputView = self.accessoryView;
+    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+}
+
+- (void)unloadAccessoryView {
+    
+    self.inputField.inputView = nil;
+    self.inputField.inputAccessoryView = nil;
+    self.accessoryView = nil;
     
 }
 
-- (void)configureKeyboard {
-    [self.inputField addTarget:self.delegate action:@selector(check:) forControlEvents:UIControlEventEditingDidEndOnExit];
+- (IBAction)press:(UIButton *)sender {
+    [self.inputField insertText:sender.currentTitle];
 }
+
+- (IBAction)action:(UIButton *)sender {
+    checked ? [self nextTest] : [self checkTest];
+}
+
+- (IBAction)back:(UIButton *)sender {
+    [self.inputField deleteBackward];
+}
+
+- (IBAction)dismiss:(UIButton*)sender {
+    [self.inputField resignFirstResponder];
+}
+
+//- (IBAction)parenthesize:(UIButton *)sender {
+//    if ([self.inputField hasText]) {
+//        self.inputField.text = [NSString stringWithFormat:@"(%@)", self.inputField.text];
+//    }
+//}
+//
+//- (IBAction)negate:(UIButton *)sender {
+//    if ([self.inputField hasText]) {
+//        self.inputField.text = [NSString stringWithFormat:@"¬(%@)", self.inputField.text];
+//    }
+//}
+
+#pragma mark -
+
+//- (void)disableControls: (NSArray*)controls {
+//    for (UIControl *control in controls) {
+//        control.enabled = NO;
+//    }
+//}
+//
+//- (void)enableControls: (NSArray*)controls {
+//    for (UIControl *control in controls) {
+//        control.enabled = YES;
+//    }
+//}
+//
+//- (void)hideViews: (NSArray*)views {
+//    for (UIView *view in views) {
+//        view.hidden = YES;
+//    }
+//}
+//
+//- (void)showViews: (NSArray*)views {
+//    for (UIView *view in views) {
+//        view.hidden = NO;
+//    }
+//}
+
+- (void)configureKeyboard {
+    // [self.inputField addTarget:self action:@selector(action:) forControlEvents:UIControlEventEditingDidEndOnExit];
+}
+
+#pragma mark - template methods …Test
 
 - (void)firstTest:(UIView *)view {
      NSLog(@"%@ firstTest", [self class] );
@@ -138,54 +169,60 @@
     [self nextTest];
 }
 
--  (void)checkTest {
-    NSLog(@"%@ checkTest", [self class] );
+- (void)nextTest {
+    checked = NO;
+    [actionButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
+    NSLog(@"%@ nextTest", [self class] );
+    BOOL success = [self clearTestView] && [self fillTestView];
+    [delegate tester:self didNextTest:success];
 }
 
-- (void)nextTest {
-    NSLog(@"%@ nextTest", [self class] );
-    self.inputField.backgroundColor = nil;
-    
-    self.inputField.text = @"";
-    self.valueField.text = @"";
-    
-    self.inputField.enabled = YES;
+-  (void)checkTest {
+    checked = YES;
+    [actionButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
+    NSLog(@"%@ checkTest", [self class] );
+    BOOL success = [self validateTestView];
+    [self.delegate tester:self didCheckTest:success];
 }
 
 - (void)removeTest {
     NSLog(@"%@ removeTest", [self class] );
+    BOOL success = [self clearTestView];
+    [self.delegate tester:self didRemoveTest:success];
+}
+
+#pragma mark -
+
+- (BOOL)fillTestView {
+    BOOL success = YES;
+    
+    self.inputField.enabled = YES;
+    
+    
+    return success;
+}
+
+- (BOOL)validateTestView {
+    return YES;
+}
+
+- (BOOL)clearTestView {
     self.keyLabel.text = @"";
-    self.keyField.text = @"";
     self.inputLabel.text = @"";
-    self.inputField.text = @"";
     self.valueLabel.text = @"";
+    
+    self.keyField.text = @"";
+    self.inputField.text = @"";
     self.valueField.text = @"";
     
-    self.keyLabel = nil;
-    self.keyField = nil;
-    self.inputLabel = nil;
-    self.inputField = nil;
-    self.valueLabel = nil;
-    self.valueField = nil;
+    self.inputField.backgroundColor = [UIColor nyLightGreyColor];
+    
+    return YES;
 }
 
-#pragma mark NyAccessoryViewDelegate
 
-- (IBAction)press:(UIButton *)sender {
-    [self.inputField insertText:sender.currentTitle];
-}
 
-- (IBAction)parenthesize:(UIButton *)sender {
-    if ([self.inputField hasText]) {
-        self.inputField.text = [NSString stringWithFormat:@"(%@)", self.inputField.text];
-    }
-}
 
-- (IBAction)negate:(UIButton *)sender {
-    if ([self.inputField hasText]) {
-        self.inputField.text = [NSString stringWithFormat:@"¬(%@)", self.inputField.text];
-    }
-}
 
 @end
 
@@ -207,25 +244,23 @@
     return self;
 }
 
-- (void)configureSubviews:(UIView *)view {
-    [super configureSubviews:view];
+- (BOOL)fillTestView {
+    BOOL success = [super fillTestView];
     
     self.keyLabel.text = self.keyLabelText;
     self.inputLabel.text = self.inputLabelText;
     self.valueLabel.text = self.valueLabelText;
-}
-
-- (void)nextTest {
-    [super nextTest];
     
     NSUInteger idx = arc4random() % [self.questionsDictionary count];
     
     self.key = [[self.questionsDictionary allKeys] objectAtIndex:idx];
     self.keyField.text = self.key;
+    
+    return success ;
 }
 
-- (void)checkTest {
-    [super checkTest];
+- (BOOL)validateTestView {
+    BOOL success = NO;
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ .,;]*" options:0 error:nil];
     
@@ -235,11 +270,12 @@
     NSString *aca = [regex stringByReplacingMatchesInString:aCorrectAnswer options:0 range:NSMakeRange(0, [aCorrectAnswer length]) withTemplate:@""];
     NSString *yan = [regex stringByReplacingMatchesInString:yourAnswer options:0 range:NSMakeRange(0, [yourAnswer length]) withTemplate:@""];
     
-    if ([aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0) self.inputField.backgroundColor = [UIColor nyRightColor];
-    else self.inputField.backgroundColor = [UIColor nyWrongColor];
+    success = [aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0;
     
+    self.inputField.backgroundColor = success ? [UIColor nyRightColor] : [UIColor nyWrongColor];
     self.valueField.text = aCorrectAnswer;
     
+    return success;
 }
 
 @end
@@ -252,7 +288,7 @@
 
 @end
 
-@implementation  NyTuTester111
+@implementation NyTuTester111
 
 - (BOOL)accessoryViewShouldBeVisible {
     return NO;
@@ -261,9 +297,5 @@
 @end
 
 @implementation  NyTuTester121
-
-- (void)configureAccessoryView {
-    [self disableControls:@[self.xorButton, self.bicButton, self.lparButton, self.rparButton, self.parButton, self.nparButton]];
-}
 
 @end

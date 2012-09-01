@@ -38,7 +38,7 @@
     }];
   
 #ifdef DEBUG
-    self.selectedViewController = [self.viewControllers objectAtIndex:4];
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
 #endif
 }
 

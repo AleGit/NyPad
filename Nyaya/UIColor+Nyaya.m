@@ -22,10 +22,16 @@
     return _color;
     
 }
+
 + (UIColor*)nyLightGreyColor {
     static UIColor *_color;
     if (!_color) _color = [UIColor colorWithWhite:0.92 alpha:1.0];
     return _color;
+}
+
++ (UIColor*)nyKeyboardBackgroundColor {
+    return [self nyLightGreyColor];
+    
 }
 
 @end

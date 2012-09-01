@@ -11,19 +11,19 @@
 @protocol NyAccessoryController <NSObject>
 
 @property (strong, nonatomic) IBOutlet UIView *accessoryView;
-@property (weak, nonatomic) IBOutlet UIButton *notButton;
-@property (weak, nonatomic) IBOutlet UIButton *andButton;
-@property (weak, nonatomic) IBOutlet UIButton *orButton;
-@property (weak, nonatomic) IBOutlet UIButton *xorButton;
-@property (weak, nonatomic) IBOutlet UIButton *bicButton;
-@property (weak, nonatomic) IBOutlet UIButton *lparButton;
-@property (weak, nonatomic) IBOutlet UIButton *impButton;
-@property (weak, nonatomic) IBOutlet UIButton *rparButton;
-@property (weak, nonatomic) IBOutlet UIButton *parButton;
-@property (weak, nonatomic) IBOutlet UIButton *nparButton;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
+@property (weak, nonatomic) IBOutlet UIButton *dismissButton;
+@property (readonly, readonly) BOOL accessoryViewShouldBeVisible;
 
-- (IBAction)press:(UIButton *)sender;
-- (IBAction)parenthesize:(UIButton *)sender;
-- (IBAction)negate:(UIButton *)sender;
+- (void)loadAccessoryView;
+- (void)configureAccessoryView;
+- (void)unloadAccessoryView;
+
+
+- (IBAction)press:(UIButton*)sender;
+- (IBAction)back:(UIButton*)sender;
+- (IBAction)action:(UIButton*)sender;
+- (IBAction)dismiss:(UIButton*)sender;
 
 @end

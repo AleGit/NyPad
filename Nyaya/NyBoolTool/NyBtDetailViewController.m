@@ -35,25 +35,55 @@
 @synthesize dnfLabel;
 @synthesize dnfField;
 
-@synthesize accessoryView, notButton, andButton, orButton, xorButton, impButton, bicButton, lparButton, rparButton, parButton, nparButton;
+// NyAccessoryDelegate protocol properties
+@synthesize accessoryView, backButton, actionButton, dismissButton;
+
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"BoolTool", @"BoolTool");
 }
 
-- (void)configureView
-{
-    [super configureView];
-    // Update the user interface for the detail item.
-    
-    if (self.detailItem) {
-        [self.inputField becomeFirstResponder];
+#pragma mark - ny accessor controller protocol
+
+- (BOOL)accessoryViewShouldBeVisible {
+    return NO;
+}
+
+- (void)loadAccessoryView {
+    if (!self.inputAccessoryView) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyExtendedKeysView" owner:self options:nil];
+        [self configureAccessoryView];
     }
+}
+
+- (void)configureAccessoryView {
+    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    self.inputField.inputView = self.accessoryView;
+}
+
+- (void)unloadAccessoryView {
+    self.inputField.inputView = nil;
+    self.inputField.inputAccessoryView = nil;
+    self.accessoryView = nil;
 }
 
 - (IBAction)press:(UIButton *)sender {
     [self.inputField insertText:sender.currentTitle];
 }
+
+- (IBAction)back:(UIButton *)sender {
+    [self.inputField deleteBackward];
+}
+
+- (IBAction)action:(UIButton *)sender {
+    [self didEndOnExit:sender];
+}
+
+- (IBAction)dismiss:(UIButton*)sender {
+    [self.inputField resignFirstResponder];
+}
+
+#pragma mark - additional ib actions
 
 - (IBAction)parenthesize:(UIButton *)sender {
     if ([self.inputField hasText]) {
@@ -67,17 +97,43 @@
     }
 }
 
+- (IBAction)send:(id)sender {
+    self.normalFormView.hidden = NO;
+    [self compute];
+}
+
+- (IBAction)didEndOnExit:(id)sender {
+    self.normalFormView.hidden = NO;
+    [self compute];
+}
+
+- (IBAction)editingChanged:(id)sender {
+    [self resetOutputViews];
+    [self parse];
+}
+
+- (IBAction)editingDidBegin:(id)sender {
+    [self resetOutputViews];
+}
+
+#pragma mark - view configuration
+
+- (void)configureView
+{
+    [super configureView];
+    // Update the user interface for the detail item.
+    
+    if (self.detailItem) {
+        [self.inputField becomeFirstResponder];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self resetOutputViews];
+    [self loadAccessoryView];
+    [self.inputField becomeFirstResponder];
     
-    if (!self.inputAccessoryView) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyAccessoryView" owner:self options:nil];
-        self.inputField.inputAccessoryView = self.accessoryView;
-        
-        self.accessoryView = nil;
-        
-    }
     queue = dispatch_queue_create("at.maringele.nyaya.booltool.queue", DISPATCH_QUEUE_SERIAL);
 }
 
@@ -114,25 +170,6 @@
     self.contradictionLabel.backgroundColor = [UIColor nyLightGreyColor];
     self.parsedLabel.backgroundColor = [UIColor nyLightGreyColor];
     self.parsedField.backgroundColor = [UIColor nyLightGreyColor];
-}
-
-- (IBAction)send:(id)sender {
-    [self didEndOnExit:sender];
-    // [self.inputField resignFirstResponder];
-}
-
-- (IBAction)didEndOnExit:(id)sender {
-    self.normalFormView.hidden = NO;
-    [self compute];
-}
-
-- (IBAction)editingChanged:(id)sender {
-    [self resetOutputViews];
-    [self parse];
-}
-
-- (IBAction)editingDidBegin:(id)sender {
-    [self resetOutputViews];
 }
 
 

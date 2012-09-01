@@ -9,30 +9,40 @@
 #import <Foundation/Foundation.h>
 #import "NyAccessoryController.h"
 
-@class NyTuTestViewController;
+
+@class NyTuTestViewController;      // external declaration
+@protocol NyTuTesterDelegate;       // forward declaration
+@protocol NyTuTester;               // forward declaration
+@class NyTuTester;                  // forward declaration
 
 @protocol NyTuTester <NSObject>
 
-@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) id<NyTuTesterDelegate> delegate;
 + (BOOL)testerExistsForKey:(NSString*)key;
 + (id)testerForKey:(NSString*)key;
 
 - (void)firstTest:(UIView*)view;
-- (void)checkTest;
 - (void)nextTest;
+- (void)checkTest;
 - (void)removeTest;
 
 @end
 
+@protocol NyTuTesterDelegate <NSObject>
+- (void)tester:(id<NyTuTester>)tester didNextTest:(BOOL)success;
+- (void)tester:(id<NyTuTester>)tester didCheckTest:(BOOL)success;
+- (void)tester:(id<NyTuTester>)tester didRemoveTest:(BOOL)success;
+@end
+
 @interface NyTuTester : NSObject <NyTuTester, NyAccessoryController>
 
-@property (nonatomic, strong) UILabel *keyLabel;
-@property (nonatomic, strong) UILabel *valueLabel;
-@property (nonatomic, strong) UILabel *inputLabel;
+@property (nonatomic, weak) UILabel *keyLabel;
+@property (nonatomic, weak) UILabel *valueLabel;
+@property (nonatomic, weak) UILabel *inputLabel;
 
-@property (nonatomic, strong) UITextField *keyField;
-@property (nonatomic, strong) UITextField *valueField;
-@property (nonatomic, strong) UITextField *inputField;
+@property (nonatomic, weak) UITextField *keyField;
+@property (nonatomic, weak) UITextField *valueField;
+@property (nonatomic, weak) UITextField *inputField;
 
 @end
 

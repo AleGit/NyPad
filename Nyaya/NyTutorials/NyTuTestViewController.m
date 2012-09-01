@@ -8,10 +8,8 @@
 
 #import "NyTuTestViewController.h"
 #import "NyTuDetailViewController.h"
-#import "NyTuTester.h"
 
 @interface NyTuTestViewController ()
-
 @end
 
 @implementation NyTuTestViewController
@@ -56,18 +54,26 @@
 
 - (void)done:(id)sender {
     [self.tester removeTest];
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)check:(id)sender {
-    
-    self.nextButton.enabled = YES;
     [self.tester checkTest];
 }
 
 - (IBAction)next:(id)sender {
-    self.nextButton.enabled = NO;
     [self.tester nextTest];
+}
+
+- (void)tester:(id<NyTuTester>)tester didCheckTest:(BOOL)success {
+    self.nextButton.enabled = YES;
+}
+
+- (void)tester:(id<NyTuTester>)tester didNextTest:(BOOL)success {
+    self.nextButton.enabled = NO;
+}
+
+- (void)tester:(id<NyTuTester>)tester didRemoveTest:(BOOL)success {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

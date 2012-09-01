@@ -13,5 +13,6 @@
 + (UIColor*)nyRightColor;
 + (UIColor*)nyWrongColor;
 + (UIColor*)nyLightGreyColor;
++ (UIColor*)nyKeyboardBackgroundColor;
 
 @end
