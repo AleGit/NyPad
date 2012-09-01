@@ -198,7 +198,7 @@
     
     self.inputField.enabled = YES;
     
-    
+    [self.inputField becomeFirstResponder];
     return success;
 }
 
