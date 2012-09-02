@@ -12,6 +12,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 #import "TruthTable.h"
+#import "BddNode.h"
 
 @interface NyBtDetailViewController () <NyAccessoryController> {
     dispatch_queue_t queue;
@@ -230,72 +231,85 @@
                 
                 if (!nf) {
                     
-                    NSString *nnfdescription = nil;
-                    NSString *cnfdescription = nil;
-                    NSString *dnfdescription = nil;
                     
-                                        
-                    if ([truthTable.variables count] < 6) {
-                        /* transformations with many variables are too expensive */
+                    
+                    BddNode *bdd = [BddNode diagramWithTruthTable:truthTable];
+                    
+                    NSString *cnfdescription = [bdd cnfDescription];
+                    NSString *dnfdescription = [bdd dnfDescription];
+                    NSString *nnfdescription = [cnfdescription length] > [dnfdescription length] ? dnfdescription : cnfdescription;
+                    
+                    dispatch_async(mq, ^{
+                        self.nnfField.text = nnfdescription;
+                        self.cnfField.text = cnfdescription;
+                        self.dnfField.text = dnfdescription;
+                    });
 
-                        NyayaNode *imfnode = [node imf];
-                        
-                        NyayaNode *nnfnode = [imfnode nnf];
-                        nnfdescription = nf ? nf : [nnfnode description];
-                        dispatch_async(mq, ^{
-                            self.nnfField.text = nnfdescription;
-                            self.nnfField.backgroundColor = [UIColor nyLightGreyColor];
-                        });
-                        
-                        NyayaNode *cnfnode = [nnfnode cnf];
-                        cnfdescription = nf ? nf : [cnfnode description];
-                        dispatch_async(mq, ^{
-                            self.cnfField.text = cnfdescription;
-                            self.cnfField.backgroundColor = [UIColor nyLightGreyColor];
-                        });
-                        
-                        
-                        NyayaNode *dnfnode = [nnfnode dnf];
-                        dnfdescription = nf ? nf : [dnfnode description];
-                        
-                        dispatch_async(mq, ^{
-                            self.dnfField.text = dnfdescription;
-                            self.dnfField.backgroundColor = [UIColor nyLightGreyColor];
-                        });
-                    } 
                     
-                    NSString *ttcnf = [truthTable cnfDescription];
-                    NSString *ttdnf = [truthTable dnfDescription];
                     
-                    NSString *ttnnf = [ttcnf length] <= [ttdnf length] ? ttcnf : ttcnf;
-                    
-                    if (!nnfdescription || [ttnnf length] < [nnfdescription length]) {
-                        dispatch_async(mq, ^{
-                            self.nnfField.text = ttnnf;
-#ifdef DEBUG
-                            self.nnfField.backgroundColor = [UIColor nyRightColor];
-#endif
-                        });
-                    }
-                    
-                    if (!cnfdescription || [ttcnf length] < [cnfdescription length]) {
-                        dispatch_async(mq, ^{
-                            self.cnfField.text = ttcnf;
-#ifdef DEBUG
-                            self.cnfField.backgroundColor = [UIColor nyRightColor];
-#endif
-                        });
-                    }
-                    
-                    if (!dnfdescription || [ttdnf length] < [dnfdescription length]) {
-                        dispatch_async(mq, ^{
-                            self.dnfField.text = ttdnf;
-                            
-#ifdef DEBUG
-                            self.dnfField.backgroundColor = [UIColor nyRightColor];
-#endif
-                        });
-                    }
+//
+//                                        
+//                    if ([truthTable.variables count] < 6) {
+//                        /* transformations with many variables are too expensive */
+//
+//                        NyayaNode *imfnode = [node imf];
+//                        
+//                        NyayaNode *nnfnode = [imfnode nnf];
+//                        nnfdescription = nf ? nf : [nnfnode description];
+//                        dispatch_async(mq, ^{
+//                            self.nnfField.text = nnfdescription;
+//                            self.nnfField.backgroundColor = [UIColor nyLightGreyColor];
+//                        });
+//
+//                        NyayaNode *cnfnode = [nnfnode cnf];
+//                        cnfdescription = nf ? nf : [cnfnode description];
+//                        dispatch_async(mq, ^{
+//                            self.cnfField.text = cnfdescription;
+//                            self.cnfField.backgroundColor = [UIColor nyLightGreyColor];
+//                        });
+//                        
+//                        
+//                        NyayaNode *dnfnode = [nnfnode dnf];
+//                        dnfdescription = nf ? nf : [dnfnode description];
+//                        
+//                        dispatch_async(mq, ^{
+//                            self.dnfField.text = dnfdescription;
+//                            self.dnfField.backgroundColor = [UIColor nyLightGreyColor];
+//                        });
+//                    } 
+//                    
+//                    NSString *ttcnf = [truthTable cnfDescription];
+//                    NSString *ttdnf = [truthTable dnfDescription];
+//                    
+//                    NSString *ttnnf = [ttcnf length] <= [ttdnf length] ? ttcnf : ttcnf;
+//                    
+//                    if (!nnfdescription || [ttnnf length] < [nnfdescription length]) {
+//                        dispatch_async(mq, ^{
+//                            self.nnfField.text = ttnnf;
+//#ifdef DEBUG
+//                            self.nnfField.backgroundColor = [UIColor nyRightColor];
+//#endif
+//                        });
+//                    }
+//                    
+//                    if (!cnfdescription || [ttcnf length] < [cnfdescription length]) {
+//                        dispatch_async(mq, ^{
+//                            self.cnfField.text = ttcnf;
+//#ifdef DEBUG
+//                            self.cnfField.backgroundColor = [UIColor nyRightColor];
+//#endif
+//                        });
+//                    }
+//                    
+//                    if (!dnfdescription || [ttdnf length] < [dnfdescription length]) {
+//                        dispatch_async(mq, ^{
+//                            self.dnfField.text = ttdnf;
+//                            
+//#ifdef DEBUG
+//                            self.dnfField.backgroundColor = [UIColor nyRightColor];
+//#endif
+//                        });
+//                    }
                 }
                 
                 dispatch_async(mq, ^{

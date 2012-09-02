@@ -41,9 +41,8 @@
     STAssertTrue(node.isLeaf,nil);
     STAssertEquals(node.id, 1, nil);
     
-    NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
+    STAssertEqualObjects([node cnfDescription], @"1", nil);
+    STAssertEqualObjects([node dnfDescription], @"1", nil);
 }
 
 - (void)testContradiction {
@@ -57,9 +56,8 @@
     STAssertEquals(node.id, 0, nil);
     
     
-    NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
+    STAssertEqualObjects([node cnfDescription], @"0", nil);
+    STAssertEqualObjects([node dnfDescription], @"0", nil);
 }
 
 
@@ -82,9 +80,8 @@
     
     STAssertEquals(node.rightBranch.id, 1, nil);
     
-    NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
+    STAssertEqualObjects([node cnfDescription], @"(a ∨ b)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b)", nil);
 }
 
 - (void)testAnd {
@@ -106,9 +103,8 @@
     
     STAssertEquals(node.leftBranch.id, 0, nil);
     
-    NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
+    STAssertEqualObjects([node cnfDescription], @"(a) ∧ (¬a ∨ b)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a ∧ b)", nil);
 }
 
 - (void)testXor {
@@ -131,11 +127,9 @@
     STAssertEqualObjects(node.leftBranch.name, @"b", nil);
     STAssertEqualObjects(node.rightBranch.name, @"b", nil);
     
+    STAssertEqualObjects([node cnfDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
     
-    
-    NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
 }
 
 - (void)testAorBandC {
@@ -159,12 +153,12 @@
     STAssertEquals(node.leftBranch.leftBranch.id, 0, nil);
     STAssertEquals(node.leftBranch.rightBranch.leftBranch.id, 0, nil);
     
-    
+    STAssertEqualObjects([node cnfDescription], @"(a ∨ b) ∧ (a ∨ ¬b ∨ c)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b ∧ c)", nil);
     
     NSLog(@"%@", [formula description]);
-    NSLog(@"dnf (%@)", [[node cPaths1] componentsJoinedByString:@") ∨ ("]);
-    NSLog(@"cnf (%@)", [[node dPaths0] componentsJoinedByString:@") ∧ ("]);
 }
+
 
 
 

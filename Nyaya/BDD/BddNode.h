@@ -18,9 +18,8 @@
 +(BddNode*)diagramWithTruthTable:(TruthTable*)truthTable;
 
 -(BOOL)isLeaf;
--(NSArray*)paths;
--(NSArray*)cPaths1;
--(NSArray*)dPaths0;
+-(NSString*)cnfDescription;
+-(NSString*)dnfDescription;
 
 
 @end

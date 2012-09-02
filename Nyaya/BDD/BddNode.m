@@ -170,22 +170,22 @@
     
     return [lastArray objectAtIndex:0];
 }
-
-- (NSArray*)paths {
-    if ([self isLeaf]) return @[self.name];
-    
-    NSMutableArray *paths = [NSMutableArray array];
-    
-    for (NSString *path in [self.leftBranch paths]) {
-        [paths addObject:[NSString stringWithFormat:@"¬%@:%@", self.name, path]];
-    }
-    
-    for (NSString *path in [self.rightBranch paths]) {
-        [paths addObject:[NSString stringWithFormat:@"%@:%@", self.name, path]];
-    }
-    
-    return paths;
-}
+//
+//- (NSArray*)paths {
+//    if ([self isLeaf]) return @[self.name];
+//    
+//    NSMutableArray *paths = [NSMutableArray array];
+//    
+//    for (NSString *path in [self.leftBranch paths]) {
+//        [paths addObject:[NSString stringWithFormat:@"¬%@:%@", self.name, path]];
+//    }
+//    
+//    for (NSString *path in [self.rightBranch paths]) {
+//        [paths addObject:[NSString stringWithFormat:@"%@:%@", self.name, path]];
+//    }
+//    
+//    return paths;
+//}
 
 - (NSArray*)cPaths1 {
     if (![self isLeaf]) {
@@ -197,29 +197,30 @@
         
         NSMutableArray *paths = [NSMutableArray array];
         
-        if (!rights) {
-            // the variable must be negated to lead to 1
-            for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∧ %@", self.name, path]];
-            }
-            
-        }
-        else if (!lefts) {
+        if (!lefts) {
             // the variable must true to lead to 1
             for (NSString *path in rights) {
                 [paths addObject:[NSString stringWithFormat:@"%@ ∧ %@", self.name, path]];
             }
             
         }
-        else {
+        else if (!rights) {
+            // the variable must be negated to lead to 1
             for (NSString *path in lefts) {
                 [paths addObject:[NSString stringWithFormat:@"¬%@ ∧ %@", self.name, path]];
-                // the variable is false and other variables
-                // [paths addObject:[NSString stringWithFormat:@"%@", path]];
             }
+            
+        }
+        else {
             for (NSString *path in rights) {
                 // or she is true and other variables
                 [paths addObject:[NSString stringWithFormat:@"%@ ∧ %@", self.name, path]];
+            }
+            
+            for (NSString *path in lefts) {
+                [paths addObject:[NSString stringWithFormat:@"¬%@ ∧ %@", self.name, path]];
+                // [paths addObject:[NSString stringWithFormat:@"%@", path]];
+                
             }
             
         }
@@ -232,6 +233,15 @@
     else return nil; 
 }
 
+-(NSString*)dnfDescription {
+    if (self.isLeaf) return self.name;
+    
+    NSString *s = [NSString stringWithFormat:@"(%@)", [[self cPaths1] componentsJoinedByString:@") ∨ ("]];
+    return [s stringByReplacingOccurrencesOfString:@" ∧ 1" withString:@""];
+    
+}
+
+
 - (NSArray*)dPaths0 {
     if (![self isLeaf]) {
         NSArray *lefts = [self.leftBranch dPaths0];
@@ -241,58 +251,40 @@
         
         if (!rights) {
             for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
+                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
             }
-            
         }
         else if (!lefts) {
             // the variable must true to lead to 1
             for (NSString *path in rights) {
-                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
+                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
             }
             
         }
         else {
             for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
+                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
                 // the variable is false and other variables
                 // [paths addObject:[NSString stringWithFormat:@"%@", path]];
             }
             for (NSString *path in rights) {
                 // or she is true and other variables
-                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
+                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
+                // [paths addObject:[NSString stringWithFormat:@"%@",path]];
             }
-            
         }
-        
         return paths;
-        
         
     }
     else if (self.id==0) return @[@"¬0"];
     else return nil;
 }
 
-
-- (NSArray*)paths1 {
-    NSArray *paths = [self paths];
-    NSIndexSet *indexSet = [paths indexesOfObjectsPassingTest:^BOOL(NSString* s, NSUInteger idx, BOOL *stop) {
-        if ([s hasSuffix:@":1"]) return YES;
-        else return NO;
-    }];
+-(NSString*)cnfDescription {
+    if (self.isLeaf) return self.name;
     
-
-    return [[paths objectsAtIndexes:indexSet] valueForKeyPath:@"conjunct"];
-    
-}
-
-- (NSArray*)paths0 {
-    NSArray *paths = [self paths];
-    NSIndexSet *indexSet = [paths indexesOfObjectsPassingTest:^BOOL(NSString* s, NSUInteger idx, BOOL *stop) {
-        if ([s hasSuffix:@":0"]) return YES;
-        else return NO;
-    }];
-    return [[paths objectsAtIndexes:indexSet] valueForKeyPath:@"disjunct"];
+    NSString *s = [NSString stringWithFormat:@"(%@)", [[self dPaths0] componentsJoinedByString:@") ∧ ("]];
+    return  [s stringByReplacingOccurrencesOfString:@" ∨ ¬0" withString:@""];
 }
 
 
