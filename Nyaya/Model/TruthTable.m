@@ -11,10 +11,10 @@
 #import "NSString+NyayaToken.h"
 
 @interface TruthTable () {
-    NSUInteger _rowsCount;
     NSUInteger _colsCount;
     NSUInteger _cellCount;
     NSArray *_sortedNames;
+    NSUInteger _titleColumnIdx;
     
     BOOL *_evals;
     NSMutableIndexSet *_trueIndices;
@@ -158,12 +158,20 @@
         if (rowEval) [_trueIndices addIndex:rowIndex];
         else [_falseIndices addIndex:rowIndex];
     }
+    
+    _titleColumnIdx = [_headers indexOfObject:_title];
 }
 
 #pragma mark - output
 
 - (BOOL)evalAtRow:(NSUInteger)rowIndex forColumn:(NSUInteger)colIndex {
     return *(_evals + rowIndex *_colsCount + colIndex);
+}
+
+- (BOOL)evalAtRow:(NSUInteger)rowIdx {
+    
+    return [self evalAtRow:rowIdx forColumn:_titleColumnIdx];
+    
 }
 
 - (BOOL)evalAtRow:(NSUInteger)rowIndex forHeader:(NSString*)header {
@@ -256,6 +264,8 @@
     return sameVariables && [_trueIndices isEqualToIndexSet:truthTable->_trueIndices];
     // return [[self cnfSet] isEqualToSet:[truthTable cnfSet]];
 }
+
+
 
 #pragma mark - normal forms
 

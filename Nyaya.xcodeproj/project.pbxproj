@@ -25,6 +25,7 @@
 		1102563015ECCE2E008B38F9 /* tutorial401.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561D15ECCE2E008B38F9 /* tutorial401.html */; };
 		1102563215ECCE2E008B38F9 /* tutorial421.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561F15ECCE2E008B38F9 /* tutorial421.html */; };
 		1102563415ECE8F2008B38F9 /* tutorial251.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102563315ECE8F0008B38F9 /* tutorial251.html */; };
+		1103D6EB15F3822B003D5193 /* TestValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1103D6EA15F3822B003D5193 /* TestValidator.m */; };
 		11061F1215EE0F9A00345516 /* tutorial211.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1115EE0F9A00345516 /* tutorial211.html */; };
 		11061F1515EE0FE500345516 /* tutorial361.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1315EE0FE500345516 /* tutorial361.html */; };
 		11061F1615EE0FE500345516 /* tutorial371.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1415EE0FE500345516 /* tutorial371.html */; };
@@ -174,6 +175,8 @@
 		1102561D15ECCE2E008B38F9 /* tutorial401.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial401.html; path = html/tutorial401.html; sourceTree = "<group>"; };
 		1102561F15ECCE2E008B38F9 /* tutorial421.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial421.html; path = html/tutorial421.html; sourceTree = "<group>"; };
 		1102563315ECE8F0008B38F9 /* tutorial251.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial251.html; path = html/tutorial251.html; sourceTree = "<group>"; };
+		1103D6E915F3822B003D5193 /* TestValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestValidator.h; sourceTree = "<group>"; };
+		1103D6EA15F3822B003D5193 /* TestValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestValidator.m; sourceTree = "<group>"; };
 		11061F1115EE0F9A00345516 /* tutorial211.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial211.html; path = html/tutorial211.html; sourceTree = "<group>"; };
 		11061F1315EE0FE500345516 /* tutorial361.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial361.html; path = html/tutorial361.html; sourceTree = "<group>"; };
 		11061F1415EE0FE500345516 /* tutorial371.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial371.html; path = html/tutorial371.html; sourceTree = "<group>"; };
@@ -714,6 +717,8 @@
 				1183B6D015B70AC60076D92C /* NyayaParserTests */,
 				11C3762E15B3D269005C5C9C /* NyayaExtensionsTests */,
 				11C3761D15B3D23D005C5C9C /* Supporting Files */,
+				1103D6E915F3822B003D5193 /* TestValidator.h */,
+				1103D6EA15F3822B003D5193 /* TestValidator.m */,
 			);
 			path = NyayaTests;
 			sourceTree = "<group>";
@@ -1049,6 +1054,7 @@
 				1187E23E15D0F3940048E153 /* SimpleParseTests.m in Sources */,
 				113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */,
 				11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */,
+				1103D6EB15F3822B003D5193 /* TestValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

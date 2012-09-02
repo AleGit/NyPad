@@ -16,6 +16,8 @@
 @property (nonatomic, readonly) NSArray *variables;
 @property (nonatomic, readonly) NSArray *headers;
 
+@property (nonatomic, readonly) NSUInteger rowsCount;
+
 - (id)initWithFormula:(NyayaNode*)formula;
 - (id)initWithFormula:(NyayaNode *)formula compact:(BOOL)compact;
 - (void)evaluateTable;
@@ -31,6 +33,8 @@
 - (NSSet*)dnfSet;
 - (NSString *)cnfDescription;
 - (NSString *)dnfDescription;
+
+- (BOOL)evalAtRow:(NSUInteger)rowIdx;
 
 
 

@@ -7,14 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NyayaNode.h"
+#import "TruthTable.h"
 
 @interface BddNode : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) BddNode *leftBranch;
+@property (nonatomic, readonly) BddNode *rightBranch;
 
-@property (nonatomic, assign) NSInteger id;
-@property (nonatomic, assign) NSString *variable;
-@property (nonatomic, assign) BOOL value;
-@property (nonatomic, strong) BddNode *leftBdd;
-@property (nonatomic, strong) BddNode *rightBdd;
++(BddNode*)diagramWithTruthTable:(TruthTable*)truthTable;
+
+-(BOOL)isLeaf;
+-(NSArray*)paths;
+-(NSArray*)cPaths1;
+-(NSArray*)dPaths0;
+
 
 @end
