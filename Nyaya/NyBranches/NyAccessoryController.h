@@ -25,5 +25,7 @@
 - (IBAction)back:(UIButton*)sender;
 - (IBAction)action:(UIButton*)sender;
 - (IBAction)dismiss:(UIButton*)sender;
+- (IBAction)parenthesize:(UIButton*)sender;
+- (IBAction)negate:(UIButton*)sender;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
+#import "UITextField+Nyaya.h"
 
 @interface NyTuTester () {
     BOOL checked;
@@ -110,43 +111,15 @@
     [self.inputField resignFirstResponder];
 }
 
-//- (IBAction)parenthesize:(UIButton *)sender {
-//    if ([self.inputField hasText]) {
-//        self.inputField.text = [NSString stringWithFormat:@"(%@)", self.inputField.text];
-//    }
-//}
-//
-//- (IBAction)negate:(UIButton *)sender {
-//    if ([self.inputField hasText]) {
-//        self.inputField.text = [NSString stringWithFormat:@"¬(%@)", self.inputField.text];
-//    }
-//}
+- (IBAction)parenthesize:(UIButton *)sender {
+    [self.inputField parenthesize];
+}
+
+- (IBAction)negate:(UIButton *)sender {
+    [self.inputField negate];
+}
 
 #pragma mark -
-
-//- (void)disableControls: (NSArray*)controls {
-//    for (UIControl *control in controls) {
-//        control.enabled = NO;
-//    }
-//}
-//
-//- (void)enableControls: (NSArray*)controls {
-//    for (UIControl *control in controls) {
-//        control.enabled = YES;
-//    }
-//}
-//
-//- (void)hideViews: (NSArray*)views {
-//    for (UIView *view in views) {
-//        view.hidden = YES;
-//    }
-//}
-//
-//- (void)showViews: (NSArray*)views {
-//    for (UIView *view in views) {
-//        view.hidden = NO;
-//    }
-//}
 
 - (void)configureKeyboard {
     // [self.inputField addTarget:self action:@selector(action:) forControlEvents:UIControlEventEditingDidEndOnExit];

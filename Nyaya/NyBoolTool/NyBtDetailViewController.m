@@ -13,6 +13,7 @@
 #import "NyayaNode.h"
 #import "TruthTable.h"
 #import "BddNode.h"
+#import "UITextField+Nyaya.h"
 
 @interface NyBtDetailViewController () <NyAccessoryController> {
     dispatch_queue_t queue;
@@ -24,17 +25,19 @@
 @synthesize parsedFormulalLabel;
 @synthesize parsedLabel;
 @synthesize parsedField;
-@synthesize propertyView;
 @synthesize satisfiabilityLabel;
 @synthesize tautologyLabel;
 @synthesize contradictionLabel;
-@synthesize normalFormView;
+@synthesize resultView;
+@synthesize stdLabel;
+@synthesize stdField;
 @synthesize nnfLabel;
 @synthesize nnfField;
 @synthesize cnfLabel;
 @synthesize cnfField;
 @synthesize dnfLabel;
 @synthesize dnfField;
+@synthesize bddView;
 
 // NyAccessoryDelegate protocol properties
 @synthesize accessoryView, backButton, actionButton, dismissButton;
@@ -87,24 +90,20 @@
 #pragma mark - additional ib actions
 
 - (IBAction)parenthesize:(UIButton *)sender {
-    if ([self.inputField hasText]) {
-        self.inputField.text = [NSString stringWithFormat:@"(%@)", self.inputField.text];
-    }
+    [self.inputField parenthesize];
 }
 
 - (IBAction)negate:(UIButton *)sender {
-    if ([self.inputField hasText]) {
-        self.inputField.text = [NSString stringWithFormat:@"¬(%@)", self.inputField.text];
-    }
+    [self.inputField negate];
 }
 
 - (IBAction)send:(id)sender {
-    self.normalFormView.hidden = NO;
+    self.resultView.hidden = NO;
     [self compute];
 }
 
 - (IBAction)didEndOnExit:(id)sender {
-    self.normalFormView.hidden = NO;
+    self.resultView.hidden = NO;
     [self compute];
 }
 
@@ -152,13 +151,15 @@
     [self setCnfField:nil];
     [self setDnfLabel:nil];
     [self setDnfField:nil];
-    [self setPropertyView:nil];
-    [self setNormalFormView:nil];
+    [self setResultView:nil];
+    [self setStdLabel:nil];
+    [self setStdField:nil];
+    [self setBddView:nil];
     [super viewDidUnload];
 }
 
 - (void)resetOutputViews {
-    self.normalFormView.hidden = YES;
+    self.resultView.hidden = YES;
     
     self.nnfField.text = @"";
     self.cnfField.text = @"";
@@ -180,10 +181,13 @@
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
-        NyayaNode *a = [parser parseFormula];
+        NyayaNode *node = [parser parseFormula];
+        NSString *description = [[node description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+        
         dispatch_async(mq, ^{
-            self.parsedField.text = [[a description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
-            self.parsedLabel.backgroundColor = parser.hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+            self.parsedField.text = description;
+            self.parsedField.backgroundColor = parser.hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+            [self adjustResultViewPosition];
         });
     });
 }
@@ -203,7 +207,8 @@
             
             dispatch_async(mq, ^{
                 self.parsedField.text = description;
-                self.parsedLabel.backgroundColor = hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+                self.parsedField.backgroundColor = hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+                [self adjustResultViewPosition];
             });
             
             if (!hasErrors) {
@@ -313,7 +318,7 @@
                 }
                 
                 dispatch_async(mq, ^{
-                    [self adjustNormalForms];
+                    [self adjustResultViewContent];
                 });
                 
                 
@@ -345,46 +350,58 @@
 
 - (CGFloat)resizeTextView:(UITextView*)textView toSize:(CGSize)size yOffset:(CGFloat)yoffset {
     CGFloat height = textView.frame.size.height;
+    CGFloat newHeight = size.height + 16;
+    if (newHeight<37) newHeight = 37;
+
     
     [textView setFrame:CGRectMake(textView.frame.origin.x,
                                   textView.frame.origin.y + yoffset,
                                   textView.frame.size.width,
-                                  size.height+16)];
+                                  newHeight)];
     return textView.frame.size.height - height;
 }
 
-
-
-- (void)align:(UIView*)textLabel toTopY:(CGRect)r {
-    CGRect f = textLabel.frame;
-    textLabel.frame = CGRectMake(f.origin.x, r.origin.y, f.size.width, f.size.height);
+- (void)moveView:(UIView*)view toY:(CGFloat)y {
+    CGRect f = view.frame;
+    view.frame = CGRectMake(f.origin.x, y, f.size.width, f.size.height);
+    
 }
 
-- (void)adjustNormalForms {
+- (void)alignView:(UIView*)view toTopY:(CGRect)r {
+    [self moveView:view toY:r.origin.y];
+}
+
+- (void)adjustResultViewPosition {
     CGFloat yoffset = 0.0;
     
     CGSize size = [self textViewSize: self.parsedField];
     yoffset += [self resizeTextView: self.parsedField toSize:size yOffset:yoffset];
-    NSLog(@"parseField offset %f", yoffset);
     
     if (yoffset != 0.0) {
         
-        CGRect f = self.propertyView.frame;
-        self.propertyView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, f.size.height);
+        CGRect f = self.resultView.frame;
+        self.resultView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, f.size.height - yoffset);
     }
     
+}
+
+- (void)adjustResultViewContent {
+    CGFloat yoffset = 0.0;
     
-    for (UITextView *textView in @[nnfField, cnfField, dnfField]) {
+    
+    for (UITextView *textView in @[stdField, nnfField, cnfField, dnfField]) {
         CGSize size = [self textViewSize: textView];
         yoffset += [self resizeTextView: textView toSize:size yOffset:yoffset];
-        NSLog(@"offset %f", yoffset);
     }
     
-    [self align:self.nnfLabel toTopY:self.nnfField.frame];
-    [self align:self.cnfLabel toTopY:self.cnfField.frame];
-    [self align:self.dnfLabel toTopY:self.dnfField.frame];
+    [self alignView:self.stdLabel toTopY:self.stdField.frame];
+    [self alignView:self.nnfLabel toTopY:self.nnfField.frame];
+    [self alignView:self.cnfLabel toTopY:self.cnfField.frame];
+    [self alignView:self.dnfLabel toTopY:self.dnfField.frame];
+    [self moveView:self.bddView toY: self.bddView.frame.origin.y + yoffset];
     
-    self.normalFormView.contentSize = CGSizeMake(self.normalFormView.frame.size.width, self.dnfField.frame.origin.y + self.dnfField.frame.size.height);
+    
+    self.resultView.contentSize = CGSizeMake(self.resultView.frame.size.width, self.bddView.frame.origin.y + self.bddView.frame.size.height);
     
 }
 @end
