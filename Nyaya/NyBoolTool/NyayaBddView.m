@@ -33,7 +33,7 @@
 - (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
     CGSize nextSize = CGSizeMake(offset.width/2, offset.height);
     
-    CGContextSetRGBStrokeColor(context, 0.8, 0.8, 0.8, 0.7);
+    CGContextSetStrokeColorWithColor(context, [[UIColor nyWrongColor] CGColor]);
     CGContextMoveToPoint(context, pos.x, pos.y);
     if (node.leftBranch.isLeaf) {
         
@@ -42,7 +42,12 @@
         CGContextStrokePath(context);
     }
     else {
-        CGPoint lPos = CGPointMake(pos.x - offset.width, pos.y + offset.height-offset.width/4.0);
+        CGFloat xoffset = offset.width;
+        if (node.rightBranch.isLeaf && node.rightBranch.id==0) xoffset *= -1.0;
+        
+        CGPoint lPos =  CGPointMake(pos.x - xoffset, pos.y + offset.height-offset.width/4.0);
+        
+        
         CGContextAddLineToPoint(context, lPos.x, lPos.y);
         CGContextStrokePath(context);
         [self drawNode:node.leftBranch at:lPos inContext:context offset:nextSize];
@@ -52,7 +57,7 @@
     
     
     
-    CGContextSetRGBStrokeColor(context, 0.2, 0.2, 0.2, 0.7);
+    CGContextSetStrokeColorWithColor(context, [[UIColor nyRightColor] CGColor]);
     CGContextMoveToPoint(context, pos.x, pos.y);
     if (node.rightBranch.isLeaf) {
         if (node.rightBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
@@ -61,8 +66,9 @@
 
     }
     else {
-        
-        CGPoint rPos = CGPointMake(pos.x + offset.width, pos.y + offset.height-offset.width/4.0);
+        CGFloat xoffset = offset.width;
+        if (node.leftBranch.isLeaf && node.rightBranch.id==1) xoffset *= -1.0;
+        CGPoint rPos = CGPointMake(pos.x + xoffset, pos.y + offset.height-offset.width/4.0);
         CGContextAddLineToPoint(context, rPos.x, rPos.y);
         CGContextStrokePath(context);
         [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
@@ -89,19 +95,35 @@
 {
     bottom = (UILabel*)[self viewWithTag:1];
     top = (UILabel*)[self viewWithTag:2];
+    
     bottom.backgroundColor = [UIColor nyWrongColor];
     top.backgroundColor = [UIColor nyRightColor];
-    self.backgroundColor = [UIColor nyLightGreyColor];
-    CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
+    // self.backgroundColor = [UIColor nyLightGreyColor];
     
-    CGSize offset = CGSizeMake(pos.x / 2.0, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 4);
-    
-    
-    
-    if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
+    if (!self.bddNode.isLeaf) {
+        top.hidden = NO;
+        bottom.hidden = NO;
+        
+        CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
+        
+        CGSize offset = CGSizeMake(pos.x / 2.0 - 5.0, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetLineWidth(context, 4);
+        
+        
+        
+        if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
+    }
+    else if (self.bddNode.id == 0) {
+        top.hidden = YES;
+        bottom.hidden = NO;
+    }
+    else if (self.bddNode.id == 1) {
+        bottom.hidden = YES;
+        top.hidden = NO;
+        
+    }
     
     
 }

@@ -16,7 +16,8 @@
 @property (nonatomic, readonly) BddNode *rightBranch;
 
 +(BddNode*)diagramWithTruthTable:(TruthTable*)truthTable;
-
++ (id)top;
++ (id)bottom;
 -(BOOL)isLeaf;
 -(NSString*)cnfDescription;
 -(NSString*)dnfDescription;

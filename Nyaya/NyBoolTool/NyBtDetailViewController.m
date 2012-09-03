@@ -225,6 +225,9 @@
                     self.cnfField.text = nf;
                     self.dnfField.text = nf;
                 }
+                
+                if (tau) self.bddView.bddNode = [BddNode top];
+                else if (con) self.bddView.bddNode = [BddNode bottom];
             });
             
             NSUInteger bddLevelCount = 1;
@@ -243,6 +246,14 @@
                 });
                 bddLevelCount = bdd.levelCount;
             }
+            else {
+                dispatch_async(mq, ^{
+                    if (tau) self.bddView.bddNode = [BddNode top];
+                    else if (con) self.bddView.bddNode = [BddNode bottom];
+                });
+            }
+            
+           
             
             dispatch_async(mq, ^{
                 // [self.inputField becomeFirstResponder];
