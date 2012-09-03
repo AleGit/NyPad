@@ -240,7 +240,6 @@
                     self.cnfField.text = cnfdescription;
                     self.dnfField.text = dnfdescription;
                     self.bddView.bddNode = bdd;
-                    [self.bddView setNeedsDisplay];
                 });
                 bddLevelCount = bdd.levelCount;
             }
@@ -249,6 +248,8 @@
                 // [self.inputField becomeFirstResponder];
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                 [self adjustResultViewContent:bddLevelCount];
+                
+                
             });
             
             
@@ -329,6 +330,11 @@
     
     
     self.resultView.contentSize = CGSizeMake(self.resultView.frame.size.width, self.bddView.frame.origin.y + self.bddView.frame.size.height);
+    [self.bddView setNeedsDisplay];
     
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self.bddView setNeedsDisplay];
 }
 @end

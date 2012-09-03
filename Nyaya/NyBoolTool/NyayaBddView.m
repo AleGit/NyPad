@@ -12,7 +12,6 @@
 @interface NyayaBddView () {
     UILabel *bottom;
     UILabel *top;
-    CGFloat xoffset, yoffset;
 }
 
 @end
@@ -31,8 +30,8 @@
     return self;
 }
 
-- (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context {
-    
+- (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
+    CGSize nextSize = CGSizeMake(offset.width/2, offset.height);
     
     CGContextSetRGBStrokeColor(context, 0.8, 0.8, 0.8, 0.7);
     CGContextMoveToPoint(context, pos.x, pos.y);
@@ -43,10 +42,10 @@
         CGContextStrokePath(context);
     }
     else {
-        CGPoint lPos = CGPointMake(pos.x -xoffset, pos.y + yoffset);
+        CGPoint lPos = CGPointMake(pos.x - offset.width, pos.y + offset.height-offset.width/4.0);
         CGContextAddLineToPoint(context, lPos.x, lPos.y);
         CGContextStrokePath(context);
-        [self drawNode:node.leftBranch at:lPos inContext:context];
+        [self drawNode:node.leftBranch at:lPos inContext:context offset:nextSize];
     }
     
     CGContextMoveToPoint(context, pos.x, pos.y);
@@ -63,10 +62,10 @@
     }
     else {
         
-        CGPoint rPos = CGPointMake(pos.x+xoffset, pos.y + yoffset);
+        CGPoint rPos = CGPointMake(pos.x + offset.width, pos.y + offset.height-offset.width/4.0);
         CGContextAddLineToPoint(context, rPos.x, rPos.y);
         CGContextStrokePath(context);
-        [self drawNode:node.rightBranch at:rPos inContext:context];
+        [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
         
     }
     
@@ -94,15 +93,15 @@
     top.backgroundColor = [UIColor nyRightColor];
     self.backgroundColor = [UIColor nyLightGreyColor];
     CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
-    yoffset = 110;
-    xoffset = (pos.x - bottom.center.x) / (CGFloat)([self.bddNode levelCount] -1);
+    
+    CGSize offset = CGSizeMake(pos.x / 2.0, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 4);
     
     
     
-    if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context];
+    if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
     
     
 }
