@@ -18,5 +18,7 @@
 
 @property (strong, nonatomic) NyDetailViewController *detailViewController;
 
+- (NSString*)bundlePath:(NSString*)fileName;
+- (NSString*)documentPath: (NSString*)fileName;
 
 @end

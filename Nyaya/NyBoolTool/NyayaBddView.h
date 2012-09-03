@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BddNode.h"
 
 @interface NyayaBddView : UIView
+
+@property (strong, nonatomic) BddNode* bddNode;
 
 @end

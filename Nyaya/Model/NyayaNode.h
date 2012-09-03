@@ -92,6 +92,7 @@ typedef NSUInteger NyayaNodeType;
 
 @end
 
+#pragma mark -
 @interface NyayaNodeVariable : NyayaNode
 
 - (void)setDisplayValue:(NyayaBool)displayValue;

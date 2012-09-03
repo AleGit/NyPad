@@ -41,6 +41,13 @@
 // ****************************
 // !!! OVERRIDE IN SUBCLASS !!!
 // ****************************
+- (BOOL)tableViewIsAddable {
+    return [self tableViewIsEditable];
+}
+
+// ****************************
+// !!! OVERRIDE IN SUBCLASS !!!
+// ****************************
 - (void)readMasterData {
     
 }
@@ -54,9 +61,14 @@
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         
+        
+    }
+    if ([self tableViewIsAddable]) {
         UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
         self.navigationItem.rightBarButtonItem = addButton;
     }
+    
+    
     self.detailViewController = (NyDetailViewController*)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     [self readMasterData];
@@ -155,6 +167,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.detailViewController.detailItem = [_objects objectAtIndex:indexPath.row];
+}
+
+- (NSString*)bundlePath:(NSString*)fileName {
+    return [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+}
+
+- (NSString*)documentPath:(NSString*)fileName {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);NSString *documentsDirectory = [paths objectAtIndex:0];
+    return[[documentsDirectory stringByAppendingPathComponent:@"BoolToolData"] stringByAppendingPathExtension:@"plist"];
 }
 
 @end

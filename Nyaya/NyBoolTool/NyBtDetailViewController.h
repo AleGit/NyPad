@@ -9,12 +9,19 @@
 #import "NyDetailViewController.h"
 #import "NyayaBddView.h"
 
+@protocol InputSaver<NSObject>
+
+- (BOOL) save:(NSString*)name input:(NSString*)input;
+
+@end
+
 @interface NyBtDetailViewController : NyDetailViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *inputField;
-@property (strong, nonatomic) IBOutlet UILabel *parsedFormulalLabel;
+@property (weak, nonatomic) id<InputSaver>inputSaver;
 
-@property (strong, nonatomic) IBOutlet UITextView *parsedLabel;
+@property (strong, nonatomic) IBOutlet UITextField *inputName;
+@property (strong, nonatomic) IBOutlet UITextField *inputField;
+
 @property (strong, nonatomic) IBOutlet UITextView *parsedField;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *resultView;

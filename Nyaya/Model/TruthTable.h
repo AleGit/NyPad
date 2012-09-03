@@ -19,7 +19,7 @@
 @property (nonatomic, readonly) NSUInteger rowsCount;
 
 - (id)initWithFormula:(NyayaNode*)formula;
-- (id)initWithFormula:(NyayaNode *)formula compact:(BOOL)compact;
+- (id)initWithFormula:(NyayaNode *)formula expanded:(BOOL)expanded;
 - (void)evaluateTable;
 
 - (NSString*)minimalDescription; 

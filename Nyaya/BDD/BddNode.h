@@ -20,6 +20,7 @@
 -(BOOL)isLeaf;
 -(NSString*)cnfDescription;
 -(NSString*)dnfDescription;
+-(NSUInteger)levelCount;
 
 
 @end

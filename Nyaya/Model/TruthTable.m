@@ -68,19 +68,20 @@
 }
 
 - (id)initWithFormula:(NyayaNode *)formula {
-    return [self initWithFormula:formula compact:NO];
+    return [self initWithFormula:formula expanded:NO];
 }
 
-- (id)initWithFormula:(NyayaNode *)formula compact:(BOOL)compact {
+- (id)initWithFormula:(NyayaNode *)formula expanded:(BOOL)expanded {
     self = [super init];
     if (self) {
         _formula = formula;
         _title = [formula description];
         _variables = [[formula setOfVariables] allObjects];
-        if (compact)
-            _headers = [[_variables valueForKeyPath:@"description"] arrayByAddingObject:_title];
-        else 
+        if (expanded)
             _headers = [[formula setOfSubformulas] allObjects];
+        else
+            _headers = [[_variables valueForKeyPath:@"description"] arrayByAddingObject:_title];
+            
         
         [self sortVariablesAndHeaders];
         

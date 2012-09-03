@@ -31,11 +31,11 @@ enum { AST, IMF, NNF, CNF, DNF };
     STAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], input);
     STAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], input);
     
-    TruthTable *astTable = [[TruthTable alloc] initWithFormula:[ast copy]];
-    TruthTable *imfTable = [[TruthTable alloc] initWithFormula:[imf copy]];
-    TruthTable *nnfTable = [[TruthTable alloc] initWithFormula:[nnf copy]];
-    TruthTable *cnfTable = [[TruthTable alloc] initWithFormula:[cnf copy]];
-    TruthTable *dnfTable = [[TruthTable alloc] initWithFormula:[dnf copy]];
+    TruthTable *astTable = [[TruthTable alloc] initWithFormula:[ast copy] expanded:YES];
+    TruthTable *imfTable = [[TruthTable alloc] initWithFormula:[imf copy] expanded:YES];
+    TruthTable *nnfTable = [[TruthTable alloc] initWithFormula:[nnf copy] expanded:YES];
+    TruthTable *cnfTable = [[TruthTable alloc] initWithFormula:[cnf copy] expanded:YES];
+    TruthTable *dnfTable = [[TruthTable alloc] initWithFormula:[dnf copy] expanded:YES];
     
     [astTable evaluateTable];
     [imfTable evaluateTable];

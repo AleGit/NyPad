@@ -170,22 +170,6 @@
     
     return [lastArray objectAtIndex:0];
 }
-//
-//- (NSArray*)paths {
-//    if ([self isLeaf]) return @[self.name];
-//    
-//    NSMutableArray *paths = [NSMutableArray array];
-//    
-//    for (NSString *path in [self.leftBranch paths]) {
-//        [paths addObject:[NSString stringWithFormat:@"¬%@:%@", self.name, path]];
-//    }
-//    
-//    for (NSString *path in [self.rightBranch paths]) {
-//        [paths addObject:[NSString stringWithFormat:@"%@:%@", self.name, path]];
-//    }
-//    
-//    return paths;
-//}
 
 - (NSArray*)cPaths1 {
     if (![self isLeaf]) {
@@ -285,6 +269,15 @@
     
     NSString *s = [NSString stringWithFormat:@"(%@)", [[self dPaths0] componentsJoinedByString:@") ∧ ("]];
     return  [s stringByReplacingOccurrencesOfString:@" ∨ ¬0" withString:@""];
+}
+
+- (NSUInteger)levelCount {
+    if (self.isLeaf) return 1;
+    
+    NSUInteger leftLevelCount = [self.leftBranch levelCount];
+    NSUInteger rightLevelCount = [self.rightBranch levelCount];
+    
+    return 1 + (leftLevelCount > rightLevelCount ? leftLevelCount : rightLevelCount);
 }
 
 

@@ -52,6 +52,8 @@
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		114A800E15B989A8002C85B4 /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A800D15B989A8002C85B4 /* NyayaFormula.m */; };
 		114A801115B99226002C85B4 /* NyayaFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A801015B99226002C85B4 /* NyayaFormulaTests.m */; };
+		1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1162EBA315F4A62F0007EBAB /* BoolToolData.plist */; };
+		1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */; };
 		116451C615B9383400CD6E16 /* NyayaStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 116451C515B9383400CD6E16 /* NyayaStore.m */; };
 		1166601715B6BCE90070B5B8 /* NyayaNodeResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601615B6BCE90070B5B8 /* NyayaNodeResolution.m */; };
 		1166601A15B6DEF60070B5B8 /* NSString+NyayaToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601915B6DEF60070B5B8 /* NSString+NyayaToken.m */; };
@@ -217,6 +219,9 @@
 		114A800F15B99226002C85B4 /* NyayaFormulaTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaFormulaTests.h; sourceTree = "<group>"; };
 		114A801015B99226002C85B4 /* NyayaFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaFormulaTests.m; sourceTree = "<group>"; };
 		1158F20C15D19EDD00B422FD /* NyayaTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaTabBarViewController.h; sourceTree = "<group>"; };
+		1162EBA315F4A62F0007EBAB /* BoolToolData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BoolToolData.plist; path = NyBoolTool/BoolToolData.plist; sourceTree = "<group>"; };
+		1162EBA615F4AB0A0007EBAB /* NyBoolToolEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyBoolToolEntry.h; path = NyBoolTool/NyBoolToolEntry.h; sourceTree = "<group>"; };
+		1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyBoolToolEntry.m; path = NyBoolTool/NyBoolToolEntry.m; sourceTree = "<group>"; };
 		116451C415B9383400CD6E16 /* NyayaStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaStore.h; path = Model/NyayaStore.h; sourceTree = "<group>"; };
 		116451C515B9383400CD6E16 /* NyayaStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaStore.m; path = Model/NyayaStore.m; sourceTree = "<group>"; };
 		1166601515B6BCE90070B5B8 /* NyayaNodeResolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeResolution.h; sourceTree = "<group>"; };
@@ -572,6 +577,9 @@
 				1177496B15E7D67100B5C071 /* NyBtMasterViewController.m */,
 				11C93F0915F4741000AB94DF /* NyayaBddView.h */,
 				11C93F0A15F4741000AB94DF /* NyayaBddView.m */,
+				1162EBA315F4A62F0007EBAB /* BoolToolData.plist */,
+				1162EBA615F4AB0A0007EBAB /* NyBoolToolEntry.h */,
+				1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */,
 			);
 			name = NyBoolTool;
 			path = Nyaya;
@@ -972,6 +980,7 @@
 				113FF75D15F07ED90073A410 /* NyTuTester121.plist in Resources */,
 				1172EF5115F1F8F30038E6D0 /* NyBasicKeysView.xib in Resources */,
 				1172EF5315F1FBB40038E6D0 /* NyExtendedKeysView.xib in Resources */,
+				1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,6 +1044,7 @@
 				1122563D15F0E68E00DBEE30 /* UIColor+Nyaya.m in Sources */,
 				11C93F0615F46E6300AB94DF /* UITextField+Nyaya.m in Sources */,
 				11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */,
+				1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,11 +24,11 @@
     
     
     NSArray* truthTables = @[
-    [[TruthTable alloc] initWithFormula:frm compact:YES],
-    [[TruthTable alloc] initWithFormula:imf compact:YES],
-    [[TruthTable alloc] initWithFormula:nnf compact:YES],
-    [[TruthTable alloc] initWithFormula:cnf compact:YES],
-    [[TruthTable alloc] initWithFormula:dnf compact:YES]
+    [[TruthTable alloc] initWithFormula:frm],
+    [[TruthTable alloc] initWithFormula:imf],
+    [[TruthTable alloc] initWithFormula:nnf],
+    [[TruthTable alloc] initWithFormula:cnf],
+    [[TruthTable alloc] initWithFormula:dnf]
     ];
     
         
@@ -65,8 +65,8 @@
     NyayaNode *dnfFrm = [dnfParser parseFormula];
     
     truthTables = @[
-    [[TruthTable alloc] initWithFormula:cnfFrm compact:YES],
-    [[TruthTable alloc] initWithFormula:dnfFrm compact:YES]
+    [[TruthTable alloc] initWithFormula:cnfFrm],
+    [[TruthTable alloc] initWithFormula:dnfFrm]
     ];
     
     

@@ -112,7 +112,7 @@
     
     NyayaNode *formula = [parser parseFormula];
     
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula expanded:YES];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"x ∧ T → y",nil);
