@@ -685,7 +685,7 @@
 - (NyayaNode*)std {
     NyayaNode *first = [[self firstNode] std];
     NyayaNode *second = [[self secondNode] std];
-    return [NyayaNode bicondition:first with:second];
+    return [NyayaNode implication:first with:second];
 }
 
 @end

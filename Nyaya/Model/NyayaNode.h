@@ -18,8 +18,8 @@ enum { // NyayaUndefined=0
     NyayaNegation,
     NyayaConjunction, NyayaDisjunction, NyayaBicondition, NyayaImplication, NyayaXdisjunction,
     NyayaFunction
-    , NyayaSequence     // a conjunction
-    , NyayaEntailment   // an implication
+    , NyayaSequence     // a conjunction with lower precedence than everything but eintailment
+    , NyayaEntailment   // an implication with lowest precedence
 };
 typedef NSUInteger NyayaNodeType;
 
