@@ -403,6 +403,12 @@
     return _descriptionCache;
 }
 
+- (NyayaNode*)std {
+    NyayaNode *first = [[self firstNode] std];
+    NyayaNode *second = [[self secondNode] std];
+    return [NyayaNode conjunction:first with:second];
+}
+
 @end
 
 @implementation NyayaNodeConjunction
@@ -674,6 +680,12 @@
     NyayaNode *second = [self secondNode];
     _descriptionCache =   [NSString stringWithFormat:@"%@ %@ %@", [first description], [self symbol], [second description]];
     return _descriptionCache;
+}
+
+- (NyayaNode*)std {
+    NyayaNode *first = [[self firstNode] std];
+    NyayaNode *second = [[self secondNode] std];
+    return [NyayaNode bicondition:first with:second];
 }
 
 @end
@@ -976,6 +988,10 @@
     NSArray *nodes = [self valueForKeyPath:@"nodes.nnf"];
     
     return [self copyWith:nodes];
+}
+
+- (NyayaNode*)std {
+    return [self copy];
 }
 
 - (NyayaNode*)imf {

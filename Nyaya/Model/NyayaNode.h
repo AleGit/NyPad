@@ -54,6 +54,9 @@ typedef NSUInteger NyayaNodeType;
 - (NSUInteger)arity;
 
 #pragma mark - normal forms
+- (NyayaNode*)std;      // substitute ;⊨
+
+
 - (NyayaNode*)imf;      // equivalent formula without implications or biconditions
 - (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
 - (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)

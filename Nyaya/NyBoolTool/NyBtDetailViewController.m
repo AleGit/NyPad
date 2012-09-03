@@ -203,15 +203,22 @@
             
             NyayaNode *node = [parser parseFormula];
             NSString *description = [[node description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+            
             BOOL hasErrors = parser.hasErrors;
+            
+            
             
             dispatch_async(mq, ^{
                 self.parsedField.text = description;
                 self.parsedField.backgroundColor = hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+                self.resultView.hidden = hasErrors;
                 [self adjustResultViewPosition];
             });
             
+            
+            
             if (!hasErrors) {
+                NSString *stdDescription = [[node std] description];
                 TruthTable *truthTable = [[TruthTable alloc] initWithFormula:node compact:YES];
                 [truthTable evaluateTable];
                 
@@ -224,6 +231,7 @@
                 else if (con) nf = @"F";
                 
                 dispatch_async(mq, ^{
+                    self.stdField.text = stdDescription;
                     self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                     self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : [UIColor nyLightGreyColor];
                     self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : [UIColor nyLightGreyColor];
