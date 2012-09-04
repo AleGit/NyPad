@@ -12,6 +12,7 @@
 #import "NSArray+NyayaToken.h"
 #import "NyayaNode_Cluster.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Type.h"
 
 @interface NyayaNode ()
 
@@ -24,10 +25,6 @@
 #pragma mark - node sub class implementations
 
 @implementation NyayaNodeVariable
-
-- (NyayaNodeType)type { 
-    return NyayaVariable;
-}
 
 - (void)setDisplayValue:(NyayaBool)displayValue {
     [[NyayaStore sharedInstance] setDisplayValue:displayValue forName:self.symbol];
@@ -56,10 +53,6 @@
 @end
 
 @implementation NyayaNodeConstant
-
-- (NyayaNodeType)type { 
-    return NyayaConstant; 
-}
 
 - (BOOL)isLiteral {
     return YES;
@@ -100,10 +93,6 @@
 @end
 
 @implementation NyayaNodeNegation
-
-- (NyayaNodeType)type {
-    return NyayaNegation;
-}
 
 - (NyayaBool)displayValue {
     NyayaBool firstValue = [self firstValue];
@@ -195,10 +184,6 @@
 
 @implementation NyayaNodeDisjunction
 
-- (NyayaNodeType)type {
-    return NyayaDisjunction;
-}
-
 - (NyayaBool)displayValue { 
     NyayaBool firstValue = [self firstValue];
     NyayaBool secondValue = [self secondValue];
@@ -271,10 +256,6 @@
 
 @implementation NyayaNodeSequence
 
-- (NyayaNodeType)type {
-    return NyayaSequence;
-}
-
 - (NyayaNode*)std {
     NyayaNode *first = [[self firstNode] std];
     NyayaNode *second = [[self secondNode] std];
@@ -285,11 +266,7 @@
 
 @implementation NyayaNodeConjunction
 
-- (NyayaNodeType)type {
-    return NyayaConjunction;
-}
-
-- (NyayaBool)displayValue { 
+- (NyayaBool)displayValue {
     NyayaBool firstValue = [self firstValue];
     NyayaBool secondValue = [self secondValue];
     
@@ -377,9 +354,6 @@
 @end
 
 @implementation NyayaNodeXdisjunction
-- (NyayaNodeType)type {
-    return NyayaXdisjunction;
-}
 
 - (NyayaBool)displayValue {
     NyayaBool firstValue = [self firstValue];
@@ -411,10 +385,6 @@
 
 @implementation NyayaNodeImplication
 
-- (NyayaNodeType)type {
-    return NyayaImplication;
-}
-
 - (NyayaBool)displayValue {
     NyayaBool firstValue = [self firstValue];
     NyayaBool secondValue = [self secondValue];
@@ -442,10 +412,6 @@
 
 @implementation NyayaNodeEntailment
 
-- (NyayaNodeType)type {
-    return NyayaEntailment;
-}
-
 - (NyayaNode*)std {
     NyayaNode *first = [[self firstNode] std];
     NyayaNode *second = [[self secondNode] std];
@@ -455,10 +421,6 @@
 @end
 
 @implementation NyayaNodeBicondition
-
-- (NyayaNodeType)type {
-    return NyayaBicondition;
-}
 
 - (NyayaBool)displayValue { 
     NyayaBool firstValue = [self firstValue];
@@ -492,10 +454,6 @@
 
 @implementation NyayaNodeFunction
 
-- (NyayaNodeType)type {
-    return NyayaFunction;
-}
-
 - (NSUInteger) arity {
     return [self.nodes count];
 }
@@ -508,10 +466,6 @@
 - (id)copyWithZone:(NSZone*)zone {
     
     return [self copyWith:[self valueForKeyPath:@"nodes.copy"]]; // recursive copy
-}
-
-- (NyayaNodeType)type {
-    return NyayaUndefined;
 }
 
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index {
