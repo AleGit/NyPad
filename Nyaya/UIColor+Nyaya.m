@@ -27,6 +27,10 @@ static CGFloat saturation = 0.15;
     return [UIColor colorWithHue:(240.0+offset) / 360.0 saturation:saturation brightness:1.0 alpha:1.0];
 }
 
++ (UIColor*)nyHalfBlue {
+    return [UIColor colorWithHue:(240.0+offset) / 360.0 saturation:saturation/2.0 brightness:1.0 alpha:1.0];
+}
+
 + (UIColor*)nyRightColor {
     return [self nyGreen];
 //    static UIColor *_color;

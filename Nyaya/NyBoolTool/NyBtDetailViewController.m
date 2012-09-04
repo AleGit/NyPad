@@ -108,12 +108,14 @@
     if (self.detailItem) {
         self.inputName.text = ((NyBoolToolEntry*)self.detailItem).title;
         self.inputField.text = ((NyBoolToolEntry*)self.detailItem).input;
+        self.inputField.delegate = self;
         
         [self.inputField becomeFirstResponder];
         
         self.navigationItem.title = [self.detailItem title];
-        self.resultView.backgroundColor = [UIColor nyBlue];
-        self.bddView.backgroundColor = [UIColor nyBlue];
+        self.view.backgroundColor = [UIColor nyHalfBlue];
+        self.resultView.backgroundColor = nil;
+        self.bddView.backgroundColor = nil;
     }
 }
 
@@ -322,5 +324,10 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [self.bddView setNeedsDisplay];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.inputName.text = @"";
+    return YES;
 }
 @end

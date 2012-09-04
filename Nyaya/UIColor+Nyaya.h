@@ -13,6 +13,7 @@
 + (UIColor*)nyRed;
 + (UIColor*)nyGreen;
 + (UIColor*)nyBlue;
++ (UIColor*)nyHalfBlue;
 
 + (UIColor*)nyRightColor;
 + (UIColor*)nyWrongColor;
