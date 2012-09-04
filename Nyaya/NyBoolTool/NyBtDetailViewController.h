@@ -15,7 +15,7 @@
 
 @end
 
-@interface NyBtDetailViewController : NyDetailViewController <UITextFieldDelegate>
+@interface NyBtDetailViewController : NyDetailViewController
 
 @property (weak, nonatomic) id<InputSaver>inputSaver;
 

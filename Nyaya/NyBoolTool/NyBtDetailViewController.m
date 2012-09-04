@@ -14,7 +14,7 @@
 #import "NyayaNode.h"
 #import "NyBoolToolEntry.h"
 
-@interface NyBtDetailViewController () <NyAccessoryController> {
+@interface NyBtDetailViewController () <NyAccessoryController,UITextFieldDelegate> {
     dispatch_queue_t queue;
 }
 @end
@@ -162,7 +162,7 @@
     self.satisfiabilityLabel.backgroundColor = [UIColor nyLightGreyColor];
     self.tautologyLabel.backgroundColor = [UIColor nyLightGreyColor];
     self.contradictionLabel.backgroundColor = [UIColor nyLightGreyColor];
-    self.parsedField.backgroundColor = [UIColor nyLightGreyColor];
+    self.parsedField.backgroundColor = [UIColor nyHalfBlue];
 }
 
 - (void)parse {
@@ -209,8 +209,12 @@
             dispatch_async(mq, ^{
                 self.stdField.text = stdDescription;
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
-                self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : [UIColor nyLightGreyColor];
-                self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : [UIColor nyLightGreyColor];
+                self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
+                self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
+                
+                self.satisfiabilityLabel.textColor = sat ? [UIColor blackColor] : [UIColor whiteColor];
+                self.tautologyLabel.textColor = tau ? [UIColor blackColor] : [UIColor whiteColor];
+                self.contradictionLabel.textColor = con ? [UIColor blackColor] : [UIColor whiteColor];
                 
                 if (nf) {
                     self.nnfField.text = nf;
@@ -241,6 +245,7 @@
             dispatch_async(mq, ^{
                 [self.inputField becomeFirstResponder];
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
+                self.navigationItem.title = self.inputName.text;
                 [self adjustResultViewContent:bddLevelCount];
             });
             
@@ -279,8 +284,10 @@
     
 }
 
-- (void)alignView:(UIView*)view toTopY:(CGRect)r {
-    [self moveView:view toY:r.origin.y];
+- (void)centerView:(UIView*)view verticallyTo:(CGRect)r {
+    CGRect f = view.frame;
+    CGFloat yoffset = (r.size.height - f.size.height)/2.0;
+    view.frame = CGRectMake(f.origin.x, r.origin.y + yoffset, f.size.width, f.size.height);
 }
 
 - (void)adjustResultViewPosition {
@@ -306,10 +313,10 @@
         yoffset += [self resizeView: textView toSize:size yOffset:yoffset];
     }
     
-    [self alignView:self.stdLabel toTopY:self.stdField.frame];
-    [self alignView:self.nnfLabel toTopY:self.nnfField.frame];
-    [self alignView:self.cnfLabel toTopY:self.cnfField.frame];
-    [self alignView:self.dnfLabel toTopY:self.dnfField.frame];
+    [self centerView:self.stdLabel verticallyTo:self.stdField.frame];
+    [self centerView:self.nnfLabel verticallyTo:self.nnfField.frame];
+    [self centerView:self.cnfLabel verticallyTo:self.cnfField.frame];
+    [self centerView:self.dnfLabel verticallyTo:self.dnfField.frame];
     
     CGRect f = self.bddView.frame;
     self.bddView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, 20 + bddLevelCount * (50+60) - 60 + 20);
