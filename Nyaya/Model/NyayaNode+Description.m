@@ -8,6 +8,7 @@
 
 #import "NyayaNode+Description.h"
 #import "NyayaNode_Cluster.h"
+#import "NyayaNode+Type.h"
 
 @implementation NyayaNode (Description)
 

@@ -13,6 +13,7 @@
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Derivations.h"
 #import "NyayaNode+Attributes.h"
+#import "NyayaNode+Type.h"
 
 @implementation NyayaNodeNormalFormTests
 

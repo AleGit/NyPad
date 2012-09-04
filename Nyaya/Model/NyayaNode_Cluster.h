@@ -8,6 +8,31 @@
 
 #import "NyayaNode.h"
 
+
+enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
+typedef NSUInteger NyayaBool;
+
+enum { // NyayaUndefined=0
+    NyayaConstant=1, NyayaVariable,
+    NyayaNegation,
+    NyayaConjunction, NyayaDisjunction, NyayaXdisjunction, NyayaImplication, NyayaBicondition,
+    NyayaFunction
+    , NyayaSequence     // a conjunction with lower precedence than everything but eintailment
+    , NyayaEntailment   // an implication with lowest precedence
+};
+typedef NSUInteger NyayaNodeType;
+
+@interface NyayaNode () {
+    @protected
+    NSString *_descriptionCache;
+    NSString *_symbol;
+    NyayaBool _displayValue;
+    BOOL _evaluationValue;
+    NSArray *_nodes;
+}
+- (NyayaNode*)nodeAtIndex:(NSUInteger)index;
+@end
+
 #pragma mark - node sub class interfaces
 
 // arity    abstract classes         concrete classes

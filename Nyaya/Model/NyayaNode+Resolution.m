@@ -7,6 +7,7 @@
 //
 
 #import "NyayaNode+Resolution.h"
+#import "NyayaNode+Type.h"
 
 @implementation NyayaNode (Resolution)
 

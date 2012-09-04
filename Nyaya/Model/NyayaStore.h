@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NyayaNode.h"
+#import "NyayaNode+Type.h"
 
 @interface NyayaStore : NSObject
 

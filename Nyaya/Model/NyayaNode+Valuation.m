@@ -9,6 +9,7 @@
 
 #import "NyayaNode+Valuation.h"
 #import "NyayaNode_Cluster.h"
+#import "NyayaNode+Type.h"
 #import "NyayaStore.h"
 
 @implementation NyayaNode (Valuation)

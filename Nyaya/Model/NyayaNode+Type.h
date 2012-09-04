@@ -7,7 +7,10 @@
 //
 
 #import "NyayaNode.h"
+#import "NyayaNode_Cluster.h"
 
 @interface NyayaNode (Type)
+
+- (NyayaNodeType)type;
 
 @end

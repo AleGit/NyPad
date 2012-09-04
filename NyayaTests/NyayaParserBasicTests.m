@@ -10,6 +10,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 #import "NyayaNode+Display.h"
+#import "NyayaNode+Type.h"
 
 @implementation NyayaParserBasicTests
 

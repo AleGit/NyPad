@@ -11,6 +11,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Display.h"
+#import "NyayaNode+Type.h"
 
 @interface NyayaNodeValueTests () {
     NyayaNode *_u;

@@ -7,22 +7,19 @@
 //
 
 #import "NyayaNode.h"
-#import "NyayaStore.h"
-#import "NSString+NyayaToken.h"
-#import "NSArray+NyayaToken.h"
 #import "NyayaNode_Cluster.h"
-#import "NyayaNode+Creation.h"
-#import "NyayaNode+Type.h"
-#import "NyayaNode+Valuation.h"
-#import "NyayaNode+Display.h"
 #import "NyayaNode+Derivations.h"
-#import "NyayaNode+Attributes.h"
 
-@interface NyayaNode ()
-- (NyayaNode*)nodeAtIndex:(NSUInteger)index;
-@end
 
 @implementation NyayaNode
+
++ (id)nodeWithInput:(NSString*)input {
+    return nil;
+}
+
+/* ********************************************************************************************************* */
+#pragma mark - internal methods -
+/* ********************************************************************************************************* */
 
 - (id)copyWithZone:(NSZone*)zone {
     
@@ -35,7 +32,9 @@
 
 @end
 
+/* ********************************************************************************************************* */
 #pragma mark - clustered subclasses -
+/* ********************************************************************************************************* */
 
 @implementation NyayaNodeVariable
 

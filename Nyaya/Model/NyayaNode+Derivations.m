@@ -10,6 +10,7 @@
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Valuation.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Type.h"
 
 @implementation NyayaNode (Derivations)
 
