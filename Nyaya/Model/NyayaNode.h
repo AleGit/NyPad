@@ -36,9 +36,6 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;
-@property (nonatomic, readonly) NyayaBool displayValue;   // user evaluations (default=undefined)
-@property (nonatomic, readonly) BOOL evaluationValue;     // truth table evaluations
-
 @property (nonatomic, weak) NyayaNode *parent;
 
 // @property (nonatomic, readonly) NSString* de;
@@ -88,9 +85,5 @@ typedef NSUInteger NyayaNodeType;
 
 #pragma mark -
 @interface NyayaNodeVariable : NyayaNode
-
-- (void)setDisplayValue:(NyayaBool)displayValue;
-- (void)setEvaluationValue:(BOOL)evaluationValue;
-
 @end
 

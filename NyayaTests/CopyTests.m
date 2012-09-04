@@ -9,6 +9,8 @@
 #import "CopyTests.h"
 #import "NyayaNode.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Valuation.h"
+#import "NyayaNode+Display.h"
 
 @implementation CopyTests 
 

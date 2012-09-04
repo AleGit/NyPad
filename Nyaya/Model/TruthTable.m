@@ -9,6 +9,7 @@
 #import "TruthTable.h"
 #import "NyayaNode.h"
 #import "NSString+NyayaToken.h"
+#import "NyayaNode+Valuation.h"
 
 @interface TruthTable () {
     NSUInteger _colsCount;

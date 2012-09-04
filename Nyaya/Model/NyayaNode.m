@@ -13,6 +13,8 @@
 #import "NyayaNode_Cluster.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Type.h"
+#import "NyayaNode+Valuation.h"
+#import "NyayaNode+Display.h"
 
 @interface NyayaNode ()
 
@@ -25,14 +27,6 @@
 #pragma mark - node sub class implementations
 
 @implementation NyayaNodeVariable
-
-- (void)setDisplayValue:(NyayaBool)displayValue {
-    [[NyayaStore sharedInstance] setDisplayValue:displayValue forName:self.symbol];
-    
-}
-- (void)setEvaluationValue:(BOOL)evaluationValue {
-    [[NyayaStore sharedInstance] setEvaluationValue:evaluationValue forName:self.symbol];
-}
 
 - (BOOL)isLiteral {
     return YES;
@@ -93,21 +87,6 @@
 @end
 
 @implementation NyayaNodeNegation
-
-- (NyayaBool)displayValue {
-    NyayaBool firstValue = [self firstValue];
-    
-    if (firstValue == NyayaFalse) _displayValue = NyayaTrue;
-    else if (firstValue == NyayaTrue) _displayValue = NyayaFalse;
-    else return _displayValue = NyayaUndefined;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = ![[self firstNode] evaluationValue];
-    return _evaluationValue; 
-}
 
 - (NyayaNode*)nnf {
     NyayaNode *node = [self.nodes objectAtIndex:0];
@@ -184,22 +163,6 @@
 
 @implementation NyayaNodeDisjunction
 
-- (NyayaBool)displayValue { 
-    NyayaBool firstValue = [self firstValue];
-    NyayaBool secondValue = [self secondValue];
-    
-    if (firstValue == NyayaTrue || secondValue == NyayaTrue) _displayValue = NyayaTrue;
-    else if (firstValue == NyayaFalse && secondValue == NyayaFalse) _displayValue = NyayaFalse;
-    else _displayValue = NyayaUndefined;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = [[self firstNode] evaluationValue] | [[self secondNode] evaluationValue]; 
-    return _evaluationValue;
-}
-
 - (NyayaNode*)cnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
     if (first.type == NyayaConjunction) {
         NyayaNode *n11 = [first.nodes objectAtIndex:0];
@@ -265,22 +228,6 @@
 @end
 
 @implementation NyayaNodeConjunction
-
-- (NyayaBool)displayValue {
-    NyayaBool firstValue = [self firstValue];
-    NyayaBool secondValue = [self secondValue];
-    
-    if (firstValue == NyayaFalse || secondValue == NyayaFalse) _displayValue = NyayaFalse;
-    else if (firstValue == NyayaTrue && secondValue == NyayaTrue) _displayValue = NyayaTrue;
-    else _displayValue = NyayaUndefined;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = [[self firstNode] evaluationValue] & [[self secondNode] evaluationValue]; 
-    return _evaluationValue;
-}
 
 - (NyayaNode*)cnf {
     // cnf (A & B) = cnf (A) & cnf (B)
@@ -354,23 +301,6 @@
 @end
 
 @implementation NyayaNodeXdisjunction
-
-- (NyayaBool)displayValue {
-    NyayaBool firstValue = [self firstValue];
-    NyayaBool secondValue = [self secondValue];
-    
-    if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
-    else if (firstValue == secondValue) _displayValue = NyayaFalse;
-    else _displayValue = NyayaTrue;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = [[self firstNode] evaluationValue] ^ [[self secondNode] evaluationValue];
-    return _evaluationValue;
-}
-
 - (NyayaNode*)imf {
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] imf];
@@ -384,22 +314,6 @@
 @end
 
 @implementation NyayaNodeImplication
-
-- (NyayaBool)displayValue {
-    NyayaBool firstValue = [self firstValue];
-    NyayaBool secondValue = [self secondValue];
-    
-    if (firstValue == NyayaFalse || secondValue == NyayaTrue) _displayValue = NyayaTrue;
-    else if (firstValue == NyayaTrue && secondValue == NyayaFalse) _displayValue = NyayaFalse;
-    else _displayValue = NyayaUndefined;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = ![[self firstNode] evaluationValue] | [[self secondNode] evaluationValue];
-    return _evaluationValue;
-}
 
 - (NyayaNode*)imf {
     // imf(P → Q) = ¬imf(P) ∨ imf(Q)
@@ -421,23 +335,6 @@
 @end
 
 @implementation NyayaNodeBicondition
-
-- (NyayaBool)displayValue { 
-    NyayaBool firstValue = [self firstValue];
-    NyayaBool secondValue = [self secondValue];
-    
-    if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
-    else if (firstValue == secondValue) _displayValue = NyayaTrue;
-    else _displayValue = NyayaFalse;
-    
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = (![[self firstNode] evaluationValue] | [[self secondNode] evaluationValue])
-    & (![[self secondNode] evaluationValue] | [[self firstNode] evaluationValue]); 
-    return _evaluationValue;
-}
 
 - (NyayaNode*)imf {
     // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
@@ -477,16 +374,6 @@
 }
 
 #pragma mark default method implementations
-
-- (NyayaBool)displayValue {
-    _displayValue = [[NyayaStore sharedInstance] displayValueForName:self.symbol];
-    return _displayValue;
-}
-
-- (BOOL)evaluationValue {
-    _evaluationValue = [[NyayaStore sharedInstance] evaluationValueForName:self.symbol];
-    return _evaluationValue;
-}
 
 - (NSString*)treeDescription {
     switch (self.type) {

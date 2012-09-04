@@ -11,6 +11,8 @@
 #import "NyayaParser.h"
 #import "NyayaStore.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Valuation.h"
+#import "NyayaNode+Display.h"
 
 @interface BasicParseTests () {
     NyayaNode *A;
