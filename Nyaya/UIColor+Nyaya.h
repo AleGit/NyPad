@@ -10,6 +10,10 @@
 
 @interface UIColor (Nyaya)
 
++ (UIColor*)nyRed;
++ (UIColor*)nyGreen;
++ (UIColor*)nyBlue;
+
 + (UIColor*)nyRightColor;
 + (UIColor*)nyWrongColor;
 + (UIColor*)nyLightGreyColor;

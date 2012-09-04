@@ -112,6 +112,8 @@
         [self.inputField becomeFirstResponder];
         
         self.navigationItem.title = [self.detailItem title];
+        self.resultView.backgroundColor = [UIColor nyBlue];
+        self.bddView.backgroundColor = [UIColor nyBlue];
     }
 }
 
