@@ -16,6 +16,32 @@
     return _descriptionCache;
 }
 
+- (NSString*)treeDescription {
+    switch (self.type) {
+        case NyayaVariable:
+        case NyayaConstant:
+            return _symbol;
+        case NyayaNegation:
+            return [NSString stringWithFormat:@"(%@%@)",
+                    self.symbol, [[(NyayaNodeUnary*)self firstNode] treeDescription]];
+        case NyayaConjunction:
+        case NyayaSequence:
+        case NyayaDisjunction:
+        case NyayaBicondition:
+        case NyayaImplication:
+        case NyayaXdisjunction:
+            return [NSString stringWithFormat:@"(%@%@%@)",
+                    [[(NyayaNodeBinary*)self firstNode] treeDescription],
+                    self.symbol,
+                    [[(NyayaNodeBinary*)self secondNode] treeDescription]];
+        case NyayaFunction:
+        default:
+            return [NSString stringWithFormat:@"%@(%@)",
+                    self.symbol,
+                    [[self valueForKeyPath:@"nodes.treeDescription"] componentsJoinedByString:@","]];
+    }
+}
+
 @end
 
 @implementation NyayaNodeNegation (Description)

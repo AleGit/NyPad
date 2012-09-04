@@ -38,27 +38,6 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NSArray *nodes;
 @property (nonatomic, weak) NyayaNode *parent;
 
-
-#pragma mark - normal forms
-- (NyayaNode*)std;      // substitute ;⊨
-
-
-#pragma mark - transformations
-
-- (void)replaceNode:(NyayaNode*)n1 withNode:(NyayaNode*)n2;
-
-#pragma mark - output
-
-- (NSString*)treeDescription;
-
-- (NSArray*)conjunctionOfDisjunctions; // cnf is conjunction (AND) of disjunctions (OR) of literals: (a or b) AND (a or !b)
-- (NSArray*)disjunctionOfConjunctions; // dnf is disjunction (OR) of conjunctions (AND) of literals: (a and b) OR (a and !b)
-
-- (NSSet*)setOfSubformulas;     // set of subformulas (strings)
-- (NSSet*)setOfVariables;       // set of variables (nodes)
-
-- (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals;
-
 @end
 
 

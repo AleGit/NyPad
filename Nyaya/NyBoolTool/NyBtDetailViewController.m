@@ -203,7 +203,7 @@
         
         
         if (!hasErrors) {
-            NSString *stdDescription = [[node std] description];
+            NSString *stdDescription = @""; // [[node std] description];
             TruthTable *truthTable = [[TruthTable alloc] initWithFormula:node];
             [truthTable evaluateTable];
             

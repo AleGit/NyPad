@@ -51,11 +51,11 @@
 		112C72E015F5F13D0085B1EC /* NyayaNode+Derivations.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */; };
 		112C72E315F5F6E70085B1EC /* NyayaNode+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */; };
 		112C72E615F5F7110085B1EC /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E515F5F7110085B1EC /* NyayaNode+Description.m */; };
+		112C72E915F5FD6D0085B1EC /* NyayaNode+Resolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E815F5FD6D0085B1EC /* NyayaNode+Resolution.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
 		113FF75B15F07CA80073A410 /* instructions121.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75A15F07CA80073A410 /* instructions121.html */; };
 		113FF75D15F07ED90073A410 /* NyTuTester121.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* NyTuTester121.plist */; };
-		1144248815C68918000B3CD9 /* TransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248715C68918000B3CD9 /* TransformTests.m */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1162EBA315F4A62F0007EBAB /* BoolToolData.plist */; };
 		1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */; };
@@ -224,14 +224,14 @@
 		112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Attributes.m"; path = "Model/NyayaNode+Attributes.m"; sourceTree = "<group>"; };
 		112C72E415F5F7100085B1EC /* NyayaNode+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Description.h"; path = "Model/NyayaNode+Description.h"; sourceTree = "<group>"; };
 		112C72E515F5F7110085B1EC /* NyayaNode+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Description.m"; path = "Model/NyayaNode+Description.m"; sourceTree = "<group>"; };
+		112C72E715F5FD6D0085B1EC /* NyayaNode+Resolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Resolution.h"; path = "Model/NyayaNode+Resolution.h"; sourceTree = "<group>"; };
+		112C72E815F5FD6D0085B1EC /* NyayaNode+Resolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Resolution.m"; path = "Model/NyayaNode+Resolution.m"; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
 		113FF75A15F07CA80073A410 /* instructions121.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions121.html; path = html/instructions121.html; sourceTree = "<group>"; };
 		113FF75C15F07ED90073A410 /* NyTuTester121.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester121.plist; path = Nyaya/NyTutorials/NyTuTester121.plist; sourceTree = "<group>"; };
 		113FF75E15F0850D0073A410 /* NyAccessoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyAccessoryController.h; path = Nyaya/NyBranches/NyAccessoryController.h; sourceTree = "<group>"; };
-		1144248615C68918000B3CD9 /* TransformTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTests.h; sourceTree = "<group>"; };
-		1144248715C68918000B3CD9 /* TransformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTests.m; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
 		1144248B15C68EA5000B3CD9 /* CopyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyTests.m; sourceTree = "<group>"; };
 		1158F20C15D19EDD00B422FD /* NyayaTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaTabBarViewController.h; sourceTree = "<group>"; };
@@ -651,8 +651,6 @@
 				1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */,
 				1166F19D15BECE7C007B7B50 /* TruthTableTests.h */,
 				1166F19E15BECE7C007B7B50 /* TruthTableTests.m */,
-				1144248615C68918000B3CD9 /* TransformTests.h */,
-				1144248715C68918000B3CD9 /* TransformTests.m */,
 				1144248A15C68EA5000B3CD9 /* CopyTests.h */,
 				1144248B15C68EA5000B3CD9 /* CopyTests.m */,
 			);
@@ -786,6 +784,8 @@
 				116451C515B9383400CD6E16 /* NyayaStore.m */,
 				1166F19915BE6C18007B7B50 /* TruthTable.h */,
 				1166F19A15BE6C18007B7B50 /* TruthTable.m */,
+				112C72E715F5FD6D0085B1EC /* NyayaNode+Resolution.h */,
+				112C72E815F5FD6D0085B1EC /* NyayaNode+Resolution.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1069,6 +1069,7 @@
 				112C72DD15F5ECA90085B1EC /* NyayaNode+Display.m in Sources */,
 				112C72E015F5F13D0085B1EC /* NyayaNode+Derivations.m in Sources */,
 				112C72E315F5F6E70085B1EC /* NyayaNode+Attributes.m in Sources */,
+				112C72E915F5FD6D0085B1EC /* NyayaNode+Resolution.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,7 +1090,6 @@
 				1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */,
 				1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */,
 				1166F19F15BECE7C007B7B50 /* TruthTableTests.m in Sources */,
-				1144248815C68918000B3CD9 /* TransformTests.m in Sources */,
 				1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */,
 				11F906C615CEC164001CD0F3 /* BasicParseTests.m in Sources */,
 				11F906C915CECB2A001CD0F3 /* BasicTruthTableTests.m in Sources */,

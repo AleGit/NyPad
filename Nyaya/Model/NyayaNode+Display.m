@@ -29,6 +29,9 @@
 @end
 
 @implementation NyayaNodeUnary (Display)
+- (NyayaBool)firstValue {
+    return [[self firstNode] displayValue];
+}
 @end
 
 @implementation NyayaNodeNegation (Display)
@@ -45,6 +48,9 @@
 @end
 
 @implementation NyayaNodeBinary  (Display)
+- (NyayaBool)secondValue {
+    return [[self secondNode] displayValue];
+}
 @end
 
 @implementation NyayaNodeJunction (Display)

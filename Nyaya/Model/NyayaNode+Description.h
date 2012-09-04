@@ -10,4 +10,6 @@
 
 @interface NyayaNode (Description)
 
+- (NSString*)treeDescription;
+
 @end

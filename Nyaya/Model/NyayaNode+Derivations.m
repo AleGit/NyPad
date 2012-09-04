@@ -28,6 +28,10 @@
     return node;
 }
 
+- (NyayaNode*)std {
+    return [self copy];
+}
+
 - (NyayaNode*)copyImf {
     NSArray *nodes = [self valueForKeyPath:@"nodes.imf"];
     return [self copyWith:nodes];
@@ -160,6 +164,12 @@
 
 @implementation NyayaNodeSequence (Derivations)
 
+- (NyayaNode*)std {
+    NyayaNode *first = [[self firstNode] std];
+    NyayaNode *second = [[self secondNode] std];
+    return [NyayaNode conjunction:first with:second];
+}
+
 @end
 
 @implementation NyayaNodeConjunction (Derivations)
@@ -232,6 +242,12 @@
 @end
 
 @implementation NyayaNodeEntailment (Derivations)
+
+- (NyayaNode*)std {
+    NyayaNode *first = [[self firstNode] std];
+    NyayaNode *second = [[self secondNode] std];
+    return [NyayaNode implication:first with:second];
+}
 @end
 
 @implementation NyayaNodeBicondition (Derivations)

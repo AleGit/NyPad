@@ -20,3 +20,11 @@
 - (void)setDisplayValue:(NyayaBool)displayValue;
 
 @end
+
+@interface NyayaNodeUnary (Display)
+- (NyayaBool)firstValue;
+@end
+
+@interface NyayaNodeBinary (Display)
+- (NyayaBool)secondValue;
+@end

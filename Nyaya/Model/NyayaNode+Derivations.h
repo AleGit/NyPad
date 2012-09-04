@@ -14,6 +14,7 @@
 - (NyayaNode*)copyImf;
 - (NyayaNode*)copyNnf;
 
+- (NyayaNode*)std;      // substitute sequence and entailment with conjunction and implication
 - (NyayaNode*)imf;      // equivalent formula without implications or biconditions
 - (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
 - (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)

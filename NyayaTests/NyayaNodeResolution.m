@@ -10,6 +10,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 #import "NyayaNode+Derivations.h"
+#import "NyayaNode+Resolution.h"
 
 @interface NSArray (NNRT) 
 - (NSString*)myDescription;

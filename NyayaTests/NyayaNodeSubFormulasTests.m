@@ -9,6 +9,7 @@
 #import "NyayaNodeSubFormulasTests.h"
 #import "NyayaParser.h"
 #import "NyayaNode.h"
+#import "NyayaNode+Valuation.h"
 
 @implementation NyayaNodeSubFormulasTests
 

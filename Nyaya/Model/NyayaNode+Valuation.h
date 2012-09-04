@@ -13,6 +13,10 @@
 
 - (BOOL)evaluationValue;
 
+- (NSSet*)setOfSubformulas;     // set of subformulas (strings)
+- (NSSet*)setOfVariables;       // set of variables (nodes)
+- (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals;
+
 @end
 
 @interface NyayaNodeVariable (Valuation)

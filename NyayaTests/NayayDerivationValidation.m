@@ -12,6 +12,7 @@
 #import "TruthTable.h"
 #import "BddNode.h"
 #import "NyayaNode+Derivations.h"
+#import "NyayaNode+Valuation.h"
 
 @implementation NayayDerivationValidation
 

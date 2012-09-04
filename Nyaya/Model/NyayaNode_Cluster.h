@@ -26,7 +26,6 @@
 
 @interface NyayaNodeUnary : NyayaNode
 - (NyayaNode*)firstNode;
-- (NyayaBool)firstValue;
 @end
 
 @interface NyayaNodeNegation : NyayaNodeUnary
@@ -34,7 +33,6 @@
 
 @interface NyayaNodeBinary : NyayaNodeUnary
 - (NyayaNode*)secondNode;
-- (NyayaBool)secondValue;
 @end
 
 @interface NyayaNodeJunction : NyayaNodeBinary

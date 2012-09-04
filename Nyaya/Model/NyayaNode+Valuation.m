@@ -16,6 +16,47 @@
     _evaluationValue = [[NyayaStore sharedInstance] evaluationValueForName:self.symbol];
     return _evaluationValue;
 }
+
+- (NSSet*)setOfSubformulas {
+    NSMutableSet *set = [NSMutableSet setWithObject:_descriptionCache];
+    
+    NSArray *sets = [self valueForKeyPath:@"nodes.setOfSubformulas"];
+    for (NSSet* nodeset in sets) {
+        [set unionSet:nodeset];
+    }
+    
+    return set;
+}
+
+- (NSSet*)setOfVariables {
+    NSSet *result = nil;
+    if (self.type == NyayaConstant) result = [NSSet set];
+    else if (self.type == NyayaVariable) result = [NSSet setWithObject:self];
+    else {
+        // return [self valueForKeyPath:@"@distinctUnionOfSets.nodes.variables"];
+        // result = [self.nodes valueForKeyPath:@"@distinctUnionOfSets.variables"];
+        
+        
+        for (NSSet* subset in [self valueForKeyPath:@"nodes.setOfVariables"]) {
+            // for (NSSet* subset in [self.nodes valueForKeyPath:@"variables"]) {
+            if (!result) result = subset;
+            else result = [result setByAddingObjectsFromSet:subset];
+        }
+        
+        // result = [self valueForKeyPath:@"nodes.@distinctUnionOfSets.variables."];
+    }
+    return result;
+}
+
+- (void)fillHeadersAndEvals:(NSMutableDictionary*)headersAndEvals {
+    if (![headersAndEvals objectForKey:_descriptionCache]) {
+        [headersAndEvals setValue:[NSNumber numberWithBool:_evaluationValue] forKey:_descriptionCache];
+
+        for (NyayaNode *node in _nodes) {
+            [node fillHeadersAndEvals:headersAndEvals];
+        }
+    }
+}
 @end
 
 @implementation NyayaNodeVariable (Valuation)

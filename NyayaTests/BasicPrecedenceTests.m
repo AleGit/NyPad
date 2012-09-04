@@ -9,6 +9,7 @@
 #import "BasicPrecedenceTests.h"
 #import "NyayaNode.h"
 #import "NyayaParser.h"
+#import "NyayaNode+Description.h"
 
 @implementation BasicPrecedenceTests
 

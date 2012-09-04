@@ -10,6 +10,8 @@
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Derivations.h"
 
+#import "NyayaNode+Valuation.h"
+
 @implementation NyayaNodeVariablesTests
 
 - (void)testBasicVariables {
