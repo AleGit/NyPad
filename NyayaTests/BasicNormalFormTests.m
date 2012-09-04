@@ -11,6 +11,7 @@
 #import "NyayaParser.h"
 #import "TruthTable.h"
 #import "NyayaNode+Derivations.h"
+#import "NyayaNode+Attributes.h"
 
 enum { AST, IMF, NNF, CNF, DNF };
 

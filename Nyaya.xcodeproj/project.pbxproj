@@ -44,12 +44,13 @@
 		11281B9215EB479C00B377B3 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8E15EB479C00B377B3 /* Default-Landscape~ipad.png */; };
 		11281B9315EB479C00B377B3 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */; };
 		11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */; };
-		112C72D115F5D05A0085B1EC /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */; };
 		112C72D415F5D9950085B1EC /* NyayaNode+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */; };
 		112C72D715F5DEF00085B1EC /* NyayaNode+Type.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D615F5DEF00085B1EC /* NyayaNode+Type.m */; };
 		112C72DA15F5E8770085B1EC /* NyayaNode+Valuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D915F5E8770085B1EC /* NyayaNode+Valuation.m */; };
 		112C72DD15F5ECA90085B1EC /* NyayaNode+Display.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72DC15F5ECA90085B1EC /* NyayaNode+Display.m */; };
 		112C72E015F5F13D0085B1EC /* NyayaNode+Derivations.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */; };
+		112C72E315F5F6E70085B1EC /* NyayaNode+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */; };
+		112C72E615F5F7110085B1EC /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E515F5F7110085B1EC /* NyayaNode+Description.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
 		113FF75B15F07CA80073A410 /* instructions121.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75A15F07CA80073A410 /* instructions121.html */; };
@@ -209,8 +210,6 @@
 		11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "AppIcons/Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "AppIcons/Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		112C72CD15F5D0090085B1EC /* NyayaNode_Cluster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyayaNode_Cluster.h; path = Model/NyayaNode_Cluster.h; sourceTree = "<group>"; };
-		112C72CF15F5D05A0085B1EC /* NyayaNode+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NyayaNode+Description.h"; sourceTree = "<group>"; };
-		112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NyayaNode+Description.m"; sourceTree = "<group>"; };
 		112C72D215F5D9950085B1EC /* NyayaNode+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Creation.h"; path = "Model/NyayaNode+Creation.h"; sourceTree = "<group>"; };
 		112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Creation.m"; path = "Model/NyayaNode+Creation.m"; sourceTree = "<group>"; };
 		112C72D515F5DEF00085B1EC /* NyayaNode+Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Type.h"; path = "Model/NyayaNode+Type.h"; sourceTree = "<group>"; };
@@ -221,6 +220,10 @@
 		112C72DC15F5ECA90085B1EC /* NyayaNode+Display.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Display.m"; path = "Model/NyayaNode+Display.m"; sourceTree = "<group>"; };
 		112C72DE15F5F13D0085B1EC /* NyayaNode+Derivations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Derivations.h"; path = "Model/NyayaNode+Derivations.h"; sourceTree = "<group>"; };
 		112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Derivations.m"; path = "Model/NyayaNode+Derivations.m"; sourceTree = "<group>"; };
+		112C72E115F5F6E60085B1EC /* NyayaNode+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Attributes.h"; path = "Model/NyayaNode+Attributes.h"; sourceTree = "<group>"; };
+		112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Attributes.m"; path = "Model/NyayaNode+Attributes.m"; sourceTree = "<group>"; };
+		112C72E415F5F7100085B1EC /* NyayaNode+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Description.h"; path = "Model/NyayaNode+Description.h"; sourceTree = "<group>"; };
+		112C72E515F5F7110085B1EC /* NyayaNode+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Description.m"; path = "Model/NyayaNode+Description.m"; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
@@ -760,27 +763,29 @@
 				1166601F15B6EDE70070B5B8 /* NSSet+NyayaLiteral.m */,
 				1166601815B6DEF60070B5B8 /* NSString+NyayaToken.h */,
 				1166601915B6DEF60070B5B8 /* NSString+NyayaToken.m */,
+				112C72E115F5F6E60085B1EC /* NyayaNode+Attributes.h */,
+				112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */,
+				112C72D215F5D9950085B1EC /* NyayaNode+Creation.h */,
+				112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */,
+				112C72DE15F5F13D0085B1EC /* NyayaNode+Derivations.h */,
+				112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */,
+				112C72E415F5F7100085B1EC /* NyayaNode+Description.h */,
+				112C72E515F5F7110085B1EC /* NyayaNode+Description.m */,
+				112C72DB15F5ECA90085B1EC /* NyayaNode+Display.h */,
+				112C72DC15F5ECA90085B1EC /* NyayaNode+Display.m */,
+				112C72D515F5DEF00085B1EC /* NyayaNode+Type.h */,
+				112C72D615F5DEF00085B1EC /* NyayaNode+Type.m */,
+				112C72D815F5E8770085B1EC /* NyayaNode+Valuation.h */,
+				112C72D915F5E8770085B1EC /* NyayaNode+Valuation.m */,
 				1178CC9B15B5005300FD21CA /* NyayaNode.h */,
 				1178CC9C15B5005300FD21CA /* NyayaNode.m */,
+				112C72CD15F5D0090085B1EC /* NyayaNode_Cluster.h */,
 				1178CCA715B5313900FD21CA /* NyayaParser.h */,
 				1178CCA815B5313900FD21CA /* NyayaParser.m */,
 				116451C415B9383400CD6E16 /* NyayaStore.h */,
 				116451C515B9383400CD6E16 /* NyayaStore.m */,
 				1166F19915BE6C18007B7B50 /* TruthTable.h */,
 				1166F19A15BE6C18007B7B50 /* TruthTable.m */,
-				112C72CD15F5D0090085B1EC /* NyayaNode_Cluster.h */,
-				112C72CF15F5D05A0085B1EC /* NyayaNode+Description.h */,
-				112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */,
-				112C72D215F5D9950085B1EC /* NyayaNode+Creation.h */,
-				112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */,
-				112C72D515F5DEF00085B1EC /* NyayaNode+Type.h */,
-				112C72D615F5DEF00085B1EC /* NyayaNode+Type.m */,
-				112C72D815F5E8770085B1EC /* NyayaNode+Valuation.h */,
-				112C72D915F5E8770085B1EC /* NyayaNode+Valuation.m */,
-				112C72DB15F5ECA90085B1EC /* NyayaNode+Display.h */,
-				112C72DC15F5ECA90085B1EC /* NyayaNode+Display.m */,
-				112C72DE15F5F13D0085B1EC /* NyayaNode+Derivations.h */,
-				112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1058,12 +1063,12 @@
 				11C93F0615F46E6300AB94DF /* UITextField+Nyaya.m in Sources */,
 				11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */,
 				1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */,
-				112C72D115F5D05A0085B1EC /* NyayaNode+Description.m in Sources */,
 				112C72D415F5D9950085B1EC /* NyayaNode+Creation.m in Sources */,
 				112C72D715F5DEF00085B1EC /* NyayaNode+Type.m in Sources */,
 				112C72DA15F5E8770085B1EC /* NyayaNode+Valuation.m in Sources */,
 				112C72DD15F5ECA90085B1EC /* NyayaNode+Display.m in Sources */,
 				112C72E015F5F13D0085B1EC /* NyayaNode+Derivations.m in Sources */,
+				112C72E315F5F6E70085B1EC /* NyayaNode+Attributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,6 +1100,7 @@
 				113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */,
 				11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */,
 				1103D6EF15F3CC72003D5193 /* NayayDerivationValidation.m in Sources */,
+				112C72E615F5F7110085B1EC /* NyayaNode+Description.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
