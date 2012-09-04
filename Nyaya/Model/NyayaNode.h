@@ -24,7 +24,11 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 
-@interface NyayaNode : NSObject <NSCopying>
+@interface NyayaNode : NSObject <NSCopying> {
+@protected
+    NSString *_descriptionCache;
+    NSString *_symbol;
+}
 
 @property (nonatomic, readonly) NyayaNodeType type; 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)

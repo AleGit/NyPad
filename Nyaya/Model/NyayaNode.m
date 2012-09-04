@@ -10,11 +10,11 @@
 #import "NyayaStore.h"
 #import "NSString+NyayaToken.h"
 #import "NSArray+NyayaToken.h"
+#import "NyayaNode_Cluster.h"
 
 @interface NyayaNode () {
     
 @protected
-    NSString *_descriptionCache;
     NyayaBool _displayValue;
     BOOL _evaluationValue;
 }
@@ -22,64 +22,6 @@
 - (NyayaNode*)copyImf;
 - (NyayaNode*)copyNnf;
 
-@end
-
-#pragma mark - node sub class interfaces
-
-// arity    abstract classes         concrete classes
-//
-// 0        NyayaNode            -   NyayaNode(Variable|Constant)
-//              |
-// 1        NyayaNodeUnary       -   NyayaNodeNegation
-//              |        
-// 2        NyayaNodeBinary      -   NyayaNode(Conjunction|Disjunction|Bicondition|Implication|Xdisjunction)
-
-@interface NyayaNodeConstant : NyayaNode
-@end
-
-@interface NyayaNodeUnary : NyayaNode
-- (NyayaNode*)firstNode;
-- (NyayaBool)firstValue;
-@end
-
-@interface NyayaNodeNegation : NyayaNodeUnary 
-@end
-
-@interface NyayaNodeBinary : NyayaNodeUnary
-- (NyayaNode*)secondNode;
-- (NyayaBool)secondValue;
-@end
-
-@interface NyayaNodeJunction : NyayaNodeBinary
-@end
-
-@interface NyayaNodeConjunction : NyayaNodeJunction 
-@end
-
-@interface NyayaNodeSequence : NyayaNodeConjunction
-@end
-
-@interface NyayaNodeDisjunction : NyayaNodeJunction 
-@end
-
-@interface NyayaNodeExpandable : NyayaNodeBinary
-@end
-
-@interface NyayaNodeImplication : NyayaNodeExpandable 
-@end
-
-@interface NyayaNodeEntailment : NyayaNodeImplication
-@end
-
-@interface NyayaNodeBicondition : NyayaNodeExpandable 
-@end
-
-@interface NyayaNodeXdisjunction : NyayaNodeExpandable
-@end
-
-@interface NyayaNodeFunction : NyayaNode {
-    NSUInteger _arity;
-}
 @end
 
 #pragma mark - node sub class implementations
@@ -181,26 +123,6 @@
     return _evaluationValue; 
 }
 
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NSString *right = nil;
-    
-    switch(first.type) {
-        case NyayaConstant:     // leaf                 : ¬T    ≡ ¬(T)
-        case NyayaVariable:     // leaf                 : ¬a    ≡ ¬(a)
-        case NyayaNegation:     // right associative    : ¬¬P   ≡ ¬(¬P)
-        case NyayaFunction:     // prefix notation      : ¬f(…) ≡ ¬(f(…))
-            right = [first description];
-            break;
-        default:
-            right = [NSString stringWithFormat:@"(%@)", [first description]];
-            break;
-    }
-    _descriptionCache =  [NSString stringWithFormat:@"%@%@", self.symbol, right];
-    
-    return _descriptionCache;
-}
-
 - (NyayaNode*)nnf {
     NyayaNode *node = [self.nodes objectAtIndex:0];
     
@@ -296,46 +218,6 @@
     return _evaluationValue;
 }
 
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    NSString *left = nil;
-    NSString *right = nil;
-    
-    switch(first.type) {
-        case NyayaConstant:     // leaf                 : T ∨ …     ≡ (T) ∨ …
-        case NyayaVariable:     // leaf                 : a ∨ …     ≡ (a) ∨ …
-        case NyayaNegation:     // higher precedence    : ¬P ∨ …    ≡ (¬P) ∨ …
-        // case NyayaConjunction:  // higher precedence
-        case NyayaDisjunction:  // left associative     : a ∨ b ∨ c ≡ (a ∨ b) ∨ c
-        case NyayaFunction:     // prefix notation      : f(…) ∨ …  ≡ (f(…)) ∨ …
-            left = [first description];
-            break;
-        default:
-            left = [NSString stringWithFormat:@"(%@)", [first description]];
-            break;
-    }
-    
-    switch(second.type) {
-        case NyayaConstant:     // leaf                 : … ∨ T     ≡ … ∨ (T)
-        case NyayaVariable:     // leaf                 : … ∨ a     ≡ … ∨ (a)
-        case NyayaNegation:     // higher precedencd    : … ∨ ¬P    ≡ … ∨ (¬P)
-        // case NyayaConjunction:  // higher precedence
-        case NyayaFunction:     // prefix notation      : … ∨ f(…)  ≡ … ∨ (f(…))
-        // case NyayaDisjunction:  // semantically equal   : a ∨ b ∨ c = a ∨ (b ∨ c)
-            right = [second description];
-            break;
-        default:
-            right = [NSString stringWithFormat:@"(%@)", [second description]];
-            break;
-    }
-    
-    
-    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-    
-    return _descriptionCache;
-}
-
 - (NyayaNode*)cnfDistribution:(NyayaNode*)first with:(NyayaNode*)second {
     if (first.type == NyayaConjunction) {
         NyayaNode *n11 = [first.nodes objectAtIndex:0];
@@ -396,13 +278,6 @@
     return NyayaSequence;
 }
 
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    _descriptionCache =   [NSString stringWithFormat:@"%@%@ %@", [first description], [self symbol], [second description]];
-    return _descriptionCache;
-}
-
 - (NyayaNode*)std {
     NyayaNode *first = [[self firstNode] std];
     NyayaNode *second = [[self secondNode] std];
@@ -431,44 +306,6 @@
 - (BOOL)evaluationValue {
     _evaluationValue = [[self firstNode] evaluationValue] & [[self secondNode] evaluationValue]; 
     return _evaluationValue;
-}
-
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    NSString *left = nil;
-    NSString *right = nil;
-    
-    
-    switch(first.type) {
-        case NyayaConstant:     // leaf                 : T ∧ …     ≡ (T) ∧ …
-        case NyayaVariable:     // leaf                 : a ∧ …     ≡ (a) ∧ …
-        case NyayaNegation:     // higher precedence    : ¬P ∧ …    ≡ (¬P) ∧ …
-        case NyayaConjunction:  // left associative     : a ∧ b ∧ c ≡ (a ∨ b) ∧ c 
-        case NyayaFunction:     // prefix notation      : f(…) ∧ …  ≡ (f(…)) ∧ … 
-            left = [first description];
-            break;
-        default:
-            left = [NSString stringWithFormat:@"(%@)", [first description]];
-            break;
-    }
-    
-    switch(second.type) {
-        case NyayaConstant:     // leaf                 : … ∧ T     ≡ … ∧ (T)
-        case NyayaVariable:     // leaf                 : … ∧ a     ≡ … ∧ (a)
-        case NyayaNegation:     // higher precedencd    : … ∧ ¬P    ≡ … ∧ (¬P)
-        case NyayaFunction:     // prefix notation      : … ∧ f(…)  ≡ … ∧ (f(…))
-     // case NyayaConjunction:  // semantically equal   : a ∧ b ∧ c = a ∧ (b ∧ c)
-            right = [second description];
-            break;
-        default:
-            right = [NSString stringWithFormat:@"(%@)", [second description]];
-            break;
-    }
-    
-    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-    
-    return _descriptionCache;
 }
 
 - (NyayaNode*)cnf {
@@ -563,27 +400,6 @@
     return _evaluationValue;
 }
 
-- (NSString*)description {
-    
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    NSString *left = [first description];           // xor has lowest precedence and xor ist left associative
-    NSString *right = nil;
-    
-    switch(second.type) {
-        case NyayaXdisjunction:
-            right = [NSString stringWithFormat:@"(%@)", [second description]];
-            // a XOR (b XOR c)
-            break;
-        default:
-            right = [second description];
-            break;
-    }
-    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-    
-    return _descriptionCache;
-}
-
 - (NyayaNode*)imf {
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] imf];
@@ -618,48 +434,6 @@
     return _evaluationValue;
 }
 
-- (NSString*)description {
-    
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    NSString *left = nil;
-    NSString *right = nil;
-    
-    switch(first.type) {
-        case NyayaConstant:     // leaf                 : T → …     ≡ (T) → …
-        case NyayaVariable:     // leaf                 : a → …     ≡ (a) → …
-        case NyayaNegation:     // higher precedence    : ¬P → …    ≡ (¬P) → …
-        case NyayaConjunction:  // higher precedence    : P ∧ Q → … ≡ (P ∧ Q) → …
-        case NyayaDisjunction:  // higher precedence    : P ∨ Q → … ≡ (P ∨ Q) → …
-        case NyayaXdisjunction: // higher precedence    : P ⊕ Q → … ≡ (P ⊕ Q) → …
-        case NyayaFunction:     // prefix notation      : f(…) → …  ≡ (f(…)) → …
-            left = [first description];
-            break;
-        default:
-            left = [NSString stringWithFormat:@"(%@)", [first description]];
-            break;
-    }
-    
-    switch(second.type) {
-        case NyayaConstant:     // leaf                 : … → T     ≡ … → (T)
-        case NyayaVariable:     // leaf                 : … → a     ≡ … → (a)
-        case NyayaNegation:     // higher precedence    : … → ¬P    ≡ … → (¬P)
-        case NyayaConjunction:  // higher precedence    : … → P ∧ Q ≡ … → (P ∧ Q)
-        case NyayaDisjunction:  // higher precedence    : … → P ∨ Q ≡ … → (P ∨ Q)
-        case NyayaXdisjunction: // higher precedence    : … → P ⊕ Q ≡ … → (P ⊕ Q)
-        case NyayaFunction:     // prefix notation      : f(…) → …  ≡ … → (f(…))
-        case NyayaImplication:  // right associative    : a → b → c = a → (b → c)
-            right = [second description];
-            break;
-        default:
-            right = [NSString stringWithFormat:@"(%@)", [second description]];
-            break;
-    }
-    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-    
-    return _descriptionCache;
-}
-
 - (NyayaNode*)imf {
     // imf(P → Q) = ¬imf(P) ∨ imf(Q)
     NyayaNode *first = [[self firstNode] imf];
@@ -673,13 +447,6 @@
 
 - (NyayaNodeType)type {
     return NyayaEntailment;
-}
-
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    _descriptionCache =   [NSString stringWithFormat:@"%@ %@ %@", [first description], [self symbol], [second description]];
-    return _descriptionCache;
 }
 
 - (NyayaNode*)std {
@@ -713,48 +480,6 @@
     return _evaluationValue;
 }
 
-- (NSString*)description {
-    NyayaNode *first = [self firstNode];
-    NyayaNode *second = [self secondNode];
-    NSString *left = nil;
-    NSString *right = nil;
-    
-    
-    switch(first.type) {
-        case NyayaConstant:     // leaf                 : T ↔ …     ≡ (T) ↔ …
-        case NyayaVariable:     // leaf                 : a → …     ≡ (a) ↔ …
-        case NyayaNegation:     // higher precedence    : ¬P → …    ≡ (¬P) ↔ …
-        case NyayaConjunction:  // higher precedence    : P ∧ Q ↔ … ≡ (P ∧ Q) ↔ …
-        case NyayaDisjunction:  // higher precedence    : P ∨ Q ↔ … ≡ (P ∨ Q) ↔ …
-        case NyayaXdisjunction: // higher precedence    : P ⊕ Q ↔ … ≡ (P ↔ Q) → …
-        case NyayaFunction:     // prefix notation      : f(…) ↔ …  ≡ (f(…)) ↔ …
-            left = [first description];
-            break;
-        default:
-            left = [NSString stringWithFormat:@"(%@)", [first description]];
-            break;
-    }
-    
-    switch(second.type) {
-        case NyayaConstant:     // leaf                 : … ↔ T     ≡ … ↔ (T)
-        case NyayaVariable:     // leaf                 : … ↔ a     ≡ … ↔ (a)
-        case NyayaNegation:     // higher precedence    : … ↔ ¬P    ≡ … ↔ (¬P)
-        case NyayaConjunction:  // higher precedence    : … ↔ P ∧ Q ≡ … ↔ (P ∧ Q)
-        case NyayaDisjunction:  // higher precedence    : … ↔ P ∨ Q ≡ … ↔ (P ∨ Q)
-        case NyayaXdisjunction: // higher precedence    : … ↔ P ⊕ Q ≡ … ↔ (P ⊕ Q)
-        case NyayaFunction:     // prefix notation      : … ↔ f(…)  ≡ … ↔ … ↔ (f(…))
-        case NyayaBicondition:  // right associative    : a ↔ b ↔ c = a ↔ (b → c)
-            right = [second description];
-            break;
-        default:
-            right = [NSString stringWithFormat:@"(%@)", [second description]];
-            break;
-    }
-    _descriptionCache =  [NSString stringWithFormat:@"%@ %@ %@", left, self.symbol, right];
-    
-    return _descriptionCache;
-}
-
 - (NyayaNode*)imf {
     // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
     NyayaNode *first = [[self firstNode] imf];
@@ -776,12 +501,6 @@
 
 - (NSUInteger) arity {
     return [self.nodes count];
-}
-
-- (NSString*)description {
-    NSString *right = [[self.nodes valueForKey:@"description"] componentsJoinedByString:@","];
-    _descriptionCache = [NSString stringWithFormat:@"%@(%@)", self.symbol, right]; 
-    return _descriptionCache;
 }
 
 @end
@@ -956,10 +675,10 @@
     }
 }
 
-- (NSString*)description {
-    _descriptionCache = _symbol;
-    return _descriptionCache;
-}
+//- (NSString*)description {
+//    _descriptionCache = _symbol;
+//    return _descriptionCache;
+//}
 
 #pragma mark - normal forms
 
