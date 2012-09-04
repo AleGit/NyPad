@@ -8,6 +8,7 @@
 
 #import "NyayaNodeEvaluationTests.h"
 #import "NyayaNode.h"
+#import "NyayaNode+Creation.h"
 
 
 

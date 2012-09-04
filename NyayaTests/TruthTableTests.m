@@ -10,6 +10,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 #import "TruthTable.h"
+#import "NyayaNode+Creation.h"
 
 @implementation TruthTableTests
 

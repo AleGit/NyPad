@@ -45,6 +45,7 @@
 		11281B9315EB479C00B377B3 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */; };
 		11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */; };
 		112C72D115F5D05A0085B1EC /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */; };
+		112C72D415F5D9950085B1EC /* NyayaNode+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
 		113FF75B15F07CA80073A410 /* instructions121.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75A15F07CA80073A410 /* instructions121.html */; };
@@ -208,6 +209,8 @@
 		112C72CD15F5D0090085B1EC /* NyayaNode_Cluster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyayaNode_Cluster.h; path = Model/NyayaNode_Cluster.h; sourceTree = "<group>"; };
 		112C72CF15F5D05A0085B1EC /* NyayaNode+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NyayaNode+Description.h"; sourceTree = "<group>"; };
 		112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NyayaNode+Description.m"; sourceTree = "<group>"; };
+		112C72D215F5D9950085B1EC /* NyayaNode+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Creation.h"; path = "Model/NyayaNode+Creation.h"; sourceTree = "<group>"; };
+		112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Creation.m"; path = "Model/NyayaNode+Creation.m"; sourceTree = "<group>"; };
 		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
 		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
@@ -774,6 +777,8 @@
 				112C72CD15F5D0090085B1EC /* NyayaNode_Cluster.h */,
 				112C72CF15F5D05A0085B1EC /* NyayaNode+Description.h */,
 				112C72D015F5D05A0085B1EC /* NyayaNode+Description.m */,
+				112C72D215F5D9950085B1EC /* NyayaNode+Creation.h */,
+				112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1053,6 +1058,7 @@
 				11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */,
 				1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */,
 				112C72D115F5D05A0085B1EC /* NyayaNode+Description.m in Sources */,
+				112C72D415F5D9950085B1EC /* NyayaNode+Creation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

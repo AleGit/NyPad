@@ -16,7 +16,7 @@ typedef NSUInteger NyayaBool;
 enum { // NyayaUndefined=0
     NyayaConstant=1, NyayaVariable,
     NyayaNegation,
-    NyayaConjunction, NyayaDisjunction, NyayaBicondition, NyayaImplication, NyayaXdisjunction,
+    NyayaConjunction, NyayaDisjunction, NyayaXdisjunction, NyayaImplication, NyayaBicondition,
     NyayaFunction
     , NyayaSequence     // a conjunction with lower precedence than everything but eintailment
     , NyayaEntailment   // an implication with lowest precedence
@@ -28,6 +28,9 @@ typedef NSUInteger NyayaNodeType;
 @protected
     NSString *_descriptionCache;
     NSString *_symbol;
+    NyayaBool _displayValue;
+    BOOL _evaluationValue;
+    NSArray *_nodes;
 }
 
 @property (nonatomic, readonly) NyayaNodeType type; 
@@ -41,19 +44,6 @@ typedef NSUInteger NyayaNodeType;
 // @property (nonatomic, readonly) NSString* de;
 
 #pragma mark - node factory
-
-+ (NyayaNode*)atom:(NSString*)name;
-+ (NyayaNode*)negation:(NyayaNode*)firstNode;
-+ (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)disjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)xdisjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)implication:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)bicondition:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-
-+ (NyayaNode*)sequence:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-+ (NyayaNode*)entailment:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;
-
-+ (NyayaNode*)function:(NSString*)name with:(NSArray*)nodes;
 
 - (NSUInteger)arity;
 

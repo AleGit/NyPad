@@ -10,6 +10,7 @@
 #import "NyayaNode.h"
 #import "NyayaParser.h"
 #import "NyayaStore.h"
+#import "NyayaNode+Creation.h"
 
 @interface BasicParseTests () {
     NyayaNode *A;

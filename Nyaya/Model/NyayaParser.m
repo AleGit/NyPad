@@ -9,6 +9,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode.h"
 #import "NSString+NyayaToken.h"
+#import "NyayaNode+Creation.h"
 
 @interface NyayaParser () {
     NSUInteger _index;

@@ -9,6 +9,7 @@
 #import "NyayaNodeValueTests.h"
 #import "NyayaNode.h" 
 #import "NyayaParser.h"
+#import "NyayaNode+Creation.h"
 
 @interface NyayaNodeValueTests () {
     NyayaNode *_u;
