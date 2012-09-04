@@ -38,9 +38,6 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, readonly) NSArray *nodes;
 @property (nonatomic, weak) NyayaNode *parent;
 
-// @property (nonatomic, readonly) NSString* de;
-
-#pragma mark - node factory
 
 - (NSUInteger)arity;
 
@@ -83,7 +80,4 @@ typedef NSUInteger NyayaNodeType;
 
 @end
 
-#pragma mark -
-@interface NyayaNodeVariable : NyayaNode
-@end
 

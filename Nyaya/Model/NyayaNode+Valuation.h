@@ -7,6 +7,7 @@
 //
 
 #import "NyayaNode.h"
+#import "NyayaNode_Cluster.h"
 
 @interface NyayaNode (Valuation)
 

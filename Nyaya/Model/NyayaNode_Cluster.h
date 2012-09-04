@@ -18,6 +18,9 @@
 //              |
 // 2        NyayaNodeBinary      -   NyayaNode(Conjunction|Disjunction|Bicondition|Implication|Xdisjunction)
 
+@interface NyayaNodeVariable : NyayaNode
+@end
+
 @interface NyayaNodeConstant : NyayaNode
 @end
 
