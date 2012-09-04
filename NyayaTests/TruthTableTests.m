@@ -11,6 +11,7 @@
 #import "NyayaNode.h"
 #import "TruthTable.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Derivations.h"
 
 @implementation TruthTableTests
 

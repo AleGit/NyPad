@@ -39,16 +39,13 @@ typedef NSUInteger NyayaNodeType;
 @property (nonatomic, weak) NyayaNode *parent;
 
 
-- (NSUInteger)arity;
+// - (NSUInteger)arity;
 
 #pragma mark - normal forms
 - (NyayaNode*)std;      // substitute ;⊨
 
 
-- (NyayaNode*)imf;      // equivalent formula without implications or biconditions
-- (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
-- (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)
-- (NyayaNode*)dnf;      // equivalent formula in disjunctive normal form (includes nnf, imf)
+
 
 - (BOOL)isImfFormula;   // (sub)formula is implication free
 - (BOOL)isNnfFormula;   // (sub)formula is in negation normal form

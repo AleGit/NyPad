@@ -11,6 +11,7 @@
 #import "NyayaNode.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Display.h"
+#import "NyayaNode+Derivations.h"
 
 @implementation NyayaNodeNormalFormTests
 

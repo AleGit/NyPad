@@ -8,6 +8,7 @@
 
 #import "NyayaNodeVariablesTests.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Derivations.h"
 
 @implementation NyayaNodeVariablesTests
 
