@@ -108,7 +108,8 @@
 - (NyayaNode*)parseFormula {
     NyayaNode* result = [self parseEntailment];
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
-    NSLog(@"%@", _errors);
+    
+    // if (!result) result = [[NyayaNode alloc] init];
     return result;
 }
 

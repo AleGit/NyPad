@@ -7,6 +7,9 @@
 //
 
 #import "NyayaNode.h"
+#import "NyayaParser.h"
+#import "TruthTable.h"
+#import "BddNode.h"
 
 
 enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
@@ -29,6 +32,18 @@ typedef NSUInteger NyayaNodeType;
     NyayaBool _displayValue;
     BOOL _evaluationValue;
     NSArray *_nodes;
+    
+    BOOL _hasParsingErrors;
+    
+    dispatch_once_t _truthTablePredicate;
+    TruthTable *_truthTable;
+    
+    dispatch_once_t _bddNodePredicate;
+    BddNode *_bddNode;
+    NSString *_nnfDescription;
+    NSString *_cnfDescription;
+    NSString *_dnfDescription;
+    
 }
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
 @end

@@ -9,14 +9,43 @@
 #import "NyayaNode.h"
 #import "NyayaNode_Cluster.h"
 #import "NyayaNode+Derivations.h"
+#import "NyayaNode+Description.h"
 
 
 @implementation NyayaNode
 
 + (id)nodeWithInput:(NSString*)input {
-    return nil;
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
+    NyayaNode *node = [parser parseFormula];
+    if (node) {
+        node->_wellFormed = ![parser hasErrors];
+        
+        node->_truthTablePredicate = 0;
+        node->_bddNode = 0;
+        
+       
+    }
+    return node;
 }
 
+- (TruthTable*)truthTable {
+    dispatch_once(&_truthTablePredicate, ^{
+        _truthTable = [[TruthTable alloc] initWithFormula:self];
+        [_truthTable evaluateTable];
+    });
+    return _truthTable;
+}
+
+- (BddNode*)binaryDecisionDiagram {
+    dispatch_once(&_bddNodePredicate, ^{
+        _bddNode = [BddNode diagramWithTruthTable:[self truthTable]];
+        _cnfDescription = [_bddNode cnfDescription];
+        _dnfDescription = [_bddNode dnfDescription];
+        _nnfDescription = [_cnfDescription length] <= [_dnfDescription length] ? _cnfDescription : _dnfDescription;
+    });
+    return _bddNode;
+    
+}
 /* ********************************************************************************************************* */
 #pragma mark - internal methods -
 /* ********************************************************************************************************* */

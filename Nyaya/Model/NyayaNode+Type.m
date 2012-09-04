@@ -10,9 +10,9 @@
 #import "NyayaNode_Cluster.h"
 
 @implementation NyayaNode (Type)
-//- (NyayaNodeType)type {
-//    return NyayaUndefined; // NyayaNode.m
-//}
+- (NyayaNodeType)type {
+    return NyayaUndefined; // NyayaNode.m
+}
 @end
 
 @implementation NyayaNodeVariable (Type)

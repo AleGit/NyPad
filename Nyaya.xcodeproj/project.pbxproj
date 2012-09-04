@@ -44,13 +44,13 @@
 		11281B9215EB479C00B377B3 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8E15EB479C00B377B3 /* Default-Landscape~ipad.png */; };
 		11281B9315EB479C00B377B3 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B8F15EB479C00B377B3 /* Default-Portrait@2x~ipad.png */; };
 		11281B9415EB479C00B377B3 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 11281B9015EB479C00B377B3 /* Default-Portrait~ipad.png */; };
+		112AF02815F61C95005B4ED2 /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E515F5F7110085B1EC /* NyayaNode+Description.m */; };
 		112C72D415F5D9950085B1EC /* NyayaNode+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D315F5D9950085B1EC /* NyayaNode+Creation.m */; };
 		112C72D715F5DEF00085B1EC /* NyayaNode+Type.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D615F5DEF00085B1EC /* NyayaNode+Type.m */; };
 		112C72DA15F5E8770085B1EC /* NyayaNode+Valuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72D915F5E8770085B1EC /* NyayaNode+Valuation.m */; };
 		112C72DD15F5ECA90085B1EC /* NyayaNode+Display.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72DC15F5ECA90085B1EC /* NyayaNode+Display.m */; };
 		112C72E015F5F13D0085B1EC /* NyayaNode+Derivations.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72DF15F5F13D0085B1EC /* NyayaNode+Derivations.m */; };
 		112C72E315F5F6E70085B1EC /* NyayaNode+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E215F5F6E60085B1EC /* NyayaNode+Attributes.m */; };
-		112C72E615F5F7110085B1EC /* NyayaNode+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E515F5F7110085B1EC /* NyayaNode+Description.m */; };
 		112C72E915F5FD6D0085B1EC /* NyayaNode+Resolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C72E815F5FD6D0085B1EC /* NyayaNode+Resolution.m */; };
 		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
@@ -1034,6 +1034,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112AF02815F61C95005B4ED2 /* NyayaNode+Description.m in Sources */,
 				11C375FA15B3D23D005C5C9C /* main.m in Sources */,
 				11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */,
 				1178CC9D15B5005300FD21CA /* NyayaNode.m in Sources */,
@@ -1100,7 +1101,6 @@
 				113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */,
 				11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */,
 				1103D6EF15F3CC72003D5193 /* NayayDerivationValidation.m in Sources */,
-				112C72E615F5F7110085B1EC /* NyayaNode+Description.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

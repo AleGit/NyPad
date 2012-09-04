@@ -9,11 +9,10 @@
 #import "NyBtDetailViewController.h"
 #import "NyAccessoryController.h"
 #import "UIColor+Nyaya.h"
-#import "NyayaParser.h"
-#import "NyayaNode.h"
-#import "TruthTable.h"
-#import "BddNode.h"
 #import "UITextField+Nyaya.h"
+
+#import "NyayaNode.h"
+#import "NyBoolToolEntry.h"
 
 @interface NyBtDetailViewController () <NyAccessoryController> {
     dispatch_queue_t queue;
@@ -107,8 +106,8 @@
     // Update the user interface for the detail item.
     
     if (self.detailItem) {
-        self.inputName.text = [self.detailItem title];
-        self.inputField.text = [self.detailItem input];
+        self.inputName.text = ((NyBoolToolEntry*)self.detailItem).title;
+        self.inputField.text = ((NyBoolToolEntry*)self.detailItem).input;
         
         [self.inputField becomeFirstResponder];
         
@@ -162,54 +161,42 @@
     self.parsedField.backgroundColor = [UIColor nyLightGreyColor];
 }
 
-
-
 - (void)parse {
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:self.inputField.text];
+    NSString *input = self.inputField.text;
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
-        NyayaNode *node = [parser parseFormula];
-        NSString *description = [[node description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+        NyayaNode *node = [NyayaNode nodeWithInput:input];
+        NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{
             self.parsedField.text = description;
-            self.parsedField.backgroundColor = parser.hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
+            self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
             [self adjustResultViewPosition];
         });
     });
 }
 
 - (void)compute {
-    
-    NyayaParser *parser = [[NyayaParser alloc] initWithString:self.inputField.text];
+    NSString *input = self.inputField.text;
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
-        NyayaNode *node = [parser parseFormula];
-        NSString *description = [[node description] stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
-        
-        BOOL hasErrors = parser.hasErrors;
-        
-        
+        NyayaNode *node = [NyayaNode nodeWithInput:input];
+        NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{
             self.parsedField.text = description;
-            self.parsedField.backgroundColor = hasErrors ? [UIColor nyWrongColor] : [UIColor nyRightColor];
-            self.resultView.hidden = hasErrors;
+            self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+            self.resultView.hidden = !node.isWellFormed;
             [self adjustResultViewPosition];
         });
         
-        
-        
-        if (!hasErrors) {
+        if (node.isWellFormed) {
             NSString *stdDescription = @""; // [[node std] description];
-            TruthTable *truthTable = [[TruthTable alloc] initWithFormula:node];
-            [truthTable evaluateTable];
-            
-            BOOL sat = truthTable.isSatisfiable;
-            BOOL tau = truthTable.isTautology;
-            BOOL con = truthTable.isContradiction;
+            BOOL sat = node.truthTable.isSatisfiable;
+            BOOL tau = node.truthTable.isTautology;
+            BOOL con = node.truthTable.isContradiction;
             
             NSString *nf = nil;
             if (tau) nf = @"T";
@@ -220,6 +207,7 @@
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                 self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : [UIColor nyLightGreyColor];
                 self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : [UIColor nyLightGreyColor];
+                
                 if (nf) {
                     self.nnfField.text = nf;
                     self.cnfField.text = nf;
@@ -230,44 +218,29 @@
                 else if (con) self.bddView.bddNode = [BddNode bottom];
             });
             
-            NSUInteger bddLevelCount = 1;
+            NSUInteger bddLevelCount = 0;
             if (!nf) {
-                BddNode *bdd = [BddNode diagramWithTruthTable:truthTable];
-                
-                NSString *cnfdescription = [bdd cnfDescription];
-                NSString *dnfdescription = [bdd dnfDescription];
-                NSString *nnfdescription = [cnfdescription length] > [dnfdescription length] ? dnfdescription : cnfdescription;
+            
+                NSString *cnfdescription = node.binaryDecisionDiagram.cnfDescription; //  node.conjunctiveNormalForm.description;
+                NSString *dnfdescription = node.binaryDecisionDiagram.dnfDescription; //  node.disjunctiveNormalForm.description;
+                NSString *nnfdescription = cnfdescription <= dnfdescription ? cnfdescription : dnfdescription; // node.negationNormalForm.description;
                 
                 dispatch_async(mq, ^{
                     self.nnfField.text = nnfdescription;
                     self.cnfField.text = cnfdescription;
                     self.dnfField.text = dnfdescription;
-                    self.bddView.bddNode = bdd;
+                    self.bddView.bddNode = node.binaryDecisionDiagram;
                 });
-                bddLevelCount = bdd.levelCount;
+                bddLevelCount = node.binaryDecisionDiagram.levelCount;
             }
-            else {
-                dispatch_async(mq, ^{
-                    if (tau) self.bddView.bddNode = [BddNode top];
-                    else if (con) self.bddView.bddNode = [BddNode bottom];
-                });
-            }
-            
-           
             
             dispatch_async(mq, ^{
-                // [self.inputField becomeFirstResponder];
+                [self.inputField becomeFirstResponder];
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                 [self adjustResultViewContent:bddLevelCount];
-                
-                
             });
             
-            
-            
-            
         }
-        
     });
     
 }
