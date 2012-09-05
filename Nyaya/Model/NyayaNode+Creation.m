@@ -8,8 +8,7 @@
 
 #import "NyayaNode+Creation.h"
 #import "NyayaNode_Cluster.h"
-
-#import "NSArray+NyayaToken.h"
+#import "NSSet+NyayaToken.h"
 #import "NSString+NyayaToken.h"
 #import "NyayaStore.h"
 
@@ -21,11 +20,11 @@
     NyayaNode *node = nil;
     if ([name isTrueToken]) {
         node = [[NyayaNodeConstant alloc] init];
-        node->_symbol = [[NSArray trueTokens] objectAtIndex:0];
+        node->_symbol = @"T";
     }
     else if ([name isFalseToken]) {
         node = [[NyayaNodeConstant alloc] init];
-        node->_symbol = [[NSArray falseTokens] objectAtIndex:0];
+        node->_symbol = @"F";
     }
     else { // variable name
         node = [[NyayaNodeVariable alloc] init];

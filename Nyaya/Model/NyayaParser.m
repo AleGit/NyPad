@@ -58,12 +58,7 @@
 
 - (void)tokenize {
     NSMutableArray *tokens = [NSMutableArray array];
-    NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression 
-                                  regularExpressionWithPattern: // NYAYA_TOKENS
-                                  NSLocalizedString(@"NYAYA_TOKENS_PATTERN", nil)
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:&error];
+    NSRegularExpression *regex = [NSRegularExpression nyayaTokenRegex];
     
     [regex enumerateMatchesInString:_input 
                             options:0 

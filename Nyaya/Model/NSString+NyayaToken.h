@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString *const NYAYA_TOKENS;
+@interface NSRegularExpression (NyayaToken)
++ (NSRegularExpression*)nyayaTokenRegex;
+@end
 
 @interface NSString (NyayaToken)
+
++ (NSString*)nyayaTokenPattern;
 
 - (BOOL)isTrueToken;    // are identifiers too
 - (BOOL)isFalseToken;   // are identifiers too

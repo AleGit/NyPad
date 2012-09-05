@@ -8,17 +8,17 @@
 
 // tokenizer
 
-"NYAYA_TOKENS_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
+"NYAYA_TOKEN_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
 //                          T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
+
+"NYAYA_CONNECTIVES_ASCII"    = "F,T,!,&,|,^,>,=";      // comma separated list of ascii symbols for connectives (unused)
+"NYAYA_CONNECTIVES_STANDARD" = "⊥,⊤,¬,∧,∨,⊻,→,↔";      // comma separated list of standard symbols for connectives (unused)
+"NYAYA_CONNECTIVES_BOOLEAN"  = "0,1,!,.,+,⊕,>,=";      // comma separated list of boolean symbols for connectives (unused)
 
 // parser
 // token key = comma separated list of (additional) localized names
 // there are implicit declared tokens too
 // you can only use symbols which matches NYAYA_TOKENIZER_PATTERN
-
-"CONNECTIVES_ASCII"    = "F,T,!,&,|,^,=,>";      // comma separated list of ascii symbols for connectives
-"CONNECTIVES_STANDARD" = "⊥,⊤,¬,∧,∨,⊻,↔,→";      // comma separated list of standard symbols for connectives
-"CONNECTIVES_BOOLEAN"  = "0,1,!,.,+,⊕,↔,→";      // comma separated list of boolean symbols for connectives
 
 "F"  = "FALSE,BOTTOM";
 "T"  = "TRUE,TOP";

@@ -7,10 +7,9 @@
 //
 
 #import "NSString+NyayaToken.h"
-#import "NSArray+NyayaToken.h"
+#import "NSSet+NyayaToken.h"
 
-
-NSString *const NYAYA_TOKENS =
+NSString *const NYAYA_TOKEN_PATTERN =
     @"⊤|⊥"          // TOP BOTTOM
     "|¬|!"          // NOT   negation
     "|∧|&|\\."      // AND   conjunction
@@ -25,82 +24,117 @@ NSString *const NYAYA_TOKENS =
     "|\\w+"         // IDENT identifier
     ;
 
+NSString *const NYAYA_CONNECTIVES_ASCII    = @"F,T,!,&,|,^,=,>";      // comma separated list of ascii symbols for connectives (unused)
+NSString *const NYAYA_CONNECTIVES_STANDARD = @"⊥,⊤,¬,∧,∨,⊻,↔,→";      // comma separated list of standard symbols for connectives (unused)
+NSString *const NYAYA_CONNECTIVES_BOOLEAN  = @"0,1,!,.,+,⊕,↔,→";      // comma separated list of boolean symbols for connectives (unused)
+
+NSString *const NYAYA_TOKEN_PATTERN_KEY = @"NYAYA_TOKEN_PATTERN";
+NSString *const NYAYA_CONNECTIVES_ASCII_KEY = @"NYAYA_CONNECTIVES_ASCII";
+NSString *const NYAYA_CONNECTIVES_STANDARD_KEY = @"NYAYA_CONNECTIVES_STANDARD";
+NSString *const NYAYA_CONNECTIVES_BOOLEAN_KEY = @"NYAYA_CONNECTIVES_BOOLEAN";
+
+@implementation NSRegularExpression (NyayaToken)
++ (NSRegularExpression*)nyayaTokenRegex {
+    static dispatch_once_t pred = 0;
+    __strong static NSRegularExpression *_regex = nil;
+    dispatch_once(&pred, ^{
+        NSError *error;
+        _regex = [NSRegularExpression regularExpressionWithPattern:[NSString nyayaTokenPattern]
+                                                           options:NSRegularExpressionCaseInsensitive
+                                                             error:&error];
+    });
+    
+    return _regex;
+    
+}
+@end
+
 @implementation NSString (NyayaToken)
+
++ (NSString*)nyayaTokenPattern {
+    static dispatch_once_t pred = 0;
+    __strong static NSString *_pattern = nil;
+    dispatch_once(&pred, ^{
+        _pattern = NSLocalizedString(NYAYA_TOKEN_PATTERN_KEY, nil);
+        if ([_pattern isEqualToString:NYAYA_TOKEN_PATTERN_KEY]) {
+            _pattern = NYAYA_TOKEN_PATTERN;
+        }
+    });
+    return _pattern;
+}
 
 + (NSSet*)tokenKeywords {
     static dispatch_once_t pred = 0;
     __strong static NSMutableSet* _keywords = nil;
     dispatch_once(&pred, ^{
         _keywords = [NSMutableSet setWithObject:@"frm"];        // BoolTool keyword
-        [_keywords addObjectsFromArray:[NSArray notTokens]];
-        [_keywords addObjectsFromArray:[NSArray andTokens]];
-        [_keywords addObjectsFromArray:[NSArray orTokens]];
-        [_keywords addObjectsFromArray:[NSArray bicTokens]];
-        [_keywords addObjectsFromArray:[NSArray impTokens]];
-        [_keywords addObjectsFromArray:[NSArray xorTokens]];
+        [_keywords unionSet:[NSSet notTokens]];
+        [_keywords unionSet:[NSSet andTokens]];
+        [_keywords unionSet:[NSSet orTokens]];
+        [_keywords unionSet:[NSSet bicTokens]];
+        [_keywords unionSet:[NSSet impTokens]];
+        [_keywords unionSet:[NSSet xorTokens]];
         
-        [_keywords addObjectsFromArray:[NSArray lparTokens]];
-        [_keywords addObjectsFromArray:[NSArray rparTokens]];
-        [_keywords addObjectsFromArray:[NSArray commaTokens]];
-        [_keywords addObjectsFromArray:[NSArray semicolonTokens]];
+        [_keywords unionSet:[NSSet lparTokens]];
+        [_keywords unionSet:[NSSet rparTokens]];
+        [_keywords unionSet:[NSSet commaTokens]];
         
-        [_keywords addObjectsFromArray:[NSArray entailmentTokens]];
+        [_keywords unionSet:[NSSet semicolonTokens]];
+        [_keywords unionSet:[NSSet entailmentTokens]];
     });
     return _keywords;
-
-    
 }
 
 - (BOOL)isTrueToken {
-    return [[NSArray trueTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet trueTokens] containsObject:self];
 }
 
 - (BOOL)isFalseToken {
-    return [[NSArray falseTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet falseTokens] containsObject:self];
 }
 
 - (BOOL)isNegationToken {
-    return [[NSArray notTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet notTokens] containsObject:self];
 }
 
 - (BOOL)isConjunctionToken {
-    return [[NSArray andTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet andTokens] containsObject:self];
 }
 
 - (BOOL)isDisjunctionToken {
-    return [[NSArray orTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet orTokens] containsObject:self];
 }
 
 - (BOOL)isBiconditionToken {
-    return [[NSArray bicTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet bicTokens] containsObject:self];
 }
 
 - (BOOL)isImplicationToken {
-    return [[NSArray impTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet impTokens] containsObject:self];
 }
 
 - (BOOL)isXdisjunctionToken {
-    return [[NSArray xorTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet xorTokens] containsObject:self];
 }
 
 - (BOOL)isLeftParenthesis {
-    return [[NSArray lparTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet lparTokens] containsObject:self];
 }
 
 - (BOOL)isRightParenthesis {
-    return [[NSArray rparTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet rparTokens] containsObject:self];
 }
 
 - (BOOL)isComma {
-    return [[NSArray commaTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet commaTokens] containsObject:self];
 }
 
 - (BOOL)isSemicolon {
-    return [[NSArray semicolonTokens] indexOfObject:self] != NSNotFound;
+    return [[NSSet semicolonTokens] containsObject:self];
 }
 
 - (BOOL)isEntailment {
-    return [self isEqualToString:@"⊨"];
+    return [[NSSet entailmentTokens] containsObject:self];
 }
 
 - (BOOL)isIdentifierToken {

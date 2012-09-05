@@ -11,7 +11,7 @@
 #import "NyayaParser.h"
 #import "NyayaStore.h"
 #import "NSString+NyayaToken.h"
-#import "NSArray+NyayaToken.h"
+#import "NSSet+NyayaToken.h"
 
 @implementation SimpleParseTests
 
@@ -57,7 +57,7 @@
         STAssertEqualObjects([result description], @"T", input);
     }
     
-    for (NSString *input in [NSArray trueTokens]) {
+    for (NSString *input in [NSSet trueTokens]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
         STAssertEqualObjects([result description], @"T", input);
@@ -73,7 +73,7 @@
         STAssertEqualObjects([result description], @"F", input);
     }
     
-    for (NSString *input in [NSArray falseTokens]) {
+    for (NSString *input in [NSSet falseTokens]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
         STAssertEqualObjects([result description], @"F", input);
@@ -90,7 +90,7 @@
         STAssertEqualObjects([result description], @"¬b", input);
     }
     
-    for (NSString *conn in [NSArray notTokens]) {
+    for (NSString *conn in [NSSet notTokens]) {
         NSString *input = [NSString stringWithFormat:@"%@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
@@ -108,7 +108,7 @@
         STAssertEqualObjects([result description], @"a ∧ b", input);
     }
     
-    for (NSString *conn in [NSArray andTokens]) {
+    for (NSString *conn in [NSSet andTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
@@ -135,7 +135,7 @@
         STAssertEqualObjects([result description], @"a ↔ b", input);
     }
     
-    for (NSString *conn in [NSArray bicTokens]) {
+    for (NSString *conn in [NSSet bicTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
@@ -152,7 +152,7 @@
         STAssertEqualObjects([result description], @"a → b", input);
     }
     
-    for (NSString *conn in [NSArray impTokens]) {
+    for (NSString *conn in [NSSet impTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
@@ -169,7 +169,7 @@
         STAssertEqualObjects([result description], @"a ⊻ b", input);
     }
     
-    for (NSString *conn in [NSArray xorTokens]) {
+    for (NSString *conn in [NSSet xorTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
