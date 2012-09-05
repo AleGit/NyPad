@@ -47,10 +47,8 @@
 
 - (void)loadTestView:(UIView*)view {
     [[NSBundle mainBundle] loadNibNamed:@"StandardTestView" owner:self options:nil];
-    self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
-    [view addSubview:self.testView];
     [view insertSubview:self.testView atIndex:1];
-    
+    self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)layoutSubviews:(UIView*)view {
@@ -170,7 +168,7 @@
     
     self.inputField.enabled = YES;
     
-    [self.inputField becomeFirstResponder];
+    // [self.inputField becomeFirstResponder];
     return success;
 }
 
