@@ -14,7 +14,7 @@
 
 @implementation NyayaNode
 
-+ (id)nodeWithInput:(NSString*)input {
++ (id)formulaWithInput:(NSString*)input {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *node = [parser parseFormula];
     if (node) {

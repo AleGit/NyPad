@@ -170,7 +170,7 @@
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
-        NyayaNode *node = [NyayaNode nodeWithInput:input];
+        NyayaNode *node = [NyayaNode formulaWithInput:input];
         NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{
@@ -186,7 +186,7 @@
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
-        NyayaNode *node = [NyayaNode nodeWithInput:input];
+        NyayaNode *node = [NyayaNode formulaWithInput:input];
         NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{

@@ -14,12 +14,9 @@
     BOOL checked;
 }
 
-- (void)connectSubviews:(UIView*)view;
+- (void)loadTestView:(UIView*)view;
 - (void)layoutSubviews:(UIView*)view;
 - (void)configureSubviews:(UIView*)view;
-
-
-
 - (void)configureKeyboard;
 
 @end
@@ -48,13 +45,12 @@
     return [[[self testerClassForKey:key] alloc] init];
 }
 
-- (void)connectSubviews:(UIView*)view {
-    self.keyLabel = (UILabel*)[view viewWithTag:1];
-    self.keyField = (UITextField*)[view viewWithTag:2];
-    self.inputLabel = (UILabel*)[view viewWithTag:3];
-    self.inputField = (UITextField*)[view viewWithTag:4];
-    self.valueLabel = (UILabel*)[view viewWithTag:5];
-    self.valueField = (UITextField*)[view viewWithTag:6];
+- (void)loadTestView:(UIView*)view {
+    [[NSBundle mainBundle] loadNibNamed:@"StandardTestView" owner:self options:nil];
+    self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
+    [view addSubview:self.testView];
+    [view insertSubview:self.testView atIndex:1];
+    
 }
 
 - (void)layoutSubviews:(UIView*)view {
@@ -81,6 +77,8 @@
         [self unloadAccessoryView];
     }
 }
+
+
 
 - (void)configureAccessoryView {
     self.inputField.inputView = self.accessoryView;
@@ -130,7 +128,7 @@
 - (void)firstTest:(UIView *)view {
      NSLog(@"%@ firstTest", [self class] );
     
-    [self connectSubviews:view];
+    [self loadTestView:view];
     [self layoutSubviews:view];
     [self configureSubviews:view];
     
@@ -160,8 +158,9 @@
 
 - (void)removeTest {
     NSLog(@"%@ removeTest", [self class] );
-    BOOL success = [self clearTestView];
-    [self.delegate tester:self didRemoveTest:success];
+    [self.testView removeFromSuperview];
+    [self setTestView:nil];
+    [self.delegate tester:self didRemoveTest:YES];
 }
 
 #pragma mark -
@@ -180,9 +179,6 @@
 }
 
 - (BOOL)clearTestView {
-    self.keyLabel.text = @"";
-    self.inputLabel.text = @"";
-    self.valueLabel.text = @"";
     
     self.keyField.text = @"";
     self.inputField.text = @"";

@@ -12,6 +12,13 @@
 
 @implementation NyayaNode (Description)
 
+- (NSString*)description:(NyayaNode*)subformula {
+    NSString *desc = _descriptionCache != nil ? _descriptionCache : [self description];
+    NSString *subd = subformula->_descriptionCache;
+    return [desc stringByReplacingOccurrencesOfString: subd
+                                           withString: [NSString stringWithFormat:@"[ %@ ]", subd]];
+}
+
 - (NSString*)description {
     _descriptionCache = _symbol;
     return _descriptionCache;

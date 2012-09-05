@@ -36,13 +36,14 @@
 
 @interface NyTuTester : NSObject <NyTuTester, NyAccessoryController>
 
-@property (nonatomic, weak) UILabel *keyLabel;
-@property (nonatomic, weak) UILabel *valueLabel;
-@property (nonatomic, weak) UILabel *inputLabel;
+@property (nonatomic, strong) IBOutlet UIView *testView;
+@property (nonatomic, weak) IBOutlet UILabel *keyLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *inputLabel;
 
-@property (nonatomic, weak) UITextField *keyField;
-@property (nonatomic, weak) UITextField *valueField;
-@property (nonatomic, weak) UITextField *inputField;
+@property (nonatomic, weak) IBOutlet UITextField *keyField;
+@property (nonatomic, weak) IBOutlet UITextField *valueField;
+@property (nonatomic, weak) IBOutlet UITextField *inputField;
 
 @end
 

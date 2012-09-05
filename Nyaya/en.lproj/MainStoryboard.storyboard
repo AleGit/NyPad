@@ -143,48 +143,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dWY-Ci-OMh">
-                                <rect key="frame" x="20" y="73" width="500" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="3U6-RN-0A5">
-                                <rect key="frame" x="20" y="102" width="500" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.91602988138686148" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="h9B-ir-RsS">
-                                <rect key="frame" x="20" y="141" width="500" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="always" id="cMQ-50-wGq">
-                                <rect key="frame" x="20" y="170" width="500" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.87362384796142578" green="0.95900112390518188" blue="0.78339529037475586" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="CGz-en-3DY">
-                                <rect key="frame" x="20" y="209" width="500" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="oJ4-jq-M8M">
-                                <rect key="frame" x="20" y="238" width="500" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.99353349208831787" green="0.70202070474624634" blue="0.70938962697982788" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <webView contentMode="scaleToFill" id="oFz-Le-iqp">
                                 <rect key="frame" x="0.0" y="306" width="540" height="319"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -192,7 +150,7 @@
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" red="0.9934573769569397" green="0.87960457801818848" blue="0.70172232389450073" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
@@ -805,105 +763,6 @@
         <image name="i4.png" width="30" height="30"/>
         <image name="i5.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="NyBtDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="action:" candidateClass="UIButton"/>
-                <relationship kind="action" name="back:" candidateClass="UIButton"/>
-                <relationship kind="action" name="didEndOnExit:"/>
-                <relationship kind="action" name="dismiss:" candidateClass="UIButton"/>
-                <relationship kind="action" name="editingChanged:"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
-                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
-                <relationship kind="action" name="press:" candidateClass="UIButton"/>
-                <relationship kind="action" name="send:"/>
-                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="actionButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
-                <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="cnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="contradictionLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dismissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="inputField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="inputName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="nnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="parsedField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="resultView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="satisfiabilityLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="stdField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="stdLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="tautologyLabel" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
-        </class>
-        <class className="NyDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
-        </class>
-        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
-        </class>
-        <class className="NyMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
-        </class>
-        <class className="NyPgDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
-        </class>
-        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
-        </class>
-        <class className="NyTuTestViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuTestViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="check:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="next:"/>
-                <relationship kind="outlet" name="checkButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="instructionsView" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NyWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyayaBddView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaBddView.h"/>
-        </class>
-        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
