@@ -119,6 +119,7 @@
 		1178CCB215B541B000FD21CA /* NyayaParserBasicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */; };
 		1178CCB815B56F0B00FD21CA /* NyayaParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */; };
 		1178CCBB15B5983400FD21CA /* NyayaNodeNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */; };
+		117C723B15F8B8BE00C8C10A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117C723A15F8B8BE00C8C10A /* QuartzCore.framework */; };
 		1183B6CE15B70AC10076D92C /* NyayaNodeSubFormulasTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */; };
 		1187E23E15D0F3940048E153 /* SimpleParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1187E23D15D0F3940048E153 /* SimpleParseTests.m */; };
 		1187E24115D1072C0048E153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1187E24315D1072C0048E153 /* Localizable.strings */; };
@@ -329,6 +330,7 @@
 		1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserTests.m; sourceTree = "<group>"; };
 		1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeNormalFormTests.h; sourceTree = "<group>"; };
 		1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeNormalFormTests.m; sourceTree = "<group>"; };
+		117C723A15F8B8BE00C8C10A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1183B6CC15B70AC10076D92C /* NyayaNodeSubFormulasTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeSubFormulasTests.h; sourceTree = "<group>"; };
 		1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeSubFormulasTests.m; sourceTree = "<group>"; };
 		1187E23C15D0F3940048E153 /* SimpleParseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParseTests.h; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				117C723B15F8B8BE00C8C10A /* QuartzCore.framework in Frameworks */,
 				11C375EE15B3D23D005C5C9C /* UIKit.framework in Frameworks */,
 				11C375F015B3D23D005C5C9C /* Foundation.framework in Frameworks */,
 				11C375F215B3D23D005C5C9C /* CoreGraphics.framework in Frameworks */,
@@ -696,6 +699,7 @@
 		11C375DE15B3D23D005C5C9C = {
 			isa = PBXGroup;
 			children = (
+				117C723A15F8B8BE00C8C10A /* QuartzCore.framework */,
 				11C375F315B3D23D005C5C9C /* Nyaya */,
 				11C3761C15B3D23D005C5C9C /* NyayaTests */,
 				11C375EC15B3D23D005C5C9C /* Frameworks */,

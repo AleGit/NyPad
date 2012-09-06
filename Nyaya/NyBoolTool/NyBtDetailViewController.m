@@ -45,7 +45,7 @@
 
 - (void)configureAccessoryView {
     [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
-    self.inputField.inputAccessoryView = self.accessoryView;
+    self.inputField.inputView = self.accessoryView;
 }
 
 - (void)unloadAccessoryView {
@@ -113,9 +113,8 @@
         self.inputField.delegate = self;
         
         self.navigationItem.title = [self.detailItem title];
-        self.view.backgroundColor = [UIColor nyHalfBlue];
-        self.resultView.backgroundColor = nil;
-        self.bddView.backgroundColor = nil;
+        
+        
         [self.inputField resignFirstResponder];
         [self resetOutputViews];
         [self compute:self.inputField.text];
@@ -124,6 +123,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.resultView.backgroundColor = nil;
+    self.bddView.backgroundColor = nil;
+    self.view.backgroundColor = [UIColor nyHalfBlue];
+    
     [self resetOutputViews];
     [self loadAccessoryView];
     [self.inputField becomeFirstResponder];
@@ -155,6 +159,8 @@
 
 - (void)resetOutputViews {
     
+    
+    self.stdField.text = @"";
     self.nnfField.text = @"";
     self.cnfField.text = @"";
     self.dnfField.text = @"";
@@ -184,6 +190,15 @@
 }
 
 - (void)compute:(NSString*)input {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CALC_DRAW_TITLE",nil)
+                                                    message:NSLocalizedString(@"CALC_DRAW_MESSAGE", nil)
+                                                   delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+    UIActivityIndicatorView *progress= [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(125, 50, 30, 30)];
+    progress.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [alert addSubview:progress];
+    [progress startAnimating];
+    
+    [alert show];
     
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
@@ -251,21 +266,33 @@
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                 self.navigationItem.title = self.inputName.text;
                 [self adjustResultViewContent:bddLevelCount];
-                // [self.inputField resignFirstResponder];
-
+                                
                 
+
+                [progress stopAnimating];
+                [alert dismissWithClickedButtonIndex:0 animated:YES];
+                
+            });
+            
+            dispatch_async(mq, ^{
+                [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
+                // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
             });
             
         }
     });
     
+    
+    
+    
 }
 
 - (CGSize)textViewSize:(UITextView*)textView {
     CGFloat height = textView.contentSize.height-16;
-    if (height > 120.0) {
+    if (height > 105.0) {
         textView.scrollEnabled = YES;
-        height = 120.0;
+        height = 105.0;
+        
     }
     else textView.scrollEnabled = NO;
     

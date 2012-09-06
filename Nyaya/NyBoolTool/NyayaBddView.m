@@ -8,6 +8,7 @@
 
 #import "NyayaBddView.h"
 #import "UIColor+Nyaya.h"
+// #import <QuartzCore/QuartzCore.h>
 
 @interface NyayaBddView () {
     UILabel *bottom;
@@ -18,7 +19,10 @@
 
 @implementation NyayaBddView
 
-
+//+(Class)layerClass
+//{
+//    return [CATiledLayer class];
+//}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,6 +32,54 @@
         
     }
     return self;
+}
+
+
+- (void)drawRect:(CGRect)rect {
+    // UIView uses the existence of -drawRect: to determine if should allow its CALayer
+    // to be invalidated, which would then lead to the layer creating a backing store and
+    // -drawLayer:inContext: being called.
+    // By implementing an empty -drawRect: method, we allow UIKit to continue to implement
+    // this logic, while doing our real drawing work inside of -drawLayer:inContext:
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self drawDiagram:context];
+}
+
+//- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
+//{
+//    [self drawDiagram:context];
+//}
+
+- (void)drawDiagram:(CGContextRef)context {
+    // Do all your drawing here. Do not use UIGraphics to do any drawing, use Core Graphics instead.
+    bottom = (UILabel*)[self viewWithTag:1];
+    top = (UILabel*)[self viewWithTag:2];
+    
+    bottom.backgroundColor = [UIColor nyWrongColor];
+    top.backgroundColor = [UIColor nyRightColor];
+    // self.backgroundColor = [UIColor nyLightGreyColor];
+    
+    if (!self.bddNode.isLeaf) {
+        top.hidden = NO;
+        bottom.hidden = NO;
+        
+        CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
+        
+        CGSize offset = CGSizeMake(pos.x, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
+        
+        if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
+    }
+    else if (self.bddNode.id == 0) {
+        top.hidden = YES;
+        bottom.hidden = NO;
+    }
+    else if (self.bddNode.id == 1) {
+        bottom.hidden = YES;
+        top.hidden = NO;
+        
+    }
+    
 }
 
 - (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
@@ -86,7 +138,7 @@
             CGSize nextSize = CGSizeMake(offset.width * rightFraction, offset.height);
             if (node.leftBranch.isLeaf && node.leftBranch.id == 1) xoffset *=-1.0;
             CGPoint rPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height);
-                        
+            
             CGContextAddLineToPoint(context, rPos.x, rPos.y);
             CGContextStrokePath(context);
             [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
@@ -111,45 +163,6 @@
     
     
     [text drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
-}
-
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    bottom = (UILabel*)[self viewWithTag:1];
-    top = (UILabel*)[self viewWithTag:2];
-    
-    bottom.backgroundColor = [UIColor nyWrongColor];
-    top.backgroundColor = [UIColor nyRightColor];
-    // self.backgroundColor = [UIColor nyLightGreyColor];
-    
-    if (!self.bddNode.isLeaf) {
-        top.hidden = NO;
-        bottom.hidden = NO;
-        
-        CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
-        
-        CGSize offset = CGSizeMake(pos.x, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
-        
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
-        
-        
-        if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
-    }
-    else if (self.bddNode.id == 0) {
-        top.hidden = YES;
-        bottom.hidden = NO;
-    }
-    else if (self.bddNode.id == 1) {
-        bottom.hidden = YES;
-        top.hidden = NO;
-        
-    }
-    
-    
 }
 
 
