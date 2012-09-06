@@ -247,10 +247,18 @@
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] imf];
     NyayaNode *second = [[self secondNode] imf];
+    
     return [NyayaNode conjunction:[NyayaNode disjunction:first
                                                     with:second]
                              with:[NyayaNode  disjunction:[NyayaNode negation:first]
                                                      with:[NyayaNode negation:second]]];
+    
+    /*
+    return [NyayaNode disjunction:[NyayaNode conjunction:[NyayaNode negation:first]
+                                                    with: second]
+                             with:[NyayaNode  conjunction:first
+                                                     with:[NyayaNode negation:second]]];
+     */
 }
 
 @end

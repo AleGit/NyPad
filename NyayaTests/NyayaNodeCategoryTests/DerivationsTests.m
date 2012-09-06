@@ -42,6 +42,48 @@
     
 }
 
+- (void)testAllreadyImplicationFree {
+    for (NSString *input in @[@"!a", @"!a", @"a|b"
+         ]) {
+        NyayaNode *n = [NyayaNode formulaWithInput:input];
+        NyayaNode *i = [n imf];
+        STAssertEqualObjects(i, n, nil);
+    }
+}
+
+- (void)testImplicationImf {
+    NyayaNode *n = [NyayaNode formulaWithInput:@"a>b"];
+    NyayaNode *i = [n imf];
+    NyayaNode *e = [NyayaNode formulaWithInput:@"!a|b"];
+    STAssertEqualObjects(i, e, nil);
+}
+
+- (void)testBiconditionalImf {
+    NyayaNode *n = [NyayaNode formulaWithInput:@"a=b"];
+    NyayaNode *i = [n imf];
+    NyayaNode *e = [NyayaNode formulaWithInput:@"(!a|b)&(!b|a)"];
+    STAssertEqualObjects(i, e, nil);
+}
+
+
+
+- (void)testFxorT {
+    NyayaNode *n = [NyayaNode formulaWithInput:@"F^T"];
+    NyayaNode *i = [n imf];
+    NyayaNode *e = [NyayaNode formulaWithInput:@"(F|T)&(!F|!T)"];
+    STAssertEqualObjects(i, e, nil);
+}
+
+
+- (void)testXorImf {
+    NyayaNode *n = [NyayaNode formulaWithInput:@"a^b"];
+    NyayaNode *i = [n imf];
+    NyayaNode *e = [NyayaNode formulaWithInput:@"(a|b)&(!a|!b) "];
+    STAssertEqualObjects(i, e, nil);
+    
+    
+}
+
 
 
 @end

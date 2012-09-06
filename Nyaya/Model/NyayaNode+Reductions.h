@@ -8,8 +8,16 @@
 
 #import "NyayaNode.h"
 
+@interface NSSet (Reductions)
+- (BOOL)containsComplementaryNodes;
+- (BOOL)containsTop;
+- (BOOL)containsBottom;
+@end
+
 @interface NyayaNode (Reductions)
 
 - (NyayaNode*)reduce;
+- (NSMutableSet*)disjunctiveSet;
+- (NSMutableSet*)conjunctiveSet;
 
 @end

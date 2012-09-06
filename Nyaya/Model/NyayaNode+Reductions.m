@@ -13,7 +13,38 @@
 #import "NyayaNode+Creation.h"
 #import "NSString+NyayaToken.h"
 
+@implementation NSSet (Reductions)
+- (BOOL)containsComplementaryNodes {
+    __block BOOL contains = NO;
+    [self enumerateObjectsUsingBlock:^(NyayaNode *obj, BOOL *stop) {
+        NyayaNode *negation = [[NyayaNode negation:obj] reduce];
+        if ([self containsObject:negation]) {
+            contains = YES;
+            *stop = YES;
+        }
+    }];
+    return contains;
+}
+
+- (BOOL)containsTop {
+    return [self containsObject:[NyayaNode top]];
+}
+
+- (BOOL)containsBottom {
+    return [self containsObject:[NyayaNode bottom]];
+}
+@end
+
+
 @implementation NyayaNode (Reductions)
+
+- (NSMutableSet*)disjunctiveSet {
+    return nil;
+}
+
+- (NSMutableSet*)conjunctiveSet {
+    return nil;
+}
 
 - (NyayaNode*)reduce {
     if ([self.nodes count] > 0) {
@@ -60,18 +91,37 @@
 @end
 
 @implementation NyayaNodeDisjunction (Reductions)
+
+- (NSMutableSet*)disjunctiveSet {
+    
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NyayaNode *node in self.nodes) {
+        NyayaNode *r = [node reduce];
+        NSSet *s = [r disjunctiveSet];
+        if (!s) [set addObject:r];
+        else [set unionSet:s];
+        
+    }
+    [set removeObject:[NyayaNode bottom]];
+    return set;
+}
+
 - (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    if ([reducedFirstNode.symbol isTrueToken]) return reducedFirstNode;
+
+    NSMutableSet *set = [self disjunctiveSet];
     
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
-    if ([reducedFirstNode.symbol isFalseToken] || [reducedSecondNode.symbol isTrueToken]) return reducedSecondNode;
+    if ([set count] == 0) return [NyayaNode bottom];
     
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return reducedFirstNode;
+    if ([set containsTop] || [set containsComplementaryNodes]) return [NyayaNode top]; 
     
-    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode top];
+    NyayaNode *node = nil;
+    for (NyayaNode *n in set) {
+        if (!node) node = n;
+        else node = [NyayaNode disjunction:node with:n];
+    }
+    return node;
     
-    return [NyayaNode disjunction:reducedFirstNode with:reducedSecondNode];
 }
 @end
 
@@ -80,18 +130,34 @@
 @end
 
 @implementation NyayaNodeConjunction (Reductions)
+- (NSMutableSet*)conjunctiveSet {
+    
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NyayaNode *node in self.nodes) {
+        NyayaNode *r = [node reduce];
+        NSSet *s = [r conjunctiveSet];
+        if (!s) [set addObject:r];
+        else [set unionSet:s];
+        
+    }
+    [set removeObject:[NyayaNode top]];
+    return set;
+}
+
 - (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    if ([reducedFirstNode.symbol isFalseToken]) return reducedFirstNode;
+    NSMutableSet *set = [self conjunctiveSet];
     
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
-    if ([reducedFirstNode.symbol isFalseToken] || [reducedSecondNode.symbol isFalseToken]) return reducedSecondNode;
+    if ([set count] == 0) return [NyayaNode top];
     
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return reducedFirstNode;
+    if ([set containsBottom] || [set containsComplementaryNodes]) return [NyayaNode bottom];
     
-    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode bottom];
-    
-    return [NyayaNode conjunction:reducedFirstNode with:reducedSecondNode];
+    NyayaNode *node = nil;
+    for (NyayaNode *n in set) {
+        if (!node) node = n;
+        else node = [NyayaNode conjunction:node with:n];
+    }
+    return node;
 }
 @end
 
@@ -99,12 +165,20 @@
 @end
 
 @implementation NyayaNodeXdisjunction (Reductions)
+
 - (NyayaNode*)reduce {
+    return [[self imf] reduce];
+    
+    /*
     NyayaNode *reducedFirstNode = [[self firstNode] reduce];
     NyayaNode *reducedSecondNode = [[self secondNode] reduce];
     
     if ([reducedFirstNode.symbol isFalseToken]) return reducedSecondNode;
     if ([reducedSecondNode.symbol isFalseToken]) return reducedFirstNode;
+
+    
+    
+    
     
     if ([reducedFirstNode.symbol isTrueToken] && reducedSecondNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedSecondNode firstNode];
     if ([reducedFirstNode.symbol isTrueToken]) return [NyayaNode negation:reducedSecondNode];
@@ -116,25 +190,33 @@
     
     if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode top];
     
+    // 
+   
+
     return [NyayaNode xdisjunction:reducedFirstNode with:reducedSecondNode];
+ */
+    
+     
 }
 @end
 
 @implementation NyayaNodeImplication (Reductions)
+
 - (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
-    
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
-    if ([reducedFirstNode.symbol isTrueToken] || [reducedSecondNode.symbol isTrueToken]) return reducedSecondNode;
-    
-    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
-    
-    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
-    
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
-    
-    return [NyayaNode implication:reducedFirstNode with:reducedSecondNode];
+    return [[self imf] reduce];
+//    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
+//    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
+//    
+//    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
+//    if ([reducedFirstNode.symbol isTrueToken] || [reducedSecondNode.symbol isTrueToken]) return reducedSecondNode;
+//    
+//    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
+//    
+//    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
+//    
+//    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
+//    
+//    return [NyayaNode implication:reducedFirstNode with:reducedSecondNode];
 }
 
 @end
@@ -144,23 +226,24 @@
 
 @implementation NyayaNodeBicondition (Reductions)
 - (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
-    
-    if ([reducedFirstNode.symbol isTrueToken]) return reducedSecondNode;
-    if ([reducedSecondNode.symbol isTrueToken]) return reducedFirstNode;
-    
-    if ([reducedFirstNode.symbol isFalseToken] && reducedSecondNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedSecondNode firstNode];
-    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode negation:reducedSecondNode];
-    
-    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
-    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
-    
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
-    
-    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode bottom];
-    
-    return [NyayaNode bicondition:reducedFirstNode with:reducedSecondNode];
+    return [[self imf] reduce];
+//    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
+//    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
+//    
+//    if ([reducedFirstNode.symbol isTrueToken]) return reducedSecondNode;
+//    if ([reducedSecondNode.symbol isTrueToken]) return reducedFirstNode;
+//    
+//    if ([reducedFirstNode.symbol isFalseToken] && reducedSecondNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedSecondNode firstNode];
+//    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode negation:reducedSecondNode];
+//    
+//    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
+//    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
+//    
+//    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
+//    
+//    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode bottom];
+//    
+//    return [NyayaNode bicondition:reducedFirstNode with:reducedSecondNode];
 }
 @end
 
