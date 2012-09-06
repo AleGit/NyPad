@@ -8,7 +8,7 @@
 
 #import "NyayaBddView.h"
 #import "UIColor+Nyaya.h"
-// #import <QuartzCore/QuartzCore.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface NyayaBddView () {
     UILabel *bottom;
@@ -19,10 +19,10 @@
 
 @implementation NyayaBddView
 
-//+(Class)layerClass
-//{
-//    return [CATiledLayer class];
-//}
++(Class)layerClass
+{
+    return [CATiledLayer class];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -42,14 +42,14 @@
     // By implementing an empty -drawRect: method, we allow UIKit to continue to implement
     // this logic, while doing our real drawing work inside of -drawLayer:inContext:
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self drawDiagram:context];
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [self drawDiagram:context];
 }
 
-//- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
-//{
-//    [self drawDiagram:context];
-//}
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
+{
+    [self drawDiagram:context];
+}
 
 - (void)drawDiagram:(CGContextRef)context {
     // Do all your drawing here. Do not use UIGraphics to do any drawing, use Core Graphics instead.
@@ -157,12 +157,15 @@
     }
     else text = @"...";
     
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
     
     CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
     
     
+    /* draw text */
+    UIGraphicsPushContext(context);
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
     [text drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+    UIGraphicsPopContext();
 }
 
 

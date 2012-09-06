@@ -269,17 +269,18 @@
                                 
                 
 
-                [progress stopAnimating];
-                [alert dismissWithClickedButtonIndex:0 animated:YES];
+                
                 
             });
             
-            dispatch_async(mq, ^{
-                [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
-                // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
-            });
-            
         }
+        
+        dispatch_async(mq, ^{
+            [progress stopAnimating];
+            [alert dismissWithClickedButtonIndex:0 animated:YES];
+            [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
+            // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
+        });
     });
     
     
