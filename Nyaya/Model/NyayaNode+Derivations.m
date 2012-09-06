@@ -22,7 +22,7 @@
     node->_symbol = self.symbol;
     node->_displayValue = self.displayValue;
     node->_evaluationValue = self.evaluationValue;
-    node->_nodes = [nodes copy];
+    node->_nodes = [nodes mutableCopy];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     
@@ -63,6 +63,30 @@
     // precondition 'self' is implication free and in negation normal form
     return [self copy];
 }
+
+/* ********************* */
+/* ********************* */
+
+- (NSSet*)subNodeSet {
+    NSMutableSet *set = [NSMutableSet setWithObject:self];
+    
+    NSArray *sets = [self valueForKeyPath:@"nodes.subNodeSet"];
+    for (NSSet* nodeset in sets) {
+        [set unionSet:nodeset];
+    }
+    
+    return set;
+}
+
+//- (NyayaNode*)compressWith:(NSSet*)subNodeSet {
+//    NyayaNode *node = nil;
+//}
+//
+//- (NyayaNode*)compress {
+//    NyayaNode *std = [self std]; // remove sequence and entailment
+//    return [std compressWith:[std subNodeSet]];
+//}
+
 
 @end
 

@@ -10,6 +10,8 @@
 
 @interface NyayaNode (Creation)
 
++ (NyayaNode*)top;
++ (NyayaNode*)bottom;
 + (NyayaNode*)atom:(NSString*)name;
 + (NyayaNode*)negation:(NyayaNode*)firstNode;
 + (NyayaNode*)conjunction:(NyayaNode*)firstNode with:(NyayaNode*)secondNode;

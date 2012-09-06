@@ -16,6 +16,14 @@
 @implementation NyayaNode (Creation)
 
 #pragma mark node factory
++ (NyayaNode *)top {
+    return [self atom:@"1"];
+}
+
++ (NyayaNode *)bottom {
+    return [self atom:@"0"];
+}
+
 + (NyayaNode*)atom:(NSString*)name {
     NyayaNode *node = nil;
     if ([name isTrueToken]) {
@@ -40,7 +48,7 @@
     NyayaNode*node=[[NyayaNodeNegation alloc] init];
     node->_symbol = @"¬";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -50,7 +58,7 @@
     NyayaNode*node=[[NyayaNodeConjunction alloc] init];
     node->_symbol = @"∧";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -60,7 +68,7 @@
     NyayaNode*node=[[NyayaNodeSequence alloc] init];
     node->_symbol = @";";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -70,7 +78,7 @@
     NyayaNode*node=[[NyayaNodeDisjunction alloc] init];
     node->_symbol = @"∨";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -80,7 +88,7 @@
     NyayaNode*node=[[NyayaNodeImplication alloc] init];
     node->_symbol = @"→";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -90,7 +98,7 @@
     NyayaNode*node=[[NyayaNodeEntailment alloc] init];
     node->_symbol = @"⊨";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -100,7 +108,7 @@
     NyayaNode*node=[[NyayaNodeBicondition alloc] init];
     node->_symbol = @"↔";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -110,7 +118,7 @@
     NyayaNode*node=[[NyayaNodeXdisjunction alloc] init];
     node->_symbol = @"⊻"; // @"⊕";
     node->_displayValue = NyayaUndefined;
-    node->_nodes = [NSArray arrayWithObjects:firstNode,secondNode, nil];
+    node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
@@ -121,7 +129,7 @@
     NyayaNode*node=[[NyayaNodeFunction alloc] init];
     // node->isa = [NyayaNodeFunction class];
     node->_symbol = name;
-    node->_nodes = [nodes copy];
+    node->_nodes = [nodes mutableCopy];
     
     [node setValue:node forKeyPath:@"nodes.parent"];
     return node;

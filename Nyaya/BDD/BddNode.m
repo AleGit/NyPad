@@ -280,6 +280,11 @@
     return 1 + (leftLevelCount > rightLevelCount ? leftLevelCount : rightLevelCount);
 }
 
+- (NSUInteger)nodeCount {
+    // if (self.isLeaf) return 0;
+    return 1 + [self.leftBranch nodeCount] + [self.rightBranch nodeCount];
+}
+
 
 #pragma mark - protocol NSObject
 /*

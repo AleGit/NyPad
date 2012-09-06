@@ -20,4 +20,10 @@
 - (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)
 - (NyayaNode*)dnf;      // equivalent formula in disjunctive normal form (includes nnf, imf)
 
+/* ********************* */
+/* ********************* */
+
+- (NSSet*)subNodeSet;
+// - (NyayaNode*)compressWith;
+
 @end

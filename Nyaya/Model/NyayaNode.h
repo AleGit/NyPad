@@ -22,6 +22,8 @@
 
 + (id)formulaWithInput:(NSString*)input;
 
+- (NyayaNode*)reducedFormula;
+
 - (TruthTable*)truthTable;
 - (BddNode*)binaryDecisionDiagram;
 

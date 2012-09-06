@@ -13,6 +13,7 @@
 
 #import "NyayaNode.h"
 #import "NyBoolToolEntry.h"
+#import "NSString+NyayaToken.h"
 
 @interface NyBtDetailViewController () <NyAccessoryController,UITextFieldDelegate> {
     dispatch_queue_t queue;
@@ -44,7 +45,7 @@
 
 - (void)configureAccessoryView {
     [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
-    self.inputField.inputView = self.accessoryView;
+    self.inputField.inputAccessoryView = self.accessoryView;
 }
 
 - (void)unloadAccessoryView {
@@ -80,13 +81,14 @@
 }
 
 - (IBAction)send:(id)sender {
-    self.resultView.hidden = NO;
-    [self compute];
+    [self compute: self.inputField.text];
+    [self.inputField resignFirstResponder];
 }
 
 - (IBAction)didEndOnExit:(id)sender {
-    self.resultView.hidden = NO;
-    [self compute];
+    [self compute:self.inputField.text];
+    [self.inputField resignFirstResponder];
+    
 }
 
 - (IBAction)editingChanged:(id)sender {
@@ -110,12 +112,13 @@
         self.inputField.text = ((NyBoolToolEntry*)self.detailItem).input;
         self.inputField.delegate = self;
         
-        [self.inputField becomeFirstResponder];
-        
         self.navigationItem.title = [self.detailItem title];
         self.view.backgroundColor = [UIColor nyHalfBlue];
         self.resultView.backgroundColor = nil;
         self.bddView.backgroundColor = nil;
+        [self.inputField resignFirstResponder];
+        [self resetOutputViews];
+        [self compute:self.inputField.text];
     }
 }
 
@@ -127,7 +130,7 @@
     
     queue = dispatch_queue_create("at.maringele.nyaya.booltool.queue", DISPATCH_QUEUE_SERIAL);
     
-    if (self.detailItem) [self configureView];
+    // if (self.detailItem) [self configureView];
 }
 
 - (void)viewDidUnload {
@@ -151,7 +154,6 @@
 }
 
 - (void)resetOutputViews {
-    self.resultView.hidden = YES;
     
     self.nnfField.text = @"";
     self.cnfField.text = @"";
@@ -181,8 +183,8 @@
     });
 }
 
-- (void)compute {
-    NSString *input = self.inputField.text;
+- (void)compute:(NSString*)input {
+    
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
         
@@ -197,17 +199,18 @@
         });
         
         if (node.isWellFormed) {
-            NSString *stdDescription = @""; // [[node std] description];
-            BOOL sat = node.truthTable.isSatisfiable;
-            BOOL tau = node.truthTable.isTautology;
-            BOOL con = node.truthTable.isContradiction;
             
+            NSString *stdDescription = [node.reducedFormula description];
+            
+            BOOL tau = [stdDescription isTrueToken] || node.truthTable.isTautology;
+            BOOL con = [stdDescription isFalseToken] || node.truthTable.isContradiction;
+            BOOL sat = !con;
+                        
             NSString *nf = nil;
             if (tau) nf = @"T";
             else if (con) nf = @"F";
             
             dispatch_async(mq, ^{
-                self.stdField.text = stdDescription;
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                 self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
                 self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
@@ -217,6 +220,7 @@
                 self.contradictionLabel.textColor = con ? [UIColor blackColor] : [UIColor whiteColor];
                 
                 if (nf) {
+                    self.stdField.text = nf;
                     self.nnfField.text = nf;
                     self.cnfField.text = nf;
                     self.dnfField.text = nf;
@@ -234,6 +238,7 @@
                 NSString *nnfdescription = cnfdescription <= dnfdescription ? cnfdescription : dnfdescription; // node.negationNormalForm.description;
                 
                 dispatch_async(mq, ^{
+                    self.stdField.text = stdDescription;
                     self.nnfField.text = nnfdescription;
                     self.cnfField.text = cnfdescription;
                     self.dnfField.text = dnfdescription;
@@ -243,10 +248,12 @@
             }
             
             dispatch_async(mq, ^{
-                [self.inputField becomeFirstResponder];
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                 self.navigationItem.title = self.inputName.text;
                 [self adjustResultViewContent:bddLevelCount];
+                // [self.inputField resignFirstResponder];
+
+                
             });
             
         }

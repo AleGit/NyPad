@@ -32,77 +32,85 @@
 
 - (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
     static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
-    CGSize nextSize = CGSizeMake(offset.width/2, offset.height);
+    NSString *text = nil;
     
-    // draw left branch
-    CGContextSetLineWidth(context, 3.0);
-    
-    CGContextSetLineDash(context, 30.0, arr, 2);
-    // CGContextSetStrokeColorWithColor(context, [[UIColor nyWrongColor] CGColor]);
-    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
-    
-    CGContextMoveToPoint(context, pos.x, pos.y);
-    
-    if (node.leftBranch.isLeaf) {
+    if (offset.width>20.0) {
         
-        if (node.leftBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
-        else CGContextAddLineToPoint(context, top.center.x, top.center.y);
-        CGContextStrokePath(context);
+        CGFloat leftNodeCount = (CGFloat)[node.leftBranch nodeCount];
+        CGFloat rightNodeCount = (CGFloat)[node.rightBranch nodeCount];
+        CGFloat nodeCount = leftNodeCount + rightNodeCount;
+        
+        CGFloat leftFraction = leftNodeCount / nodeCount;
+        CGFloat rightFraction = rightNodeCount / nodeCount;
+        
+        // draw left branch
+        CGContextSetLineWidth(context, 3.0);
+        CGContextSetLineDash(context, 30.0, arr, 2);
+        CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+        CGContextMoveToPoint(context, pos.x, pos.y);
+        
+        if (node.leftBranch.isLeaf) {
+            
+            if (node.leftBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
+            else CGContextAddLineToPoint(context, top.center.x, top.center.y);
+            CGContextStrokePath(context);
+        }
+        else {
+            
+            CGFloat xoffset = -offset.width * rightFraction;    // draw left branch to the left
+            CGSize nextSize = CGSizeMake(offset.width * leftFraction, offset.height);
+            if (node.rightBranch.isLeaf && node.rightBranch.id == 0) xoffset *=-1.0;
+            CGPoint lPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height);
+            
+            CGContextAddLineToPoint(context, lPos.x, lPos.y);
+            CGContextStrokePath(context);
+            [self drawNode:node.leftBranch at:lPos inContext:context offset:nextSize];
+        }
+        
+        // draw right branch
+        CGContextSetLineWidth(context, 3.0);
+        CGContextSetLineDash(context, 0.0, nil, 0);
+        CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+        CGContextMoveToPoint(context, pos.x, pos.y);
+        
+        if (node.rightBranch.isLeaf) {
+            if (node.rightBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
+            else CGContextAddLineToPoint(context, top.center.x, top.center.y);
+            CGContextStrokePath(context);
+            
+        }
+        else{
+            
+            // CGFloat xoffset = node.leftBranch.isLeaf && node.leftBranch.id == 1 ? -offset.width : offset.width;    // draw  right branch to the right
+            CGFloat xoffset = offset.width * leftFraction;    // draw left branch to the left
+            CGSize nextSize = CGSizeMake(offset.width * rightFraction, offset.height);
+            if (node.leftBranch.isLeaf && node.leftBranch.id == 1) xoffset *=-1.0;
+            CGPoint rPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height);
+                        
+            CGContextAddLineToPoint(context, rPos.x, rPos.y);
+            CGContextStrokePath(context);
+            [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
+            
+        }
+        
+        
+        // draw node
+        CGContextSetRGBFillColor(context, 1, 1, 1, 0.9);
+        
+        CGContextSetLineWidth(context, 3.0);
+        CGContextAddEllipseInRect(context, CGRectMake(pos.x-21.0, pos.y-21.0,43.0,43.0));
+        CGContextDrawPath(context, kCGPathEOFillStroke);
+        
+        text = node.name;
     }
-    else {
-        CGFloat xoffset = -offset.width;    // draw left branch to the left
-        
-        if (node.rightBranch.isLeaf && node.rightBranch.id==0)  // but the right branch is drawn to the left
-            xoffset *= -1.0;
-        
-        CGPoint lPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height-offset.width/4.0);
-        
-        
-        CGContextAddLineToPoint(context, lPos.x, lPos.y);
-        CGContextStrokePath(context);
-        [self drawNode:node.leftBranch at:lPos inContext:context offset:nextSize];
-    }
+    else text = @"...";
     
-    // draw right branch
-    CGContextSetLineWidth(context, 3.0);
-    CGContextSetLineDash(context, 0.0, nil, 0);
-
-    // CGContextSetStrokeColorWithColor(context, [[UIColor nyRightColor] CGColor]);
-    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
-    CGContextMoveToPoint(context, pos.x, pos.y);
-    
-    if (node.rightBranch.isLeaf) {
-        if (node.rightBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
-        else CGContextAddLineToPoint(context, top.center.x, top.center.y);
-        CGContextStrokePath(context);
-
-    }
-    else {
-        CGFloat xoffset = offset.width; // draw the right branch to the right
-        
-        if (node.leftBranch.isLeaf && node.rightBranch.id==1)   // but the left branch is drawn to th right
-            xoffset *= -1.0;
-        
-        CGPoint rPos = CGPointMake(pos.x + xoffset, pos.y + offset.height-offset.width/4.0);
-        CGContextAddLineToPoint(context, rPos.x, rPos.y);
-        CGContextStrokePath(context);
-        [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
-        
-    }
-    
-
-    // draw node
-    CGContextSetRGBFillColor(context, 1, 1, 1, 0.9);
-    
-    CGContextSetLineWidth(context, 3.0);
-    CGContextAddEllipseInRect(context, CGRectMake(pos.x-21.0, pos.y-21.0,43.0,43.0));
-    CGContextDrawPath(context, kCGPathEOFillStroke);
-    
-    CGSize size = [node.name sizeWithFont:[UIFont systemFontOfSize:23]];
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
     
     CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
     
-    [node.name drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+    
+    [text drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
 }
 
 
@@ -123,7 +131,7 @@
         
         CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
         
-        CGSize offset = CGSizeMake(pos.x / 2.0 - 5.0, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
+        CGSize offset = CGSizeMake(pos.x, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
         
         CGContextRef context = UIGraphicsGetCurrentContext();
         

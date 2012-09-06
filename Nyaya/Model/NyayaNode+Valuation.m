@@ -63,6 +63,7 @@
 @implementation NyayaNodeVariable (Valuation)
 
 - (void)setEvaluationValue:(BOOL)evaluationValue {
+    _evaluationValue = evaluationValue;
     [[NyayaStore sharedInstance] setEvaluationValue:evaluationValue forName:self.symbol];
 }
 

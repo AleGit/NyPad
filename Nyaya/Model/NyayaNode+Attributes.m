@@ -12,6 +12,8 @@
 
 @implementation NyayaNode (Attributes)
 
+
+
 - (NSUInteger)arity {
     return 0;   // default (constants and variables)
 }

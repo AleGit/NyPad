@@ -31,20 +31,28 @@ typedef NSUInteger NyayaNodeType;
     NSString *_symbol;
     NyayaBool _displayValue;
     BOOL _evaluationValue;
-    NSArray *_nodes;
+    NSMutableArray *_nodes;
     
     BOOL _hasParsingErrors;
+    
+    dispatch_once_t _reduceNodePredicate;
+    NyayaNode *_reducedNode;
     
     dispatch_once_t _truthTablePredicate;
     TruthTable *_truthTable;
     
     dispatch_once_t _bddNodePredicate;
     BddNode *_bddNode;
+    
+    
+    
+    
     NSString *_nnfDescription;
     NSString *_cnfDescription;
     NSString *_dnfDescription;
     
 }
+- (BOOL)isNegationToNode:(NyayaNode*)other;
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;
 @end
 

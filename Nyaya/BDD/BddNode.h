@@ -22,6 +22,7 @@
 -(NSString*)cnfDescription;
 -(NSString*)dnfDescription;
 -(NSUInteger)levelCount;
+-(NSUInteger)nodeCount;
 
 
 @end

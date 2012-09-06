@@ -75,7 +75,7 @@
     
     if ([entries count] > 0) {
         _objects = entries;
-        self.detailViewController.detailItem = [_objects objectAtIndex:0];
+        //self.detailViewController.detailItem = [_objects objectAtIndex:0];
     }  
 }
 
