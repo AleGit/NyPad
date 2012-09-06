@@ -245,7 +245,7 @@
                 else if (con) self.bddView.bddNode = [BddNode bottom];
             });
             
-            NSUInteger bddLevelCount = 0;
+            NSUInteger bddLevelCount = 1;
             if (!nf) {
             
                 NSString *cnfdescription = node.binaryDecisionDiagram.cnfDescription; //  node.conjunctiveNormalForm.description;
