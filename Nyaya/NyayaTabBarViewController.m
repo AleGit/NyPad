@@ -26,9 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    // UISplitViewController *splitViewController = (UISplitViewController *)[self.viewControllers objectAtIndex:0]; // CHOOSE THE RIGHT ONE!
+    // configure split view controllers (master detail):
     [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([obj isKindOfClass:[UISplitViewController class]]) {
             UISplitViewController *splitViewController = obj;
@@ -38,7 +37,7 @@
     }];
   
 #ifdef DEBUG
-    self.selectedViewController = [self.viewControllers objectAtIndex:4];
+    self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2 == playground
 #endif
 }
 

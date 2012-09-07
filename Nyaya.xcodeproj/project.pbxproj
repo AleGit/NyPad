@@ -461,7 +461,6 @@
 				111F923315E89B1400EB6B1D /* Tutorials.plist */,
 			);
 			name = NyTutorial;
-			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		1104768F15E4A6320024EDDF /* NyPlayground */ = {
@@ -473,7 +472,6 @@
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
 			);
 			name = NyPlayground;
-			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		110476B415E4D59C0024EDDF /* NyGlossary */ = {
@@ -487,7 +485,6 @@
 				1102560515EBB906008B38F9 /* NyGlossaryEntry.m */,
 			);
 			name = NyGlossary;
-			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		110476B515E4D5BF0024EDDF /* NyBranches */ = {
@@ -496,22 +493,16 @@
 				113FF75E15F0850D0073A410 /* NyAccessoryController.h */,
 				1172EF5215F1FBB40038E6D0 /* NyExtendedKeysView.xib */,
 				1172EF5015F1F8F30038E6D0 /* NyBasicKeysView.xib */,
-				116D220515D9255C003DBD88 /* NyBoolTool */,
 				1177498315E7D74800B5C071 /* NyDetailViewController.h */,
 				1177498415E7D74900B5C071 /* NyDetailViewController.m */,
-				110476B415E4D59C0024EDDF /* NyGlossary */,
 				1177498515E7D74900B5C071 /* NyMasterViewController.h */,
 				1177498615E7D74900B5C071 /* NyMasterViewController.m */,
-				1104768F15E4A6320024EDDF /* NyPlayground */,
-				11C61BB815E91FFC00F5BB28 /* NyTuTests */,
-				1104767C15E4A1230024EDDF /* NyTutorial */,
-				116D220215D9252C003DBD88 /* NyWelcome */,
 			);
 			name = NyBranches;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		110476C215E4E3EC0024EDDF /* NyRoot */ = {
+		110476C215E4E3EC0024EDDF /* NyApp */ = {
 			isa = PBXGroup;
 			children = (
 				11C375FC15B3D23D005C5C9C /* AppDelegate.h */,
@@ -524,7 +515,7 @@
 				11C93F0415F46E6300AB94DF /* UITextField+Nyaya.h */,
 				11C93F0515F46E6300AB94DF /* UITextField+Nyaya.m */,
 			);
-			name = NyRoot;
+			name = NyApp;
 			sourceTree = "<group>";
 		};
 		1105107815DA8054000219C9 /* TabBarIcons */ = {
@@ -621,6 +612,7 @@
 				1177497B15E7D6BA00B5C071 /* NyWelcomeViewController.m */,
 			);
 			name = NyWelcome;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		116D220515D9255C003DBD88 /* NyBoolTool */ = {
@@ -637,7 +629,6 @@
 				1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */,
 			);
 			name = NyBoolTool;
-			path = Nyaya;
 			sourceTree = "<group>";
 		};
 		116D221015D927C9003DBD88 /* html */ = {
@@ -747,8 +738,14 @@
 				11061F1915EE10DC00345516 /* htmlinstructions */,
 				1102560C15ECCCB7008B38F9 /* htmltutorials */,
 				11C3762D15B3D258005C5C9C /* Model */,
+				110476C215E4E3EC0024EDDF /* NyApp */,
+				116D220515D9255C003DBD88 /* NyBoolTool */,
 				110476B515E4D5BF0024EDDF /* NyBranches */,
-				110476C215E4E3EC0024EDDF /* NyRoot */,
+				110476B415E4D59C0024EDDF /* NyGlossary */,
+				1104768F15E4A6320024EDDF /* NyPlayground */,
+				11C61BB815E91FFC00F5BB28 /* NyTuTests */,
+				1104767C15E4A1230024EDDF /* NyTutorial */,
+				116D220215D9252C003DBD88 /* NyWelcome */,
 				11C375F415B3D23D005C5C9C /* Supporting Files */,
 				1105107815DA8054000219C9 /* TabBarIcons */,
 			);
@@ -853,6 +850,7 @@
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
 			);
 			name = NyTuTests;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		11EC4D2215CFBA320090EBAB /* BDD */ = {

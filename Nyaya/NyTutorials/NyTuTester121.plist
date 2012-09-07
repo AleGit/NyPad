@@ -12,6 +12,14 @@
 		<string>p ∨ ¬ q</string>
 		<key>If interest rates go up, share prices go down.</key>
 		<string>p → q</string>
+        <key>No shoes, no shirt, no service</key>
+		<string>(¬p ∨ ¬q) → ¬s</string>
+		<key>If Dick met Jane yesterday, they had a cup of coffee together or they took a walk in the park</key>
+		<string>p → q ∨ r</string>
+		<key>Today it wil rain or shine, but not both</key>
+		<string>(p ∨ q) ∧ ¬(p ∧ q)</string>
+		<key>If Smith has installed central heating, then he has sold his car or he has not paid his mortage</key>
+		<string>p → (q ∨ ¬r)</string>
 	</dict>
 	<key>keyLabelText</key>
 	<string>Find a model</string>
