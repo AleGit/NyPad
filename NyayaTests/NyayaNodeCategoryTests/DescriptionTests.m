@@ -14,7 +14,7 @@
 
 - (void)testDescriptionSubformula {
     
-    NyayaNode *formula = [NyayaNode formulaWithInput:@"a | b & c"];
+    NyayaNode *formula = [NyayaNode nodeWithFormula:@"a | b & c"];
     
     NSArray *descs = @[ [formula description:formula] // AND 
     ,[formula description: [formula nodeAtIndex:0]] // a

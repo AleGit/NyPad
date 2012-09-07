@@ -15,7 +15,7 @@
 - (TruthTable*)truthTableWithInput: (NSString*)input {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *formula = parser.parseFormula;
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula: formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode: formula];
     [truthTable evaluateTable];
     return truthTable;
     

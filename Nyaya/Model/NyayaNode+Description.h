@@ -11,6 +11,6 @@
 @interface NyayaNode (Description)
 
 - (NSString*)treeDescription;
-- (NSString*)description:(NyayaNode*)subformula;
+- (NSString*)description:(NyayaNode*)subnode;
 
 @end

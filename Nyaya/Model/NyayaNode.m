@@ -17,7 +17,7 @@
 
 @implementation NyayaNode
 
-+ (id)formulaWithInput:(NSString*)input {
++ (id)nodeWithFormula:(NSString*)input {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *node = [parser parseFormula];
     if (node) {
@@ -41,7 +41,8 @@
 
 - (TruthTable*)truthTable {
     dispatch_once(&_truthTablePredicate, ^{
-        _truthTable = [[TruthTable alloc] initWithFormula:[self reducedFormula]];
+        if (_reducedNode) _truthTable = [[TruthTable alloc] initWithNode:_reducedNode];
+        else _truthTable = [[TruthTable alloc] initWithNode:self];
         [_truthTable evaluateTable];
     });
     return _truthTable;

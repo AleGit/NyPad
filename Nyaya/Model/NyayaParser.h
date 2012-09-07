@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+@class NyayaNode;
+
 /*
 enum { NyayaParserStateInput = 1, 
     NyayaParserStateSequence, NyayaParserStateFormula, NyayaParserStateJunction, NyayaParserStateNegation, NyayaParserStateTerm, NyayaParserStateTuple,
@@ -29,7 +32,6 @@ enum {
 typedef NSUInteger NyayaErrorState;
 
 
-@class NyayaNode;
 
 @interface NyayaParser : NSObject
 
@@ -43,8 +45,9 @@ typedef NSUInteger NyayaErrorState;
 - (BOOL)hasErrors;
 - (NSString*)errorDescriptions;
 
-- (NyayaNode*)parseFormula;         // formula      = sequence
-- (NyayaNode*)parseSequence;        // sequence     = bicondition { COMMA bicondition }
+- (NyayaNode*)parseFormula;         // formula      = entailment
+- (NyayaNode*)parseEntailment;      // entailment   = sequence [ |= entailment ]
+- (NyayaNode*)parseSequence;        // sequence     = bicondition { SEMICOLON bicondition }
 - (NyayaNode*)parseBicondition;     // bicondition  = implication[ BIC bicondition ]
 - (NyayaNode*)parseImplication;     // implication  = xdisjunction [ IMP implication ]
 - (NyayaNode*)parseXdisjunction;    // xdisjunction = disjunction { XOR disjunction } 

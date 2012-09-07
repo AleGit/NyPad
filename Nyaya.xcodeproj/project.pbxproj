@@ -129,6 +129,8 @@
 		11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */; };
 		11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions101.html */; };
 		11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26815EFEC13006AFBFC /* instructions111.html */; };
+		11B97E0A15F9B56F00A183DA /* DisplayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0915F9B56F00A183DA /* DisplayTests.m */; };
+		11B97E0E15F9B63700A183DA /* ValuationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0D15F9B63700A183DA /* ValuationTests.m */; };
 		11C375EE15B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C375F015B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C375F215B3D23D005C5C9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375F115B3D23D005C5C9C /* CoreGraphics.framework */; };
@@ -345,6 +347,10 @@
 		11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester101.plist; path = Nyaya/NyTutorials/NyTuTester101.plist; sourceTree = "<group>"; };
 		11B0B26715EFEC13006AFBFC /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
 		11B0B26815EFEC13006AFBFC /* instructions111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions111.html; path = html/instructions111.html; sourceTree = "<group>"; };
+		11B97E0815F9B56F00A183DA /* DisplayTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayTests.h; path = NyayaNodeCategoryTests/DisplayTests.h; sourceTree = "<group>"; };
+		11B97E0915F9B56F00A183DA /* DisplayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayTests.m; path = NyayaNodeCategoryTests/DisplayTests.m; sourceTree = "<group>"; };
+		11B97E0C15F9B63700A183DA /* ValuationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValuationTests.h; path = NyayaNodeCategoryTests/ValuationTests.h; sourceTree = "<group>"; };
+		11B97E0D15F9B63700A183DA /* ValuationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValuationTests.m; path = NyayaNodeCategoryTests/ValuationTests.m; sourceTree = "<group>"; };
 		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -572,6 +578,10 @@
 				1188B55715F7BF6D004186C0 /* DerivationsTests.m */,
 				11CB867215F873EE00D20A59 /* ReductionTests.h */,
 				11CB867315F873EE00D20A59 /* ReductionTests.m */,
+				11B97E0815F9B56F00A183DA /* DisplayTests.h */,
+				11B97E0915F9B56F00A183DA /* DisplayTests.m */,
+				11B97E0C15F9B63700A183DA /* ValuationTests.h */,
+				11B97E0D15F9B63700A183DA /* ValuationTests.m */,
 			);
 			name = NyayaNodeCategoryTests;
 			sourceTree = "<group>";
@@ -1135,6 +1145,8 @@
 				1188B55515F7B5DE004186C0 /* BaseTests.m in Sources */,
 				1188B55815F7BF6D004186C0 /* DerivationsTests.m in Sources */,
 				11CB867415F873EE00D20A59 /* ReductionTests.m in Sources */,
+				11B97E0A15F9B56F00A183DA /* DisplayTests.m in Sources */,
+				11B97E0E15F9B63700A183DA /* ValuationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

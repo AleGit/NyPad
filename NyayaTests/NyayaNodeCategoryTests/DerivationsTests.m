@@ -14,20 +14,20 @@
 
 - (void)testSubNodeSet {
     
-    NyayaNode *node = [NyayaNode formulaWithInput:@"a"];
+    NyayaNode *node = [NyayaNode nodeWithFormula:@"a"];
     NyayaNode *a = node;
     NSSet *set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)1, nil);
     
-    node = [NyayaNode formulaWithInput:@"a|a"];
+    node = [NyayaNode nodeWithFormula:@"a|a"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)2, nil);
     
-    node = [NyayaNode formulaWithInput:@"(a|b)&(a|b)"];
+    node = [NyayaNode nodeWithFormula:@"(a|b)&(a|b)"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)4, nil);
     
-    node = [NyayaNode formulaWithInput:@"(a>b)|((a>b)&c)"];
+    node = [NyayaNode nodeWithFormula:@"(a>b)|((a>b)&c)"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)6, nil);
     
@@ -45,40 +45,40 @@
 - (void)testAllreadyImplicationFree {
     for (NSString *input in @[@"!a", @"!a", @"a|b"
          ]) {
-        NyayaNode *n = [NyayaNode formulaWithInput:input];
+        NyayaNode *n = [NyayaNode nodeWithFormula:input];
         NyayaNode *i = [n imf];
         STAssertEqualObjects(i, n, nil);
     }
 }
 
 - (void)testImplicationImf {
-    NyayaNode *n = [NyayaNode formulaWithInput:@"a>b"];
+    NyayaNode *n = [NyayaNode nodeWithFormula:@"a>b"];
     NyayaNode *i = [n imf];
-    NyayaNode *e = [NyayaNode formulaWithInput:@"!a|b"];
+    NyayaNode *e = [NyayaNode nodeWithFormula:@"!a|b"];
     STAssertEqualObjects(i, e, nil);
 }
 
 - (void)testBiconditionalImf {
-    NyayaNode *n = [NyayaNode formulaWithInput:@"a=b"];
+    NyayaNode *n = [NyayaNode nodeWithFormula:@"a=b"];
     NyayaNode *i = [n imf];
-    NyayaNode *e = [NyayaNode formulaWithInput:@"(!a|b)&(!b|a)"];
+    NyayaNode *e = [NyayaNode nodeWithFormula:@"(!a|b)&(!b|a)"];
     STAssertEqualObjects(i, e, nil);
 }
 
 
 
 - (void)testFxorT {
-    NyayaNode *n = [NyayaNode formulaWithInput:@"F^T"];
+    NyayaNode *n = [NyayaNode nodeWithFormula:@"F^T"];
     NyayaNode *i = [n imf];
-    NyayaNode *e = [NyayaNode formulaWithInput:@"(F|T)&(!F|!T)"];
+    NyayaNode *e = [NyayaNode nodeWithFormula:@"(F|T)&(!F|!T)"];
     STAssertEqualObjects(i, e, nil);
 }
 
 
 - (void)testXorImf {
-    NyayaNode *n = [NyayaNode formulaWithInput:@"a^b"];
+    NyayaNode *n = [NyayaNode nodeWithFormula:@"a^b"];
     NyayaNode *i = [n imf];
-    NyayaNode *e = [NyayaNode formulaWithInput:@"(a|b)&(!a|!b) "];
+    NyayaNode *e = [NyayaNode nodeWithFormula:@"(a|b)&(!a|!b) "];
     STAssertEqualObjects(i, e, nil);
     
     

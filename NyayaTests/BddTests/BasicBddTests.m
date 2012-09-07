@@ -32,7 +32,7 @@
 - (void)testTautology {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a | (!a and b) | !b"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];
@@ -48,7 +48,7 @@
 - (void)testContradiction {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a & (!a or b) & !b"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];
@@ -64,7 +64,7 @@
 - (void)testOr {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a | b)|(a|b)&(a|b)"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];
@@ -87,7 +87,7 @@
 - (void)testAnd {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a & b)&(a & b)|(a & b)"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];
@@ -110,7 +110,7 @@
 - (void)testXor {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a ^ b)|(a ^ b)&(a ^ b)"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];
@@ -136,7 +136,7 @@
     
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"(a|b&c)&(a|b&c)"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode diagramWithTruthTable:truthTable];

@@ -26,6 +26,7 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 @interface NyayaNode () {
+#pragma mark - 
     @protected
     NSString *_descriptionCache;
     NSString *_symbol;
@@ -43,9 +44,6 @@ typedef NSUInteger NyayaNodeType;
     
     dispatch_once_t _bddNodePredicate;
     BddNode *_bddNode;
-    
-    
-    
     
     NSString *_nnfDescription;
     NSString *_cnfDescription;

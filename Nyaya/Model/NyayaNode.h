@@ -20,9 +20,9 @@
 
 @property (nonatomic, readonly, getter=isWellFormed) BOOL wellFormed;
 
-+ (id)formulaWithInput:(NSString*)input;
++ (id)nodeWithFormula:(NSString*)input;
 
-- (NyayaNode*)reducedFormula;
+// - (NyayaNode*)reducedFormula;
 
 - (TruthTable*)truthTable;
 - (BddNode*)binaryDecisionDiagram;

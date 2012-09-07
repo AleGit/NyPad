@@ -12,9 +12,9 @@
 
 @implementation NyayaNode (Description)
 
-- (NSString*)description:(NyayaNode*)subformula {
+- (NSString*)description:(NyayaNode*)subnode {
     NSString *desc = _descriptionCache != nil ? _descriptionCache : [self description];
-    NSString *subd = subformula->_descriptionCache;
+    NSString *subd = subnode->_descriptionCache;
     return [desc stringByReplacingOccurrencesOfString: subd
                                            withString: [NSString stringWithFormat:@"[ %@ ]", subd]];
 }

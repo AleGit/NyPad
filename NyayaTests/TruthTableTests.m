@@ -21,7 +21,7 @@
     
     NyayaNode *formula = [parser parseFormula];
     
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"x ∧ y",nil);
@@ -62,7 +62,7 @@
     
     NyayaNode *formula = [parser parseFormula];
     
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"x10 ∨ x2",nil);
@@ -88,7 +88,7 @@
     
     NyayaNode *formula = [parser parseFormula];
     
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"x → a",nil);
@@ -114,7 +114,7 @@
     
     NyayaNode *formula = [parser parseFormula];
     
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula expanded:YES];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula expanded:YES];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"x ∧ T → y",nil);
@@ -137,7 +137,7 @@
 - (void)testTrueTop {
     NyayaParser *parser = [NyayaParser parserWithString:@"T"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"T",nil);
@@ -153,7 +153,7 @@
 - (void)testFalseBottom {
     NyayaParser *parser = [NyayaParser parserWithString:@"F"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
     STAssertEqualObjects(truthTable.formula, formula,nil);
     STAssertEqualObjects(truthTable.title, @"F",nil);
@@ -176,11 +176,11 @@
     NyayaNode *dnf = [cnf dnf];
     
     NSArray *truthTables = [NSArray arrayWithObjects:
-                            [[TruthTable alloc] initWithFormula:ast],
-                            [[TruthTable alloc] initWithFormula:imf],
-                            [[TruthTable alloc] initWithFormula:nnf],
-                            [[TruthTable alloc] initWithFormula:cnf],
-                            [[TruthTable alloc] initWithFormula:dnf],
+                            [[TruthTable alloc] initWithNode:ast],
+                            [[TruthTable alloc] initWithNode:imf],
+                            [[TruthTable alloc] initWithNode:nnf],
+                            [[TruthTable alloc] initWithNode:cnf],
+                            [[TruthTable alloc] initWithNode:dnf],
                             nil];
     
     for (TruthTable *truthTable in truthTables) {
@@ -189,12 +189,12 @@
     
     
     NyayaNode *nast = [NyayaNode negation:ast];
-    TruthTable *tt = [[TruthTable alloc] initWithFormula:nast];
+    TruthTable *tt = [[TruthTable alloc] initWithNode:nast];
     [tt evaluateTable];
-    TruthTable *aoa = [[TruthTable alloc] initWithFormula:[NyayaNode disjunction:ast with:ast]];
+    TruthTable *aoa = [[TruthTable alloc] initWithNode:[NyayaNode disjunction:ast with:ast]];
     [aoa evaluateTable];
     
-    TruthTable *aaa = [[TruthTable alloc] initWithFormula:[NyayaNode conjunction:ast with:ast]];
+    TruthTable *aaa = [[TruthTable alloc] initWithNode:[NyayaNode conjunction:ast with:ast]];
     [aaa evaluateTable];
     
     NSUInteger expectedHash = [[truthTables objectAtIndex:0] hash];
@@ -223,8 +223,8 @@
     NyayaParser *pand = [NyayaParser parserWithString:@"x&y"];
     NyayaParser *por = [NyayaParser parserWithString:@"x+y"];
     
-    TruthTable *tand = [[TruthTable alloc] initWithFormula:[pand parseFormula]];
-    TruthTable *tor = [[TruthTable alloc] initWithFormula:[por parseFormula]];
+    TruthTable *tand = [[TruthTable alloc] initWithNode:[pand parseFormula]];
+    TruthTable *tor = [[TruthTable alloc] initWithNode:[por parseFormula]];
     
     [tand evaluateTable];
     [tor evaluateTable];
@@ -238,7 +238,7 @@
 - (void)testXdisjunctionNormalForm {
     NyayaParser *parser = [NyayaParser parserWithString:@"x^y"];
     NyayaNode *formula = [parser parseFormula];
-    TruthTable *truthTable = [[TruthTable alloc] initWithFormula:formula];
+    TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     NyayaNode *imf = [formula imf];
     NyayaNode *nnf = [imf nnf];

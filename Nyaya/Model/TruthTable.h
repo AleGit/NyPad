@@ -18,8 +18,8 @@
 
 @property (nonatomic, readonly) NSUInteger rowsCount;
 
-- (id)initWithFormula:(NyayaNode*)formula;
-- (id)initWithFormula:(NyayaNode *)formula expanded:(BOOL)expanded;
+- (id)initWithNode:(NyayaNode*)node;
+- (id)initWithNode:(NyayaNode *)node expanded:(BOOL)expanded;
 - (void)evaluateTable;
 
 - (NSString*)minimalDescription; 

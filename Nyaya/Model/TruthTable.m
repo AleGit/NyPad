@@ -69,18 +69,18 @@
     }];
 }
 
-- (id)initWithFormula:(NyayaNode *)formula {
-    return [self initWithFormula:formula expanded:NO];
+- (id)initWithNode:(NyayaNode *)node {
+    return [self initWithNode:node expanded:NO];
 }
 
-- (id)initWithFormula:(NyayaNode *)formula expanded:(BOOL)expanded {
+- (id)initWithNode:(NyayaNode *)node expanded:(BOOL)expanded {
     self = [super init];
     if (self) {
-        _formula = formula;
-        _title = [formula description];
-        _variables = [[formula setOfVariables] allObjects];
+        _formula = node;
+        _title = [node description];
+        _variables = [[node setOfVariables] allObjects];
         if (expanded)
-            _headers = [[formula setOfSubformulas] allObjects];
+            _headers = [[node setOfSubformulas] allObjects];
         else
             _headers = [[_variables valueForKeyPath:@"description"] arrayByAddingObject:_title];
             

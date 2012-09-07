@@ -17,7 +17,7 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
     STAssertFalse(parser.hasErrors, input);
-    TruthTable *astTable = [[TruthTable alloc] initWithFormula:ast expanded:YES];
+    TruthTable *astTable = [[TruthTable alloc] initWithNode:ast expanded:YES];
     [astTable evaluateTable];
     STAssertEqualObjects([astTable description],tt, input);
     STAssertTrue([astTable isTautology] == isTautology, input);
@@ -296,10 +296,10 @@
 - (void)testTruthTableXorEquals {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"x ^ y"];
     NyayaNode *node = [parser parseFormula];
-    TruthTable *table1 = [[TruthTable alloc] initWithFormula:node];
+    TruthTable *table1 = [[TruthTable alloc] initWithNode:node];
     parser = [[NyayaParser alloc] initWithString:@"a ^ b"];
     node = [parser parseFormula];
-    TruthTable *table2 = [[TruthTable alloc] initWithFormula:node];
+    TruthTable *table2 = [[TruthTable alloc] initWithNode:node];
     [table1 evaluateTable];
     [table2 evaluateTable];
     NSString *tt1 = @""
