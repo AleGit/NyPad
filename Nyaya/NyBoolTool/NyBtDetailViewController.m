@@ -7,7 +7,6 @@
 //
 
 #import "NyBtDetailViewController.h"
-#import "NyAccessoryController.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
 
@@ -15,70 +14,19 @@
 #import "NyBoolToolEntry.h"
 #import "NSString+NyayaToken.h"
 
-@interface NyBtDetailViewController () <NyAccessoryController,UITextFieldDelegate> {
+@interface NyBtDetailViewController () {
     dispatch_queue_t queue;
 }
 @end
 
 @implementation NyBtDetailViewController
 
-// NyAccessoryDelegate protocol properties
-@synthesize accessoryView, backButton, actionButton, dismissButton;
-
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"BoolTool", @"BoolTool");
 }
 
-#pragma mark - ny accessor controller protocol
-
-- (BOOL)accessoryViewShouldBeVisible {
-    return NO;
-}
-
-- (void)loadAccessoryView {
-    if (!self.inputAccessoryView) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyExtendedKeysView" owner:self options:nil];
-        [self configureAccessoryView];
-    }
-}
-
-- (void)configureAccessoryView {
-    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
-    self.inputField.inputView = self.accessoryView;
-}
-
-- (void)unloadAccessoryView {
-    self.inputField.inputView = nil;
-    self.inputField.inputAccessoryView = nil;
-    self.accessoryView = nil;
-}
-
-- (IBAction)press:(UIButton *)sender {
-    [self.inputField insertText:sender.currentTitle];
-}
-
-- (IBAction)back:(UIButton *)sender {
-    [self.inputField deleteBackward];
-}
-
-- (IBAction)action:(UIButton *)sender {
-    [self didEndOnExit:sender];
-}
-
-- (IBAction)dismiss:(UIButton*)sender {
-    [self.inputField resignFirstResponder];
-}
-
 #pragma mark - additional ib actions
-
-- (IBAction)parenthesize:(UIButton *)sender {
-    [self.inputField parenthesize];
-}
-
-- (IBAction)negate:(UIButton *)sender {
-    [self.inputField negate];
-}
 
 - (IBAction)send:(id)sender {
     [self compute: self.inputField.text];
@@ -286,6 +234,11 @@
     
     
     
+}
+
+- (IBAction)process:(UIButton *)sender {
+    [self compute:self.inputField.text];
+    [self.inputField resignFirstResponder];
 }
 
 - (CGSize)textViewSize:(UITextView*)textView {

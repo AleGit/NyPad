@@ -7,6 +7,8 @@
 //
 
 #import "NyDetailViewController.h"
+#import "UIColor+Nyaya.h"
+#import "UITextField+Nyaya.h"
 
 @interface NyDetailViewController ()
 
@@ -95,4 +97,62 @@
     }
 }
 
+@end
+
+@implementation NyDetailInputViewController
+// NyAccessoryDelegate protocol properties
+@synthesize accessoryView, backButton, processButton, dismissButton;
+
+#pragma mark - ny accessor controller protocol
+
+- (BOOL)accessoryViewShouldBeVisible {
+    return YES;
+}
+
+- (void)loadAccessoryView {
+    if (!self.inputAccessoryView) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyExtendedKeysView" owner:self options:nil];
+        [self configureAccessoryView];
+    }
+}
+
+- (void)configureAccessoryView {
+    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    self.inputField.inputView = self.accessoryView;
+}
+
+- (void)unloadAccessoryView {
+    self.inputField.inputView = nil;
+    self.inputField.inputAccessoryView = nil;
+    self.accessoryView = nil;
+}
+
+- (IBAction)press:(UIButton *)sender {
+    [self.inputField insertText:sender.currentTitle];
+}
+
+- (IBAction)back:(UIButton *)sender {
+    [self.inputField deleteBackward];
+}
+
+- (IBAction)process:(UIButton *)sender {
+    // implement in subclass
+}
+
+- (IBAction)dismiss:(UIButton*)sender {
+    [self.inputField resignFirstResponder];
+}
+
+- (IBAction)negate:(UIButton *)sender {
+    [self.inputField negate];
+}
+
+- (IBAction)parenthesize:(UIButton *)sender {
+    [self.inputField parenthesize];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self loadAccessoryView];
+}
 @end

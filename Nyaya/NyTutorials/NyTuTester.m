@@ -27,7 +27,7 @@
 @synthesize delegate;
 
 // NyAccessoryDelegate protocol properties
-@synthesize accessoryView, backButton, actionButton, dismissButton;
+@synthesize accessoryView, backButton, processButton, dismissButton;
 
 + (NSString*)testerClassNameForKey:(NSString*)key {
     return [NSString stringWithFormat:@"NyTuTester%@", key];
@@ -95,7 +95,7 @@
     [self.inputField insertText:sender.currentTitle];
 }
 
-- (IBAction)action:(UIButton *)sender {
+- (IBAction)process:(UIButton *)sender {
     checked ? [self nextTest] : [self checkTest];
 }
 
@@ -140,7 +140,7 @@
 
 - (void)nextTest {
     checked = NO;
-    [actionButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
+    [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
     NSLog(@"%@ nextTest", [self class] );
     BOOL success = [self clearTestView] && [self fillTestView];
     [delegate tester:self didNextTest:success];
@@ -148,7 +148,7 @@
 
 -  (void)checkTest {
     checked = YES;
-    [actionButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
+    [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
     NSLog(@"%@ checkTest", [self class] );
     BOOL success = [self validateTestView];
     [self.delegate tester:self didCheckTest:success];

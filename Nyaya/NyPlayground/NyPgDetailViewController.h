@@ -8,7 +8,9 @@
 
 #import "NyDetailViewController.h"
 
-@interface NyPgDetailViewController : NyDetailViewController
+@interface NyPgDetailViewController : NyDetailInputViewController
+
+@property (strong, nonatomic) IBOutlet UIView *canvasView;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end

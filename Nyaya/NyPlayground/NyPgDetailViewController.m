@@ -12,6 +12,7 @@
 @end
 
 @implementation NyPgDetailViewController
+@synthesize canvasView;
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Playground", @"Playground");
@@ -27,4 +28,12 @@
     }
 }
 
+- (void)viewDidLoad {
+    [self.canvasView setNeedsDisplay];
+}
+
+- (void)viewDidUnload {
+    [self setCanvasView:nil];
+    [super viewDidUnload];
+}
 @end

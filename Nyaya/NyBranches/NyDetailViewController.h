@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NyAccessoryController.h"
 
 @interface NyDetailViewController : UIViewController  <UISplitViewControllerDelegate>
 
@@ -16,3 +17,11 @@
 - (void)configureView; // override implementation in subclasses
 
 @end
+
+@interface NyDetailInputViewController : NyDetailViewController <NyAccessoryController,UITextFieldDelegate>
+
+@property (strong, nonatomic) IBOutlet UITextField *inputField;
+
+@end
+
+

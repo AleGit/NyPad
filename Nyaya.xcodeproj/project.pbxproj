@@ -131,6 +131,9 @@
 		11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26815EFEC13006AFBFC /* instructions111.html */; };
 		11B97E0A15F9B56F00A183DA /* DisplayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0915F9B56F00A183DA /* DisplayTests.m */; };
 		11B97E0E15F9B63700A183DA /* ValuationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0D15F9B63700A183DA /* ValuationTests.m */; };
+		11BFCBA815F9E331004CBDA2 /* NyPgCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */; };
+		11BFCBAC15F9E3E1004CBDA2 /* kariert.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BFCBAA15F9E3E1004CBDA2 /* kariert.png */; };
+		11BFCBAD15F9E3E1004CBDA2 /* kariert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */; };
 		11C375EE15B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C375F015B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C375F215B3D23D005C5C9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375F115B3D23D005C5C9C /* CoreGraphics.framework */; };
@@ -351,6 +354,10 @@
 		11B97E0915F9B56F00A183DA /* DisplayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayTests.m; path = NyayaNodeCategoryTests/DisplayTests.m; sourceTree = "<group>"; };
 		11B97E0C15F9B63700A183DA /* ValuationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValuationTests.h; path = NyayaNodeCategoryTests/ValuationTests.h; sourceTree = "<group>"; };
 		11B97E0D15F9B63700A183DA /* ValuationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValuationTests.m; path = NyayaNodeCategoryTests/ValuationTests.m; sourceTree = "<group>"; };
+		11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyPgCanvasView.h; path = NyPlayground/NyPgCanvasView.h; sourceTree = "<group>"; };
+		11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgCanvasView.m; path = NyPlayground/NyPgCanvasView.m; sourceTree = "<group>"; };
+		11BFCBAA15F9E3E1004CBDA2 /* kariert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kariert.png; path = NyPlayground/kariert.png; sourceTree = "<group>"; };
+		11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "kariert@2x.png"; path = "NyPlayground/kariert@2x.png"; sourceTree = "<group>"; };
 		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -466,10 +473,14 @@
 		1104768F15E4A6320024EDDF /* NyPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				11BFCBAA15F9E3E1004CBDA2 /* kariert.png */,
+				11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */,
 				1177496E15E7D68B00B5C071 /* NyPgDetailViewController.h */,
 				1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */,
 				1177497015E7D68B00B5C071 /* NyPgMasterViewController.h */,
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
+				11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */,
+				11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */,
 			);
 			name = NyPlayground;
 			sourceTree = "<group>";
@@ -1039,6 +1050,8 @@
 				1172EF5315F1FBB40038E6D0 /* NyExtendedKeysView.xib in Resources */,
 				1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */,
 				1139123B15F7140600B83877 /* StandardTestView.xib in Resources */,
+				11BFCBAC15F9E3E1004CBDA2 /* kariert.png in Resources */,
+				11BFCBAD15F9E3E1004CBDA2 /* kariert@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,6 +1123,7 @@
 				112C72E915F5FD6D0085B1EC /* NyayaNode+Resolution.m in Sources */,
 				1188B55215F788E3004186C0 /* NSSet+NyayaToken.m in Sources */,
 				11CB867015F8634800D20A59 /* NyayaNode+Reductions.m in Sources */,
+				11BFCBA815F9E331004CBDA2 /* NyPgCanvasView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

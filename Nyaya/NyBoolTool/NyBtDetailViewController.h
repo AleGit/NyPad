@@ -15,12 +15,11 @@
 
 @end
 
-@interface NyBtDetailViewController : NyDetailViewController
+@interface NyBtDetailViewController : NyDetailInputViewController
 
 @property (weak, nonatomic) id<InputSaver>inputSaver;
 
 @property (strong, nonatomic) IBOutlet UITextField *inputName;
-@property (strong, nonatomic) IBOutlet UITextField *inputField;
 
 @property (strong, nonatomic) IBOutlet UITextView *parsedField;
 
