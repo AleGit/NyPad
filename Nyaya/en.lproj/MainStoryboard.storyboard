@@ -274,7 +274,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" id="D8M-GJ-Ed7" customClass="NyPgCanvasView">
-                                <rect key="frame" x="0.0" y="263" width="703" height="392"/>
+                                <rect key="frame" x="0.0" y="59" width="703" height="596"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -632,9 +632,11 @@
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.85712249087591252" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                             </scrollView>
                             <view opaque="NO" contentMode="scaleToFill" id="65A-s6-fW1">
                                 <rect key="frame" x="0.0" y="115" width="703" height="2"/>
@@ -648,6 +650,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
@@ -802,9 +805,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailInputViewController.h"/>
             <relationships>
                 <relationship kind="action" name="back:" candidateClass="UIButton"/>
-                <relationship kind="action" name="dismiss:" candidateClass="UIButton"/>
-                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
-                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
                 <relationship kind="action" name="press:" candidateClass="UIButton"/>
                 <relationship kind="action" name="process:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>

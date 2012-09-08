@@ -80,6 +80,14 @@
         
     }
     
+//    if (self.title || self.subtitle) {
+//        UIGraphicsPushContext(context);
+//        // CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
+//        if (self.title) [[self.title substringToIndex:5] drawAtPoint:CGPointMake(10.0,10.0) withFont:[UIFont systemFontOfSize:16]];
+//        if (self.subtitle) [self.subtitle drawAtPoint:CGPointMake(10.0,40.0) withFont:[UIFont systemFontOfSize:12]];
+//        UIGraphicsPopContext();
+//    }
+    
 }
 
 - (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
@@ -89,11 +97,19 @@
     if (offset.width>20.0) {
         
         CGFloat leftNodeCount = (CGFloat)[node.leftBranch nodeCount];
-        CGFloat rightNodeCount = (CGFloat)[node.rightBranch nodeCount];
+        CGFloat rightNodeCount = (CGFloat)[node.rightBranch nodeCount];        
+        leftNodeCount = sqrt(leftNodeCount);
+        rightNodeCount = sqrt(rightNodeCount);
         CGFloat nodeCount = leftNodeCount + rightNodeCount;
-        
         CGFloat leftFraction = leftNodeCount / nodeCount;
         CGFloat rightFraction = rightNodeCount / nodeCount;
+        
+        
+        
+//        CGFloat leftFraction = sqrt(leftNodeCount) / sqrt(nodeCount);
+//        CGFloat rightFraction = sqrt(rightNodeCount) / sqrt(nodeCount);
+        
+        
         
         // draw left branch
         CGContextSetLineWidth(context, 3.0);

@@ -12,5 +12,7 @@
 @interface NyayaBddView : UIView
 
 @property (strong, nonatomic) BddNode* bddNode;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *subtitle;
 
 @end

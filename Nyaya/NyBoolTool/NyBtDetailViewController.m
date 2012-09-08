@@ -191,6 +191,9 @@
                 
                 if (tau) self.bddView.bddNode = [BddNode top];
                 else if (con) self.bddView.bddNode = [BddNode bottom];
+                
+                self.bddView.title = description;
+                self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
             });
             
             NSUInteger bddLevelCount = 1;
@@ -228,6 +231,7 @@
             [alert dismissWithClickedButtonIndex:0 animated:YES];
             [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
             // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
+            [self.bddView setNeedsDisplay];
         });
     });
     
@@ -313,7 +317,6 @@
     
     
     self.resultView.contentSize = CGSizeMake(self.resultView.frame.size.width, self.bddView.frame.origin.y + self.bddView.frame.size.height);
-    [self.bddView setNeedsDisplay];
     
 }
 

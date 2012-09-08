@@ -37,7 +37,7 @@
     }];
   
 #ifdef DEBUG
-    self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2 == playground
+    self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2=playground, 4=booltool
 #endif
 }
 
