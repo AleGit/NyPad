@@ -2,30 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>questions</key>
-	<dict>
-		<key>If the barmoter falls, then it will rain or it will snow.</key>
-		<string>the barometer falls; it will rains; it will snow</string>
-		<key>When the sun shines today, it won‘t shine tommorrow.</key>
-		<string>the sun shines today; it will shine tommorow</string>
-		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
-		<string>Robert was jealous of Yvonne;  he was in a good mood</string>
-		<key>If interest rates go up, share prices go down.</key>
-		<string>interest rates go up; share prices go down</string>
-        <key>No shoes, no shirt, no service</key>
-		<string>shoes, shirt, service</string>
-		<key>If Dick met Jane yesterday, they had a cup of coffee together or they took a walk in the park</key>
-		<string>Dick met Jane yesterday; they had a cup of coffee together; they took a walk in the park</string>
-		<key>Today it will rain or shine, but not both; </key>
-		<string>will rain; shine; both</string>
-		<key>If Smith has installed central heating, then he has sold his car or he has not paid his mortage</key>
-		<string>Smith has installed central heating; he has sold his car; he has not paid his mortage</string>
-	</dict>
 	<key>keyLabelText</key>
 	<string>Find the Propositions</string>
 	<key>inputLabelText</key>
 	<string>Your list of propositions without “if”, “then”, “and”, “or“, and “not”</string>
 	<key>valueLabelText</key>
 	<string>Sample solution (your correct answer may not match exactly)</string>
+	<key>questionsFile</key>
+	<string>QA123</string>
+	<key>answerIndex</key>
+	<integer>2</integer>
 </dict>
 </plist>

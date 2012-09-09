@@ -2,30 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>questions</key>
-	<dict>
-		<key>If the barmoter falls, then it will rain or it will snow.</key>
-		<string>p → q ∨ r</string>
-		<key>When the sun shines today, it won‘t shine tommorrow.</key>
-		<string>p → ¬q</string>
-		<key>Robert was jealous of Yvonne, or he was not in a good mood.</key>
-		<string>p ∨ ¬ q</string>
-		<key>If interest rates go up, share prices go down.</key>
-		<string>p → q</string>
-        <key>No shoes, no shirt, no service</key>
-		<string>(¬p ∨ ¬q) → ¬s</string>
-		<key>If Dick met Jane yesterday, they had a cup of coffee together or they took a walk in the park</key>
-		<string>p → q ∨ r</string>
-		<key>Today it wil rain or shine, but not both</key>
-		<string>(p ∨ q) ∧ ¬(p ∧ q)</string>
-		<key>If Smith has installed central heating, then he has sold his car or he has not paid his mortage</key>
-		<string>p → (q ∨ ¬r)</string>
-	</dict>
 	<key>keyLabelText</key>
 	<string>Find a model</string>
 	<key>inputLabelText</key>
 	<string>Use only “¬ ∧ ∨ → p q r”</string>
 	<key>valueLabelText</key>
 	<string>Sample solution</string>
+	<key>questionsFile</key>
+	<string>QA123</string>
+	<key>answerIndex</key>
+	<integer>3</integer>
 </dict>
 </plist>

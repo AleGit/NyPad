@@ -202,7 +202,19 @@
         NSString *filePath = [[NSBundle mainBundle] pathForResource:NSStringFromClass([self class]) ofType:@"plist"];
         
         self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+        
         self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
+        
+        if (!self.questionsDictionary) {
+            filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
+            NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
+            NSUInteger answerIndex = [[self.testDictionary objectForKey:@"answerIndex"] integerValue];
+            NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
+            for (NSArray* qa in array) {
+                if (answerIndex < [qa count]) [qd setObject:[qa objectAtIndex:answerIndex] forKey:[qa objectAtIndex:0]];
+            }
+            self.questionsDictionary = [qd copy]; // create unmutable copy
+        }
         
         self.keyLabelText = [self.testDictionary objectForKey:@"keyLabelText"];
         self.inputLabelText = [self.testDictionary objectForKey:@"inputLabelText"];
