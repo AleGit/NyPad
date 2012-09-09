@@ -67,36 +67,39 @@
 			<string>Satisfiability and Validity</string>
 			<string>331</string>
 		</array>
+	</array>
+	<array>
+		<string>Normal Forms</string>
 		<array>
 			<string>Implication Free Form</string>
-			<string>341</string>
+			<string>401</string>
 		</array>
 		<array>
 			<string>Negation Normal Form</string>
-			<string>351</string>
+			<string>411</string>
 		</array>
 		<array>
 			<string>Conjunctive Normal Form</string>
-			<string>361</string>
+			<string>421</string>
 		</array>
 		<array>
 			<string>Disjunctive Normal Form</string>
-			<string>371</string>
+			<string>422</string>
 		</array>
 	</array>
 	<array>
 		<string>Binary Decision Diagrams</string>
 		<array>
 			<string>Boolean Functions</string>
-			<string>401</string>
+			<string>501</string>
 		</array>
 		<array>
 			<string>Trees</string>
-			<string>411</string>
+			<string>511</string>
 		</array>
 		<array>
 			<string>Reduced BDDs</string>
-			<string>421</string>
+			<string>521</string>
 		</array>
 	</array>
 </array>
