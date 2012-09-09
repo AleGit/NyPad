@@ -158,6 +158,7 @@
 		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* BddNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* BddNode.m */; };
+		11F531BD15FC78B4003F6C11 /* QA123.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11F531BC15FC78B4003F6C11 /* QA123.plist */; };
 		11F906C615CEC164001CD0F3 /* BasicParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C515CEC164001CD0F3 /* BasicParseTests.m */; };
 		11F906C915CECB2A001CD0F3 /* BasicTruthTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C815CECB2A001CD0F3 /* BasicTruthTableTests.m */; };
 		11F906CC15CED420001CD0F3 /* BasicPrecedenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */; };
@@ -395,6 +396,7 @@
 		11EC4D2415CFC3750090EBAB /* BasicBddTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicBddTests.h; path = BddTests/BasicBddTests.h; sourceTree = "<group>"; };
 		11EC4D2515CFC3750090EBAB /* BasicBddTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicBddTests.m; path = BddTests/BasicBddTests.m; sourceTree = "<group>"; };
 		11EC4D2715CFC3970090EBAB /* BddNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BddNode.m; path = Nyaya/BDD/BddNode.m; sourceTree = "<group>"; };
+		11F531BC15FC78B4003F6C11 /* QA123.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA123.plist; path = Nyaya/NyTutorials/QA123.plist; sourceTree = "<group>"; };
 		11F906C415CEC164001CD0F3 /* BasicParseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicParseTests.h; sourceTree = "<group>"; };
 		11F906C515CEC164001CD0F3 /* BasicParseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicParseTests.m; sourceTree = "<group>"; };
 		11F906C715CECB2A001CD0F3 /* BasicTruthTableTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTruthTableTests.h; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 			children = (
 				11061F2F15EF9BBD00345516 /* NyTuTester.h */,
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
+				11F531BC15FC78B4003F6C11 /* QA123.plist */,
 				11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */,
 				11061F3215EFA6EF00345516 /* NyTuTester111.plist */,
 				113FF75C15F07ED90073A410 /* NyTuTester121.plist */,
@@ -1052,6 +1055,7 @@
 				1139123B15F7140600B83877 /* StandardTestView.xib in Resources */,
 				11BFCBAC15F9E3E1004CBDA2 /* kariert.png in Resources */,
 				11BFCBAD15F9E3E1004CBDA2 /* kariert@2x.png in Resources */,
+				11F531BD15FC78B4003F6C11 /* QA123.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
