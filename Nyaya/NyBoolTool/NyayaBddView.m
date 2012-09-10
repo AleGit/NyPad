@@ -35,13 +35,19 @@
 
 
 - (NSDictionary*)nodePoints {
+    NSSet *set0 = [NSSet setWithArray:[self.bddNode.levels objectAtIndex:0]];
+    BOOL optimized = [set0 count] < 3;
+    
+    CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
+    CGFloat xmargin = optimized ? 5.0 + self.frame.size.width / (vSegments+1.0) : 25.0;
+    
     CGPoint p0 = CGPointMake(self.frame.size.width/2.0, 25.0);
-    CGPoint pL = CGPointMake(25.0, self.frame.size.height- 25.0);
-    CGPoint pR = CGPointMake(self.frame.size.width-50.0, self.frame.size.height - 25.0);
+    CGPoint pL = CGPointMake(xmargin, self.frame.size.height- 25.0);
+    CGPoint pR = CGPointMake(self.frame.size.width-xmargin, self.frame.size.height - 25.0);
     
     NSMutableDictionary *nps = [NSMutableDictionary dictionary];
 
-    CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
+    
     CGSize size = CGSizeMake(pR.x - pL.x, pR.y - p0.y);
     
     if (!self.bddNode.levels && self.bddNode) {
@@ -49,32 +55,25 @@
     }
     
     [self.bddNode.levels enumerateObjectsUsingBlock:^(NSArray* harr, NSUInteger vidx, BOOL *stop) {
-        // CGFloat xoffset = (CGFloat)vidx/vSegments * size.width/2.0;
-//        CGFloat factor = (CGFloat)vidx/vSegments;
-//        CGFloat xoffset = factor*factor * size.width/2.0;
-        
-        CGFloat factor = (((CGFloat)vidx) - vSegments/2.0)/vSegments;
-        CGFloat xoffset = sqrt(fabs(factor)) * size.width/2.0;
-
-        
+        CGFloat factor = optimized ?    (vSegments-2*vidx) / vSegments     : (CGFloat)vidx / vSegments;
+        CGFloat xoffset = optimized ?   factor * factor * size.width/4.0   : factor * size.width/2.0;
         
         CGFloat vPos;
         if (vSegments < 1)
             vPos = p0.y;
         else
             vPos =  pL.y - (CGFloat)vidx/vSegments * size.height;
-        NSSet *hset = [NSSet setWithArray:harr]; // does not keep order
-        CGFloat hSegments = (CGFloat)[hset count] - 1.0;
         
         NSMutableArray *rarr = [NSMutableArray array];
         for (BddNode *node in harr) {
             if (![rarr containsObject:node]) [rarr addObject:node];
         }
+        CGFloat hSegments = (CGFloat)[rarr count] - 1.0;
         
-        
-        
-        [rarr enumerateObjectsUsingBlock:^(BddNode *node, NSUInteger hidx, BOOL *stop) {
-            if ([nps objectForKey:node] == nil) {
+        for (NSUInteger hidx = 0; hidx < [rarr count]; hidx++) {
+            BddNode *node = [rarr objectAtIndex:hidx];
+            
+            if (![nps objectForKey:node]) {
                 CGFloat hPos;
                 
                 if (hSegments < 1.0) {
@@ -87,10 +86,8 @@
                 NSString *obj = NSStringFromCGPoint(npos);
                 
                 [nps setObject:obj forKey:node];
-                
             }
-            
-        }];
+        }
         
         
     }];

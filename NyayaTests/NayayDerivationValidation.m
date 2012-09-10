@@ -43,7 +43,7 @@
     }];
     
     TruthTable *truthTable = [truthTables objectAtIndex:0];
-    BddNode *bddNode = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *bddNode = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     NSString *cnfDescription = [bddNode cnfDescription];
     NSString *dnfDescription = [bddNode dnfDescription];

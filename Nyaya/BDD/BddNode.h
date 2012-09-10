@@ -16,7 +16,7 @@
 @property (nonatomic, readonly) BddNode *rightBranch;
 @property (nonatomic, strong) NSArray *levels;
 
-+(BddNode*)diagramWithTruthTable:(TruthTable*)truthTable;
++(BddNode*)bddWithTruthTable:(TruthTable*)truthTable reduce:(BOOL)optimize;
 + (id)top;
 + (id)bottom;
 -(BOOL)isLeaf;

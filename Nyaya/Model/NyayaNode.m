@@ -50,7 +50,7 @@
 
 - (BddNode*)binaryDecisionDiagram {
     dispatch_once(&_bddNodePredicate, ^{
-        _bddNode = [BddNode diagramWithTruthTable:[self truthTable]];
+        _bddNode = [BddNode bddWithTruthTable:[self truthTable] reduce:YES];
         _cnfDescription = [_bddNode cnfDescription];
         _dnfDescription = [_bddNode dnfDescription];
         _nnfDescription = [_cnfDescription length] <= [_dnfDescription length] ? _cnfDescription : _dnfDescription;

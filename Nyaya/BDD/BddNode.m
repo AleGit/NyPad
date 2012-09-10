@@ -97,11 +97,7 @@
 
 
 
-+ (BddNode *)diagramWithTruthTable:(TruthTable *)truthTable {
-    return [self bddv3:truthTable optimize:YES];
-}
-
-+ (BddNode *)bddv3:(TruthTable *)truthTable optimize:(BOOL)optimize {
++ (BddNode *)bddWithTruthTable:(TruthTable *)truthTable reduce:(BOOL)reduced {
     BddNode *bdd = nil;
     NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[truthTable.variables count]];
     
@@ -116,7 +112,7 @@
     
     NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:rowsCount];
     
-    if (optimize) {
+    if (reduced) {
         [allNodes addObject:bottom];    // idx == 0
         [allNodes addObject:top];       // idx == 1
     }
@@ -126,7 +122,7 @@
     for (NSUInteger rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
         BddNode *node = nil;
         BOOL eval = [truthTable evalAtRow:rowIdx];
-        if (optimize) { // reuse nodes
+        if (reduced) { // reuse nodes
             node = eval ? top : bottom;
         }
         else { // do not reuse nodes
@@ -147,7 +143,7 @@
             BddNode *right = [lowerLevelArray objectAtIndex:idx+1];
             BddNode * node = nil;
             
-            if (optimize) {
+            if (reduced) {
                 if (left == right) node = left;
                 
                 // try to find the node in actual level

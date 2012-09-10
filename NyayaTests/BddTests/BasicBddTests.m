@@ -35,7 +35,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     
     STAssertTrue(node.isLeaf,nil);
@@ -51,7 +51,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     STAssertTrue(node.isLeaf,nil);
     STAssertEquals(node.id, 0, nil);
     
@@ -67,7 +67,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     STAssertTrue([node isMemberOfClass:[BddNode class]], nil);
     STAssertEquals(node.id, 3, nil);
@@ -90,7 +90,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     STAssertTrue([node isMemberOfClass:[BddNode class]], nil);
     STAssertEquals(node.id, 3, nil);
@@ -113,7 +113,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     STAssertEquals(node.id, 4, nil);
     STAssertEquals(node.rightBranch.id, 3, nil);
@@ -139,7 +139,7 @@
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
     
-    BddNode *node = [BddNode diagramWithTruthTable:truthTable];
+    BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     STAssertEquals(node.id, 4, nil);
     STAssertEqualObjects(node.name, @"a", nil);
     STAssertEquals(node.leftBranch.id, 3, nil);
