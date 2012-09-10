@@ -33,11 +33,11 @@
 			<string>211</string>
 		</array>
 		<array>
-			<string>Syntax tree</string>
+			<string>Subformulas</string>
 			<string>221</string>
 		</array>
 		<array>
-			<string>Sub formulas</string>
+			<string>Syntax tree</string>
 			<string>231</string>
 		</array>
 		<array>
@@ -45,7 +45,7 @@
 			<string>241</string>
 		</array>
 		<array>
-			<string>Basic Deduction Rules</string>
+			<string>Simplifying</string>
 			<string>251</string>
 		</array>
 	</array>
@@ -94,7 +94,7 @@
 			<string>501</string>
 		</array>
 		<array>
-			<string>Trees</string>
+			<string>Binary Decisions</string>
 			<string>511</string>
 		</array>
 		<array>
