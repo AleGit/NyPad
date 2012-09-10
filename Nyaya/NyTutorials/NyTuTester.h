@@ -41,9 +41,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *valueLabel;
 @property (nonatomic, weak) IBOutlet UILabel *inputLabel;
 
-@property (nonatomic, weak) IBOutlet UITextField *keyField;
-@property (nonatomic, weak) IBOutlet UITextField *valueField;
-@property (nonatomic, weak) IBOutlet UITextField *inputField;
+@property (nonatomic, weak) IBOutlet UITextView *keyField;
+@property (nonatomic, weak) IBOutlet UITextView *valueField;
+@property (nonatomic, weak) IBOutlet UITextView *inputField;
 
 @end
 

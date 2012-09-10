@@ -23,3 +23,19 @@
 }
 
 @end
+
+@implementation UITextView (Nyaya)
+
+- (void)parenthesize {
+    if ([self hasText]) {
+        self.text = [NSString stringWithFormat:@"(%@)", self.text];
+    }
+}
+
+- (void)negate {
+    if ([self hasText]) {
+        self.text = [NSString stringWithFormat:@"¬(%@)", self.text];
+    }
+}
+
+@end

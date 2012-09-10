@@ -166,7 +166,7 @@
 - (BOOL)fillTestView {
     BOOL success = YES;
     
-    self.inputField.enabled = YES;
+    self.inputField.editable = YES;
     
     // [self.inputField becomeFirstResponder];
     return success;
@@ -182,7 +182,7 @@
     self.inputField.text = @"";
     self.valueField.text = @"";
     
-    self.inputField.backgroundColor = [UIColor nyLightGreyColor];
+    self.inputField.backgroundColor = [UIColor whiteColor];
     
     return YES;
 }
@@ -241,7 +241,7 @@
 - (BOOL)validateTestView {
     BOOL success = NO;
     
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ .,;]*" options:0 error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ .,;()]*" options:0 error:nil];
     
     NSString *aCorrectAnswer = [self.questionsDictionary valueForKey:self.key];
     NSString *yourAnswer = self.inputField.text;

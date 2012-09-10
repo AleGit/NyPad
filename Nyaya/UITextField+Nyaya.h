@@ -14,3 +14,10 @@
 - (void)negate;
 
 @end
+
+@interface UITextView (Nyaya)
+
+- (void)parenthesize;
+- (void)negate;
+
+@end
