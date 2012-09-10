@@ -63,17 +63,11 @@
 @implementation BddNode
 
 + (id)top {
-    static dispatch_once_t pred = 0;
-    __strong static BddNode* _top = nil;
-    dispatch_once(&pred, ^{ _top = [[BddNode alloc] initWithName:@"1" id:1]; });
-    return _top;
+    return [[BddNode alloc] initWithName:@"1" id:1];
 }
 
 + (id)bottom {
-    static dispatch_once_t pred = 0;
-    __strong static BddNode* _bottom = nil;
-    dispatch_once(&pred, ^{ _bottom = [[BddNode alloc] initWithName:@"0" id:0];});
-    return _bottom;
+    return [[BddNode alloc] initWithName:@"0" id:0];
 }
 
 - (id)initWithName:(NSString*)name id:(NSUInteger)id {
@@ -104,6 +98,17 @@
     BddNode *top = [BddNode top];
     BddNode *bottom = [BddNode bottom];
     
+    if (reduced) {
+        if (truthTable.isContradiction) {
+            bottom.levels = @[@[bottom]];
+            return bottom;
+        }
+        else if (truthTable.isTautology) {
+            top.levels = @[@[top]];
+            return top;
+        }
+    }
+    
     NSAssert(bottom.id == 0, @"bottom should be zero");
     NSAssert(top.id == 1, @"top should be one");
     
@@ -111,7 +116,6 @@
     NSUInteger varsCount = [truthTable.variables count];
     
     NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:rowsCount];
-    
     if (reduced) {
         [allNodes addObject:bottom];    // idx == 0
         [allNodes addObject:top];       // idx == 1

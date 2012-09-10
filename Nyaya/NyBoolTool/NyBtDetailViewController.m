@@ -170,14 +170,11 @@
             BOOL sat = !con;
                         
             NSString *nf = nil;
-            if (tau) {
-                nf = @"T";
-                self.bddView.bddNode = [BddNode top];
-            }
-            else if (con) {
-                nf = @"F";
-                self.bddView.bddNode = [BddNode bottom];
-            }
+            if (tau)  nf = @"T";
+            else if (con)  nf = @"F";
+            
+            BddNode *bdd = node.binaryDecisionDiagram;
+            NSUInteger bddLevelCount = bdd.levelCount;
             
             dispatch_async(mq, ^{
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
@@ -195,14 +192,11 @@
                     self.dnfField.text = nf;
                 }
                 
-                if (tau) self.bddView.bddNode = [BddNode top];
-                else if (con) self.bddView.bddNode = [BddNode bottom];
-                
+                self.bddView.bddNode = bdd;
                 self.bddView.title = description;
                 self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
             });
             
-            NSUInteger bddLevelCount = 1;
             if (!nf) {
             
                 NSString *cnfdescription = node.binaryDecisionDiagram.cnfDescription; //  node.conjunctiveNormalForm.description;
@@ -214,20 +208,13 @@
                     self.nnfField.text = nnfdescription;
                     self.cnfField.text = cnfdescription;
                     self.dnfField.text = dnfdescription;
-                    self.bddView.bddNode = node.binaryDecisionDiagram;
                 });
-                bddLevelCount = node.binaryDecisionDiagram.levelCount;
             }
             
             dispatch_async(mq, ^{
                 [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                 self.navigationItem.title = self.inputName.text;
                 [self adjustResultViewContent:bddLevelCount];
-                                
-                
-
-                
-                
             });
             
         }
@@ -235,7 +222,7 @@
         dispatch_async(mq, ^{
             [progress stopAnimating];
             [alert dismissWithClickedButtonIndex:0 animated:YES];
-            [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
+            // [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
             // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
             [self.bddView setNeedsDisplay];
         });

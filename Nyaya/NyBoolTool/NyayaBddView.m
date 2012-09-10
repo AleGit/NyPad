@@ -30,7 +30,10 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
 {
-    [self drawDiagram:context];
+    if (self.bddNode.levels) [self drawDiagram:context]; // ordered bdd
+    else if (self.bddNode) {
+        NSLog(@"missing bdd.levels – unordered bdd");
+    }
 }
 
 
@@ -39,7 +42,7 @@
     BOOL optimized = [set0 count] < 3;
     
     CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
-    CGFloat xmargin = optimized ? 5.0 + self.frame.size.width / (vSegments+1.0) : 25.0;
+    CGFloat xmargin = optimized ? 5.0 + self.frame.size.width / (vSegments+2.0) : 25.0;
     
     CGPoint p0 = CGPointMake(self.frame.size.width/2.0, 25.0);
     CGPoint pL = CGPointMake(xmargin, self.frame.size.height- 25.0);
@@ -55,7 +58,7 @@
     }
     
     [self.bddNode.levels enumerateObjectsUsingBlock:^(NSArray* harr, NSUInteger vidx, BOOL *stop) {
-        CGFloat factor = optimized ?    (vSegments-2*vidx) / vSegments     : (CGFloat)vidx / vSegments;
+        CGFloat factor = optimized  ?   (vSegments-2*vidx) / vSegments     : (CGFloat)vidx / vSegments;
         CGFloat xoffset = optimized ?   factor * factor * size.width/4.0   : factor * size.width/2.0;
         
         CGFloat vPos;
@@ -136,7 +139,6 @@
     
     
     [nps enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
-        NSLog(@"%@ %u %@", key.name, key.id, obj);
         CGPoint pos = CGPointFromString(obj);
         
         if (!key.isLeaf) {
@@ -149,7 +151,7 @@
         }
         else {
             
-            if (key.id==0 || [key.name isEqual:@"0"])
+            if ([key.name isEqual:@"0"])
                 CGContextSetRGBFillColor(context, 1.0, 0, 0, 1.0);
             else 
                 CGContextSetRGBFillColor(context, 0, 0.75, 0, 1.0);
