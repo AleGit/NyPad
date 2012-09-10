@@ -24,5 +24,12 @@
 -(NSString*)cnfDescription;
 -(NSString*)dnfDescription;
 
+// usually [node pathsTo:@"0"] and [node pathsTo:@"1"],
+// but [node pathsTo:@"x"] is possible too
+- (NSMutableSet*)pathsTo:(NSString*)name;
+- (NSMutableSet*)disjunctiveSet;
+- (NSMutableSet*)conjunctiveSet;
+- (NSString*)disjunctiveDescription;
+- (NSString*)conjunctiveDescription;
 
 @end

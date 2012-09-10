@@ -9,6 +9,7 @@
 #import "BddNode.h"
 #import "TruthTable.h"
 #include "NyayaNode.h"
+#include "NSString+NyayaToken.h"
 
 #pragma mark -
 //@interface NSArray (BddNode)
@@ -276,6 +277,91 @@
     
     NSString *s = [NSString stringWithFormat:@"(%@)", [[self dPaths0] componentsJoinedByString:@") ∧ ("]];
     return  [s stringByReplacingOccurrencesOfString:@" ∨ ¬0" withString:@""];
+}
+
+#pragma mark - disjunctive normal form
+
+- (NSMutableSet*)pathsTo:(NSString*)name {
+    NSMutableSet *set = [NSMutableSet set];
+    if ([self.name isEqual:name]) {
+        [set addObject:[NSMutableArray array]]; // an empty path leads to name
+    }
+    else if (!self.isLeaf) {
+        for (NSMutableArray *path in [self.leftBranch pathsTo:name]) {
+            [path insertObject:[NSString stringWithFormat:@"¬%@", self.name] atIndex:0];
+            [set addObject:path];
+        }
+        for (NSMutableArray *path in [self.rightBranch pathsTo:name]) {
+            [path insertObject:self.name atIndex:0];
+            [set addObject:path];
+        }
+    }
+    return set;
+}
+
+- (NSMutableSet*)disjunctiveSet {
+    return [self pathsTo:@"1"];
+}
+
+- (NSMutableSet*)conjunctiveSet {
+    NSSet *set = [self pathsTo:@"0"];
+    NSMutableSet *cset = [NSMutableSet setWithCapacity:[set count]];
+    
+    for (NSArray *path in set) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:[path count]];
+        for (NSString *s in path) {
+            [array addObject:[s complementaryString]];
+        }
+        [cset addObject:array];
+    }
+    return cset;
+}
+
+- (NSString*)disjunctiveDescription {
+    NSSet* set = [self disjunctiveSet];                             // paths to 0
+    if ([set count] == 0) return @"F";                              // no paths to 1
+    
+    NSSet *cs = [self conjunctiveSet];                              // paths to 0
+    if ([cs count] == 0) return @"T";                               // no path to 0
+    
+    if ([set count] > 1) {
+        if ([cs count] == 1) return [self conjunctiveDescription];  // one path to 0
+    }
+    
+    NSMutableString *description = [NSMutableString string];
+    
+    for (NSArray* path in set) {
+        NSString *s = [path componentsJoinedByString:@" ∧ "];
+        if ([description length] > 0) [description appendString:@" ∨ "];
+        if ([set count] > 1 && [path count] > 1)
+            [description appendFormat:@"(%@)", s];
+        else [description appendString:s];
+    }
+    return description;
+    
+}
+
+- (NSString*)conjunctiveDescription {
+    NSSet* set = [self conjunctiveSet];
+    if ([set count] == 0) return @"T";                              // no path to 0
+    
+    NSSet *ds = [self disjunctiveSet];                              // paths to 1
+    if ([ds count] == 0) return @"F";                               // no paths to 1
+    
+    if ([set count] > 1) {
+        
+        if ([ds count] == 1) return [self disjunctiveDescription];  // one path to 1
+    }
+    
+    NSMutableString *description = [NSMutableString string];
+        for (NSArray* path in set) {
+        NSString *s = [path componentsJoinedByString:@" ∨ "];
+        if ([description length] > 0) [description appendString:@" ∧ "];
+        if ([set count] > 1 && [path count] > 1)
+            [description appendFormat:@"(%@)", s];
+        else [description appendString:s];
+    }
+    return description;
 }
 
 
