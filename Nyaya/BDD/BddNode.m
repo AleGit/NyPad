@@ -11,46 +11,46 @@
 #include "NyayaNode.h"
 
 #pragma mark -
-@interface NSArray (BddNode)
-- (BddNode*)nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb;
-@end
+//@interface NSArray (BddNode)
+//- (BddNode*)nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb;
+//@end
+//
+//@implementation NSArray (BddNode)
+//
+//- (BddNode*) nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb {
+//    for (BddNode* node in self) {
+//        if (node.leftBranch.id == lb.id && node.rightBranch.id == rb.id)
+//            return node;
+//    }
+//    return nil;
+//}
+//
+//@end
 
-@implementation NSArray (BddNode)
-
-- (BddNode*) nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb {
-    for (BddNode* node in self) {
-        if (node.leftBranch.id == lb.id && node.rightBranch.id == rb.id)
-            return node;
-    }
-    return nil;
-}
-
-@end
-
-@interface NSString (BddNode)
-- (NSString*)conjunct;
-- (NSString*)disjunct;
-@end
-
-@implementation NSString (BddNode)
-
-- (NSString*)conjunct {
-    NSString *s = [[self stringByReplacingOccurrencesOfString:@":1" withString:@""]
-            stringByReplacingOccurrencesOfString:@":" withString:@" ∧ "];
-    
-    return s;
-    
-}
-- (NSString*)disjunct {
-    NSString *s = [[self stringByReplacingOccurrencesOfString:@":0" withString:@""]
-                   stringByReplacingOccurrencesOfString:@":" withString:@" ∨ ¬"];
-    s = [@"¬" stringByAppendingString:s];
-    s = [s stringByReplacingOccurrencesOfString:@"¬¬" withString:@""];
-    
-    return s;
-}
-
-@end
+//@interface NSString (BddNode)
+//- (NSString*)conjunct;
+//- (NSString*)disjunct;
+//@end
+//
+//@implementation NSString (BddNode)
+//
+//- (NSString*)conjunct {
+//    NSString *s = [[self stringByReplacingOccurrencesOfString:@":1" withString:@""]
+//            stringByReplacingOccurrencesOfString:@":" withString:@" ∧ "];
+//    
+//    return s;
+//    
+//}
+//- (NSString*)disjunct {
+//    NSString *s = [[self stringByReplacingOccurrencesOfString:@":0" withString:@""]
+//                   stringByReplacingOccurrencesOfString:@":" withString:@" ∨ ¬"];
+//    s = [@"¬" stringByAppendingString:s];
+//    s = [s stringByReplacingOccurrencesOfString:@"¬¬" withString:@""];
+//    
+//    return s;
+//}
+//
+//@end
 #pragma mark -
 
 @interface BddNode ()
@@ -88,8 +88,6 @@
 - (BOOL)isLeaf {
     return _leftBranch == nil;
 }
-
-
 
 + (BddNode *)bddWithTruthTable:(TruthTable *)truthTable reduce:(BOOL)reduced {
     BddNode *bdd = nil;
@@ -280,40 +278,8 @@
     return  [s stringByReplacingOccurrencesOfString:@" ∨ ¬0" withString:@""];
 }
 
-- (NSUInteger)levelCount {
-    if (self.isLeaf) return 1;
-    
-    NSUInteger leftLevelCount = [self.leftBranch levelCount];
-    NSUInteger rightLevelCount = [self.rightBranch levelCount];
-    
-    return 1 + (leftLevelCount > rightLevelCount ? leftLevelCount : rightLevelCount);
-}
-
-- (NSUInteger)nodeCount {
-    // if (self.isLeaf) return 0;
-    return 1 + [self.leftBranch nodeCount] + [self.rightBranch nodeCount];
-}
-
 
 #pragma mark - protocol NSObject
-/*
- - (BOOL)isEqualToLeaf:(BddLeaf*)leaf {
- return self.id == leaf.id;
- }
- 
- - (BOOL)isEqual:(id)object {
- if (self == object)
- return YES;
- else if ([object isKindOfClass:[self class]])
- return [self isEqualToLeaf:object];
- else
- return NO;
- }
- 
- - (NSUInteger)hash {
- return self.id;
- }
- */
 
 - (BOOL)isEqual:(id)object {
     if (self == object) return YES;

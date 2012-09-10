@@ -174,7 +174,7 @@
             else if (con)  nf = @"F";
             
             BddNode *bdd = node.binaryDecisionDiagram;
-            NSUInteger bddLevelCount = bdd.levelCount;
+            NSUInteger bddLevelCount = bdd.levels.count;
             
             dispatch_async(mq, ^{
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];

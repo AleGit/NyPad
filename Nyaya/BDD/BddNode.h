@@ -20,10 +20,9 @@
 + (id)top;
 + (id)bottom;
 -(BOOL)isLeaf;
+
 -(NSString*)cnfDescription;
 -(NSString*)dnfDescription;
--(NSUInteger)levelCount;
--(NSUInteger)nodeCount;
 
 
 @end
