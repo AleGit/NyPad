@@ -170,8 +170,14 @@
             BOOL sat = !con;
                         
             NSString *nf = nil;
-            if (tau) nf = @"T";
-            else if (con) nf = @"F";
+            if (tau) {
+                nf = @"T";
+                self.bddView.bddNode = [BddNode top];
+            }
+            else if (con) {
+                nf = @"F";
+                self.bddView.bddNode = [BddNode bottom];
+            }
             
             dispatch_async(mq, ^{
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
@@ -311,7 +317,7 @@
     [self centerView:self.dnfLabel verticallyTo:self.dnfField.frame];
     
     CGRect f = self.bddView.frame;
-    self.bddView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, 20 + bddLevelCount * (50+60) - 60 + 20);
+    self.bddView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, 50 + (bddLevelCount-1)*100);
     
     // [self moveView:self.bddView toY: self.bddView.frame.origin.y + yoffset];
     

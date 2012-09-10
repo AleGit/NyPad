@@ -14,6 +14,7 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) BddNode *leftBranch;
 @property (nonatomic, readonly) BddNode *rightBranch;
+@property (nonatomic, strong) NSArray *levels;
 
 +(BddNode*)diagramWithTruthTable:(TruthTable*)truthTable;
 + (id)top;

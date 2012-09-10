@@ -10,30 +10,12 @@
 #import "UIColor+Nyaya.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface NyayaBddView () {
-    UILabel *bottom;
-    UILabel *top;
-}
-
-@end
-
 @implementation NyayaBddView
 
 +(Class)layerClass
 {
     return [CATiledLayer class];
 }
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        
-    }
-    return self;
-}
-
 
 - (void)drawRect:(CGRect)rect {
     // UIView uses the existence of -drawRect: to determine if should allow its CALayer
@@ -51,138 +33,147 @@
     [self drawDiagram:context];
 }
 
-- (void)drawDiagram:(CGContextRef)context {
-    // Do all your drawing here. Do not use UIGraphics to do any drawing, use Core Graphics instead.
-    bottom = (UILabel*)[self viewWithTag:1];
-    top = (UILabel*)[self viewWithTag:2];
+
+- (NSDictionary*)nodePoints {
+    CGPoint p0 = CGPointMake(self.frame.size.width/2.0, 25.0);
+    CGPoint pL = CGPointMake(25.0, self.frame.size.height- 25.0);
+    CGPoint pR = CGPointMake(self.frame.size.width-50.0, self.frame.size.height - 25.0);
     
-    bottom.backgroundColor = [UIColor nyWrongColor];
-    top.backgroundColor = [UIColor nyRightColor];
-    // self.backgroundColor = [UIColor nyLightGreyColor];
+    NSMutableDictionary *nps = [NSMutableDictionary dictionary];
+
+    CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
+    CGSize size = CGSizeMake(pR.x - pL.x, pR.y - p0.y);
     
-    if (!self.bddNode.isLeaf) {
-        top.hidden = NO;
-        bottom.hidden = NO;
-        
-        CGPoint pos = CGPointMake(self.frame.size.width/2.0, 45.0);
-        
-        CGSize offset = CGSizeMake(pos.x, (top.center.y - pos.y) / ((CGFloat)self.bddNode.levelCount-1.0));
-        
-        if (self.bddNode) [self drawNode:self.bddNode at:pos inContext:context offset:offset];
-    }
-    else if (self.bddNode.id == 0) {
-        top.hidden = YES;
-        bottom.hidden = NO;
-    }
-    else if (self.bddNode.id == 1) {
-        bottom.hidden = YES;
-        top.hidden = NO;
-        
+    if (!self.bddNode.levels && self.bddNode) {
+        self.bddNode.levels = @[@[self.bddNode]];
     }
     
-//    if (self.title || self.subtitle) {
-//        UIGraphicsPushContext(context);
-//        // CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
-//        if (self.title) [[self.title substringToIndex:5] drawAtPoint:CGPointMake(10.0,10.0) withFont:[UIFont systemFontOfSize:16]];
-//        if (self.subtitle) [self.subtitle drawAtPoint:CGPointMake(10.0,40.0) withFont:[UIFont systemFontOfSize:12]];
-//        UIGraphicsPopContext();
-//    }
-    
+    [self.bddNode.levels enumerateObjectsUsingBlock:^(NSArray* harr, NSUInteger vidx, BOOL *stop) {
+        // CGFloat xoffset = (CGFloat)vidx/vSegments * size.width/2.0;
+//        CGFloat factor = (CGFloat)vidx/vSegments;
+//        CGFloat xoffset = factor*factor * size.width/2.0;
+        
+        CGFloat factor = (((CGFloat)vidx) - vSegments/2.0)/vSegments;
+        CGFloat xoffset = sqrt(fabs(factor)) * size.width/2.0;
+
+        
+        
+        CGFloat vPos;
+        if (vSegments < 1)
+            vPos = p0.y;
+        else
+            vPos =  pL.y - (CGFloat)vidx/vSegments * size.height;
+        NSSet *hset = [NSSet setWithArray:harr]; // does not keep order
+        CGFloat hSegments = (CGFloat)[hset count] - 1.0;
+        
+        NSMutableArray *rarr = [NSMutableArray array];
+        for (BddNode *node in harr) {
+            if (![rarr containsObject:node]) [rarr addObject:node];
+        }
+        
+        
+        
+        [rarr enumerateObjectsUsingBlock:^(BddNode *node, NSUInteger hidx, BOOL *stop) {
+            if ([nps objectForKey:node] == nil) {
+                CGFloat hPos;
+                
+                if (hSegments < 1.0) {
+                    hPos = p0.x;
+                }
+                else {
+                    hPos = pL.x + xoffset + ((CGFloat)hidx)/hSegments * (pR.x-pL.x-2*xoffset);
+                }
+                CGPoint npos = CGPointMake(hPos, vPos);
+                NSString *obj = NSStringFromCGPoint(npos);
+                
+                [nps setObject:obj forKey:node];
+                
+            }
+            
+        }];
+        
+        
+    }];
+    return nps;
 }
 
-- (void)drawNode:(BddNode*)node at:(CGPoint)pos inContext:(CGContextRef)context offset:(CGSize)offset {
-    static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
-    NSString *text = nil;
+- (void)drawDiagram:(CGContextRef)context {
     
-    if (offset.width>20.0) {
+    static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
+    CGContextSetLineWidth(context, 3.0);
+    
+    NSDictionary *nps = [self nodePoints];
+    
+    // draw lines
+    
+    [nps enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
+        CGPoint pos = CGPointFromString(obj);
         
-        CGFloat leftNodeCount = (CGFloat)[node.leftBranch nodeCount];
-        CGFloat rightNodeCount = (CGFloat)[node.rightBranch nodeCount];        
-        leftNodeCount = sqrt(leftNodeCount);
-        rightNodeCount = sqrt(rightNodeCount);
-        CGFloat nodeCount = leftNodeCount + rightNodeCount;
-        CGFloat leftFraction = leftNodeCount / nodeCount;
-        CGFloat rightFraction = rightNodeCount / nodeCount;
-        
-        
-        
-//        CGFloat leftFraction = sqrt(leftNodeCount) / sqrt(nodeCount);
-//        CGFloat rightFraction = sqrt(rightNodeCount) / sqrt(nodeCount);
-        
-        
-        
-        // draw left branch
-        CGContextSetLineWidth(context, 3.0);
-        CGContextSetLineDash(context, 30.0, arr, 2);
-        CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
-        CGContextMoveToPoint(context, pos.x, pos.y);
-        
-        if (node.leftBranch.isLeaf) {
+        if (!key.isLeaf) {
             
-            if (node.leftBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
-            else CGContextAddLineToPoint(context, top.center.x, top.center.y);
+            
+            CGPoint posL = CGPointFromString([nps objectForKey:key.leftBranch]);
+            CGPoint posR = CGPointFromString([nps objectForKey:key.rightBranch]);
+            
+            // draw left branch
+            CGContextSetLineDash(context, 30.0, arr, 2);
+            CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+            CGContextMoveToPoint(context, pos.x, pos.y);
+            CGContextAddLineToPoint(context, posL.x, posL.y);
             CGContextStrokePath(context);
+
+            
+            // draw right branch
+            CGContextSetLineDash(context, 0.0, nil, 0);
+            CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+            CGContextMoveToPoint(context, pos.x, pos.y);
+            CGContextAddLineToPoint(context, posR.x, posR.y);
+            CGContextStrokePath(context);
+            
+            
+        }
+        
+    }];
+    
+    // draw nodes
+    
+    
+    [nps enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
+        NSLog(@"%@ %u %@", key.name, key.id, obj);
+        CGPoint pos = CGPointFromString(obj);
+        
+        if (!key.isLeaf) {
+            CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+            CGContextSetRGBFillColor(context, 1, 1, 1, 0.9);
+            CGContextAddEllipseInRect(context, CGRectMake(pos.x-21.0, pos.y-21.0,43.0,43.0));
+            CGContextDrawPath(context, kCGPathEOFillStroke);
+            
+            
         }
         else {
             
-            CGFloat xoffset = -offset.width * rightFraction;    // draw left branch to the left
-            CGSize nextSize = CGSizeMake(offset.width * leftFraction, offset.height);
-            if (node.rightBranch.isLeaf && node.rightBranch.id == 0) xoffset *=-1.0;
-            CGPoint lPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height);
+            if (key.id==0 || [key.name isEqual:@"0"])
+                CGContextSetRGBFillColor(context, 1.0, 0, 0, 1.0);
+            else 
+                CGContextSetRGBFillColor(context, 0, 0.75, 0, 1.0);
             
-            CGContextAddLineToPoint(context, lPos.x, lPos.y);
-            CGContextStrokePath(context);
-            [self drawNode:node.leftBranch at:lPos inContext:context offset:nextSize];
+            CGContextSetRGBStrokeColor(context, 0, 0, 0, 1.0);
+            CGContextAddRect(context, CGRectMake(pos.x-21.0, pos.y-21.0,43.0,43.0));
+            CGContextDrawPath(context, kCGPathEOFillStroke);
         }
         
-        // draw right branch
-        CGContextSetLineWidth(context, 3.0);
-        CGContextSetLineDash(context, 0.0, nil, 0);
-        CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
-        CGContextMoveToPoint(context, pos.x, pos.y);
+        CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
+        UIGraphicsPushContext(context);
+        CGSize size = [key.name sizeWithFont:[UIFont systemFontOfSize:23]];
+        [key.name drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+        UIGraphicsPopContext();
         
-        if (node.rightBranch.isLeaf) {
-            if (node.rightBranch.id == 0) CGContextAddLineToPoint(context, bottom.center.x, bottom.center.y);
-            else CGContextAddLineToPoint(context, top.center.x, top.center.y);
-            CGContextStrokePath(context);
-            
-        }
-        else{
-            
-            // CGFloat xoffset = node.leftBranch.isLeaf && node.leftBranch.id == 1 ? -offset.width : offset.width;    // draw  right branch to the right
-            CGFloat xoffset = offset.width * leftFraction;    // draw left branch to the left
-            CGSize nextSize = CGSizeMake(offset.width * rightFraction, offset.height);
-            if (node.leftBranch.isLeaf && node.leftBranch.id == 1) xoffset *=-1.0;
-            CGPoint rPos =  CGPointMake(pos.x + xoffset, pos.y + offset.height);
-            
-            CGContextAddLineToPoint(context, rPos.x, rPos.y);
-            CGContextStrokePath(context);
-            [self drawNode:node.rightBranch at:rPos inContext:context offset:nextSize];
-            
-        }
-        
-        
-        // draw node
-        CGContextSetRGBFillColor(context, 1, 1, 1, 0.9);
-        
-        CGContextSetLineWidth(context, 3.0);
-        CGContextAddEllipseInRect(context, CGRectMake(pos.x-21.0, pos.y-21.0,43.0,43.0));
-        CGContextDrawPath(context, kCGPathEOFillStroke);
-        
-        text = node.name;
-    }
-    else text = @"...";
+    }];
     
     
-    CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
-    
-    
-    /* draw text */
-    UIGraphicsPushContext(context);
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:23]];
-    [text drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
-    UIGraphicsPopContext();
 }
+
+
 
 
 @end

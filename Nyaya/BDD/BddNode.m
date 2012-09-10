@@ -95,80 +95,89 @@
     return _leftBranch == nil;
 }
 
+
+
 + (BddNode *)diagramWithTruthTable:(TruthTable *)truthTable {
-    if (truthTable.isTautology) return [self top];
-    if (truthTable.isContradiction) return [self bottom];
+    return [self bddv3:truthTable optimize:YES];
+}
+
++ (BddNode *)bddv3:(TruthTable *)truthTable optimize:(BOOL)optimize {
+    BddNode *bdd = nil;
+    NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[truthTable.variables count]];
     
-    NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:truthTable.rowsCount];
-    // maximum capacity needed is rowCount/2 + rowCount/4 + rowCount/8
+    BddNode *top = [BddNode top];
+    BddNode *bottom = [BddNode bottom];
     
-    [allNodes addObject:[self bottom]]; // object at index 0 has id 0
-    [allNodes addObject:[self top]];    // object at index 1 has id 1
+    NSAssert(bottom.id == 0, @"bottom should be zero");
+    NSAssert(top.id == 1, @"top should be one");
     
-   
-    NSMutableArray *lastArray = nil;
-    NSMutableArray *thisArray = nil;
-    NSUInteger count = [truthTable.variables count];
+    NSUInteger rowsCount = truthTable.rowsCount;
+    NSUInteger varsCount = [truthTable.variables count];
     
-    for (NSUInteger idx = count-1; idx < count; idx--) { // (NSUInteger)-1 == NSUIntegerMax
-        NyayaNode *variable = [truthTable.variables objectAtIndex:idx];
-        
-        if (!lastArray) {
-            thisArray = [NSMutableArray arrayWithCapacity:truthTable.rowsCount/2];
-            
-            for (NSUInteger rowIdx = 0; rowIdx < truthTable.rowsCount; rowIdx += 2) {
-                
-                BddNode * leftBranch = [truthTable evalAtRow:rowIdx] ? [BddNode top] : [BddNode bottom];
-                BddNode * rightBranch = [truthTable evalAtRow:rowIdx+1] ? [BddNode top] : [BddNode bottom];
-                
-                if (leftBranch == rightBranch) [thisArray addObject:leftBranch];
-                else {
-                    BddNode *node = [thisArray nodeWithLeftBranch:leftBranch rightBranch:rightBranch];
-                    if (!node) {
-                        node = [[BddNode alloc] initWithName:variable.symbol
-                                                          id:[allNodes count]
-                                                  leftBranch:leftBranch
-                                                 rightBranch:rightBranch];
-                        [allNodes addObject:node];                        
-                    }
-                    [thisArray addObject:node];
-                }  
-            }
-            
-        }
-        else {
-            thisArray = [NSMutableArray arrayWithCapacity:[lastArray count]/2];
-            
-            for (NSUInteger idx =0; idx < [lastArray count]; idx += 2) {
-                
-                BddNode * leftBranch = [lastArray objectAtIndex:idx];
-                BddNode * rightBranch = [lastArray objectAtIndex:idx+1];
-                
-                if (leftBranch == rightBranch) [thisArray addObject:leftBranch];
-                else {
-                    BddNode *node = [thisArray nodeWithLeftBranch:leftBranch rightBranch:rightBranch];
-                    if (!node) {
-                        node = [[BddNode alloc] initWithName:variable.symbol
-                                                          id:[allNodes count]
-                                                  leftBranch:leftBranch
-                                                 rightBranch:rightBranch];
-                        [allNodes addObject:node];
-                    }
-                    [thisArray addObject:node];
-                }
-                
-            }
-            
-            
-        }
-        
-        lastArray = thisArray;
-        thisArray = nil;
+    NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:rowsCount];
+    
+    if (optimize) {
+        [allNodes addObject:bottom];    // idx == 0
+        [allNodes addObject:top];       // idx == 1
     }
     
-    NSAssert([lastArray count] == 1, @"should be one");
+    NSMutableArray *lowerLevelArray = [NSMutableArray arrayWithCapacity:rowsCount];
     
-    return [lastArray objectAtIndex:0];
+    for (NSUInteger rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
+        BddNode *node = nil;
+        BOOL eval = [truthTable evalAtRow:rowIdx];
+        if (optimize) { // reuse nodes
+            node = eval ? top : bottom;
+        }
+        else { // do not reuse nodes
+            node = eval ? [[BddNode alloc] initWithName:@"1" id:[allNodes count]] : [[BddNode alloc] initWithName:@"0" id:[allNodes count]];
+            [allNodes addObject:node];
+        }
+        [lowerLevelArray addObject:node];
+    }
+    [levels addObject:lowerLevelArray]; // the array with 0 and 1-nodes
+    
+    NSMutableArray *levelArray;
+    for (NSUInteger varIdx = 0; varIdx < varsCount; varIdx++) {
+        NyayaNode *variable = [truthTable.variables objectAtIndex:varsCount-varIdx-1];
+        levelArray = [NSMutableArray arrayWithCapacity:[lowerLevelArray count]/2];
+        
+        for (NSUInteger idx = 0; idx < [lowerLevelArray count]; idx +=2) {
+            BddNode *left = [lowerLevelArray objectAtIndex:idx];
+            BddNode *right = [lowerLevelArray objectAtIndex:idx+1];
+            BddNode * node = nil;
+            
+            if (optimize) {
+                if (left == right) node = left;
+                
+                // try to find the node in actual level
+                for (BddNode *ln in levelArray) {
+                    if (ln.leftBranch == left && ln.rightBranch == right) {
+                        node = ln;
+                        break;  // found the same node
+                    }
+                }
+            }
+            
+            if (!node) {
+                node = [[BddNode alloc] initWithName:variable.symbol
+                                                        id:[allNodes count]
+                                                leftBranch:left
+                                               rightBranch:right];
+                [allNodes addObject:node];
+                        
+            }
+            [levelArray addObject:node];
+        }
+        
+        lowerLevelArray = levelArray;
+        [levels addObject:lowerLevelArray];
+    }
+    
+    NSAssert([lowerLevelArray count] == 1, @"lowerLevelArray should contain one element");
+    bdd = [lowerLevelArray objectAtIndex:0];
+    bdd.levels = levels;
+    return bdd;
 }
 
 - (NSArray*)cPaths1 {
@@ -305,6 +314,23 @@
  return self.id;
  }
  */
+
+- (BOOL)isEqual:(id)object {
+    if (self == object) return YES;
+    
+    if (![object isMemberOfClass:[self class]]) return NO;
+    
+    return self.id == [object id];
+    
+}
+
+- (NSUInteger)hash {
+    return self.id;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
 
 
 @end
