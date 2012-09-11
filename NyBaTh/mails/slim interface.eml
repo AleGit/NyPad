@@ -1,0 +1,35 @@
+Received: via dmail-2003(12) for +INBOX; Thu, 26 Apr 2012 10:43:24 +0200 (MEST)
+Received: from smtp.uibk.ac.at (lmr1.uibk.ac.at [138.232.1.142] georg.moser@uibk.ac.at)
+  by smd.uibk.ac.at (8.13.8+Sun/uibk) with ESMTP id q3Q8hOjE009047 for <csaa4441@mail2.uibk.ac.at>;
+  Thu, 26 Apr 2012 10:43:24 +0200 (MEST)
+Received: from [138.232.66.132] (pc6132-c703.uibk.ac.at [138.232.66.132])
+	by smtp.uibk.ac.at (8.13.8/8.13.8/F1) with ESMTP id q3Q8hNmd015974;
+	Thu, 26 Apr 2012 10:43:23 +0200
+Message-ID: <4F990AAB.4040300@uibk.ac.at>
+Date: Thu, 26 Apr 2012 10:43:23 +0200
+From: Georg Moser <georg.moser@uibk.ac.at>
+Organization: University Innsbruck
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Lightning/1.0b2 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: Alexander Maringele <Alexander.Maringele@student.uibk.ac.at>
+CC: georg <georg.moser@uibk.ac.at>
+Subject: slim interface
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Score: () -5.0 FROM_NET_2,RCV_SMTP_UIBK,S25R_1,T_RP_MATCHES_RCVD
+X-Scanned-By: MIMEDefang 2.61 at uibk.ac.at on 138.232.1.140
+
+Hallo Alexander,
+
+und hier ist das versprochene 'slim interface', das bereits auf dem von 
+Simon Legner geänderten Code aufbaut:
+
+http://colo6-c703.uibk.ac.at/ttt2/interface_new/booltool/
+
+Hier sind die vorhin geschickten Fehler der CNF Transformation schon 
+behoben. (Dafür ist das 'slim interface' nicht ohne fehler, etwa wird 
+zwar die Syntax von BoolTool unterstützt ("|" für oder), aber 
+beschrieben wird eine andere Syntax ...)
+
+LG, Georg
+

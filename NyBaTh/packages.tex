@@ -1,0 +1,96 @@
+% !TEX encoding = UTF-8 Unicode
+% ÄÖÜ ß äöü
+
+
+
+\usepackage[utf8]{inputenc}			% Eingabekodierung
+\usepackage[ngerman,english]{babel}	% Unterstütze deutsch und englisch, english ist aktiv, \selectlanguage{ngerman}
+\usepackage[T1]{fontenc}				% Korrekte Umlaute im PDF
+
+%\usepackage{ucs}
+\usepackage{blindtext}				% Blindtext einfach erzeugen
+\usepackage{listings}
+\usepackage{floatflt}
+
+%\lstset{
+%extendedchars=\true,
+%inputencoding=utf8x
+%}
+
+\lstset{
+extendedchars=\true,
+%language=C,                             % Code langugage
+basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+commentstyle=\color{gray},              % Comments font
+numbers=left,                           % Line nums position
+numberstyle=\tiny,                      % Line-numbers fonts
+stepnumber=1,                           % Step between two line-numbers
+numbersep=5pt,                          % How far are line-numbers from code
+%backgroundcolor=\color{lightlightgray}, % Choose background color
+frame=none,                             % A frame around the code
+tabsize=2,                              % Default tab size
+captionpos=b,                           % Caption-position = bottom
+breaklines=true,                        % Automatic line breaking?
+breakatwhitespace=false,                % Automatic breaks only at whitespace?
+showspaces=false,                       % Dont make spaces visible
+showtabs=false,                         % Dont make tabls visible
+columns=flexible,                       % Column format
+morekeywords={__global__, __device__},  % CUDA specific keywords
+}
+
+\usepackage{varioref}
+\newcommand{\figref}[1]{(figure \vref{#1})}
+\newcommand{\tabref}[1]{(table \vref{#1})}
+\newcommand{\seeref}[1]{(see \vref{#1})}
+\newcommand{\reff}[1]{„\nameref{#1}“ (see \vref{#1})}
+\newcommand{\USD}[1]{{#1}\,\$}
+
+% ############################################################################
+% Metadaten und anklickbare Verweise in der PDF-Datei
+% ===========================================
+%\usepackage[pdftex
+%	, pdfauthor={Alexander Maringele}
+%	, pdftitle={An Interactive Interface for BoolTool}
+%	, pdfsubject={bachaelor thesis},
+%		%,pdfkeywords={}
+%		%,pdfproducer={Latex with hyperref}
+%		%,pdfcreator={pdflatex}
+%	, colorlinks=true
+%]
+%{hyperref}				% anklickbare Links im PDF
+
+% \usepackage[pdftex]{hyperref}
+
+% to typeset algorithms
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+% for documentation of packages search
+% http://ctan.org
+
+\pdfinfo{
+/Author (Alexander Maringele)
+/Title  (Interactive Interface for Bool Tool)
+/CreationDate (D:20121001121300)
+/Subject (iPad Learning App for Propositional Logic)
+/Keywords (University of Innsbruck;Institute of Computer Science;Computational Logic)
+}
+% ##############################################################################
+
+\usepackage{graphicx}  % \includgraphics
+\usepackage{amssymb}
+
+\usepackage[xindy,toc,nonumberlist]{glossaries}
+ \include{glossary}
+ \makeglossaries
+
+
+% #########################################################
+% smarter line breaks for urls
+% =========================================================
+%\let\oldurlbreaks=\UrlBreaks
+%\renewcommand{\UrlBreaks}{\oldurlbreaks\do\a\do\b\do\c\do\d\do\e%
+%  \do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q%
+%  \do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\?\do\&}
+%\renewcommand{\UrlBreaks}{\oldurlbreaks\do\-\do\&}
+% #########################################################
