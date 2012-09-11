@@ -162,21 +162,28 @@
         });
         
         if (node.isWellFormed) {
+            dispatch_async(mq, ^{
+                [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
+                self.navigationItem.title = self.inputName.text;
+            });
             
-            NSString *stdDescription = @""; // [node.reducedFormula description];
-            
-            BOOL tau = [stdDescription isTrueToken] || node.truthTable.isTautology;
-            BOOL con = [stdDescription isFalseToken] || node.truthTable.isContradiction;
-            BOOL sat = !con;
-                        
-            NSString *nf = nil;
-            if (tau)  nf = @"T";
-            else if (con)  nf = @"F";
-            
-            BddNode *bdd = node.binaryDecisionDiagram;
+            BddNode *bdd = [node OBDD:YES];
             NSUInteger bddLevelCount = bdd.levels.count;
             
+            // NSString *stdDescription = @""; // [node.reducedFormula description];
+            // NSString *imfDescription = node.IMF.description;
+            NSString *nnfDescription = node.NNF.description;
+            NSString *cnfDescription = node.CNF.description;
+            NSString *dnfDescription = node.DNF.description;
+            
+
+            BOOL tau = [node truthTable:YES].isTautology;
+            BOOL con = [node truthTable:YES].isContradiction;
+            BOOL sat = !con;
+                        
             dispatch_async(mq, ^{
+                [self adjustResultViewContent:bddLevelCount];
+                
                 self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                 self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
                 self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
@@ -185,36 +192,13 @@
                 self.tautologyLabel.textColor = tau ? [UIColor blackColor] : [UIColor whiteColor];
                 self.contradictionLabel.textColor = con ? [UIColor blackColor] : [UIColor whiteColor];
                 
-                if (nf) {
-                    self.stdField.text = nf;
-                    self.nnfField.text = nf;
-                    self.cnfField.text = nf;
-                    self.dnfField.text = nf;
-                }
+                self.nnfField.text = nnfDescription;
+                self.cnfField.text = cnfDescription;
+                self.dnfField.text = dnfDescription;
                 
                 self.bddView.bddNode = bdd;
                 self.bddView.title = description;
                 self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
-            });
-            
-            if (!nf) {
-            
-                NSString *cnfdescription = node.binaryDecisionDiagram.cnfDescription; //  node.conjunctiveNormalForm.description;
-                NSString *dnfdescription = node.binaryDecisionDiagram.dnfDescription; //  node.disjunctiveNormalForm.description;
-                NSString *nnfdescription = cnfdescription <= dnfdescription ? cnfdescription : dnfdescription; // node.negationNormalForm.description;
-                
-                dispatch_async(mq, ^{
-                    self.stdField.text = stdDescription;
-                    self.nnfField.text = nnfdescription;
-                    self.cnfField.text = cnfdescription;
-                    self.dnfField.text = dnfdescription;
-                });
-            }
-            
-            dispatch_async(mq, ^{
-                [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
-                self.navigationItem.title = self.inputName.text;
-                [self adjustResultViewContent:bddLevelCount];
             });
             
         }

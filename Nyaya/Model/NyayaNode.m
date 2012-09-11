@@ -21,43 +21,69 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *node = [parser parseFormula];
     if (node) {
-        node->_wellFormed = ![parser hasErrors];
-        
-        node->_reduceNodePredicate = 0;
-        node->_truthTablePredicate = 0;
-        node->_bddNodePredicate = 0;
-        
+        node->_wellFormed = !parser.hasErrors;
+                
        
     }
     return node;
 }
 
 - (NyayaNode*)reducedFormula {
-    dispatch_once(&_reduceNodePredicate, ^{
-        _reducedNode = [self reduce];
-    });
+    if (!_reducedNode) _reducedNode = [self reduce];
     return _reducedNode;
 }
 
-- (TruthTable*)truthTable {
-    dispatch_once(&_truthTablePredicate, ^{
-        if (_reducedNode) _truthTable = [[TruthTable alloc] initWithNode:_reducedNode];
-        else _truthTable = [[TruthTable alloc] initWithNode:self];
+- (TruthTable*)truthTable:(BOOL)compact {
+    if (_wellFormed && (!_truthTable || _truthTable.compact != compact)) {
+        _truthTable = [[TruthTable alloc] initWithNode:self];
         [_truthTable evaluateTable];
-    });
+    }
     return _truthTable;
 }
 
-- (BddNode*)binaryDecisionDiagram {
-    dispatch_once(&_bddNodePredicate, ^{
-        _bddNode = [BddNode bddWithTruthTable:[self truthTable] reduce:YES];
-        _cnfDescription = [_bddNode cnfDescription];
-        _dnfDescription = [_bddNode dnfDescription];
-        _nnfDescription = [_cnfDescription length] <= [_dnfDescription length] ? _cnfDescription : _dnfDescription;
-    });
+- (BddNode*)OBDD:(BOOL)reduced {
+    if (_wellFormed && (!_bddNode || (_bddNode.reduced != reduced))) {
+        _bddNode = [BddNode bddWithTruthTable:[self truthTable:YES] reduce:reduced];
+    }
     return _bddNode;
-    
 }
+
+- (NSUInteger)count {
+    NSUInteger c = 1;
+    for (NyayaNode *subnode in self.nodes) {
+        c += [subnode count]; // the graph must not contain circles, but can be reduced
+    }
+    return c;
+}
+
+- (NyayaNode*)CNF {
+    if (!_cnfNode) {
+        _cnfNode = [self OBDD:YES].CNF;
+    }
+    return _cnfNode;
+}
+
+- (NyayaNode*)DNF {
+    if (!_dnfNode) {
+        _dnfNode = [self OBDD:YES].DNF;
+    }
+    return _dnfNode;
+}
+
+- (NyayaNode*)NNF {
+    if (!_nnfNode) {
+        _nnfNode = [self OBDD:YES].NNF;
+    }
+    return _nnfNode;
+}
+
+- (NyayaNode*)IMF {
+    if (!_imfNode) {
+        _imfNode = [self OBDD:YES].IMF;
+    }
+    return _imfNode;
+}
+
 /* ********************************************************************************************************* */
 #pragma mark - internal methods -
 /* ********************************************************************************************************* */
@@ -140,6 +166,15 @@
         hash += [node hash]; // a > b has same hash as b > a
     }
     return hash;
+}
+
+- (NSComparisonResult)compare:(NyayaNode*)other {
+    NSUInteger selfCount = [self count];
+    NSUInteger otherCount = [other count];
+    
+    if (selfCount < otherCount) return NSOrderedAscending;
+    else if (selfCount > otherCount) return NSOrderedDescending;
+    else return NSOrderedSame;
 }
 
 @end

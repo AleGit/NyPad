@@ -70,12 +70,14 @@
 }
 
 - (id)initWithNode:(NyayaNode *)node {
-    return [self initWithNode:node expanded:NO];
+    return [self initWithNode:node compact:YES];
 }
 
-- (id)initWithNode:(NyayaNode *)node expanded:(BOOL)expanded {
+- (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact {
+    BOOL expanded = !compact;
     self = [super init];
     if (self) {
+        _compact = compact;
         _formula = node;
         _title = [node description];
         _variables = [[node setOfVariables] allObjects];
@@ -270,107 +272,8 @@
 
 
 
-#pragma mark - normal forms
+#pragma mark - normal forms (deprecated see BddNode)
 
-- (NSSet*)cnfSet {
-    NSMutableSet* conjunction = nil;
-    if ([_falseIndices count] == 0) { // valid, tautology, top, T
-        conjunction = [NSSet set];         // ∧{} = T
-    }
-    else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
-        conjunction = [NSSet setWithObject:[NSSet set]]; // ∧{∨{}} = ∧{F} = F
-    }
-    else if ([_trueIndices count] == 1) { // conjunction of literals: { {x} {¬y} {z} }
-        NSMutableSet *c = [NSMutableSet setWithCapacity:[_sortedNames count]];
-        NSUInteger idx = [_trueIndices firstIndex];
-        for (NSString *name in _sortedNames) {
-            BOOL eval = [self evalAtRow:idx forHeader:name];
-            NSSet *d = [NSSet setWithArray:@[eval ? name : [name complementaryString]]];
-            [c addObject: d];
-        }
-        conjunction = c;
-    }
-    else { // conjunction of "negated 0-rows"
-        //              = "negated conjunction of literals"
-        //              = "disjunction of negated literals"
-        //              = "disjunction of complementary literals"
-        NSMutableSet *c = [NSMutableSet setWithCapacity:[_falseIndices count]];
-        [_falseIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            NSMutableSet *d = [NSMutableSet setWithCapacity:[_sortedNames count]];
-            for (NSString *name in _sortedNames) {
-                BOOL eval = [self evalAtRow:idx forHeader:name];
-                [d addObject: !eval ? name : [name complementaryString]];
-            }
-            [c addObject:d];
-        }];
-        conjunction = c;
-    }
-    return conjunction;
-}
-
-- (NSSet*)dnfSet {
-    NSMutableSet* disjunction = nil;
-    if ([_falseIndices count] == 0) { // valid, tautology, top, T
-        disjunction = [NSSet setWithObject:[NSSet set]];         // ∨{∧{}} = ∨{T} = T
-    }
-    else if ([_trueIndices count] == 0) { // not satisfiable, contradiction, bottom, F
-        disjunction = [NSSet set]; // ∨{} = F
-    }
-    else if ([_falseIndices count] == 1) { // disjunction of complementary literals
-        NSMutableSet *d = [NSMutableSet setWithCapacity:[_sortedNames count]];
-        NSUInteger idx = [_falseIndices firstIndex];
-        for (NSString *name in _sortedNames) {
-            BOOL eval = [self evalAtRow:idx forHeader:name];
-            NSSet *c = [NSSet setWithArray:@[!eval ? name : [name complementaryString]]];
-            [d addObject: c];
-        }
-        disjunction = d;
-        
-    }
-    else { // disjunction of "1-rows"
-        //              = "conjunction of literals"
-        NSMutableSet *d = [NSMutableSet setWithCapacity:[_trueIndices count]];
-        [_trueIndices enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) { // must not be concurrent
-            NSMutableSet *c = [NSMutableSet setWithCapacity:[_sortedNames count]];
-            for (NSString *name in _sortedNames) {
-                BOOL eval = [self evalAtRow:idx forHeader:name];
-                [c addObject: eval ? name : [name complementaryString]];
-            }
-            [d addObject:c];
-        }];
-        disjunction = d;
-    }
-    return disjunction;
-}
-
-- (NSString*)descriptionFromSet:(NSSet*)set outer:(NSString*)co inner:(NSString*)ci {
-    if ([self isContradiction]) return @"F";
-    if ([self isTautology]) return @"T";
-
-    NSMutableArray *outerArray = [NSMutableArray arrayWithCapacity:[set count]];
-    for (NSSet *innerSet in set) {
-        if ([innerSet count] == 1)
-            [outerArray addObject:[innerSet anyObject]];
-        else {
-            NSString *innerString = [[innerSet allObjects] componentsJoinedByString:ci];
-            [outerArray addObject:[NSString stringWithFormat:@"(%@)", innerString]];
-        }
-    }
-    return [outerArray componentsJoinedByString:co];
-}
-
-- (NSString *)cnfDescription {
-    NSSet *set = [self cnfSet];
-    NSLog(@"%@",set);
-    
-    return [self descriptionFromSet:set outer:@" ∧ " inner: @" ∨ "];
-}
-
-- (NSString *)dnfDescription {
-    NSSet *set = [self dnfSet];
-    NSLog(@"%@",set);
-    return [self descriptionFromSet:set outer:@" ∨ " inner: @" ∧ "];
-}
 
 #pragma mark - protocol NSObject
 

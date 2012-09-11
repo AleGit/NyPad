@@ -17,7 +17,7 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
     STAssertFalse(parser.hasErrors, input);
-    TruthTable *astTable = [[TruthTable alloc] initWithNode:ast expanded:YES];
+    TruthTable *astTable = [[TruthTable alloc] initWithNode:ast compact:NO];
     [astTable evaluateTable];
     STAssertEqualObjects([astTable description],tt, input);
     STAssertTrue([astTable isTautology] == isTautology, input);

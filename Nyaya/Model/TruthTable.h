@@ -15,11 +15,12 @@
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSArray *variables;
 @property (nonatomic, readonly) NSArray *headers;
+@property (nonatomic, readonly) BOOL compact;
 
 @property (nonatomic, readonly) NSUInteger rowsCount;
 
 - (id)initWithNode:(NyayaNode*)node;
-- (id)initWithNode:(NyayaNode *)node expanded:(BOOL)expanded;
+- (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact;
 - (void)evaluateTable;
 
 - (NSString*)minimalDescription; 
@@ -28,11 +29,6 @@
 - (BOOL)isTautology;
 - (BOOL)isContradiction;
 - (BOOL)isSatisfiable;
-
-- (NSSet*)cnfSet;
-- (NSSet*)dnfSet;
-- (NSString *)cnfDescription;
-- (NSString *)dnfDescription;
 
 - (BOOL)evalAtRow:(NSUInteger)rowIdx;
 

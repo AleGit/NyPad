@@ -10,7 +10,6 @@
 #import "TruthTable.h"
 #import "BddNode.h"
 
-
 @interface NyayaNode : NSObject <NSCopying>
 
 @property (nonatomic, readonly) NSString *symbol;       // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
@@ -24,8 +23,16 @@
 
 // - (NyayaNode*)reducedFormula;
 
-- (TruthTable*)truthTable;
-- (BddNode*)binaryDecisionDiagram;
+- (NSUInteger)count;
+- (NSComparisonResult)compare:(NyayaNode*)other;
+
+- (TruthTable*)truthTable:(BOOL)compact;
+- (BddNode*)OBDD: (BOOL)reduced;
+
+- (NyayaNode*)IMF;
+- (NyayaNode*)NNF;
+- (NyayaNode*)CNF;
+- (NyayaNode*)DNF;
 
 @end
 

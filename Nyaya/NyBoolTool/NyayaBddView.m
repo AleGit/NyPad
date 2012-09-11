@@ -30,7 +30,7 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
 {
-    if (self.bddNode.levels) [self drawDiagram:context]; // ordered bdd
+    if (self.bddNode.levels) [self drawOBDD:context]; // ordered bdd
     else if (self.bddNode) {
         NSLog(@"missing bdd.levels – unordered bdd");
     }
@@ -52,10 +52,6 @@
 
     
     CGSize size = CGSizeMake(pR.x - pL.x, pR.y - p0.y);
-    
-    if (!self.bddNode.levels && self.bddNode) {
-        self.bddNode.levels = @[@[self.bddNode]];
-    }
     
     [self.bddNode.levels enumerateObjectsUsingBlock:^(NSArray* harr, NSUInteger vidx, BOOL *stop) {
         CGFloat factor = optimized  ?   (vSegments-2*vidx) / vSegments     : (CGFloat)vidx / vSegments;
@@ -97,7 +93,7 @@
     return nps;
 }
 
-- (void)drawDiagram:(CGContextRef)context {
+- (void)drawOBDD:(CGContextRef)context {
     
     static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
     CGContextSetLineWidth(context, 3.0);

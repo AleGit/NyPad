@@ -12,10 +12,11 @@
 
 - (NSUInteger)arity;
 
-- (BOOL)isImfFormula;   // (sub)formula is implication free
-- (BOOL)isNnfFormula;   // (sub)formula is in negation normal form
-- (BOOL)isCnfFormula;   // (sub)formula is in conjunctive normal form
-- (BOOL)isDnfFormula;   // (sub)formula is in disjunctive normal form
+- (BOOL)isImplicationFree;          // (sub)formula is implication free
+- (BOOL)isNegationNormalForm;       // (sub)formula is in negation normal form
+- (BOOL)isConjunctiveNormalForm;    // (sub)formula is in conjunctive normal form
+- (BOOL)isDisjunctiveNormalForm;    // (sub)formula is in disjunctive normal form
+
 
 - (BOOL)isLiteral;
 

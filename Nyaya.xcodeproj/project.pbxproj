@@ -55,7 +55,6 @@
 		112E0F6A15FE78860078339F /* BddNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E0F6915FE78860078339F /* BddNormalFormsTests.m */; };
 		1139123915F7109C00B83877 /* DescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139123815F7109C00B83877 /* DescriptionTests.m */; };
 		1139123B15F7140600B83877 /* StandardTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139123A15F7140600B83877 /* StandardTestView.xib */; };
-		113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */; };
 		113FF75815F07AB40073A410 /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75715F07AB40073A410 /* tutorial131.html */; };
 		113FF75B15F07CA80073A410 /* instructions121.html in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75A15F07CA80073A410 /* instructions121.html */; };
 		113FF75D15F07ED90073A410 /* NyTuTester121.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* NyTuTester121.plist */; };
@@ -243,8 +242,6 @@
 		1139123715F7109C00B83877 /* DescriptionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionTests.h; path = NyayaNodeCategoryTests/DescriptionTests.h; sourceTree = "<group>"; };
 		1139123815F7109C00B83877 /* DescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionTests.m; path = NyayaNodeCategoryTests/DescriptionTests.m; sourceTree = "<group>"; };
 		1139123A15F7140600B83877 /* StandardTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StandardTestView.xib; path = Nyaya/NyTutorials/StandardTestView.xib; sourceTree = "<group>"; };
-		113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableNormalFormsTests.h; sourceTree = "<group>"; };
-		113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableNormalFormsTests.m; sourceTree = "<group>"; };
 		113FF75715F07AB40073A410 /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
 		113FF75A15F07CA80073A410 /* instructions121.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions121.html; path = html/instructions121.html; sourceTree = "<group>"; };
 		113FF75C15F07ED90073A410 /* NyTuTester121.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester121.plist; path = Nyaya/NyTutorials/NyTuTester121.plist; sourceTree = "<group>"; };
@@ -596,8 +593,6 @@
 		113A209415E628A300338F5E /* TruthTableTests */ = {
 			isa = PBXGroup;
 			children = (
-				113A209515E628E000338F5E /* TruthTableNormalFormsTests.h */,
-				113A209615E628E000338F5E /* TruthTableNormalFormsTests.m */,
 				11061F2615EF5D8900345516 /* NyayaAssociativityTests.h */,
 				11061F2715EF5D8900345516 /* NyayaAssociativityTests.m */,
 			);
@@ -1159,7 +1154,6 @@
 				11F906CF15CEDF58001CD0F3 /* BasicNormalFormTests.m in Sources */,
 				11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */,
 				1187E23E15D0F3940048E153 /* SimpleParseTests.m in Sources */,
-				113A209715E628E000338F5E /* TruthTableNormalFormsTests.m in Sources */,
 				11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */,
 				1103D6EF15F3CC72003D5193 /* NayayDerivationValidation.m in Sources */,
 				1139123915F7109C00B83877 /* DescriptionTests.m in Sources */,

@@ -26,8 +26,9 @@ enum { // NyayaUndefined=0
 typedef NSUInteger NyayaNodeType;
 
 @interface NyayaNode () {
-#pragma mark - 
+    
     @protected
+    
     NSString *_descriptionCache;
     NSString *_symbol;
     NyayaBool _displayValue;
@@ -36,18 +37,17 @@ typedef NSUInteger NyayaNodeType;
     
     BOOL _hasParsingErrors;
     
-    dispatch_once_t _reduceNodePredicate;
     NyayaNode *_reducedNode;
     
-    dispatch_once_t _truthTablePredicate;
+    NyayaNode *_imfNode;
+    NyayaNode *_nnfNode;
+    NyayaNode *_cnfNode;
+    NyayaNode *_dnfNode;
+
     TruthTable *_truthTable;
-    
-    dispatch_once_t _bddNodePredicate;
     BddNode *_bddNode;
     
-    NSString *_nnfDescription;
-    NSString *_cnfDescription;
-    NSString *_dnfDescription;
+    // consolidation
     
 }
 - (BOOL)isNegationToNode:(NyayaNode*)other;

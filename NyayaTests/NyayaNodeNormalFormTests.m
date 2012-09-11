@@ -146,30 +146,30 @@
     NyayaNode *cnf = [nnf cnf];
     NyayaNode *dnf = [nnf dnf];
     
-    STAssertFalse([ast isImfFormula], nil);
-    STAssertFalse([ast isNnfFormula], nil);
-    STAssertFalse([ast isCnfFormula], nil);
-    STAssertFalse([ast isDnfFormula], nil);
+    STAssertFalse([ast isImplicationFree], nil);
+    STAssertFalse([ast isNegationNormalForm], nil);
+    STAssertFalse([ast isConjunctiveNormalForm], nil);
+    STAssertFalse([ast isDisjunctiveNormalForm], nil);
     
-    STAssertTrue([imf isImfFormula], nil);
-    STAssertFalse([imf isNnfFormula], nil);
-    STAssertFalse([imf isCnfFormula], nil);
-    STAssertFalse([imf isDnfFormula], nil);
+    STAssertTrue([imf isImplicationFree], nil);
+    STAssertFalse([imf isNegationNormalForm], nil);
+    STAssertFalse([imf isConjunctiveNormalForm], nil);
+    STAssertFalse([imf isDisjunctiveNormalForm], nil);
     
-    STAssertTrue([nnf isImfFormula], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
-    STAssertTrue([nnf isNnfFormula], nil);
-    STAssertFalse([nnf isCnfFormula], nil);                // is not cnf
-    STAssertTrue([nnf isDnfFormula], nil);                 // is allready dnf
+    STAssertTrue([nnf isImplicationFree], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([nnf isNegationNormalForm], nil);
+    STAssertFalse([nnf isConjunctiveNormalForm], nil);                // is not cnf
+    STAssertTrue([nnf isDisjunctiveNormalForm], nil);                 // is allready dnf
     
-    STAssertTrue([cnf isImfFormula], nil);                 // (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))
-    STAssertTrue([cnf isNnfFormula], nil);
-    STAssertTrue([cnf isCnfFormula], nil);
-    STAssertFalse([cnf isDnfFormula], nil);
+    STAssertTrue([cnf isImplicationFree], nil);                 // (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a))) ∧ (¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ ¬a)))
+    STAssertTrue([cnf isNegationNormalForm], nil);
+    STAssertTrue([cnf isConjunctiveNormalForm], nil);
+    STAssertFalse([cnf isDisjunctiveNormalForm], nil);
     
-    STAssertTrue([dnf isImfFormula], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
-    STAssertTrue([dnf isNnfFormula], nil);
-    STAssertFalse([dnf isCnfFormula], nil);
-    STAssertTrue([dnf isDnfFormula], nil);
+    STAssertTrue([dnf isImplicationFree], nil);                 // ¬a ∨ (¬b ∨ a ∨ ¬b ∨ (b ∨ a ∨ (¬a ∨ b) ∨ (¬a ∧ ¬a)))
+    STAssertTrue([dnf isNegationNormalForm], nil);
+    STAssertFalse([dnf isConjunctiveNormalForm], nil);
+    STAssertTrue([dnf isDisjunctiveNormalForm], nil);
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSArray arrayWithObjects: [ast description], @"a → b ∧ ¬a ∧ b → b ∨ a ∨ (a → b) ∨ ¬(¬a → a)",
@@ -248,10 +248,10 @@
                              nil]) {
         
         
-        STAssertFalse([test isImfFormula], [test description]);
-        STAssertFalse([test isNnfFormula], [test description]);
-        STAssertFalse([test isCnfFormula], [test description]);
-        STAssertFalse([test isDnfFormula], [test description]);
+        STAssertFalse([test isImplicationFree], [test description]);
+        STAssertFalse([test isNegationNormalForm], [test description]);
+        STAssertFalse([test isConjunctiveNormalForm], [test description]);
+        STAssertFalse([test isDisjunctiveNormalForm], [test description]);
     }
 }
 
@@ -271,10 +271,10 @@
                              nil]) {
         
         
-        STAssertTrue([test isImfFormula], [test description]);
-        STAssertFalse([test isNnfFormula], [test description]);
-        STAssertFalse([test isCnfFormula], [test description]);
-        STAssertFalse([test isDnfFormula], [test description]);
+        STAssertTrue([test isImplicationFree], [test description]);
+        STAssertFalse([test isNegationNormalForm], [test description]);
+        STAssertFalse([test isConjunctiveNormalForm], [test description]);
+        STAssertFalse([test isDisjunctiveNormalForm], [test description]);
     }
 
     

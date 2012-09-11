@@ -33,11 +33,11 @@ enum { AST, IMF, NNF, CNF, DNF };
     STAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], input);
     STAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], input);
     
-    TruthTable *astTable = [[TruthTable alloc] initWithNode:[ast copy] expanded:YES];
-    TruthTable *imfTable = [[TruthTable alloc] initWithNode:[imf copy] expanded:YES];
-    TruthTable *nnfTable = [[TruthTable alloc] initWithNode:[nnf copy] expanded:YES];
-    TruthTable *cnfTable = [[TruthTable alloc] initWithNode:[cnf copy] expanded:YES];
-    TruthTable *dnfTable = [[TruthTable alloc] initWithNode:[dnf copy] expanded:YES];
+    TruthTable *astTable = [[TruthTable alloc] initWithNode:[ast copy] compact:NO];
+    TruthTable *imfTable = [[TruthTable alloc] initWithNode:[imf copy] compact:NO];
+    TruthTable *nnfTable = [[TruthTable alloc] initWithNode:[nnf copy] compact:NO];
+    TruthTable *cnfTable = [[TruthTable alloc] initWithNode:[cnf copy] compact:NO];
+    TruthTable *dnfTable = [[TruthTable alloc] initWithNode:[dnf copy] compact:NO];
     
     [astTable evaluateTable];
     [imfTable evaluateTable];
@@ -77,46 +77,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertTrue([ast isNnfFormula], input);
-        STAssertTrue([ast isCnfFormula], input);
-        STAssertTrue([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertTrue([ast isNegationNormalForm], input);
+        STAssertTrue([ast isConjunctiveNormalForm], input);
+        STAssertTrue([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertTrue([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertTrue([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -148,46 +148,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertTrue([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -221,46 +221,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertTrue([ast isNnfFormula], input);
-        STAssertTrue([ast isCnfFormula], input);
-        STAssertTrue([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertTrue([ast isNegationNormalForm], input);
+        STAssertTrue([ast isConjunctiveNormalForm], input);
+        STAssertTrue([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertTrue([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertTrue([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -294,46 +294,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertTrue([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -367,46 +367,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertTrue([ast isNnfFormula], input);
-        STAssertTrue([ast isCnfFormula], input);
-        STAssertTrue([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertTrue([ast isNegationNormalForm], input);
+        STAssertTrue([ast isConjunctiveNormalForm], input);
+        STAssertTrue([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertTrue([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertTrue([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -440,46 +440,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertTrue([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertTrue([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -524,46 +524,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertTrue([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertTrue([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertFalse([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertFalse([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertTrue([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertFalse([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertFalse([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertTrue([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertFalse([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertFalse([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -610,46 +610,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     NyayaNode *dnf = [frms objectAtIndex:DNF];
     
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertFalse([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertFalse([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertTrue([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertFalse([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertFalse([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertFalse([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertFalse([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertTrue([dnf isCnfTransformationNode], input);
@@ -715,46 +715,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertTrue([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertTrue([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertTrue([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -789,46 +789,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertTrue([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertTrue([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertTrue([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertTrue([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertFalse([dnf isCnfTransformationNode], input);
@@ -863,46 +863,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertTrue([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertTrue([imf isNnfFormula], input);
-        STAssertTrue([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertTrue([imf isNegationNormalForm], input);
+        STAssertTrue([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertFalse([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertTrue([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertTrue([nnf isCnfFormula], input);
-        STAssertFalse([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertTrue([nnf isConjunctiveNormalForm], input);
+        STAssertFalse([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertFalse([nnf isCnfTransformationNode], input);
         STAssertTrue([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertFalse([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertFalse([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertTrue([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertFalse([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertFalse([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         // (a ∧ ¬a) ∨ (a ∧ ¬b) ∨ ((b ∧ ¬a) ∨ (b ∧ ¬b))
@@ -941,46 +941,46 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImfFormula], input);
-        STAssertFalse([ast isNnfFormula], input);
-        STAssertFalse([ast isCnfFormula], input);
-        STAssertFalse([ast isDnfFormula], input);
+        STAssertFalse([ast isImplicationFree], input);
+        STAssertFalse([ast isNegationNormalForm], input);
+        STAssertFalse([ast isConjunctiveNormalForm], input);
+        STAssertFalse([ast isDisjunctiveNormalForm], input);
         STAssertFalse([ast isImfTransformationNode], input);
         STAssertFalse([ast isNnfTransformationNode], input);
         STAssertFalse([ast isCnfTransformationNode], input);
         STAssertFalse([ast isDnfTransformationNode], input);
         
-        STAssertTrue([imf isImfFormula], input);
-        STAssertFalse([imf isNnfFormula], input);
-        STAssertFalse([imf isCnfFormula], input);
-        STAssertFalse([imf isDnfFormula], input);
+        STAssertTrue([imf isImplicationFree], input);
+        STAssertFalse([imf isNegationNormalForm], input);
+        STAssertFalse([imf isConjunctiveNormalForm], input);
+        STAssertFalse([imf isDisjunctiveNormalForm], input);
         STAssertFalse([imf isImfTransformationNode], input);
         STAssertTrue([imf isNnfTransformationNode], input);
         STAssertFalse([imf isCnfTransformationNode], input);
         STAssertFalse([imf isDnfTransformationNode], input);
         
-        STAssertTrue([nnf isImfFormula], input);
-        STAssertTrue([nnf isNnfFormula], input);
-        STAssertFalse([nnf isCnfFormula], input);
-        STAssertTrue([nnf isDnfFormula], input);
+        STAssertTrue([nnf isImplicationFree], input);
+        STAssertTrue([nnf isNegationNormalForm], input);
+        STAssertFalse([nnf isConjunctiveNormalForm], input);
+        STAssertTrue([nnf isDisjunctiveNormalForm], input);
         STAssertFalse([nnf isImfTransformationNode], input);
         STAssertFalse([nnf isNnfTransformationNode], input);
         STAssertTrue([nnf isCnfTransformationNode], input);
         STAssertFalse([nnf isDnfTransformationNode], input);
         
-        STAssertTrue([cnf isImfFormula], input);
-        STAssertTrue([cnf isNnfFormula], input);
-        STAssertTrue([cnf isCnfFormula], input);
-        STAssertFalse([cnf isDnfFormula], input);
+        STAssertTrue([cnf isImplicationFree], input);
+        STAssertTrue([cnf isNegationNormalForm], input);
+        STAssertTrue([cnf isConjunctiveNormalForm], input);
+        STAssertFalse([cnf isDisjunctiveNormalForm], input);
         STAssertFalse([cnf isImfTransformationNode], input);
         STAssertFalse([cnf isNnfTransformationNode], input);
         STAssertFalse([cnf isCnfTransformationNode], input);
         STAssertFalse([cnf isDnfTransformationNode], input);
         
-        STAssertTrue([dnf isImfFormula], input);
-        STAssertTrue([dnf isNnfFormula], input);
-        STAssertFalse([dnf isCnfFormula], input);
-        STAssertTrue([dnf isDnfFormula], input);
+        STAssertTrue([dnf isImplicationFree], input);
+        STAssertTrue([dnf isNegationNormalForm], input);
+        STAssertFalse([dnf isConjunctiveNormalForm], input);
+        STAssertTrue([dnf isDisjunctiveNormalForm], input);
         STAssertFalse([dnf isImfTransformationNode], input);
         STAssertFalse([dnf isNnfTransformationNode], input);
         STAssertTrue([dnf isCnfTransformationNode], input);

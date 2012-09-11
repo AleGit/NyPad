@@ -45,30 +45,30 @@
     TruthTable *truthTable = [truthTables objectAtIndex:0];
     BddNode *bddNode = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
-    NSString *cnfDescription = [bddNode cnfDescription];
-    NSString *dnfDescription = [bddNode dnfDescription];
+    NSString *cnfDescription = bddNode.CNF.description;
+//    NSString *dnfDescription = [bddNode dnfDescription];
     
     for (NyayaNode* variable in frm.setOfVariables) {
         if ( [cnfDescription rangeOfString:variable.symbol].length == 0) {
             cnfDescription = [cnfDescription stringByAppendingFormat:@" & (%1$@ | !%1$@)", variable.symbol]; // add optimized variables for truth table comparison
         }
         
-        if ( [dnfDescription rangeOfString:variable.symbol].length == 0) {
-            dnfDescription = [dnfDescription stringByAppendingFormat:@" | (%1$@ & !%1$@)", variable.symbol]; // add optimized variables for truth table comparison
-        }
+//        if ( [dnfDescription rangeOfString:variable.symbol].length == 0) {
+//            dnfDescription = [dnfDescription stringByAppendingFormat:@" | (%1$@ & !%1$@)", variable.symbol]; // add optimized variables for truth table comparison
+//        }
         
     }
     
     NyayaParser *cnfParser = [[NyayaParser alloc] initWithString:cnfDescription];
-    NyayaParser *dnfParser = [[NyayaParser alloc] initWithString:dnfDescription];
+//    NyayaParser *dnfParser = [[NyayaParser alloc] initWithString:dnfDescription];
     
 
     NyayaNode *cnfFrm = [cnfParser parseFormula];
-    NyayaNode *dnfFrm = [dnfParser parseFormula];
+//    NyayaNode *dnfFrm = [dnfParser parseFormula];
     
     truthTables = @[
-    [[TruthTable alloc] initWithNode:cnfFrm],
-    [[TruthTable alloc] initWithNode:dnfFrm]
+    [[TruthTable alloc] initWithNode:cnfFrm]
+//    ,[[TruthTable alloc] initWithNode:dnfFrm]
     ];
     
     

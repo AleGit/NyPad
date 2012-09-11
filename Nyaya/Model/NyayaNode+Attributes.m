@@ -18,20 +18,20 @@
     return 0;   // default (constants and variables)
 }
 
-- (BOOL)isImfFormula {
+- (BOOL)isImplicationFree {
     return YES;
 }
 
-- (BOOL)isNnfFormula {
-    return [self isImfFormula];
+- (BOOL)isNegationNormalForm {
+    return [self isImplicationFree];
 }
 
-- (BOOL)isCnfFormula {
-    return [self isNnfFormula];
+- (BOOL)isConjunctiveNormalForm {
+    return [self isNegationNormalForm];
 }
 
-- (BOOL)isDnfFormula {
-    return [self isNnfFormula];
+- (BOOL)isDisjunctiveNormalForm {
+    return [self isNegationNormalForm];
 }
 
 - (BOOL)isLiteral {
@@ -74,20 +74,20 @@
     return 1;
 }
 
-- (BOOL)isImfFormula {
-    return [[self firstNode] isImfFormula];
+- (BOOL)isImplicationFree {
+    return [[self firstNode] isImplicationFree];
 }
 @end
 
 @implementation NyayaNodeNegation (Attributes)
 
-- (BOOL)isNnfFormula {
+- (BOOL)isNegationNormalForm {
     return [self firstNode].type <= NyayaVariable;
 }
 
 - (BOOL)isLiteral {
     // a negation in nnf is a literal
-    return [self isNnfFormula];
+    return [self isNegationNormalForm];
 }
 
 - (BOOL)isNnfTransformationNode {
@@ -110,12 +110,12 @@
     return 2;
 }
 
-- (BOOL)isImfFormula {
-    return [[self firstNode] isImfFormula] && [[self secondNode] isImfFormula];
+- (BOOL)isImplicationFree {
+    return [[self firstNode] isImplicationFree] && [[self secondNode] isImplicationFree];
 }
 
-- (BOOL)isNnfFormula {
-    return [[self firstNode] isNnfFormula] && [[self secondNode] isNnfFormula];
+- (BOOL)isNegationNormalForm {
+    return [[self firstNode] isNegationNormalForm] && [[self secondNode] isNegationNormalForm];
 }
 @end
 
@@ -124,13 +124,13 @@
 
 @implementation NyayaNodeDisjunction (Attributes)
 
-- (BOOL)isCnfFormula {
-    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaDisjunction && [[self firstNode] isCnfFormula]))
-    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaDisjunction && [[self secondNode] isCnfFormula]));
+- (BOOL)isConjunctiveNormalForm {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaDisjunction && [[self firstNode] isConjunctiveNormalForm]))
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaDisjunction && [[self secondNode] isConjunctiveNormalForm]));
 }
 
-- (BOOL)isDnfFormula {
-    return [[self firstNode] isDnfFormula] && [[self secondNode] isDnfFormula];
+- (BOOL)isDisjunctiveNormalForm {
+    return [[self firstNode] isDisjunctiveNormalForm] && [[self secondNode] isDisjunctiveNormalForm];
 }
 
 - (BOOL)isCnfTransformationNode {
@@ -145,13 +145,13 @@
 
 @implementation NyayaNodeConjunction (Attributes)
 
-- (BOOL)isCnfFormula {
-    return [[self firstNode] isCnfFormula] && [[self secondNode] isCnfFormula];
+- (BOOL)isConjunctiveNormalForm {
+    return [[self firstNode] isConjunctiveNormalForm] && [[self secondNode] isConjunctiveNormalForm];
 }
 
-- (BOOL)isDnfFormula {
-    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaConjunction && [[self firstNode] isDnfFormula]))
-    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaConjunction && [[self secondNode] isDnfFormula]));
+- (BOOL)isDisjunctiveNormalForm {
+    return ([[self firstNode] isLiteral] || ([self firstNode].type == NyayaConjunction && [[self firstNode] isDisjunctiveNormalForm]))
+    && ([[self secondNode] isLiteral] ||  ([self secondNode].type == NyayaConjunction && [[self secondNode] isDisjunctiveNormalForm]));
 }
 
 - (BOOL)isDnfTransformationNode {
@@ -164,11 +164,11 @@
 
 @implementation NyayaNodeExpandable (Attributes)
 
-- (BOOL)isImfFormula {
+- (BOOL)isImplicationFree {
     return NO;
 }
 
-- (BOOL)isNnfFormula {
+- (BOOL)isNegationNormalForm {
     return NO;
 }
 

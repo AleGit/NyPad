@@ -54,7 +54,18 @@
 //@end
 #pragma mark -
 
-@interface BddNode ()
+@interface BddNode () {
+    NSInteger _id;
+    NSString *_name;
+    BddNode *_leftBranch;
+    BddNode *_rightBranch;
+    BOOL _reduced;
+    NSArray *_levels;
+    
+    NyayaNode *_nnfNode;
+    NyayaNode *_cnfNode;
+    NyayaNode *_dnfNode;
+}
 - (id)initWithName:(NSString*)name id:(NSUInteger)id;
 - (id)initWithName:(NSString*)name id:(NSUInteger)id leftBranch:(BddNode*)lb rightBranch:(BddNode*)rb;
 + (id)top;
@@ -90,20 +101,24 @@
     return _leftBranch == nil;
 }
 
-+ (BddNode *)bddWithTruthTable:(TruthTable *)truthTable reduce:(BOOL)reduced {
++ (BddNode *)bddWithTruthTable:(TruthTable *)truthTable reduce:(BOOL)reduce {
+    if (!truthTable) return nil;
+    
     BddNode *bdd = nil;
     NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[truthTable.variables count]];
     
     BddNode *top = [BddNode top];
     BddNode *bottom = [BddNode bottom];
     
-    if (reduced) {
+    if (reduce) {
         if (truthTable.isContradiction) {
-            bottom.levels = @[@[bottom]];
+            bottom->_levels = @[@[bottom]];
+            bottom->_reduced = YES;
             return bottom;
         }
         else if (truthTable.isTautology) {
-            top.levels = @[@[top]];
+            top->_levels = @[@[top]];
+            top->_reduced = YES;
             return top;
         }
     }
@@ -115,7 +130,7 @@
     NSUInteger varsCount = [truthTable.variables count];
     
     NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:rowsCount];
-    if (reduced) {
+    if (reduce) {
         [allNodes addObject:bottom];    // idx == 0
         [allNodes addObject:top];       // idx == 1
     }
@@ -125,7 +140,7 @@
     for (NSUInteger rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
         BddNode *node = nil;
         BOOL eval = [truthTable evalAtRow:rowIdx];
-        if (reduced) { // reuse nodes
+        if (reduce) { // reuse nodes
             node = eval ? top : bottom;
         }
         else { // do not reuse nodes
@@ -146,7 +161,7 @@
             BddNode *right = [lowerLevelArray objectAtIndex:idx+1];
             BddNode * node = nil;
             
-            if (reduced) {
+            if (reduce) {
                 if (left == right) node = left;
                 
                 // try to find the node in actual level
@@ -175,108 +190,8 @@
     
     NSAssert([lowerLevelArray count] == 1, @"lowerLevelArray should contain one element");
     bdd = [lowerLevelArray objectAtIndex:0];
-    bdd.levels = levels;
+    bdd->_levels = levels;
     return bdd;
-}
-
-- (NSArray*)cPaths1 {
-    if (![self isLeaf]) {
-        NSArray *lefts = [self.leftBranch cPaths1];
-        NSArray *rights = [self.rightBranch cPaths1];
-        
-        // both can't be null !!! otherwise it would be a leaf 0 (no paths lead to 1)
-        // the can't be equal ??? otherwise it would be leaf 1 (the same paths lead to 1)
-        
-        NSMutableArray *paths = [NSMutableArray array];
-        
-        if (!lefts) {
-            // the variable must true to lead to 1
-            for (NSString *path in rights) {
-                [paths addObject:[NSString stringWithFormat:@"%@ ∧ %@", self.name, path]];
-            }
-            
-        }
-        else if (!rights) {
-            // the variable must be negated to lead to 1
-            for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∧ %@", self.name, path]];
-            }
-            
-        }
-        else {
-            for (NSString *path in rights) {
-                // or she is true and other variables
-                [paths addObject:[NSString stringWithFormat:@"%@ ∧ %@", self.name, path]];
-            }
-            
-            for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∧ %@", self.name, path]];
-                // [paths addObject:[NSString stringWithFormat:@"%@", path]];
-                
-            }
-            
-        }
-        
-        return paths;
-        
-        
-    }
-    else if (self.id==1) return @[@"1"];
-    else return nil; 
-}
-
--(NSString*)dnfDescription {
-    if (self.isLeaf) return self.name;
-    
-    NSString *s = [NSString stringWithFormat:@"(%@)", [[self cPaths1] componentsJoinedByString:@") ∨ ("]];
-    return [s stringByReplacingOccurrencesOfString:@" ∧ 1" withString:@""];
-    
-}
-
-
-- (NSArray*)dPaths0 {
-    if (![self isLeaf]) {
-        NSArray *lefts = [self.leftBranch dPaths0];
-        NSArray *rights = [self.rightBranch dPaths0];
-        
-        NSMutableArray *paths = [NSMutableArray array];
-        
-        if (!rights) {
-            for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
-            }
-        }
-        else if (!lefts) {
-            // the variable must true to lead to 1
-            for (NSString *path in rights) {
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
-            }
-            
-        }
-        else {
-            for (NSString *path in lefts) {
-                [paths addObject:[NSString stringWithFormat:@"%@ ∨ %@", self.name, path]];
-                // the variable is false and other variables
-                // [paths addObject:[NSString stringWithFormat:@"%@", path]];
-            }
-            for (NSString *path in rights) {
-                // or she is true and other variables
-                [paths addObject:[NSString stringWithFormat:@"¬%@ ∨ %@", self.name, path]];
-                // [paths addObject:[NSString stringWithFormat:@"%@",path]];
-            }
-        }
-        return paths;
-        
-    }
-    else if (self.id==0) return @[@"¬0"];
-    else return nil;
-}
-
--(NSString*)cnfDescription {
-    if (self.isLeaf) return self.name;
-    
-    NSString *s = [NSString stringWithFormat:@"(%@)", [[self dPaths0] componentsJoinedByString:@") ∧ ("]];
-    return  [s stringByReplacingOccurrencesOfString:@" ∨ ¬0" withString:@""];
 }
 
 #pragma mark - disjunctive normal form
@@ -324,20 +239,12 @@
     NSSet *cs = [self conjunctiveSet];                              // paths to 0
     if ([cs count] == 0) return @"T";                               // no path to 0
     
-    if ([set count] > 1) {
-        if ([cs count] == 1) return [self conjunctiveDescription];  // one path to 0
-    }
-    
-    NSMutableString *description = [NSMutableString string];
-    
+    NSMutableArray *ccs = [NSMutableArray arrayWithCapacity:[set count]];
     for (NSArray* path in set) {
         NSString *s = [path componentsJoinedByString:@" ∧ "];
-        if ([description length] > 0) [description appendString:@" ∨ "];
-        if ([set count] > 1 && [path count] > 1)
-            [description appendFormat:@"(%@)", s];
-        else [description appendString:s];
+        [ccs addObject:[NSString stringWithFormat:@"(%@)", s]];
     }
-    return description;
+    return [ccs componentsJoinedByString:@" ∨ "];
     
 }
 
@@ -348,20 +255,50 @@
     NSSet *ds = [self disjunctiveSet];                              // paths to 1
     if ([ds count] == 0) return @"F";                               // no paths to 1
     
-    if ([set count] > 1) {
-        
-        if ([ds count] == 1) return [self disjunctiveDescription];  // one path to 1
+    NSMutableArray *ccs = [NSMutableArray arrayWithCapacity:[set count]];
+    for (NSArray* path in set) {
+        NSString *s = [path componentsJoinedByString:@" ∨ "];
+        [ccs addObject:[NSString stringWithFormat:@"(%@)", s]];
+    }
+    return [ccs componentsJoinedByString:@" ∧ "];
+}
+
+- (void)makeNormalForms {
+    if (!_cnfNode) {
+        NSString *desc = [self conjunctiveDescription];
+        _cnfNode = [NyayaNode nodeWithFormula:desc];
+    }
+    if (!_dnfNode) {
+        NSString *desc = [self disjunctiveDescription];
+        _dnfNode = [NyayaNode nodeWithFormula:desc];
     }
     
-    NSMutableString *description = [NSMutableString string];
-        for (NSArray* path in set) {
-        NSString *s = [path componentsJoinedByString:@" ∨ "];
-        if ([description length] > 0) [description appendString:@" ∧ "];
-        if ([set count] > 1 && [path count] > 1)
-            [description appendFormat:@"(%@)", s];
-        else [description appendString:s];
+    if ([_cnfNode compare:_dnfNode] == NSOrderedAscending) {
+        _nnfNode = _cnfNode;
     }
-    return description;
+    else {
+        _nnfNode = _dnfNode;
+    }
+    
+}
+
+- (NyayaNode*)CNF {
+    [self makeNormalForms];
+    return _cnfNode;
+}
+
+- (NyayaNode*)DNF {
+    [self makeNormalForms];
+    return _dnfNode;
+}
+
+- (NyayaNode*)NNF {
+    [self makeNormalForms];
+    return _nnfNode;
+}
+
+- (NyayaNode*)IMF {
+    return [self NNF];
 }
 
 
