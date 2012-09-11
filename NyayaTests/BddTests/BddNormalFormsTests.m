@@ -12,8 +12,8 @@
 - (NSMutableSet*)pathsTo:(NSString*)name;
 - (NSMutableSet*)disjunctiveSet;
 - (NSMutableSet*)conjunctiveSet;
-- (NSString*)disjunctiveDescription;
-- (NSString*)conjunctiveDescription;
+- (NSString*)dnfDescription;
+- (NSString*)cnfDescription;
 @end
 
 @implementation BddNormalFormsTests
@@ -28,8 +28,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)0, nil);
     
-    STAssertEqualObjects([bdd disjunctiveDescription], @"F", nil);
-    STAssertEqualObjects([bdd conjunctiveDescription], @"F", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"F", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"F", nil);
     
     node = [NyayaNode nodeWithFormula:@"a"];
     bdd = [node OBDD:YES];
@@ -40,8 +40,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)1, nil);
     
-    STAssertEqualObjects([bdd disjunctiveDescription], @"(a)", nil);
-    STAssertEqualObjects([bdd conjunctiveDescription], @"(a)", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"(a)", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"(a)", nil);
     
     
     node = [NyayaNode nodeWithFormula:@"a|b"];
@@ -55,8 +55,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
     
-    STAssertEqualObjects([bdd disjunctiveDescription], @"(a) ∨ (¬a ∧ b)", nil);
-    STAssertEqualObjects([bdd conjunctiveDescription], @"(a ∨ b)", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"(a) ∨ (¬a ∧ b)", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b)", nil);
     
     node = [NyayaNode nodeWithFormula:@"a&b"];
     bdd = [node OBDD:YES];
@@ -69,8 +69,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)1, nil);
     
-    STAssertEqualObjects([bdd disjunctiveDescription], @"(a ∧ b)", nil);
-    STAssertEqualObjects([bdd conjunctiveDescription], @"(a) ∧ (¬a ∨ b)", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"(a ∧ b)", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"(a) ∧ (¬a ∨ b)", nil);
     
     node = [NyayaNode nodeWithFormula:@"a^b"];
     bdd = [node OBDD:YES];
@@ -83,8 +83,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
     
-    STAssertEqualObjects([bdd disjunctiveDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
-    STAssertEqualObjects([bdd conjunctiveDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
     
     node = [NyayaNode nodeWithFormula:@"a+b.c"];
     bdd = [node OBDD:YES];
@@ -98,8 +98,8 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
     
-//    STAssertEqualObjects([bdd disjunctiveDescription], @"a ∨ (b ∧ c)", nil);
-//    STAssertEqualObjects([bdd conjunctiveDescription], @"(a ∨ b) ∧ (a ∨ c)", nil);
+//    STAssertEqualObjects([bdd dnfDescription], @"a ∨ (b ∧ c)", nil);
+//    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (a ∨ c)", nil);
     
     
 }

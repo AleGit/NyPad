@@ -56,7 +56,7 @@
     STAssertEquals(node.id, 0, nil);
     
     
-    STAssertEqualObjects(node.CNF.description, @"F", nil);
+    STAssertEqualObjects(node.cnfDescription, @"F", nil);
 //    STAssertEqualObjects([node dnfDescription], @"0", nil);
 }
 
@@ -80,7 +80,7 @@
     
     STAssertEquals(node.rightBranch.id, 1, nil);
     
-    STAssertEqualObjects(node.CNF.description, @"a ∨ b", nil);
+    STAssertEqualObjects(node.cnfDescription, @"(a ∨ b)", nil);
 //    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b)", nil);
 }
 
@@ -103,7 +103,7 @@
     
     STAssertEquals(node.leftBranch.id, 0, nil);
     
-    STAssertEqualObjects(node.CNF.description, @"a ∧ (¬a ∨ b)", nil);
+    STAssertEqualObjects(node.cnfDescription, @"(a) ∧ (¬a ∨ b)", nil);
 //    STAssertEqualObjects([node dnfDescription], @"(a ∧ b)", nil);
 }
 
@@ -127,7 +127,7 @@
     STAssertEqualObjects(node.leftBranch.name, @"b", nil);
     STAssertEqualObjects(node.rightBranch.name, @"b", nil);
     
-    STAssertEqualObjects(node.CNF.description, @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
+    STAssertEqualObjects(node.cnfDescription, @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
 //    STAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
     
 }
@@ -153,7 +153,7 @@
     STAssertEquals(node.leftBranch.leftBranch.id, 0, nil);
     STAssertEquals(node.leftBranch.rightBranch.leftBranch.id, 0, nil);
     
-    STAssertEqualObjects(node.CNF.description, @"(a ∨ ¬b ∨ c) ∧ (a ∨ b)", nil);
+    STAssertEqualObjects(node.cnfDescription, @"(a ∨ ¬b ∨ c) ∧ (a ∨ b)", nil);
 //    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b ∧ c)", nil);
     
     NSLog(@"%@", [formula description]);

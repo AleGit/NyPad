@@ -54,9 +54,7 @@
 // usually [node pathsTo:@"0"] and [node pathsTo:@"1"],
 // but [node pathsTo:@"x"] is possible too
 
-- (NyayaNode*)IMF;
-- (NyayaNode*)CNF;
-- (NyayaNode*)DNF;
-- (NyayaNode*)NNF;
+- (NSString*)cnfDescription;
+- (NSString*)dnfDescription;
 
 @end

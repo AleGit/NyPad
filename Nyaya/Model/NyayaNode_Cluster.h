@@ -39,11 +39,18 @@ typedef NSUInteger NyayaNodeType;
     
     NyayaNode *_reducedNode;
     
+    NSString *_slfDescription;
+    NSString *_imfDescription;
+    NSString *_nnfDescription;
+    NSString *_cnfDescription;
+    NSString *_dnfDescription;
+    
     NyayaNode *_imfNode;
     NyayaNode *_nnfNode;
     NyayaNode *_cnfNode;
     NyayaNode *_dnfNode;
 
+    dispatch_once_t _pred;
     TruthTable *_truthTable;
     BddNode *_bddNode;
     

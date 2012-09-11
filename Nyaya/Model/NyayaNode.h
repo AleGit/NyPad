@@ -19,6 +19,10 @@
 
 @property (nonatomic, readonly, getter=isWellFormed) BOOL wellFormed;
 
+
+#define NYAYA_MAX_INPUT_LENGTH 1367
+// if input's length ist greater than NYAYA_MAX_INPUT_LENGTH
+// the method will return nil 
 + (id)nodeWithFormula:(NSString*)input;
 
 // - (NyayaNode*)reducedFormula;
@@ -27,12 +31,13 @@
 - (NSComparisonResult)compare:(NyayaNode*)other;
 
 - (TruthTable*)truthTable:(BOOL)compact;
-- (BddNode*)OBDD: (BOOL)reduced;
+- (BddNode*)OBDD:(BOOL)reduced;
 
-- (NyayaNode*)IMF;
-- (NyayaNode*)NNF;
-- (NyayaNode*)CNF;
-- (NyayaNode*)DNF;
+- (NSString*)slfDescription;
+- (NSString*)imfDescription;
+- (NSString*)nnfDescription;
+- (NSString*)cnfDescription;
+- (NSString*)dnfDescription;
 
 @end
 

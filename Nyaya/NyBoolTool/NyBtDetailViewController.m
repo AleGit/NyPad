@@ -176,10 +176,10 @@
                 NSUInteger bddLevelCount = bdd.levels.count;
                 
                 // NSString *stdDescription = @""; // [node.reducedFormula description];
-                // NSString *imfDescription = node.IMF.description;
-                NSString *nnfDescription = node.NNF.description;
-                NSString *cnfDescription = node.CNF.description;
-                NSString *dnfDescription = node.DNF.description;
+                // NSString *imfDescription = node.imfDescription;
+                NSString *nnfDescription = node.nnfDescription;
+                NSString *cnfDescription = node.cnfDescription;
+                NSString *dnfDescription = node.dnfDescription;
                 
                 
                 BOOL tau = [node truthTable:YES].isTautology;

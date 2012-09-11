@@ -45,7 +45,7 @@
     TruthTable *truthTable = [truthTables objectAtIndex:0];
     BddNode *bddNode = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
-    NSString *cnfDescription = bddNode.CNF.description;
+    NSString *cnfDescription = bddNode.cnfDescription;
 //    NSString *dnfDescription = [bddNode dnfDescription];
     
     for (NyayaNode* variable in frm.setOfVariables) {

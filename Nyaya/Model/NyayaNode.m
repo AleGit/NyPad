@@ -14,14 +14,17 @@
 #import "NyayaNode+Attributes.h"
 #import "NyayaNode+Type.h"
 
-
 @implementation NyayaNode
 
 + (id)nodeWithFormula:(NSString*)input {
+    
+    if ([input length] > NYAYA_MAX_INPUT_LENGTH) return nil;
+    
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *node = [parser parseFormula];
     if (node) {
         node->_wellFormed = !parser.hasErrors;
+        node->_pred = 0;
     }
     return node;
 }
@@ -54,76 +57,63 @@
     return c;
 }
 
-- (NyayaNode*)CNF {
-    @autoreleasepool {
-        if (!_cnfNode) {
-            _cnfNode = [self OBDD:YES].CNF;
-            NSInteger maxSize = MIN([_cnfNode count],367);
-            
-            NyayaNode *nnf = [self NNF];
-            NyayaNode *cnf = nil;
-            cnf = [self isConjunctiveNormalForm] ? nnf : [nnf deriveCnf:maxSize];
-            if (cnf && [_cnfNode compare:cnf] == NSOrderedDescending)
-                _cnfNode = cnf;
-            
-            if (!cnf) NSLog(@"CNF: maxSize did it's work %u", maxSize);
+/* ********************************************************************************************************* */
+
+- (void)makeDescriptions {
+    dispatch_once(&_pred, ^{
+        _slfDescription = [self description];
+        _cnfDescription = [self OBDD:YES].cnfDescription;
+        _dnfDescription = [self OBDD:YES].dnfDescription;
+        
+        if ([_cnfDescription length] < [_dnfDescription length]) {
+            _nnfDescription = _cnfDescription;
+            _imfDescription = _imfDescription;
         }
-        return _cnfNode;
-    }
+        else {
+            _nnfDescription = _dnfDescription;
+            _imfDescription = _dnfDescription;
+        }
+        
+        if ([self isImplicationFree] && [_slfDescription length] < [_imfDescription length])
+            _imfDescription = _slfDescription;
+        
+        if ([self isNegationNormalForm] && [_slfDescription length] < [_nnfDescription length])
+            _nnfDescription = _slfDescription;
+        
+        if ([self isConjunctiveNormalForm] && [_slfDescription length] < [_cnfDescription length])
+            _cnfDescription = _slfDescription;
+        
+        if ([self isDisjunctiveNormalForm] && [_slfDescription length] < [_dnfDescription length])
+            _dnfDescription = _slfDescription;
+    });
+}
+    
+
+- (NSString*)cnfDescription {
+    [self makeDescriptions];
+    return _cnfDescription;
 }
 
-- (NyayaNode*)DNF {
-    @autoreleasepool {
-        if (!_dnfNode) {
-            _dnfNode = [self OBDD:YES].DNF;
-            NSUInteger maxSize = MIN([_dnfNode count],367);
-            
-            NyayaNode *nnf = [self NNF];
-            NyayaNode *dnf = nil;
-            dnf = [self isDisjunctiveNormalForm] ? nnf : [nnf deriveDnf:maxSize];
-            if (dnf && [_dnfNode compare:dnf] == NSOrderedDescending)
-                _dnfNode = dnf;
-            
-            if (!dnf) NSLog(@"DNF: maxSize did it's work %u", maxSize);
-        }
-        return _dnfNode;
-    }
+- (NSString*)dnfDescription {
+    [self makeDescriptions];
+    return _dnfDescription;
 }
 
-- (NyayaNode*)NNF {
-    @autoreleasepool {
-        if (!_nnfNode) {
-            _nnfNode = [self OBDD:YES].NNF;
-            NSUInteger maxSize = MIN([_nnfNode count],367);
-            
-            NyayaNode *imf = [self IMF];
-            NyayaNode *nnf = nil;
-            
-            nnf = [imf isNegationNormalForm] ? imf : [imf deriveNnf:maxSize];
-            if (nnf && [_nnfNode compare:nnf] == NSOrderedDescending)
-                _nnfNode = nnf;
-            
-            if (!nnf) NSLog(@"NNF: maxSize did it's work %u", maxSize);
-            
-        }
-        return _nnfNode;
-    }
+- (NSString*)nnfDescription {
+    [self makeDescriptions];
+    return _nnfDescription;
 }
 
-- (NyayaNode*)IMF {
-    @autoreleasepool {
-        if (!_imfNode) {
-            _imfNode = [self OBDD:YES].IMF;
-            NSUInteger maxSize = MIN([_imfNode count],367);
-            
-            NyayaNode *imf = [self isImplicationFree] ? self : [self deriveImf:maxSize];
-            if (imf && [_imfNode compare:imf] == NSOrderedDescending)
-                _imfNode = imf;
-            if (!imf) NSLog(@"IMF: maxSize did it's work %u", maxSize);
-        }
-        return _imfNode;
-    }
+- (NSString*)imfDescription {
+    [self makeDescriptions];
+    return _imfDescription;
 }
+
+- (NSString*)slfDescription {
+    [self makeDescriptions];
+    return _slfDescription;
+}
+
 
 /* ********************************************************************************************************* */
 #pragma mark - internal methods -

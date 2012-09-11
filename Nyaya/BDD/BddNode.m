@@ -62,9 +62,8 @@
     BOOL _reduced;
     NSArray *_levels;
     
-    NyayaNode *_nnfNode;
-    NyayaNode *_cnfNode;
-    NyayaNode *_dnfNode;
+    NSString *_cnfDescription;
+    NSString *_dnfDescritpion;
 }
 - (id)initWithName:(NSString*)name id:(NSUInteger)id;
 - (id)initWithName:(NSString*)name id:(NSUInteger)id leftBranch:(BddNode*)lb rightBranch:(BddNode*)rb;
@@ -232,7 +231,7 @@
     return cset;
 }
 
-- (NSString*)disjunctiveDescription {
+- (NSString*)dnfDescription {
     NSSet* set = [self disjunctiveSet];                             // paths to 0
     if ([set count] == 0) return @"F";                              // no paths to 1
     
@@ -248,7 +247,7 @@
     
 }
 
-- (NSString*)conjunctiveDescription {
+- (NSString*)cnfDescription {
     NSSet* set = [self conjunctiveSet];
     if ([set count] == 0) return @"T";                              // no path to 0
     
@@ -261,44 +260,6 @@
         [ccs addObject:[NSString stringWithFormat:@"(%@)", s]];
     }
     return [ccs componentsJoinedByString:@" ∧ "];
-}
-
-- (void)makeNormalForms {
-    if (!_cnfNode) {
-        NSString *desc = [self conjunctiveDescription];
-        _cnfNode = [NyayaNode nodeWithFormula:desc];
-    }
-    if (!_dnfNode) {
-        NSString *desc = [self disjunctiveDescription];
-        _dnfNode = [NyayaNode nodeWithFormula:desc];
-    }
-    
-    if ([_cnfNode compare:_dnfNode] == NSOrderedAscending) {
-        _nnfNode = _cnfNode;
-    }
-    else {
-        _nnfNode = _dnfNode;
-    }
-    
-}
-
-- (NyayaNode*)CNF {
-    [self makeNormalForms];
-    return _cnfNode;
-}
-
-- (NyayaNode*)DNF {
-    [self makeNormalForms];
-    return _dnfNode;
-}
-
-- (NyayaNode*)NNF {
-    [self makeNormalForms];
-    return _nnfNode;
-}
-
-- (NyayaNode*)IMF {
-    return [self NNF];
 }
 
 
