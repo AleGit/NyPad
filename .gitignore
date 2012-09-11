@@ -1,11 +1,12 @@
-Nyaya.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-Nyaya.xcodeproj/project.xcworkspace/xcuserdata/alexander.xcuserdatad/UserInterfaceState.xcuserstate
-Nyaya.xcodeproj/project.xcworkspace/xcuserdata/alexander.xcuserdatad/WorkspaceSettings.xcsettings
-Nyaya.xcodeproj/xcuserdata/alexander.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
-Nyaya.xcodeproj/xcuserdata/alexander.xcuserdatad/xcschemes/Nyaya.xcscheme
-Nyaya.xcodeproj/xcuserdata/alexander.xcuserdatad/xcschemes/xcschememanagement.plist
+# ignore Xcode data for user and workspace data
 
+Nyaya.xcodeproj/xcuserdata
+Nyaya.xcodeproj/project.xcworkspace
+
+# ignore tex output
 NyBaTh/thesis.log
 NyBaTh/thesis.synctex.gz
 NyBaTh/thesis.xdy
 NyBaTh/thesis.pdf
+
+
