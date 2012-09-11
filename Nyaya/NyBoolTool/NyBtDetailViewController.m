@@ -138,82 +138,85 @@
 }
 
 - (void)compute:(NSString*)input {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CALC_DRAW_TITLE",nil)
-                                                    message:NSLocalizedString(@"CALC_DRAW_MESSAGE", nil)
-                                                   delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    UIActivityIndicatorView *progress= [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(125, 50, 30, 30)];
-    progress.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [alert addSubview:progress];
-    [progress startAnimating];
-    
-    [alert show];
-    
-    dispatch_async(queue, ^{
-        dispatch_queue_t mq = dispatch_get_main_queue();
+    @autoreleasepool {
+        self.bddView.bddNode = nil;
         
-        NyayaNode *node = [NyayaNode nodeWithFormula:input];
-        NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CALC_DRAW_TITLE",nil)
+                                                        message:NSLocalizedString(@"CALC_DRAW_MESSAGE", nil)
+                                                       delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        UIActivityIndicatorView *progress= [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(125, 50, 30, 30)];
+        progress.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        [alert addSubview:progress];
+        [progress startAnimating];
         
-        dispatch_async(mq, ^{
-            self.parsedField.text = description;
-            self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
-            self.resultView.hidden = !node.isWellFormed;
-            [self adjustResultViewPosition];
-        });
+        [alert show];
         
-        if (node.isWellFormed) {
+        dispatch_async(queue, ^{
+            dispatch_queue_t mq = dispatch_get_main_queue();
+            
+            
+            
+            NyayaNode *node = [NyayaNode nodeWithFormula:input];
+            NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+            
             dispatch_async(mq, ^{
-                [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
-                self.navigationItem.title = self.inputName.text;
+                self.parsedField.text = description;
+                self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+                self.resultView.hidden = !node.isWellFormed;
+                [self adjustResultViewPosition];
             });
             
-            BddNode *bdd = [node OBDD:YES];
-            NSUInteger bddLevelCount = bdd.levels.count;
+            if (node.isWellFormed) {
+                dispatch_async(mq, ^{
+                    [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
+                    self.navigationItem.title = self.inputName.text;
+                });
+                
+                BddNode *bdd = [node OBDD:YES];
+                NSUInteger bddLevelCount = bdd.levels.count;
+                
+                // NSString *stdDescription = @""; // [node.reducedFormula description];
+                // NSString *imfDescription = node.IMF.description;
+                NSString *nnfDescription = node.NNF.description;
+                NSString *cnfDescription = node.CNF.description;
+                NSString *dnfDescription = node.DNF.description;
+                
+                
+                BOOL tau = [node truthTable:YES].isTautology;
+                BOOL con = [node truthTable:YES].isContradiction;
+                BOOL sat = !con;
+                
+                dispatch_async(mq, ^{
+                    [self adjustResultViewContent:bddLevelCount];
+                    
+                    self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+                    self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
+                    self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
+                    
+                    self.satisfiabilityLabel.textColor = sat ? [UIColor blackColor] : [UIColor whiteColor];
+                    self.tautologyLabel.textColor = tau ? [UIColor blackColor] : [UIColor whiteColor];
+                    self.contradictionLabel.textColor = con ? [UIColor blackColor] : [UIColor whiteColor];
+                    
+                    self.nnfField.text = nnfDescription;
+                    self.cnfField.text = cnfDescription;
+                    self.dnfField.text = dnfDescription;
+                    
+                    self.bddView.bddNode = bdd;
+                    self.bddView.title = description;
+                    self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
+                });
+                
+            }
             
-            // NSString *stdDescription = @""; // [node.reducedFormula description];
-            // NSString *imfDescription = node.IMF.description;
-            NSString *nnfDescription = node.NNF.description;
-            NSString *cnfDescription = node.CNF.description;
-            NSString *dnfDescription = node.DNF.description;
-            
-
-            BOOL tau = [node truthTable:YES].isTautology;
-            BOOL con = [node truthTable:YES].isContradiction;
-            BOOL sat = !con;
-                        
             dispatch_async(mq, ^{
-                [self adjustResultViewContent:bddLevelCount];
-                
-                self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
-                self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
-                self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
-                
-                self.satisfiabilityLabel.textColor = sat ? [UIColor blackColor] : [UIColor whiteColor];
-                self.tautologyLabel.textColor = tau ? [UIColor blackColor] : [UIColor whiteColor];
-                self.contradictionLabel.textColor = con ? [UIColor blackColor] : [UIColor whiteColor];
-                
-                self.nnfField.text = nnfDescription;
-                self.cnfField.text = cnfDescription;
-                self.dnfField.text = dnfDescription;
-                
-                self.bddView.bddNode = bdd;
-                self.bddView.title = description;
-                self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
+                [progress stopAnimating];
+                [alert dismissWithClickedButtonIndex:0 animated:YES];
+                // [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
+                // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
+                [self.bddView setNeedsDisplay];
             });
-            
-        }
-        
-        dispatch_async(mq, ^{
-            [progress stopAnimating];
-            [alert dismissWithClickedButtonIndex:0 animated:YES];
-            // [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
-            // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
-            [self.bddView setNeedsDisplay];
         });
-    });
-    
-    
-    
+    }
     
 }
 
@@ -241,9 +244,9 @@
     
     
     [view setFrame:CGRectMake(view.frame.origin.x,
-                                  view.frame.origin.y + yoffset,
-                                  view.frame.size.width,
-                                  newHeight)];
+                              view.frame.origin.y + yoffset,
+                              view.frame.size.width,
+                              newHeight)];
     return view.frame.size.height - height;
 }
 
