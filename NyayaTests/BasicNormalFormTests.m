@@ -22,10 +22,10 @@ enum { AST, IMF, NNF, CNF, DNF };
     NyayaNode *ast = [parser parseFormula];
     STAssertFalse(parser.hasErrors, input);
     
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [nnf dnf];
+    NyayaNode *imf = [ast deriveImf:NSIntegerMax];
+    NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+    NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
+    NyayaNode *dnf = [nnf deriveDnf:NSIntegerMax];
     
     STAssertEqualObjects([ast description], [descs objectAtIndex:AST], input);
     STAssertEqualObjects([imf description], [descs objectAtIndex:IMF], input);

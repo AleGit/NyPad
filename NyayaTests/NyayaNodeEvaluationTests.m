@@ -17,10 +17,10 @@
 @implementation NyayaNodeEvaluationTests
 
 - (void)assertDerivations: (NyayaNode*)node expected:(BOOL) evaluation {
-    NyayaNode *imf = [node imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf nnf];
-    NyayaNode *dnf = [imf dnf];
+    NyayaNode *imf = [node deriveImf:NSIntegerMax];
+    NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+    NyayaNode *cnf = [nnf deriveNnf:NSIntegerMax];
+    NyayaNode *dnf = [imf deriveDnf:NSIntegerMax];
     STAssertEquals(node.evaluationValue, evaluation, nil);
     STAssertEquals(imf.evaluationValue, evaluation, nil);
     STAssertEquals(nnf.evaluationValue, evaluation, nil);

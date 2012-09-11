@@ -46,21 +46,21 @@
     for (NSString *input in @[@"!a", @"!a", @"a|b"
          ]) {
         NyayaNode *n = [NyayaNode nodeWithFormula:input];
-        NyayaNode *i = [n imf];
+        NyayaNode *i = [n deriveImf:NSIntegerMax];
         STAssertEqualObjects(i, n, nil);
     }
 }
 
 - (void)testImplicationImf {
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a>b"];
-    NyayaNode *i = [n imf];
+    NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [NyayaNode nodeWithFormula:@"!a|b"];
     STAssertEqualObjects(i, e, nil);
 }
 
 - (void)testBiconditionalImf {
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a=b"];
-    NyayaNode *i = [n imf];
+    NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [NyayaNode nodeWithFormula:@"(!a|b)&(!b|a)"];
     STAssertEqualObjects(i, e, nil);
 }
@@ -69,7 +69,7 @@
 
 - (void)testFxorT {
     NyayaNode *n = [NyayaNode nodeWithFormula:@"F^T"];
-    NyayaNode *i = [n imf];
+    NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [NyayaNode nodeWithFormula:@"(F|T)&(!F|!T)"];
     STAssertEqualObjects(i, e, nil);
 }
@@ -77,7 +77,7 @@
 
 - (void)testXorImf {
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a^b"];
-    NyayaNode *i = [n imf];
+    NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [NyayaNode nodeWithFormula:@"(a|b)&(!a|!b) "];
     STAssertEqualObjects(i, e, nil);
     

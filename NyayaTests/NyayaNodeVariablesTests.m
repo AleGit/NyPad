@@ -23,7 +23,7 @@
     NyayaNode *aAb = [NyayaNode conjunction:a with:b];
     aAb = [NyayaNode disjunction:aAb with:a];
     aAb = [NyayaNode negation:aAb];
-    aAb = [[[[NyayaNode implication:b with:aAb] imf] nnf] cnf];
+    aAb = [[[[NyayaNode implication:b with:aAb] deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax] deriveCnf:NSIntegerMax];
     
     NSSet *set = [aAb setOfVariables];
     STAssertEquals([set count], (NSUInteger)2,nil);

@@ -94,10 +94,10 @@ enum { INPUT, AST, IMF, NNF, CNF, DNF, CDS, DCS };
     [_testBasics enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSArray* obj, BOOL *stop) {
         NyayaParser *parser = [[NyayaParser alloc ] initWithString:[obj objectAtIndex:INPUT]];
         NyayaNode *astp = [parser parseFormula];
-        NyayaNode *imfp = [astp imf];
-        NyayaNode *nnfp = [imfp imf];
-        NyayaNode *cnfp = [imfp nnf];
-        NyayaNode *dnfp = [imfp dnf];
+        NyayaNode *imfp = [astp deriveImf:NSIntegerMax];
+        NyayaNode *nnfp = [imfp deriveImf:NSIntegerMax];
+        NyayaNode *cnfp = [imfp deriveNnf:NSIntegerMax];
+        NyayaNode *dnfp = [imfp deriveDnf:NSIntegerMax];
         NSArray *cdsp = [cnfp conjunctionOfDisjunctions];
         NSArray *dcsp = [dnfp disjunctionOfConjunctions];
         

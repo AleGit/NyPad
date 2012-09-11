@@ -11,14 +11,14 @@
 @interface NyayaNode (Derivations)
 
 - (NyayaNode*)copyWith:(NSArray*)nodes;
-- (NyayaNode*)copyImf;
-- (NyayaNode*)copyNnf;
+- (NyayaNode*)copyImf:(NSInteger)maxSize;
+- (NyayaNode*)copyNnf:(NSInteger)maxSize;
 
 - (NyayaNode*)std;      // substitute sequence and entailment with conjunction and implication
-- (NyayaNode*)imf;      // equivalent formula without implications or biconditions
-- (NyayaNode*)nnf;      // equivalent formula in negation normal form (includes imf)
-- (NyayaNode*)cnf;      // equivalent formula in conjunctive normal form (includes nnf, imf)
-- (NyayaNode*)dnf;      // equivalent formula in disjunctive normal form (includes nnf, imf)
+- (NyayaNode*)deriveImf:(NSInteger)maxSize;      // equivalent formula without implications or biconditions
+- (NyayaNode*)deriveNnf:(NSInteger)maxSize;      // equivalent formula in negation normal form (includes imf)
+- (NyayaNode*)deriveCnf:(NSInteger)maxSize;      // equivalent formula in conjunctive normal form (includes nnf, imf)
+- (NyayaNode*)deriveDnf:(NSInteger)maxSize;      // equivalent formula in disjunctive normal form (includes nnf, imf)
 
 /* ********************* */
 /* ********************* */

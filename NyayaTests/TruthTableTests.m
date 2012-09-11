@@ -170,10 +170,10 @@
     NyayaParser *parser = [NyayaParser parserWithString:@"!x|y>x<>!y"];
     
     NyayaNode *ast = [parser parseFormula];
-    NyayaNode *imf = [ast imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
-    NyayaNode *dnf = [cnf dnf];
+    NyayaNode *imf = [ast deriveImf:NSIntegerMax];
+    NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+    NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
+    NyayaNode *dnf = [cnf deriveDnf:NSIntegerMax];
     
     NSArray *truthTables = [NSArray arrayWithObjects:
                             [[TruthTable alloc] initWithNode:ast],
@@ -240,9 +240,9 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     [truthTable evaluateTable];
-    NyayaNode *imf = [formula imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [nnf cnf];
+    NyayaNode *imf = [formula deriveImf:NSIntegerMax];
+    NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+    NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
     // NyayaNode *dnf = [nnf dnf];
     
     STAssertEqualObjects([nnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"NNF");

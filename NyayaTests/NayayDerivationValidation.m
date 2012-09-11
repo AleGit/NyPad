@@ -19,10 +19,10 @@
 - (BOOL)validateDerivations:(NSString*)input; {
     NyayaParser *parser = [[NyayaParser alloc] initWithString: input];
     NyayaNode *frm = [parser parseFormula];
-    NyayaNode *imf = [frm imf];
-    NyayaNode *nnf = [imf nnf];
-    NyayaNode *cnf = [imf cnf];
-    NyayaNode *dnf = [imf dnf];
+    NyayaNode *imf = [frm deriveImf:NSIntegerMax];
+    NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+    NyayaNode *cnf = [imf deriveCnf:NSIntegerMax];
+    NyayaNode *dnf = [imf deriveDnf:NSIntegerMax];
     
     
     NSArray* truthTables = @[
