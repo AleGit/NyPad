@@ -238,6 +238,8 @@
     NSSet *cs = [self conjunctiveSet];                              // paths to 0
     if ([cs count] == 0) return @"T";                               // no path to 0
     
+    if ([set count] > 1 && [cs count] == 1) return [self cnfDescription];   // one path to 0
+    
     NSMutableArray *ccs = [NSMutableArray arrayWithCapacity:[set count]];
     for (NSArray* path in set) {
         NSString *s = [path componentsJoinedByString:@" ∧ "];
@@ -253,6 +255,8 @@
     
     NSSet *ds = [self disjunctiveSet];                              // paths to 1
     if ([ds count] == 0) return @"F";                               // no paths to 1
+    
+    if ([set count] > 1 && [ds count] == 1) return [self dnfDescription];   // one path to 1
     
     NSMutableArray *ccs = [NSMutableArray arrayWithCapacity:[set count]];
     for (NSArray* path in set) {

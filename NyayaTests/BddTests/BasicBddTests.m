@@ -103,8 +103,8 @@
     
     STAssertEquals(node.leftBranch.id, 0, nil);
     
-    STAssertEqualObjects(node.cnfDescription, @"(a) ∧ (¬a ∨ b)", nil);
-//    STAssertEqualObjects([node dnfDescription], @"(a ∧ b)", nil);
+    STAssertEqualObjects([node cnfDescription], @"(a ∧ b)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a ∧ b)", nil);
 }
 
 - (void)testXor {
@@ -128,7 +128,7 @@
     STAssertEqualObjects(node.rightBranch.name, @"b", nil);
     
     STAssertEqualObjects(node.cnfDescription, @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
-//    STAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
+    STAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
     
 }
 

@@ -16,8 +16,8 @@
 
 @interface NyayaNode (Reductions)
 
-- (NyayaNode*)reduce;
-- (NSMutableSet*)disjunctiveSet;
-- (NSMutableSet*)conjunctiveSet;
+- (NyayaNode*)reduce:(NSInteger)maxSize;
+- (NSMutableSet*)naryDisjunction:(NSInteger)maxSize;
+- (NSMutableSet*)naryConjunction:(NSInteger)maxSize;
 
 @end

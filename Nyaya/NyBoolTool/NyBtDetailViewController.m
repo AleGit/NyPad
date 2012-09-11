@@ -187,8 +187,6 @@
                 BOOL sat = !con;
                 
                 dispatch_async(mq, ^{
-                    [self adjustResultViewContent:bddLevelCount];
-                    
                     self.satisfiabilityLabel.backgroundColor = sat ? [UIColor nyRightColor] : [UIColor nyWrongColor];
                     self.tautologyLabel.backgroundColor = tau ? [UIColor nyRightColor] : nil;
                     self.contradictionLabel.backgroundColor = con ? [UIColor nyWrongColor] : nil;
@@ -200,6 +198,8 @@
                     self.nnfField.text = nnfDescription;
                     self.cnfField.text = cnfDescription;
                     self.dnfField.text = dnfDescription;
+                    
+                    [self adjustResultViewContent:bddLevelCount];
                     
                     self.bddView.bddNode = bdd;
                     self.bddView.title = description;

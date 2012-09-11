@@ -30,7 +30,7 @@
 }
 
 - (NyayaNode*)reducedFormula {
-    if (!_reducedNode) _reducedNode = [self reduce];
+    if (!_reducedNode) _reducedNode = [self reduce:100];
     return _reducedNode;
 }
 
@@ -61,9 +61,19 @@
 
 - (void)makeDescriptions {
     dispatch_once(&_pred, ^{
+        
         _slfDescription = [self description];
-        _cnfDescription = [self OBDD:YES].cnfDescription;
-        _dnfDescription = [self OBDD:YES].dnfDescription;
+        NyayaNode *redNode = nil;
+        NSString *redDescription = nil;
+        
+        if ([self isNegationNormalForm]) {
+            redNode = [self reduce:800];
+            redDescription = [redNode description];
+            NSLog(@"RED %@ CNF=%u DNF=%u",redDescription, [redNode isConjunctiveNormalForm], [redNode isDisjunctiveNormalForm]);
+        }
+        
+        _cnfDescription = [redNode isConjunctiveNormalForm] ? redDescription : [self OBDD:YES].cnfDescription;
+        _dnfDescription = [redNode isDisjunctiveNormalForm] ? redDescription : [self OBDD:YES].dnfDescription;
         
         if ([_cnfDescription length] < [_dnfDescription length]) {
             _nnfDescription = _cnfDescription;
@@ -80,11 +90,11 @@
         if ([self isNegationNormalForm] && [_slfDescription length] < [_nnfDescription length])
             _nnfDescription = _slfDescription;
         
-        if ([self isConjunctiveNormalForm] && [_slfDescription length] < [_cnfDescription length])
-            _cnfDescription = _slfDescription;
-        
-        if ([self isDisjunctiveNormalForm] && [_slfDescription length] < [_dnfDescription length])
-            _dnfDescription = _slfDescription;
+//        if ([self isConjunctiveNormalForm] && [_slfDescription length] < [_cnfDescription length])
+//            _cnfDescription = _slfDescription;
+//        
+//        if ([self isDisjunctiveNormalForm] && [_slfDescription length] < [_dnfDescription length])
+//            _dnfDescription = _slfDescription;
     });
 }
     

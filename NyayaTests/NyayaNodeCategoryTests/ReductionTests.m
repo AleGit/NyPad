@@ -13,17 +13,17 @@
 
 #pragma mark - basic reductions
 
-- (void)testReduceToBottom {
+- (void)testreduceToBottom {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"F"];
     for (NSString *input in @[@"F", @"!T", @"T&F", @"F&T", @"F|F", @"!T&!T"
          , @"a&!a", @"!a&a", @"a&b&c&d&e&!a", @"a^a", @"a^a^a^a", @"a^a^a^a^a^a", @"T^T", @"F^F"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-- (void)testReduceToTop {
+- (void)testreduceToTop {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"T"];
     for (NSString *input in @[@"!F", @"T", @"F|T", @"!F|!T", @"T|T" , @"T&T", @"!F&!F"
          , @"a|!a", @"!a|a", @"a|b|c|d|e|!a", @"a=a",
@@ -31,53 +31,53 @@
          //, @"(F|T)&(!F|!T)"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-- (void)testReduceToA {
+- (void)testreduceToA {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"a"];
     for (NSString *input in @[@"a", @"a|a", @"a&a", @"a|a|a", @"a&a|a", @"a^a^a", @"a^a^a^a^a", @"(a>a)>a", @"a|a&a", @"p∨¬q∨(¬p∨q)↔a"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-- (void)testReduceToNotA {
+- (void)testreduceToNotA {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"!a"];
     for (NSString *input in @[@"!!!a", @"!a|!!!a", @"!a&!!!a", @"!!!a|!a|!!!!!a", @"!!!a&!!!!!a|!!!!!!!a", @"a^T" // @"a|a&a", @"a^a^a", @"a^a^a^a^a"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-- (void)testReduceToAandB {
+- (void)testreduceToAandB {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"a&b"];
     for (NSString *input in @[@"a&b|b&a|a&b"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-- (void)testReduceToAordB {
+- (void)testreduceToAordB {
     NyayaNode *expected = [NyayaNode nodeWithFormula:@"a|b"];
     for (NSString *input in @[@"(a|a|b)&(b|a|b)&(a|a|b|b|b)"
          ]) {
         NyayaNode *actual = [NyayaNode nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
     }
 }
 
-#pragma mark - reduce big formulas
+#pragma mark - reduce:1000 big formulas
 
-- (void)xtestReduceBigXor {
+- (void)xtestreduceBigXor {
     NyayaNode *formula = [NyayaNode nodeWithFormula:@"a^b^c^d^f^g^h^i^j^k^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
     NSDate *begin = [NSDate date];
     
-    NyayaNode *reducedFormula = [formula reduce];
+    NyayaNode *reducedFormula = [formula reduce:1000];
     
     NSDate *end = [NSDate date];
     
@@ -86,7 +86,7 @@
     
 }
 
-- (void)xtestReduceBigFormulas {
+- (void)xtestreduceBigFormulas {
     for (NSString*input in @[@"(p&q)|r"
          ,@"(p&q)|r^pp^q^rr^ss^tt^pq^qr^rs^s"
          ]) {
@@ -96,7 +96,7 @@
         NSDate *begin = [NSDate date];
         
         
-        NyayaNode *reducedFormula = [formula reduce];
+        NyayaNode *reducedFormula = [formula reduce:1000];
         
         NSDate *end = [NSDate date];
         NSLog(@"%@",reducedFormula);
@@ -109,7 +109,7 @@
     
 }
 
-- (void)xtestReduceBigOr {
+- (void)xtestreduceBigOr {
     for (NSString*input in @[@"a|b|c|d" , @"a|b|c|d|e|(f|g|h|i)|(j|k|l)|m|n"
          ]) {
         
@@ -118,7 +118,7 @@
         NSDate *begin = [NSDate date];
         
         
-        NyayaNode *reducedFormula = [formula reduce];
+        NyayaNode *reducedFormula = [formula reduce:1000];
         
         NSDate *end = [NSDate date];
         NSLog(@"%@",reducedFormula);
@@ -134,7 +134,7 @@
 
 //- (void)testE1 {
 //    NyayaNode *n = [NyayaNode nodeWithFormula:@"p∨¬q∨(¬p∨q)↔s"];
-//    NyayaNode *r = [n reduce];
+//    NyayaNode *r = [n reduce:1000];
 //    
 //    // STAssertEqualObjects(n.truthTable, r.truthTable, nil);
 //}
@@ -149,7 +149,7 @@
     
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a|b|a|c|a|b|(d&b)"];
     
-    NSSet *set = [n disjunctiveSet];
+    NSSet *set = [n naryDisjunction:1000];
     
     STAssertEquals([set count], (NSUInteger)4, nil);
     STAssertTrue([set containsObject:a],nil);
@@ -172,7 +172,7 @@
     
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a&b&a&c&a&b&(d|b)"];
     
-    NSSet *set = [n conjunctiveSet];
+    NSSet *set = [n naryConjunction:1000];
     
     STAssertEquals([set count], (NSUInteger)4, nil);
     STAssertTrue([set containsObject:a],nil);

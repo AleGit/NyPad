@@ -55,7 +55,7 @@
     STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
     
-    STAssertEqualObjects([bdd dnfDescription], @"(a) ∨ (¬a ∧ b)", nil);
+    STAssertEqualObjects([bdd dnfDescription], @"(a ∨ b)", nil);
     STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b)", nil);
     
     node = [NyayaNode nodeWithFormula:@"a&b"];
@@ -70,7 +70,7 @@
     STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)1, nil);
     
     STAssertEqualObjects([bdd dnfDescription], @"(a ∧ b)", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"(a) ∧ (¬a ∨ b)", nil);
+    STAssertEqualObjects([bdd cnfDescription], @"(a ∧ b)", nil);
     
     node = [NyayaNode nodeWithFormula:@"a^b"];
     bdd = [node OBDD:YES];
@@ -100,6 +100,27 @@
     
 //    STAssertEqualObjects([bdd dnfDescription], @"a ∨ (b ∧ c)", nil);
 //    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (a ∨ c)", nil);
+    
+    
+}
+
+- (void)testBigXor {
+    NyayaNode *node = [NyayaNode nodeWithFormula:@"a^b^c^d^e^f^g^h^i^j^k^l"]; //^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
+    BddNode *bdd = [node OBDD:YES];
+    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
+    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)2, nil);
+    STAssertEquals([[bdd pathsTo:@"c"] count], (NSUInteger)4, nil);
+    STAssertEquals([[bdd pathsTo:@"d"] count], (NSUInteger)8, nil);
+    STAssertEquals([[bdd pathsTo:@"e"] count], (NSUInteger)16, nil);
+    STAssertEquals([[bdd pathsTo:@"f"] count], (NSUInteger)32, nil);
+    STAssertEquals([[bdd pathsTo:@"g"] count], (NSUInteger)64, nil);
+    STAssertEquals([[bdd pathsTo:@"h"] count], (NSUInteger)128, nil);
+    STAssertEquals([[bdd pathsTo:@"i"] count], (NSUInteger)256, nil);
+    STAssertEquals([[bdd pathsTo:@"j"] count], (NSUInteger)512, nil);
+    STAssertEquals([[bdd pathsTo:@"k"] count], (NSUInteger)1024, nil);
+    STAssertEquals([[bdd pathsTo:@"l"] count], (NSUInteger)2048, nil);
+    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2048, nil);
+    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)2048, nil);
     
     
 }

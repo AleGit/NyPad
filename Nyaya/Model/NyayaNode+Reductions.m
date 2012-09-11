@@ -17,7 +17,7 @@
 - (BOOL)containsComplementaryNodes {
     __block BOOL contains = NO;
     [self enumerateObjectsUsingBlock:^(NyayaNode *obj, BOOL *stop) {
-        NyayaNode *negation = [[NyayaNode negation:obj] reduce];
+        NyayaNode *negation = [[NyayaNode negation:obj] reduce:100]; //  reduce];
         if ([self containsObject:negation]) {
             contains = YES;
             *stop = YES;
@@ -38,17 +38,24 @@
 
 @implementation NyayaNode (Reductions)
 
-- (NSMutableSet*)disjunctiveSet {
+- (NSMutableSet*)naryDisjunction:(NSInteger)maxSize; {
     return nil;
 }
 
-- (NSMutableSet*)conjunctiveSet {
+- (NSMutableSet*)naryConjunction:(NSInteger)maxSize; {
     return nil;
 }
 
-- (NyayaNode*)reduce {
-    if ([self.nodes count] > 0) {
-        NSArray *nodes = [self.nodes valueForKeyPath:@"nodes.reduce"];
+- (NyayaNode*)reduce:(NSInteger)maxSize {
+    
+    if (maxSize > 0 && [self.nodes count] > 0) {
+        NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
+        for (NyayaNode *node in self.nodes) {
+            NyayaNode *rn = maxSize < 0 ? [node copy] : [node reduce:maxSize-1];
+            
+            [nodes addObject: rn];
+            maxSize -= [rn count];
+        }
         return [self copyWith:nodes];
     }
     
@@ -70,8 +77,8 @@
 
 @implementation NyayaNodeNegation (Reductions)
 // remove double negation
-- (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [self.firstNode reduce];
+- (NyayaNode*)reduce:(NSInteger)maxSize {
+    NyayaNode *reducedFirstNode = [self.firstNode reduce:maxSize-1];
     
     if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
     
@@ -92,7 +99,7 @@
 
 @implementation NyayaNodeDisjunction (Reductions)
 
-- (NSMutableSet*)disjunctiveSet {
+- (NSMutableSet*)naryDisjunction:(NSInteger)maxSize; {
     
     NSMutableSet *set = [NSMutableSet set];
 #ifdef SIMPLE_REDUCTION
@@ -100,8 +107,8 @@
     [set addObject:[self.secondNode reduce]];
 #else
     for (NyayaNode *node in self.nodes) {
-        NyayaNode *r = [node reduce];
-        NSSet *s = [r disjunctiveSet];
+        NyayaNode *r = [node reduce:maxSize-1];
+        NSSet *s = [r naryDisjunction:maxSize-1];
         if (!s) [set addObject:r];
         else [set unionSet:s];
         
@@ -111,9 +118,9 @@
     return set;
 }
 
-- (NyayaNode*)reduce {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
 
-    NSMutableSet *set = [self disjunctiveSet];
+    NSMutableSet *set = [self naryDisjunction:maxSize-1];
     
     if ([set count] == 0) return [NyayaNode bottom];
     
@@ -134,7 +141,7 @@
 @end
 
 @implementation NyayaNodeConjunction (Reductions)
-- (NSMutableSet*)conjunctiveSet {
+- (NSMutableSet*)naryConjunction:(NSInteger)maxSize; {
     
     NSMutableSet *set = [NSMutableSet set];
 #ifdef SIMPLE_REDUCTION
@@ -142,8 +149,8 @@
     [set addObject:[self.secondNode reduce]];
 #else
     for (NyayaNode *node in self.nodes) {
-        NyayaNode *r = [node reduce];
-        NSSet *s = [r conjunctiveSet];
+        NyayaNode *r = [node reduce:maxSize-1];
+        NSSet *s = [r naryConjunction:maxSize-1];
         if (!s) [set addObject:r];
         else [set unionSet:s];
         
@@ -153,8 +160,8 @@
     return set;
 }
 
-- (NyayaNode*)reduce {
-    NSMutableSet *set = [self conjunctiveSet];
+- (NyayaNode*)reduce:(NSInteger)maxSize; {
+    NSMutableSet *set = [self naryConjunction:maxSize-1];
     
     if ([set count] == 0) return [NyayaNode top];
     
@@ -174,9 +181,9 @@
 
 @implementation NyayaNodeXdisjunction (Reductions)
 
-- (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
+- (NyayaNode*)reduce:(NSInteger)maxSize; {
+    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
+    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
     
     if ([reducedFirstNode.symbol isFalseToken]) return reducedSecondNode;
     if ([reducedSecondNode.symbol isFalseToken]) return reducedFirstNode;
@@ -200,11 +207,11 @@
 
 @implementation NyayaNodeImplication (Reductions)
 
-- (NyayaNode*)reduce {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
+- (NyayaNode*)reduce:(NSInteger)maxSize; {
+    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
     if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
     
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
+    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
     if ([reducedFirstNode.symbol isTrueToken] || [reducedSecondNode.symbol isTrueToken]) return reducedSecondNode;
     
     if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
@@ -222,10 +229,10 @@
 @end
 
 @implementation NyayaNodeBicondition (Reductions)
-- (NyayaNode*)reduce {
+- (NyayaNode*)reduce:(NSInteger)maxSize; {
 //    return [[self imf] reduce];
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce];
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce];
+    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
+    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
     
     if ([reducedFirstNode.symbol isTrueToken]) return reducedSecondNode;
     if ([reducedSecondNode.symbol isTrueToken]) return reducedFirstNode;
