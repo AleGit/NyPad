@@ -16,7 +16,11 @@
 @property (nonatomic, readonly) NSArray *nodes;     // subformulas
 @property (nonatomic, weak) NyayaNode *parent;
 
-- (NSUInteger)count;
+// return the number of nodes (#atoms + #connectives)
+// "a&b" count == 3 (2 atoms + 1 conjunction)
+- (NSUInteger)length;
+
+// comparison by length
 - (NSComparisonResult)compare:(NyayaNode*)other;
 
 

@@ -17,34 +17,30 @@
 
 @implementation NSArray (Reductions)
 - (BOOL)containsComplementaryNodes {
-    NSMutableArray *negatedArray = [self negatedNodes];
+    NSMutableArray *negatedArray = [self negatedNodes:NO]; // the nodes in self are unique
     NSUInteger count = [negatedArray count];
     [negatedArray removeObjectsInArray:self];
     
     return [negatedArray count] < count;
 }
 
-- (NSMutableArray*)negatedNodes {
+- (NSMutableArray*)negatedNodes:(BOOL)unique {
     NSMutableArray *negatedArray = [NSMutableArray arrayWithCapacity:[self count]];
     for (NyayaNode *sub in self) {
-        NyayaNode *red = nil;
-        if (sub.type == NyayaNegation) {
-            red = [sub nodeAtIndex:0]; // not (not a) = a
-        }
-        else {
-            red = [NyayaNode negation:sub];
-        }
-        [negatedArray addObject: red];
+        NyayaNode *rdc = sub.type == NyayaNegation ? [sub nodeAtIndex:0] : [NyayaNode negation:sub];
+        
+        if (!unique || ![negatedArray containsObject:rdc])
+            [negatedArray addObject: rdc];
     }
     return negatedArray;
 }
 
-- (NSMutableArray*)reducedNodes {
+- (NSMutableArray*)reducedNodes:(BOOL)unique {
     NSMutableArray *reducedArray = [NSMutableArray arrayWithCapacity:[self count]];
     for (NyayaNode *sub in self) {
-        NyayaNode *red = [sub reduce:NSIntegerMax];
-        if ([reducedArray indexOfObject:red] == NSNotFound)
-            [reducedArray addObject: red];
+        NyayaNode *rdc = [sub reduce:NSIntegerMax];
+        if (!unique || ![reducedArray containsObject:rdc])
+            [reducedArray addObject: rdc];
     }
     return reducedArray;
     
@@ -71,14 +67,15 @@
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize {
+    if (maxSize < 0)
+        return [self copy];
     
-    if (maxSize > 0 && [self.nodes count] > 0) {
+    if ([self.nodes count] > 0) {
         NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
         for (NyayaNode *node in self.nodes) {
-            NyayaNode *rn = maxSize < 0 ? [node copy] : [node reduce:maxSize-1];
-            
+            NyayaNode *rn = [node reduce:maxSize-1];
             [nodes addObject: rn];
-            maxSize -= [rn count];
+            maxSize -= [rn length];
         }
         return [self copyWith:nodes];
     }
@@ -142,7 +139,7 @@
 
 - (NyayaNode*)reduce:(NSInteger)maxSize {
     // first collect disjuncted subnodes, then reduce the nodes in the set
-    NSMutableArray *array = [[self naryDisjunction] reducedNodes];
+    NSMutableArray *array = [[self naryDisjunction] reducedNodes:YES];
     
     if ([array count] == 0) return [NyayaNode bottom];
     
@@ -181,7 +178,7 @@
 
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
     // first collect conjuncted subnodes, then reduce the nodes in the set
-    NSMutableArray *array = [[self naryConjunction] reducedNodes];
+    NSMutableArray *array = [[self naryConjunction] reducedNodes:YES];
     
     if ([array count] == 0) return [NyayaNode top];
     

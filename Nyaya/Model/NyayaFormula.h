@@ -24,4 +24,7 @@
 - (TruthTable*)truthTable:(BOOL)compact;
 - (BddNode*)OBDD:(BOOL)reduced;
 
+- (void)makeDescriptions;
+- (void)optimizeDescriptions;
+
 @end

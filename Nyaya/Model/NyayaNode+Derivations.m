@@ -154,7 +154,7 @@
         case NyayaDisjunction: { // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
             NyayaNode *ld = [[NyayaNode negation:first] deriveNnf:maxSize-1];
             NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1];
-            if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+            if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
             else return [NyayaNode conjunction: ld with: rd ];
         }
             
@@ -162,7 +162,7 @@
         case NyayaSequence: {
             NyayaNode *ld = [[NyayaNode negation:first] deriveNnf:maxSize-1];
             NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1];
-            if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+            if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
             else return [NyayaNode disjunction: ld with: rd ];
         }
             
@@ -212,7 +212,7 @@
     // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
     NyayaNode *ld = [[self.nodes objectAtIndex:0] deriveCnf:maxSize-1];
     NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveCnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
     
     return [self cnfDistribution:ld with: rd];
 }
@@ -221,7 +221,7 @@
     if (maxSize < 0) return nil;
     NyayaNode *ld = [[self.nodes objectAtIndex:0] deriveDnf:maxSize-1];
     NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveDnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
     
     return [NyayaNode disjunction:ld with:rd];
 }
@@ -246,7 +246,7 @@
     
     NyayaNode *ld = [[self firstNode] deriveCnf:maxSize-1];
     NyayaNode *rd = [[self secondNode] deriveCnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
     
     return [NyayaNode conjunction:ld with:rd];
 }
@@ -280,7 +280,7 @@
     // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
     NyayaNode *ld = [[self firstNode] deriveDnf:maxSize-1];
     NyayaNode *rd = [[self secondNode] deriveDnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld count] + [rd count])) return nil;
+    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
     return [self dnfDistribution:ld with:rd];
 }
 
@@ -295,7 +295,7 @@
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
     NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second|| maxSize < ([first count] + [second count])) return nil;
+    if (!first || !second|| maxSize < ([first length] + [second length])) return nil;
     
     return [NyayaNode conjunction:[NyayaNode disjunction:first
                                                     with:second]
@@ -319,7 +319,7 @@
     // imf(P → Q) = ¬imf(P) ∨ imf(Q)
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
     NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second || maxSize < ([first count] + [second count])) return nil;
+    if (!first || !second || maxSize < ([first length] + [second length])) return nil;
     return [NyayaNode disjunction: [NyayaNode negation:first] with: second];
 }
 
@@ -341,7 +341,7 @@
     // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
     NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second || maxSize < ([first count] + [second count])) return nil;
+    if (!first || !second || maxSize < ([first length] + [second length])) return nil;
     
     return [NyayaNode conjunction:[NyayaNode disjunction:[NyayaNode negation:first] with:second]
                              with:[NyayaNode disjunction:[NyayaNode negation:second] with:first]];

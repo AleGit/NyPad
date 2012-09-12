@@ -25,10 +25,10 @@
 
 
 
-- (NSUInteger)count {
+- (NSUInteger)length {
     NSUInteger c = 1;
     for (NyayaNode *subnode in self.nodes) {
-        c += [subnode count]; // the graph must not contain circles, but can be reduced
+        c += [subnode length]; // the graph must not contain circles, but can be reduced
     }
     return c;
 }
@@ -123,8 +123,8 @@
 }
 
 - (NSComparisonResult)compare:(NyayaNode*)other {
-    NSUInteger selfCount = [self count];
-    NSUInteger otherCount = [other count];
+    NSUInteger selfCount = [self length];
+    NSUInteger otherCount = [other length];
     
     if (selfCount < otherCount) return NSOrderedAscending;
     else if (selfCount > otherCount) return NSOrderedDescending;

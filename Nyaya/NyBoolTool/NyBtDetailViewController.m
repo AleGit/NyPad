@@ -10,8 +10,6 @@
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
 #import "NyayaFormula.h"
-#import "NyayaNode.h"
-#import "NyayaParser.h"
 #import "NyBoolToolEntry.h"
 #import "NSString+NyayaToken.h"
 
@@ -126,13 +124,12 @@
     NSString *input = self.inputField.text;
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
-        NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
-        NyayaNode *node = [parser parseFormula];
-        NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        NSString *description = [formula.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{
             self.parsedField.text = description;
-            self.parsedField.backgroundColor = !parser.hasErrors ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+            self.parsedField.backgroundColor = formula.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
             [self adjustResultViewPosition];
         });
     });
@@ -155,36 +152,34 @@
         dispatch_async(queue, ^{
             dispatch_queue_t mq = dispatch_get_main_queue();
             
-            
-            
-            NyayaFormula *node = [NyayaFormula formulaWithString:input];
-            NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
+            NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+            NSString *description = [formula.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
             
             dispatch_async(mq, ^{
                 self.parsedField.text = description;
-                self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
-                self.resultView.hidden = !node.isWellFormed;
+                self.parsedField.backgroundColor = formula.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+                self.resultView.hidden = !formula.isWellFormed;
                 [self adjustResultViewPosition];
             });
             
-            if (node.isWellFormed) {
+            if (formula.isWellFormed) {
                 dispatch_async(mq, ^{
                     [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
                     self.navigationItem.title = self.inputName.text;
                 });
                 
-                BddNode *bdd = [node OBDD:YES];
+                BddNode *bdd = [formula OBDD:YES];
                 NSUInteger bddLevelCount = bdd.levels.count;
                 
                 // NSString *stdDescription = @""; // [node.reducedFormula description];
                 // NSString *imfDescription = node.imfDescription;
-                NSString *nnfDescription = node.nnfDescription;
-                NSString *cnfDescription = node.cnfDescription;
-                NSString *dnfDescription = node.dnfDescription;
+                NSString *nnfDescription = formula.nnfDescription;
+                NSString *cnfDescription = formula.cnfDescription;
+                NSString *dnfDescription = formula.dnfDescription;
                 
                 
-                BOOL tau = [node truthTable:YES].isTautology;
-                BOOL con = [node truthTable:YES].isContradiction;
+                BOOL tau = [formula truthTable:YES].isTautology;
+                BOOL con = [formula truthTable:YES].isContradiction;
                 BOOL sat = !con;
                 
                 dispatch_async(mq, ^{
@@ -206,6 +201,16 @@
                     self.bddView.title = description;
                     self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
                 });
+                
+                [formula optimizeDescriptions];
+                dispatch_async(mq, ^{
+                    self.nnfField.text = formula.nnfDescription;
+                    self.cnfField.text = formula.cnfDescription;
+                    self.dnfField.text = formula.dnfDescription;
+                    
+                    // [self adjustResultViewContent:bddLevelCount];
+                });
+                
                 
             }
             

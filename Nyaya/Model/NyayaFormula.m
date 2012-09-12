@@ -10,6 +10,7 @@
 #import "NyayaParser.h"
 #import "NyayaNode+Attributes.h"
 #import "NyayaNode+Reductions.h"
+#import "NyayaNode+Derivations.h"
 //#import "NyayaNode+Derivations.h"
 
 #define NYAYA_MAX_INPUT_LENGTH 1367
@@ -26,7 +27,8 @@
     NSString *_cnfDescription;
     NSString *_dnfDescription;
     
-    dispatch_once_t _pred;
+    dispatch_once_t _firstRun;
+    dispatch_once_t _secondRun;
 }
 @end
 
@@ -36,7 +38,7 @@
     self = [super init];
     if (self) {
         _slfNode = node;
-        _pred = 0;
+        _firstRun = 0;
     }
     return self;
 }
@@ -75,44 +77,110 @@
 }
 
 - (void)makeDescriptions {
-    dispatch_once(&_pred, ^{
+    dispatch_once(&_firstRun, ^{
         
-        _slfDescription = [self description];
-        NyayaNode *redNode = nil;
-        NSString *redDescription = nil;
+        if (!_slfDescription) _slfDescription = [_slfNode description];
         
-        if ([_slfNode isNegationNormalForm]) {
-            redNode = [_slfNode reduce:800];
-            redDescription = [redNode description];
-            NSLog(@"RED %@ CNF=%u DNF=%u",redDescription, [redNode isConjunctiveNormalForm], [redNode isDisjunctiveNormalForm]);
-        }
+        if ([_slfNode isImplicationFree]) _imfDescription = _slfDescription;
+        if ([_slfNode isNegationNormalForm]) _nnfDescription = _slfDescription;
+        if ([_slfNode isConjunctiveNormalForm]) _cnfDescription = _slfDescription;
+        if ([_slfNode isDisjunctiveNormalForm]) _dnfDescription = _slfDescription;
         
-        _cnfDescription = [redNode isConjunctiveNormalForm] ? redDescription : [self OBDD:YES].cnfDescription;
-        _dnfDescription = [redNode isDisjunctiveNormalForm] ? redDescription : [self OBDD:YES].dnfDescription;
+        if (!_cnfDescription) _cnfDescription = [self OBDD:YES].cnfDescription;
+        if (!_dnfDescription) _dnfDescription = [self OBDD:YES].dnfDescription;
+       
+        NSString* nf = [_cnfDescription length] < [_dnfDescription length] ? _cnfDescription : _dnfDescription;
+                
+        if (!_imfDescription || [nf length] < [_imfDescription length]) _imfDescription = nf;
+        if (!_nnfDescription || [nf length] < [_nnfDescription length]) _nnfDescription = nf;
         
-        if ([_cnfDescription length] < [_dnfDescription length]) {
-            _nnfDescription = _cnfDescription;
-            _imfDescription = _imfDescription;
-        }
-        else {
-            _nnfDescription = _dnfDescription;
-            _imfDescription = _dnfDescription;
-        }
-        
-        if ([_slfNode isImplicationFree] && [_slfDescription length] < [_imfDescription length])
-            _imfDescription = _slfDescription;
-        
-        if ([_slfNode isNegationNormalForm] && [_slfDescription length] < [_nnfDescription length])
-            _nnfDescription = _slfDescription;
-        
-        //        if ([self isConjunctiveNormalForm] && [_slfDescription length] < [_cnfDescription length])
-        //            _cnfDescription = _slfDescription;
-        //
-        //        if ([self isDisjunctiveNormalForm] && [_slfDescription length] < [_dnfDescription length])
-        //            _dnfDescription = _slfDescription;
     });
 }
 
+- (NyayaNode*)shortestNode {
+    NSString *sd = nil;
+    for (NSString *description in @[_slfDescription, _imfDescription, _nnfDescription, _cnfDescription, _dnfDescription]) {
+        if (!sd || (description && [description length] < [sd length])) {
+            sd = description;
+        }
+    }
+    NyayaParser *p = [[NyayaParser alloc] initWithString:sd];
+    return [p parseFormula];
+}
+
+- (void)optimizeDescriptions {
+    dispatch_once(&_secondRun, ^{
+        NyayaNode *rNode = [_slfNode reduce:NSIntegerMax];        
+        NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax];
+        NSString *description = nil;
+        
+        for (NyayaNode *rdcNode in @[rNode, sNode]) {
+            if (!rdcNode) break;
+            
+            description = [rdcNode description];
+            if (!_rdcDescription || [description length] < [_rdcDescription length]) {
+                _rdcDescription = description;
+            }
+        
+            NyayaNode *imfNode = [rdcNode isImplicationFree] ? rdcNode : [rdcNode deriveImf:[_imfDescription length]];
+            description = [imfNode description];
+            if (imfNode && [description length] < [_imfDescription length]) {
+                _imfDescription = description;
+            }
+            
+            NyayaNode *nnfNode = [imfNode isNegationNormalForm] ? imfNode : [imfNode deriveNnf:[_nnfDescription length]];
+            description = [nnfNode description];
+            if (nnfNode && [description length] < [_nnfDescription length]) {
+                _nnfDescription = description;
+            }
+            
+            NyayaNode *cnfNode = [nnfNode isConjunctiveNormalForm] ? nnfNode : [nnfNode deriveCnf:[_cnfDescription length]];
+            description = [cnfNode description];
+            if (cnfNode && [description length] < [_cnfDescription length]) {
+                _cnfDescription = description;
+            }
+            if ([cnfNode isDisjunctiveNormalForm] && [description length] < [_dnfDescription length]) {
+                _dnfDescription = description;
+            }
+            
+            NyayaNode *dnfNode = [nnfNode isDisjunctiveNormalForm] ? nnfNode : [nnfNode deriveDnf:[_dnfDescription length]];
+            description = [dnfNode description];
+            if (dnfNode && [description length] < [_dnfDescription length]) {
+                _dnfDescription = description;
+            }
+            
+            if ([dnfNode isConjunctiveNormalForm] && [description length] < [_cnfDescription length]) {
+                _cnfDescription = description;
+            }
+        }
+    });
+}
+
+- (NSString*)description {
+    if (!_slfDescription) _slfDescription = [_slfNode description];
+    return _slfDescription;
+}
+
+
+- (NSString*)slfDescription {
+    [self makeDescriptions];
+    return _slfDescription;
+}
+
+- (NSString*)rdcDescription {
+    [self makeDescriptions];
+    return _rdcDescription;
+}
+
+- (NSString*)imfDescription {
+    [self makeDescriptions];
+    return _imfDescription;
+}
+
+- (NSString*)nnfDescription {
+    [self makeDescriptions];
+    return _nnfDescription;
+}
 
 - (NSString*)cnfDescription {
     [self makeDescriptions];
@@ -122,21 +190,6 @@
 - (NSString*)dnfDescription {
     [self makeDescriptions];
     return _dnfDescription;
-}
-
-- (NSString*)nnfDescription {
-    [self makeDescriptions];
-    return _nnfDescription;
-}
-
-- (NSString*)imfDescription {
-    [self makeDescriptions];
-    return _imfDescription;
-}
-
-- (NSString*)slfDescription {
-    [self makeDescriptions];
-    return _slfDescription;
 }
 
 @end

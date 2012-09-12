@@ -75,64 +75,6 @@
     }
 }
 
-#pragma mark - reduce:1000 big formulas
-
-- (void)xtestreduceBigXor {
-    NyayaNode *formula = [self nodeWithFormula:@"a^b^c^d^f^g^h^i^j^k^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
-    NSDate *begin = [NSDate date];
-    
-    NyayaNode *reducedFormula = [formula reduce:1000];
-    
-    NSDate *end = [NSDate date];
-    
-    STAssertEqualObjects(formula, reducedFormula, nil);
-    STAssertTrue([end timeIntervalSinceDate:begin] < 0.001, nil);
-    
-}
-
-- (void)xtestreduceBigFormulas {
-    for (NSString*input in @[@"(p&q)|r"
-         ,@"(p&q)|r^pp^q^rr^ss^tt^pq^qr^rs^s"
-         ]) {
-    
-        NyayaNode *formula = [self nodeWithFormula:input];
-        NSLog(@"%@",formula);
-        NSDate *begin = [NSDate date];
-        
-        
-        NyayaNode *reducedFormula = [formula reduce:1000];
-        
-        NSDate *end = [NSDate date];
-        NSLog(@"%@",reducedFormula);
-        
-        STAssertEqualObjects(formula, reducedFormula, nil);
-        NSTimeInterval duration = [end timeIntervalSinceDate:begin];
-        STAssertTrue(duration < 0.001, @"%f", duration);
-                          
-    }
-    
-}
-
-- (void)xtestreduceBigOr {
-    for (NSString*input in @[@"a|b|c|d" , @"a|b|c|d|e|(f|g|h|i)|(j|k|l)|m|n"
-         ]) {
-        
-        NyayaNode *formula = [self nodeWithFormula:input];
-        NSLog(@"%@",formula);
-        NSDate *begin = [NSDate date];
-        
-        
-        NyayaNode *reducedFormula = [formula reduce:1000];
-        
-        NSDate *end = [NSDate date];
-        NSLog(@"%@",reducedFormula);
-        
-        NSTimeInterval duration = [end timeIntervalSinceDate:begin];
-        STAssertTrue(duration < 0.001, @"%f %@", duration, input);
-        
-    }
-    
-}
 
 #pragma mark - formulas with problems
 
@@ -163,8 +105,6 @@
     
     STAssertFalse([array containsObject:e],nil);
     STAssertFalse([array containsObject:n],nil);
-    
-    
 }
 
 - (void)testDisjunctiveArray {
@@ -190,15 +130,5 @@
     
 }
 
-- (void)testBigOr {
-    
-    NyayaNode *az = [self nodeWithFormula:@"a+b+c+d+e+f+g+h+i+j+k+m+n+p+q+r+s+t+u+v+w+x+y+z"];
-    NSDate *begin = [NSDate date];
-    NyayaNode *raz = [az reduce:NSIntegerMax];
-    NSDate *end = [NSDate date];
-    STAssertEqualObjects(az, raz, nil);
-    NSTimeInterval duration = [end timeIntervalSinceDate:begin];
-    STAssertTrue(duration < 0.001, @"%f", duration);
-}
 
 @end

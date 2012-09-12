@@ -9,8 +9,8 @@
 #import "NyayaNode.h"
 
 @interface NSArray (Reductions)
-- (NSMutableArray*)reducedNodes;
-- (NSMutableArray*)negatedNodes;
+- (NSMutableArray*)reducedNodes:(BOOL)unique;
+- (NSMutableArray*)negatedNodes:(BOOL)unique;
 - (BOOL)containsComplementaryNodes;
 - (BOOL)containsTop;
 - (BOOL)containsBottom;

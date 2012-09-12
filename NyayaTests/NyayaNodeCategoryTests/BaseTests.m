@@ -70,28 +70,4 @@
     STAssertTrue([a3 isNegationToNode:a4], nil);
 }
 
-- (void)testIsNegationOfBigFormula {
-    for (NSString *input in _bigFormulas) {
-        
-        NyayaNode *a = [self nodeWithFormula:input];
-        NyayaNode *n = [self nodeWithFormula:[NSString stringWithFormat:@"!(%@)", input] ];
-        NSDate *begin = [NSDate date];
-        STAssertTrue([a isNegationToNode:n], [a description]);
-        NSTimeInterval duration = [[NSDate date] timeIntervalSinceDate:begin];
-        STAssertTrue(duration < 0.002, @"%f %@", duration, [a description]);
-    }
-}
-
-- (void)testIsEqualBigFormula {
-    for (NSString *input in _bigFormulas) {
-        NyayaNode *a = [self nodeWithFormula:input];
-        NyayaNode *b = [self nodeWithFormula:input];
-        STAssertFalse(a == b, [a description]);
-        NSDate *begin = [NSDate date];
-        STAssertEqualObjects(a, b, [a description]);
-        NSTimeInterval duration = [[NSDate date] timeIntervalSinceDate:begin];
-        STAssertTrue(duration < 0.002, @"%f %@", duration, [a description]);
-    }
-}
-
 @end
