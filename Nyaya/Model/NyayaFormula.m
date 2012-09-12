@@ -110,6 +110,8 @@
 
 - (void)optimizeDescriptions {
     dispatch_once(&_secondRun, ^{
+        [self makeDescriptions];
+        
         NyayaNode *rNode = [_slfNode reduce:NSIntegerMax];        
         NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax];
         NSString *description = nil;
