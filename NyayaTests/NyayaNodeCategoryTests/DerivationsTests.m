@@ -7,27 +7,27 @@
 //
 
 #import "DerivationsTests.h"
-// #import "NyayaNode.h"
+#import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Derivations.h"
 
 @implementation DerivationsTests
 
 - (void)testSubNodeSet {
     
-    NyayaNode *node = [NyayaNode nodeWithFormula:@"a"];
+    NyayaNode *node = [self nodeWithFormula:@"a"];
     NyayaNode *a = node;
     NSSet *set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)1, nil);
     
-    node = [NyayaNode nodeWithFormula:@"a|a"];
+    node = [self nodeWithFormula:@"a|a"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)2, nil);
     
-    node = [NyayaNode nodeWithFormula:@"(a|b)&(a|b)"];
+    node = [self nodeWithFormula:@"(a|b)&(a|b)"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)4, nil);
     
-    node = [NyayaNode nodeWithFormula:@"(a>b)|((a>b)&c)"];
+    node = [self nodeWithFormula:@"(a>b)|((a>b)&c)"];
     set = [node subNodeSet];
     STAssertEquals([set count], (NSUInteger)6, nil);
     
@@ -45,40 +45,40 @@
 - (void)testAllreadyImplicationFree {
     for (NSString *input in @[@"!a", @"!a", @"a|b"
          ]) {
-        NyayaNode *n = [NyayaNode nodeWithFormula:input];
+        NyayaNode *n = [self nodeWithFormula:input];
         NyayaNode *i = [n deriveImf:NSIntegerMax];
         STAssertEqualObjects(i, n, nil);
     }
 }
 
 - (void)testImplicationImf {
-    NyayaNode *n = [NyayaNode nodeWithFormula:@"a>b"];
+    NyayaNode *n = [self nodeWithFormula:@"a>b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
-    NyayaNode *e = [NyayaNode nodeWithFormula:@"!a|b"];
+    NyayaNode *e = [self nodeWithFormula:@"!a|b"];
     STAssertEqualObjects(i, e, nil);
 }
 
 - (void)testBiconditionalImf {
-    NyayaNode *n = [NyayaNode nodeWithFormula:@"a=b"];
+    NyayaNode *n = [self nodeWithFormula:@"a=b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
-    NyayaNode *e = [NyayaNode nodeWithFormula:@"(!a|b)&(!b|a)"];
+    NyayaNode *e = [self nodeWithFormula:@"(!a|b)&(!b|a)"];
     STAssertEqualObjects(i, e, nil);
 }
 
 
 
 - (void)testFxorT {
-    NyayaNode *n = [NyayaNode nodeWithFormula:@"F^T"];
+    NyayaNode *n = [self nodeWithFormula:@"F^T"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
-    NyayaNode *e = [NyayaNode nodeWithFormula:@"(F|T)&(!F|!T)"];
+    NyayaNode *e = [self nodeWithFormula:@"(F|T)&(!F|!T)"];
     STAssertEqualObjects(i, e, nil);
 }
 
 
 - (void)testXorImf {
-    NyayaNode *n = [NyayaNode nodeWithFormula:@"a^b"];
+    NyayaNode *n = [self nodeWithFormula:@"a^b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
-    NyayaNode *e = [NyayaNode nodeWithFormula:@"(a|b)&(!a|!b) "];
+    NyayaNode *e = [self nodeWithFormula:@"(a|b)&(!a|!b) "];
     STAssertEqualObjects(i, e, nil);
     
     

@@ -7,14 +7,14 @@
 //
 
 #import "DescriptionTests.h"
-#import "NyayaNode_Cluster.h"
+#import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Description.h"
 
 @implementation DescriptionTests
 
 - (void)testDescriptionSubformula {
     
-    NyayaNode *formula = [NyayaNode nodeWithFormula:@"a | b & c"];
+    NyayaNode *formula = [self nodeWithFormula:@"a | b & c"];
     
     NSArray *descs = @[ [formula description:formula] // AND 
     ,[formula description: [formula nodeAtIndex:0]] // a

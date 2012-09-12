@@ -7,6 +7,7 @@
 //
 
 #import "BddNormalFormsTests.h"
+#import "NyayaFormula.h"
 
 @interface BddNode (Tests)
 - (NSMutableSet*)pathsTo:(NSString*)name;
@@ -19,7 +20,7 @@
 @implementation BddNormalFormsTests
 
 - (void)testPathsTo {
-    NyayaNode *node = [NyayaNode nodeWithFormula:@"0"];
+    NyayaFormula *node = [NyayaFormula formulaWithString:@"0"];
     BddNode *bdd = [node OBDD:YES];
     
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
@@ -31,7 +32,7 @@
     STAssertEqualObjects([bdd dnfDescription], @"F", nil);
     STAssertEqualObjects([bdd cnfDescription], @"F", nil);
     
-    node = [NyayaNode nodeWithFormula:@"a"];
+    node = [NyayaFormula formulaWithString:@"a"];
     bdd = [node OBDD:YES];
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)1, nil);
@@ -44,7 +45,7 @@
     STAssertEqualObjects([bdd cnfDescription], @"(a)", nil);
     
     
-    node = [NyayaNode nodeWithFormula:@"a|b"];
+    node = [NyayaFormula formulaWithString:@"a|b"];
     bdd = [node OBDD:YES];
     
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
@@ -58,7 +59,7 @@
     STAssertEqualObjects([bdd dnfDescription], @"(a ∨ b)", nil);
     STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b)", nil);
     
-    node = [NyayaNode nodeWithFormula:@"a&b"];
+    node = [NyayaFormula formulaWithString:@"a&b"];
     bdd = [node OBDD:YES];
     
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
@@ -72,7 +73,7 @@
     STAssertEqualObjects([bdd dnfDescription], @"(a ∧ b)", nil);
     STAssertEqualObjects([bdd cnfDescription], @"(a ∧ b)", nil);
     
-    node = [NyayaNode nodeWithFormula:@"a^b"];
+    node = [NyayaFormula formulaWithString:@"a^b"];
     bdd = [node OBDD:YES];
     
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
@@ -86,7 +87,7 @@
     STAssertEqualObjects([bdd dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
     STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
     
-    node = [NyayaNode nodeWithFormula:@"a+b.c"];
+    node = [NyayaFormula formulaWithString:@"a+b.c"];
     bdd = [node OBDD:YES];
     
     STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
@@ -105,7 +106,7 @@
 }
 
 - (void)testBigXor {
-    NyayaNode *node = [NyayaNode nodeWithFormula:@"a^b^c^d^e^f^g^h^i^j^k^l"]; //^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
+    NyayaFormula *node = [NyayaFormula formulaWithString:@"a^b^c^d^e^f^g^h^i^j^k^l"]; //^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
     BddNode *bdd = [node OBDD:YES];
     STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
     STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)2, nil);

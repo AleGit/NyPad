@@ -35,27 +35,6 @@ typedef NSUInteger NyayaNodeType;
     BOOL _evaluationValue;
     NSMutableArray *_nodes;
     
-    BOOL _hasParsingErrors;
-    
-    NyayaNode *_reducedNode;
-    
-    NSString *_slfDescription;
-    NSString *_imfDescription;
-    NSString *_nnfDescription;
-    NSString *_cnfDescription;
-    NSString *_dnfDescription;
-    
-    NyayaNode *_imfNode;
-    NyayaNode *_nnfNode;
-    NyayaNode *_cnfNode;
-    NyayaNode *_dnfNode;
-
-    dispatch_once_t _pred;
-    TruthTable *_truthTable;
-    BddNode *_bddNode;
-    
-    // consolidation
-    
 }
 - (BOOL)isNegationToNode:(NyayaNode*)other;
 - (NyayaNode*)nodeAtIndex:(NSUInteger)index;

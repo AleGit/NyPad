@@ -15,32 +15,38 @@
 
 
 
-@implementation NSSet (Reductions)
+@implementation NSArray (Reductions)
 - (BOOL)containsComplementaryNodes {
-    NSMutableSet *negatedSet = [self negatedSet];
-    [negatedSet intersectSet:self];
-    return [negatedSet count] > 0;
+    NSMutableArray *negatedArray = [self negatedNodes];
+    NSUInteger count = [negatedArray count];
+    [negatedArray removeObjectsInArray:self];
+    
+    return [negatedArray count] < count;
 }
 
-- (NSMutableSet*)negatedSet {
-    NSMutableSet *negatedSet = [NSMutableSet setWithCapacity:[self count]];
-    for (NyayaNode *node in self) {
-        if (node.type == NyayaNegation) {
-            [negatedSet addObject:[node nodeAtIndex:0]];
+- (NSMutableArray*)negatedNodes {
+    NSMutableArray *negatedArray = [NSMutableArray arrayWithCapacity:[self count]];
+    for (NyayaNode *sub in self) {
+        NyayaNode *red = nil;
+        if (sub.type == NyayaNegation) {
+            red = [sub nodeAtIndex:0]; // not (not a) = a
         }
         else {
-            [negatedSet addObject:[NyayaNode negation:node]];
+            red = [NyayaNode negation:sub];
         }
+        [negatedArray addObject: red];
     }
-    return negatedSet;
+    return negatedArray;
 }
 
-- (NSMutableSet*)reducedSet {
-     NSMutableSet *reducedSet = [NSMutableSet setWithCapacity:[self count]];
-    for (NyayaNode *node in self) {
-        [reducedSet addObject: [node reduce:NSIntegerMax]];
+- (NSMutableArray*)reducedNodes {
+    NSMutableArray *reducedArray = [NSMutableArray arrayWithCapacity:[self count]];
+    for (NyayaNode *sub in self) {
+        NyayaNode *red = [sub reduce:NSIntegerMax];
+        if ([reducedArray indexOfObject:red] == NSNotFound)
+            [reducedArray addObject: red];
     }
-    return reducedSet;
+    return reducedArray;
     
 }
 
@@ -117,28 +123,33 @@
 
 @implementation NyayaNodeDisjunction (Reductions)
 
-- (NSMutableSet*)naryDisjunction {
+// it would be easier with a set, but an array keeps the order
+- (NSMutableArray*)naryDisjunction {
     
-    NSMutableSet *set = [NSMutableSet set];
+    NSMutableArray *array = [NSMutableArray array];
     for (NyayaNode *node in self.nodes) {
-        NSSet *subSet = [node naryDisjunction];
-        if (!subSet) [set addObject:node];
-        else [set unionSet:subSet];
+        NSArray *subArray = [node naryDisjunction];
+        if (!subArray) subArray = @[node];
+        
+        for (NyayaNode* subNode in subArray) {
+            if (![array containsObject:subNode]) // inefficient form many nodes
+                [array addObject:subNode];
+        }
     }
-    [set removeObject:[NyayaNode bottom]];
-    return set;
+    [array removeObject:[NyayaNode bottom]];
+    return array;
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize {
     // first collect disjuncted subnodes, then reduce the nodes in the set
-    NSMutableSet *set = [[self naryDisjunction] reducedSet];
+    NSMutableArray *array = [[self naryDisjunction] reducedNodes];
     
-    if ([set count] == 0) return [NyayaNode bottom];
+    if ([array count] == 0) return [NyayaNode bottom];
     
-    if ([set containsTop] || [set containsComplementaryNodes]) return [NyayaNode top];
+    if ([array containsTop] || [array containsComplementaryNodes]) return [NyayaNode top];
     
     NyayaNode *node = nil;
-    for (NyayaNode *n in set) {
+    for (NyayaNode *n in array) {
         if (!node) node = n;
         else node = [NyayaNode disjunction:node with:n];
     }
@@ -152,28 +163,32 @@
 @end
 
 @implementation NyayaNodeConjunction (Reductions)
-- (NSMutableSet*)naryConjunction {
+- (NSMutableArray*)naryConjunction {
     
-    NSMutableSet *set = [NSMutableSet set];
-    
+    NSMutableArray *array = [NSMutableArray array];
     for (NyayaNode *node in self.nodes) {
-        NSSet *subSet = [node naryConjunction];
-        if (!subSet) [set addObject:node];
-        else [set unionSet:subSet];
+        NSArray *subArray = [node naryConjunction];
+        if (!subArray) subArray = @[node];
+        
+        for (NyayaNode* subNode in subArray) {
+            if (![array containsObject:subNode]) // inefficient form many nodes
+                [array addObject:subNode];
+        }
     }
-    return set;
+    [array removeObject:[NyayaNode top]];
+    return array;
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
     // first collect conjuncted subnodes, then reduce the nodes in the set
-    NSMutableSet *set = [[self naryConjunction] reducedSet];
+    NSMutableArray *array = [[self naryConjunction] reducedNodes];
     
-    if ([set count] == 0) return [NyayaNode top];
+    if ([array count] == 0) return [NyayaNode top];
     
-    if ([set containsBottom] || [set containsComplementaryNodes]) return [NyayaNode bottom];
+    if ([array containsBottom] || [array containsComplementaryNodes]) return [NyayaNode bottom];
     
     NyayaNode *node = nil;
-    for (NyayaNode *n in set) {
+    for (NyayaNode *n in array) {
         if (!node) node = n;
         else node = [NyayaNode conjunction:node with:n];
     }

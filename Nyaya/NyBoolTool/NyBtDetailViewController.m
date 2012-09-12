@@ -9,8 +9,9 @@
 #import "NyBtDetailViewController.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
-
+#import "NyayaFormula.h"
 #import "NyayaNode.h"
+#import "NyayaParser.h"
 #import "NyBoolToolEntry.h"
 #import "NSString+NyayaToken.h"
 
@@ -125,13 +126,13 @@
     NSString *input = self.inputField.text;
     dispatch_async(queue, ^{
         dispatch_queue_t mq = dispatch_get_main_queue();
-        
-        NyayaNode *node = [NyayaNode nodeWithFormula:input];
+        NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
+        NyayaNode *node = [parser parseFormula];
         NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
         
         dispatch_async(mq, ^{
             self.parsedField.text = description;
-            self.parsedField.backgroundColor = node.isWellFormed ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+            self.parsedField.backgroundColor = !parser.hasErrors ? [UIColor nyRightColor] : [UIColor nyWrongColor];
             [self adjustResultViewPosition];
         });
     });
@@ -156,7 +157,7 @@
             
             
             
-            NyayaNode *node = [NyayaNode nodeWithFormula:input];
+            NyayaFormula *node = [NyayaFormula formulaWithString:input];
             NSString *description = [node.description stringByReplacingOccurrencesOfString:@"(null)" withString:@"…"];
             
             dispatch_async(mq, ^{

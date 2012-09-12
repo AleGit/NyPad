@@ -7,6 +7,7 @@
 //
 
 #import "DisplayTests.h"
+#import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Display.h"
 
@@ -24,7 +25,7 @@
 }
 
 - (void)testDisplayA {
-    NyayaNode *a = [NyayaNode nodeWithFormula:@"a"];
+    NyayaNode *a = [self nodeWithFormula:@"a"];
     ((NyayaNodeVariable*)a).displayValue = NyayaTrue;
     STAssertEquals(a.displayValue, (NyayaBool)NyayaTrue, @"%d",a.displayValue);
     ((NyayaNodeVariable*)a).displayValue = NyayaFalse;
