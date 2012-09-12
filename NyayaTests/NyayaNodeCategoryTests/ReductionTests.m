@@ -149,7 +149,7 @@
     
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a|b|a|c|a|b|(d&b)"];
     
-    NSSet *set = [n naryDisjunction:1000];
+    NSSet *set = [n naryDisjunction];
     
     STAssertEquals([set count], (NSUInteger)4, nil);
     STAssertTrue([set containsObject:a],nil);
@@ -172,7 +172,7 @@
     
     NyayaNode *n = [NyayaNode nodeWithFormula:@"a&b&a&c&a&b&(d|b)"];
     
-    NSSet *set = [n naryConjunction:1000];
+    NSSet *set = [n naryConjunction];
     
     STAssertEquals([set count], (NSUInteger)4, nil);
     STAssertTrue([set containsObject:a],nil);
@@ -184,6 +184,17 @@
     STAssertFalse([set containsObject:n],nil);
     
     
+}
+
+- (void)testBigOr {
+    
+    NyayaNode *az = [NyayaNode nodeWithFormula:@"a+b+c+d+e+f+g+h+i+j+k+m+n+p+q+r+s+t+u+v+w+x+y+z"];
+    NSDate *begin = [NSDate date];
+    NyayaNode *raz = [az reduce:NSIntegerMax];
+    NSDate *end = [NSDate date];
+    STAssertEqualObjects(az, raz, nil);
+    NSTimeInterval duration = [end timeIntervalSinceDate:begin];
+    STAssertTrue(duration < 0.001, @"%f", duration);
 }
 
 @end

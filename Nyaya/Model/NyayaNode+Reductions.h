@@ -9,6 +9,8 @@
 #import "NyayaNode.h"
 
 @interface NSSet (Reductions)
+- (NSMutableSet*)reducedSet;
+- (NSMutableSet*)negatedSet;
 - (BOOL)containsComplementaryNodes;
 - (BOOL)containsTop;
 - (BOOL)containsBottom;
@@ -17,7 +19,7 @@
 @interface NyayaNode (Reductions)
 
 - (NyayaNode*)reduce:(NSInteger)maxSize;
-- (NSMutableSet*)naryDisjunction:(NSInteger)maxSize;
-- (NSMutableSet*)naryConjunction:(NSInteger)maxSize;
+- (NSMutableSet*)naryDisjunction;
+- (NSMutableSet*)naryConjunction;
 
 @end

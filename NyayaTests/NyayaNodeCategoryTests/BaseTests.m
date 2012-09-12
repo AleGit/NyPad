@@ -42,6 +42,13 @@
     STAssertFalse([a2 isEqual:a3], @"implication is not commutative");
 }
 
+- (void)testBigIsEqual {
+    NyayaNode *a1 = [NyayaNode nodeWithFormula:@"a+b+c+d+e+f+g+h+i+j+k+m+n+p+q+r+s+t+u+v+w+x+y+z"];
+    NyayaNode *a2 = [NyayaNode nodeWithFormula:@"a∨b∨c∨d∨e∨f∨g∨h∨i∨j∨k∨m∨n∨p∨q∨r∨s∨t∨u∨v∨w∨x∨y∨z"];
+    STAssertEqualObjects(a1, a2, nil);
+    
+}
+
 - (void)testIsNegationOfNode {
     NyayaNode *a0 = [NyayaNode nodeWithFormula:@"(a&b|c)"];
     NyayaNode *a1 = [NyayaNode nodeWithFormula:@"!(a&b|c)"];
