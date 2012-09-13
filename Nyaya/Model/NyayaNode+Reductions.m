@@ -12,6 +12,7 @@
 #import "NyayaNode+Type.h"
 #import "NyayaNode+Creation.h"
 #import "NSString+NyayaToken.h"
+#import "NyayaNode+Description.h"
 
 
 
@@ -43,7 +44,6 @@
             [reducedArray addObject: rdc];
     }
     return reducedArray;
-    
 }
 
 - (BOOL)containsTop {
@@ -52,6 +52,62 @@
 
 - (BOOL)containsBottom {
     return [self containsObject:[NyayaNode bottom]];
+}
+@end
+
+@implementation NSMutableArray (Reductions)
+- (void)xorConsolidate:(BOOL)isXor {
+    NSCountedSet *countedSet = [NSCountedSet setWithArray:self];
+    for (NyayaNode *node in countedSet) {
+        NSUInteger count = [countedSet countForObject:node];
+        NSUInteger idx = [self indexOfObject:node]; // lowest index of obj isEqual:node)
+        if (count > 1) {
+            //  
+            // !isXor: T=T == T, F=F == T subNode = subNode == T, node = T == node
+            [self removeObject:node]; // removes all occurrences of obj isEqual:node
+            
+            if (count % 2 == 1) {
+                [self insertObject:node atIndex:idx];
+            }
+        }
+    }
+    
+    countedSet = [NSCountedSet setWithArray:self];
+    NSMutableArray *negatedNodes = [self negatedNodes:NO];
+    
+    NSUInteger substitutions = 0;
+    for (NyayaNode *node in countedSet) {
+        NSAssert([countedSet countForObject:node] == 1, @"there must be no doubles");
+        
+        if ([negatedNodes containsObject:node]) {
+            // [!P,!Q, P] contains node in { P:1, Q:1,!P:1 }
+            [self removeObject:node]; // will be called for !P and P
+            substitutions++;
+        }
+    }
+    
+    substitutions = (substitutions / 2) % 2;
+    // [!P,!Q, P]        => [Q] substitutions = 1;
+    // [!P,!Q, P, A, !A] => [Q] substitutions = 0;
+    
+    if (isXor) {
+        // P^F = F^P == P
+        [self removeObject:[NyayaNode bottom]]; // bottom is neutral for XOR
+        
+        if (substitutions == 1) {
+            // (1) P^!P == T, (0) P^P^!P^!P = F
+            [self addObject:[NyayaNode top]];  
+        }
+    }
+    else {
+        // P=T = T=P == P
+        [self removeObject:[NyayaNode top]]; // top is neutral for BIC
+        
+        if (substitutions == 1) {
+            // (1) P=!P == F, (0) P=P=!P=!P == T
+            [self addObject:[NyayaNode bottom]];
+        }
+    }
 }
 @end
 
@@ -65,6 +121,15 @@
 - (NSMutableSet*)naryConjunction {
     return nil;
 }
+
+- (NSMutableArray*)naryXdisjunction {
+    return nil;
+}
+
+- (NSMutableArray*)naryBiconditional {
+    return nil;
+}
+
 
 - (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0)
@@ -198,27 +263,42 @@
 
 @implementation NyayaNodeXdisjunction (Reductions)
 
+
+
+- (NSMutableArray*)naryXdisjunction {
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (NyayaNode *node in self.nodes) {
+        NSArray *subArray = [node naryXdisjunction];
+        if (!subArray) subArray = @[node];
+        
+        [array addObjectsFromArray:subArray];
+    }
+    
+    [array removeObject:[NyayaNode bottom]];
+    return array;
+}
+
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
+    NSMutableArray *array = [[self naryXdisjunction] reducedNodes:NO];
+    [array xorConsolidate:YES];
+    // now there is the possibility of mutiple
     
-    if ([reducedFirstNode.symbol isFalseToken]) return reducedSecondNode;
-    if ([reducedSecondNode.symbol isFalseToken]) return reducedFirstNode;
+    if ([array count] == 0) return [NyayaNode bottom];
     
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode bottom];
-    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode top];
-    
-    if ([reducedFirstNode.symbol isTrueToken]) {
-        if (reducedSecondNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedSecondNode firstNode];
-        return [NyayaNode negation:reducedSecondNode];
+    BOOL negation = NO;
+    if ([array containsObject:[NyayaNode top]]) {
+        [array removeObject:[NyayaNode top]];
+        negation = YES;
     }
     
-    if ([reducedSecondNode.symbol isTrueToken]) {
-        if (reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
-        return [NyayaNode negation:reducedFirstNode];
+    NyayaNode *node = nil;
+    for (NyayaNode *n in array) {
+        if (!node) node = n;
+        else node = [NyayaNode xdisjunction:node with:n];
     }
     
-    return [NyayaNode xdisjunction:reducedFirstNode with:reducedSecondNode];
+    return negation ? [NyayaNode negation:node] : node;
 }
 @end
 
@@ -246,24 +326,45 @@
 @end
 
 @implementation NyayaNodeBicondition (Reductions)
+
+- (NSMutableArray*)naryBiconditional {
+    NSMutableArray *array = [NSMutableArray array];
+    for (NyayaNode *node in self.nodes) {
+        NSArray *subArray = [node naryBiconditional];
+        if (!subArray) subArray = @[node];
+        
+        for (NyayaNode* subNode in subArray) {
+            if (![array containsObject:subNode]) {
+                [array insertObject:subNode atIndex:0];
+            }
+            else {
+                // subNode <> subNode == T, node <> T == node
+                [array removeObject:subNode];
+            }
+        }
+    }
+    [array removeObject:[NyayaNode top]];
+    return array;
+}
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
 //    return [[self imf] reduce];
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
+    NSMutableArray *array = [[self naryBiconditional] reducedNodes:NO];
+    [array xorConsolidate:NO];
+    if ([array count] == 0) return [NyayaNode top];
     
-    if ([reducedFirstNode.symbol isTrueToken]) return reducedSecondNode;
-    if ([reducedSecondNode.symbol isTrueToken]) return reducedFirstNode;
+    BOOL negation = NO;
+    if ([array containsObject:[NyayaNode bottom]]) {
+        [array removeObject:[NyayaNode bottom]];
+        negation = YES;
+    }
     
-    if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
-    if ([reducedFirstNode isNegationToNode:reducedSecondNode]) return [NyayaNode bottom];
+    NyayaNode *node = nil;
+    for (NyayaNode *n in array) {
+        if (!node) node = n;
+        else node = [NyayaNode bicondition:node with:n];
+    }
     
-    if ([reducedFirstNode.symbol isFalseToken] && reducedSecondNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedSecondNode firstNode];
-    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode negation:reducedSecondNode];
-    
-    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
-    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
-    
-    return [NyayaNode bicondition:reducedFirstNode with:reducedSecondNode];
+    return negation ? [NyayaNode negation:node] : node;
 }
 @end
 

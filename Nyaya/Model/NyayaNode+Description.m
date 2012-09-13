@@ -12,6 +12,10 @@
 
 @implementation NyayaNode (Description)
 
+- (NSString*)debugDescription {
+    return [NSString stringWithFormat:@"%@ %@", [self class], [self description]];
+}
+
 - (NSString*)description:(NyayaNode*)subnode {
     NSString *desc = _descriptionCache != nil ? _descriptionCache : [self description];
     NSString *subd = subnode->_descriptionCache;

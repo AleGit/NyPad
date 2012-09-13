@@ -117,7 +117,9 @@
 - (NSUInteger)hash {
     NSUInteger hash = [self.symbol hash]; // F,T,x,y,z,¬∧∨↔→⊻
     for (NyayaNode *node in self.nodes) {
-        hash += [node hash]; // a > b has same hash as b > a
+        hash += [node hash];
+        // a > b has same hash as b > a
+        // so the hash of not equal nodes can be the same
     }
     return hash;
 }
@@ -175,27 +177,52 @@
 @end
 
 @implementation NyayaNodeConjunction
+// AND is associative and commutative
+- (BOOL)isEqualToNode:(NyayaNode*)other {
+    NSSet *selfSet = [NSSet setWithArray:[self naryConjunction]];
+    NSSet *otherSet = [NSSet setWithArray:[other naryConjunction]];
+    return [selfSet isEqualToSet:otherSet];
+}
 @end
 
 @implementation NyayaNodeSequence
 @end
 
 @implementation NyayaNodeDisjunction
+// OR is associative and commutative
+- (BOOL)isEqualToNode:(NyayaNode*)other {
+    NSSet *selfSet = [NSSet setWithArray:[self naryDisjunction]];
+    NSSet *otherSet = [NSSet setWithArray:[other naryDisjunction]];
+    return [selfSet isEqualToSet:otherSet];
+}
 @end
 
 @implementation NyayaNodeExpandable
 @end
 
 @implementation NyayaNodeImplication
+// IMP is neither associative nor commutative
 @end
 
 @implementation NyayaNodeEntailment
 @end
 
 @implementation NyayaNodeBicondition
+// BIC is associative and commutative
+- (BOOL)isEqualToNode:(NyayaNode*)other {
+    NSSet *selfSet = [NSSet setWithArray:[self naryBiconditional]];
+    NSSet *otherSet = [NSSet setWithArray:[other naryBiconditional]];
+    return [selfSet isEqualToSet:otherSet];
+}
 @end
 
 @implementation NyayaNodeXdisjunction
+// XOR is associative and commutative
+- (BOOL)isEqualToNode:(NyayaNode*)other {
+    NSSet *selfSet = [NSSet setWithArray:[self naryXdisjunction]];
+    NSSet *otherSet = [NSSet setWithArray:[other naryXdisjunction]];
+    return [selfSet isEqualToSet:otherSet];
+}
 @end
 
 @implementation NyayaNodeFunction

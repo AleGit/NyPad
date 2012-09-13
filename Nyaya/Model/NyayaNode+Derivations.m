@@ -24,7 +24,7 @@
     node->_evaluationValue = self.evaluationValue;
     node->_nodes = [nodes mutableCopy];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     
     return node;
 }

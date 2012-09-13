@@ -130,5 +130,50 @@
     
 }
 
+- (void)testXdisjunctiveArray {
+    
+    NSArray *abcArray = @[
+    [self nodeWithFormula:@"(a+b+c)"],
+    [self nodeWithFormula:@"(a+c+b)"],
+    [self nodeWithFormula:@"(b+a+c)"],
+    [self nodeWithFormula:@"(b+c+a)"],
+    [self nodeWithFormula:@"(c+a+b)"],
+    [self nodeWithFormula:@"(c+b+a)"]
+    ];
+    
+    NyayaNode *n = [self nodeWithFormula:@"(a+b+c)^(a+c+b)^(b+a+c)"];
+    
+    NSMutableArray *array = [n naryXdisjunction];
+    [array xorConsolidate:YES];
+    STAssertEquals([array count], (NSUInteger)1, nil);
+    
+    for (NyayaNode *abc in abcArray)
+        STAssertTrue([array containsObject:abc],nil);
+    
+    STAssertEqualObjects([[array objectAtIndex:0] description], [[abcArray objectAtIndex:0] description], nil);
+}
+
+- (void)testBoconditionalArray {
+    
+    NSArray *abcArray = @[
+    [self nodeWithFormula:@"(a+b+c)"],
+    [self nodeWithFormula:@"(a+c+b)"],
+    [self nodeWithFormula:@"(b+a+c)"],
+    [self nodeWithFormula:@"(b+c+a)"],
+    [self nodeWithFormula:@"(c+a+b)"],
+    [self nodeWithFormula:@"(c+b+a)"]
+    ];
+    
+    NyayaNode *n = [self nodeWithFormula:@"(a+b+c)=(a+c+b)=(b+a+c)"];
+    
+    NSArray *array = [n naryBiconditional];
+    STAssertEquals([array count], (NSUInteger)1, nil);
+    
+    for (NyayaNode *abc in abcArray)
+        STAssertTrue([array containsObject:abc],nil);
+    
+    STAssertEqualObjects([[array objectAtIndex:0] description], [[abcArray objectAtIndex:0] description], nil);
+}
+
 
 @end

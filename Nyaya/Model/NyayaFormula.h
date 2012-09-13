@@ -21,6 +21,7 @@
 @property (nonatomic, readonly, getter=isWellFormed) BOOL wellFormed;
 
 + (id)formulaWithString:(NSString*)input;
+- (NyayaNode*)syntaxTree:(BOOL)optimized;
 - (TruthTable*)truthTable:(BOOL)compact;
 - (BddNode*)OBDD:(BOOL)reduced;
 

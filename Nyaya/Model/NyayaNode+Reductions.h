@@ -16,10 +16,18 @@
 - (BOOL)containsBottom;
 @end
 
+@interface NSMutableArray (Reductions)
+
+// negated xor is biconditional
+- (void)xorConsolidate:(BOOL)isXor;
+@end
+
 @interface NyayaNode (Reductions)
 
 - (NyayaNode*)reduce:(NSInteger)maxSize;
 - (NSMutableArray*)naryDisjunction;
 - (NSMutableArray*)naryConjunction;
+- (NSMutableArray*)naryXdisjunction;
+- (NSMutableArray*)naryBiconditional;
 
 @end

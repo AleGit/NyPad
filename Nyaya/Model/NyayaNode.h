@@ -14,7 +14,7 @@
 
 @property (nonatomic, readonly) NSString *symbol;   // atoms (a,b,c,...) or connectives (¬,∨,∧,→,↔)
 @property (nonatomic, readonly) NSArray *nodes;     // subformulas
-@property (nonatomic, weak) NyayaNode *parent;
+// @property (nonatomic, weak) NyayaNode *parent;   // deprecated because nodes should be unmutable
 
 // return the number of nodes (#atoms + #connectives)
 // "a&b" count == 3 (2 atoms + 1 conjunction)

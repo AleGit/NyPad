@@ -61,6 +61,14 @@
     return formula;
 }
 
+- (NyayaNode*)syntaxTree:(BOOL)optimized {
+    if (!optimized) return _slfNode;
+    
+    [self optimizeDescriptions];
+    
+    return [self shortestNode];
+}
+
 - (TruthTable*)truthTable:(BOOL)compact {
     if (_wellFormed && (!_truthTable || _truthTable.compact != compact)) {
         _truthTable = [[TruthTable alloc] initWithNode:_slfNode];
@@ -71,6 +79,7 @@
 
 - (BddNode*)OBDD:(BOOL)reduced {
     if (_wellFormed && (!_bddNode || (_bddNode.reduced != reduced))) {
+        // caculate reduced ordered binary decision diagram for compact truth table
         _bddNode = [BddNode bddWithTruthTable:[self truthTable:YES] reduce:reduced];
     }
     return _bddNode;
@@ -85,9 +94,13 @@
         if ([_slfNode isNegationNormalForm]) _nnfDescription = _slfDescription;
         if ([_slfNode isConjunctiveNormalForm]) _cnfDescription = _slfDescription;
         if ([_slfNode isDisjunctiveNormalForm]) _dnfDescription = _slfDescription;
-        
+#ifdef DEBUG
+        if (!_cnfDescription) _cnfDescription = @"DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG ";
+        if (!_dnfDescription) _dnfDescription = @"DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG ";
+#else
         if (!_cnfDescription) _cnfDescription = [self OBDD:YES].cnfDescription;
         if (!_dnfDescription) _dnfDescription = [self OBDD:YES].dnfDescription;
+#endif
        
         NSString* nf = [_cnfDescription length] < [_dnfDescription length] ? _cnfDescription : _dnfDescription;
                 

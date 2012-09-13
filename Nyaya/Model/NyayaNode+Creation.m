@@ -50,7 +50,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -60,7 +60,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -70,7 +70,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -80,7 +80,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -90,7 +90,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -100,7 +100,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -110,7 +110,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -120,7 +120,7 @@
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
     
 }
@@ -131,7 +131,7 @@
     node->_symbol = name;
     node->_nodes = [nodes mutableCopy];
     
-    [node setValue:node forKeyPath:@"nodes.parent"];
+//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 

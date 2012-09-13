@@ -33,42 +33,49 @@
     inputs = nil;
 }
 
-- (id)formulaWithString:(NSString*)input {
-    NyayaFormula *formula = [NyayaFormula formulaWithString:input];
-    return formula;
+- (id (^)(NSString*))blockFormulaWithString {
+    return ^(NSString*input) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        return formula;
+    };
 }
 
-- (id)makeDescriptions:(NSString*)input {
-    NyayaFormula *formula = [NyayaFormula formulaWithString:input];
-    [formula makeDescriptions];
-    return formula;
+- (id (^)(NSString*))blockMakeDescriptions {
+    return ^(NSString*input) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        [formula makeDescriptions];
+        return formula;
+    };
 }
 
-- (id)optimizeDescriptions:(NSString*)input {
-    NyayaFormula *formula = [NyayaFormula formulaWithString:input];
-    [formula optimizeDescriptions];
-    return formula;
+- (id (^)(NSString*))blockOptimizeDescriptions {
+    return ^(NSString*input) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        [formula optimizeDescriptions];
+        return formula;
+    };
 }
 
 - (void)testDuration {
-    [self runDurationTest:@selector(formulaWithString:) maxDuration: defaultMaxDuration];
-    [self runDurationTest:@selector(makeDescriptions:) maxDuration: 4*defaultMaxDuration];
-    [self runDurationTest:@selector(optimizeDescriptions:) maxDuration: 8*defaultMaxDuration];
+    [self gaugeBlock:[self blockFormulaWithString] duration:defaultMaxDuration label:@"A"];
+    [self gaugeBlock:[self blockMakeDescriptions] duration:4*defaultMaxDuration label:@"B"];
+    [self gaugeBlock:[self blockOptimizeDescriptions] duration:6*defaultMaxDuration label:@"C"];
 }
 
-
-- (void)runDurationTest:(SEL)sel maxDuration:(NSTimeInterval)maxDuration {
+- (void)gaugeBlock:(id (^)(NSString *input))block
+          duration:(NSTimeInterval)maxDuration
+             label:(NSString*)label
+{
     NSDate *begin = nil;
     NSDate *end = nil;
     NSTimeInterval duration;
     for (NSString *input in inputs) {
         begin = [NSDate date];
-        id result = [self performSelector:sel withObject:input];
+        id result = block(input);
         end = [NSDate date];
         duration = [end timeIntervalSinceDate:begin];
         STAssertNotNil(result, input);
-        STAssertTrue(duration < maxDuration, input); // less than a millisecond
+        STAssertTrue(duration < maxDuration, @"%3f %@", duration, label);
     }
-    
 }
 @end
