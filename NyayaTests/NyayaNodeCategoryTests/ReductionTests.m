@@ -10,6 +10,8 @@
 #import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Reductions.h"
 #import "NyayaFormula.h"
+#import "NyayaNode+Creation.h"
+#import "NyayaNode_Cluster.h"
 
 
 @implementation ReductionTests
@@ -178,6 +180,27 @@
         STAssertTrue([array containsObject:abc],nil);
     
     STAssertEqualObjects([[array objectAtIndex:0] description], [[abcArray objectAtIndex:0] description], nil);
+}
+
+- (void)testSubstitute {
+    NyayaNode *a1 = [NyayaNode atom:@"a"];
+    NyayaNode *a2 = [NyayaNode atom:@"a"];
+    
+    NyayaNodeConjunction *a1a2 = (NyayaNodeConjunction*)[NyayaNode conjunction:a1 with:a2];
+    NSMutableSet *substitutions = [NSMutableSet set];
+    STAssertEquals(a1a2.firstNode, a1, nil);
+    STAssertEquals(a1a2.secondNode, a2, nil);
+    STAssertFalse(a1a2.firstNode == a1a2.secondNode, nil);
+    
+    a1a2 = (NyayaNodeConjunction*)[a1a2 substitute:substitutions];
+    STAssertEquals(a1a2.firstNode,a1a2.secondNode, nil);
+    
+    substitutions = [NSMutableSet setWithArray:@[a1]];
+    a1a2 = (NyayaNodeConjunction*)[a1a2 substitute:substitutions];
+    STAssertEquals(a1a2.firstNode, a1a2.secondNode, nil);
+    
+    
+    
 }
 
 

@@ -17,9 +17,11 @@
 - (NyayaNode*)copyWith:(NSArray*)nodes {
     NyayaNode *node = nil;
     
-    if ([self.nodes count] == 0 && [nodes count] == 0) return self; // nothing to change
+    if ([self.nodes count] == 0 && [nodes count] == 0)
+        return self; // nothing to change
     
-    if ([self.nodes isEqualToArray:nodes]) return self; // nothing has changed
+    if ([self.nodes isEqualToArray:nodes])
+        return self; // nothing has changed
     
     node = [[[self class] alloc] init];
     

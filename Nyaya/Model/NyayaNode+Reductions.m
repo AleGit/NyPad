@@ -48,7 +48,7 @@
 - (NSMutableArray*)substitute:(NSMutableSet*)substitutes {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
     for (NyayaNode *node in self) {
-        NyayaNode *sn = [sn substitute:substitutes];
+        NyayaNode *sn = [node substitute:substitutes];
         [array addObject:sn];
     }
     return array;
@@ -200,11 +200,22 @@
     
     if (!substitute) {
         
-        substitute = [self copyWith:[self.nodes substitute:substitutes]];
+        if ([self.nodes count] == 0) {
+            substitute = [substitutes objectSubstitute:self];
+        }
+        else {
+            
+            NyayaNode *node = [self copyWith:nil];
+            // can't use [self copyWith:[self.nodes substitute:substitutes]];
+            // because nodes are equal
+            
+            node->_nodes = [self.nodes substitute:substitutes];
+            
+            substitute = [substitutes objectSubstitute:node];
+        }
         
-        
-        
-        substitute = [substitutes objectIsEqual:substitute];
+        substitute = [substitutes objectSubstitute:substitute];
+
     }
     
     return substitute;
