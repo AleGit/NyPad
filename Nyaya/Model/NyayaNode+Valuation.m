@@ -14,7 +14,6 @@
 
 @implementation NyayaNode (Valuation)
 - (BOOL)evaluationValue {
-    _evaluationValue = [[NyayaStore sharedInstance] evaluationValueForName:self.symbol];
     return _evaluationValue;
 }
 
@@ -64,7 +63,6 @@
 
 - (void)setEvaluationValue:(BOOL)evaluationValue {
     _evaluationValue = evaluationValue;
-    [[NyayaStore sharedInstance] setEvaluationValue:evaluationValue forName:self.symbol];
 }
 
 @end
