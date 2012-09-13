@@ -51,7 +51,7 @@
 - (NyayaNode*)substitute:(NyayaNode*)node {
     if (!node) return nil;
     
-    return [_subNodesSet addObjectAndGetOriginal: node];
+    return [_subNodesSet objectSubstitute: node];
     
     
     

@@ -19,7 +19,7 @@
     NyayaNode *_slfNode;
     TruthTable *_truthTable;
     BddNode *_bddNode;
-    NSMutableSet *_subNodes;
+    NSSet *_subNodesSet;
     
     NSString *_slfDescription;
     NSString *_rdcDescription;
@@ -57,6 +57,7 @@
         NyayaNode *node = [parser parseFormula];
         formula = [NyayaFormula formulaWithNode:node];
         formula->_wellFormed = !parser.hasErrors;
+        formula->_subNodesSet = parser.subNodesSet;
     }
     
     return formula;
@@ -126,8 +127,8 @@
     dispatch_once(&_secondRun, ^{
         [self makeDescriptions];
         
-        NyayaNode *rNode = [_slfNode reduce:NSIntegerMax originals:[_subNodes mutableCopy]];
-        NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax originals:[_subNodes mutableCopy]];
+        NyayaNode *rNode = [_slfNode reduce:NSIntegerMax];
+        NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax];
         NSString *description = nil;
         
         for (NyayaNode *rdcNode in @[rNode, sNode]) {

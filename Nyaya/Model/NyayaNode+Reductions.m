@@ -17,14 +17,14 @@
 
 @implementation NSArray (Reductions)
 - (BOOL)containsComplementaryNodes {
-    NSMutableArray *negatedArray = [self negatedNodes:NO originals:nil]; // the nodes in self are unique
+    NSMutableArray *negatedArray = [self negatedNodes:NO]; // the nodes in self are unique
     NSUInteger count = [negatedArray count];
     [negatedArray removeObjectsInArray:self];
     
     return [negatedArray count] < count;
 }
 
-- (NSMutableArray*)negatedNodes:(BOOL)unique originals:(NSMutableSet*)set  {
+- (NSMutableArray*)negatedNodes:(BOOL)unique  {
     NSMutableArray *negatedArray = [NSMutableArray arrayWithCapacity:[self count]];
     for (NyayaNode *sub in self) {
         NyayaNode *rdc = sub.type == NyayaNegation ? [sub nodeAtIndex:0] : [NyayaNode negation:sub];
@@ -35,14 +35,23 @@
     return negatedArray;
 }
 
-- (NSMutableArray*)reducedNodes:(BOOL)unique originals:(NSMutableSet*)set {
+- (NSMutableArray*)reducedNodes:(BOOL)unique {
     NSMutableArray *reducedArray = [NSMutableArray arrayWithCapacity:[self count]];
     for (NyayaNode *sub in self) {
-        NyayaNode *rdc = [sub reduce:NSIntegerMax originals:set];
+        NyayaNode *rdc = [sub reduce:NSIntegerMax];
         if (!unique || ![reducedArray containsObject:rdc])
             [reducedArray addObject: rdc];
     }
     return reducedArray;
+}
+
+- (NSMutableArray*)substitute:(NSMutableSet*)substitutes {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
+    for (NyayaNode *node in self) {
+        NyayaNode *sn = [sn substitute:substitutes];
+        [array addObject:sn];
+    }
+    return array;
 }
 
 - (BOOL)containsTop {
@@ -58,15 +67,15 @@
 
 @implementation NSMutableArray (Reductions)
 
-- (void)xorConsolidateOriginals:(NSMutableSet *)set {
-    [self consolidate:YES originals:set];
+- (void)xorConsolidate {
+    [self consolidate:YES];
 }
 
-- (void)bicConsolidateOriginals:(NSMutableSet *)set {
-    [self consolidate:NO originals:set];
+- (void)bicConsolidate {
+    [self consolidate:NO];
 }
 
-- (void)consolidate:(BOOL)isXor originals:(NSMutableSet*)set {
+- (void)consolidate:(BOOL)isXor {
     NSCountedSet *countedSet = [NSCountedSet setWithArray:self];
     for (NyayaNode *node in countedSet) {
         NSUInteger count = [countedSet countForObject:node];
@@ -83,7 +92,7 @@
     }
     
     countedSet = [NSCountedSet setWithArray:self];
-    NSMutableArray *negatedNodes = [self negatedNodes:NO originals:nil];
+    NSMutableArray *negatedNodes = [self negatedNodes:NO];
     
     NSUInteger substitutions = 0;
     for (NyayaNode *node in countedSet) {
@@ -123,7 +132,19 @@
 
 @implementation NSMutableSet (Reductions)
 
-- (id)addObjectAndGetOriginal:(id)newEntry {
+- (id)objectSubstitute:(id)newEntry {
+    NyayaNode *entry = [self objectIsEqual:newEntry];
+    
+    if (entry) {
+        return entry; 
+    }
+    else {
+        [self addObject:newEntry];
+        return newEntry;
+    }
+}
+
+- (id)objectIsEqual:(id)newEntry {
     
     NSSet *set = [self objectsPassingTest:^BOOL(id obj, BOOL *stop) {
         if ([obj isEqual:newEntry]) {
@@ -133,15 +154,8 @@
         return NO;
     }];
     
-    if ([set count] == 0) {
-        [self addObject:newEntry];
-        return newEntry;
-    }
-    else {
-        // [set count] == 0 by definition of set and test
-        return [set anyObject];
-    }
-    
+    if ([set count] > 0) return [set anyObject];    // found it
+    else return nil;                                // did not find it
 }
 
 
@@ -167,17 +181,33 @@
 }
 
 
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set { // stop reduction
+- (NyayaNode*)reduce:(NSInteger)maxSize { // stop reduction
     if (maxSize < 0 || [self.nodes count] == 0) // nothing to reduce
         return self;
 
     NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
     for (NyayaNode *node in self.nodes) {
-        NyayaNode *rn = [node reduce:maxSize-1 originals:set];
+        NyayaNode *rn = [node reduce:maxSize-1];
         [nodes addObject: rn];
         maxSize -= [rn length];
     }
     return [self copyWith:nodes];
+    
+}
+
+- (NyayaNode*)substitute:(NSMutableSet *)substitutes {
+    NyayaNode *substitute = [substitutes objectIsEqual:self];
+    
+    if (!substitute) {
+        
+        substitute = [self copyWith:[self.nodes substitute:substitutes]];
+        
+        
+        
+        substitute = [substitutes objectIsEqual:substitute];
+    }
+    
+    return substitute;
     
 }
 @end
@@ -196,10 +226,10 @@
 
 @implementation NyayaNodeNegation (Reductions)
 // remove double negation
-- (NyayaNode*)reduce:(NSInteger)maxSize  originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
 
-    NyayaNode *reducedFirstNode = [self.firstNode reduce:maxSize-1 originals:set];
+    NyayaNode *reducedFirstNode = [self.firstNode reduce:maxSize-1];
     
     if ([reducedFirstNode isEqual:[NyayaNode bottom]]) return [NyayaNode top];
     
@@ -237,11 +267,11 @@
     return array;
 }
 
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
     
     // first collect disjuncted subnodes, then reduce the nodes in the set
-    NSMutableArray *array = [[self naryDisjunction] reducedNodes:YES originals:set];
+    NSMutableArray *array = [[self naryDisjunction] reducedNodes:YES];
     [array removeObject:[NyayaNode bottom]];
     
     if ([array count] == 0) return [NyayaNode bottom];
@@ -279,11 +309,11 @@
     return array;
 }
 
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
     
     // first collect conjuncted subnodes, then reduce the nodes in the set
-    NSMutableArray *array = [[self naryConjunction] reducedNodes:YES originals:set];
+    NSMutableArray *array = [[self naryConjunction] reducedNodes:YES];
     [array removeObject:[NyayaNode top]];
     
     if ([array count] == 0) return [NyayaNode top]; // P & T == P
@@ -320,11 +350,11 @@
     return array;
 }
 
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
     
-    NSMutableArray *array = [[self naryXdisjunction] reducedNodes:NO originals:set];
-    [array xorConsolidateOriginals:set];
+    NSMutableArray *array = [[self naryXdisjunction] reducedNodes:NO];
+    [array xorConsolidate];
     
     if ([array count] == 0) return [NyayaNode bottom];
     
@@ -346,14 +376,14 @@
 
 @implementation NyayaNodeImplication (Reductions)
 
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
     
-    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1 originals:set];
+    NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1 ];
     if (!reducedFirstNode) reducedFirstNode = [self firstNode]; // use unreduced first node
     if ([reducedFirstNode isEqual:[NyayaNode bottom]]) return [NyayaNode top];
     
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1-[reducedFirstNode length] originals:set];
+    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1-[reducedFirstNode length]];
     if (!reducedSecondNode) reducedSecondNode = [self secondNode]; // use unreduced second node
     
     if ([reducedFirstNode isEqual:[NyayaNode top]] || [reducedSecondNode isEqual:[NyayaNode top]]) return reducedSecondNode;
@@ -395,11 +425,11 @@
     [array removeObject:[NyayaNode top]];
     return array;
 }
-- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set {
+- (NyayaNode*)reduce:(NSInteger)maxSize {
     if (maxSize < 0) return self; // stop reduction
     
-    NSMutableArray *array = [[self naryBiconditional] reducedNodes:NO originals:set];
-    [array bicConsolidateOriginals:set];
+    NSMutableArray *array = [[self naryBiconditional] reducedNodes:NO];
+    [array bicConsolidate];
     if ([array count] == 0) return [NyayaNode top];
     
     BOOL negation = NO;

@@ -19,12 +19,12 @@
 @property (nonatomic, readonly) NSString *cnfDescription;
 @property (nonatomic, readonly) NSString *dnfDescription;
 @property (nonatomic, readonly, getter=isWellFormed) BOOL wellFormed;
+@property (nonatomic, readonly) NSSet* subNodesSet;
 
 + (id)formulaWithString:(NSString*)input;
 - (NyayaNode*)syntaxTree:(BOOL)optimized;
 - (TruthTable*)truthTable:(BOOL)compact;
 - (BddNode*)OBDD:(BOOL)reduced;
-- (NSSet*)subNodes;
 
 - (void)makeDescriptions;
 - (void)optimizeDescriptions;

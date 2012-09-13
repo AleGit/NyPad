@@ -18,7 +18,7 @@
     NyayaNode *A = [NyayaNode atom:@"a"];
     NyayaNode *Ac = [A copy];
     
-    STAssertFalse(A == Ac, nil);
+    STAssertTrue(A == Ac, nil);
     STAssertTrue([A isEqual: Ac], nil);
 }
 
