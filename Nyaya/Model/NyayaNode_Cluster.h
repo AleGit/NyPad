@@ -33,7 +33,7 @@ typedef NSUInteger NyayaNodeType;
     NSString *_symbol;
     NyayaBool _displayValue;
     BOOL _evaluationValue;
-    NSMutableArray *_nodes;
+    NSArray *_nodes;
     
 }
 - (BOOL)isNegationToNode:(NyayaNode*)other;
@@ -43,7 +43,7 @@ typedef NSUInteger NyayaNodeType;
 #pragma mark - node sub class interfaces
 
 // arity    abstract classes         concrete classes
-//
+///Users/alexander/Dropbox/Studium/project/Nyaya/Nyaya/Model/NyayaNode_Cluster.h
 // 0        NyayaNode            -   NyayaNode(Variable|Constant)
 //              |
 // 1        NyayaNodeUnary       -   NyayaNodeNegation

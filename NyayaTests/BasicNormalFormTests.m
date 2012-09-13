@@ -570,19 +570,6 @@ enum { AST, IMF, NNF, CNF, DNF };
         STAssertFalse([dnf isDnfTransformationNode], input);
         
     }
-    
-    // check node realtions
-    
-//    STAssertEquals([dnf valueForKeyPath:@"firstNode.parent"], dnf, nil);
-//    STAssertEquals([dnf valueForKeyPath:@"secondNode.parent"], dnf, nil);
-//    
-//    STAssertEquals([dnf valueForKeyPath:@"firstNode.firstNode.parent.parent"], dnf, nil);
-//    STAssertEquals([dnf valueForKeyPath:@"firstNode.secondNode.parent.parent"], dnf, nil);
-//    STAssertEquals([dnf valueForKeyPath:@"secondNode.firstNode.parent.parent"], dnf, nil);
-//    STAssertEquals([dnf valueForKeyPath:@"secondNode.secondNode.parent.parent"], dnf, nil);
-//    
-//    STAssertEquals([dnf valueForKeyPath:@"firstNode.firstNode.firstNode.parent.parent.parent"], dnf, nil);
-//    STAssertEquals([dnf valueForKeyPath:@"firstNode.firstNode.firstNode.firstNode.parent.parent.parent.parent"], dnf, nil);
 }
 
 - (void)testNotBic {
@@ -659,26 +646,18 @@ enum { AST, IMF, NNF, CNF, DNF };
     // check node relations
     
     STAssertFalse(nnf == dnf, nil);
-//    NyayaNode *nfrst = [nnf valueForKeyPath:@"firstNode"];
-//    NyayaNode *nscnd = [nnf valueForKeyPath:@"secondNode"];
     
     NyayaNode *nal = [nnf valueForKeyPath:@"firstNode.firstNode"];
     NyayaNode *nar = [nnf valueForKeyPath:@"secondNode.secondNode.firstNode"];
     NyayaNode *dal = [dnf valueForKeyPath:@"firstNode.firstNode"];
     NyayaNode *dar = [dnf valueForKeyPath:@"secondNode.secondNode.firstNode"];
     
-//    STAssertEquals(nal.parent, nfrst, nil);
-//    STAssertEquals(nal.parent.parent, nnf, nil);
-//    
-//    STAssertEquals(nar.parent.parent, nscnd, nil);
-//    STAssertEquals(nar.parent.parent.parent, nnf, nil);
-    
-    STAssertFalse(nal == nar, nil);
-    STAssertFalse(nal == dal, nil);
-    STAssertFalse(nal == dar, nil);
-    STAssertFalse(nar == dal, nil);
-    STAssertFalse(nar == dar, nil);
-    STAssertFalse(dal == dar, nil);
+    STAssertTrue(nal == nar, nil);
+    STAssertTrue(nal == dal, nil);
+    STAssertTrue(nal == dar, nil);
+    STAssertTrue(nar == dal, nil);
+    STAssertTrue(nar == dar, nil);
+    STAssertTrue(dal == dar, nil);
     
     STAssertTrue([nal isEqual: nar], nil);
     STAssertTrue([nal isEqual: dal], nil);

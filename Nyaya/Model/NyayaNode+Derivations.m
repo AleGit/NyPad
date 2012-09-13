@@ -17,29 +17,30 @@
 - (NyayaNode*)copyWith:(NSArray*)nodes {
     NyayaNode *node = nil;
     
+    if ([self.nodes isEqualToArray:nodes]) return self; // nothing has changed
+    
     node = [[[self class] alloc] init];
     
     node->_symbol = self.symbol;
     node->_displayValue = self.displayValue;
     node->_evaluationValue = self.evaluationValue;
-    node->_nodes = [nodes mutableCopy];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
+    node->_nodes = nodes;
     
     return node;
 }
 
 - (NyayaNode*)std {
-    return [self copy];
+    return self;
 }
 
 - (NyayaNode*)copyImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
-    // NSArray *nodes = [self valueForKeyPath:@"nodes.deriveImf"];
+    if (maxSize < 0) return nil; // cancel the derivation
+    
     NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
     for (NyayaNode *node in self.nodes) {
         NyayaNode *imf = [node deriveImf:maxSize-1];
-        if (!imf) return nil;
+        maxSize -= [imf length];
+        if (!imf || maxSize < 0) return nil; // cancel the derivation
         [nodes addObject:imf];
     }
     
@@ -53,7 +54,8 @@
     
     for (NyayaNode *node in self.nodes) {
         NyayaNode *nnf = [node deriveNnf:maxSize-1];
-        if (!nnf) return nil;
+        maxSize -= [nnf length];
+        if (!nnf || maxSize < 0) return nil;
         [nodes addObject:nnf];
     }
     
@@ -64,28 +66,28 @@
     if (maxSize < 0)
         return nil;
     // no precondition
-    return [self copy];
+    return self;
 }
 
 - (NyayaNode*)deriveNnf:(NSInteger)maxSize {
     if (maxSize < 0)
         return nil;
     // precondition 'self' is implication free
-    return [self copy];
+    return self;
 }
 
 - (NyayaNode*)deriveCnf:(NSInteger)maxSize {
     if (maxSize < 0)
         return nil;
     // precondition 'self' is implication free and in negation normal form
-    return [self copy];
+    return self;
 }
 
 - (NyayaNode *)deriveDnf:(NSInteger)maxSize {
     if (maxSize < 0)
         return nil;
     // precondition 'self' is implication free and in negation normal form
-    return [self copy];
+    return self;
 }
 
 /* ********************* */
@@ -98,19 +100,8 @@
     for (NSSet* nodeset in sets) {
         [set unionSet:nodeset];
     }
-    
     return set;
 }
-
-//- (NyayaNode*)compressWith:(NSSet*)subNodeSet {
-//    NyayaNode *node = nil;
-//}
-//
-//- (NyayaNode*)compress {
-//    NyayaNode *std = [self std]; // remove sequence and entailment
-//    return [std compressWith:[std subNodeSet]];
-//}
-
 
 @end
 
@@ -151,19 +142,25 @@
     switch (node.type) {
         case NyayaNegation: // nnf(!!P) = nnf(P)
             return [first deriveNnf:maxSize-1];
+            
         case NyayaDisjunction: { // nnf(!(P|Q)) = nnf(!P) & nnf(!Q)
             NyayaNode *ld = [[NyayaNode negation:first] deriveNnf:maxSize-1];
-            NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1];
-            if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
-            else return [NyayaNode conjunction: ld with: rd ];
+            if (!ld) return nil;
+            NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1-[ld length]];
+            if (!rd) return nil;
+            if (!ld || !rd || maxSize < 0) return nil;
+            
+            return [NyayaNode conjunction: ld with: rd];
         }
             
         case NyayaConjunction:  // nnf(!(P&Q)) = nnf(!P) | nnf(!Q)
         case NyayaSequence: {
             NyayaNode *ld = [[NyayaNode negation:first] deriveNnf:maxSize-1];
-            NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1];
-            if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
-            else return [NyayaNode disjunction: ld with: rd ];
+            if (!ld) return nil;
+            NyayaNode *rd = [[NyayaNode negation:second] deriveNnf:maxSize-1-[ld length]];
+            if (!rd) return nil;
+            
+            return [NyayaNode disjunction: ld with: rd ];
         }
             
         default: // nnf(!f(a,b,c)) = !f(nnf(a),nnf(b),nnf(c))
@@ -211,17 +208,20 @@
     // dnf ((a & b) | c)) = (a | c) & (b | c)
     // dnf ((a & b) | (c & d)) = (a | c) & (a | d) &| (b | c) & (b | d)
     NyayaNode *ld = [[self.nodes objectAtIndex:0] deriveCnf:maxSize-1];
-    NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveCnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
+    if (!ld) return nil;
+    NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveCnf:maxSize-1-[ld length]];
+    if (!rd) return nil;
     
     return [self cnfDistribution:ld with: rd];
 }
 
 - (NyayaNode *)deriveDnf:(NSInteger)maxSize {
     if (maxSize < 0) return nil;
+    
     NyayaNode *ld = [[self.nodes objectAtIndex:0] deriveDnf:maxSize-1];
-    NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveDnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
+    if (!ld) return nil;
+    NyayaNode *rd = [[self.nodes objectAtIndex:1] deriveDnf:maxSize-1-[ld length]];
+    if (!rd) return nil;
     
     return [NyayaNode disjunction:ld with:rd];
 }
@@ -245,8 +245,9 @@
     // cnf (A & B) = cnf (A) & cnf (B)
     
     NyayaNode *ld = [[self firstNode] deriveCnf:maxSize-1];
-    NyayaNode *rd = [[self secondNode] deriveCnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
+    if (!ld) return nil;
+    NyayaNode *rd = [[self secondNode] deriveCnf:maxSize-1-[ld length]];
+    if (!rd ) return nil;
     
     return [NyayaNode conjunction:ld with:rd];
 }
@@ -275,12 +276,15 @@
 
 - (NyayaNode*)deriveDnf:(NSInteger)maxSize {
     if (maxSize < 0) return nil;
+    
     // dnf (a & (b | c)) = (a & b) | (a & c)
     // dnf ((a | b) & c)) = (a & c) | (b & c)
     // dnf ((a | b) & (c | d)) = (a & c) | (a & d) | (b & c) | (b & d)
     NyayaNode *ld = [[self firstNode] deriveDnf:maxSize-1];
-    NyayaNode *rd = [[self secondNode] deriveDnf:maxSize-1];
-    if (!ld || !rd || maxSize < ([ld length] + [rd length])) return nil;
+    if (!ld) return nil;
+    NyayaNode *rd = [[self secondNode] deriveDnf:maxSize-1-[ld length]];
+    if (!rd) return nil;
+    
     return [self dnfDistribution:ld with:rd];
 }
 
@@ -292,10 +296,12 @@
 @implementation NyayaNodeXdisjunction (Derivations)
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
     if (maxSize < 0) return nil;
+    
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
-    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second|| maxSize < ([first length] + [second length])) return nil;
+    if (!first) return nil;
+    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1-[first length]];
+    if (!second) return nil;
     
     return [NyayaNode conjunction:[NyayaNode disjunction:first
                                                     with:second]
@@ -316,10 +322,13 @@
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
     if (maxSize < 0) return nil;
+    
     // imf(P → Q) = ¬imf(P) ∨ imf(Q)
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
-    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second || maxSize < ([first length] + [second length])) return nil;
+    if (!first) return nil;
+    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1-[first length]];
+    if (!second) return nil;
+    
     return [NyayaNode disjunction: [NyayaNode negation:first] with: second];
 }
 
@@ -338,10 +347,12 @@
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
     if (maxSize < 0) return nil;
+    
     // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
-    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1];
-    if (!first || !second || maxSize < ([first length] + [second length])) return nil;
+    if (!first) return nil;
+    NyayaNode *second = [[self secondNode] deriveImf:maxSize-1-[first length]];
+    if (!second) return nil;
     
     return [NyayaNode conjunction:[NyayaNode disjunction:[NyayaNode negation:first] with:second]
                              with:[NyayaNode disjunction:[NyayaNode negation:second] with:first]];

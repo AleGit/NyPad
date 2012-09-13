@@ -26,6 +26,7 @@
 @end
 
 @implementation NyayaNodeConstant (Display)
+- (NyayaBool)displayValue { return _displayValue; }
 @end
 
 @implementation NyayaNodeUnary (Display)

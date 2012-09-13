@@ -41,7 +41,7 @@
 
 - (void)testreduceToA {
     NyayaNode *expected = [self nodeWithFormula:@"a"];
-    for (NSString *input in @[@"a", @"a|a", @"a&a", @"a|a|a", @"a&a|a", @"a^a^a", @"a^a^a^a^a", @"(a>a)>a", @"a|a&a", @"p∨¬q∨(¬p∨q)↔a"
+    for (NSString *input in @[@"a", @"a|a", @"a&a", @"a|a|a", @"a&a|a", @"a^a^a", @"a^a^a^a^a", @"(a>a)>a", @"a|a&a", @"p∨¬q∨(¬p∨q)↔a", @"a+(c.!c)", @"a.(c+!c)"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
         STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
@@ -144,7 +144,7 @@
     NyayaNode *n = [self nodeWithFormula:@"(a+b+c)^(a+c+b)^(b+a+c)"];
     
     NSMutableArray *array = [n naryXdisjunction];
-    [array xorConsolidate:YES];
+    [array xorConsolidate];
     STAssertEquals([array count], (NSUInteger)1, nil);
     
     for (NyayaNode *abc in abcArray)

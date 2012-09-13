@@ -105,7 +105,7 @@
     
 }
 
-- (void)testBigXor {
+- (void)xtestBigXor {
     NyayaFormula *node = [NyayaFormula formulaWithString:@"a^b^c^d^e^f^g^h^i^j^k^l"]; //^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
     BddNode *bdd = [node OBDD:YES];
     STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);

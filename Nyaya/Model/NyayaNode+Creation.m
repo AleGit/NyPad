@@ -16,12 +16,25 @@
 @implementation NyayaNode (Creation)
 
 #pragma mark node factory
+
+// top is a singleton
 + (NyayaNode *)top {
-    return [self atom:@"1"];
+    static dispatch_once_t pred = 0;
+    __strong static NyayaNode* _top = nil;
+    dispatch_once(&pred, ^{
+        _top = [self atom:@"1"];
+    });
+    return _top;
 }
 
+// bottom is a singleton
 + (NyayaNode *)bottom {
-    return [self atom:@"0"];
+    static dispatch_once_t pred = 0;
+    __strong static NyayaNode* _bottom = nil;
+    dispatch_once(&pred, ^{
+        _bottom = [self atom:@"0"];
+    });
+    return _bottom;
 }
 
 + (NyayaNode*)atom:(NSString*)name {
@@ -29,10 +42,14 @@
     if ([name isTrueToken]) {
         node = [[NyayaNodeConstant alloc] init];
         node->_symbol = @"T";
+        node->_evaluationValue = YES;
+        node->_displayValue = NyayaTrue;
     }
     else if ([name isFalseToken]) {
         node = [[NyayaNodeConstant alloc] init];
         node->_symbol = @"F";
+        node->_evaluationValue = NO;
+        node->_displayValue = NyayaFalse;
     }
     else { // variable name
         node = [[NyayaNodeVariable alloc] init];
@@ -49,8 +66,6 @@
     node->_symbol = @"¬";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -59,8 +74,6 @@
     node->_symbol = @"∧";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -69,8 +82,6 @@
     node->_symbol = @";";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -79,8 +90,6 @@
     node->_symbol = @"∨";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -89,8 +98,6 @@
     node->_symbol = @"→";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -99,8 +106,6 @@
     node->_symbol = @"⊨";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -109,8 +114,6 @@
     node->_symbol = @"↔";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 
@@ -119,8 +122,6 @@
     node->_symbol = @"⊻"; // @"⊕";
     node->_displayValue = NyayaUndefined;
     node->_nodes = [NSMutableArray arrayWithObjects:firstNode,secondNode, nil];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
     
 }
@@ -130,8 +131,6 @@
     // node->isa = [NyayaNodeFunction class];
     node->_symbol = name;
     node->_nodes = [nodes mutableCopy];
-    
-//    [node setValue:node forKeyPath:@"nodes.parent"];
     return node;
 }
 

@@ -31,14 +31,6 @@
     NyayaNode *nnAc = [nnA copy];
     NyayaNode *nAc = [nnAc.nodes objectAtIndex:0];
     NyayaNode *Ac = [nAc.nodes objectAtIndex:0];
-    
-//    STAssertNil(nnA.parent, nil);
-//    STAssertEquals(nA.parent, nnA,nil);
-//    STAssertEquals(A.parent, nA,nil);
-//    
-//    STAssertNil(nnAc.parent, nil);
-//    STAssertEquals(nAc.parent, nnAc,nil);
-//    STAssertEquals(Ac.parent, nAc,nil);
 
     STAssertEquals(A.displayValue, Ac.displayValue,nil);
     STAssertEquals(A.evaluationValue, Ac.evaluationValue,nil);
@@ -56,13 +48,17 @@
     A.displayValue = NyayaUndefined;
     STAssertEquals(Ac.displayValue, (NyayaBool)NyayaUndefined,nil);
     
+    STAssertEqualObjects(nnA, nnAc,nil);
+    STAssertEqualObjects(nA, nAc,nil);
+    STAssertEqualObjects(A, Ac,nil);
+    
     STAssertEqualObjects([nnA description], [nnAc description],nil);
     STAssertEqualObjects([nA description], [nAc description],nil);
     STAssertEqualObjects([A description], [Ac description],nil);
     
-    STAssertFalse(A == Ac, nil);
-    STAssertFalse(nA == nAc, nil);
-    STAssertFalse(nnA == nnAc, nil);
+    STAssertTrue(A == Ac, nil);
+    STAssertTrue(nA == nAc, nil);
+    STAssertTrue(nnA == nnAc, nil);
 }
 
 @end

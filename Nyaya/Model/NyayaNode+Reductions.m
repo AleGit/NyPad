@@ -11,7 +11,6 @@
 #import "NyayaNode_Cluster.h"
 #import "NyayaNode+Type.h"
 #import "NyayaNode+Creation.h"
-#import "NSString+NyayaToken.h"
 #import "NyayaNode+Description.h"
 
 
@@ -55,8 +54,19 @@
 }
 @end
 
+
+
 @implementation NSMutableArray (Reductions)
-- (void)xorConsolidate:(BOOL)isXor {
+
+- (void)xorConsolidate {
+    [self consolidate:YES];
+}
+
+- (void)bicConsolidate {
+    [self consolidate:NO];
+}
+
+- (void)consolidate:(BOOL)isXor {
     NSCountedSet *countedSet = [NSCountedSet setWithArray:self];
     for (NyayaNode *node in countedSet) {
         NSUInteger count = [countedSet countForObject:node];
@@ -131,21 +141,18 @@
 }
 
 
-- (NyayaNode*)reduce:(NSInteger)maxSize {
-    if (maxSize < 0)
-        return [self copy];
-    
-    if ([self.nodes count] > 0) {
-        NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
-        for (NyayaNode *node in self.nodes) {
-            NyayaNode *rn = [node reduce:maxSize-1];
-            [nodes addObject: rn];
-            maxSize -= [rn length];
-        }
-        return [self copyWith:nodes];
+- (NyayaNode*)reduce:(NSInteger)maxSize { // stop reduction
+    if (maxSize < 0 || [self.nodes count] == 0) // nothing to reduce
+        return self;
+
+    NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
+    for (NyayaNode *node in self.nodes) {
+        NyayaNode *rn = [node reduce:maxSize-1];
+        [nodes addObject: rn];
+        maxSize -= [rn length];
     }
+    return [self copyWith:nodes];
     
-    return [self copy];
 }
 @end
 
@@ -164,11 +171,13 @@
 @implementation NyayaNodeNegation (Reductions)
 // remove double negation
 - (NyayaNode*)reduce:(NSInteger)maxSize {
+    if (maxSize < 0) return self; // stop reduction
+
     NyayaNode *reducedFirstNode = [self.firstNode reduce:maxSize-1];
     
-    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
+    if ([reducedFirstNode isEqual:[NyayaNode bottom]]) return [NyayaNode top];
     
-    if ([reducedFirstNode.symbol isTrueToken]) return [NyayaNode bottom];
+    if ([reducedFirstNode isEqual:[NyayaNode top]]) return [NyayaNode bottom];
     
     if (reducedFirstNode.type == NyayaNegation)
          return [(NyayaNodeNegation*)reducedFirstNode firstNode]; // firstNode is allready reduced
@@ -203,8 +212,11 @@
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize {
+    if (maxSize < 0) return self; // stop reduction
+    
     // first collect disjuncted subnodes, then reduce the nodes in the set
     NSMutableArray *array = [[self naryDisjunction] reducedNodes:YES];
+    [array removeObject:[NyayaNode bottom]];
     
     if ([array count] == 0) return [NyayaNode bottom];
     
@@ -242,10 +254,13 @@
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
+    if (maxSize < 0) return self; // stop reduction
+    
     // first collect conjuncted subnodes, then reduce the nodes in the set
     NSMutableArray *array = [[self naryConjunction] reducedNodes:YES];
+    [array removeObject:[NyayaNode top]];
     
-    if ([array count] == 0) return [NyayaNode top];
+    if ([array count] == 0) return [NyayaNode top]; // P & T == P
     
     if ([array containsBottom] || [array containsComplementaryNodes]) return [NyayaNode bottom];
     
@@ -280,9 +295,10 @@
 }
 
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
+    if (maxSize < 0) return self; // stop reduction
+    
     NSMutableArray *array = [[self naryXdisjunction] reducedNodes:NO];
-    [array xorConsolidate:YES];
-    // now there is the possibility of mutiple
+    [array xorConsolidate];
     
     if ([array count] == 0) return [NyayaNode bottom];
     
@@ -305,15 +321,17 @@
 @implementation NyayaNodeImplication (Reductions)
 
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
+    if (maxSize < 0) return self; // stop reduction
+    
     NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
-    if ([reducedFirstNode.symbol isFalseToken]) return [NyayaNode top];
+    if ([reducedFirstNode isEqual:[NyayaNode bottom]]) return [NyayaNode top];
     
     NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
-    if ([reducedFirstNode.symbol isTrueToken] || [reducedSecondNode.symbol isTrueToken]) return reducedSecondNode;
+    if ([reducedFirstNode isEqual:[NyayaNode top]] || [reducedSecondNode isEqual:[NyayaNode top]]) return reducedSecondNode;
     
-    if ([reducedSecondNode.symbol isFalseToken] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
+    if ([reducedSecondNode isEqual:[NyayaNode bottom]] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
     
-    if ([reducedSecondNode.symbol isFalseToken]) return [NyayaNode negation:reducedFirstNode];
+    if ([reducedSecondNode isEqual:[NyayaNode bottom]]) return [NyayaNode negation:reducedFirstNode];
     
     if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
     
@@ -347,9 +365,10 @@
     return array;
 }
 - (NyayaNode*)reduce:(NSInteger)maxSize; {
-//    return [[self imf] reduce];
+    if (maxSize < 0) return self; // stop reduction
+    
     NSMutableArray *array = [[self naryBiconditional] reducedNodes:NO];
-    [array xorConsolidate:NO];
+    [array bicConsolidate];
     if ([array count] == 0) return [NyayaNode top];
     
     BOOL negation = NO;

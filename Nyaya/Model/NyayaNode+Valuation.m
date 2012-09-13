@@ -70,6 +70,9 @@
 @end
 
 @implementation NyayaNodeConstant (Valuation)
+- (BOOL)evaluationValue {
+    return _evaluationValue;
+}
 @end
 
 @implementation NyayaNodeUnary (Valuation)

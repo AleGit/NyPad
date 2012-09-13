@@ -18,8 +18,9 @@
 
 @interface NSMutableArray (Reductions)
 
-// negated xor is biconditional
-- (void)xorConsolidate:(BOOL)isXor;
+- (void)xorConsolidate;
+- (void)bicConsolidate;
+
 @end
 
 @interface NyayaNode (Reductions)
