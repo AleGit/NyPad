@@ -324,9 +324,12 @@
     if (maxSize < 0) return self; // stop reduction
     
     NyayaNode *reducedFirstNode = [[self firstNode] reduce:maxSize-1];
+    if (!reducedFirstNode) reducedFirstNode = [self firstNode]; // use unreduced first node
     if ([reducedFirstNode isEqual:[NyayaNode bottom]]) return [NyayaNode top];
     
-    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1];
+    NyayaNode *reducedSecondNode = [[self secondNode] reduce:maxSize-1-[reducedFirstNode length]];
+    if (!reducedSecondNode) reducedSecondNode = [self secondNode]; // use unreduced second node
+    
     if ([reducedFirstNode isEqual:[NyayaNode top]] || [reducedSecondNode isEqual:[NyayaNode top]]) return reducedSecondNode;
     
     if ([reducedSecondNode isEqual:[NyayaNode bottom]] && reducedFirstNode.type == NyayaNegation) return [(NyayaNodeNegation*)reducedFirstNode firstNode];
@@ -334,6 +337,8 @@
     if ([reducedSecondNode isEqual:[NyayaNode bottom]]) return [NyayaNode negation:reducedFirstNode];
     
     if ([reducedFirstNode isEqual:reducedSecondNode]) return [NyayaNode top];
+    
+    if ([reducedFirstNode isEqual:[self firstNode]] && [reducedSecondNode isEqual:[self secondNode]]) return self; // nothing has changed
     
     return [NyayaNode implication:reducedFirstNode with:reducedSecondNode];
 }
