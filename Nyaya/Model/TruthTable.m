@@ -13,20 +13,29 @@
 #import "NyayaNode_Cluster.h"
 
 @interface TruthTable () {
+@protected
     NSUInteger _colsCount;
     NSUInteger _cellCount;
+    NSUInteger _rowsCount;
     NSArray *_sortedNames;
     NSUInteger _titleColumnIdx;
     
     BOOL *_evals;
     NSMutableIndexSet *_trueIndices;
     NSMutableIndexSet *_falseIndices;
+    
+    
+    NSArray *_variables;
+    NSArray *_headers;
+    NyayaNode *_formula;
 }
 @end
 
 @implementation TruthTable
 
 #pragma mark - input
+
+- (BOOL)compact { return YES; }
 
 - (void)sortVariablesAndHeaders {
     
@@ -41,7 +50,7 @@
                 else return 0;
             }
             else if (idx1 != NSNotFound) return -1;
-            else if (idx2 != NSNotFound) return 1;            
+            else if (idx2 != NSNotFound) return 1;
         }
         
         return [obj1.symbol compare:obj2.symbol options:NSNumericSearch]; // x1 < x2 < x10
@@ -52,7 +61,7 @@
     _headers = [_headers sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString* obj2) {
         
         NSUInteger idx1 = [_sortedNames indexOfObject:obj1];
-        NSUInteger idx2 = [_sortedNames indexOfObject:obj2]; 
+        NSUInteger idx2 = [_sortedNames indexOfObject:obj2];
         
         if (idx1 != NSNotFound && idx2 != NSNotFound) {
             if (idx1 < idx2) return -1;
@@ -60,7 +69,7 @@
             else return 0;
         }
         else if (idx1 != NSNotFound) return -1;
-        else if (idx2 != NSNotFound) return 1;  
+        else if (idx2 != NSNotFound) return 1;
         
         
         else if ([obj1 length] < [obj2 length]) return -1;
@@ -73,42 +82,37 @@
     return [self initWithNode:node compact:YES];
 }
 
+- (NSArray*)makeHeaders {
+    return @[_title];
+}
+
+- (void)reserveMemory {
+    long size = _cellCount * sizeof(BOOL);
+    
+    if (size > 1*1000*1000)
+        NSLog(@"\ncols: %u rows: %u calloc(%u,%lu) = %lu", _colsCount, _rowsCount, _cellCount, sizeof(BOOL), size);
+    
+    _evals = calloc(_cellCount, sizeof(BOOL));
+    
+}
+
 - (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact {
     self = [super init];
     if (self) {
-        _compact = compact;
+        if (!compact) self->isa = [ExpandedTruthTable class];
+        
         _formula = node;
         _title = [node description];
         _variables = [[node setOfVariables] allObjects];
-        if (!_compact)
-            _headers = [[node setOfSubformulas] allObjects];
-        else {
-            //_headers = [[_variables valueForKeyPath:@"description"] arrayByAddingObject:_title];
-            
-            // optimization
-            _headers = @[_title];    // no need to store values of variables (they are stored in the rowIdx)
-            // 
-            // setEvalAtRowForColumn:0      // no nedd to calculate the index
-            // evalAtRowForColumn:          // 
-            // description ...
-            
-            
-        }
-            
-        
+        _headers = [self makeHeaders];
         [self sortVariablesAndHeaders];
         
-        
-        
-        _rowsCount = 1 << [_variables count];
-        _colsCount = [_headers count];
+        _rowsCount = 1 << [_variables count];   // 2^#(variables)
+        _colsCount = [_headers count];          // 1 or #(subformulas)
         _cellCount = _rowsCount * _colsCount;
         
-        long size = _cellCount * sizeof(BOOL);
-        // if (size > 30*1000*1000)
-            NSLog(@"\ncols: %u rows: %u calloc(%u,%lu) = %lu", _colsCount, _rowsCount, _cellCount, sizeof(BOOL), size);
+        [self reserveMemory];
         
-        _evals = calloc(_cellCount, sizeof(BOOL));
         _trueIndices = [NSMutableIndexSet indexSet];
         _falseIndices = [NSMutableIndexSet indexSet];
     }
@@ -124,25 +128,17 @@
     
 }
 
-- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIndex forColumn:(NSUInteger)colIndex {
-    *(_evals + rowIndex *_colsCount + colIndex) = eval;
-}
 
-- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIndex forHeader:(NSString*)header {
-    [self setEval:eval atRow:rowIndex forColumn:[_headers indexOfObject:header]];
-}
 
 - (BOOL)evaluateRow:(NSUInteger)rowIndex {
-    NSMutableDictionary *headersAndEvals = [NSMutableDictionary dictionaryWithCapacity:[_headers count]];
     NSUInteger count = _rowsCount >> 1;
     
     [_variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
         BOOL eval = (rowIndex & (count >> idx)) > 0 ? TRUE : FALSE;
         variable.evaluationValue = eval;
-        if (!_compact) [headersAndEvals setValue:[NSNumber numberWithBool:eval] forKey:[variable description]];
-        /*  idx     0   1     
+        /*  idx     0   1
          0  0000 & 01  10
-         1  0001 & 01  10 
+         1  0001 & 01  10
          2  0010 & 01  10
          3  0011 & 01  10 */
     }];
@@ -150,17 +146,7 @@
     BOOL rowEval = [_formula evaluationValue];
     
     // formula fil
-    if (!_compact) {
-        [_formula fillHeadersAndEvals:headersAndEvals];
-        
-        for (NSString *header in _headers) {
-            [self setEval:[(NSNumber*)[headersAndEvals objectForKey:header] boolValue]  atRow:rowIndex forHeader:header];
-        }
-    }
-    else {
-        *(_evals + rowIndex) = rowEval;
-        // [self setEval:rowEval atRow:rowIndex forColumn:0];
-    }
+    *(_evals + rowIndex) = rowEval;
     
     return rowEval;
     
@@ -170,7 +156,7 @@
     [_trueIndices removeAllIndexes];
     [_falseIndices removeAllIndexes];
     
-                        
+    
     for (NSUInteger rowIndex=0; rowIndex < _rowsCount; rowIndex++) {
         BOOL rowEval = [self evaluateRow:rowIndex];
         
@@ -181,124 +167,64 @@
     _titleColumnIdx = [_headers indexOfObject:_title];
 }
 
+- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIdx {
+    *(_evals + rowIdx) = eval;
+}
+
 #pragma mark - output
 
-- (BOOL)evalAtRow:(NSUInteger)rowIndex forColumn:(NSUInteger)colIndex {
-    return *(_evals + rowIndex *_colsCount + colIndex);
-}
-
 - (BOOL)evalAtRow:(NSUInteger)rowIdx {
-    
-    return [self evalAtRow:rowIdx forColumn:_titleColumnIdx];
-    
-}
-
-- (BOOL)evalAtRow:(NSUInteger)rowIndex forHeader:(NSString*)header {
-    
-    return [self evalAtRow:rowIndex forColumn:[_headers indexOfObject:header]];
-    
-}
-
-- (NSString*)descriptionWithHeaders:(NSArray*)headers {
-    
-    NSMutableString *description = [NSMutableString stringWithString:@"|"];
-    
-    for (NSString *header in headers) {
-        [description appendFormat:@" %@ |", header]; 
-    }
-    
-    for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
-        [description appendString:@"\n|"];
-        for (NSString* header in headers) {
-            BOOL eval = [self evalAtRow:rowIndex forHeader:header];
-            if (eval) [description appendString: @" T"];
-            else [description appendString:@" F"];
-            for (int i=0; i<[header length]; i++) {
-                [description appendString:@" "];
-            }
-            [description appendString:@"|"];
-        }
-    }
-    
-    return description;
-    
+    return *(_evals + rowIdx);
 }
 
 - (NSString*)description {
-    if (!_compact)
-        return [self descriptionWithHeaders:_headers];
-    else  {
-        NSArray *headers = [[_variables valueForKeyPath:@"symbol"] arrayByAddingObject:_title];
-        
-        NSMutableString *description = [NSMutableString stringWithString:@"|"];
-        
-        for (NSString *header in headers) {
-            [description appendFormat:@" %@ |", header];
-        }
-        
-        NSUInteger count = _rowsCount >> 1;
-        
-        for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
-            [description appendString:@"\n|"];
-            
-            [_variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
-                BOOL eval = (rowIndex & (count >> idx)) > 0 ? TRUE : FALSE;
-                /*  idx     0   1
-                 0  0000 & 01  10
-                 1  0001 & 01  10
-                 2  0010 & 01  10
-                 3  0011 & 01  10 */
-                if (eval) [description appendString: @" T"];
-                else [description appendString:@" F"];
-                
-                NSString *header = [headers objectAtIndex:idx];
-                for (int i=1; i<[header length]; i++) {
-                    [description appendString:@" "];
-                }
-                [description appendString:@" |"];
-                
-                
-
-            }];
-            
-            BOOL eval = *(_evals + rowIndex);
-            if (eval) [description appendString: @" T"];
-            else [description appendString:@" F"];
-            NSString *header = [headers lastObject];
-            for (int i=1; i<[header length]; i++) {
-                [description appendString:@" "];
-            }
-            [description appendString:@" |"];
-        }
-        
-        return description;
-    }
-}
-
-    /*
-- (NSString*)minimalDescription {
     NSArray *headers = [[_variables valueForKeyPath:@"symbol"] arrayByAddingObject:_title];
     
     NSMutableString *description = [NSMutableString stringWithString:@"|"];
     
     for (NSString *header in headers) {
-        [description appendFormat:@" %@ |", header]; 
+        [description appendFormat:@" %@ |", header];
     }
     
-    headers = [headers arrayByAddingObject:_title];
+    NSUInteger count = _rowsCount >> 1;
+    
     for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
         [description appendString:@"\n|"];
-        for (NSString* header in headers) {
-            BOOL eval = [self evalAtRow:rowIndex forHeader:header];
+        
+        [_variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
+            BOOL eval = (rowIndex & (count >> idx)) > 0 ? TRUE : FALSE;
+            /*  idx     0   1
+             0  0000 & 01  10
+             1  0001 & 01  10
+             2  0010 & 01  10
+             3  0011 & 01  10 */
             if (eval) [description appendString: @" T"];
             else [description appendString:@" F"];
+            
+            NSString *header = [headers objectAtIndex:idx];
+            for (int i=1; i<[header length]; i++) {
+                [description appendString:@" "];
+            }
             [description appendString:@" |"];
+            
+            
+            
+        }];
+        
+        BOOL eval = [self evalAtRow:rowIndex];
+        
+        if (eval) [description appendString: @" T"];
+        else [description appendString:@" F"];
+        NSString *header = [headers lastObject];
+        for (int i=1; i<[header length]; i++) {
+            [description appendString:@" "];
         }
+        [description appendString:@" |"];
     }
     
     return description;
+    
 }
-     */
 
 #pragma mark - comparisons
 
@@ -341,7 +267,7 @@
 #pragma mark - protocol NSObject
 
 - (BOOL)isEqual:(id)object {
-    if (object == self) 
+    if (object == self)
         return YES;
     else if (!object || ![object isKindOfClass:[self class]])
         return NO;
@@ -352,7 +278,7 @@
     NSUInteger hash = 0;
     
     for (NSUInteger rowIdx = 0; rowIdx < _rowsCount; rowIdx++) {
-        BOOL a = [self evalAtRow:rowIdx forHeader:_title];
+        BOOL a = [self evalAtRow:rowIdx];
         if (a) hash+=1;
         hash = hash << 1;
     }
@@ -364,5 +290,95 @@
 - (void)dealloc {
     free(_evals);
 }
+
+@end
+
+@implementation ExpandedTruthTable
+
+- (BOOL)compact { return NO; }
+
+- (NSArray*)makeHeaders {
+    return [[self.formula setOfSubformulas] allObjects];
+}
+
+#pragma mark - calculation
+
+- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIndex forColumn:(NSUInteger)colIndex {
+    *(_evals + rowIndex *_colsCount + colIndex) = eval;
+}
+
+- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIndex forHeader:(NSString*)header {
+    [self setEval:eval atRow:rowIndex forColumn:[_headers indexOfObject:header]];
+}
+
+- (BOOL)evaluateRow:(NSUInteger)rowIndex {
+    NSMutableDictionary *headersAndEvals = [NSMutableDictionary dictionaryWithCapacity:[_headers count]];
+    NSUInteger count = _rowsCount >> 1;
+    
+    [_variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
+        BOOL eval = (rowIndex & (count >> idx)) > 0 ? TRUE : FALSE;
+        variable.evaluationValue = eval;
+        [headersAndEvals setValue:[NSNumber numberWithBool:eval] forKey:[variable description]];
+        /*  idx     0   1
+         0  0000 & 01  10
+         1  0001 & 01  10
+         2  0010 & 01  10
+         3  0011 & 01  10 */
+    }];
+    
+    BOOL rowEval = [_formula evaluationValue];
+    
+    // formula fil
+    [_formula fillHeadersAndEvals:headersAndEvals];
+    
+    for (NSString *header in _headers) {
+        [self setEval:[(NSNumber*)[headersAndEvals objectForKey:header] boolValue]  atRow:rowIndex forHeader:header];
+    }
+    
+    return rowEval;
+    
+}
+
+#pragma mark - output
+
+- (BOOL)evalAtRow:(NSUInteger)rowIdx {
+    return [self evalAtRow:rowIdx forColumn:_titleColumnIdx];
+}
+
+- (BOOL)evalAtRow:(NSUInteger)rowIndex forColumn:(NSUInteger)colIndex {
+    return *(_evals + rowIndex *_colsCount + colIndex);
+}
+
+- (BOOL)evalAtRow:(NSUInteger)rowIndex forHeader:(NSString*)header {
+    return [self evalAtRow:rowIndex forColumn:[_headers indexOfObject:header]];
+}
+
+- (NSString*)description {
+    
+    NSMutableString *description = [NSMutableString stringWithString:@"|"];
+    
+    for (NSString *header in self.headers) {
+        [description appendFormat:@" %@ |", header];
+    }
+    
+    for (NSUInteger rowIndex = 0; rowIndex < _rowsCount; rowIndex++) {
+        [description appendString:@"\n|"];
+        for (NSString* header in self.headers) {
+            BOOL eval = [self evalAtRow:rowIndex forHeader:header];
+            if (eval) [description appendString: @" T"];
+            else [description appendString:@" F"];
+            for (int i=0; i<[header length]; i++) {
+                [description appendString:@" "];
+            }
+            [description appendString:@"|"];
+        }
+    }
+    
+    return description;
+    
+}
+
+
+
 
 @end

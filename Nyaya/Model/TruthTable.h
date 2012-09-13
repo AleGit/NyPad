@@ -35,3 +35,7 @@
 
 
 @end
+
+@interface ExpandedTruthTable : TruthTable
+@end
+
