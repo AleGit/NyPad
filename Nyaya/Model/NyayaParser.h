@@ -35,9 +35,10 @@ typedef NSUInteger NyayaErrorState;
 
 @interface NyayaParser : NSObject
 
-@property (readonly) NSString* input;
-@property (readonly) NSArray* tokens;
-@property (readonly) NyayaErrorState firstErrorState;
+@property (nonatomic,readonly) NSString* input;
+@property (nonatomic,readonly) NSArray* tokens;
+@property (nonatomic,readonly) NSSet* subNodesSet;
+@property (nonatomic,readonly) NyayaErrorState firstErrorState;
 
 + (id)parserWithString:(NSString*)input;
 - (id)initWithString:(NSString*)input;

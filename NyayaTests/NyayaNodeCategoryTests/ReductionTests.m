@@ -9,7 +9,7 @@
 #import "ReductionTests.h"
 #import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Reductions.h"
-
+#import "NyayaFormula.h"
 
 
 @implementation ReductionTests
@@ -17,13 +17,18 @@
 
 #pragma mark - basic reductions
 
+- (NyayaNode*)nodeWithFormula:(NSString*)input {
+    return [[NyayaFormula formulaWithString:input] syntaxTree:NO];
+
+}
+
 - (void)testreduceToBottom {
     NyayaNode *expected = [self nodeWithFormula:@"F"];
     for (NSString *input in @[@"F", @"!T", @"T&F", @"F&T", @"F|F", @"!T&!T"
          , @"a&!a", @"!a&a", @"a&b&c&d&e&!a", @"a^a", @"a^a^a^a", @"a^a^a^a^a^a", @"T^T", @"F^F"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -35,7 +40,7 @@
          //, @"(F|T)&(!F|!T)"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -44,7 +49,7 @@
     for (NSString *input in @[@"a", @"a|a", @"a&a", @"a|a|a", @"a&a|a", @"a^a^a", @"a^a^a^a^a", @"(a>a)>a", @"a|a&a", @"p∨¬q∨(¬p∨q)↔a", @"a+(c.!c)", @"a.(c+!c)"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -53,7 +58,7 @@
     for (NSString *input in @[@"!!!a", @"!a|!!!a", @"!a&!!!a", @"!!!a|!a|!!!!!a", @"!!!a&!!!!!a|!!!!!!!a", @"a^T" // @"a|a&a", @"a^a^a", @"a^a^a^a^a"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -62,7 +67,7 @@
     for (NSString *input in @[@"a&b|b&a|a&b"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -71,7 +76,7 @@
     for (NSString *input in @[@"(a|a|b)&(b|a|b)&(a|a|b|b|b)"
          ]) {
         NyayaNode *actual = [self nodeWithFormula:input];
-        STAssertEqualObjects([actual reduce:1000], expected, [actual description]);
+        STAssertEqualObjects([actual reduce:1000 originals:nil], expected, [actual description]);
     }
 }
 
@@ -144,7 +149,7 @@
     NyayaNode *n = [self nodeWithFormula:@"(a+b+c)^(a+c+b)^(b+a+c)"];
     
     NSMutableArray *array = [n naryXdisjunction];
-    [array xorConsolidate];
+    [array xorConsolidateOriginals: nil];
     STAssertEquals([array count], (NSUInteger)1, nil);
     
     for (NyayaNode *abc in abcArray)

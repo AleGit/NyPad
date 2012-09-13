@@ -9,8 +9,8 @@
 #import "NyayaNode.h"
 
 @interface NSArray (Reductions)
-- (NSMutableArray*)reducedNodes:(BOOL)unique;
-- (NSMutableArray*)negatedNodes:(BOOL)unique;
+- (NSMutableArray*)reducedNodes:(BOOL)unique originals:(NSMutableSet*)set;
+- (NSMutableArray*)negatedNodes:(BOOL)unique originals:(NSMutableSet*)set;
 - (BOOL)containsComplementaryNodes;
 - (BOOL)containsTop;
 - (BOOL)containsBottom;
@@ -18,14 +18,19 @@
 
 @interface NSMutableArray (Reductions)
 
-- (void)xorConsolidate;
-- (void)bicConsolidate;
+- (void)xorConsolidateOriginals: (NSMutableSet*)set;
+- (void)bicConsolidateOriginals: (NSMutableSet*)set;
 
+@end
+
+@interface NSMutableSet (Reductions)
+
+- (id)addObjectAndGetOriginal:(id)obj;
 @end
 
 @interface NyayaNode (Reductions)
 
-- (NyayaNode*)reduce:(NSInteger)maxSize;
+- (NyayaNode*)reduce:(NSInteger)maxSize originals:(NSMutableSet*)set;
 - (NSMutableArray*)naryDisjunction;
 - (NSMutableArray*)naryConjunction;
 - (NSMutableArray*)naryXdisjunction;

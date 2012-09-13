@@ -9,8 +9,13 @@
 #import "DerivationsTests.h"
 #import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Derivations.h"
+#import "NyayaFormula.h"
 
 @implementation DerivationsTests
+
+- (NyayaNode*)nodeWithFormula:(NSString*)input {
+    return [[NyayaFormula formulaWithString:input] syntaxTree:NO];
+}
 
 - (void)testSubNodeSet {
     
@@ -21,7 +26,7 @@
     
     node = [self nodeWithFormula:@"a|a"];
     set = [node subNodeSet];
-    STAssertEquals([set count], (NSUInteger)2, nil);
+    STAssertEquals([set count], (NSUInteger)2, nil); // a, a|a
     
     node = [self nodeWithFormula:@"(a|b)&(a|b)"];
     set = [node subNodeSet];

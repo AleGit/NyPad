@@ -7,13 +7,21 @@
 //
 
 #import "BaseTests.h"
-#import "SenTestCase+NyayaTests.h"
+#import "NyayaFormula.h"
+#import "NyayaNode_Cluster.h"
+#import "NyayaNode+Attributes.h"
+
 @interface BaseTests () {
     NSArray *_bigFormulas;
 }
 @end
 
 @implementation BaseTests
+
+- (NyayaNode*) nodeWithFormula:(NSString*)input{
+    return [[NyayaFormula formulaWithString:input] syntaxTree:NO];
+    
+}
 
 - (void)setUp {
     _bigFormulas = @[
@@ -68,6 +76,13 @@
     
     STAssertTrue([a4 isNegationToNode:a3], nil);
     STAssertTrue([a3 isNegationToNode:a4], nil);
+}
+
+- (void)testSpareIntances {
+    for (NSString *input in @[@"(a&b|b&a)", @"(a|b)&(b|a)"]) {
+        NyayaNode *node = [self nodeWithFormula:input];
+        STAssertEquals([node nodeAtIndex:0], [node nodeAtIndex:1], input);
+    }
 }
 
 @end

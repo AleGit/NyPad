@@ -24,6 +24,7 @@
 - (NyayaNode*)syntaxTree:(BOOL)optimized;
 - (TruthTable*)truthTable:(BOOL)compact;
 - (BddNode*)OBDD:(BOOL)reduced;
+- (NSSet*)subNodes;
 
 - (void)makeDescriptions;
 - (void)optimizeDescriptions;

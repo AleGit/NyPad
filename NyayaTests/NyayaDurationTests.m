@@ -56,7 +56,7 @@
     };
 }
 
-- (void)testDuration {
+- (void)xtestDuration {
     [self gaugeBlock:[self blockFormulaWithString] duration:defaultMaxDuration label:@"A"];
     [self gaugeBlock:[self blockMakeDescriptions] duration:4*defaultMaxDuration label:@"B"];
     [self gaugeBlock:[self blockOptimizeDescriptions] duration:6*defaultMaxDuration label:@"C"];

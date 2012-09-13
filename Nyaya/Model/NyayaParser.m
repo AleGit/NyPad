@@ -11,12 +11,14 @@
 #import "NSString+NyayaToken.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode_Cluster.h"
+#import "NyayaNode+Reductions.h"
 
 @interface NyayaParser () {
     NSUInteger _index;
     NSInteger _level;
     NSString* _token;
     NSMutableArray* _errors;
+    NSMutableSet* _subNodesSet;
 }
 @end
 
@@ -34,6 +36,7 @@
         _level = 0;
         _firstErrorState = NyayaUndefined;
         _errors = [NSMutableArray array];
+        _subNodesSet = [NSMutableSet setWithCapacity:[input length]];
         
         [self tokenize];
         
@@ -43,6 +46,15 @@
     }
     
     return self;
+}
+
+- (NyayaNode*)substitute:(NyayaNode*)node {
+    if (!node) return nil;
+    
+    return [_subNodesSet addObjectAndGetOriginal: node];
+    
+    
+    
 }
 
 
@@ -105,7 +117,7 @@
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
     
     // if (!result) result = [[NyayaNode alloc] init];
-    return result;
+    return [self substitute: result];;
 }
 
 - (NyayaNode*)parseEntailment {
@@ -118,7 +130,7 @@
     }
     
     _level--;
-    return result;
+    return [self substitute: result];;
     
 }
 
@@ -131,7 +143,7 @@
         result = [NyayaNode sequence:result with:[self parseBicondition]];
     }
     _level--;
-    return result;
+    return [self substitute: result];;
 }
 
 - (NyayaNode*)parseBicondition {
@@ -148,7 +160,7 @@
     }
     
     _level--;
-    return result;
+    return [self substitute: result];;
 }
 
 - (NyayaNode*)parseImplication {
@@ -164,7 +176,7 @@
     }
     
     _level--;
-    return result;
+    return [self substitute: result];;
 }
 
 - (NyayaNode*)parseXdisjunction {
@@ -181,7 +193,7 @@
     
     _level--;
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
-    return result;
+    return [self substitute: result];;
     
 }
 
@@ -197,7 +209,7 @@
     }
     
     _level--;
-    return result;
+    return [self substitute: result];;
 }
 
 - (NyayaNode*)parseConjunction {
@@ -218,7 +230,9 @@
     if ([_token isNegationToken] || [_token isIdentifierToken]) [self addErrorDescription:NyayaErrorNoBinaryConnector];
     
     _level--;
-    return result;
+    
+    
+    return [self substitute:result];
 }
 
 // negation    = "¬" negation | "(" formula ")" | term 
@@ -250,7 +264,7 @@
         [self addErrorDescription:NyayaErrorNoToken];
     }
     
-    return result;
+    return [self substitute: result];;
 }
 
 // term = identifier [ tuple ]
@@ -274,7 +288,7 @@
         [self addErrorDescription: NyayaErrorNoIdentifier];
     }
     
-    return result;
+    return [self substitute: result];
 }
  
 // tuple = "(" formula { "," formula } ")"

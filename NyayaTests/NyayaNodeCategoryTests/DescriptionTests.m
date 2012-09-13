@@ -9,12 +9,13 @@
 #import "DescriptionTests.h"
 #import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Description.h"
+#import "NyayaFormula.h"
 
 @implementation DescriptionTests
 
 - (void)testDescriptionSubformula {
     
-    NyayaNode *formula = [self nodeWithFormula:@"a | b & c"];
+    NyayaNode *formula = [[NyayaFormula formulaWithString:@"a | b & c"] syntaxTree:NO];
     
     NSArray *descs = @[ [formula description:formula] // AND 
     ,[formula description: [formula nodeAtIndex:0]] // a

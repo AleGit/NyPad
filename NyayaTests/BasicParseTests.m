@@ -188,7 +188,7 @@
     STAssertEquals([t.setOfVariables count], (NSUInteger)0, nil);
     STAssertEquals([a2.setOfVariables count], (NSUInteger)1, nil);
     
-    STAssertFalse(a1 == a2, nil);
+    STAssertTrue(a1 == a2, nil);
     STAssertTrue([a1 isEqual: a2], nil);
 }
 

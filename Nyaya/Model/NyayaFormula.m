@@ -19,6 +19,7 @@
     NyayaNode *_slfNode;
     TruthTable *_truthTable;
     BddNode *_bddNode;
+    NSMutableSet *_subNodes;
     
     NSString *_slfDescription;
     NSString *_rdcDescription;
@@ -125,8 +126,8 @@
     dispatch_once(&_secondRun, ^{
         [self makeDescriptions];
         
-        NyayaNode *rNode = [_slfNode reduce:NSIntegerMax];        
-        NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax];
+        NyayaNode *rNode = [_slfNode reduce:NSIntegerMax originals:[_subNodes mutableCopy]];
+        NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax originals:[_subNodes mutableCopy]];
         NSString *description = nil;
         
         for (NyayaNode *rdcNode in @[rNode, sNode]) {

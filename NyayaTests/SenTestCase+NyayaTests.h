@@ -11,6 +11,5 @@
 
 @interface SenTestCase (NyayaTests)
 
-- (NyayaNode*)nodeWithFormula:(NSString*)input;
 
 @end

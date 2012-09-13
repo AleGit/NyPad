@@ -10,6 +10,7 @@
 #import "SenTestCase+NyayaTests.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Valuation.h"
+#import "NyayaFormula.h"
 
 @implementation ValuationTests
 
@@ -24,7 +25,7 @@
 }
 
 - (void)testValuationA {
-    NyayaNode *a = [self nodeWithFormula:@"a"];
+    NyayaNode *a = [[NyayaFormula formulaWithString:@"a"] syntaxTree:NO];
     ((NyayaNodeVariable*)a).evaluationValue = YES;
     STAssertEquals(a.evaluationValue, YES, @"%d",a.evaluationValue);
     ((NyayaNodeVariable*)a).evaluationValue = NO;
