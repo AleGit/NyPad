@@ -23,7 +23,7 @@
 - (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact;
 - (void)evaluateTable;
 
-- (NSString*)minimalDescription; 
+// - (NSString*)minimalDescription;
 - (void)setOrder: (NSArray*)variableNames;
 
 - (BOOL)isTautology;
