@@ -12,6 +12,12 @@
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Type.h"
 
+#ifdef DEBUG
+#define CANCEL_DERIVATION(t) if (t < 0) { NSLog(@"cancel derivation"); return nil; }
+#else
+#define CANCEL_DERIVATION(t) if (t < 0) { return nil; }
+#endif
+
 @implementation NyayaNode (Derivations)
 
 - (NyayaNode*)copyWith:(NSArray*)nodes {
@@ -38,7 +44,7 @@
 }
 
 - (NyayaNode*)copyImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil; // cancel the derivation
+    CANCEL_DERIVATION(maxSize)
     
     NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
     for (NyayaNode *node in self.nodes) {
@@ -52,7 +58,7 @@
 }
 
 - (NyayaNode*)copyNnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     // NSArray *nodes = [self valueForKeyPath:@"nodes.deriveNnf"];
     NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:[self.nodes count]];
     
@@ -67,29 +73,25 @@
 }
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
-    if (maxSize < 0)
-        return nil;
+    CANCEL_DERIVATION(maxSize)
     // no precondition
     return self;
 }
 
 - (NyayaNode*)deriveNnf:(NSInteger)maxSize {
-    if (maxSize < 0)
-        return nil;
+    CANCEL_DERIVATION(maxSize)
     // precondition 'self' is implication free
     return self;
 }
 
 - (NyayaNode*)deriveCnf:(NSInteger)maxSize {
-    if (maxSize < 0)
-        return nil;
+    CANCEL_DERIVATION(maxSize)
     // precondition 'self' is implication free and in negation normal form
     return self;
 }
 
 - (NyayaNode *)deriveDnf:(NSInteger)maxSize {
-    if (maxSize < 0)
-        return nil;
+    CANCEL_DERIVATION(maxSize)
     // precondition 'self' is implication free and in negation normal form
     return self;
 }
@@ -118,7 +120,7 @@
 @implementation NyayaNodeUnary (Derivations)
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     // imf(a)   =  a
     // imf(¬P)  = ¬imf(P)
     // imf(P∨Q) = imf(P) ∨ imf(Q)
@@ -127,7 +129,7 @@
 }
 
 - (NyayaNode*)deriveNnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     return [self copyNnf:maxSize-1];
 }
 
@@ -136,7 +138,7 @@
 @implementation NyayaNodeNegation (Derivations)
 
 - (NyayaNode*)deriveNnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     NyayaNode *node = [self.nodes objectAtIndex:0];
     
     NSUInteger count = [node.nodes count];
@@ -206,7 +208,7 @@
 }
 
 - (NyayaNode*)deriveCnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     // dnf (a | (b & c)) = (a | b) & (a | c)
     // dnf ((a & b) | c)) = (a | c) & (b | c)
@@ -220,7 +222,7 @@
 }
 
 - (NyayaNode *)deriveDnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     NyayaNode *ld = [[self.nodes objectAtIndex:0] deriveDnf:maxSize-1];
     if (!ld) return nil;
@@ -245,7 +247,7 @@
 @implementation NyayaNodeConjunction (Derivations)
 
 - (NyayaNode*)deriveCnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     // cnf (A & B) = cnf (A) & cnf (B)
     
     NyayaNode *ld = [[self firstNode] deriveCnf:maxSize-1];
@@ -279,7 +281,7 @@
 }
 
 - (NyayaNode*)deriveDnf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     // dnf (a & (b | c)) = (a & b) | (a & c)
     // dnf ((a | b) & c)) = (a & c) | (b & c)
@@ -299,7 +301,7 @@
 
 @implementation NyayaNodeXdisjunction (Derivations)
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     // imf(P ⊻ Q) = (imf(P) ∨ imf(Q)) ∧ (!imf(P) ∨ !imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
@@ -325,7 +327,7 @@
 @implementation NyayaNodeImplication (Derivations)
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     // imf(P → Q) = ¬imf(P) ∨ imf(Q)
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];
@@ -350,7 +352,7 @@
 @implementation NyayaNodeBicondition (Derivations)
 
 - (NyayaNode*)deriveImf:(NSInteger)maxSize {
-    if (maxSize < 0) return nil;
+    CANCEL_DERIVATION(maxSize)
     
     // imf(P ↔ Q) = imf(P → Q) ∧ imf(Q → P) = (¬imf(P) ∨ Q) ∧ (P ∨ ¬imf(Q))
     NyayaNode *first = [[self firstNode] deriveImf:maxSize-1];

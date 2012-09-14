@@ -14,6 +14,8 @@
 //#import "NyayaNode+Derivations.h"
 
 #define NYAYA_MAX_INPUT_LENGTH 1367
+#define NAYAY_MAX_DERIVATION_LENGTH 720
+#define NAYAY_DERIVATION_LENGTH(length) ((!length || NAYAY_MAX_DERIVATION_LENGTH < length) ? NAYAY_MAX_DERIVATION_LENGTH : length)
 
 @interface NyayaFormula () {
     NyayaNode *_slfNode;
@@ -97,12 +99,12 @@
         if ([_slfNode isConjunctiveNormalForm]) _cnfDescription = _slfDescription;
         if ([_slfNode isDisjunctiveNormalForm]) _dnfDescription = _slfDescription;
 #ifdef DEBUG
-        if (!_cnfDescription) _cnfDescription = @"DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG ";
-        if (!_dnfDescription) _dnfDescription = @"DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG ";
-#else
+//        if (!_cnfDescription) _cnfDescription = @"";
+//        if (!_dnfDescription) _dnfDescription = @"";
+#endif
         if (!_cnfDescription) _cnfDescription = [self OBDD:YES].cnfDescription;
         if (!_dnfDescription) _dnfDescription = [self OBDD:YES].dnfDescription;
-#endif
+
        
         NSString* nf = [_cnfDescription length] < [_dnfDescription length] ? _cnfDescription : _dnfDescription;
                 
@@ -130,44 +132,84 @@
         NyayaNode *rNode = [_slfNode reduce:NSIntegerMax];
         NyayaNode *sNode = [[self shortestNode] reduce:NSIntegerMax];
         NSString *description = nil;
+        NSUInteger length = 0;
         
-        for (NyayaNode *rdcNode in @[rNode, sNode]) {
+        NSMutableArray *nodes = [NSMutableArray arrayWithCapacity:2];
+        if (rNode) [nodes addObject:rNode];
+        if (sNode) [nodes addObject:sNode];
+        
+        for (NyayaNode *rdcNode in nodes) {
             if (!rdcNode) break;
             
             description = [rdcNode description];
             if (!_rdcDescription || [description length] < [_rdcDescription length]) {
+                NSLog(@"RDC \n %@\n %@", _rdcDescription, description);
                 _rdcDescription = description;
             }
         
-            NyayaNode *imfNode = [rdcNode isImplicationFree] ? rdcNode : [rdcNode deriveImf:[_imfDescription length]];
+            length = [_imfDescription length];
+            NyayaNode *imfNode = [rdcNode isImplicationFree] ? rdcNode : [rdcNode deriveImf: NAYAY_DERIVATION_LENGTH(length)];
             description = [imfNode description];
-            if (imfNode && [description length] < [_imfDescription length]) {
+            if (imfNode && (!length || [description length] < length)) {
+                NSLog(@"IMF \n %@\n %@", _imfDescription, description);
                 _imfDescription = description;
             }
             
-            NyayaNode *nnfNode = [imfNode isNegationNormalForm] ? imfNode : [imfNode deriveNnf:[_nnfDescription length]];
+            length = [_nnfDescription length];
+            NyayaNode *nnfNode = [imfNode isNegationNormalForm] ? imfNode : [imfNode deriveNnf: NAYAY_DERIVATION_LENGTH(length)];
             description = [nnfNode description];
-            if (nnfNode && [description length] < [_nnfDescription length]) {
+            if (nnfNode && (!length || [description length] < length)) {
+                NSLog(@"NNF \n %@\n %@", _nnfDescription, description);
                 _nnfDescription = description;
             }
             
-            NyayaNode *cnfNode = [nnfNode isConjunctiveNormalForm] ? nnfNode : [nnfNode deriveCnf:[_cnfDescription length]];
+            length = [_cnfDescription length];
+            NyayaNode *cnfNode = [nnfNode isConjunctiveNormalForm] ? nnfNode : [nnfNode deriveCnf: NAYAY_DERIVATION_LENGTH(length)];
             description = [cnfNode description];
-            if (cnfNode && [description length] < [_cnfDescription length]) {
+            if (cnfNode && (!length || [description length] < length)) {
+                NSLog(@"CNF \n %@\n %@", _cnfDescription, description);
                 _cnfDescription = description;
             }
-            if ([cnfNode isDisjunctiveNormalForm] && [description length] < [_dnfDescription length]) {
+            length = [_dnfDescription length];
+            if ([cnfNode isDisjunctiveNormalForm] && (!length || [description length] < length)) {
+                NSLog(@"DNF (CNF)\n %@\n %@", _dnfDescription, description);
                 _dnfDescription = description;
             }
-            
-            NyayaNode *dnfNode = [nnfNode isDisjunctiveNormalForm] ? nnfNode : [nnfNode deriveDnf:[_dnfDescription length]];
+            NyayaNode *dnfNode = [nnfNode isDisjunctiveNormalForm] ? nnfNode : [nnfNode deriveDnf: NAYAY_DERIVATION_LENGTH(length)];
             description = [dnfNode description];
-            if (dnfNode && [description length] < [_dnfDescription length]) {
+            if (dnfNode && (!length || [description length] < length)) {
+                NSLog(@"DNF \n %@\n %@", _dnfDescription, description);
                 _dnfDescription = description;
             }
-            
-            if ([dnfNode isConjunctiveNormalForm] && [description length] < [_cnfDescription length]) {
+            length = [_cnfDescription length];
+            if ([dnfNode isConjunctiveNormalForm] && (!length || [description length] < length)) {
+                NSLog(@"CNF (DNF)\n %@\n %@", _cnfDescription, description);
                 _cnfDescription = description;
+            }
+            
+            // update nnf
+            for (description in @[_cnfDescription, _dnfDescription]) {
+                length = [_nnfDescription length];
+                if (!length || [description length] < length) {
+                    NSLog(@"NNF (UPD)\n %@\n %@", _nnfDescription, description);
+                    _nnfDescription = description;
+                }
+            }
+            // update imf
+            for (description in @[_nnfDescription,_cnfDescription,_dnfDescription]) {
+                length = [_imfDescription length];
+                if (!length || [description length] < length) {
+                    NSLog(@"IMF (UPD)\n %@\n %@", _imfDescription, description);
+                    _imfDescription = description;
+                }
+            }
+            // update rdc
+            for (description in @[_imfDescription,_nnfDescription,_cnfDescription,_dnfDescription]) {
+                length = [_rdcDescription length];
+                if (!length || [description length] < length) {
+                    NSLog(@"RDC (UPD)\n %@\n %@", _rdcDescription, description);
+                    _rdcDescription = description;
+                }
             }
         }
     });
