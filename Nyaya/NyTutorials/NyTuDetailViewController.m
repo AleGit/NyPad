@@ -92,8 +92,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NyTuTestViewController *testViewController = (NyTuTestViewController*)segue.destinationViewController;
+    
+    
+    
+    
+    
     testViewController.instructionsName = [NSString stringWithFormat:@"instructions%@", [[self.detailItem objectAtIndex:1] objectAtIndex:1]];
     testViewController.tester = [NyTuTester testerForKey:self.tutorialKey];
+    testViewController.modalPresentationStyle = testViewController.tester.modalPresentationStyle;
+    testViewController.modalTransitionStyle = testViewController.tester.modalTransitionStyle;
     testViewController.tester.delegate = testViewController;
 }
 

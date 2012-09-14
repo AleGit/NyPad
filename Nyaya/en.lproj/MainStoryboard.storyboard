@@ -100,7 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" title="open test" id="cbo-qK-sxa">
                             <connections>
                                 <action selector="exercise:" destination="Ekn-df-hE0" id="tGm-Kf-LYd"/>
-                                <segue destination="egB-da-fIt" kind="modal" identifier="OpenTestModally" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="QND-Bv-tS8"/>
+                                <segue destination="egB-da-fIt" kind="modal" identifier="OpenTestModally" modalTransitionStyle="coverVertical" id="QND-Bv-tS8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -763,6 +763,7 @@
                 <relationship kind="action" name="didEndOnExit:"/>
                 <relationship kind="action" name="editingChanged:"/>
                 <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="process:" candidateClass="UIButton"/>
                 <relationship kind="action" name="send:"/>
                 <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
                 <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>

@@ -17,7 +17,10 @@
 
 @protocol NyTuTester <NSObject>
 
-@property (weak, nonatomic) id<NyTuTesterDelegate> delegate;
+@property(nonatomic,weak) id<NyTuTesterDelegate> delegate;
+@property(nonatomic,readonly) UIModalTransitionStyle modalTransitionStyle;
+@property(nonatomic,readonly) UIModalPresentationStyle modalPresentationStyle;
+
 + (BOOL)testerExistsForKey:(NSString*)key;
 + (id)testerForKey:(NSString*)key;
 

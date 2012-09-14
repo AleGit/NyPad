@@ -45,6 +45,21 @@
     return [[[self testerClassForKey:key] alloc] init];
 }
 
+// default
+- (UIModalPresentationStyle)modalPresentationStyle {
+#if DEBUG
+    static UIModalPresentationStyle style = 0;
+    style = (++style)%4;
+    return style;
+#endif
+    return UIModalPresentationFormSheet;
+}
+
+// default
+- (UIModalTransitionStyle)modalTransitionStyle {
+    return UIModalTransitionStyleCoverVertical;
+}
+
 - (void)loadTestView:(UIView*)view {
     [[NSBundle mainBundle] loadNibNamed:@"StandardTestView" owner:self options:nil];
     [view insertSubview:self.testView atIndex:1];
