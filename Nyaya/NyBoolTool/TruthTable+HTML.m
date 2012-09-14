@@ -62,9 +62,9 @@
     }
     
     if (spare) {
-        NSString *text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_TRUE_ROWS,nil), self.truthCount];
+        NSString *text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_TRUE_OF_U_ROWS,nil), self.truthCount, self.rowsCount];
         [description appendFormat:@"<tr><td class='green' colspan='%u'>%@</td>", [self.variables count]+2, text];
-        text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_FALSE_ROWS,nil), self.falseCount];
+        text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_FALSE_OF_U_ROWS,nil), self.falseCount, self.rowsCount];
         [description appendFormat:@"<tr><td class='red' colspan='%u'>%@</td>", [self.variables count]+2, text];
         [description appendFormat:@"<tr><td colspan='%u'></td></tr>", [self.variables count]+2];
         

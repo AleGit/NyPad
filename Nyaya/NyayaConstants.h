@@ -12,5 +12,5 @@ extern const NSUInteger TRUTH_TABLE_MAX_ROWS;
 extern const NSUInteger TRUTH_TABLE_MAX_FULL_ROWS;
 extern const NSUInteger TRUTH_TABLE_MAX_VISIBLE_ROWS;
 extern NSString *const TRUTH_TABLE_U_ROWS;
-extern NSString *const TRUTH_TABLE_U_TRUE_ROWS;
-extern NSString *const TRUTH_TABLE_U_FALSE_ROWS;
+extern NSString *const TRUTH_TABLE_U_TRUE_OF_U_ROWS;
+extern NSString *const TRUTH_TABLE_U_FALSE_OF_U_ROWS;
