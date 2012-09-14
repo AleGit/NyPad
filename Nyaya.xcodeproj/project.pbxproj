@@ -129,6 +129,7 @@
 		1188B55215F788E3004186C0 /* NSSet+NyayaToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55115F788E3004186C0 /* NSSet+NyayaToken.m */; };
 		1188B55515F7B5DE004186C0 /* BaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55415F7B5DE004186C0 /* BaseTests.m */; };
 		1188B55815F7BF6D004186C0 /* DerivationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55715F7BF6D004186C0 /* DerivationsTests.m */; };
+		11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473BE1603392400EA2508 /* NyayaConstants.m */; };
 		11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */; };
 		11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions101.html */; };
 		11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26815EFEC13006AFBFC /* instructions111.html */; };
@@ -357,6 +358,8 @@
 		1188B55415F7B5DE004186C0 /* BaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTests.m; path = NyayaNodeCategoryTests/BaseTests.m; sourceTree = "<group>"; };
 		1188B55615F7BF6D004186C0 /* DerivationsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DerivationsTests.h; path = NyayaNodeCategoryTests/DerivationsTests.h; sourceTree = "<group>"; };
 		1188B55715F7BF6D004186C0 /* DerivationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DerivationsTests.m; path = NyayaNodeCategoryTests/DerivationsTests.m; sourceTree = "<group>"; };
+		11A473BD1603392400EA2508 /* NyayaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaConstants.h; sourceTree = "<group>"; };
+		11A473BE1603392400EA2508 /* NyayaConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaConstants.m; sourceTree = "<group>"; };
 		11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester101.plist; path = Nyaya/NyTutorials/NyTuTester101.plist; sourceTree = "<group>"; };
 		11B0B26715EFEC13006AFBFC /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
 		11B0B26815EFEC13006AFBFC /* instructions111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions111.html; path = html/instructions111.html; sourceTree = "<group>"; };
@@ -536,6 +539,8 @@
 				1122563C15F0E68E00DBEE30 /* UIColor+Nyaya.m */,
 				11C93F0415F46E6300AB94DF /* UITextField+Nyaya.h */,
 				11C93F0515F46E6300AB94DF /* UITextField+Nyaya.m */,
+				11A473BD1603392400EA2508 /* NyayaConstants.h */,
+				11A473BE1603392400EA2508 /* NyayaConstants.m */,
 			);
 			name = NyApp;
 			sourceTree = "<group>";
@@ -1144,6 +1149,7 @@
 				11BFCBA815F9E331004CBDA2 /* NyPgCanvasView.m in Sources */,
 				117C353615FF63CA0002D5DD /* NyayaNode+Derivations.m in Sources */,
 				110E7E511600775500EA2D7F /* NyayaFormula.m in Sources */,
+				11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

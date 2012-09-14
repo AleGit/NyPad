@@ -12,6 +12,7 @@
 #import "NyayaFormula.h"
 #import "NyBoolToolEntry.h"
 #import "NSString+NyayaToken.h"
+#import "NyayaConstants.h"
 
 @interface NyBtDetailViewController () {
     dispatch_queue_t queue;
@@ -19,7 +20,6 @@
 @end
 
 @implementation NyBtDetailViewController
-
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"BoolTool", @"BoolTool");
@@ -101,6 +101,7 @@
     [self setStdField:nil];
     [self setBddView:nil];
     [self setInputName:nil];
+    [self setTruthTableView:nil];
     [super viewDidUnload];
 }
 
@@ -170,6 +171,8 @@
                 
                 BddNode *bdd = [formula OBDD:YES];
                 NSUInteger bddLevelCount = bdd.levels.count;
+                NSString *truthTableHtml = [[formula truthTable:YES] htmlDescription];
+                NSUInteger varCount = [[[formula truthTable:YES] variables] count];
                 
                 // NSString *stdDescription = @""; // [node.reducedFormula description];
                 // NSString *imfDescription = node.imfDescription;
@@ -195,11 +198,14 @@
                     self.cnfField.text = cnfDescription;
                     self.dnfField.text = dnfDescription;
                     
-                    [self adjustResultViewContent:bddLevelCount];
+                    [self adjustResultViewContent:bddLevelCount variableCount:varCount];
                     
                     self.bddView.bddNode = bdd;
                     self.bddView.title = description;
                     self.bddView.subtitle = @"Reduced Ordered Binary Decision Diagram";
+                    NSURL *url = [[NSBundle mainBundle] URLForResource:@"welcome" withExtension:@"html"];
+                    
+                    [self.truthTableView loadHTMLString:truthTableHtml baseURL:[url baseURL]];
                 });
                 
                 [formula optimizeDescriptions];
@@ -282,7 +288,7 @@
     
 }
 
-- (void)adjustResultViewContent:(NSUInteger)bddLevelCount {
+- (void)adjustResultViewContent:(NSUInteger)bddLevelCount variableCount:(NSUInteger)varCount {
     CGFloat yoffset = 0.0;
     
     
@@ -298,11 +304,15 @@
     
     CGRect f = self.bddView.frame;
     self.bddView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, 50 + (bddLevelCount-1)*100);
+    f = self.bddView.frame;
+    
+    NSUInteger visibleLines = MIN(1 << varCount,TRUTH_TABLE_MAX_VISIBLE_ROWS) + 1;
+    self.truthTableView.frame = CGRectMake(CGRectGetMinX(f), CGRectGetMaxY(f)+10, CGRectGetWidth(f), 40+visibleLines*25);
     
     // [self moveView:self.bddView toY: self.bddView.frame.origin.y + yoffset];
     
     
-    self.resultView.contentSize = CGSizeMake(self.resultView.frame.size.width, self.bddView.frame.origin.y + self.bddView.frame.size.height);
+    self.resultView.contentSize = CGSizeMake(CGRectGetMaxX(self.truthTableView.frame), CGRectGetMaxY(self.truthTableView.frame));
     
 }
 

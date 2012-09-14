@@ -613,11 +613,16 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
                                     <view opaque="NO" contentMode="scaleToFill" id="Pzh-UR-frg" customClass="NyayaBddView">
-                                        <rect key="frame" x="20" y="245" width="663" height="287"/>
+                                        <rect key="frame" x="20" y="245" width="663" height="134"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
+                                    <webView contentMode="scaleToFill" id="4R9-pc-TXy">
+                                        <rect key="frame" x="20" y="387" width="663" height="133"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.85712249087591252" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -662,6 +667,7 @@
                         <outlet property="stdField" destination="5B6-sD-v2M" id="TNE-T5-gU3"/>
                         <outlet property="stdLabel" destination="1We-Ua-4hw" id="pJk-0f-OpM"/>
                         <outlet property="tautologyLabel" destination="rB3-XC-X1G" id="dAc-Eu-Hww"/>
+                        <outlet property="truthTableView" destination="4R9-pc-TXy" id="o8X-C1-skb"/>
                     </connections>
                 </viewController>
             </objects>
@@ -763,7 +769,6 @@
                 <relationship kind="action" name="didEndOnExit:"/>
                 <relationship kind="action" name="editingChanged:"/>
                 <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="process:" candidateClass="UIButton"/>
                 <relationship kind="action" name="send:"/>
                 <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
                 <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
@@ -780,6 +785,7 @@
                 <relationship kind="outlet" name="stdField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="stdLabel" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="tautologyLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="truthTableView" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="NyBtMasterViewController" superclassName="NyMasterViewController">

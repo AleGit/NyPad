@@ -22,6 +22,7 @@
 - (id)initWithNode:(NyayaNode*)node;
 - (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact;
 - (void)evaluateTable;
+- (NSString*)htmlDescription;
 
 // - (NSString*)minimalDescription;
 - (void)setOrder: (NSArray*)variableNames;

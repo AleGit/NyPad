@@ -36,3 +36,5 @@
 
 "CALC_DRAW_TITLE" = "Calculating and Drawing";
 "CALC_DRAW_MESSAGE" = "This may take some time.";
+
+"TRUTH_TABLE_U_ROWS" = "table with %u rows";

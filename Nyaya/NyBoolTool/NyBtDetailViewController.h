@@ -38,6 +38,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *dnfLabel;
 @property (strong, nonatomic) IBOutlet UITextView *dnfField;
 @property (strong, nonatomic) IBOutlet NyayaBddView *bddView;
+@property (strong, nonatomic) IBOutlet UIWebView *truthTableView;
 
 - (IBAction)send:(id)sender;
 - (IBAction)didEndOnExit:(id)sender;
