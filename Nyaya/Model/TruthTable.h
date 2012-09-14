@@ -29,6 +29,8 @@
 - (BOOL)isTautology;
 - (BOOL)isContradiction;
 - (BOOL)isSatisfiable;
+- (NSUInteger)truthCount;
+- (NSUInteger)falseCount;
 
 - (BOOL)evalAtRow:(NSUInteger)rowIdx;
 

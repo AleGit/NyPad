@@ -38,3 +38,5 @@
 "CALC_DRAW_MESSAGE" = "This may take some time.";
 
 "TRUTH_TABLE_U_ROWS" = "table with %u rows";
+"TRUTH_TABLE_U_TRUE_ROWS" = "%u × true";
+"TRUTH_TABLE_U_FALSE_ROWS" = "%u × false";

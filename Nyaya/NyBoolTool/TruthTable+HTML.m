@@ -14,11 +14,11 @@
 
 - (NSString*)htmlDescription {
     
-    NSString *template = @"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">"
-    "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
+    NSString *template = @"<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>"
+    "<html><head><meta http-equiv='content-type' content='text/html; charset=UTF-8'>"
     "<title>Nyāya :: TruthTable</title>"
     // "<link rel=\"stylesheet\" type=\"text/css\" href=\"format.css\"></head>"
-    "    <style type=\"text/css\">"
+    "    <style type='text/css'>"
     "    body {"
     "    margin-left:20px; margin-right:70px; margin-top:20px; margin-bottom:10px;"
     //"    background-image:url(syntaxtree.png), -webkit-linear-gradient(top left, #F9F9F9 25%, #F9F9F9 75%);"
@@ -59,6 +59,15 @@
     else {
         tdT = @"<td class=\"green\">T</td>";
         tdF = @"<td class=\"red\">F</td>";
+    }
+    
+    if (spare) {
+        NSString *text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_TRUE_ROWS,nil), self.truthCount];
+        [description appendFormat:@"<tr><td class='green' colspan='%u'>%@</td>", [self.variables count]+2, text];
+        text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_FALSE_ROWS,nil), self.falseCount];
+        [description appendFormat:@"<tr><td class='red' colspan='%u'>%@</td>", [self.variables count]+2, text];
+        [description appendFormat:@"<tr><td colspan='%u'></td></tr>", [self.variables count]+2];
+        
     }
     
     for (NSUInteger rowIndex = 0; rowIndex < self.rowsCount; rowIndex++) {
@@ -111,11 +120,7 @@
         [description appendString:@"</tr>"];
     }
     
-    if (spare) {
-        NSString *text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_ROWS,nil), self.rowsCount];
-        [description appendFormat:@"<td colspan='%u'>%@</td>", [self.variables count]+2, text];
-        
-    }
+    
     return [NSString stringWithFormat:template, description, @""];
 }
 

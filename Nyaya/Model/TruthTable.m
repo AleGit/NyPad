@@ -244,6 +244,15 @@
     
 }
 
+- (NSUInteger)truthCount {
+    return [_trueIndices count];
+    
+}
+- (NSUInteger)falseCount {
+    return [_falseIndices count];
+    
+}
+
 - (BOOL)isEqualToTruthTable:(TruthTable*)truthTable {
     if (self->_rowsCount != truthTable->_rowsCount) return NO;
     
