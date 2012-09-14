@@ -130,6 +130,7 @@
 		1188B55515F7B5DE004186C0 /* BaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55415F7B5DE004186C0 /* BaseTests.m */; };
 		1188B55815F7BF6D004186C0 /* DerivationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55715F7BF6D004186C0 /* DerivationsTests.m */; };
 		11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473BE1603392400EA2508 /* NyayaConstants.m */; };
+		11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473C116035DFC00EA2508 /* TruthTable+HTML.m */; };
 		11B0B26515EFC66C006AFBFC /* NyTuTester101.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */; };
 		11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions101.html */; };
 		11B0B26A15EFEC13006AFBFC /* instructions111.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26815EFEC13006AFBFC /* instructions111.html */; };
@@ -360,6 +361,8 @@
 		1188B55715F7BF6D004186C0 /* DerivationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DerivationsTests.m; path = NyayaNodeCategoryTests/DerivationsTests.m; sourceTree = "<group>"; };
 		11A473BD1603392400EA2508 /* NyayaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaConstants.h; sourceTree = "<group>"; };
 		11A473BE1603392400EA2508 /* NyayaConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaConstants.m; sourceTree = "<group>"; };
+		11A473C016035DFC00EA2508 /* TruthTable+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TruthTable+HTML.h"; path = "NyBoolTool/TruthTable+HTML.h"; sourceTree = "<group>"; };
+		11A473C116035DFC00EA2508 /* TruthTable+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TruthTable+HTML.m"; path = "NyBoolTool/TruthTable+HTML.m"; sourceTree = "<group>"; };
 		11B0B26415EFC66C006AFBFC /* NyTuTester101.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NyTuTester101.plist; path = Nyaya/NyTutorials/NyTuTester101.plist; sourceTree = "<group>"; };
 		11B0B26715EFEC13006AFBFC /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
 		11B0B26815EFEC13006AFBFC /* instructions111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions111.html; path = html/instructions111.html; sourceTree = "<group>"; };
@@ -652,6 +655,8 @@
 				1162EBA315F4A62F0007EBAB /* BoolToolData.plist */,
 				1162EBA615F4AB0A0007EBAB /* NyBoolToolEntry.h */,
 				1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */,
+				11A473C016035DFC00EA2508 /* TruthTable+HTML.h */,
+				11A473C116035DFC00EA2508 /* TruthTable+HTML.m */,
 			);
 			name = NyBoolTool;
 			sourceTree = "<group>";
@@ -1150,6 +1155,7 @@
 				117C353615FF63CA0002D5DD /* NyayaNode+Derivations.m in Sources */,
 				110E7E511600775500EA2D7F /* NyayaFormula.m in Sources */,
 				11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */,
+				11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

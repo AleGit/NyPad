@@ -46,9 +46,10 @@
         CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
         CGFloat xmargin = optimized ? 5.0 + self.frame.size.width / (vSegments+2.0) : 25.0;
         
+        
+        CGPoint pL = CGPointMake(xmargin, self.frame.size.height- 35.0);
+        CGPoint pR = CGPointMake(self.frame.size.width-xmargin, self.frame.size.height - 35.0);
         CGPoint p0 = CGPointMake(self.frame.size.width/2.0, 25.0);
-        CGPoint pL = CGPointMake(xmargin, self.frame.size.height- 25.0);
-        CGPoint pR = CGPointMake(self.frame.size.width-xmargin, self.frame.size.height - 25.0);
         
         NSMutableDictionary *nps = [NSMutableDictionary dictionary];
         

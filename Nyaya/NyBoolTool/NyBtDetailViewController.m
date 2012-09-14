@@ -7,12 +7,11 @@
 //
 
 #import "NyBtDetailViewController.h"
+#import "NyayaConstants.h"
+#import "TruthTable+HTML.h"
 #import "UIColor+Nyaya.h"
-#import "UITextField+Nyaya.h"
 #import "NyayaFormula.h"
 #import "NyBoolToolEntry.h"
-#import "NSString+NyayaToken.h"
-#import "NyayaConstants.h"
 
 @interface NyBtDetailViewController () {
     dispatch_queue_t queue;
@@ -222,7 +221,7 @@
             
             dispatch_async(mq, ^{
                 [progress stopAnimating];
-                [alert dismissWithClickedButtonIndex:0 animated:YES];
+                [alert dismissWithClickedButtonIndex:0 animated:NO];
                 // [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
                 // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
                 [self.bddView setNeedsDisplay];
@@ -302,17 +301,21 @@
     [self centerView:self.cnfLabel verticallyTo:self.cnfField.frame];
     [self centerView:self.dnfLabel verticallyTo:self.dnfField.frame];
     
-    CGRect f = self.bddView.frame;
-    self.bddView.frame = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, 50 + (bddLevelCount-1)*100);
-    f = self.bddView.frame;
-    
     NSUInteger visibleLines = MIN(1 << varCount,TRUTH_TABLE_MAX_VISIBLE_ROWS) + 1;
-    self.truthTableView.frame = CGRectMake(CGRectGetMinX(f), CGRectGetMaxY(f)+10, CGRectGetWidth(f), 40+visibleLines*25);
+    CGFloat htmlHeight = 40+visibleLines*25;
+    CGFloat bddHeight = 80 + (bddLevelCount-1)*70;
     
+    CGRect f = self.bddView.frame;
+    f = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, MAX(htmlHeight, bddHeight));
+    self.bddView.frame = f;
+    self.truthTableView.frame = f;    
+    // self.truthTableView.frame = CGRectMake(CGRectGetMinX(f), CGRectGetMaxY(f)+10, CGRectGetWidth(f), );
+    self.truthTableView.frame = self.bddView.frame;
     // [self moveView:self.bddView toY: self.bddView.frame.origin.y + yoffset];
     
     
-    self.resultView.contentSize = CGSizeMake(CGRectGetMaxX(self.truthTableView.frame), CGRectGetMaxY(self.truthTableView.frame));
+    // self.resultView.contentSize = CGSizeMake(CGRectGetMaxX(self.truthTableView.frame), CGRectGetMaxY(self.truthTableView.frame));
+    self.resultView.contentSize = CGSizeMake(CGRectGetMaxX(f), CGRectGetMaxY(f));
     
 }
 
