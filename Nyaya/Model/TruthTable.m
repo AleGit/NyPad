@@ -21,9 +21,8 @@
     NSUInteger _titleColumnIdx;
     
     BOOL *_evals;
-    NSMutableIndexSet *_trueIndices;
-    NSMutableIndexSet *_falseIndices;
     
+    NSMutableIndexSet *_trueIndices;
     
     NSArray *_variables;
     NSArray *_headers;
@@ -87,13 +86,7 @@
 }
 
 - (void)reserveMemory {
-    long size = _cellCount * sizeof(BOOL);
-    
-    if (size > 1*1000*1000)
-        NSLog(@"\ncols: %u rows: %u calloc(%u,%lu) = %lu", _colsCount, _rowsCount, _cellCount, sizeof(BOOL), size);
-    
-    _evals = calloc(_cellCount, sizeof(BOOL));
-    
+    _evals = NULL; // no extra memory needed the truth values are stored in an index set
 }
 
 - (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact {
@@ -114,7 +107,7 @@
         [self reserveMemory];
         
         _trueIndices = [NSMutableIndexSet indexSet];
-        _falseIndices = [NSMutableIndexSet indexSet];
+        // _falseIndices = [NSMutableIndexSet indexSet];
     }
     
     return self;
@@ -144,37 +137,37 @@
     }];
     
     BOOL rowEval = [_formula evaluationValue];
-    
-    // formula fil
-    *(_evals + rowIndex) = rowEval;
-    
+    // *(_evals + rowIndex) = rowEval;
     return rowEval;
     
 }
 
 - (void)evaluateTable {
     [_trueIndices removeAllIndexes];
-    [_falseIndices removeAllIndexes];
+    // [_falseIndices removeAllIndexes];
     
     
     for (NSUInteger rowIndex=0; rowIndex < _rowsCount; rowIndex++) {
         BOOL rowEval = [self evaluateRow:rowIndex];
         
         if (rowEval) [_trueIndices addIndex:rowIndex];
-        else [_falseIndices addIndex:rowIndex];
+        
     }
     
     _titleColumnIdx = [_headers indexOfObject:_title];
 }
 
-- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIdx {
-    *(_evals + rowIdx) = eval;
-}
+//- (void)setEval:(BOOL)eval atRow:(NSUInteger)rowIdx {
+//    // *(_evals + rowIdx) = eval;
+//}
 
 #pragma mark - output
 
 - (BOOL)evalAtRow:(NSUInteger)rowIdx {
-    return *(_evals + rowIdx);
+    // return *(_evals + rowIdx);
+    
+    if ([_trueIndices containsIndex:rowIdx]) return YES;
+    else return FALSE;
 }
 
 - (NSString*)description {
@@ -231,7 +224,7 @@
 #pragma mark - comparisons
 
 - (BOOL)isTautology {
-    return [_falseIndices count] == 0;
+    return [_trueIndices count] == _rowsCount;
     
 }
 
@@ -249,7 +242,7 @@
     
 }
 - (NSUInteger)falseCount {
-    return [_falseIndices count];
+    return _rowsCount - [_trueIndices count];
     
 }
 
@@ -299,7 +292,7 @@
 #pragma mark - memory management
 
 - (void)dealloc {
-    free(_evals);
+    if (_evals) free(_evals);
 }
 
 @end
@@ -310,6 +303,16 @@
 
 - (NSArray*)makeHeaders {
     return [[self.formula setOfSubformulas] allObjects];
+}
+
+- (void)reserveMemory {
+    long size = _cellCount * sizeof(BOOL); // aver ineffizient way to store a truth table
+    
+    if (size > 1*1000*1000)
+        NSLog(@"\ncols: %u rows: %u calloc(%u,%lu) = %lu", _colsCount, _rowsCount, _cellCount, sizeof(BOOL), size);
+    
+    _evals = calloc(_cellCount, sizeof(BOOL));
+    
 }
 
 #pragma mark - calculation
@@ -338,7 +341,6 @@
     }];
     
     BOOL rowEval = [_formula evaluationValue];
-    
     // formula fil
     [_formula fillHeadersAndEvals:headersAndEvals];
     
