@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questionLabelText</key>
+	<string>Find the Propositions</string>
+	<key>answerLabelText</key>
+	<string>Your list of propositions without “if”, “then”, “and”, “or“, and “not”</string>
+	<key>solutionLabelText</key>
+	<string>Sample solution (your correct answer may not match exactly)</string>
+	<key>questionsFile</key>
+	<string>QA1</string>
+	<key>solutionIndex</key>
+	<integer>2</integer>
+</dict>
+</plist>

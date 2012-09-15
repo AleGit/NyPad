@@ -40,33 +40,34 @@
 @interface NyTuTester : NSObject <NyTuTester, NyAccessoryController>
 
 @property (nonatomic, strong) IBOutlet UIView *testView;
-@property (nonatomic, weak) IBOutlet UILabel *keyLabel;
-@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
-@property (nonatomic, weak) IBOutlet UILabel *inputLabel;
+@property (nonatomic, weak) IBOutlet UILabel *questionLabel;        // how to read the question
+@property (nonatomic, weak) IBOutlet UILabel *solutionLabel;        // how to read the solution
+@property (nonatomic, weak) IBOutlet UILabel *answerLabel;          // how to write the answer
 
-@property (nonatomic, weak) IBOutlet UITextView *keyField;
-@property (nonatomic, weak) IBOutlet UITextView *valueField;
-@property (nonatomic, weak) IBOutlet UITextView *inputField;
+@property (nonatomic, weak) IBOutlet UITextView *questionField;     // the content of the question
+@property (nonatomic, weak) IBOutlet UITextView *solutionField;     // the content of the solution
+@property (nonatomic, weak) IBOutlet UITextView *answerField;       // the answer of the user
 
+@property (nonatomic, readonly) NSString *testerKey;
 @end
 
 @interface NyTuTesterPlist : NyTuTester
 
 @property (nonatomic, strong) NSDictionary *testDictionary;
 @property (nonatomic, strong) NSDictionary *questionsDictionary;
-@property (nonatomic, strong) NSString *keyLabelText;
-@property (nonatomic, strong) NSString *inputLabelText;
-@property (nonatomic, strong) NSString *valueLabelText;
+@property (nonatomic, strong) NSString *questionLabelText;
+@property (nonatomic, strong) NSString *answerLabelText;
+@property (nonatomic, strong) NSString *solutionLabelText;
 
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *question;       // question = key, solution = value from dictionary
 
 @end
 
 @interface NyTuTester101 : NyTuTesterPlist
 @end
 
-@interface NyTuTester111 : NyTuTesterPlist
+@interface NyTuTester1DS : NyTuTesterPlist
 @end
 
-@interface NyTuTester121 : NyTuTesterPlist
+@interface NyTuTester1SY : NyTuTesterPlist
 @end

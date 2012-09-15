@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>If I don‘t reach the bus then I have to take a taxi.</string>
+		<string>if not p then q</string>
+		<string>I reach the bus; I take a taxi</string>
+		<string>¬p → q</string>
+	</array>
+	<array>
+		<string>I will be late when I don‘t reach the bus</string>
+		<string>if not p then q</string>
+		<string>I will be late; I reach the bus</string>
+		<string>¬p → q</string>
+	</array>
+	<array>
+		<string>If I buy a car I can&apos;t buy a boat.</string>
+		<string>if p then not q</string>
+		<string>I buy a car; I can buy a boat</string>
+		<string>p → ¬q</string>
+	</array>
+	<array>
+		<string>If the barmoter falls, then it will rain or it will snow.</string>
+		<string>if p then q or r</string>
+		<string>the barometer falls; it will rains; it will snow</string>
+		<string>p → q ∨ r</string>
+	</array>
+	<array>
+		<string>When the sun shines today, it won‘t shine tommorrow.</string>
+		<string>if p then not q</string>
+		<string>the sun shines today; it will shine tommorow</string>
+		<string>p → ¬q</string>
+	</array>
+	<array>
+		<string>Robert was jealous of Yvonne, or he was not in a good mood.</string>
+		<string>p or not q</string>
+		<string>Robert was jealous of Yvonne;  he was in a good mood</string>
+		<string>p ∨ ¬ q</string>
+	</array>
+	<array>
+		<string>If interest rates go up, share prices go down.</string>
+		<string>if not p or not q then not r</string>
+		<string>interest rates go up; share prices go down</string>
+		<string>p → q</string>
+	</array>
+	<array>
+		<string>No shoes, no shirt, no service</string>
+		<string>if not p or not q then not r</string>
+		<string>shoes, shirt, service</string>
+		<string>¬p ∨ ¬q → ¬s</string>
+	</array>
+	<array>
+		<string>If Dick met Jane yesterday, they had a cup of coffee together or they took a walk in the park</string>
+		<string>if p then q or r</string>
+		<string>Dick met Jane yesterday; they had a cup of coffee together; they took a walk in the park</string>
+		<string>p → q ∨ r</string>
+	</array>
+	<array>
+		<string>Today it will rain or shine, but not both</string>
+		<string>p or q and not p and q</string>
+		<string>will rain; shine; both</string>
+		<string>p → q ∨ ¬r</string>
+	</array>
+	<array>
+		<string>If Smith has installed central heating, then he has sold his car or he has not paid his mortage</string>
+		<string>if p then q or not r</string>
+		<string>Smith has installed central heating; he has sold his car; he has not paid his mortage</string>
+		<string></string>
+	</array>
+</array>
+</plist>

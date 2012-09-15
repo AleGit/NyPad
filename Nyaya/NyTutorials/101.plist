@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questionLabelText</key>
+	<string>Guess the structure of composite sentences</string>
+	<key>answerLabelText</key>
+	<string>Use only “if”, “then”, “and”, “or“, “not”, “p”, “q”, “r”.</string>
+	<key>solutionLabelText</key>
+	<string>Sample solution (you may have found an other correct epression)</string>
+	<key>questionsFile</key>
+	<string>QA1</string>
+	<key>solutionIndex</key>
+	<integer>1</integer>
+</dict>
+</plist>
