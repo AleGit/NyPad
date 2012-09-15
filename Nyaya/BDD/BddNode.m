@@ -8,51 +8,10 @@
 
 #import "BddNode.h"
 #import "TruthTable.h"
-#include "NyayaNode.h"
-#include "NSString+NyayaToken.h"
-
-#pragma mark -
-//@interface NSArray (BddNode)
-//- (BddNode*)nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb;
-//@end
-//
-//@implementation NSArray (BddNode)
-//
-//- (BddNode*) nodeWithLeftBranch:(BddNode*)lb rightBranch:(BddNode*)rb {
-//    for (BddNode* node in self) {
-//        if (node.leftBranch.id == lb.id && node.rightBranch.id == rb.id)
-//            return node;
-//    }
-//    return nil;
-//}
-//
-//@end
-
-//@interface NSString (BddNode)
-//- (NSString*)conjunct;
-//- (NSString*)disjunct;
-//@end
-//
-//@implementation NSString (BddNode)
-//
-//- (NSString*)conjunct {
-//    NSString *s = [[self stringByReplacingOccurrencesOfString:@":1" withString:@""]
-//            stringByReplacingOccurrencesOfString:@":" withString:@" ∧ "];
-//    
-//    return s;
-//    
-//}
-//- (NSString*)disjunct {
-//    NSString *s = [[self stringByReplacingOccurrencesOfString:@":0" withString:@""]
-//                   stringByReplacingOccurrencesOfString:@":" withString:@" ∨ ¬"];
-//    s = [@"¬" stringByAppendingString:s];
-//    s = [s stringByReplacingOccurrencesOfString:@"¬¬" withString:@""];
-//    
-//    return s;
-//}
-//
-//@end
-#pragma mark -
+#import "NyayaNode.h"
+#import "NyayaNode+Valuation.h"
+#import "NyayaNode_Cluster.h"
+#import "NSString+NyayaToken.h"
 
 @interface BddNode () {
     NSInteger _id;
@@ -148,7 +107,7 @@
         }
         [lowerLevelArray addObject:node];
     }
-    [levels addObject:lowerLevelArray]; // the array with 0 and 1-nodes
+    [levels addObject:lowerLevelArray]; // the array with '0' and '1'-nodes has index 0
     
     NSMutableArray *levelArray;
     for (NSUInteger varIdx = 0; varIdx < varsCount; varIdx++) {
@@ -191,6 +150,65 @@
     bdd = [lowerLevelArray objectAtIndex:0];
     bdd->_levels = levels;
     return bdd;
+}
+
++(BddNode*)bddWithNode:(NyayaNode *)node order:(NSArray *)variables levels:(NSMutableArray*)levels varIdx:(NSUInteger)varIdx {
+    BddNode *bdd = nil;
+    NSUInteger levelIdx = [variables count] - varIdx;
+    
+    if (levelIdx == 0) {
+        // not a variable level, but level with '0's and '1's
+        // 'lowest' level (level idx == 0)
+            
+        BOOL eval = [node evaluationValue];
+        if (eval) bdd = [BddNode top];
+        else bdd = [BddNode bottom];
+            
+        
+    }
+    else {
+        // variables    = [x,y]
+        // node         = x^y
+        // levels       = [[0,1,1,0],[y:2,y:3],[x:4]]
+        
+        NyayaNodeVariable *variable = [variables objectAtIndex:varIdx];
+        
+        variable.evaluationValue = NO;
+        BddNode *lbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1];
+        variable.evaluationValue = YES;
+        BddNode *rbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1];
+        
+        bdd = [[BddNode alloc] init];
+        
+        bdd->_leftBranch = lbdd;
+        
+        bdd->_rightBranch = rbdd;
+        bdd->_name = variable.symbol;
+        
+    }
+    
+    NSUInteger capacity = 1 << ([variables count] - levelIdx);
+    if ([levels count] == levelIdx) {
+        
+        [levels addObject:[NSMutableArray arrayWithCapacity:capacity]];
+    }
+    NSMutableArray *levelArray = [levels objectAtIndex:levelIdx];
+    
+    bdd->_id = capacity + [levelArray count]; // unreduced
+    
+    [levelArray addObject:bdd];
+
+    return bdd;
+}
+
++(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables {
+    NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[variables count]];
+    BddNode *bdd = [self bddWithNode:node order:variables levels:levels varIdx:0];
+
+    bdd->_levels = levels;
+    return bdd;
+    
+    
 }
 
 #pragma mark - disjunctive normal form

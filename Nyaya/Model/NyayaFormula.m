@@ -11,7 +11,7 @@
 #import "NyayaNode+Attributes.h"
 #import "NyayaNode+Reductions.h"
 #import "NyayaNode+Derivations.h"
-//#import "NyayaNode+Derivations.h"
+#import "NyayaNode+Valuation.h"
 
 #define NYAYA_MAX_INPUT_LENGTH 1367
 #define NAYAY_MAX_DERIVATION_LENGTH 720
@@ -81,12 +81,19 @@
     return _truthTable;
 }
 
-- (BddNode*)OBDD:(BOOL)reduced {
+- (BddNode*)OBDDx:(BOOL)reduced {
     if (_wellFormed && (!_bddNode || (_bddNode.reduced != reduced))) {
         // caculate reduced ordered binary decision diagram for compact truth table
         _bddNode = [BddNode bddWithTruthTable:[self truthTable:YES] reduce:reduced];
     }
     return _bddNode;
+}
+
+- (BddNode*)OBDD:(BOOL)reduced {
+    NSArray *variables = [_slfNode.setOfVariables allObjects];
+    
+    
+    return [BddNode bddWithNode:_slfNode order:variables];
 }
 
 - (void)makeDescriptions {
