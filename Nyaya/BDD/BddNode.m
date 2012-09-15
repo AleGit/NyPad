@@ -152,7 +152,7 @@
     return bdd;
 }
 
-+(BddNode*)bddWithNode:(NyayaNode *)node order:(NSArray *)variables levels:(NSMutableArray*)levels varIdx:(NSUInteger)varIdx {
++(BddNode*)bddWithNode:(NyayaNode *)node order:(NSArray *)variables levels:(NSMutableArray*)levels varIdx:(NSUInteger)varIdx reduce:(BOOL)reduce{
     BddNode *bdd = nil;
     NSUInteger levelIdx = [variables count] - varIdx;
     
@@ -174,17 +174,22 @@
         NyayaNodeVariable *variable = [variables objectAtIndex:varIdx];
         
         variable.evaluationValue = NO;
-        BddNode *lbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1];
+        BddNode *lbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1 reduce:reduce];
         variable.evaluationValue = YES;
-        BddNode *rbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1];
+        BddNode *rbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1 reduce:reduce];
         
-        bdd = [[BddNode alloc] init];
-        
-        bdd->_leftBranch = lbdd;
-        
-        bdd->_rightBranch = rbdd;
-        bdd->_name = variable.symbol;
-        
+        if ([lbdd isEqual:rbdd])
+            bdd = lbdd;
+        else {
+            
+            bdd = [[BddNode alloc] init];
+            
+            bdd->_leftBranch = lbdd;
+            
+            bdd->_rightBranch = rbdd;
+            bdd->_name = variable.symbol;
+            
+        }
     }
     
     NSUInteger capacity = 1 << ([variables count] - levelIdx);
@@ -194,16 +199,28 @@
     }
     NSMutableArray *levelArray = [levels objectAtIndex:levelIdx];
     
-    bdd->_id = capacity + [levelArray count]; // unreduced
+    bdd->_id = capacity + [levelArray count]; // unused number
     
+    if (reduce) {
+        for (BddNode* b in levelArray) {
+            if (bdd.isLeaf && [b.name isEqual:bdd.name]) { // '0' or '1'
+                bdd = b;
+                break;
+            }
+            else if (!bdd.isLeaf && bdd.leftBranch == b.leftBranch && bdd.rightBranch == b.rightBranch) {
+                bdd = b;
+                break;
+            }      
+        }
+    }
     [levelArray addObject:bdd];
 
     return bdd;
 }
 
-+(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables {
++(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce {
     NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[variables count]];
-    BddNode *bdd = [self bddWithNode:node order:variables levels:levels varIdx:0];
+    BddNode *bdd = [self bddWithNode:node order:variables levels:levels varIdx:0 reduce:reduce];
 
     bdd->_levels = levels;
     return bdd;

@@ -90,10 +90,13 @@
 }
 
 - (BddNode*)OBDD:(BOOL)reduced {
-    NSArray *variables = [_slfNode.setOfVariables allObjects];
-    
-    
-    return [BddNode bddWithNode:_slfNode order:variables];
+    if (_wellFormed) {
+        NSArray *variables = [_slfNode.setOfVariables allObjects];
+        
+        
+        return [BddNode bddWithNode:_slfNode order:variables reduce:reduced];
+    }
+    return nil;
 }
 
 - (void)makeDescriptions {
