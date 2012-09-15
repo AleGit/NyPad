@@ -94,4 +94,28 @@
         STAssertTrue(duration < maxDuration, @"%3f %@", duration, label);
     }
 }
+
+- (void)testBddCreation {
+    for (NSString *input in @[@"a^b^c^d^e^f^g^h^i^j^k",
+         @"a+b+c+d+e+f+g+h+i+j+k+m+n",
+         @"a+b+c+d+e+f+g+h+i+j+k+m+n+a+b+c+d+e+f+g+h+i+j+k+m+n",
+         @"a^b^c^d^e^f^g^h^i^j^k^l^m^n^o^p^q^r^s"]) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        
+        NSDate *begin = [NSDate date];
+        BddNode *bdd0 = [formula OBDD:YES];
+        NSTimeInterval duration0 = [[NSDate date] timeIntervalSinceDate:begin];
+        NSLog(@"d0:%f", duration0);
+        
+        begin = [NSDate date];
+        TruthTable *tTable = [formula truthTable:YES];
+        BddNode *bdd1 = [BddNode bddWithTruthTable:tTable reduce:YES];
+        NSTimeInterval duration1 = [[NSDate date] timeIntervalSinceDate:begin];
+        
+        STAssertFalse(bdd0 == bdd1, nil);
+        STAssertTrue(duration0 < duration1, @"d0:%f d1:%f %@", duration0, duration1,input);
+        NSLog(@"d1:%f %@", duration1,input);
+    }
+    
+}
 @end

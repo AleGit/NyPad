@@ -152,81 +152,93 @@
     return bdd;
 }
 
-+(BddNode*)bddWithNode:(NyayaNode *)node order:(NSArray *)variables levels:(NSMutableArray*)levels varIdx:(NSUInteger)varIdx reduce:(BOOL)reduce{
++(BddNode*)bddWithNode:(NyayaNode*)nynode order:(NSArray*)variables reduce:(BOOL)reduce {
+    
     BddNode *bdd = nil;
-    NSUInteger levelIdx = [variables count] - varIdx;
+    NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[variables count]+1];
     
-    if (levelIdx == 0) {
-        // not a variable level, but level with '0's and '1's
-        // 'lowest' level (level idx == 0)
-            
-        BOOL eval = [node evaluationValue];
-        if (eval) bdd = [BddNode top];
-        else bdd = [BddNode bottom];
-            
-        
-    }
-    else {
-        // variables    = [x,y]
-        // node         = x^y
-        // levels       = [[0,1,1,0],[y:2,y:3],[x:4]]
-        
-        NyayaNodeVariable *variable = [variables objectAtIndex:varIdx];
-        
-        variable.evaluationValue = NO;
-        BddNode *lbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1 reduce:reduce];
-        variable.evaluationValue = YES;
-        BddNode *rbdd = [self bddWithNode:node order:variables levels:levels varIdx: varIdx+1 reduce:reduce];
-        
-        if ([lbdd isEqual:rbdd])
-            bdd = lbdd;
-        else {
-            
-            bdd = [[BddNode alloc] init];
-            
-            bdd->_leftBranch = lbdd;
-            
-            bdd->_rightBranch = rbdd;
-            bdd->_name = variable.symbol;
-            
-        }
-    }
+    BddNode *top = [BddNode top];
+    BddNode *bottom = [BddNode bottom];
     
-    NSUInteger capacity = 1 << ([variables count] - levelIdx);
-    if ([levels count] == levelIdx) {
-        
-        [levels addObject:[NSMutableArray arrayWithCapacity:capacity]];
-    }
-    NSMutableArray *levelArray = [levels objectAtIndex:levelIdx];
+    NSUInteger varsCount = [variables count];
+    NSUInteger rowsCount = 1 << varsCount;
+    NSUInteger count = rowsCount >> 1;
     
-    bdd->_id = capacity + [levelArray count]; // unused number
-    
+    NSMutableArray *allNodes = [NSMutableArray arrayWithCapacity:rowsCount];
     if (reduce) {
-        for (BddNode* b in levelArray) {
-            if (bdd.isLeaf && [b.name isEqual:bdd.name]) { // '0' or '1'
-                bdd = b;
-                break;
-            }
-            else if (!bdd.isLeaf && bdd.leftBranch == b.leftBranch && bdd.rightBranch == b.rightBranch) {
-                bdd = b;
-                break;
-            }      
-        }
+        [allNodes addObject:bottom];    // idx == 0
+        [allNodes addObject:top];       // idx == 1
     }
-    [levelArray addObject:bdd];
-
-    return bdd;
-}
-
-+(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce {
-    NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[variables count]];
-    BddNode *bdd = [self bddWithNode:node order:variables levels:levels varIdx:0 reduce:reduce];
-
+    
+    NSMutableArray *lowerLevelArray = [NSMutableArray arrayWithCapacity:rowsCount];
+    
+    for (NSUInteger rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
+        BddNode *bdd = nil;
+        
+        [variables enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, NSUInteger idx, BOOL *stop) {
+            variable.evaluationValue = (rowIdx & (count >> idx)) > 0 ? YES : NO;;
+        }];
+        
+        BOOL eval = nynode.evaluationValue;
+        
+        if (reduce) { // reuse nodes
+            bdd = eval ? top : bottom;
+        }
+        else { // do not reuse nodes
+            bdd = eval ? [[BddNode alloc] initWithName:@"1" id:[allNodes count]] : [[BddNode alloc] initWithName:@"0" id:[allNodes count]];
+            [allNodes addObject:bdd];
+        }
+        [lowerLevelArray addObject:bdd];
+    }
+    [levels addObject:lowerLevelArray]; // the array with '0' and '1'-nodes has index 0
+    
+    NSMutableArray *levelArray;
+    for (NSUInteger varIdx = 0; varIdx < varsCount; varIdx++) {
+        NyayaNode *variable = [variables objectAtIndex:varsCount-varIdx-1];
+        levelArray = [NSMutableArray arrayWithCapacity:[lowerLevelArray count]/2];
+        
+        for (NSUInteger idx = 0; idx < [lowerLevelArray count]; idx +=2) {
+            BddNode *left = [lowerLevelArray objectAtIndex:idx];
+            BddNode *right = [lowerLevelArray objectAtIndex:idx+1];
+            BddNode *bdd = nil;
+            
+            if (reduce) {
+                if (left == right) bdd = left;
+                
+                // try to find the node in actual level
+                for (BddNode *ln in levelArray) {
+                    if (ln.leftBranch == left && ln.rightBranch == right) {
+                        bdd = ln;
+                        break;  // found the same node
+                    }
+                }
+            }
+            
+            // didn't find the node
+            if (!bdd) {
+                bdd = [[BddNode alloc] initWithName:variable.symbol
+                                                  id:[allNodes count]   // new unique id
+                                          leftBranch:left
+                                         rightBranch:right];
+                [allNodes addObject:bdd];
+                
+            }
+            [levelArray addObject:bdd];
+            // level with multiple entries of same instance (reduced)
+            // or all entries with unique id (unreduced)
+        }
+        
+        lowerLevelArray = levelArray;
+        [levels addObject:lowerLevelArray];
+    }
+    
+    NSAssert([lowerLevelArray count] == 1, @"lowerLevelArray should contain one element");
+    bdd = [lowerLevelArray objectAtIndex:0];
     bdd->_levels = levels;
+    
     return bdd;
-    
-    
 }
+
 
 #pragma mark - disjunctive normal form
 
