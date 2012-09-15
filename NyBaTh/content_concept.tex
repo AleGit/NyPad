@@ -12,9 +12,9 @@ A glossary of terms and a formula calculator (BoolTool) to check formulas will s
 
 \section{Tutorials}
 
-Ny$\bar{a}$ya for iPad covers syntax and semantics of propositional logic, but not natural deduction. 
-It introduces normal forms and the representation of boolean functions
-as truth tables and binary decision diagrams. 
+Ny$\bar{a}$ya for iPad covers syntax and semantics of propositional logic, but one some basic rules of natural deduction. 
+It introduces normal forms,
+truth tables and binary decision diagrams as different but equivalent representations of boolean functions.
 
 The structure of the tutorials and the content of the exercises are heavily based on the according sections of the book  
 {\em Logic in Computer Science} \cite{Huth:2004:LCS:975331} by M.~Huth and M.~Ryan.
@@ -25,99 +25,179 @@ where the user gets immediate feedback. Every interactive part will present some
 
 \subsection{Introduction}
 
-The first three tutorials give an overview to modeling, 
+The first three tutorials (\hyperref[tut:101]{101}, \hyperref[tut:1DC]{1DC}, \hyperref[tut:1SY]{1SY}) give an informal overview to modeling, 
 i.e. the translation from sentences of natural language to more formal sentences. 
 The content and configuration of the comprehensive questions are stored in xml-files in utf8-encoding. 
 
-The content is written into  a simple property list “QA124.plist” \tabref{tab:QA123} 
+The content is written into  a simple property list “QA1.plist” \tabref{tab:QA1} 
 with an array (starts at line 2) 
 of arrays that include sentences and sample solutions (the first exercise-array starts at line 3). 
 The first string is the sample sentence (line 4), 
 and the following entries are the solutions for different exercises. 
 
-The tutorials has their own configuration files “NyTuTester101.plist” \tabref{tab:PLIST101},
- “NyTuTester111.plist” and  “NyTuTester121.plist”, with a dictionary that
+The tutorials has their own configuration files “101.plist” \tabref{tab:101PLIST},
+ “1DS” and  “1SY.plist”, with a dictionary that
  describes the task and defines the index of the sample solution.
 
 
-\begin{table}[htdp]
-\begin{center}
-\begin{lstlisting}[mathescape]
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-	<array>
-		<array> 
-			<string>If the barmoter falls, then it will rain or it will snow.</string>
-			<string>if p then q or r</string>
-			<string>the barometer falls; it will rains; it will snow</string>
-			<string>p $\rightarrow$ q $\vee$ r</string>
-		</array>
-		<array>
-			<string>sample sentence …
-			$\square$
-		$\square$
-	$\square$
-</plist>
-\end{lstlisting}
-\caption{Content file with sentences and solutions}
-\end{center}
-\label{tab:QA123}
-\end{table}%
+
 
 \begin{table}[htdp]
 \begin{center}
 \begin{lstlisting}[mathescape]
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+	"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+	$\square$	
+</plist>
+\end{lstlisting}
+\caption{Structure of a simple property list \tabref{tab:PLISTDTD}}
+\end{center}
+\label{tab:PLISTHEAD}
+\end{table}%
+
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape,firstnumber=5]
+	<array>
+		<string>Tutorials</string>
+		<array>
+			<string>Overview</string>
+			<array>
+				<string>Motivation</string>
+				<string>101</string>
+			</array>
+		$\square$
+\end{lstlisting}
+\caption{Tutorial.plist – configuration file for all tutorials}
+\end{center}
+\label{tab:TUTORIALPLIST}
+\end{table}%
+
+
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape,firstnumber=5]
+	<array>
+		<array> 
+			<string>If the barmoter falls, then it will rain.</string>
+			<string>if p then q or r</string>
+			<string>the barometer falls; it will rains</string>
+			<string>p $\rightarrow$ q</string>
+		</array>
+		$\square$
+\end{lstlisting}
+\caption{QA1.plist – sentences and solutions}
+\end{center}
+\label{tab:QA1}
+\end{table}%
+
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape,firstnumber=5]
 <dict>
- <key>keyLabelText</key>
- <string>Guess the structure of composite sentences</string>
- <key>inputLabelText</key>
- <string>Use only “if”, “then”, “and”, “or“, “not”, “p”, “q”, “r”.</string>
- <key>valueLabelText</key>
- <string>Sample solution (you may have found an other correct epression)</string>
- <key>questionsFile</key>
- <string>QA123</string>
- <key>answerIndex</key>
- <integer>1</integer>
+	<key>questionLabelText</key>
+	<string>Guess $\square$ </string>
+	<key>answerLabelText</key>
+ 	<string>Use $\square$ </string>
+ 	<key>solutionLabelText</key>
+ 	<string>Solution $\square$ </string>
+ 	<key>questionsFile</key>
+ 	<string>QA1</string>
+ 	<key>solutionIndex</key>
+ 	<integer> $\square$ </integer>
 </dict>
 \end{lstlisting}
-\caption{Configuration file with comprehension question}
+\caption{Structure of a test configuration}
 \end{center}
-\label{tab:PLIST101}
+\label{tab:101PLIST}
 \end{table}%
+
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{llll}
+%& Tutorial & Instructions & Configuration \\
+\hyperref[tut:101]{101} & tutorial101.html & instructions101.html & 101.plist \\
+\hyperref[tut:1DS]{1DS} & tutorial1DS.html & instructions1DS.html & 1DS.plist \\
+\hyperref[tut:1SY]{1SY} & tutorial1DS.html & instructions1DS.html & 1SY.plist \\
+\hyperref[tut:1LI]{1LI} & tutorial1LI.html & & \\
+\hline
+\hyperref[tut:201]{201} & \\
+\hyperref[tut:2PRE]{2PRE} & \\
+\hyperref[tut:2SUB]{2SUB} & \\
+\hyperref[tut:2SYT]{2SYT} & \\
+\hyperref[tut:2TOB]{2TOB} & \\
+\hyperref[tut:2SMP]{2SMP} & \\
+\hyperref[tut:2CNF]{2CNF} & \\
+\hyperref[tut:2DNF]{2DNF} & \\
+\hline
+\hyperref[tut:301]{301} & \\
+\hyperref[tut:3TT]{3TT} & \\
+\hyperref[tut:3EE]{3EE} & \\
+\hyperref[tut:3STC]{3STC} & \\
+\hline
+\hyperref[tut:401]{401} & \\
+\hyperref[tut:4IFF]{4IFF} & \\
+\hyperref[tut:4NNF]{4NNF} & \\
+\hyperref[tut:4CNF]{4CNF} & \\
+\hyperref[tut:4DNF]{4DNF} & \\
+\hyperref[tut:4ALG]{4ALG} & \\
+\hyperref[tut:4VAL]{4VAL} & \\
+\hyperref[tut:4SAT]{4SAT} & \\
+\hline
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+%\hyperref[tut:]{} & \\
+\end{tabular}
+\caption{Overview of tutorial content and configuration files}
+\end{center}
+\label{tab:CONFIG}
+\end{table}%
+
 
 
 \begin{verbatim}
 \end{verbatim}
 
 \subsubsection{Motivation – the composite structure of sentences}
+\label{tut:101}
 
-The aim of logic in general is to reason about situations.\cite{Huth:2004:LCS:975331} 
+(101) The aim of logic in general is to reason about situations.\cite{Huth:2004:LCS:975331} 
 The common structure of two composite sentences in natural language 
 is reduced to “If p and not q, then r. Not r. p. Therefore, q“. 
 If the reasoning is correct, the user can it use in both situations.
-In the interactive part the user has to guess the structure of composite sentences. 
+In the interactive part the user has to guess the structure of composite sentences in natural language. 
 
 \subsubsection{Propositions – declarative sentences}
+\label{tut:1DC}
 
-The concept of propositions – declarative sentences – 
+(1DS) The concept of propositions – declarative sentences – 
 as indivisible building blocks of propositional logic 
 is explained in more detail. Some counterexamples are presented 
 and the ambiguity of natural language is demonstrated.
 The user has to find the propositions in composite sentences. 
 
 \subsubsection{Symbols – emphasize the structure}
+\label{tut:1SY}
 
-The symbols to replace “if then”, “not”, “and” and “or” are introduced. 
+(1SY) The symbols to replace “if then”, “not”, “and” and “or” are introduced. 
 Now the user should transform the sentences from the first tutorial into pure propositional formulas. 
-The content will be generated by the app and the user's solution will be checked without tolerance.
 
 \subsubsection{Limits}
+\label{tut:1LI}
 
-Not every situation can be transformed into a formula in propositional logic. 
+(1LI) Not every situation can be transformed into a formula in propositional logic. 
 This tutorial has no interactive part.
 
 \subsection{Syntax}
@@ -125,80 +205,168 @@ This tutorial has no interactive part.
 After the informal introduction into the atoms and connectives of propositional logic, 
 the formal aspects of propositional logic will be introduced to the user.
 
-\subsubsection{Well formed formulas}
+The content of the exercises will be generated by the app and the user's solution will be checked without tolerance.
 
-The concept of well formed formulas is explained. 
+
+\subsubsection{Well formed formulas}
+\label{tut:201}
+
+(201) The concept of well formed formulas is explained. 
 The user has to build simple well formed formulas: 
 “a conjcuntion”, “an disjunction of an negation”, “a negation of an implication” and so on.
 They have to use parenthesis.
 
 \subsubsection{Conventions for your convenience}
+\label{tut:2PRR}
 
-Precedence of connective is introduced. 
+(2PRE) Precedence of connective is introduced. 
 The user has to rewrite formulas 
 to save some parenthesis.
 
 \subsubsection{Subformulas}
+\label{tut:2SUB}
 
-Subformulas (starting from atoms) are use to build bigger formulas. Big formulas are build from many sub formulas.
+(2SUB) Subformulas (starting from atoms) are use to build bigger formulas. Big formulas are build from many sub formulas.
 The user have to find all sub formulas of simple composite formulas.
 
 \subsubsection{Syntax Trees}
+\label{tut:2SYT}
 
-This tutorial explains how to draw an syntax tree (starting with atoms)
-The user has to draw the syntax tree of simple formulas.
+(2SYT) This tutorial explains how to draw an syntax tree (starting with atoms)
+The user has to draw the syntax tree of simple formulas. They has to pay attention to the precedence of connectives.
 
 \subsubsection{Additional symbols – Top and Bottom}
+\label{tut:2TOB}
 
-The tutorial introduces top and bottom  
+(2TOB) The tutorial introduces top and bottom  
 as abbreviations of conjunctions and disjunctions 
-of formulas with their negation (tautologies and contradictions)
+of formulas with their negation (tautologies and contradictions). 
+The user has to rewrite some formulas replacing contradictions and tautologies with top and bottom.
 
-\subsubsection{Simplifying formulas}
+\subsubsection{Simplifying formulas – basic natural deduction rules}
+\label{tut:2SMP}
 
-The tutorial teaches the simplifying of conjunctions and disjunctions with top and bottom.
+(2SMP) The tutorial teaches the simplifying of conjunctions and disjunctions with top and bottom and the same sub formulas.
+The user has to rewrite some formulas eleminating top and bottom, double negations, dis- and conjunctions of the same atoms or sub formulas.
+
+\subsubsection{Conjunctive Normal Form} 
+\label{tut:2CNF}
+(2CNF) The syntax of formulas in conjunctive normal form is introduced and explained.
+It is shown that some formulas in cnf can be simplified to top.
+The user has to guess if a presented formula is in conjunctive normal form
+and if it can be simplified to top (T)
+
+\subsubsection{Disjunctive Normal Form} 
+\label{tut:2DNF}
+(2DNF) The syntax of formulas in conjunctive normal form is introduced and explained.
+It is shown that some formulas in dnf can be simplified to bottom.
+The user has to guess if a presented formula is in disjunctive normal form
+and if it can be simplified to top (T).
 
 \subsection{Semantics}
 
 After the introduction of well formed formulas the meaning of logical connectives is defined.
 
 \subsubsection{Truth assignments and valuation of formulas}
-
+\label{tut:301}
+(301)
 The user has to guess or calculate the evaluation of a given formula with a given truth assignment of the atoms of the formula.
 
 \subsubsection{Truth tables}
-
-The user has to fill in complete truth tables.
+\label{tut:3TT}
+(3TT)
+The user has to fill in complete truth tables with a maximum of three atoms.
 
 \subsubsection{Entailment and Equivalence}
+\label{tut:3EE}
+(3EE)
+The user has to guess or calculate if an semantic entailment holds. 
 
 
 
 \subsubsection{Satisfiability, Tautologies and Contradictions}
-
-content is missing
+\label{tut:3STC}
+(3STC)
+%content is missing
 
 \subsection{Normal Forms}
+\label{tut:4NF}
+(4NF)
+The definitions of implication free form and negation normal form is provided. 
+\hyperref[tut:2CNF]{CNF} and \hyperref[tut:2DNF]{CNF} are already defined.
 
-\subsubsection{Implication Free Form}
+The user has to guess if a formula is in IFF, NNF, CNF or DNF.
 
-content is missing
+\subsubsection{Get rid of implications}
+\label{tut:4IFF}
+(4IFF)
+%content is missing
+The implication of two sub formulas is semantically equivalent to the disjunction of the negation of the first sub formula with the second sub formula.
 
-\subsubsection{Negation Normal Form}
+The user has to rewrite formulas to an implication free form.
+The presented formula may already be implication free.
 
-content is missing
+\subsubsection{Negated atoms only}
+\label{tut:4NNF}
+(4NNF)
+The negation of a conjunction is semantically equivalent to the disjunction of the negations.
 
-\subsubsection{Conjunctive Normal Form}
+$\neg (a \wedge b) = (\neg a \vee \neg b)$
 
-content is missing
+The negation of a disjunction is semantically equivalent to the conjunction of the negations.
 
-\subsubsection{Disjunctive Normal Form}
+$\neg (a \vee b) = (\neg a \wedge \neg b)$
 
-content is missing
+The user has to rewrite formulas to a negation normal form.
+The presented formula is implication free
+but may already be in negation normal form.
 
-\subsubsection{Algorithms combined}
+\subsubsection{NNF to CNF}
+\label{tut:4CNF}
+(4CNF)
+The user learns the distribution of disjunctions over conjunctions.
 
-content is missing
+$a \vee (b \wedge c) = (a\vee b) \wedge (a\vee c)$
+
+$ (b \wedge c) \vee d = (b\vee d) \wedge (c\vee d)$
+
+The user has to rewrite formulas to a conjunctive normal form.  
+The presented formula is in negation normal form 
+but may already be in conjunctive normal form.
+
+
+\subsubsection{NNF to DNF}
+\label{tut:4DNF}
+(4DNF)
+The user learns the distribution of con junctions over disjunctions.
+
+$a \wedge (b \vee c) = (a\wedge b) \vee (a\wedge c)$
+
+$ (b \wedge c) \wedge d = (b\wedge d) \vee (c\wedge d)$
+
+The user has to rewrite formulas to a disjunctive normal form. 
+The presented formula is in negation normal form 
+but may be already be in disjunctive normal form.
+
+\subsubsection{From general formula to CNF or DNF}
+\label{tut:4ALG}
+(4ALG)
+The user learns how to combine the previous techniques to reach cnf or dnf.
+The user has to rewrite formulas to a conjunctive or disjunctive normal form.
+The presented formula is in general form
+but may already be in demanded normal form.
+
+\subsubsection{Validity of CNF}
+\label{tut:4VAL}
+(4VAL)
+
+The user has to guess or calculate satisfiability of formulas in conjunctive normal form.
+
+\subsubsection{Satisfiability of DNF} 
+\label{tut:4SAT}
+(4SAT)
+
+The user has to to guess or calculate satisfiability of formulas in disjunctive normal form.
 
 \subsection{Binary Decision Diagrams}
 
@@ -457,17 +625,16 @@ Some additions should be added for comfort.
 
 \subsection{Input}
 
-As minimum the embedded BoolTool must support the small latin letters as identifiers for atoms, 
+As minimum the embedded BoolTool must support the latin letters as identifiers for atoms, 
 “T” and “F” as names for top and bottom, and the symbols
-“\verb#!&|+>^#” as connectives, because these symbols can be found on almost every keyboard.
+“\verb#!&|+>^#” as connectives, because these ascii-symbols can be found on almost every keyboard.
 In environments with native utf8-strings it is is desirable that standard symbols of propositional logic
 “$ \neg \vee \wedge \rightarrow $”are accepted too, 
 so the user can copy the output and paste it into the input. 
-This enables the local persisting of formulas in standard representation of boolean functions.
+This enables the local persisting of formulas in a standard representation of boolean functions.
 
 \begin{table}[htdp]
 \begin{center}%\begin{lstlisting}[mathescape] 
-
 $\top | \perp 
 | \neg | !
 | \wedge | \&
@@ -485,29 +652,31 @@ $\top | \perp
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{l|c|c|c|cc|c|c|c|c|c|c|c|}
-Name	& NOT		& AND		& OR		&  IMPLIES \\
-ASCII 	& ! 			& \& \quad .	& |  \quad +			&> 	\\
-Symbol  	& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
-UTF-8	& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
-Unicode	& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
-HTML	& \&not;		& \&and;		& \&or;		& \&rarr; 
+Name	& atom & NOT		& AND		& OR		&  IMPLIES \\
+ASCII 	& p,q,r & ! 			& \& \quad .	& |  \quad +			&> 	\\
+Symbol  	&& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
+UTF-8	&& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
+Unicode	&& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
+HTML	&& \&not;		& \&and;		& \&or;		& \&rarr;  \\
+LaTeX	&& \verb+\neg+	& \verb+\& \wedge+ & \verb+\vee+ & \verb+\rightarrow+ 
 \end{tabular}
-\caption{basic connectives in ascii, utf-8, unicode and html}
+\caption{basic atoms and connectives in different encodings}
 \end{center}
 \label{tab:BASICSYMBOLS}
 \end{table}%
 
 \begin{table}[htdp]
 \begin{center}
-\begin{tabular}{c|c|cc|cccccccccc}
-TOP			& BOTTOM	& XOR & EOR		& IFF\\	
-T \quad 1	& F  \quad 0	& \multicolumn{2}{c|}{\textasciicircum} 	& <> \\
-$\top$		& $\perp$		& $\veebar$ 	&$\oplus$   			&$ \leftrightarrow$\\
-E2 8A A4	& E2 8A A5	& E2 8A BB	& E2 8A 95			&E2 86 94\\
-U+22A4		& U+22A5		& U+22BB	& U+2295				&U+2194\\
-T			& F			&			& \&oplus;				& \&harr;
+\begin{tabular}{l|c|c|cc|cccccccccc}
+Name & TOP			& BOTTOM	& EOR & XOR		& IFF \\	
+ASCII & T \quad 1	& F  \quad 0	& \multicolumn{2}{c|}{\textasciicircum} 	& <> \\
+Symbol &$\top$		& $\perp$		& $\veebar$ 	&$\oplus$   			&$ \leftrightarrow$\\
+UTF-8 & E2 8A A4	& E2 8A A5	& E2 8A BB	& E2 8A 95			&E2 86 94\\
+Unicode & U+22A4		& U+22A5		& U+22BB	& U+2295				&U+2194\\
+Html & T			& F			&			& \&oplus;				& \&harr;\\
+LaTeX & \verb+\top+	& \verb+\perp+	& \verb+\veebar+ & \verb+\oplus+	& \verb+\leftrightarrow+
 \end{tabular}
-\caption{additional connectives in ascii, utf-8, unicode and html}
+\caption{additional atoms and connectives}
 \end{center}
 \label{tab:ADDITIONALSYMBOLS}
 \end{table}%

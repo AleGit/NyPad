@@ -11,6 +11,7 @@
 \usepackage{blindtext}				% Blindtext einfach erzeugen
 \usepackage{listings}
 \usepackage{floatflt}
+\usepackage{color}
 
 %\lstset{
 %extendedchars=\true,
@@ -19,10 +20,11 @@
 
 \lstset{
 extendedchars=\true,
-%language=C,                             % Code langugage
+language=XML,                             % Code langugage
 basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
-keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
-commentstyle=\color{gray},              % Comments font
+%keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+keywordstyle=\color{blue},        % Keywords font ('*' = uppercase)
+commentstyle=\color{red},              % Comments font
 numbers=left,                           % Line nums position
 numberstyle=\tiny,                      % Line-numbers fonts
 stepnumber=1,                           % Step between two line-numbers
@@ -36,7 +38,7 @@ breakatwhitespace=false,                % Automatic breaks only at whitespace?
 showspaces=false,                       % Dont make spaces visible
 showtabs=false,                         % Dont make tabls visible
 columns=flexible,                       % Column format
-morekeywords={__global__, __device__},  % CUDA specific keywords
+morekeywords={__global__, __device__,array,dict,string,integer,key},  % CUDA specific keywords
 }
 
 \usepackage{varioref}
