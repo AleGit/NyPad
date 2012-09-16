@@ -274,9 +274,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" id="D8M-GJ-Ed7" customClass="NyPgCanvasView">
-                                <rect key="frame" x="0.0" y="59" width="703" height="596"/>
+                                <rect key="frame" x="20" y="59" width="663" height="586"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jBA-Jr-uNV" appends="YES" id="6HS-bX-CDB"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -287,10 +291,15 @@
                         <barButtonItem key="rightBarButtonItem" title="Options" id="xyg-hc-8D0"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="canvasView" destination="Xde-n2-Qu6" id="sQb-rQ-8SW"/>
+                        <outlet property="canvasView" destination="D8M-GJ-Ed7" id="mcf-zQ-aT9"/>
                         <outlet property="inputField" destination="ZvL-8X-3LC" id="slq-6W-FBS"/>
                     </connections>
                 </viewController>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="jBA-Jr-uNV">
+                    <connections>
+                        <action selector="canvasLongPress:" destination="IPo-mM-uVV" id="xQM-aV-PXK"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6347" y="674"/>
         </scene>
@@ -770,6 +779,7 @@
                 <relationship kind="action" name="didEndOnExit:"/>
                 <relationship kind="action" name="editingChanged:"/>
                 <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="process:" candidateClass="UIButton"/>
                 <relationship kind="action" name="send:"/>
                 <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
                 <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
@@ -797,7 +807,6 @@
             <relationships>
                 <relationship kind="action" name="back:" candidateClass="UIButton"/>
                 <relationship kind="action" name="dismiss:" candidateClass="UIButton"/>
-                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
                 <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
                 <relationship kind="action" name="press:" candidateClass="UIButton"/>
                 <relationship kind="action" name="process:" candidateClass="UIButton"/>
@@ -829,6 +838,12 @@
         <class className="NyPgDetailViewController" superclassName="NyDetailInputViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="canvasLongPress:" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="action" name="canvasTap:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="action" name="deleteFormula:" candidateClass="UIButton"/>
+                <relationship kind="action" name="dragFormula:" candidateClass="UIPanGestureRecognizer"/>
+                <relationship kind="action" name="lockFormula:" candidateClass="UIButton"/>
+                <relationship kind="action" name="selectFormula:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="canvasView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
             </relationships>

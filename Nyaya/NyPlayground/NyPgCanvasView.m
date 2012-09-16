@@ -57,10 +57,8 @@
     CGGradientRelease(glossGradient);
     CGColorSpaceRelease(rgbColorspace);
     
-    NSLog(@"canvasView drawRect:%@ %@", NSStringFromCGRect(rect),NSStringFromCGRect(self.bounds));
-    CGContextAddEllipseInRect(currentContext, CGRectMake(10.0, 10.0, 40.0, 40.0));
-    CGContextAddEllipseInRect(currentContext, CGRectMake(100.0, 100.0, 40.0, 40.0));
-    CGContextDrawPath(currentContext, kCGPathStroke);
+    
+    // CGContextDrawPath(currentContext, kCGPathStroke);
 }
 
 @end

@@ -67,6 +67,8 @@
 		1166601D15B6E7D90070B5B8 /* NyayaTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601C15B6E7D90070B5B8 /* NyayaTokenTests.m */; };
 		1166F19B15BE6C18007B7B50 /* TruthTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166F19A15BE6C18007B7B50 /* TruthTable.m */; };
 		1166F19F15BECE7C007B7B50 /* TruthTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166F19E15BECE7C007B7B50 /* TruthTableTests.m */; };
+		1169BFAB1605B12A001CECCC /* NyFormulaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1169BFAA1605B12A001CECCC /* NyFormulaView.xib */; };
+		1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169BFAD1605C3C2001CECCC /* NyFormulaView.m */; };
 		1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */; };
 		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		116D220715D925A2003DBD88 /* NyayaTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */; };
@@ -271,6 +273,9 @@
 		1166F19A15BE6C18007B7B50 /* TruthTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TruthTable.m; path = Model/TruthTable.m; sourceTree = "<group>"; };
 		1166F19D15BECE7C007B7B50 /* TruthTableTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableTests.h; sourceTree = "<group>"; };
 		1166F19E15BECE7C007B7B50 /* TruthTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableTests.m; sourceTree = "<group>"; };
+		1169BFAA1605B12A001CECCC /* NyFormulaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyFormulaView.xib; path = NyPlayground/NyFormulaView.xib; sourceTree = "<group>"; };
+		1169BFAC1605C3C2001CECCC /* NyFormulaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyFormulaView.h; path = NyPlayground/NyFormulaView.h; sourceTree = "<group>"; };
+		1169BFAD1605C3C2001CECCC /* NyFormulaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyFormulaView.m; path = NyPlayground/NyFormulaView.m; sourceTree = "<group>"; };
 		1169DC5415BC3E19000BD3D0 /* NyayaNodeEvaluationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeEvaluationTests.h; sourceTree = "<group>"; };
 		1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeEvaluationTests.m; sourceTree = "<group>"; };
 		1169DC5815BC5C1B000BD3D0 /* NyayaNodeVariablesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeVariablesTests.h; sourceTree = "<group>"; };
@@ -498,6 +503,9 @@
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
 				11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */,
 				11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */,
+				1169BFAA1605B12A001CECCC /* NyFormulaView.xib */,
+				1169BFAC1605C3C2001CECCC /* NyFormulaView.h */,
+				1169BFAD1605C3C2001CECCC /* NyFormulaView.m */,
 			);
 			name = NyPlayground;
 			sourceTree = "<group>";
@@ -1081,6 +1089,7 @@
 				11DBC0B41604F2A40007A82B /* tutorial1LI.html in Resources */,
 				11DBC0B71604F2CF0007A82B /* instructions1DS.html in Resources */,
 				11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */,
+				1169BFAB1605B12A001CECCC /* NyFormulaView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1165,7 @@
 				110E7E511600775500EA2D7F /* NyayaFormula.m in Sources */,
 				11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */,
 				11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */,
+				1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
