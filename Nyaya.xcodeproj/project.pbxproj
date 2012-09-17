@@ -121,6 +121,18 @@
 		1178CCB215B541B000FD21CA /* NyayaParserBasicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB115B541B000FD21CA /* NyayaParserBasicTests.m */; };
 		1178CCB815B56F0B00FD21CA /* NyayaParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */; };
 		1178CCBB15B5983400FD21CA /* NyayaNodeNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */; };
+		117BD6641607BB2E0025F381 /* abstract.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6581607BB2E0025F381 /* abstract.tex */; };
+		117BD6651607BB2E0025F381 /* appendix.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6591607BB2E0025F381 /* appendix.tex */; };
+		117BD6661607BB2E0025F381 /* content_concept.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65A1607BB2E0025F381 /* content_concept.tex */; };
+		117BD6671607BB2E0025F381 /* content_conclusion.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65B1607BB2E0025F381 /* content_conclusion.tex */; };
+		117BD6681607BB2E0025F381 /* content_implementation.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65C1607BB2E0025F381 /* content_implementation.tex */; };
+		117BD6691607BB2E0025F381 /* content_introduction.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65D1607BB2E0025F381 /* content_introduction.tex */; };
+		117BD66A1607BB2E0025F381 /* content_processes.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65E1607BB2E0025F381 /* content_processes.tex */; };
+		117BD66B1607BB2E0025F381 /* content_related.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD65F1607BB2E0025F381 /* content_related.tex */; };
+		117BD66C1607BB2E0025F381 /* content_retrospective.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6601607BB2E0025F381 /* content_retrospective.tex */; };
+		117BD66D1607BB2E0025F381 /* glossary.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6611607BB2E0025F381 /* glossary.tex */; };
+		117BD66E1607BB2E0025F381 /* packages.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6621607BB2E0025F381 /* packages.tex */; };
+		117BD66F1607BB2E0025F381 /* thesis.tex in Resources */ = {isa = PBXBuildFile; fileRef = 117BD6631607BB2E0025F381 /* thesis.tex */; };
 		117C353615FF63CA0002D5DD /* NyayaNode+Derivations.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C353515FF63CA0002D5DD /* NyayaNode+Derivations.m */; };
 		117C723B15F8B8BE00C8C10A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117C723A15F8B8BE00C8C10A /* QuartzCore.framework */; };
 		1183B6CE15B70AC10076D92C /* NyayaNodeSubFormulasTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183B6CD15B70AC10076D92C /* NyayaNodeSubFormulasTests.m */; };
@@ -350,6 +362,18 @@
 		1178CCB715B56F0B00FD21CA /* NyayaParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserTests.m; sourceTree = "<group>"; };
 		1178CCB915B5983400FD21CA /* NyayaNodeNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeNormalFormTests.h; sourceTree = "<group>"; };
 		1178CCBA15B5983400FD21CA /* NyayaNodeNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeNormalFormTests.m; sourceTree = "<group>"; };
+		117BD6581607BB2E0025F381 /* abstract.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = abstract.tex; path = NyBaTh/abstract.tex; sourceTree = SOURCE_ROOT; };
+		117BD6591607BB2E0025F381 /* appendix.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = appendix.tex; path = NyBaTh/appendix.tex; sourceTree = SOURCE_ROOT; };
+		117BD65A1607BB2E0025F381 /* content_concept.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_concept.tex; path = NyBaTh/content_concept.tex; sourceTree = SOURCE_ROOT; };
+		117BD65B1607BB2E0025F381 /* content_conclusion.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_conclusion.tex; path = NyBaTh/content_conclusion.tex; sourceTree = SOURCE_ROOT; };
+		117BD65C1607BB2E0025F381 /* content_implementation.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_implementation.tex; path = NyBaTh/content_implementation.tex; sourceTree = SOURCE_ROOT; };
+		117BD65D1607BB2E0025F381 /* content_introduction.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_introduction.tex; path = NyBaTh/content_introduction.tex; sourceTree = SOURCE_ROOT; };
+		117BD65E1607BB2E0025F381 /* content_processes.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_processes.tex; path = NyBaTh/content_processes.tex; sourceTree = SOURCE_ROOT; };
+		117BD65F1607BB2E0025F381 /* content_related.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_related.tex; path = NyBaTh/content_related.tex; sourceTree = SOURCE_ROOT; };
+		117BD6601607BB2E0025F381 /* content_retrospective.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = content_retrospective.tex; path = NyBaTh/content_retrospective.tex; sourceTree = SOURCE_ROOT; };
+		117BD6611607BB2E0025F381 /* glossary.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = glossary.tex; path = NyBaTh/glossary.tex; sourceTree = SOURCE_ROOT; };
+		117BD6621607BB2E0025F381 /* packages.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = packages.tex; path = NyBaTh/packages.tex; sourceTree = SOURCE_ROOT; };
+		117BD6631607BB2E0025F381 /* thesis.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = thesis.tex; path = NyBaTh/thesis.tex; sourceTree = SOURCE_ROOT; };
 		117C353415FF63CA0002D5DD /* NyayaNode+Derivations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Derivations.h"; path = "Model/NyayaNode+Derivations.h"; sourceTree = "<group>"; };
 		117C353515FF63CA0002D5DD /* NyayaNode+Derivations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Derivations.m"; path = "Model/NyayaNode+Derivations.m"; sourceTree = "<group>"; };
 		117C723A15F8B8BE00C8C10A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -697,6 +721,25 @@
 			name = html;
 			sourceTree = "<group>";
 		};
+		117BD6561607BADF0025F381 /* TEX */ = {
+			isa = PBXGroup;
+			children = (
+				117BD6631607BB2E0025F381 /* thesis.tex */,
+				117BD6621607BB2E0025F381 /* packages.tex */,
+				117BD6581607BB2E0025F381 /* abstract.tex */,
+				117BD65D1607BB2E0025F381 /* content_introduction.tex */,
+				117BD65F1607BB2E0025F381 /* content_related.tex */,
+				117BD65E1607BB2E0025F381 /* content_processes.tex */,
+				117BD65A1607BB2E0025F381 /* content_concept.tex */,
+				117BD65C1607BB2E0025F381 /* content_implementation.tex */,
+				117BD6601607BB2E0025F381 /* content_retrospective.tex */,
+				117BD65B1607BB2E0025F381 /* content_conclusion.tex */,
+				117BD6611607BB2E0025F381 /* glossary.tex */,
+				117BD6591607BB2E0025F381 /* appendix.tex */,
+			);
+			name = TEX;
+			sourceTree = "<group>";
+		};
 		1183B6D015B70AC60076D92C /* NyayaParserTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +822,7 @@
 		11C375F315B3D23D005C5C9C /* Nyaya */ = {
 			isa = PBXGroup;
 			children = (
+				117BD6561607BADF0025F381 /* TEX */,
 				11436C0715E3761100A4457F /* AppIcons */,
 				11EC4D2215CFBA320090EBAB /* BDD */,
 				1187E23915D0D68F0048E153 /* Documents */,
@@ -1100,6 +1144,18 @@
 				11DBC0B71604F2CF0007A82B /* instructions1DS.html in Resources */,
 				11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */,
 				1169BFAB1605B12A001CECCC /* NyFormulaView.xib in Resources */,
+				117BD6641607BB2E0025F381 /* abstract.tex in Resources */,
+				117BD6651607BB2E0025F381 /* appendix.tex in Resources */,
+				117BD6661607BB2E0025F381 /* content_concept.tex in Resources */,
+				117BD6671607BB2E0025F381 /* content_conclusion.tex in Resources */,
+				117BD6681607BB2E0025F381 /* content_implementation.tex in Resources */,
+				117BD6691607BB2E0025F381 /* content_introduction.tex in Resources */,
+				117BD66A1607BB2E0025F381 /* content_processes.tex in Resources */,
+				117BD66B1607BB2E0025F381 /* content_related.tex in Resources */,
+				117BD66C1607BB2E0025F381 /* content_retrospective.tex in Resources */,
+				117BD66D1607BB2E0025F381 /* glossary.tex in Resources */,
+				117BD66E1607BB2E0025F381 /* packages.tex in Resources */,
+				117BD66F1607BB2E0025F381 /* thesis.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
