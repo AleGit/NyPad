@@ -10,7 +10,7 @@
 
 @interface NyFormulaView : UIView
 
-@property (assign, nonatomic, getter = isSelected) BOOL selected;
+@property (assign, nonatomic, getter = isChosen) BOOL chosen;
 @property (assign, nonatomic, getter = isLocked) BOOL locked;
 
 @property (weak, nonatomic) IBOutlet UITapGestureRecognizer *formulaTapGestureRecognizer;

@@ -7,6 +7,8 @@
 //
 
 #import "NyDetailViewController.h"
+#import "NyFormulaView.h"
+#import "NySymbolView.h"
 
 @interface NyPgDetailViewController : NyDetailInputViewController
 
@@ -22,5 +24,6 @@
 - (IBAction)deleteFormula:(UIButton *)sender;
 - (IBAction)selectFormula:(UITapGestureRecognizer *)sender;
 - (IBAction)dragFormula:(UIPanGestureRecognizer *)sender;
+- (IBAction)tapSymbol:(UITapGestureRecognizer *)sender;
 
 @end

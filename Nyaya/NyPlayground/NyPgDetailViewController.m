@@ -7,7 +7,7 @@
 //
 
 #import "NyPgDetailViewController.h"
-#import "NyFormulaView.h"
+#import "NSObject+Nyaya.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
@@ -15,7 +15,6 @@
 @end
 
 @implementation NyPgDetailViewController
-@synthesize canvasView;
 
 - (NSString*)localizedBarButtonItemTitle {
     return NSLocalizedString(@"Playground", @"Playground");
@@ -48,9 +47,22 @@
     // [self.canvasView setNeedsDisplayInRect:self.canvasView.frame];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[NyFormulaView class]]) {
+        return YES; // drag, select formula
+    }
+    else  if ([touch.view isKindOfClass:[UIButton class]])
+        return NO;
+    else {
+        NSLog(@"touch.view.class = %@", touch.view.class);
+        return YES;
+    }
+}
+
+
 - (IBAction)canvasTap:(UITapGestureRecognizer *)sender {
     for (NyFormulaView *formulaView in _formulaViews) {
-        formulaView.selected = NO;
+        formulaView.chosen = NO;
         [formulaView setNeedsDisplay];
     }
 }
@@ -58,32 +70,50 @@
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         [self deselectOtherFormulas:nil];
-        NyFormulaView *formualaView = [[[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil] objectAtIndex:0];
+        NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
+        NyFormulaView *formualaView = [viewArray objectAtIndex:0];
+        NySymbolView *symbolView = [viewArray objectAtIndex:3];
+        // NSLog(@"\n%x %x %x", (NSInteger)viewArray, (NSInteger)formualaView, (NSInteger)symbolView);
+        viewArray = nil;
         CGPoint location = [sender locationInView:self.canvasView];
         
-        formualaView.frame = CGRectMake(location.x-200, location.y-20, 400.0, 400);
-        formualaView.selected = YES;
+        formualaView.center = location;
+        formualaView.chosen = YES;
         [_formulaViews addObject:formualaView];
+        
+        
         [self.canvasView addSubview:formualaView];
+        symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
+        [formualaView addSubview:symbolView];
+        
+        NSLog(@"canvasView.subview count %u", [self.canvasView.subviews count]);
+        [self.canvasView setNeedsDisplay];
+        
     }
 }
 
 - (void)deselectOtherFormulas:(NyFormulaView*)formulaView {
     [_formulaViews enumerateObjectsUsingBlock:^(NyFormulaView *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.isSelected && obj != formulaView) {
-            obj.selected = NO;
-            [obj setNeedsDisplay];
+        if (obj.chosen && obj != formulaView) {
+            obj.chosen = NO;
+            
         }
+        [obj setNeedsDisplay];
     }];
+    
+    if (formulaView.isChosen) {
+        [formulaView.superview bringSubviewToFront:formulaView];
+    }
 }
 
 - (IBAction)dragFormula:(UIPanGestureRecognizer *)sender {
     NyFormulaView *formulaView = (NyFormulaView*)sender.view;
     [self deselectOtherFormulas:formulaView];
     
-    if (!formulaView.isSelected) {
-        formulaView.selected = YES;
+    if (!formulaView.isChosen) {
+        formulaView.chosen = YES;
         [formulaView setNeedsDisplay];
+        [formulaView.superview bringSubviewToFront:formulaView];
     }
     
     CGPoint canvasTranslation = [sender translationInView:self.canvasView];
@@ -92,10 +122,20 @@
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 }
 
+- (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
+    NSLog(@"tabSymbol: %@", [sender.view class]);
+    NySymbolView *symbolView = (NySymbolView*)sender.view;
+    NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
+    formulaView.chosen = YES;
+    [self deselectOtherFormulas:formulaView];
+    
+}
+
 - (IBAction)selectFormula:(UITapGestureRecognizer *)sender {
+    NSLog(@"selectFormula: %@", [sender.view class]);
     NyFormulaView *formulaView = (NyFormulaView*)sender.view;
     [self deselectOtherFormulas:formulaView];
-    formulaView.selected = !formulaView.isSelected;
+    formulaView.chosen = !formulaView.isChosen;
     [formulaView setNeedsDisplay];
 }
 

@@ -8,8 +8,8 @@
 
 #import "NyFormulaView.h"
 
-#define LOCK_BUTTON_TAG 1
-#define DELE_BUTTON_TAG 2
+#define LOCK_BUTTON_IDX 0
+#define DELE_BUTTON_IDX 1
 
 @interface NyFormulaView () {
     UIButton* _lockButton;
@@ -23,10 +23,15 @@
 
 - (void)setup {
     self.backgroundColor = nil;
-    _lockButton = (UIButton*)[self viewWithTag:LOCK_BUTTON_TAG];
-    _deleButton = (UIButton*)[self viewWithTag:DELE_BUTTON_TAG];
-    _lockButton.hidden = !self.isSelected;
-    _deleButton.hidden = !self.isSelected;
+    _lockButton = (UIButton*)[self.subviews objectAtIndex:LOCK_BUTTON_IDX];
+    _deleButton = (UIButton*)[self.subviews objectAtIndex:DELE_BUTTON_IDX];
+    _chosen = YES;
+}
+
+- (void)reset {
+    _lockButton.hidden = !self.chosen;
+    _deleButton.hidden = !self.chosen;
+    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -47,10 +52,9 @@
     
 }
 
-- (void)setSelected:(BOOL)selected {
-    _selected = selected;
-    _lockButton.hidden = !self.isSelected;
-    _deleButton.hidden = !self.isSelected;
+- (void)setChosen:(BOOL)selected {
+    _chosen = selected;
+    [self reset];
 }
 
 - (void)setLocked:(BOOL)locked {
@@ -61,10 +65,6 @@
     return _lockButton.isSelected;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    BOOL shouldReceive = touch.view != _lockButton && touch.view != _deleButton;
-    return shouldReceive;
-}
 
 
 
@@ -73,12 +73,13 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef context = UIGraphicsGetCurrentContext();
     static const CGFloat arr [] = { 1.0, 1.0, 2.0, 2.0 };
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0);
     CGContextSetLineDash(context, 0.0, arr, 2);
     CGContextSetRGBStrokeColor(context, 0.5, 0.0, 0, 0.9);
-    if (self.isSelected) {
+    if (self.isChosen) {
         CGContextAddRect(context, CGRectInset(self.bounds, 3.0, 3.0));
     }
     CGContextAddRect(context, self.bounds);

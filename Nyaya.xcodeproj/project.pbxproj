@@ -163,6 +163,8 @@
 		11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions1SY.html */; };
 		11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0B15EB63A200DFC94A /* iPadIcon.png */; };
 		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
+		11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC6E1606ECF30069497A /* NySymbolView.m */; };
+		11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC72160700980069497A /* NSObject+Nyaya.m */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* BddNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* BddNode.m */; };
 		11F531BD15FC78B4003F6C11 /* QA1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11F531BC15FC78B4003F6C11 /* QA1.plist */; };
@@ -412,6 +414,10 @@
 		11DBC0B61604F2CF0007A82B /* instructions1SY.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions1SY.html; path = html/instructions1SY.html; sourceTree = "<group>"; };
 		11DDBF0B15EB63A200DFC94A /* iPadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPadIcon.png; path = AppIcons/iPadIcon.png; sourceTree = "<group>"; };
 		11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPadIcon@2x.png"; path = "AppIcons/iPadIcon@2x.png"; sourceTree = "<group>"; };
+		11E3EC6D1606ECF30069497A /* NySymbolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NySymbolView.h; path = NyPlayground/NySymbolView.h; sourceTree = "<group>"; };
+		11E3EC6E1606ECF30069497A /* NySymbolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NySymbolView.m; path = NyPlayground/NySymbolView.m; sourceTree = "<group>"; };
+		11E3EC71160700980069497A /* NSObject+Nyaya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Nyaya.h"; sourceTree = "<group>"; };
+		11E3EC72160700980069497A /* NSObject+Nyaya.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Nyaya.m"; sourceTree = "<group>"; };
 		11EC4D1F15CFBA210090EBAB /* BddNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BddNode.h; path = Nyaya/BDD/BddNode.h; sourceTree = "<group>"; };
 		11EC4D2415CFC3750090EBAB /* BasicBddTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicBddTests.h; path = BddTests/BasicBddTests.h; sourceTree = "<group>"; };
 		11EC4D2515CFC3750090EBAB /* BasicBddTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicBddTests.m; path = BddTests/BasicBddTests.m; sourceTree = "<group>"; };
@@ -497,15 +503,17 @@
 			children = (
 				11BFCBAA15F9E3E1004CBDA2 /* kariert.png */,
 				11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */,
+				1169BFAC1605C3C2001CECCC /* NyFormulaView.h */,
+				1169BFAD1605C3C2001CECCC /* NyFormulaView.m */,
+				1169BFAA1605B12A001CECCC /* NyFormulaView.xib */,
+				11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */,
+				11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */,
 				1177496E15E7D68B00B5C071 /* NyPgDetailViewController.h */,
 				1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */,
 				1177497015E7D68B00B5C071 /* NyPgMasterViewController.h */,
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
-				11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */,
-				11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */,
-				1169BFAA1605B12A001CECCC /* NyFormulaView.xib */,
-				1169BFAC1605C3C2001CECCC /* NyFormulaView.h */,
-				1169BFAD1605C3C2001CECCC /* NyFormulaView.m */,
+				11E3EC6D1606ECF30069497A /* NySymbolView.h */,
+				11E3EC6E1606ECF30069497A /* NySymbolView.m */,
 			);
 			name = NyPlayground;
 			sourceTree = "<group>";
@@ -552,6 +560,8 @@
 				11C93F0515F46E6300AB94DF /* UITextField+Nyaya.m */,
 				11A473BD1603392400EA2508 /* NyayaConstants.h */,
 				11A473BE1603392400EA2508 /* NyayaConstants.m */,
+				11E3EC71160700980069497A /* NSObject+Nyaya.h */,
+				11E3EC72160700980069497A /* NSObject+Nyaya.m */,
 			);
 			name = NyApp;
 			sourceTree = "<group>";
@@ -1166,6 +1176,8 @@
 				11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */,
 				11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */,
 				1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */,
+				11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */,
+				11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
