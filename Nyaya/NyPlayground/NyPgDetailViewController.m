@@ -70,25 +70,23 @@
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         [self deselectOtherFormulas:nil];
+        
         NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
         NyFormulaView *formualaView = [viewArray objectAtIndex:0];
         NySymbolView *symbolView = [viewArray objectAtIndex:3];
-        // NSLog(@"\n%x %x %x", (NSInteger)viewArray, (NSInteger)formualaView, (NSInteger)symbolView);
-        viewArray = nil;
+        
         CGPoint location = [sender locationInView:self.canvasView];
         
-        formualaView.center = location;
+        
+        [formualaView addSubview:symbolView];
+        symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
+        formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0 - symbolView.center.y);
+        
         formualaView.chosen = YES;
+        formualaView.locked = NO;
         [_formulaViews addObject:formualaView];
         
-        
-        [self.canvasView addSubview:formualaView];
-        symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
-        [formualaView addSubview:symbolView];
-        
-        NSLog(@"canvasView.subview count %u", [self.canvasView.subviews count]);
-        [self.canvasView setNeedsDisplay];
-        
+        [self.canvasView addSubview:formualaView];    
     }
 }
 
@@ -122,12 +120,80 @@
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 }
 
+- (void)actionA:(UIMenuController*)ctrl {
+    NSLog(@"A %@", ctrl);
+    
+}
+
+- (void)actionB:(UIMenuController*)ctrl {
+    NSLog(@"B %@", ctrl);
+    
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)showSymbolMenu:(UIView*)view {
+    //CGPoint location = view.center;
+    
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    NSMutableArray *menuItems = [NSMutableArray array];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(¬Φ)" action:@selector(actionA:)]];
+//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ➞Φ)" action:nil]];
+//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ∧Φ)" action:nil]];
+//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ∨Φ)" action:nil]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(actionB:)]];
+//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⊤" action:nil]];
+//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⊥" action:nil]];
+    // [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"f(Φ,Φ,Φ)" action:@selector(formulaToF:)]];
+    
+    [self becomeFirstResponder];
+    
+    [menuController setMenuItems:menuItems];
+    [menuController setTargetRect:view.frame inView:view.superview];
+    [menuController setMenuVisible:YES];
+    
+    
+}
+
+- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(UIView *)context {
+    if ([animationID isEqualToString:@"growSymbol"]) {
+        [UIView beginAnimations:@"shrinkSymbol" context:(void*)context];
+#define ANIMADURATION 0.4
+        [UIView setAnimationDuration:ANIMADURATION];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
+        context.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        [self showSymbolMenu:context];
+    }
+    else {
+        // [self showFormulaMenu:context.center inView:context];
+        NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
+    }
+}
+
+- (void)growSymbol:(UIView *)view {
+    
+	[UIView beginAnimations:@"growSymbol" context:(void*)view];
+	[UIView setAnimationDuration:ANIMADURATION];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
+	CGAffineTransform transform = CGAffineTransformMakeScale(1.2f, 1.2f);
+    
+	view.transform = transform;
+	[UIView commitAnimations];
+}
+
+
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
     NSLog(@"tabSymbol: %@", [sender.view class]);
     NySymbolView *symbolView = (NySymbolView*)sender.view;
     NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
+    [self growSymbol:symbolView];
+    symbolView.displayValue = symbolView.displayValue + 1;
     
 }
 

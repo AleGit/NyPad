@@ -24,8 +24,8 @@
 
 - (void)setup {
     self.backgroundColor = nil;
-    _symbolLabel = (UILabel*)[self.subviews objectAtIndex:CIRCLE_LABEL_IDX];
-    _circleLabel = (UILabel*)[self.subviews objectAtIndex:SYMBOL_LABEL_IDX];
+    _circleLabel = (UILabel*)[self.subviews objectAtIndex:CIRCLE_LABEL_IDX];
+    _symbolLabel= (UILabel*)[self.subviews objectAtIndex:SYMBOL_LABEL_IDX];
     _subsymbols = [NSMutableArray arrayWithCapacity:2];
     [self reset];
 }
@@ -39,6 +39,7 @@
             _circleLabel.textColor = [UIColor greenColor];
             break;
         default:
+            _displayValue = NyayaUndefined;
             _circleLabel.textColor = [UIColor grayColor];
             break;
     }
