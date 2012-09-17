@@ -27,6 +27,16 @@ a:active { color:#000000;  text-decoration:none; }
 
 a.an { text-decoration:none; }
 
+div.rbox {
+    float:right;
+    border-width:thin;
+    border-style:dashed;
+    
+    margin:4px; width:50%;
+    padding-left:14px;
+    padding-right:14px;
+}
+
 
 table { border:solid 1px #555555; border-collapse:collapse; }
 table.left { float:left; margin:3px 20px 13px 0px; }

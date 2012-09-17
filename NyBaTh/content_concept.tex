@@ -331,7 +331,9 @@ The user has to to guess or calculate satisfiability of formulas in disjunctive 
 
 \subsection{Binary Decision Diagrams}
 
-content is missing
+\subsubseciont{Boolean functions}
+\label{tut:501}
+(5BF) content is missing
 
 
 %Propositional formulae are build from atoms and connectives.
@@ -541,19 +543,88 @@ content is missing
 
 \section{Playgrounds}
 
-content is missing
+In the playground the user (content is missing)
 
-\subsection{Create formulas by syntax tree}
+When a user taps a node in the syntax tree the corresponding sub formula 
+in the textual representation of the syntax tree will be marked with square brackets.
+Once, for example,  the user taps the disjunction node in the syntax tree of 
+$a \wedge (b \vee c) $, then
+$a \wedge [\,(b \vee c) \,]$ is displayed.
 
-content is missing
+\subsection{Manipulate formulas in free mode}
 
-\subsubsection{Find sub formulas by syntax tree}
+In the free mode arbitrary formulas can be created by adding, replacing and removing connectives and atoms. 
+The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \perp p, q, r, … \}$.
 
-content is missing
+\subsection{Manipulate formulas in locked mode}
 
-\subsection{Perform equivalence transformations on the syntax tree}
+In the locked mode only equivalence transformations can be applied on (sub)trees. 
 
-content is missing
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcl|rcl}
+
+$P$&$ \TAP{\rightarrow}$&$Q$				&$ $&$\TAP{\neg}$&$\neg P$			\\
+\hline
+$\neg P $&$ \TAP{\vee}$&$Q$					&$ $&$\TAP{P}$&$ $				\\
+\\
+$ $&$\TAP{\neg}$&$(P \vee Q)$				&$ $&$ \TAP{\neg}$&$(P \wedge Q)$	\\
+\hline
+$\neg P$&$\TAP{\wedge}$&$\neg Q$			&$\neg P$&$ \TAP{\vee}$&$\neg Q$	\\
+\\
+$P$&$\TAP{\vee}$&$P$						&$P$&$ \TAP{\wedge}$&$P$			\\
+\hline
+$$&$\TAP{P}$&$$							&$$&$ \TAP{P}$&$$					\\
+\\
+$P$&$\TAP{\vee}$&$\neg P$					&P&$\TAP{\wedge}$&$\neg P$		\\
+\hline
+$ $&$\TAP{\top}$&$ 	$						&	&$\TAP{\perp}$&$ $				\\
+\\
+$P$&$\TAP{\vee}$&$\top$					&P	&$\TAP{\wedge}$&$\top$			\\
+\hline
+$ $&$\TAP{\top}$&$ 	$						&	&$\TAP{P}$&$ $				\\
+\\
+$P$&$\TAP{\vee}$&$\perp$					&$P$&$ \TAP{\wedge}$&$\perp$		\\
+\hline
+$ $&$\TAP{P}$&$ $							&$ $&$ \TAP{\perp}$&$ $				\\
+\\
+$P$&$\TAP{\vee}$&$Q$						&$P$&$ \TAP{\wedge}$&$Q$			\\
+\hline
+$Q$&$\TAP{\vee}$&$P$						&$Q$&$ \TAP{\wedge}$&$P$			\\
+\\
+$P$&$\TAP{\vee}$&$(Q\wedge R)$				&$P$&$\TAP{\wedge}$&$(Q\vee R)$			\\
+\hline
+$(P\vee Q)$&$\TAP{\wedge}$&$(P\vee R)$		&$(P\wedge Q)$&$\TAP{\vee}$&$(P\wedge R)$	\\
+\\
+$(P\wedge Q)$&$\TAP{\vee}$&$R$				&$(P\vee Q)$&$\TAP{\wedge}$&$R$			\\
+\hline
+$(P\vee R)$&$\TAP{\wedge}$&$(Q\vee R)$		&$(P\wedge R)$&$\TAP{\vee}$&$(Q\wedge R)$	\\
+\\
+$P$&$\TAP{\vee}$&$(Q\vee R)$				&$P$&$\TAP{\wedge}$&$(Q\wedge R)$			\\
+\hline
+$(P\vee Q)$&$\TAP{\vee}$&$R$			&$(P\wedge Q)$&$\TAP{\wedge}$&$R$	\\
+
+\end{tabular}
+\caption{Transformations which are offered in locked mode}
+\label{tab:nf}
+\end{center}
+\end{table}%
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcl|rcl}
+
+$P$&$ \TAP{\leftrightarrow}$&$Q$					&$P$&$ \TAP{\veebar}$&$Q$			\\
+\hline
+$P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$ \TAP{\vee}$&$\neg (Q \rightarrow P)$				\\
+
+\end{tabular}
+\caption{Additional transformations in locked mode}
+\label{tab:addnf}
+\end{center}
+\end{table}%
+
 
 \subsubsection{Substitute implications}
 
