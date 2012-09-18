@@ -173,6 +173,10 @@
 		11DBC0B41604F2A40007A82B /* tutorial1LI.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B31604F2A40007A82B /* tutorial1LI.html */; };
 		11DBC0B71604F2CF0007A82B /* instructions1DS.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B51604F2CF0007A82B /* instructions1DS.html */; };
 		11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions1SY.html */; };
+		11DC67491608531C00B9008B /* slim interface.eml in Resources */ = {isa = PBXBuildFile; fileRef = 11DC67481608531C00B9008B /* slim interface.eml */; };
+		11DC674B160854B900B9008B /* clnewstylewide.css in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674A160854B900B9008B /* clnewstylewide.css */; };
+		11DC674D1608550800B9008B /* clsample.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674C1608550800B9008B /* clsample.html */; };
+		11DC674F1608558E00B9008B /* MathJax.js in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674E1608558E00B9008B /* MathJax.js */; };
 		11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0B15EB63A200DFC94A /* iPadIcon.png */; };
 		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
 		11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC6E1606ECF30069497A /* NySymbolView.m */; };
@@ -436,6 +440,10 @@
 		11DBC0B31604F2A40007A82B /* tutorial1LI.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial1LI.html; path = html/tutorial1LI.html; sourceTree = "<group>"; };
 		11DBC0B51604F2CF0007A82B /* instructions1DS.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions1DS.html; path = html/instructions1DS.html; sourceTree = "<group>"; };
 		11DBC0B61604F2CF0007A82B /* instructions1SY.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions1SY.html; path = html/instructions1SY.html; sourceTree = "<group>"; };
+		11DC67481608531C00B9008B /* slim interface.eml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "slim interface.eml"; path = "NyBaTh/mails/slim interface.eml"; sourceTree = SOURCE_ROOT; };
+		11DC674A160854B900B9008B /* clnewstylewide.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = clnewstylewide.css; path = html/clnewstylewide.css; sourceTree = "<group>"; };
+		11DC674C1608550800B9008B /* clsample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = clsample.html; path = html/clsample.html; sourceTree = "<group>"; };
+		11DC674E1608558E00B9008B /* MathJax.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = MathJax.js; path = html/MathJax.js; sourceTree = "<group>"; };
 		11DDBF0B15EB63A200DFC94A /* iPadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPadIcon.png; path = AppIcons/iPadIcon.png; sourceTree = "<group>"; };
 		11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPadIcon@2x.png"; path = "AppIcons/iPadIcon@2x.png"; sourceTree = "<group>"; };
 		11E3EC6D1606ECF30069497A /* NySymbolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NySymbolView.h; path = NyPlayground/NySymbolView.h; sourceTree = "<group>"; };
@@ -706,6 +714,9 @@
 		116D221015D927C9003DBD88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				11DC674E1608558E00B9008B /* MathJax.js */,
+				11DC674C1608550800B9008B /* clsample.html */,
+				11DC674A160854B900B9008B /* clnewstylewide.css */,
 				1102560A15ECAE01008B38F9 /* selfhtmlcss.css */,
 				1102560115EBB4E0008B38F9 /* glossary.html */,
 				11281B7815EB452700B377B3 /* syntaxtree.png */,
@@ -721,9 +732,10 @@
 			name = html;
 			sourceTree = "<group>";
 		};
-		117BD6561607BADF0025F381 /* TEX */ = {
+		117BD6561607BADF0025F381 /* Thesis */ = {
 			isa = PBXGroup;
 			children = (
+				11DC67481608531C00B9008B /* slim interface.eml */,
 				117BD6631607BB2E0025F381 /* thesis.tex */,
 				117BD6621607BB2E0025F381 /* packages.tex */,
 				117BD6581607BB2E0025F381 /* abstract.tex */,
@@ -737,7 +749,7 @@
 				117BD6611607BB2E0025F381 /* glossary.tex */,
 				117BD6591607BB2E0025F381 /* appendix.tex */,
 			);
-			name = TEX;
+			name = Thesis;
 			sourceTree = "<group>";
 		};
 		1183B6D015B70AC60076D92C /* NyayaParserTests */ = {
@@ -822,7 +834,7 @@
 		11C375F315B3D23D005C5C9C /* Nyaya */ = {
 			isa = PBXGroup;
 			children = (
-				117BD6561607BADF0025F381 /* TEX */,
+				117BD6561607BADF0025F381 /* Thesis */,
 				11436C0715E3761100A4457F /* AppIcons */,
 				11EC4D2215CFBA320090EBAB /* BDD */,
 				1187E23915D0D68F0048E153 /* Documents */,
@@ -1156,6 +1168,10 @@
 				117BD66D1607BB2E0025F381 /* glossary.tex in Resources */,
 				117BD66E1607BB2E0025F381 /* packages.tex in Resources */,
 				117BD66F1607BB2E0025F381 /* thesis.tex in Resources */,
+				11DC67491608531C00B9008B /* slim interface.eml in Resources */,
+				11DC674B160854B900B9008B /* clnewstylewide.css in Resources */,
+				11DC674D1608550800B9008B /* clsample.html in Resources */,
+				11DC674F1608558E00B9008B /* MathJax.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

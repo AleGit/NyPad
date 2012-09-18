@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>BoolTool | Computational Logic | University of Innsbruck</title>
+        <link rel="stylesheet" type="text/css" href="http://cl-informatik.uibk.ac.at/workspace/new-style-wide.css" />
+        <style>
+            #formula {
+                width: 100%;
+                font-size: 2em;
+                border: 2px solid #799BB3;
+            }
+            .content img {
+                vertical-align: top;
+            }
+            .content ul {
+                margin-top: 1em;
+            }
+            .content li:hover {
+                background: rgba(200, 200, 145, 0.3);
+            }
+            </style>
+        <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+            </script>
+    </head>
+    <body>
+        <div class="lang_sel"></div>
+        <div class="all">
+            <div class="header">
+                <div class="subtitle">
+                    <div>&nbsp;</div>
+                    <div>BoolTool</div>
+                </div>
+                <div class="logo">
+                    <a href="http://cl-informatik.uibk.ac.at/">&nbsp;</a>
+                </div>
+            </div>
+            <div class="main_menu">
+                <a href="http://cl-informatik.uibk.ac.at/home">Home</a>
+                <a href="http://cl-informatik.uibk.ac.at/research">Research</a>
+                <a class="active" href="http://cl-informatik.uibk.ac.at/teaching">Teaching</a>
+                <a href="http://cl-informatik.uibk.ac.at/members">Members</a>
+                <a href="http://cl-informatik.uibk.ac.at/events">Events</a>
+                <a href="http://cl-informatik.uibk.ac.at/news">News</a>
+            </div>
+            <div class="side_bar">
+                <div class="sub_menu">
+                    <div>BoolTool</div>
+                    <a title="Syntax"><code>&phi; =
+                        <span title="variable">x</span> |
+                        <span title="true">T</span> |
+                        <span title="false">F</span> |
+                        <span title="parentheses">(&phi;)</span> |<br>
+                        <span title="negation">!&phi;</span> |
+                        <span title="conjunction">&phi;&amp;&phi;</span> |
+                        <span title="disjunction">&phi;+&phi;</span> |<br>
+                        <span title="implication">&phi;&gt;&phi;</span> |
+                        <span title="exclusive or">&phi;^&phi;</span>
+                    </code></a>
+                    <a title="Precendence"><code>
+                        ! &#x2290; &amp; &#x2290; + &#x2290; ^ &#x2290; &gt;
+                    </code></a>
+                    <!--
+                     <a>\( \phi = x \quad\text{variable} \)</a>
+                     <a>\( \mid (\phi) \)</a>
+                     <a>\( \mid {!\phi} \quad\text{negation} \)</a>
+                     <a>\( \mid \phi\&\phi \quad\text{conjunction} \)</a>
+                     <a>\( \mid \phi|\phi \quad\text{disjunction} \)</a>
+                     <a>\( \mid \phi{>}\phi \quad\text{implication} \)</a>
+                     <a>\( \mid \phi\verb|^|\phi \quad\text{xor} \)</a>
+                     <a>\( \mid \text{T} \quad\text{true} \)</a>
+                     <a>\( \mid \text{F} \quad\text{false} \)</a>
+                     -->
+                    <!--
+                     <a><code>x = v | (x) | !x | x&x | x|x | x>x | x^x | T | F</code></a>
+                     <a>\( x = v \mid (x) \mid {!x} \mid x\&x \mid x|x \)</a>
+                     <a>\( \mid x{>}x \mid x \verb|^|x  \mid T \mid F \)</a>
+                     -->
+                </div>
+            </div>
+            <div class="content">
+                <h1>BoolTool</h1>
+                <form method="get">
+                    <div><input id="formula" name="formula" value="a+!a"></div>
+                    <div><input type="submit"></div>
+                </form>
+                
+                <ul><li>input: \(a \lor \lnot a \)</li>
+                    <li>satisfiable</li>
+                    <li>tautology</li>
+                    <li>no contradiction</li>
+                    <li>NNF: \(\top \)</li>
+                    <li>CNF: \(\top \)</li>
+                    <li>DNF: \(\top \)</li>
+                    <li>BDD: <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCIgWwogPCFBVFRMSVNUIHN2ZyB4bWxuczp4bGluayBDREFUQSAjRklYRUQgImh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgpdPgo8IS0tIEdlbmVyYXRlZCBieSBHcmFwaHZpeiB2ZXJzaW9uIDIuMTQuMSAoU2F0IE1hciAgOCAxNTowMDoyOCBVVEMgMjAwOCkKICAgICBGb3IgdXNlcjogKGFwYWNoZSkgQXBhY2hlIC0tPgo8IS0tIFRpdGxlOiBHIFBhZ2VzOiAxIC0tPgo8c3ZnIHdpZHRoPSI2MnB0IiBoZWlnaHQ9IjQ0cHQiCiB2aWV3Qm94PSIwLjAwIDAuMDAgNjIuMDAgNDQuMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgo8ZyBpZD0iZ3JhcGgwIiBjbGFzcz0iZ3JhcGgiIHRyYW5zZm9ybT0ic2NhbGUoMSAxKSByb3RhdGUoMCkgdHJhbnNsYXRlKDQgNDApIj4KPHRpdGxlPkc8L3RpdGxlPgo8cG9seWdvbiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTpub25lOyIgcG9pbnRzPSItNCw0IC00LC00MCA1OCwtNDAgNTgsNCAtNCw0Ii8+CjwhLS0gMSAtLT4KPGcgaWQ9Im5vZGUxIiBjbGFzcz0ibm9kZSI+PHRpdGxlPjE8L3RpdGxlPgo8cG9seWdvbiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTpibGFjazsiIHBvaW50cz0iNTQsLTM2IDIuNDg2OWUtMTQsLTM2IDAsLTEuNzc2MzZlLTE0IDU0LC0zLjU1MjcxZS0xNSA1NCwtMzYiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMjciIHk9Ii0xMiIgc3R5bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjtmb250LXNpemU6MTQuMDA7Ij4xPC90ZXh0Pgo8L2c+CjwvZz4KPC9zdmc+Cg=="></img>
+                    </li>
+                </ul>
+                
+                </form>
+            </div>
+            <div class="footer">
+            </div>
+        </div>
+    </body>
+</html>

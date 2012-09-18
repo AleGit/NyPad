@@ -84,7 +84,7 @@ and the following entries are sample solutions for different exercises.
 
 \begin{table}[htdp]
 \begin{center}
-\begin{lstlisting}[mathescape,firstnumber=5]
+\begin{lstlisting}[firstnumber=5]
 	<array>
 		<array> 
 			<string>If the barmoter falls, then it will rain.</string>
@@ -106,7 +106,7 @@ with a dictionary that
 
 \begin{table}[htdp]
 \begin{center}
-\begin{lstlisting}[mathescape,firstnumber=5]
+\begin{lstlisting}[firstnumber=5]
 <dict>
 	<key>questionLabelText</key>
 	<string>Guess $\square$ </string>
@@ -202,7 +202,7 @@ The user has to draw the syntax tree of simple formulas. They has to pay attenti
 as abbreviations of conjunctions and disjunctions 
 of formulas with their negation (tautologies and contradictions). 
 
-$\top = \neg P \vee P = P \vee \neg P \qquad \perp  = \neg P \wedge P = P \wedge \neg P$
+$\top = \neg P \vee P = P \vee \neg P \qquad \bot  = \neg P \wedge P = P \wedge \neg P$
 
 The user has to rewrite some formulas replacing contradictions and tautologies with top and bottom.
 
@@ -225,7 +225,7 @@ and if it can be simplified to top ($\top$)
 (2DNF) The syntax of formulas in conjunctive normal form is introduced and explained.
 It is shown that some formulas in dnf can be simplified to bottom.
 The user has to guess if a presented formula is in disjunctive normal form
-and if it can be simplified to bottom ($\perp$).
+and if it can be simplified to bottom ($\bot$).
 
 \subsection{Semantics}
 
@@ -554,7 +554,7 @@ $a \wedge [\,(b \vee c) \,]$ is displayed.
 \subsection{Manipulate formulas in free mode}
 
 In the free mode arbitrary formulas can be created by adding, replacing and removing connectives and atoms. 
-The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \perp p, q, r, … \}$.
+The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \bot p, q, r, … \}$.
 
 \subsection{Manipulate formulas in locked mode}
 
@@ -579,15 +579,15 @@ $$&$\TAP{P}$&$$							&$$&$ \TAP{P}$&$$					\\
 \\
 $P$&$\TAP{\vee}$&$\neg P$					&P&$\TAP{\wedge}$&$\neg P$		\\
 \hline
-$ $&$\TAP{\top}$&$ 	$						&	&$\TAP{\perp}$&$ $				\\
+$ $&$\TAP{\top}$&$ 	$						&	&$\TAP{\bot}$&$ $				\\
 \\
 $P$&$\TAP{\vee}$&$\top$					&P	&$\TAP{\wedge}$&$\top$			\\
 \hline
 $ $&$\TAP{\top}$&$ 	$						&	&$\TAP{P}$&$ $				\\
 \\
-$P$&$\TAP{\vee}$&$\perp$					&$P$&$ \TAP{\wedge}$&$\perp$		\\
+$P$&$\TAP{\vee}$&$\bot$					&$P$&$ \TAP{\wedge}$&$\bot$		\\
 \hline
-$ $&$\TAP{P}$&$ $							&$ $&$ \TAP{\perp}$&$ $				\\
+$ $&$\TAP{P}$&$ $							&$ $&$ \TAP{\bot}$&$ $				\\
 \\
 $P$&$\TAP{\vee}$&$Q$						&$P$&$ \TAP{\wedge}$&$Q$			\\
 \hline
@@ -659,15 +659,15 @@ Some additions should be added for comfort.
 
 As minimum the embedded BoolTool must support the latin letters as identifiers for atoms, 
 “T” and “F” as names for top and bottom, and the symbols
-“\verb#!&|+>^#” as connectives, because these ascii-symbols can be found on almost every keyboard.
+“\verb#!&.|+>^#” as connectives, because these ascii-symbols can be found on almost every keyboard.
 In environments with native utf8-strings it is is desirable that standard symbols of propositional logic
 “$ \neg \vee \wedge \rightarrow $”are accepted too, 
 so the user can copy the output and paste it into the input. 
-This enables the local persisting of formulas in a standard representation of boolean functions.
+This enables the local persisting of formulas with standard syntax of propositional logic.
 
 \begin{table}[htdp]
-\begin{center}%\begin{lstlisting}[mathescape] 
-$\top | \perp 
+\begin{center}
+$\top | \bot 
 | \neg | !
 | \wedge | \&
 | {\setminus}| | {\setminus}+
@@ -675,22 +675,24 @@ $\top | \perp
 | = | <> | \leftrightarrow 
 | > | \rightarrow | \models
 | ( | ) | , | ; 
-| {\setminus}w+$ %\end{lstlisting}
+| {\setminus}w+$ 
 \caption{Regular expresson for a lexxer to build a more flexible parser}
-\end{center}
 \label{tab:REGEX}
+\end{center}
 \end{table}%
 
 \begin{table}[htdp]
 \begin{center}
-\begin{tabular}{l|c|c|c|cc|c|c|c|c|c|c|c|}
-Name	& atom & NOT		& AND		& OR		&  IMPLIES \\
-ASCII 	& p,q,r & ! 			& \& \quad .	& |  \quad +			&> 	\\
-Symbol  	&& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
-UTF-8	&& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
-Unicode	&& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
-HTML	&& \&not;		& \&and;		& \&or;		& \&rarr;  \\
-LaTeX	&& \verb+\neg+	& \verb+\& \wedge+ & \verb+\vee+ & \verb+\rightarrow+ 
+\begin{tabular}{lccccc}
+Name	& Atom 	& Negation		& Conjunction		& Disjunction		&  Implication \\
+		&  		& NOT		& AND		& OR		&   \\
+ASCII 	& p,q,r 	& ! 			& \& \quad .	& |  \quad +			&> 	\\
+Symbol  	&		& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
+UTF-8	&		& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
+Unicode	&		& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
+HTML	&		& \&not;		& \&and;		& \&or;		& \&rarr;  \\
+LaTeX	&		& \verb+\neg+	& \verb+\& \wedge+ & \verb+\vee+ & \verb+\rightarrow+ \\
+
 \end{tabular}
 \caption{basic atoms and connectives in different encodings}
 \end{center}
@@ -699,14 +701,15 @@ LaTeX	&& \verb+\neg+	& \verb+\& \wedge+ & \verb+\vee+ & \verb+\rightarrow+
 
 \begin{table}[htdp]
 \begin{center}
-\begin{tabular}{l|c|c|cc|cccccccccc}
-Name & TOP			& BOTTOM	& EOR & XOR		& IFF \\	
-ASCII & T \quad 1	& F  \quad 0	& \multicolumn{2}{c|}{\textasciicircum} 	& <> \\
-Symbol &$\top$		& $\perp$		& $\veebar$ 	&$\oplus$   			&$ \leftrightarrow$\\
-UTF-8 & E2 8A A4	& E2 8A A5	& E2 8A BB	& E2 8A 95			&E2 86 94\\
-Unicode & U+22A4		& U+22A5		& U+22BB	& U+2295				&U+2194\\
-Html & T			& F			&			& \&oplus;				& \&harr;\\
-LaTeX & \verb+\top+	& \verb+\perp+	& \verb+\veebar+ & \verb+\oplus+	& \verb+\leftrightarrow+
+\begin{tabular}{ccccc}
+Tautology		& Contradiction		& \multicolumn{2}{c}{Exclusive Disjunction}	& Biconditional \\	
+TOP			& BOTTOM		& EOR & XOR							& IFF \\
+T \quad 1		& F  \quad 0		& \multicolumn{2}{c}{\textasciicircum} 		& <> \\
+$\top$		& $\bot$			& $\veebar$ 							&$\oplus$   			&$ \leftrightarrow$\\
+E2 8A A4		& E2 8A A5		& E2 8A BB							& E2 8A 95			&E2 86 94\\
+U+22A4		& U+22A5			& U+22BB							& U+2295				&U+2194\\
+			& \&perp;			&									& \&oplus;				& \&harr;\\
+\verb+\top+	& \verb+\bot+	& \verb+\veebar+ & \verb+\oplus+	& \verb+\leftrightarrow+
 \end{tabular}
 \caption{additional atoms and connectives}
 \end{center}

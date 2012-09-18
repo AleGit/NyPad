@@ -44,3 +44,5 @@ xcuserdata
 # ignore thesis pdf too!
 thesis.pdf
 
+
+*.texshop
