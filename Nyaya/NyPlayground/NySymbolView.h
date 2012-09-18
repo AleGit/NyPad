@@ -12,6 +12,7 @@
 @interface NySymbolView : UIView
 
 @property (nonatomic, assign) NyayaBool displayValue;
+@property (nonatomic, weak) NyayaNode* subformula;
 
 - (NSUInteger)countSubsymbols;
 - (NySymbolView*)subsymbolAtIndex:(NSUInteger)idx;

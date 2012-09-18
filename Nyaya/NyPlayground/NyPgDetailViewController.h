@@ -22,8 +22,10 @@
 
 - (IBAction)lockFormula:(UIButton *)sender;
 - (IBAction)deleteFormula:(UIButton *)sender;
+
 - (IBAction)selectFormula:(UITapGestureRecognizer *)sender;
 - (IBAction)dragFormula:(UIPanGestureRecognizer *)sender;
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender;
+- (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender;
 
 @end
