@@ -7,6 +7,7 @@
 //
 
 #import "NyFormulaView.h"
+#import "NySymbolView.h"
 
 #define LOCK_BUTTON_IDX 0
 #define DELE_BUTTON_IDX 1
@@ -82,6 +83,26 @@
         CGContextAddRect(context, CGRectInset(self.bounds, 3.0, 3.0));
     }
     CGContextAddRect(context, self.bounds);
+    CGContextStrokePath(context);
+    
+    CGContextSetLineWidth(context, 2.0);
+    CGContextSetLineDash(context, 0.0, NULL, 0);
+    CGContextSetRGBStrokeColor(context, 0.2, 0.2, 0.2, 0.8);
+    for (UIView *subview in self.subviews) {
+        if ([subview isMemberOfClass:[NySymbolView class]]) {
+            NySymbolView *symbolView = (NySymbolView*)subview;
+            
+            for (NySymbolView *subsymbolView in symbolView.subsymbols) {
+                CGContextMoveToPoint(context, symbolView.center.x, symbolView.center.y+20.0);
+                // CGContextAddLineToPoint(context, subsymbolView.center.x, subsymbolView.center.y-20.0);
+                
+                CGContextAddCurveToPoint(context,
+                                         symbolView.center.x, symbolView.center.y+40.0,
+                                         subsymbolView.center.x, subsymbolView.center.y-40.0,
+                                         subsymbolView.center.x, subsymbolView.center.y-20.0);
+            }
+        }
+    }
     CGContextStrokePath(context);
 }
 

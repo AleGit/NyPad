@@ -13,6 +13,8 @@
 
 @property (nonatomic, assign) NyayaBool displayValue;
 @property (nonatomic, strong) NyayaNode* node;
+@property (nonatomic, readonly) NSArray *subsymbols;
+@property (nonatomic, readonly) NySymbolView *supersymbol;
 
 //- (NSUInteger)countSubsymbols;
 //- (NySymbolView*)subsymbolAtIndex:(NSUInteger)idx;

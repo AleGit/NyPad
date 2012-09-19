@@ -269,7 +269,7 @@
     
 }
 
-- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(UIView *)context {
+- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(NySymbolView *)context {
     if ([animationID isEqualToString:@"growSymbol"]) {
         [UIView beginAnimations:@"shrinkSymbol" context:(void*)context];
 #define ANIMADURATION 0.4
@@ -277,24 +277,36 @@
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
         context.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-        [self showSymbolMenu:context];
+        // [self showSymbolMenu:context];
     }
     else {
+        [self growSymbol:context.supersymbol];
+        
+        if (!context.supersymbol) {
+            
+            for (UIView *view in context.superview.subviews) {
+                [view setNeedsDisplay];
+            }
+        }
         // [self showFormulaMenu:context.center inView:context];
         NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
     }
 }
 
-- (void)growSymbol:(UIView *)view {
+- (void)growSymbol:(NySymbolView *)symbolView {
+    if (!symbolView) return ;
     
-	[UIView beginAnimations:@"growSymbol" context:(void*)view];
+    [symbolView setNeedsDisplay];
+	
+    [UIView beginAnimations:@"growSymbol" context:(void*)symbolView];
 	[UIView setAnimationDuration:ANIMADURATION];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
 	CGAffineTransform transform = CGAffineTransformMakeScale(1.2f, 1.2f);
     
-	view.transform = transform;
+	symbolView.transform = transform;
 	[UIView commitAnimations];
+    
 }
 
 - (void)moveAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(UIView *)context {
@@ -335,12 +347,9 @@
     NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
-    [self growSymbol:symbolView];
+    
     symbolView.displayValue = (symbolView.displayValue + 1) % 3;
-
-
-    for (UIView *view in formulaView.subviews)
-    [view setNeedsDisplay];
+    [self growSymbol:symbolView];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {
