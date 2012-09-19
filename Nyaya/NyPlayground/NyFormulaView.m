@@ -91,8 +91,8 @@
     [self addNode:node inRect:self.bounds];
 }
 
-#define FDX 61.0
-#define FDY 71.0
+#define FDX 46.0
+#define FDY 61.0
 
 - (CGSize)sizeOfNode:(NyayaNode*)node {
     return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);

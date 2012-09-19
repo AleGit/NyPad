@@ -57,6 +57,8 @@
 		112E0F6A15FE78860078339F /* BddNormalFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E0F6915FE78860078339F /* BddNormalFormsTests.m */; };
 		1139123915F7109C00B83877 /* DescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139123815F7109C00B83877 /* DescriptionTests.m */; };
 		1139123B15F7140600B83877 /* StandardTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139123A15F7140600B83877 /* StandardTestView.xib */; };
+		113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 113CAE3E160A3BC500BEBC90 /* NyayaNode+Transformations.m */; };
+		113CAE43160A470F00BEBC90 /* TransformationsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 113CAE42160A470F00BEBC90 /* TransformationsTest.m */; };
 		113FF75D15F07ED90073A410 /* 1SY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* 1SY.plist */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1162EBA315F4A62F0007EBAB /* BoolToolData.plist */; };
@@ -271,6 +273,10 @@
 		1139123715F7109C00B83877 /* DescriptionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionTests.h; path = NyayaNodeCategoryTests/DescriptionTests.h; sourceTree = "<group>"; };
 		1139123815F7109C00B83877 /* DescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionTests.m; path = NyayaNodeCategoryTests/DescriptionTests.m; sourceTree = "<group>"; };
 		1139123A15F7140600B83877 /* StandardTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StandardTestView.xib; path = Nyaya/NyTutorials/StandardTestView.xib; sourceTree = "<group>"; };
+		113CAE3D160A3BC500BEBC90 /* NyayaNode+Transformations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Transformations.h"; path = "Model/NyayaNode+Transformations.h"; sourceTree = "<group>"; };
+		113CAE3E160A3BC500BEBC90 /* NyayaNode+Transformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Transformations.m"; path = "Model/NyayaNode+Transformations.m"; sourceTree = "<group>"; };
+		113CAE41160A470F00BEBC90 /* TransformationsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformationsTest.h; sourceTree = "<group>"; };
+		113CAE42160A470F00BEBC90 /* TransformationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformationsTest.m; sourceTree = "<group>"; };
 		113FF75C15F07ED90073A410 /* 1SY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 1SY.plist; path = Nyaya/NyTutorials/1SY.plist; sourceTree = "<group>"; };
 		113FF75E15F0850D0073A410 /* NyAccessoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyAccessoryController.h; path = Nyaya/NyBranches/NyAccessoryController.h; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
@@ -653,6 +659,8 @@
 				11B97E0915F9B56F00A183DA /* DisplayTests.m */,
 				11B97E0C15F9B63700A183DA /* ValuationTests.h */,
 				11B97E0D15F9B63700A183DA /* ValuationTests.m */,
+				113CAE41160A470F00BEBC90 /* TransformationsTest.h */,
+				113CAE42160A470F00BEBC90 /* TransformationsTest.m */,
 			);
 			name = NyayaNodeCategoryTests;
 			sourceTree = "<group>";
@@ -934,6 +942,8 @@
 				1166F19A15BE6C18007B7B50 /* TruthTable.m */,
 				110E7E4F1600775500EA2D7F /* NyayaFormula.h */,
 				110E7E501600775500EA2D7F /* NyayaFormula.m */,
+				113CAE3D160A3BC500BEBC90 /* NyayaNode+Transformations.h */,
+				113CAE3E160A3BC500BEBC90 /* NyayaNode+Transformations.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1250,6 +1260,7 @@
 				1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */,
 				11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */,
 				11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */,
+				113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1287,6 +1298,7 @@
 				112E0F6A15FE78860078339F /* BddNormalFormsTests.m in Sources */,
 				110E7E5516007F8400EA2D7F /* SenTestCase+NyayaTests.m in Sources */,
 				110E7E581600A1B000EA2D7F /* NyayaDurationTests.m in Sources */,
+				113CAE43160A470F00BEBC90 /* TransformationsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

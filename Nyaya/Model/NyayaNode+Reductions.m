@@ -196,6 +196,9 @@
 }
 
 - (NyayaNode*)substitute:(NSMutableSet *)substitutes {
+    if (!substitutes) substitutes = [NSMutableSet set];
+    
+    
     NyayaNode *substitute = [substitutes objectIsEqual:self];
     
     if (!substitute) {

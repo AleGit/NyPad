@@ -9,7 +9,10 @@
 #import "NyPgDetailViewController.h"
 #import "NSObject+Nyaya.h"
 #import "NyayaNode+Creation.h"
+#import "NyayaNode+Type.h"
 #import "NyayaNode+Reductions.h"
+#import "NyayaNode+Transformations.h"
+#import "NyayaNode+Valuation.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
@@ -118,6 +121,8 @@
     [_formulaViews addObject:formualaView];
     
     NyayaNode *node = [NyayaNode conjunction:[NyayaNode negation:[NyayaNode conjunction:[NyayaNode atom:@"a"] with:[NyayaNode atom:@"b"]]] with:[NyayaNode atom:@"a"]];
+    node = [NyayaNode implication:node with:[NyayaNode negation:node]];
+    node = [NyayaNode implication:node with:[NyayaNode negation:node]];
     node = [node substitute:[NSMutableSet set]];
     formualaView.node = node;
     [self.canvasView addSubview:formualaView];
@@ -228,14 +233,14 @@
         // [self showSymbolMenu:context];
     }
     else {
-        [self growSymbol:context.supersymbol];
+        /* [self growSymbol:context.supersymbol];
         
         if (!context.supersymbol) {
             
             for (UIView *view in context.superview.subviews) {
                 [view setNeedsDisplay];
             }
-        }
+        }*/
         // [self showFormulaMenu:context.center inView:context];
         NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
     }
@@ -297,8 +302,23 @@
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
     
-    symbolView.displayValue = (symbolView.displayValue + 1) % 3;
-    [self growSymbol:symbolView];
+    if (symbolView.node.type == NyayaImplication) {
+        NSMutableSet *variables = [formulaView.node.setOfVariables mutableCopy];
+        NSIndexPath *indexPath = symbolView.indexPath;
+        NyayaNode *newsubnode = [NyayaNode disjunction:[NyayaNode negation:[symbolView.node nodeAtIndex:0]] with:[symbolView.node nodeAtIndex:1]];
+        NyayaNode *newnode = [formulaView.node nodeByReplacingNodeAtIndexPath:indexPath withNode:newsubnode];
+        formulaView.node = [newnode substitute:variables];
+    }
+    else {
+        
+        symbolView.displayValue = (symbolView.displayValue + 1) % 3;
+        [self growSymbol:symbolView];
+        
+    }
+    
+    [formulaView.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+        [obj setNeedsDisplay];
+    }];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {

@@ -126,7 +126,7 @@
 */
 
 - (NSIndexPath*)indexPath {
-    if (!self.supersymbol) return [NSIndexPath indexPathWithIndex:0]; // root node has index path '0'
+    if (!self.supersymbol) return [[NSIndexPath alloc] init]; // root node has empty indexpath
     
     
     
