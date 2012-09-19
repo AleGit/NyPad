@@ -94,7 +94,8 @@
     }
 }
 
-- (NySymbolView*)newSymbolView {
+#pragma mark - Ny Formula View Data Source
+- (NySymbolView*)symbolView {
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
     NySymbolView *symbolView = [viewArray objectAtIndex:3];
     return symbolView;    
@@ -103,22 +104,23 @@
 - (void)addNewFormulaAtCanvasLocation:(CGPoint)location {
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
     NyFormulaView *formualaView = [viewArray objectAtIndex:0];
-    NySymbolView *symbolView = [viewArray objectAtIndex:3];
+    //NySymbolView *symbolView = [viewArray objectAtIndex:3];
     
-    [formualaView addSubview:symbolView];
-    symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
-    formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0 - symbolView.center.y);
+    //[formualaView addSubview:symbolView];
+    // symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
+    // formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0 - symbolView.center.y);
+    formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0);
     
     formualaView.chosen = YES;
     formualaView.locked = NO;
     
+    
     [_formulaViews addObject:formualaView];
-    [self.canvasView addSubview:formualaView];
     
     NyayaNode *node = [NyayaNode conjunction:[NyayaNode negation:[NyayaNode conjunction:[NyayaNode atom:@"a"] with:[NyayaNode atom:@"b"]]] with:[NyayaNode atom:@"a"]];
     node = [node substitute:[NSMutableSet set]];
-    
-    [self fillFormula:formualaView withNode:node];
+    formualaView.node = node;
+    [self.canvasView addSubview:formualaView];
 }
 
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender {
@@ -130,60 +132,6 @@
 }
 
 #pragma mark - FORMULAs
-
-#define FDX 61.0
-#define FDY 71.0
-
-- (CGSize)sizeOfNode:(NyayaNode*)node {
-    return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);
-}
-
-- (void)clearFormula:(NyFormulaView*)formulaView {
-    NSArray *subviews = [formulaView.subviews copy];
-    for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[NySymbolView class]]) [subview removeFromSuperview];
-    }
-}
-
-- (NySymbolView*)fillFormula:(NyFormulaView*)formulaView withNode:(NyayaNode*)node inRect:(CGRect)rect {
-    NySymbolView *symbolView = [self newSymbolView];
-    
-    [formulaView addSubview:symbolView];
-    symbolView.center = CGPointMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + FDY / 2.0);
-    symbolView.node = node;
-    
-    CGFloat xoffset = rect.origin.x;
-    CGFloat yoffset = rect.origin.y + FDY;
-    
-    
-    for (NyayaNode *subnode in node.nodes) {
-        CGSize size = [self sizeOfNode:subnode];
-        rect = CGRectMake(xoffset, yoffset, size.width, size.height);
-        
-        NySymbolView *subsymbol = [self fillFormula:formulaView withNode:subnode inRect:rect];
-        [symbolView connectSubsymbol:subsymbol];
-        xoffset += size.width;
-    }
-    return symbolView;
-    
-}
-
-- (void)fillFormula:(NyFormulaView*)formulaView withNode:(NyayaNode*)node {
-    [self clearFormula:formulaView];
-    
-    
-    CGPoint origin = formulaView.frame.origin;
-    CGSize oldsize = formulaView.frame.size;
-    CGSize newsize = [self sizeOfNode:node];
-    formulaView.frame = CGRectMake(MAX(0.0,
-                                        origin.x + (oldsize.width-newsize.width)/2.0),
-                                   origin.y,
-                                   newsize.width,
-                                   newsize.height);
-    
-    [self fillFormula:formulaView withNode:node inRect:formulaView.bounds];
-    
-}
 
 - (void)deselectOtherFormulas:(NyFormulaView*)formulaView {
     [_formulaViews enumerateObjectsUsingBlock:^(NyFormulaView *obj, NSUInteger idx, BOOL *stop) {
@@ -344,6 +292,7 @@
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
     NSLog(@"tabSymbol: %@", [sender.view class]);
     NySymbolView *symbolView = (NySymbolView*)sender.view;
+    NSLog(@"indexPath: %@", [symbolView indexPath]);
     NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];

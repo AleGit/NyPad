@@ -12,13 +12,16 @@
 @interface NySymbolView : UIView
 
 @property (nonatomic, assign) NyayaBool displayValue;
-@property (nonatomic, strong) NyayaNode* node;
+@property (nonatomic, weak) NyayaNode* node;
 @property (nonatomic, readonly) NSArray *subsymbols;
 @property (nonatomic, readonly) NySymbolView *supersymbol;
 
+- (void)connectSubsymbol:(NySymbolView*)symbol;
+- (NSIndexPath*)indexPath;
+
 //- (NSUInteger)countSubsymbols;
 //- (NySymbolView*)subsymbolAtIndex:(NSUInteger)idx;
-- (void)connectSubsymbol:(NySymbolView*)symbol;
+
 //- (void)connectSubsymbol:(NySymbolView*)symbol atIndex:(NSUInteger)idx;
 //- (void)disconnectSubsymbol:(NySymbolView*)symbol;
 

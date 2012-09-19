@@ -125,4 +125,15 @@
 }
 */
 
+- (NSIndexPath*)indexPath {
+    if (!self.supersymbol) return [NSIndexPath indexPathWithIndex:0]; // root node has index path '0'
+    
+    
+    
+    else {
+        NSUInteger idx = [self.supersymbol.subsymbols indexOfObject:self];
+        return [[self.supersymbol indexPath] indexPathByAddingIndex:idx];
+    }
+}
+
 @end

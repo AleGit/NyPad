@@ -66,6 +66,62 @@
     return _lockButton.isSelected;
 }
 
+- (void)removeAllSymbols {
+    NSArray *subviews = [self.subviews copy];
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:[NySymbolView class]]) [subview removeFromSuperview];
+    }
+}
+
+
+- (void)setNode:(NyayaNode *)node {
+    _node = node;
+    [self removeAllSymbols];
+    
+    
+    CGPoint origin = self.frame.origin;
+    CGSize oldsize = self.frame.size;
+    CGSize newsize = [self sizeOfNode:node];
+    self.frame = CGRectMake(MAX(0.0,
+                                       origin.x + (oldsize.width-newsize.width)/2.0),
+                                   origin.y,
+                                   newsize.width,
+                                   newsize.height);
+    
+    [self addNode:node inRect:self.bounds];
+}
+
+#define FDX 61.0
+#define FDY 71.0
+
+- (CGSize)sizeOfNode:(NyayaNode*)node {
+    return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);
+}
+
+
+- (NySymbolView*)addNode:(NyayaNode*)node inRect:(CGRect)rect {
+    NySymbolView *symbolView = [self.dataSource symbolView];
+    
+    [self addSubview:symbolView];
+    symbolView.center = CGPointMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + FDY / 2.0);
+    symbolView.node = node;
+    
+    CGFloat xoffset = rect.origin.x;
+    CGFloat yoffset = rect.origin.y + FDY;
+    
+    
+    for (NyayaNode *subnode in node.nodes) {
+        CGSize size = [self sizeOfNode:subnode];
+        rect = CGRectMake(xoffset, yoffset, size.width, size.height);
+        
+        NySymbolView *subsymbol = [self addNode:subnode inRect:rect];
+        [symbolView connectSubsymbol:subsymbol];
+        xoffset += size.width;
+    }
+    return symbolView;
+    
+}
+
 
 
 

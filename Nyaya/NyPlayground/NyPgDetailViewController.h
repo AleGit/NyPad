@@ -10,22 +10,12 @@
 #import "NyFormulaView.h"
 #import "NySymbolView.h"
 
-@interface NyPgDetailViewController : NyDetailInputViewController
+@interface NyPgDetailViewController : NyDetailInputViewController <NyFormulaViewDataSource, NyFormulaViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *canvasView;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 
 - (IBAction)canvasTap:(UITapGestureRecognizer *)sender;
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender;
-
-- (IBAction)lockFormula:(UIButton *)sender;
-- (IBAction)deleteFormula:(UIButton *)sender;
-
-- (IBAction)selectFormula:(UITapGestureRecognizer *)sender;
-- (IBAction)dragFormula:(UIPanGestureRecognizer *)sender;
-- (IBAction)tapSymbol:(UITapGestureRecognizer *)sender;
-- (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender;
 
 @end
