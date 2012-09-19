@@ -7,7 +7,8 @@
 //
 
 #import "NySymbolView.h"
-
+#import "NyayaNode+Type.h"
+#import "NyayaNode+Display.h"
 
 #define CIRCLE_LABEL_IDX 0
 #define SYMBOL_LABEL_IDX 1
@@ -31,7 +32,7 @@
 }
 
 - (void)reset {
-    switch (_displayValue) {
+    switch (self.displayValue) {
         case NyayaFalse:
             _circleLabel.textColor = [UIColor redColor];
             break;
@@ -39,7 +40,6 @@
             _circleLabel.textColor = [UIColor greenColor];
             break;
         default:
-            _displayValue = NyayaUndefined;
             _circleLabel.textColor = [UIColor grayColor];
             break;
     }
@@ -62,9 +62,15 @@
     return self;
 }
 
+- (NyayaBool)displayValue {
+    return _node.displayValue;
+}
+
 - (void)setDisplayValue:(NyayaBool)displayValue {
-    _displayValue = displayValue;
-    [self reset];
+    if (_node.type == NyayaVariable) {
+        ((NyayaNodeVariable*)_node).displayValue = displayValue;
+        [self reset];
+    }
 }
 
 - (NSUInteger)countSubsymbols {
@@ -98,6 +104,16 @@
         [_subsymbols removeObject:symbol];
         symbol->_supersymbol = nil;
     }
+}
+
+- (void)setNode:(NyayaNode *)node {
+    _node = node;
+    _symbolLabel.text = node.symbol;
+}
+
+- (void)setNeedsDisplay {
+    [self reset];
+    // [super setNeedsDisplay];
 }
 
 /*

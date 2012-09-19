@@ -8,6 +8,8 @@
 
 #import "NyPgDetailViewController.h"
 #import "NSObject+Nyaya.h"
+#import "NyayaNode+Creation.h"
+#import "NyayaNode+Reductions.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
@@ -92,6 +94,12 @@
     }
 }
 
+- (NySymbolView*)newSymbolView {
+    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
+    NySymbolView *symbolView = [viewArray objectAtIndex:3];
+    return symbolView;    
+}
+
 - (void)addNewFormulaAtCanvasLocation:(CGPoint)location {
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
     NyFormulaView *formualaView = [viewArray objectAtIndex:0];
@@ -106,6 +114,11 @@
     
     [_formulaViews addObject:formualaView];
     [self.canvasView addSubview:formualaView];
+    
+    NyayaNode *node = [NyayaNode conjunction:[NyayaNode negation:[NyayaNode conjunction:[NyayaNode atom:@"a"] with:[NyayaNode atom:@"b"]]] with:[NyayaNode atom:@"a"]];
+    node = [node substitute:[NSMutableSet set]];
+    
+    [self fillFormula:formualaView withNode:node];
 }
 
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender {
@@ -117,6 +130,60 @@
 }
 
 #pragma mark - FORMULAs
+
+#define FDX 61.0
+#define FDY 71.0
+
+- (CGSize)sizeOfNode:(NyayaNode*)node {
+    return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);
+}
+
+- (void)clearFormula:(NyFormulaView*)formulaView {
+    NSArray *subviews = [formulaView.subviews copy];
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:[NySymbolView class]]) [subview removeFromSuperview];
+    }
+}
+
+- (NySymbolView*)fillFormula:(NyFormulaView*)formulaView withNode:(NyayaNode*)node inRect:(CGRect)rect {
+    NySymbolView *symbolView = [self newSymbolView];
+    
+    [formulaView addSubview:symbolView];
+    symbolView.center = CGPointMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + FDY / 2.0);
+    symbolView.node = node;
+    
+    CGFloat xoffset = rect.origin.x;
+    CGFloat yoffset = rect.origin.y + FDY;
+    
+    
+    for (NyayaNode *subnode in node.nodes) {
+        CGSize size = [self sizeOfNode:subnode];
+        rect = CGRectMake(xoffset, yoffset, size.width, size.height);
+        
+        NySymbolView *subsymbol = [self fillFormula:formulaView withNode:subnode inRect:rect];
+        [symbolView connectSubsymbol:subsymbol];
+        xoffset += size.width;
+    }
+    return symbolView;
+    
+}
+
+- (void)fillFormula:(NyFormulaView*)formulaView withNode:(NyayaNode*)node {
+    [self clearFormula:formulaView];
+    
+    
+    CGPoint origin = formulaView.frame.origin;
+    CGSize oldsize = formulaView.frame.size;
+    CGSize newsize = [self sizeOfNode:node];
+    formulaView.frame = CGRectMake(MAX(0.0,
+                                        origin.x + (oldsize.width-newsize.width)/2.0),
+                                   origin.y,
+                                   newsize.width,
+                                   newsize.height);
+    
+    [self fillFormula:formulaView withNode:node inRect:formulaView.bounds];
+    
+}
 
 - (void)deselectOtherFormulas:(NyFormulaView*)formulaView {
     [_formulaViews enumerateObjectsUsingBlock:^(NyFormulaView *obj, NSUInteger idx, BOOL *stop) {
@@ -237,14 +304,16 @@
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(moveAnimationDidStop:finished:context:)];
         context.transform = CGAffineTransformMakeTranslation(0.0f, 0.0f);
+        context.alpha = 1.0;
     }
     else {
         // [self showFormulaMenu:context.center inView:context];
         NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
+        
     }
 }
 
-- (void)moveSymbol:(UIView *)view direction: (CGPoint)direction {
+- (void)moveSymbol:(NySymbolView *)view direction: (CGPoint)direction {
     [UIView beginAnimations:@"moveDownSymbol" context:(void*)view];
 	[UIView setAnimationDuration:ANIMADURATION * sqrtf(0.5+sqrtf(direction.x*direction.x+direction.y+direction.y)/40.0) ];
 	[UIView setAnimationDelegate:self];
@@ -252,6 +321,9 @@
 	CGAffineTransform transform = CGAffineTransformMakeTranslation(direction.x, direction.y);
     
 	view.transform = transform;
+    view.displayValue = (view.displayValue +1) %3;
+    view.alpha = 0.0;
+    
 	[UIView commitAnimations];
     
 }
@@ -264,8 +336,11 @@
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
     [self growSymbol:symbolView];
-    symbolView.displayValue = symbolView.displayValue + 1;
-    
+    symbolView.displayValue = (symbolView.displayValue + 1) % 3;
+
+
+    for (UIView *view in formulaView.subviews)
+    [view setNeedsDisplay];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {

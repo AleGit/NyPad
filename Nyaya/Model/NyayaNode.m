@@ -33,6 +33,24 @@
     return c;
 }
 
+
+- (NSUInteger) width {
+    NSUInteger width = 0;
+    
+    for (NyayaNode *node in self.nodes) width += node.width;
+    
+    return width ? width : 1;
+    
+}
+
+- (NSUInteger)height {
+    NSUInteger height = 0;
+    
+    for (NyayaNode *node in self.nodes) height = MAX(height,node.height);
+    
+    return 1 + height;
+}
+
 /* ********************************************************************************************************* */
 
 

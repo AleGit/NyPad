@@ -20,6 +20,9 @@
 // "a&b" count == 3 (2 atoms + 1 conjunction)
 - (NSUInteger)length;
 
+- (NSUInteger)width;        // width . dx = frame width of syntax tree
+- (NSUInteger)height;       // height . dy = frame height of syntax treee
+
 // comparison by length
 - (NSComparisonResult)compare:(NyayaNode*)other;
 
