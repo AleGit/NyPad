@@ -72,6 +72,18 @@
 - (BOOL)nodesAreEqual:(NyayaNode*)other {
     __block BOOL equal = YES; // call this only with nodes of same length
     
+    [self.nodes enumerateObjectsUsingBlock:^(NyayaNode *node, NSUInteger idx, BOOL *stop) {
+        if (![node isEqualToNode:[other nodeAtIndex:idx]]) {
+            equal = NO;
+            *stop = YES;
+        }
+    }];
+    return equal;
+}
+
+- (BOOL)nodesAreSemanticallyEqual:(NyayaNode*)other {
+    __block BOOL equal = YES; // call this only with nodes of same length
+    
     switch (self.type) {
             // (commutative binary functions: the order of subnodes does not matter)
         case NyayaConjunction:
@@ -196,7 +208,7 @@
 
 @implementation NyayaNodeConjunction
 // AND is associative and commutative
-- (BOOL)isEqualToNode:(NyayaNode*)other {
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode*)other {
     NSSet *selfSet = [NSSet setWithArray:[self naryConjunction]];
     NSSet *otherSet = [NSSet setWithArray:[other naryConjunction]];
     return [selfSet isEqualToSet:otherSet];
@@ -208,7 +220,7 @@
 
 @implementation NyayaNodeDisjunction
 // OR is associative and commutative
-- (BOOL)isEqualToNode:(NyayaNode*)other {
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode*)other {
     NSSet *selfSet = [NSSet setWithArray:[self naryDisjunction]];
     NSSet *otherSet = [NSSet setWithArray:[other naryDisjunction]];
     return [selfSet isEqualToSet:otherSet];
@@ -227,7 +239,7 @@
 
 @implementation NyayaNodeBicondition
 // BIC is associative and commutative
-- (BOOL)isEqualToNode:(NyayaNode*)other {
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode*)other {
     NSSet *selfSet = [NSSet setWithArray:[self naryBiconditional]];
     NSSet *otherSet = [NSSet setWithArray:[other naryBiconditional]];
     return [selfSet isEqualToSet:otherSet];
@@ -236,7 +248,7 @@
 
 @implementation NyayaNodeXdisjunction
 // XOR is associative and commutative
-- (BOOL)isEqualToNode:(NyayaNode*)other {
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode*)other {
     NSSet *selfSet = [NSSet setWithArray:[self naryXdisjunction]];
     NSSet *otherSet = [NSSet setWithArray:[other naryXdisjunction]];
     return [selfSet isEqualToSet:otherSet];

@@ -171,7 +171,6 @@
 		11C93F0615F46E6300AB94DF /* UITextField+Nyaya.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C93F0515F46E6300AB94DF /* UITextField+Nyaya.m */; };
 		11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C93F0A15F4741000AB94DF /* NyayaBddView.m */; };
 		11CB867015F8634800D20A59 /* NyayaNode+Reductions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */; };
-		11CB867415F873EE00D20A59 /* ReductionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB867315F873EE00D20A59 /* ReductionTests.m */; };
 		11DBC0B41604F2A40007A82B /* tutorial1LI.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B31604F2A40007A82B /* tutorial1LI.html */; };
 		11DBC0B71604F2CF0007A82B /* instructions1DS.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B51604F2CF0007A82B /* instructions1DS.html */; };
 		11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions1SY.html */; };
@@ -441,8 +440,6 @@
 		11C93F0A15F4741000AB94DF /* NyayaBddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaBddView.m; path = NyBoolTool/NyayaBddView.m; sourceTree = "<group>"; };
 		11CB866E15F8634800D20A59 /* NyayaNode+Reductions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Reductions.h"; path = "Model/NyayaNode+Reductions.h"; sourceTree = "<group>"; };
 		11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Reductions.m"; path = "Model/NyayaNode+Reductions.m"; sourceTree = "<group>"; };
-		11CB867215F873EE00D20A59 /* ReductionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReductionTests.h; path = NyayaNodeCategoryTests/ReductionTests.h; sourceTree = "<group>"; };
-		11CB867315F873EE00D20A59 /* ReductionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReductionTests.m; path = NyayaNodeCategoryTests/ReductionTests.m; sourceTree = "<group>"; };
 		11DBC0B31604F2A40007A82B /* tutorial1LI.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial1LI.html; path = html/tutorial1LI.html; sourceTree = "<group>"; };
 		11DBC0B51604F2CF0007A82B /* instructions1DS.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions1DS.html; path = html/instructions1DS.html; sourceTree = "<group>"; };
 		11DBC0B61604F2CF0007A82B /* instructions1SY.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions1SY.html; path = html/instructions1SY.html; sourceTree = "<group>"; };
@@ -653,8 +650,6 @@
 				1188B55415F7B5DE004186C0 /* BaseTests.m */,
 				1188B55615F7BF6D004186C0 /* DerivationsTests.h */,
 				1188B55715F7BF6D004186C0 /* DerivationsTests.m */,
-				11CB867215F873EE00D20A59 /* ReductionTests.h */,
-				11CB867315F873EE00D20A59 /* ReductionTests.m */,
 				11B97E0815F9B56F00A183DA /* DisplayTests.h */,
 				11B97E0915F9B56F00A183DA /* DisplayTests.m */,
 				11B97E0C15F9B63700A183DA /* ValuationTests.h */,
@@ -1292,7 +1287,6 @@
 				1139123915F7109C00B83877 /* DescriptionTests.m in Sources */,
 				1188B55515F7B5DE004186C0 /* BaseTests.m in Sources */,
 				1188B55815F7BF6D004186C0 /* DerivationsTests.m in Sources */,
-				11CB867415F873EE00D20A59 /* ReductionTests.m in Sources */,
 				11B97E0A15F9B56F00A183DA /* DisplayTests.m in Sources */,
 				11B97E0E15F9B63700A183DA /* ValuationTests.m in Sources */,
 				112E0F6A15FE78860078339F /* BddNormalFormsTests.m in Sources */,

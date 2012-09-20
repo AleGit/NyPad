@@ -124,6 +124,27 @@
     return node;
 }
 
+- (NSString*)switchKey {
+    NSString *key = nil; // default return value
+    switch (self.type) {
+        case NyayaConjunction: key=@"P∧Q=Q∧P"; break;
+        case NyayaDisjunction: key=@"P∨Q=Q∨P"; break;
+    }
+    return key;
+}
+
+- (NyayaNode*)switchedNode {
+    NyayaNode *node = self;                 // level 0, default return value
+    NyayaNode *n0 = [self nodeAtIndex:0];   // level 1
+    NyayaNode *n1 = [self nodeAtIndex:1];   // level 1
+    
+    switch (self.type) {
+        case NyayaConjunction: node=[NyayaNode conjunction:n1 with:n0]; break;
+        case NyayaDisjunction: node=[NyayaNode disjunction:n1 with:n0];; break;
+    }
+    return node;
+}
+
 - (NSString*)imfKey {
     NSString *key = nil; // default return value
     if (self.type == NyayaImplication) key = @"P→Q=¬P∨Q";

@@ -316,6 +316,10 @@
     [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:1]];
 }
 
+- (void)switchSymbol:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node switchedNode]];
+}
+
 
 
 #pragma mark - user interaction
@@ -330,6 +334,12 @@
         NyayaNode *node = symbolView.node;      // level 0
         NSString *key = nil;
         SEL selector = nil;
+        
+        key = [node switchKey];
+        selector = @selector(switchSymbol:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        
         // collapse
         key = [node collapseKey];
         selector = @selector(collapseSymbol:);
@@ -379,6 +389,7 @@
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➞" action:@selector(implication:)]];
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"switch" action:@selector(switchSymbol:)]];
         }
         
         [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];

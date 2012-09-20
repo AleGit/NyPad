@@ -57,4 +57,24 @@
     STAssertEqualObjects(ghij.cnfRightKey, @"P∨(Q∧R)=(P∨Q)∧(P∨R)", nil);
 }
 
+- (void)testDnfKeys {
+    NyayaFormula *frm = [NyayaFormula formulaWithString:@"a&(b|c); ((d|e)&f ; (g|h)&(i|j))"];
+    NyayaNode *node = [frm syntaxTree:NO];
+    NyayaNode *abc = [node nodeAtIndex:0];
+    NyayaNode *def = [[node nodeAtIndex:1] nodeAtIndex:0];
+    NyayaNode *ghij = [[node nodeAtIndex:1] nodeAtIndex:1];
+    
+    STAssertEqualObjects([abc description], @"a ∧ (b ∨ c)", nil);
+    STAssertNil(abc.dnfLeftKey,nil);
+    STAssertEqualObjects(abc.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
+    
+    STAssertEqualObjects([def description], @"(d ∨ e) ∧ f", nil);
+    STAssertEqualObjects(def.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)", nil);
+    STAssertNil(def.dnfRightKey, nil);
+    
+    STAssertEqualObjects([ghij description], @"(g ∨ h) ∧ (i ∨ j)", nil);
+    STAssertEqualObjects(ghij.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)", nil);
+    STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
+}
+
 @end

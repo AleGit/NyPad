@@ -38,11 +38,10 @@
     STAssertEqualObjects(a1, a2, @"nodes should be equal");
     STAssertEqualObjects(a1.nodes, a2.nodes, @"array of subnodes should be equal");
     STAssertEqualObjects([NSSet setWithArray:a2.nodes], [NSSet setWithArray:a3.nodes], @"set of subnodes should be equal");
-    STAssertEqualObjects(a2, a3, @"nodes should be equal");
+    
     
     a2 = [self nodeWithFormula:@"a&b"];
     a3 = [self nodeWithFormula:@"b&a"];
-    STAssertEqualObjects(a2, a3, @"conjunction is commutative");
     
     a2 = [self nodeWithFormula:@"a>b"];
     a3 = [self nodeWithFormula:@"b>a"];
@@ -76,13 +75,6 @@
     
     STAssertTrue([a4 isNegationToNode:a3], nil);
     STAssertTrue([a3 isNegationToNode:a4], nil);
-}
-
-- (void)testSpareIntances {
-    for (NSString *input in @[@"(a&b|b&a)", @"(a|b)&(b|a)"]) {
-        NyayaNode *node = [self nodeWithFormula:input];
-        STAssertEquals([node nodeAtIndex:0], [node nodeAtIndex:1], input);
-    }
 }
 
 @end
