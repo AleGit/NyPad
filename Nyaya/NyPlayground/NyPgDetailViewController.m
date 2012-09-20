@@ -13,9 +13,11 @@
 #import "NyayaNode+Reductions.h"
 #import "NyayaNode+Transformations.h"
 #import "NyayaNode+Valuation.h"
+#import "NyayaNode+Attributes.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
+    __weak NySymbolView *_tappedSymbolView;
 }
 @end
 
@@ -120,10 +122,7 @@
     
     [_formulaViews addObject:formualaView];
     
-    NyayaNode *node = [NyayaNode conjunction:[NyayaNode negation:[NyayaNode conjunction:[NyayaNode atom:@"a"] with:[NyayaNode atom:@"b"]]] with:[NyayaNode atom:@"a"]];
-    node = [NyayaNode implication:node with:[NyayaNode negation:node]];
-    node = [NyayaNode implication:node with:[NyayaNode negation:node]];
-    node = [node substitute:[NSMutableSet set]];
+    NyayaNode *node = [NyayaNode atom:@"p"];
     formualaView.node = node;
     [self.canvasView addSubview:formualaView];
 }
@@ -189,34 +188,139 @@
 
 #pragma mark - SYMBOLs
 
-- (void)actionA:(UIMenuController*)ctrl {
-    NSLog(@"A %@", ctrl);
-    
+- (void)refreshFormulaView:(NyFormulaView*)formulaView {
+    [formulaView setNeedsDisplay];
+
+    for (UIView *view in formulaView.subviews) {
+        [view setNeedsDisplay];
+    }
 }
 
-- (void)actionB:(UIMenuController*)ctrl {
-    NSLog(@"B %@", ctrl);
+- (void)updateSymbolView:(NySymbolView*)symbolView withNode:(NyayaNode*)node {
     
+    NyFormulaView *formulaView =  symbolView.formulaView;
+    
+    NyayaNode *root = formulaView.node;
+    NSMutableSet *variables = [root.setOfVariables mutableCopy];
+    NyayaNode *newroot = [root nodeByReplacingNodeAtIndexPath:symbolView.indexPath withNode:node];
+    newroot = [newroot substitute:variables];
+    formulaView.node = newroot;
+    
+    [self refreshFormulaView:formulaView];
 }
 
-- (void)showSymbolMenu:(UIView*)view {
-    //CGPoint location = view.center;
+- (void)atomNodeP:(UIMenuController*)ctrl {
+    NyayaNode *newNode = [NyayaNode atom:@"p"];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)atomNodeQ:(UIMenuController*)ctrl {
+    NyayaNode *newNode = [NyayaNode atom:@"q"];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)atomNodeR:(UIMenuController*)ctrl {
+    NyayaNode *newNode = [NyayaNode atom:@"r"];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)negateNode:(UIMenuController*)ctrl {
+    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode negation: node];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)implicateNode:(UIMenuController*)ctrl {
+    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode implication:node with:node];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)conjunctNode:(UIMenuController*)ctrl {
+    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode conjunction:node with:node];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)disjunctNode:(UIMenuController*)ctrl {
+    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode disjunction:node with:node];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)negation:(UIMenuController*)ctrl {
+    NyayaNodeUnary *node = (NyayaNodeUnary*)_tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode negation: [node firstNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)implication:(UIMenuController*)ctrl {
+    NyayaNodeBinary *node = (NyayaNodeBinary*)_tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode implication:[node firstNode] with:[node secondNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)conjunction:(UIMenuController*)ctrl {
+    NyayaNodeBinary *node = (NyayaNodeBinary*)_tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode conjunction:[node firstNode] with:[node secondNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)disjunction:(UIMenuController*)ctrl {
+    NyayaNodeBinary *node = (NyayaNodeBinary*)_tappedSymbolView.node;
+    NyayaNode *newNode = [NyayaNode disjunction:[node firstNode] with:[node secondNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)displayFalse:(UIMenuController*)ctrl {
+    _tappedSymbolView.displayValue = NyayaFalse;
+    [self refreshFormulaView:_tappedSymbolView.formulaView];
+}
+- (void)displayTrue:(UIMenuController*)ctrl {
+    _tappedSymbolView.displayValue = NyayaTrue;
+    [self refreshFormulaView:_tappedSymbolView.formulaView];
+}
+- (void)displayClear:(UIMenuController*)ctrl {
+    _tappedSymbolView.displayValue = NyayaUndefined;
+    [self refreshFormulaView:_tappedSymbolView.formulaView];
+}
+
+
+
+- (void)showSymbolMenu:(NySymbolView*)symbolView {
+    NyFormulaView *formulaView = symbolView.formulaView;
+    _tappedSymbolView = symbolView;
     
     UIMenuController *menuController = [UIMenuController sharedMenuController];
     NSMutableArray *menuItems = [NSMutableArray array];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(¬Φ)" action:@selector(actionA:)]];
-//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ➞Φ)" action:nil]];
-//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ∧Φ)" action:nil]];
-//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"(Φ∨Φ)" action:nil]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(actionB:)]];
-//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⊤" action:nil]];
-//    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⊥" action:nil]];
-    // [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"f(Φ,Φ,Φ)" action:@selector(formulaToF:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
+    
+    if (symbolView.node.arity > 0) { // not a leaf
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
+    }
+    if (symbolView.node.arity > 1) {
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➞" action:@selector(implication:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
+    }
+    
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ➞Φ" action:@selector(implicateNode:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∧Φ" action:@selector(conjunctNode:)]];
+    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∨Φ" action:@selector(disjunctNode:)]];
+    
+    if (symbolView.node.type == NyayaVariable) {
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"false" action:@selector(displayFalse:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"true" action:@selector(displayTrue:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"clear" action:@selector(displayClear:)]];
+    }
     
     [self becomeFirstResponder];
     
     [menuController setMenuItems:menuItems];
-    [menuController setTargetRect:view.frame inView:view.superview];
+    [menuController setTargetRect:symbolView.frame inView:formulaView];
     [menuController setMenuVisible:YES];
     
     
@@ -230,7 +334,7 @@
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
         context.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-        // [self showSymbolMenu:context];
+        [self showSymbolMenu:context];
     }
     else {
         /* [self growSymbol:context.supersymbol];
@@ -241,7 +345,7 @@
                 [view setNeedsDisplay];
             }
         }*/
-        // [self showFormulaMenu:context.center inView:context];
+        
         NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
     }
 }
@@ -272,6 +376,7 @@
         context.alpha = 1.0;
     }
     else {
+        [UIView setAnimationDuration:0.0];
         // [self showFormulaMenu:context.center inView:context];
         NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
         
@@ -295,30 +400,13 @@
 
 
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
-    NSLog(@"tabSymbol: %@", [sender.view class]);
+    
     NySymbolView *symbolView = (NySymbolView*)sender.view;
-    NSLog(@"indexPath: %@", [symbolView indexPath]);
-    NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
+    NyFormulaView *formulaView = symbolView.formulaView;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
     
-    if (symbolView.node.type == NyayaImplication) {
-        NSMutableSet *variables = [formulaView.node.setOfVariables mutableCopy];
-        NSIndexPath *indexPath = symbolView.indexPath;
-        NyayaNode *newsubnode = [NyayaNode disjunction:[NyayaNode negation:[symbolView.node nodeAtIndex:0]] with:[symbolView.node nodeAtIndex:1]];
-        NyayaNode *newnode = [formulaView.node nodeByReplacingNodeAtIndexPath:indexPath withNode:newsubnode];
-        formulaView.node = [newnode substitute:variables];
-    }
-    else {
-        
-        symbolView.displayValue = (symbolView.displayValue + 1) % 3;
-        [self growSymbol:symbolView];
-        
-    }
-    
-    [formulaView.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-        [obj setNeedsDisplay];
-    }];
+    [self showSymbolMenu:symbolView];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {

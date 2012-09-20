@@ -74,6 +74,10 @@
 }
 
 
+
+#define FDX 47.0
+#define FDY 61.0
+
 - (void)setNode:(NyayaNode *)node {
     _node = node;
     [self removeAllSymbols];
@@ -85,14 +89,11 @@
     self.frame = CGRectMake(MAX(0.0,
                                        origin.x + (oldsize.width-newsize.width)/2.0),
                                    origin.y,
-                                   newsize.width,
-                                   newsize.height);
+                                   MAX(2.0*FDX, newsize.width),
+                                   MAX(1.5*FDY, newsize.height));
     
     [self addNode:node inRect:self.bounds];
 }
-
-#define FDX 46.0
-#define FDY 61.0
 
 - (CGSize)sizeOfNode:(NyayaNode*)node {
     return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);

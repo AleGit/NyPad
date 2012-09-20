@@ -23,6 +23,10 @@
 
 @implementation NySymbolView
 
+- (NyFormulaView*)formulaView {
+    return (NyFormulaView*)self.superview;
+}
+
 - (void)setup {
     self.backgroundColor = nil;
     _circleLabel = (UILabel*)[self.subviews objectAtIndex:CIRCLE_LABEL_IDX];

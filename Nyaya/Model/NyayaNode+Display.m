@@ -65,6 +65,7 @@
     
     if (firstValue == NyayaTrue || secondValue == NyayaTrue) _displayValue = NyayaTrue;
     else if (firstValue == NyayaFalse && secondValue == NyayaFalse) _displayValue = NyayaFalse;
+    else if ([self.firstNode isNegationToNode:self.secondNode]) _displayValue = NyayaTrue;
     else _displayValue = NyayaUndefined;
     
     return _displayValue;
@@ -82,6 +83,7 @@
     
     if (firstValue == NyayaFalse || secondValue == NyayaFalse) _displayValue = NyayaFalse;
     else if (firstValue == NyayaTrue && secondValue == NyayaTrue) _displayValue = NyayaTrue;
+    else if ([self.firstNode isNegationToNode:self.secondNode]) _displayValue = NyayaFalse;
     else _displayValue = NyayaUndefined;
     
     return _displayValue;
@@ -99,6 +101,8 @@
     
     if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
     else if (firstValue == secondValue) _displayValue = NyayaFalse;
+    else if ([self.firstNode isNegationToNode:self.secondNode]) _displayValue = NyayaTrue;
+    else if ([self.firstNode isEqual:self.secondNode]) _displayValue = NyayaFalse;
     else _displayValue = NyayaTrue;
     
     return _displayValue;
@@ -129,6 +133,9 @@
     
     if (firstValue == NyayaUndefined || secondValue == NyayaUndefined) _displayValue = NyayaUndefined;
     else if (firstValue == secondValue) _displayValue = NyayaTrue;
+    else if ([self.firstNode isNegationToNode:self.secondNode]) _displayValue = NyayaFalse;
+    else if ([self.firstNode isEqual:self.secondNode]) _displayValue = NyayaTrue;
+
     else _displayValue = NyayaFalse;
     
     return _displayValue;
