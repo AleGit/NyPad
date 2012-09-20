@@ -40,7 +40,7 @@
             _circleLabel.textColor = [UIColor greenColor];
             break;
         default:
-            _circleLabel.textColor = [UIColor grayColor];
+            _circleLabel.textColor = [UIColor blueColor];
             break;
     }
 }
