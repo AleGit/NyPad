@@ -11,7 +11,7 @@
 @class TruthTable;
 @class NyayaNode;
 
-@interface BddNode : NSObject
+@interface BddNode : NSObject <NSCopying>
 
 // used be reduce algorithm
 @property (nonatomic, readonly) NSInteger id;
