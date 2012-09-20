@@ -30,10 +30,4 @@
 
 - (NyayaNode*)distributedNodeToIndex:(NSUInteger)idx;
 
-
-//- (NyayaNode*)imfNodeAtIndexPath:(NSIndexPath*)indexPath;
-//- (NyayaNode*)nnfNodeAtIndexPath:(NSIndexPath*)indexPath;
-//- (NyayaNode*)distributeNodeAtIndexPath:(NSIndexPath*)indexPath overNodeIndex:(NSUInteger)idx;
-
-
 @end
