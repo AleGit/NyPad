@@ -26,7 +26,8 @@
 // comparison by length
 - (NSComparisonResult)compare:(NyayaNode*)other;
 
-
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode*)other;
+- (BOOL)isSyntacticallyEqualToNode:(NyayaNode*)other;
 
 @end
 

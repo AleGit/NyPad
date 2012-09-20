@@ -69,7 +69,7 @@
     return [_nodes count] > index ? [_nodes objectAtIndex:index] : nil;
 }
 
-- (BOOL)nodesAreEqual:(NyayaNode*)other {
+- (BOOL)nodesAreSyntacticallyEqual:(NyayaNode*)other {
     __block BOOL equal = YES; // call this only with nodes of same length
     
     [self.nodes enumerateObjectsUsingBlock:^(NyayaNode *node, NSUInteger idx, BOOL *stop) {
@@ -127,13 +127,26 @@
     
 }
 
-- (BOOL)isEqualToNode:(NyayaNode*)other {
+- (BOOL)isSyntacticallyEqualToNode:(NyayaNode *)other {
     
     return
     [self.symbol isEqualToString:other.symbol]
     && [self.nodes count] == [other.nodes count]
-    && [self nodesAreEqual:other];
+    && [self nodesAreSyntacticallyEqual:other];
     
+}
+
+- (BOOL)isSemanticallyEqualToNode:(NyayaNode *)other {
+    
+    return
+    [self.symbol isEqualToString:other.symbol]
+    && [self.nodes count] == [other.nodes count]
+    && [self nodesAreSemanticallyEqual:other];
+    
+}
+
+- (BOOL)isEqualToNode:(NyayaNode*)other {
+    return [self isSyntacticallyEqualToNode:other]; // make this configurable
 }
 
 - (BOOL)isEqual:(id)object {

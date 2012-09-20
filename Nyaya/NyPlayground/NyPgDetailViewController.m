@@ -335,14 +335,13 @@
         NSString *key = nil;
         SEL selector = nil;
         
-        key = [node switchKey];
-        selector = @selector(switchSymbol:);
-        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
-        
-        
         // collapse
         key = [node collapseKey];
         selector = @selector(collapseSymbol:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        key = [node switchKey];
+        selector = @selector(switchSymbol:);
         if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
         
         // implication free

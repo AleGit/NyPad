@@ -126,9 +126,13 @@
 
 - (NSString*)switchKey {
     NSString *key = nil; // default return value
-    switch (self.type) {
-        case NyayaConjunction: key=@"P∧Q=Q∧P"; break;
-        case NyayaDisjunction: key=@"P∨Q=Q∨P"; break;
+    NyayaNode *n0 = [self nodeAtIndex:0];   // level 1
+    NyayaNode *n1 = [self nodeAtIndex:1];   // level 1
+    if (![n0 isEqual:n1]) {
+        switch (self.type) {
+            case NyayaConjunction: key=@"P∧Q=Q∧P"; break;
+            case NyayaDisjunction: key=@"P∨Q=Q∨P"; break;
+        }
     }
     return key;
 }
