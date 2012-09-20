@@ -87,14 +87,18 @@
         case NyayaConjunction:
             if ([n0 isEqual:n1]) key = @"P∧P=P";
             else if ([n0 isNegationToNode:n1]) key = @"P∧¬P=⊥";
-            else if ([n0 isEqual:[NyayaNode top]]) key = @"P∧⊤=P";
-            else if ([n0 isEqual:[NyayaNode bottom]]) key = @"P∧⊥=⊥";
+            else if ([n0 isEqual:[NyayaNode top]]) key = @"⊤∧P=P";
+            else if ([n0 isEqual:[NyayaNode bottom]]) key = @"⊥∧P=⊥";
+            else if ([n1 isEqual:[NyayaNode top]]) key = @"P∧⊤=P";
+            else if ([n1 isEqual:[NyayaNode bottom]]) key = @"P∧⊥=⊥";
             break;
         case NyayaDisjunction:
             if ([n0 isEqual:n1]) key = @"P∨P=P";
             else if ([n0 isNegationToNode:n1]) key = @"P∨¬P=⊤";
-            else if ([n0 isEqual:[NyayaNode top]]) key = @"P∨⊤=⊤";
-            else if ([n0 isEqual:[NyayaNode bottom]]) key = @"P∨⊥=P";
+            else if ([n0 isEqual:[NyayaNode top]]) key = @"⊤∨P=⊤";
+            else if ([n0 isEqual:[NyayaNode bottom]]) key = @"⊥∨P=P";
+            else if ([n1 isEqual:[NyayaNode top]]) key = @"P∨⊤=⊤";
+            else if ([n1 isEqual:[NyayaNode bottom]]) key = @"P∨⊥=P";
             break;
     }
     return key;
@@ -112,14 +116,18 @@
         case NyayaConjunction:
             if ([n0 isEqual:n1]) node = n0;
             else if ([n0 isNegationToNode:n1]) node =[NyayaNode bottom];
-            else if ([n0 isEqual:[NyayaNode top]]) node = n0;
+            else if ([n0 isEqual:[NyayaNode top]]) node = n1;
             else if ([n0 isEqual:[NyayaNode bottom]]) node = [NyayaNode bottom];
+            else if ([n1 isEqual:[NyayaNode top]]) node = n0;
+            else if ([n1 isEqual:[NyayaNode bottom]]) node = [NyayaNode bottom];
             break;
         case NyayaDisjunction:
             if ([n0 isEqual:n1]) node = n0;
             else if ([n0 isNegationToNode:n1]) node = [NyayaNode top];
             else if ([n0 isEqual:[NyayaNode top]]) node = [NyayaNode top];
-            else if ([n0 isEqual:[NyayaNode bottom]]) node = n0;
+            else if ([n0 isEqual:[NyayaNode bottom]]) node = n1;
+            else if ([n1 isEqual:[NyayaNode top]]) node = [NyayaNode top];
+            else if ([n1 isEqual:[NyayaNode bottom]]) node = n0;
             break;
     }
     return node;

@@ -77,53 +77,106 @@
     STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
 }
 
+- (void)testDnfLeft {
+    NSArray *inputs =       @[@"a&(b|c)"  , @"(d|e)&f"              ,@"(g|h)&(i|j)"         , @"!a" , @"a&a", @"a|a"];
+    NSArray *leftkeys =     @[@"---"      , @"(P∨Q)∧R=(P∧R)∨(Q∧R)"  ,@"(P∨Q)∧R=(P∧R)∨(Q∧R)" , @"---", @"---", @"---"];
+    NSArray *rightkeys =    @[@"P∧(Q∨R)=(P∧Q)∨(P∧R)"   , @"---",    @"P∧(Q∨R)=(P∧Q)∨(P∧R)"  , @"---", @"---", @"---"];
 
-
-- (void)testTransformationNnf {
-    NyayaFormula *frm = [NyayaFormula formulaWithString:@"!(a&b)>!(c|d)"];
-    NyayaNode *node = [frm syntaxTree:NO];
-
-    NyayaNode *ab = [node nodeAtIndex:0];
-    NyayaNode *cd = [node nodeAtIndex:1];
-    STAssertEqualObjects([ab description], @"¬(a ∧ b)", nil);
-    STAssertEqualObjects([cd description], @"¬(c ∨ d)", nil);
-    
-    STAssertEqualObjects([[ab nnfKey] description], @"¬(P∧Q)=¬P∨¬Q", nil);
-    STAssertEqualObjects([[cd nnfKey] description], @"¬(P∨Q)=¬P∧¬Q", nil);
-    
-    STAssertEqualObjects([[ab nnfNode] description], @"¬a ∨ ¬b", nil);
-    STAssertEqualObjects([[cd nnfNode] description], @"¬c ∧ ¬d", nil);
-    
-    frm = [NyayaFormula formulaWithString:@"!0 & !1"];
-    node = [frm syntaxTree:NO];
-
-    NyayaNode *n0 = [node nodeAtIndex:0];
-    NyayaNode *n1 = [node nodeAtIndex:1];
-    
-    STAssertEqualObjects([n0 description], @"¬F", nil);
-    STAssertEqualObjects([n1 description], @"¬T", nil);
-    
-    STAssertEqualObjects([[n0 nnfKey] description], @"¬⊥=⊤", nil);
-    STAssertEqualObjects([[n1 nnfKey] description], @"¬⊤=⊥", nil);
-    
-    STAssertEqualObjects([[n0 nnfNode] description], @"T", nil);
-    STAssertEqualObjects([[n1 nnfNode] description], @"F", nil);
-    
-    frm = [NyayaFormula formulaWithString:@"!!(a&b|!!c)"];
-    node = [frm syntaxTree:NO];
-    n1 = [[[node nodeAtIndex:0] nodeAtIndex:0] nodeAtIndex:1];
-    STAssertEqualObjects([n1 description], @"¬¬c", nil);
-    
-    STAssertEqualObjects([[node nnfKey] description], @"¬¬P=P", nil);
-    STAssertEqualObjects([[n1 nnfKey] description], @"¬¬P=P", nil);
-    STAssertEqualObjects([[node nnfNode] description], @"(a ∧ b) ∨ ¬¬c", nil);
-    STAssertEqualObjects([[n1 nnfNode] description], @"c", nil);
+    NSArray *leftDists =    @[@"a ∧ (b ∨ c)", @"(d ∧ f) ∨ (e ∧ f)",  @"(g ∧ (i ∨ j)) ∨ (h ∧ (i ∨ j))", @"¬a", @"a ∧ a" , @"a ∨ a"];
+    NSArray *rightDist =    @[@"(a ∧ b) ∨ (a ∧ c)", @"(d ∨ e) ∧ f",  @"((g ∨ h) ∧ i) ∨ ((g ∨ h) ∧ j)", @"¬a", @"a ∧ a" , @"a ∨ a"];
     
     
-    
-    
-    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        NSString *leftkey = [node dnfLeftKey];
+        NSString *rightkey = [node dnfRightKey];
+        STAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], obj);
+        STAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], obj);
+        STAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], obj);
+        STAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], obj);
+    }];
     
 }
+
+
+- (void)testImf {
+    
+    
+    NSArray *inputs = @[@"a>b"      , @"!a" , @"a&a", @"a|a"];
+    NSArray *keys = @[@"P→Q=¬P∨Q"   , @"---", @"---", @"---"];
+    NSArray *trans = @[@"¬a ∨ b"    , @"¬a", @"a ∧ a", @"a ∨ a"];
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        NSString *key = [node imfKey];
+        STAssertEqualObjects(key ? key : @"---", keys[idx], obj);
+        STAssertEqualObjects([[node imfNode] description], trans[idx], obj);
+    }];
+}
+
+
+- (void)testNff {
+    NSArray *inputs = @[@"!!a"  , @"!(b&c)"         , @"!(d|e)"         , @"!a", @"a&a", @"a|a"];
+    NSArray *keys = @[@"¬¬P=P"  , @"¬(P∧Q)=¬P∨¬Q"   , @"¬(P∨Q)=¬P∧¬Q"   , @"---", @"---", @"---"];
+    NSArray *trans = @[@"a"     , @"¬b ∨ ¬c"        , @"¬d ∧ ¬e"        , @"¬a", @"a ∧ a", @"a ∨ a"];
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        NSString *key = [node nnfKey];
+        STAssertEqualObjects(key ? key : @"---", keys[idx], obj);
+        STAssertEqualObjects([[node nnfNode] description], trans[idx], obj);
+    }];    
+}
+
+- (void)testCollapseAnd {
+    
+    NSArray *inputs = @[@"a&a"  ,@"a&!a"    ,@"!a&a"    ,@"a&0"     ,@"0&a"     ,@"a&1"     ,@"1&a"     ,  @"T&T"     ,@"T&F"   ,   @"F&T"  ,   @"F&F"];
+    NSArray *keys = @[@"P∧P=P"  ,@"P∧¬P=⊥"  ,@"P∧¬P=⊥"  ,@"P∧⊥=⊥"   ,@"⊥∧P=⊥"  ,@"P∧⊤=P"    ,@"⊤∧P=P" ,@"P∧P=P"     ,@"⊤∧P=P"   ,@"⊥∧P=⊥",  @"P∧P=P"];
+    NSArray *trans = @[  @"a"   ,@"F"       , @"F"      ,@"F"       ,@"F"       ,@"a"       ,@"a"       ,@"T"       , @"F"          , @"F"  , @"F", @"F"];
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        STAssertEqualObjects([node collapseKey], keys[idx], obj);
+        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+    }];
+}
+
+- (void)testCollapseOr {
+    
+    NSArray *inputs = @[@"a|a",@"a|!a"  ,@"!a|a"  ,@"a|0"   ,@"0|a"  ,@"a|1"  ,@"1|a",   @"T|T",   @"T|F",   @"F|T",   @"F|F"];
+    NSArray *keys = @[@"P∨P=P",@"P∨¬P=⊤",@"P∨¬P=⊤",@"P∨⊥=P",@"⊥∨P=P",@"P∨⊤=⊤",@"⊤∨P=⊤",@"P∨P=P", @"⊤∨P=⊤",@"⊥∨P=P",@"P∨P=P"];
+    NSArray *trans = @[  @"a"    ,@"T",       @"T",    @"a",    @"a",    @"T",   @"T",   @"T",     @"T",    @"T",     @"F"];
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        STAssertEqualObjects([node collapseKey], keys[idx], obj);
+        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+    }];
+}
+
+- (void)testNoCollapse {
+    
+    NSArray *inputs = @[@"a|b"  ,@"a&b"     ,@"a>b"];
+    NSArray *trans = @[@"a ∨ b" ,@"a ∧ b"   ,@"a → b"];
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        STAssertNil([node collapseKey], obj);
+        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+    }];
+}
+
 
 @end
