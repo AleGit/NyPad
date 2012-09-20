@@ -77,4 +77,23 @@
     STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
 }
 
+- (void)testNnfNode {
+    NyayaFormula *frm = [NyayaFormula formulaWithString:@"!(a&b)>!(c|d)"];
+    NyayaNode *node = [frm syntaxTree:NO];
+
+    
+    NyayaNode *ab = [node nodeAtIndex:0];
+    NyayaNode *cd = [node nodeAtIndex:1];
+    STAssertEqualObjects([ab description], @"¬(a ∧ b)", nil);
+    STAssertEqualObjects([cd description], @"¬(c ∨ d)", nil);
+    
+    STAssertEqualObjects([[ab nnfNode] description], @"¬a ∨ ¬b", nil);
+    STAssertEqualObjects([[cd nnfNode] description], @"¬c ∧ ¬d", nil);
+    
+    
+    
+    
+    
+}
+
 @end

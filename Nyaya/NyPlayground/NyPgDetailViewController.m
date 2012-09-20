@@ -441,6 +441,9 @@
 - (void)growSymbol:(NySymbolView *)symbolView {
     if (!symbolView) return ;
     
+    
+    [self showSymbolMenu:symbolView];
+    
     [symbolView setNeedsDisplay];
 	
     [UIView beginAnimations:@"growSymbol" context:(void*)symbolView];
@@ -493,8 +496,7 @@
     NyFormulaView *formulaView = symbolView.formulaView;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
-    
-    [self showSymbolMenu:symbolView];
+    [self growSymbol:symbolView];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {

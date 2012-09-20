@@ -183,13 +183,15 @@
 - (NyayaNode*)nnfNode {
     NyayaNode *node = self;                 // level 0, default return value
     NyayaNode *n0 = [self nodeAtIndex:0];   // level 1
-    NyayaNode *n1 = [self nodeAtIndex:1];   // level 1
+    NyayaNode *n00 = [n0 nodeAtIndex:0];   // level 2
+    NyayaNode *n01 = [n0 nodeAtIndex:1];   // level 2
+    
     
     if (self.type == NyayaNegation) {
         switch(n0.type) {
             case NyayaNegation: node = [n0 nodeAtIndex:0]; break;
-            case NyayaConjunction: node = [NyayaNode disjunction:[NyayaNode negation:n0] with:[NyayaNode negation:n1]]; break;
-            case NyayaDisjunction: node = [NyayaNode conjunction:[NyayaNode negation:n0] with:[NyayaNode negation:n1]]; break;
+            case NyayaConjunction: node = [NyayaNode disjunction:[NyayaNode negation:n00] with:[NyayaNode negation:n01]]; break;
+            case NyayaDisjunction: node = [NyayaNode conjunction:[NyayaNode negation:n00] with:[NyayaNode negation:n01]]; break;
         }
     }
     return node;
