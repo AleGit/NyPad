@@ -12,7 +12,7 @@
 
 - (NyayaNode*)nodeByReplacingNodeAtIndexPath:(NSIndexPath*)indexPath withNode:(NyayaNode*)node;
 
-// - (NyayaNode*)nodeAtIndexPath:(NSIndexPath*)indexPath;
+- (NyayaNode*)nodeAtIndexPath:(NSIndexPath*)indexPath;
 
 - (NSString*)switchKey;
 - (NyayaNode*)switchedNode;

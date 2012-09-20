@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C54" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--Ny Welcome View Controller - Nyāya-->
         <scene sceneID="jCN-t4-8jg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eob-bE-bsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="P7z-VW-2I9" customClass="NyWelcomeViewController" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="RMd-Ln-koR">
                         <rect key="frame" x="0.0" y="20" width="768" height="955"/>
@@ -20,13 +18,13 @@
                         <outlet property="webView" destination="RMd-Ln-koR" id="VtK-vC-8eY"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eob-bE-bsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1586" y="-1147"/>
         </scene>
         <!--Nyaya Tab Bar View Controller-->
         <scene sceneID="15">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
                 <tabBarController id="4" customClass="NyayaTabBarViewController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
@@ -43,13 +41,13 @@
                         <segue destination="ZnC-dO-Rhu" kind="relationship" relationship="viewControllers" id="wXq-i1-RwR"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-15" y="394"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zTw-Mz-Vei">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KFL-fx-zVn" sceneMemberID="firstResponder"/>
                 <navigationController id="Gcg-I5-xyM" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eke-bW-sF6">
                         <autoresizingMask key="autoresizingMask"/>
@@ -58,13 +56,13 @@
                         <segue destination="fDq-m6-kVc" kind="relationship" relationship="rootViewController" id="b3K-fw-hpI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KFL-fx-zVn" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8351" y="-1338"/>
         </scene>
         <!--Ny Tu Detail View Controller - Detail-->
         <scene sceneID="DWy-yp-KZn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UoU-xC-uZQ" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" title="Detail" id="Ekn-df-hE0" customClass="NyTuDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vLr-Bs-QYl">
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
@@ -109,13 +107,13 @@
                         <outlet property="webView" destination="INa-cD-A8v" id="wrm-gl-lBE"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UoU-xC-uZQ" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8351" y="-460"/>
         </scene>
         <!--Ny Tu Test View Controller-->
         <scene sceneID="2hw-5j-ztQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t4K-cR-tFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="formSheet" id="egB-da-fIt" customClass="NyTuTestViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ltI-le-nPx">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
@@ -166,13 +164,13 @@
                         <outlet property="nextButton" destination="4dw-FZ-aR6" id="uvG-zm-l76"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t4K-cR-tFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9404" y="-410"/>
         </scene>
         <!--Split View Controller - Tutorials-->
         <scene sceneID="ngR-6b-X6c">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4P1-dh-78L" sceneMemberID="firstResponder"/>
                 <splitViewController id="NqH-PB-plD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tutorials" image="i2.png" id="UiC-mH-BOA"/>
                     <toolbarItems/>
@@ -183,13 +181,13 @@
                         <segue destination="41F-dm-9Ib" kind="relationship" relationship="detailViewController" id="vJT-xD-FwZ"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4P1-dh-78L" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7196" y="-1339"/>
         </scene>
         <!--Ny Tu Master View Controller - Master-->
         <scene sceneID="OcY-Em-P75">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kh2-ga-ltF" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="fDq-m6-kVc" customClass="NyTuMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="37" sectionHeaderHeight="10" sectionFooterHeight="10" id="UeV-mC-vWL">
                         <rect key="frame" x="0.0" y="64" width="320" height="655"/>
@@ -225,13 +223,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Tutorials" id="m1W-Q8-NYc"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kh2-ga-ltF" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8762" y="-1339"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dAF-YT-ZLd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rbp-Dv-5dt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="41F-dm-9Ib" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8aj-8c-ek5">
                         <autoresizingMask key="autoresizingMask"/>
@@ -240,13 +238,13 @@
                         <segue destination="Ekn-df-hE0" kind="relationship" relationship="rootViewController" id="UBm-6G-q2k"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rbp-Dv-5dt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7537" y="-460"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EfQ-aJ-ZdM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tsa-2J-zMK" sceneMemberID="firstResponder"/>
                 <navigationController id="RZW-En-ryB" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DrY-3F-o2B">
                         <autoresizingMask key="autoresizingMask"/>
@@ -255,27 +253,29 @@
                         <segue destination="y8j-nK-SqU" kind="relationship" relationship="rootViewController" id="rCe-YI-Tz2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tsa-2J-zMK" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6347" y="-204"/>
         </scene>
         <!--Ny Pg Detail View Controller - Detail-->
         <scene sceneID="gei-1H-LEx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h0d-EJ-78B" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" title="Detail" id="IPo-mM-uVV" customClass="NyPgDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xde-n2-Qu6">
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ZvL-8X-3LC">
-                                <rect key="frame" x="20" y="20" width="663" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <view contentMode="scaleToFill" id="D8M-GJ-Ed7" customClass="NyPgCanvasView">
-                                <rect key="frame" x="20" y="59" width="663" height="586"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="655"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ZvL-8X-3LC">
+                                        <rect key="frame" x="20" y="20" width="663" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -287,14 +287,13 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Playground" id="be5-hE-dL5">
-                        <barButtonItem key="rightBarButtonItem" title="Options" id="xyg-hc-8D0"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Playground" id="be5-hE-dL5"/>
                     <connections>
                         <outlet property="canvasView" destination="D8M-GJ-Ed7" id="mcf-zQ-aT9"/>
                         <outlet property="inputField" destination="ZvL-8X-3LC" id="slq-6W-FBS"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0d-EJ-78B" sceneMemberID="firstResponder"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="jBA-Jr-uNV">
                     <connections>
                         <action selector="canvasLongPress:" destination="IPo-mM-uVV" id="xQM-aV-PXK"/>
@@ -306,7 +305,6 @@
         <!--Split View Controller - Playground-->
         <scene sceneID="qec-Ji-kFZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XrA-6q-doa" sceneMemberID="firstResponder"/>
                 <splitViewController id="X7K-51-h76" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Playground" image="i3.png" id="UeM-Xg-3a4"/>
                     <toolbarItems/>
@@ -317,13 +315,13 @@
                         <segue destination="6dF-AR-VEk" kind="relationship" relationship="detailViewController" id="3v7-As-TFi"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XrA-6q-doa" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5212" y="-204"/>
         </scene>
         <!--Ny Pg Master View Controller - Master-->
         <scene sceneID="g45-kw-Pym">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3mV-pE-VxY" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="y8j-nK-SqU" customClass="NyPgMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4U2-md-Na8">
                         <rect key="frame" x="0.0" y="64" width="320" height="655"/>
@@ -359,13 +357,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Sheets" id="zPu-3U-yul"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3mV-pE-VxY" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6758" y="-205"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bFo-ea-HAl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="voU-2j-kKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="6dF-AR-VEk" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rOb-sB-6mh">
                         <autoresizingMask key="autoresizingMask"/>
@@ -374,13 +372,13 @@
                         <segue destination="IPo-mM-uVV" kind="relationship" relationship="rootViewController" id="EZv-Qp-yv2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="voU-2j-kKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5533" y="674"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vhV-US-N9P">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ozh-K9-lbd" sceneMemberID="firstResponder"/>
                 <navigationController id="oeJ-Wx-oIq" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="7qz-eG-vJw">
                         <autoresizingMask key="autoresizingMask"/>
@@ -389,13 +387,13 @@
                         <segue destination="eMm-lv-59L" kind="relationship" relationship="rootViewController" id="M8e-kV-3rb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ozh-K9-lbd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4511" y="808"/>
         </scene>
         <!--Ny Gl Detail View Controller - Detail-->
         <scene sceneID="syC-YZ-gn7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WX1-QR-08z" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" title="Detail" id="ZYB-p6-LJ0" customClass="NyGlDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FVR-M3-MCL">
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
@@ -416,13 +414,13 @@
                         <outlet property="webView" destination="ur1-7m-3tH" id="VnV-Pc-CMv"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WX1-QR-08z" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4511" y="1686"/>
         </scene>
         <!--Split View Controller - Glossary-->
         <scene sceneID="6vO-Qz-2mI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="onB-wJ-GDA" sceneMemberID="firstResponder"/>
                 <splitViewController id="39e-ND-YaP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Glossary" image="i4.png" id="Hrd-gI-2iP"/>
                     <toolbarItems/>
@@ -433,13 +431,13 @@
                         <segue destination="t0I-P4-I4c" kind="relationship" relationship="detailViewController" id="bON-le-Dre"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="onB-wJ-GDA" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3376" y="808"/>
         </scene>
         <!--Ny Gl Master View Controller - Master-->
         <scene sceneID="wmu-9p-5oR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="knP-9o-1cc" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="eMm-lv-59L" customClass="NyGlMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="33" sectionHeaderHeight="22" sectionFooterHeight="22" id="aCv-UU-tnR">
                         <rect key="frame" x="0.0" y="64" width="320" height="655"/>
@@ -475,13 +473,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Glossary" id="mgN-Sj-TC5"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="knP-9o-1cc" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4922" y="807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o1S-1K-Yed">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l9J-dV-63o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="t0I-P4-I4c" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kUA-rc-sHE">
                         <autoresizingMask key="autoresizingMask"/>
@@ -490,13 +488,13 @@
                         <segue destination="ZYB-p6-LJ0" kind="relationship" relationship="rootViewController" id="d5c-Xg-gBl"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9J-dV-63o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3697" y="1686"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xrb-zT-5tp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7l-3S-hcd" sceneMemberID="firstResponder"/>
                 <navigationController id="uHv-S2-ouI" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vDg-wf-LKy">
                         <autoresizingMask key="autoresizingMask"/>
@@ -505,13 +503,13 @@
                         <segue destination="DLb-tQ-pdz" kind="relationship" relationship="rootViewController" id="D4E-fe-KAT"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7l-3S-hcd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2419" y="1484"/>
         </scene>
         <!--Ny Bt Detail View Controller - Detail-->
         <scene sceneID="sTx-qB-ska">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLQ-mF-uac" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" title="Detail" id="mdJ-xw-K5Z" customClass="NyBtDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q5B-es-2pw">
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
@@ -621,16 +619,16 @@
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
-                                    <webView contentMode="scaleToFill" scalesPageToFit="YES" id="4R9-pc-TXy">
+                                    <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" id="4R9-pc-TXy">
                                         <rect key="frame" x="20" y="387" width="663" height="133"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <dataDetectorType key="dataDetectorTypes"/>
                                     </webView>
                                     <view opaque="NO" contentMode="scaleToFill" id="Pzh-UR-frg" customClass="NyayaBddView">
                                         <rect key="frame" x="20" y="245" width="663" height="134"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
                                 </subviews>
@@ -680,13 +678,13 @@
                         <outlet property="truthTableView" destination="4R9-pc-TXy" id="o8X-C1-skb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLQ-mF-uac" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2419" y="2362"/>
         </scene>
         <!--Split View Controller - BoolTool-->
         <scene sceneID="QOk-Mb-sAN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="40t-IU-ZWP" sceneMemberID="firstResponder"/>
                 <splitViewController id="ZnC-dO-Rhu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="BoolTool" image="i5.png" id="RXS-CG-Yhr"/>
                     <toolbarItems/>
@@ -697,13 +695,13 @@
                         <segue destination="gI9-03-LnD" kind="relationship" relationship="detailViewController" id="r4U-6h-8PZ"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40t-IU-ZWP" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1284" y="1484"/>
         </scene>
         <!--Ny Bt Master View Controller - Master-->
         <scene sceneID="3gr-ME-JDg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="27E-NT-iGV" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="DLb-tQ-pdz" customClass="NyBtMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BUW-vb-T2a">
                         <rect key="frame" x="0.0" y="64" width="320" height="655"/>
@@ -746,13 +744,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Formulas" id="Mfy-ah-6TK"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="27E-NT-iGV" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2830" y="1483"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ljj-uy-zUz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="woN-HL-X70" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="gI9-03-LnD" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3AL-TM-9hc">
                         <autoresizingMask key="autoresizingMask"/>
@@ -761,6 +759,7 @@
                         <segue destination="mdJ-xw-K5Z" kind="relationship" relationship="rootViewController" id="gIc-Ge-BB6"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="woN-HL-X70" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1605" y="2362"/>
         </scene>
@@ -772,6 +771,121 @@
         <image name="i4.png" width="30" height="30"/>
         <image name="i5.png" width="30" height="30"/>
     </resources>
+    <classes>
+        <class className="NyBtDetailViewController" superclassName="NyDetailInputViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="didEndOnExit:"/>
+                <relationship kind="action" name="editingChanged:"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="send:"/>
+                <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
+                <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="cnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="contradictionLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="inputName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="nnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="parsedField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="resultView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="satisfiabilityLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="stdField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="stdLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tautologyLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="truthTableView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
+        </class>
+        <class className="NyDetailInputViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailInputViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="back:" candidateClass="UIButton"/>
+                <relationship kind="action" name="dismiss:" candidateClass="UIButton"/>
+                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
+                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
+                <relationship kind="action" name="press:" candidateClass="UIButton"/>
+                <relationship kind="action" name="process:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dismissButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="inputField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="processButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NyDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
+        </class>
+        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
+        </class>
+        <class className="NyMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
+        </class>
+        <class className="NyPgCanvasView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgCanvasView.h"/>
+        </class>
+        <class className="NyPgDetailViewController" superclassName="NyDetailInputViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="canvasLongPress:" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="action" name="canvasTap:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="action" name="dragFormula:" candidateClass="UIPanGestureRecognizer"/>
+                <relationship kind="action" name="lockFormula:" candidateClass="UIButton"/>
+                <relationship kind="action" name="selectFormula:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="action" name="tapSymbol:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="canvasView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
+        </class>
+        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="back:"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
+        </class>
+        <class className="NyTuTestViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuTestViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="check:"/>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="action" name="next:"/>
+                <relationship kind="outlet" name="checkButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="instructionsView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="nextButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NyWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyayaBddView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaBddView.h"/>
+        </class>
+        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

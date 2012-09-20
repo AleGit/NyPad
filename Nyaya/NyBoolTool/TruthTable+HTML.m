@@ -22,7 +22,7 @@
     "    body {"
     "    margin-left:20px; margin-right:70px; margin-top:20px; margin-bottom:10px;"
     //"    background-image:url(syntaxtree.png), -webkit-linear-gradient(top left, #F9F9F9 25%, #F9F9F9 75%);"
-    "    background-image:-webkit-linear-gradient(top left, #F9F9F9 25%, #F9F9F9 75%);"
+    //"    background-image:-webkit-linear-gradient(top left, #F9F9F9 25%, #F9F9F9 75%);"
     "}"
     "h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {"
     "    font-family:Arial,Helvetica,sans-serif; color:#555555;"

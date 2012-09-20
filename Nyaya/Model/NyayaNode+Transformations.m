@@ -12,6 +12,7 @@
 #import "NyayaNode+Type.h"
 #import "NyayaNode+Attributes.h"
 #import "NyayaNode_Cluster.h"
+#import "NyayaNode+Valuation.h"
 
 @interface NSIndexPath (Nyaya)
 - (NSIndexPath*)indexPathByRemovingFirstIndex;
@@ -175,6 +176,7 @@
             case NyayaNegation: key = @"¬¬P=P"; break;
             case NyayaConjunction: key = @"¬(P∧Q)=¬P∨¬Q"; break;
             case NyayaDisjunction: key = @"¬(P∨Q)=¬P∧¬Q"; break;
+            case NyayaConstant: key = n0.evaluationValue ? @"¬⊤=⊥" : @"¬⊥=⊤"; break;
         }
     }
     return key;
@@ -192,6 +194,7 @@
             case NyayaNegation: node = [n0 nodeAtIndex:0]; break;
             case NyayaConjunction: node = [NyayaNode disjunction:[NyayaNode negation:n00] with:[NyayaNode negation:n01]]; break;
             case NyayaDisjunction: node = [NyayaNode conjunction:[NyayaNode negation:n00] with:[NyayaNode negation:n01]]; break;
+            case NyayaConstant: node = n0.evaluationValue ? [NyayaNode bottom] : [NyayaNode top];
         }
     }
     return node;

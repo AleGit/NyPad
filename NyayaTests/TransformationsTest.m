@@ -77,18 +77,48 @@
     STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
 }
 
-- (void)testNnfNode {
+
+
+- (void)testTransformationNnf {
     NyayaFormula *frm = [NyayaFormula formulaWithString:@"!(a&b)>!(c|d)"];
     NyayaNode *node = [frm syntaxTree:NO];
 
-    
     NyayaNode *ab = [node nodeAtIndex:0];
     NyayaNode *cd = [node nodeAtIndex:1];
     STAssertEqualObjects([ab description], @"¬(a ∧ b)", nil);
     STAssertEqualObjects([cd description], @"¬(c ∨ d)", nil);
     
+    STAssertEqualObjects([[ab nnfKey] description], @"¬(P∧Q)=¬P∨¬Q", nil);
+    STAssertEqualObjects([[cd nnfKey] description], @"¬(P∨Q)=¬P∧¬Q", nil);
+    
     STAssertEqualObjects([[ab nnfNode] description], @"¬a ∨ ¬b", nil);
     STAssertEqualObjects([[cd nnfNode] description], @"¬c ∧ ¬d", nil);
+    
+    frm = [NyayaFormula formulaWithString:@"!0 & !1"];
+    node = [frm syntaxTree:NO];
+
+    NyayaNode *n0 = [node nodeAtIndex:0];
+    NyayaNode *n1 = [node nodeAtIndex:1];
+    
+    STAssertEqualObjects([n0 description], @"¬F", nil);
+    STAssertEqualObjects([n1 description], @"¬T", nil);
+    
+    STAssertEqualObjects([[n0 nnfKey] description], @"¬⊥=⊤", nil);
+    STAssertEqualObjects([[n1 nnfKey] description], @"¬⊤=⊥", nil);
+    
+    STAssertEqualObjects([[n0 nnfNode] description], @"T", nil);
+    STAssertEqualObjects([[n1 nnfNode] description], @"F", nil);
+    
+    frm = [NyayaFormula formulaWithString:@"!!(a&b|!!c)"];
+    node = [frm syntaxTree:NO];
+    n1 = [[[node nodeAtIndex:0] nodeAtIndex:0] nodeAtIndex:1];
+    STAssertEqualObjects([n1 description], @"¬¬c", nil);
+    
+    STAssertEqualObjects([[node nnfKey] description], @"¬¬P=P", nil);
+    STAssertEqualObjects([[n1 nnfKey] description], @"¬¬P=P", nil);
+    STAssertEqualObjects([[node nnfNode] description], @"(a ∧ b) ∨ ¬¬c", nil);
+    STAssertEqualObjects([[n1 nnfNode] description], @"c", nil);
+    
     
     
     

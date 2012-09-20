@@ -72,7 +72,6 @@
     
     self.resultView.backgroundColor = nil;
     self.bddView.backgroundColor = nil;
-    self.view.backgroundColor = [UIColor nyHalfBlue];
     
     [self resetOutputViews];
     [self loadAccessoryView];
