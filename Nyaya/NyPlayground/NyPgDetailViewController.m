@@ -197,6 +197,7 @@
 }
 
 - (void)updateSymbolView:(NySymbolView*)symbolView withNode:(NyayaNode*)node {
+    if (symbolView.node == node) return; // nothing to do
     
     NyFormulaView *formulaView =  symbolView.formulaView;
     
@@ -254,6 +255,12 @@
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
 
+- (void)cutout:(UIMenuController*)ctrl {
+    NyayaNodeUnary *node = (NyayaNodeUnary*)_tappedSymbolView.node;
+    NyayaNode *newNode = [node firstNode];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
 - (void)implication:(UIMenuController*)ctrl {
     NyayaNodeBinary *node = (NyayaNodeBinary*)_tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode implication:[node firstNode] with:[node secondNode]];
@@ -287,35 +294,106 @@
 
 
 
+#pragma mark - equivalence transformations 
+
+- (void)collapseSymbol:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node collapsedNode]];
+}
+
+- (void)imfSymbol:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node imfNode]];
+}
+
+- (void)nnfSymbol:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node nnfNode]];
+}
+
+- (void)distributeLeft:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:0]];
+}
+
+- (void)distributeRight:(UIMenuController*)ctrl {
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:1]];
+}
+
+
+
+#pragma mark - user interaction
 - (void)showSymbolMenu:(NySymbolView*)symbolView {
     NyFormulaView *formulaView = symbolView.formulaView;
     _tappedSymbolView = symbolView;
     
     UIMenuController *menuController = [UIMenuController sharedMenuController];
     NSMutableArray *menuItems = [NSMutableArray array];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
     
-    if (symbolView.node.arity > 0) { // not a leaf
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
+    if (formulaView.isLocked) {
+        NyayaNode *node = symbolView.node;      // level 0
+        NSString *key = nil;
+        SEL selector = nil;
+        // collapse
+        key = [node collapseKey];
+        selector = @selector(collapseSymbol:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        // implication free
+        key = [node imfKey];
+        selector = @selector(imfSymbol:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        // negation normal form
+        
+        key = [node nnfKey];
+        selector = @selector(nnfSymbol:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        // conjunctive normal form
+        key = [node cnfLeftKey];
+        selector = @selector(distributeLeft:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        key = [node cnfRightKey];
+        selector = @selector(distributeRight:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        
+        // disjunctive normal form
+        key = [node dnfLeftKey];
+        selector = @selector(distributeLeft:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
+        key = [node dnfRightKey];
+        selector = @selector(distributeRight:);
+        if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
+        
     }
-    if (symbolView.node.arity > 1) {
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➞" action:@selector(implication:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
+    else {
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
+        
+        if (symbolView.node.arity > 0) { // not a leaf
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"cut out" action:@selector(cutout:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
+        }
+        if (symbolView.node.arity > 1) {
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➞" action:@selector(implication:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
+        }
+        
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ➞Φ" action:@selector(implicateNode:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∧Φ" action:@selector(conjunctNode:)]];
+        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∨Φ" action:@selector(disjunctNode:)]];
+        
+        if (symbolView.node.type == NyayaVariable) {
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"false" action:@selector(displayFalse:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"true" action:@selector(displayTrue:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"clear" action:@selector(displayClear:)]];
+        }
+        
     }
     
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ➞Φ" action:@selector(implicateNode:)]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∧Φ" action:@selector(conjunctNode:)]];
-    [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∨Φ" action:@selector(disjunctNode:)]];
-    
-    if (symbolView.node.type == NyayaVariable) {
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"false" action:@selector(displayFalse:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"true" action:@selector(displayTrue:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"clear" action:@selector(displayClear:)]];
-    }
     
     [self becomeFirstResponder];
     

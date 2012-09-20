@@ -12,4 +12,28 @@
 
 - (NyayaNode*)nodeByReplacingNodeAtIndexPath:(NSIndexPath*)indexPath withNode:(NyayaNode*)node;
 
+// - (NyayaNode*)nodeAtIndexPath:(NSIndexPath*)indexPath;
+
+- (NSString*)collapseKey;
+- (NyayaNode*)collapsedNode;
+
+- (NSString*)imfKey;
+- (NyayaNode*)imfNode;
+
+- (NSString*)nnfKey;
+- (NyayaNode*)nnfNode;
+
+- (NSString*)cnfLeftKey;
+- (NSString*)cnfRightKey;
+- (NSString*)dnfLeftKey;
+- (NSString*)dnfRightKey;
+
+- (NyayaNode*)distributedNodeToIndex:(NSUInteger)idx;
+
+
+//- (NyayaNode*)imfNodeAtIndexPath:(NSIndexPath*)indexPath;
+//- (NyayaNode*)nnfNodeAtIndexPath:(NSIndexPath*)indexPath;
+//- (NyayaNode*)distributeNodeAtIndexPath:(NSIndexPath*)indexPath overNodeIndex:(NSUInteger)idx;
+
+
 @end

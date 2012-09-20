@@ -59,11 +59,11 @@
 }
 
 - (void)setLocked:(BOOL)locked {
-    _lockButton.selected = locked;
+    _lockButton.selected = !locked;
 }
 
 - (BOOL)isLocked {
-    return _lockButton.isSelected;
+    return !_lockButton.isSelected;
 }
 
 - (void)removeAllSymbols {
