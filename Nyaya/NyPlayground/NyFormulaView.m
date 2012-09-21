@@ -86,14 +86,34 @@
     CGPoint origin = self.frame.origin;
     CGSize oldsize = self.frame.size;
     CGSize newsize = [self sizeOfNode:node];
-    self.frame = CGRectMake(MAX(0.0,
+    CGRect frame = CGRectMake(MAX(0.0,
                                        origin.x + (oldsize.width-newsize.width)/2.0),
                                    origin.y,
                                    MAX(2.0*FDX, newsize.width),
                                    MAX(1.5*FDY, newsize.height));
     
-    [self addNode:node inRect:self.bounds];
+    self.center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+   
+    [UIView animateWithDuration:0.2 animations:^{
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        [self addNode:node inRect:self.bounds];
+        [self refreshSymbols];
+    }];
+    
+    
+    
+    
 }
+
+- (void)refreshSymbols {
+    [self setNeedsDisplay];
+    
+    for (UIView *view in self.subviews) {
+        [view setNeedsDisplay];
+    }
+}
+
 
 - (CGSize)sizeOfNode:(NyayaNode*)node {
     return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);

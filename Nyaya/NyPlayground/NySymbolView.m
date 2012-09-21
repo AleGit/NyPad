@@ -9,6 +9,11 @@
 #import "NySymbolView.h"
 #import "NyayaNode+Type.h"
 #import "NyayaNode+Display.h"
+#import "NyFormulaView.h"
+
+@interface NyFormulaView (Symbols)
+- (void)refreshSymbols;
+@end
 
 #define CIRCLE_LABEL_IDX 0
 #define SYMBOL_LABEL_IDX 1
@@ -73,8 +78,9 @@
 - (void)setDisplayValue:(NyayaBool)displayValue {
     if (_node.type == NyayaVariable) {
         ((NyayaNodeVariable*)_node).displayValue = displayValue;
-        [self reset];
+        
     }
+    [self.formulaView refreshSymbols];
 }
 
 - (NSUInteger)countSubsymbols {

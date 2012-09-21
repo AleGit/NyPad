@@ -203,13 +203,7 @@
 
 #pragma mark - SYMBOLs
 
-- (void)refreshFormulaView:(NyFormulaView*)formulaView {
-    [formulaView setNeedsDisplay];
 
-    for (UIView *view in formulaView.subviews) {
-        [view setNeedsDisplay];
-    }
-}
 
 - (void)updateSymbolView:(NySymbolView*)symbolView withNode:(NyayaNode*)node {
     if (symbolView.node == node) return; // nothing to do
@@ -221,8 +215,6 @@
     NyayaNode *newroot = [root nodeByReplacingNodeAtIndexPath:symbolView.indexPath withNode:node];
     newroot = [newroot substitute:variables];
     formulaView.node = newroot;
-    
-    [self refreshFormulaView:formulaView];
 }
 
 - (void)atomNodeP:(UIMenuController*)ctrl {
@@ -306,15 +298,12 @@
 
 - (void)displayFalse:(UIMenuController*)ctrl {
     _tappedSymbolView.displayValue = NyayaFalse;
-    [self refreshFormulaView:_tappedSymbolView.formulaView];
 }
 - (void)displayTrue:(UIMenuController*)ctrl {
     _tappedSymbolView.displayValue = NyayaTrue;
-    [self refreshFormulaView:_tappedSymbolView.formulaView];
 }
 - (void)displayClear:(UIMenuController*)ctrl {
     _tappedSymbolView.displayValue = NyayaUndefined;
-    [self refreshFormulaView:_tappedSymbolView.formulaView];
 }
 
 
