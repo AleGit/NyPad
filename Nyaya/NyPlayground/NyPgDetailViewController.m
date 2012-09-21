@@ -124,7 +124,15 @@
     
     NyayaNode *node = [NyayaNode atom:@"p"];
     formualaView.node = node;
+    formualaView.alpha = 0.0;
+    formualaView.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
+    
     [self.canvasView addSubview:formualaView];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        formualaView.alpha = 1.0;
+        formualaView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+    }];
 }
 
 - (IBAction)canvasLongPress:(UILongPressGestureRecognizer*)sender {
@@ -182,8 +190,15 @@
 
 - (IBAction)deleteFormula:(UIButton *)sender {
     NyFormulaView *formulaView = (NyFormulaView*)sender.superview;
-    [_formulaViews removeObject:formulaView];
-    [formulaView removeFromSuperview];
+    [UIView animateWithDuration:1.0 animations:^{
+        formulaView.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
+        formulaView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [_formulaViews removeObject:formulaView];
+        [formulaView removeFromSuperview];
+    }];
+    
+    
 }
 
 #pragma mark - SYMBOLs
@@ -444,80 +459,6 @@
     
 }
 
-- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(NySymbolView *)context {
-    if ([animationID isEqualToString:@"growSymbol"]) {
-        [UIView beginAnimations:@"shrinkSymbol" context:(void*)context];
-#define ANIMADURATION 0.4
-        [UIView setAnimationDuration:ANIMADURATION];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
-        context.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-        [self showSymbolMenu:context];
-    }
-    else {
-        /* [self growSymbol:context.supersymbol];
-        
-        if (!context.supersymbol) {
-            
-            for (UIView *view in context.superview.subviews) {
-                [view setNeedsDisplay];
-            }
-        }*/
-        
-        NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
-    }
-}
-
-- (void)growSymbol:(NySymbolView *)symbolView {
-    if (!symbolView) return ;
-    
-    
-    [self showSymbolMenu:symbolView];
-    
-    [symbolView setNeedsDisplay];
-	
-    [UIView beginAnimations:@"growSymbol" context:(void*)symbolView];
-	[UIView setAnimationDuration:ANIMADURATION];
-	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
-	CGAffineTransform transform = CGAffineTransformMakeScale(1.2f, 1.2f);
-    
-	symbolView.transform = transform;
-	[UIView commitAnimations];
-    
-}
-
-- (void)moveAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(UIView *)context {
-    if (![animationID isEqualToString:@"undoMoveSymbol"]) {
-        [UIView beginAnimations:@"undoMoveSymbol" context:(void*)context];
-        [UIView setAnimationDuration:ANIMADURATION];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(moveAnimationDidStop:finished:context:)];
-        context.transform = CGAffineTransformMakeTranslation(0.0f, 0.0f);
-        context.alpha = 1.0;
-    }
-    else {
-        [UIView setAnimationDuration:0.0];
-        // [self showFormulaMenu:context.center inView:context];
-        NSLog(@"animationDidStop: %@ finished: %@ context: %f %f", animationID, finished, context.center.x, context.center.y);
-        
-    }
-}
-
-- (void)moveSymbol:(NySymbolView *)view direction: (CGPoint)direction {
-    [UIView beginAnimations:@"moveDownSymbol" context:(void*)view];
-	[UIView setAnimationDuration:ANIMADURATION * sqrtf(0.5+sqrtf(direction.x*direction.x+direction.y+direction.y)/40.0) ];
-	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(moveAnimationDidStop:finished:context:)];
-	CGAffineTransform transform = CGAffineTransformMakeTranslation(direction.x, direction.y);
-    
-	view.transform = transform;
-    view.displayValue = (view.displayValue +1) %3;
-    view.alpha = 0.0;
-    
-	[UIView commitAnimations];
-    
-}
 
 
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
@@ -526,7 +467,17 @@
     NyFormulaView *formulaView = symbolView.formulaView;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
-    [self growSymbol:symbolView];
+        
+    [UIView animateWithDuration:0.4 animations:^{
+        symbolView.transform = CGAffineTransformMakeScale(1.2f, 1.2f);
+                
+    } completion:^(BOOL finished) {
+        [self showSymbolMenu:symbolView];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            symbolView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        }];
+    }];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {
@@ -535,10 +486,10 @@
     // NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionUp:
-            [self moveSymbol:symbolView direction:CGPointMake(0.0,-10.0)];
+            // [self moveSymbol:symbolView direction:CGPointMake(0.0,-10.0)];
             break;
         case UISwipeGestureRecognizerDirectionDown:
-            [self moveSymbol:symbolView direction:CGPointMake(0.0,40.0)];
+            // [self moveSymbol:symbolView direction:CGPointMake(0.0,40.0)];
             break;
         default:
             NSLog(@"%@",sender);
