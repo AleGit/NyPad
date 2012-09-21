@@ -330,7 +330,7 @@
     [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:1]];
 }
 
-- (void)switchSymbol:(UIMenuController*)ctrl {
+- (void)switchChildren:(UIMenuController*)ctrl {
     [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node switchedNode]];
 }
 
@@ -423,7 +423,9 @@
                 if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"→" action:@selector(implication:)]];
                 if (![s isEqual:@"∧"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
                 if (![s isEqual:@"∨"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
-                if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⎌" action:@selector(switchSymbol:)]];
+                
+                if (![symbolView.node.nodes[0] isEqual:symbolView.node.nodes[1]])
+                      [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"🔀" action:@selector(switchChildren:)]];
             }
             
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
@@ -464,25 +466,48 @@
         [self showSymbolMenu:symbolView];
         
         [UIView animateWithDuration:0.4 animations:^{
-            symbolView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+            symbolView.transform = CGAffineTransformIdentity; // CGAffineTransformMakeScale(1.0f, 1.0f);
         }];
     }];
 }
 
 - (IBAction)swipeSymbol:(UISwipeGestureRecognizer *)sender {
     NSLog(@"swipeDownSymbol: %@", [sender.view class]);
-    NySymbolView *symbolView = (NySymbolView*)sender.view;
+    /* NySymbolView *symbolView = (NySymbolView*)sender.view;
     // NyFormulaView *formulaView = (NyFormulaView *)symbolView.superview;
+    
     switch (sender.direction) {
-        case UISwipeGestureRecognizerDirectionUp:
-            // [self moveSymbol:symbolView direction:CGPointMake(0.0,-10.0)];
-            break;
-        case UISwipeGestureRecognizerDirectionDown:
-            // [self moveSymbol:symbolView direction:CGPointMake(0.0,40.0)];
+        case UISwipeGestureRecognizerDirectionUp: {
+            [UIView animateWithDuration:0.2 animations:^{
+                symbolView.transform = CGAffineTransformMakeTranslation(0.0, -10.0);
+                
+            } completion:^(BOOL finished) {
+                [self showSymbolMenu:symbolView];
+                
+                [UIView animateWithDuration:1.4 animations:^{
+                    symbolView.transform = CGAffineTransformIdentity;
+                }];
+            }];
+        }
+            
+                      break;
+        case UISwipeGestureRecognizerDirectionDown:{
+            [UIView animateWithDuration:0.4 animations:^{
+                symbolView.transform = CGAffineTransformMakeTranslation(0.0, 40.0);
+                
+            } completion:^(BOOL finished) {
+                [self showSymbolMenu:symbolView];
+                
+                [UIView animateWithDuration:2.8 animations:^{
+                    symbolView.transform = CGAffineTransformIdentity; 
+                }];
+            }];
+        }
+
             break;
         default:
             NSLog(@"%@",sender);
             break;
-    } 
+    } */
 }
 @end

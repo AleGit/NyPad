@@ -8,13 +8,16 @@
 
 #import "NyFormulaView.h"
 #import "NySymbolView.h"
+#import "NyayaNode+Attributes.h"
 
 #define LOCK_BUTTON_IDX 0
 #define DELE_BUTTON_IDX 1
+#define HEAD_LABEL_IDX 2
 
 @interface NyFormulaView () {
     UIButton* _lockButton;
     UIButton* _deleButton;
+    UILabel* _headLabel;
 }
 @end
 
@@ -26,13 +29,15 @@
     self.backgroundColor = nil;
     _lockButton = (UIButton*)[self.subviews objectAtIndex:LOCK_BUTTON_IDX];
     _deleButton = (UIButton*)[self.subviews objectAtIndex:DELE_BUTTON_IDX];
+    _headLabel = (UILabel*)[self.subviews objectAtIndex:HEAD_LABEL_IDX];
     _chosen = YES;
+    _headLabel.text = @"";
 }
 
 - (void)reset {
-    _lockButton.hidden = !self.chosen;
-    _deleButton.hidden = !self.chosen;
-    
+    _lockButton.hidden = _hideLock || !_chosen;
+    _deleButton.hidden = _hideCloser || !_chosen;
+    _headLabel.hidden = _hideHeader || !_chosen;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -80,6 +85,7 @@
 
 - (void)setNode:(NyayaNode *)node {
     _node = node;
+    _headLabel.text = @"";
     [self removeAllSymbols];
     
     
@@ -99,6 +105,23 @@
     } completion:^(BOOL finished) {
         [self addNode:node inRect:self.bounds];
         [self refreshSymbols];
+        
+        if ([_node isConjunctiveNormalForm]) {
+            if ([_node isDisjunctiveNormalForm]) _headLabel.text = @"cnf dnf";
+            else _headLabel.text = @"cnf";
+        }
+        else if ([_node isDisjunctiveNormalForm]) {
+            _headLabel.text = @"dnf";
+        }
+        else if ([_node isNegationNormalForm]) {
+            _headLabel.text = @"nnf";
+        }
+        else if ([_node isImplicationFree]) {
+            _headLabel.text = @"imf";
+        }
+        else _headLabel.text = @"";
+
+
     }];
     
     
@@ -124,7 +147,7 @@
     NySymbolView *symbolView = [self.dataSource symbolView];
     
     [self addSubview:symbolView];
-    symbolView.center = CGPointMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + FDY / 2.0);
+    symbolView.center = CGPointMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + 0.6 * FDY);
     symbolView.node = node;
     
     CGFloat xoffset = rect.origin.x;

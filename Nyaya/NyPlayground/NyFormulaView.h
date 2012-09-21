@@ -38,6 +38,10 @@
 @property (assign, nonatomic, getter = isChosen) BOOL chosen;
 @property (assign, nonatomic, getter = isLocked) BOOL locked;
 
+@property (assign, nonatomic) BOOL hideLock;
+@property (assign, nonatomic) BOOL hideCloser;
+@property (assign, nonatomic) BOOL hideHeader;
+
 @property (weak, nonatomic) IBOutlet UITapGestureRecognizer *formulaTapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *formulaPanGestureRecognizer;
 
