@@ -483,7 +483,7 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{582, 10}, {46, 44}}</string>
+								<string key="NSFrame">{{582, 10}, {56, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSNextKeyView" ref="935037485"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -493,7 +493,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⬅</string>
+								<string key="IBUINormalTitle">⌫</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -558,7 +558,7 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{592, 62}, {46, 44}}</string>
+								<string key="NSFrame">{{593, 62}, {46, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">7</int>
@@ -567,7 +567,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⬇</string>
+								<string key="IBUINormalTitle">🔻</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">

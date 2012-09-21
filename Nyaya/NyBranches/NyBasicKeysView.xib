@@ -318,7 +318,7 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{529, 10}, {46, 44}}</string>
+								<string key="NSFrame">{{530, 10}, {51, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="445706464"/>
@@ -329,7 +329,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⬅</string>
+								<string key="IBUINormalTitle">⌫</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -344,7 +344,7 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{582, 10}, {96, 44}}</string>
+								<string key="NSFrame">{{589, 10}, {89, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="544661315"/>
@@ -370,9 +370,10 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1316</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{685, 10}, {46, 44}}</string>
+								<string key="NSFrame">{{686, 10}, {46, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">8</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -380,7 +381,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⬇</string>
+								<string key="IBUINormalTitle">🔻</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -606,7 +607,6 @@
 							<reference ref="853069931"/>
 							<reference ref="500446835"/>
 							<reference ref="445706464"/>
-							<reference ref="544661315"/>
 							<reference ref="802214001"/>
 							<reference ref="226323856"/>
 							<reference ref="941272362"/>
@@ -614,8 +614,9 @@
 							<reference ref="215449823"/>
 							<reference ref="972341071"/>
 							<reference ref="503845071"/>
-							<reference ref="459287744"/>
 							<reference ref="452934762"/>
+							<reference ref="544661315"/>
+							<reference ref="459287744"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -757,6 +758,30 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NyTuTester</string>
 					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="dismiss:">UIButton</string>
+						<string key="negate:">UIButton</string>
+						<string key="parenthesize:">UIButton</string>
+						<string key="press:">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="dismiss:">
+							<string key="name">dismiss:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="negate:">
+							<string key="name">negate:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="parenthesize:">
+							<string key="name">parenthesize:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="press:">
+							<string key="name">press:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="accessoryView">UIView</string>
 						<string key="answerField">UITextView</string>

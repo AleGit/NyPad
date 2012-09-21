@@ -419,7 +419,7 @@
                 if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"→" action:@selector(implication:)]];
                 if (![s isEqual:@"∧"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
                 if (![s isEqual:@"∨"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
-                if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➰" action:@selector(switchSymbol:)]];
+                if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"⎌" action:@selector(switchSymbol:)]];
             }
             
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
