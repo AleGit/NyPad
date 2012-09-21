@@ -225,6 +225,16 @@
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
 
+- (void)atomNodeS:(UIMenuController*)ctrl {
+    NyayaNode *newNode = [NyayaNode atom:@"s"];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
+- (void)atomNodeT:(UIMenuController*)ctrl {
+    NyayaNode *newNode = [NyayaNode atom:@"t"];
+    [self updateSymbolView:_tappedSymbolView withNode:newNode];
+}
+
 - (void)negateNode:(UIMenuController*)ctrl {
     NyayaNode *node = _tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode negation: node];
@@ -376,30 +386,50 @@
         
     }
     else {
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
+        NSString *s = symbolView.node.symbol;
         
-        if (symbolView.node.arity > 0) { // not a leaf
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"cut out" action:@selector(cutout:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
+        if (symbolView.node.type == NyayaConstant) {
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
         }
-        if (symbolView.node.arity > 1) {
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➞" action:@selector(implication:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"switch" action:@selector(switchSymbol:)]];
+
+        else if (symbolView.node.type == NyayaVariable) {
+            if (![s isEqual:@"p"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
+            if (![s isEqual:@"q"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
+            if (![s isEqual:@"r"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
+            if (![s isEqual:@"s"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"s" action:@selector(atomNodeS:)]];
+            if (![s isEqual:@"t"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"t" action:@selector(atomNodeT:)]];
+            
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"¬%@",s] action:@selector(negateNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@➞%@",s,s] action:@selector(implicateNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@∧%@",s,s] action:@selector(conjunctNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@∨%@",s,s] action:@selector(disjunctNode:)]];
+            
+            
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📕" action:@selector(displayFalse:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📗" action:@selector(displayTrue:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📘" action:@selector(displayClear:)]];
         }
         
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ➞Φ" action:@selector(implicateNode:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∧Φ" action:@selector(conjunctNode:)]];
-        [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∨Φ" action:@selector(disjunctNode:)]];
-        
-        if (symbolView.node.type == NyayaVariable) {
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"false" action:@selector(displayFalse:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"true" action:@selector(displayTrue:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"clear" action:@selector(displayClear:)]];
+        else if (symbolView.node.arity > 0) {  // not a leaf
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]]; // reduce to leave
+            
+            if (![s isEqual:@"¬"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
+            
+            if (symbolView.node.arity > 1) {
+                if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"→" action:@selector(implication:)]];
+                if (![s isEqual:@"∧"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
+                if (![s isEqual:@"∨"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
+                if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"➰" action:@selector(switchSymbol:)]];
+            }
+            
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬Φ" action:@selector(negateNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ➞Φ" action:@selector(implicateNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∧Φ" action:@selector(conjunctNode:)]];
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"Φ∨Φ" action:@selector(disjunctNode:)]];
+            
+            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"✂" action:@selector(cutout:)]];
+            
+            
         }
         
     }

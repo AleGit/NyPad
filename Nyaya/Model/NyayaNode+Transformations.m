@@ -56,12 +56,12 @@
     }
     else {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self.nodes count]];
-        NSIndexPath *subpath  = [indexPath indexPathByRemovingFirstIndex];
         
         [self.nodes enumerateObjectsUsingBlock:^(NyayaNode *obj, NSUInteger idx, BOOL *stop) {
             NyayaNode *subnode = nil;
             if ([indexPath indexAtPosition:0] == idx) {
-                subnode = [obj nodeByReplacingNodeAtIndexPath:subpath withNode:node];
+                subnode = [obj nodeByReplacingNodeAtIndexPath:[indexPath indexPathByRemovingFirstIndex]
+                                                     withNode:node];
             }
             else {
                 subnode = obj;
@@ -115,7 +115,7 @@
             break;
         case NyayaConjunction:
             if ([n0 isEqual:n1]) node = n0;
-            else if ([n0 isNegationToNode:n1]) node =[NyayaNode bottom];
+            else if ([n0 isNegationToNode:n1]) node = [NyayaNode bottom];
             else if ([n0 isEqual:[NyayaNode top]]) node = n1;
             else if ([n0 isEqual:[NyayaNode bottom]]) node = [NyayaNode bottom];
             else if ([n1 isEqual:[NyayaNode top]]) node = n0;
@@ -154,13 +154,19 @@
     switch (self.type) {
         case NyayaConjunction: node=[NyayaNode conjunction:n1 with:n0]; break;
         case NyayaDisjunction: node=[NyayaNode disjunction:n1 with:n0];; break;
+        case NyayaBicondition: node=[NyayaNode bicondition:n1 with:n0]; break;
+        case NyayaXdisjunction: node=[NyayaNode bicondition:n1 with:n0]; break;
     }
     return node;
 }
 
 - (NSString*)imfKey {
     NSString *key = nil; // default return value
-    if (self.type == NyayaImplication) key = @"P→Q=¬P∨Q";
+    switch (self.type) {
+        case NyayaImplication: key = @"P→Q=¬P∨Q"; break;
+        case NyayaBicondition: key = @"P↔Q=(P→Q)∧(Q→P)"; break;
+        case NyayaXdisjunction: key = @"P⊻Q=¬(P↔Q)"; break;
+    }
     return key;
 }
 

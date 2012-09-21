@@ -77,13 +77,38 @@
     STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
 }
 
-- (void)testDnfLeft {
-    NSArray *inputs =       @[@"a&(b|c)"  , @"(d|e)&f"              ,@"(g|h)&(i|j)"         , @"!a" , @"a&a", @"a|a"];
-    NSArray *leftkeys =     @[@"---"      , @"(P∨Q)∧R=(P∧R)∨(Q∧R)"  ,@"(P∨Q)∧R=(P∧R)∨(Q∧R)" , @"---", @"---", @"---"];
-    NSArray *rightkeys =    @[@"P∧(Q∨R)=(P∧Q)∨(P∧R)"   , @"---",    @"P∧(Q∨R)=(P∧Q)∨(P∧R)"  , @"---", @"---", @"---"];
+- (void)testCnfs {
+    NSArray *inputs =       @[@"a+(b∧c)"  , @"(d∧e)+f"              ,@"(g∧h)+(i∧j)"         , @"!a" , @"a+a", @"a∧a",               @"a∧(b+c)"];
+    NSArray *leftkeys =     @[@"---"      , @"(P∧Q)∨R=(P∨R)∧(Q∨R)"  ,@"(P∧Q)∨R=(P∨R)∧(Q∨R)" , @"---", @"---", @"---",               @"---"];
+    NSArray *rightkeys =    @[@"P∨(Q∧R)=(P∨Q)∧(P∨R)"   , @"---",    @"P∨(Q∧R)=(P∨Q)∧(P∨R)"  , @"---", @"---", @"---",               @"---"];
+    
+    NSArray *leftDists =    @[@"a ∨ (b ∧ c)", @"(d ∨ f) ∧ (e ∨ f)",  @"(g ∨ (i ∧ j)) ∧ (h ∨ (i ∧ j))", @"¬a", @"a ∨ a" , @"a ∧ a", @"a ∧ (b ∨ c)"];
+    NSArray *rightDist =    @[@"(a ∨ b) ∧ (a ∨ c)", @"(d ∧ e) ∨ f",  @"((g ∧ h) ∨ i) ∧ ((g ∧ h) ∨ j)", @"¬a", @"a ∨ a" , @"a ∧ a",@"(a ∧ b) ∨ (a ∧ c)"];
+    
+    
+    [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
+        NyayaNode *node = [frm syntaxTree:NO];
+        
+        NSString *leftkey = [node cnfLeftKey];
+        NSString *rightkey = [node cnfRightKey];
+        STAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], obj);
+        STAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], obj);
+        STAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], obj);
+        STAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], obj);
+    }];
+    
+}
 
-    NSArray *leftDists =    @[@"a ∧ (b ∨ c)", @"(d ∧ f) ∨ (e ∧ f)",  @"(g ∧ (i ∨ j)) ∨ (h ∧ (i ∨ j))", @"¬a", @"a ∧ a" , @"a ∨ a"];
-    NSArray *rightDist =    @[@"(a ∧ b) ∨ (a ∧ c)", @"(d ∨ e) ∧ f",  @"((g ∨ h) ∧ i) ∨ ((g ∨ h) ∧ j)", @"¬a", @"a ∧ a" , @"a ∨ a"];
+
+
+- (void)testDnfs {
+    NSArray *inputs =       @[@"a&(b|c)"  , @"(d|e)&f"              ,@"(g|h)&(i|j)"         , @"!a" , @"a&a", @"a|a",               @"a|(b&c)"];
+    NSArray *leftkeys =     @[@"---"      , @"(P∨Q)∧R=(P∧R)∨(Q∧R)"  ,@"(P∨Q)∧R=(P∧R)∨(Q∧R)" , @"---", @"---", @"---",               @"---"];
+    NSArray *rightkeys =    @[@"P∧(Q∨R)=(P∧Q)∨(P∧R)"   , @"---",    @"P∧(Q∨R)=(P∧Q)∨(P∧R)"  , @"---", @"---", @"---",               @"---"];
+
+    NSArray *leftDists =    @[@"a ∧ (b ∨ c)", @"(d ∧ f) ∨ (e ∧ f)",  @"(g ∧ (i ∨ j)) ∨ (h ∧ (i ∨ j))", @"¬a", @"a ∧ a" , @"a ∨ a", @"a ∨ (b ∧ c)"];
+    NSArray *rightDist =    @[@"(a ∧ b) ∨ (a ∧ c)", @"(d ∨ e) ∧ f",  @"((g ∨ h) ∧ i) ∨ ((g ∨ h) ∧ j)", @"¬a", @"a ∧ a" , @"a ∨ a",@"(a ∨ b) ∧ (a ∨ c)"];
     
     
     [inputs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
@@ -101,7 +126,7 @@
 }
 
 
-- (void)testImf {
+- (void)testImfs {
     
     
     NSArray *inputs = @[@"a>b"      , @"!a" , @"a&a", @"a|a"];
@@ -119,7 +144,7 @@
 }
 
 
-- (void)testNff {
+- (void)testNffs {
     NSArray *inputs = @[@"!!a"  , @"!(b&c)"         , @"!(d|e)"         , @"!a", @"a&a", @"a|a"];
     NSArray *keys = @[@"¬¬P=P"  , @"¬(P∧Q)=¬P∨¬Q"   , @"¬(P∨Q)=¬P∧¬Q"   , @"---", @"---", @"---"];
     NSArray *trans = @[@"a"     , @"¬b ∨ ¬c"        , @"¬d ∧ ¬e"        , @"¬a", @"a ∧ a", @"a ∨ a"];
