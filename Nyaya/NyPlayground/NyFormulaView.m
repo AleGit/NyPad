@@ -86,7 +86,6 @@
 - (void)setNode:(NyayaNode *)node {
     _node = node;
     _headLabel.text = @"";
-    [self removeAllSymbols];
     
     
     CGPoint origin = self.frame.origin;
@@ -103,6 +102,9 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.frame = frame;
     } completion:^(BOOL finished) {
+        
+        [self removeAllSymbols];
+        
         [self addNode:node inRect:self.bounds];
         [self refreshSymbols];
         
