@@ -15,7 +15,7 @@
 - (NyayaNode*)nodeAtIndexPath:(NSIndexPath*)indexPath;
 
 - (NSString*)switchKey;
-- (NyayaNode*)switchedNode;
+- (NyayaNode*)switchedNode:(BOOL)force;
 
 - (NSString*)collapseKey;
 - (NyayaNode*)collapsedNode;

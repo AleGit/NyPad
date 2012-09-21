@@ -146,7 +146,7 @@
     return key;
 }
 
-- (NyayaNode*)switchedNode {
+- (NyayaNode*)switchedNode:(BOOL)force {
     NyayaNode *node = self;                 // level 0, default return value
     NyayaNode *n0 = [self nodeAtIndex:0];   // level 1
     NyayaNode *n1 = [self nodeAtIndex:1];   // level 1
@@ -155,7 +155,8 @@
         case NyayaConjunction: node=[NyayaNode conjunction:n1 with:n0]; break;
         case NyayaDisjunction: node=[NyayaNode disjunction:n1 with:n0];; break;
         case NyayaBicondition: node=[NyayaNode bicondition:n1 with:n0]; break;
-        case NyayaXdisjunction: node=[NyayaNode bicondition:n1 with:n0]; break;
+        case NyayaXdisjunction: node=[NyayaNode xdisjunction:n1 with:n0]; break;
+        case NyayaImplication: if (force) node=[NyayaNode implication:n1 with:n0]; break;
     }
     return node;
 }

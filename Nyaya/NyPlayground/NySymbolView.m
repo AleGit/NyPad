@@ -41,16 +41,19 @@
 }
 
 - (void)reset {
-    switch (self.displayValue) {
-        case NyayaFalse:
-            _circleLabel.textColor = [UIColor redColor];
-            break;
-        case NyayaTrue:
-            _circleLabel.textColor = [UIColor greenColor];
-            break;
-        default:
-            _circleLabel.textColor = [UIColor blueColor];
-            break;
+    if (self.formulaView.hideValuation) _circleLabel.textColor = [UIColor blueColor];
+    else {
+        switch (self.displayValue) {
+            case NyayaFalse:
+                _circleLabel.textColor = [UIColor redColor];
+                break;
+            case NyayaTrue:
+                _circleLabel.textColor = [UIColor greenColor];
+                break;
+            default:
+                _circleLabel.textColor = [UIColor blueColor];
+                break;
+        }
     }
 }
 

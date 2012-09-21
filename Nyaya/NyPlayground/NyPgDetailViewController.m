@@ -331,7 +331,7 @@
 }
 
 - (void)switchChildren:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node switchedNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node switchedNode:YES]];
 }
 
 
@@ -409,9 +409,11 @@
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@∨%@",s,s] action:@selector(disjunctNode:)]];
             
             
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📕" action:@selector(displayFalse:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📗" action:@selector(displayTrue:)]];
-            [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📘" action:@selector(displayClear:)]];
+            if (!symbolView.formulaView.hideValuation) {
+                [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📕" action:@selector(displayFalse:)]];
+                [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📗" action:@selector(displayTrue:)]];
+                [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"📘" action:@selector(displayClear:)]];
+            }
         }
         
         else if (symbolView.node.arity > 0) {  // not a leaf

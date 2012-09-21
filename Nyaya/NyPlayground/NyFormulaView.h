@@ -41,6 +41,7 @@
 @property (assign, nonatomic) BOOL hideLock;
 @property (assign, nonatomic) BOOL hideCloser;
 @property (assign, nonatomic) BOOL hideHeader;
+@property (assign, nonatomic) BOOL hideValuation;
 
 @property (weak, nonatomic) IBOutlet UITapGestureRecognizer *formulaTapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *formulaPanGestureRecognizer;
