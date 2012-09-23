@@ -205,6 +205,9 @@
     // a ^ b
     
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [bdd fillStructure:dict];
+    STAssertEquals([dict count], (NSUInteger)4, nil);
     
     STAssertEqualObjects(bdd.name, @"a", nil);
     //     a
@@ -236,6 +239,9 @@
     // a ^ (b ^ c)
     
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [bdd fillStructure:dict];
+    STAssertEquals([dict count], (NSUInteger)5, nil);
     
     STAssertEqualObjects(bdd.name, @"a", nil);
     //     a
@@ -271,6 +277,16 @@
     // a + b.c
     
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:NO];
+    STAssertEquals([bdd.names count], (NSUInteger)3, nil);
+    [variables enumerateObjectsUsingBlock:^(NyayaNode *obj, NSUInteger idx, BOOL *stop) {
+        STAssertEqualObjects(obj.symbol, bdd.names[idx], nil);
+    }];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [bdd fillStructure:dict];
+    STAssertEquals([dict count], (NSUInteger)5, nil);
+    
+    
     //               a:14
     //           /         \
     //       b:6             b:13
@@ -340,6 +356,8 @@
 
     
 
+    
+    
 
     
     

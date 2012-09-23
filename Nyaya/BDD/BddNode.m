@@ -203,10 +203,14 @@
 +(BddNode*)obddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce; {
     NSMutableArray *allNodes = nil;
     
+    
+    
     if (reduce) allNodes = [NSMutableArray arrayWithObjects:[BddNode bottom], [BddNode top], nil];
     else allNodes = [NSMutableArray arrayWithCapacity:1 << [variables count]];
     
-    return [self obddWithNode:node order:variables reduce:reduce bdds:allNodes];
+    BddNode *bdd = [self obddWithNode:node order:variables reduce:reduce bdds:allNodes];
+    bdd->_names = [variables valueForKeyPath:@"symbol"];
+    return bdd;
         
 }
 
@@ -397,6 +401,19 @@
 
 - (NSUInteger)height {
     return 1 + MAX([self.leftBranch height],[self.rightBranch height]); // 1 + MAX(0,0) for leaves
+}
+
+- (void)fillStructure:(NSMutableDictionary*)dictionary {
+    NSMutableSet *set = dictionary[self.name];
+    if (!set) {
+        set = [NSMutableSet set];
+        dictionary[self.name] = set;
+    }
+    
+    [set addObject:self];
+    
+    [self.leftBranch fillStructure:dictionary];
+    [self.rightBranch fillStructure:dictionary];
 }
 
 

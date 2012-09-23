@@ -45,6 +45,8 @@
 // (unordered BDDs will not contain levels
 // but drawing is not supported yet.)
 
+@property (nonatomic,readonly) NSArray *names;  // root.names != nil, !root.names == nil
+
 // Constructs an Ordered BDD with variable order of 'truth table'
 +(BddNode*)bddWithTruthTable:(TruthTable*)truthTable reduce:(BOOL)reduce;
 
@@ -65,5 +67,7 @@
 
 - (NSUInteger)width;
 - (NSUInteger)height;
+
+- (void)fillStructure:(NSMutableDictionary*)dictionary;
 
 @end

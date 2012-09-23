@@ -10,11 +10,27 @@
 #import "UIColor+Nyaya.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface NyayaBddView () {
+    NSMutableDictionary *_structure;
+    NSMutableDictionary *_nodepoints;
+
+}
+@end
+
 @implementation NyayaBddView
 
 +(Class)layerClass
 {
     return [CATiledLayer class];
+}
+
+- (void)setBddNode:(BddNode *)bddNode {
+    @synchronized(self) {
+        _bddNode = nil;
+        _structure = nil;
+        _nodepoints = nil;
+        _bddNode = bddNode;
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -26,57 +42,74 @@
     
     //    CGContextRef context = UIGraphicsGetCurrentContext();
     //    [self drawDiagram:context];
+    
+    
 }
 
-- (void)fillDictionary:(NSMutableDictionary*)nodePoints with:(BddNode*)bdd inRect:(CGRect) rect {
-    if (bdd) {
-        CGFloat x = rect.origin.x + rect.size.width / 2.0;
-        CGFloat y = rect.origin.y + 35.0;
-        if (bdd.isLeaf) {
-            y = rect.origin.y + rect.size.height - 35.0;
-            
-        }
-        else {
-            CGFloat lc = (CGFloat)[bdd.leftBranch width];
-            CGFloat rc = (CGFloat)[bdd.rightBranch width];
-            CGFloat sum = lc+rc;
-            
-            
-            
-            CGRect left = CGRectMake(rect.origin.x, rect.origin.y + 70.0, rect.size.width * lc/sum, rect.size.height - 70.0);
-            [self fillDictionary:nodePoints with:bdd.leftBranch inRect:left];
-            CGRect right = CGRectMake(rect.origin.x + rect.size.width * lc/sum, rect.origin.y + 70.0, rect.size.width*rc/sum, rect.size.height - 70.0);
-            [self fillDictionary:nodePoints with:bdd.rightBranch inRect:right];
-        }
-        nodePoints[bdd] = NSStringFromCGPoint(CGPointMake(x,y));
-        
-        
-        
-    }
-}
+
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+    if (!self.bddNode) return;
     
+    if (!_structure) {
+        @synchronized(self) {
+            if (!_structure) {
+                _structure = [NSMutableDictionary dictionary];
+                [self.bddNode fillStructure:_structure];
+                
+                _nodepoints = [NSMutableDictionary dictionary];
+                
+                if ([_structure count] == 1) {
+                    _nodepoints[self.bddNode] = NSStringFromCGPoint(CGPointMake(200.0,35.0));
+                }
+                else {
+                    
+                    [self.bddNode.names enumerateObjectsUsingBlock:^(NSString *name, NSUInteger yidx, BOOL *stop) {
+                        CGFloat y = 30.0 + yidx * 60.0;
+                        
+                        NSSet *bddLevel = _structure[name];
+                        CGFloat levelCount = [bddLevel count] + 1.0;
+                        
+                        [[bddLevel allObjects] enumerateObjectsUsingBlock:^(BddNode *lbdd, NSUInteger xidx, BOOL *stop) {
+                            CGFloat x = (1.0+(CGFloat)xidx) * self.bounds.size.width / levelCount;
+                            _nodepoints[lbdd] = NSStringFromCGPoint(CGPointMake(x,y));
+                        }];
+                        
+                    }];
+                    CGFloat y = [self.bddNode.names count] * 70.0;                    
+                    BddNode *bottom = (BddNode*)[_structure[@"0"] anyObject];
+                    BddNode *top = (BddNode*)[_structure[@"1"] anyObject];
+                    
+                    _nodepoints[bottom] = NSStringFromCGPoint(CGPointMake(self.bounds.size.width / 3.0,y));
+                    _nodepoints[top] = NSStringFromCGPoint(CGPointMake(2.0*self.bounds.size.width / 3.0,y));
+                    
+                    
+                    
+                }
+            }
+        }
+    }
+    
+        
     static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
     CGContextSetLineWidth(context, 3.0);
-    
-    NSMutableDictionary *nps = [NSMutableDictionary dictionary];
-    
+
     
     
     
-    [self fillDictionary:nps with:self.bddNode inRect:self.bounds];
+    
+    // [self fillDictionary:nps with:self.bddNode inRect:self.bounds];
     
     // draw lines
     
-    [nps enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
+    [_nodepoints enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
         CGPoint pos = CGPointFromString(obj);
         
         if (!key.isLeaf) {
             
             
-            CGPoint posL = CGPointFromString([nps objectForKey:key.leftBranch]);
-            CGPoint posR = CGPointFromString([nps objectForKey:key.rightBranch]);
+            CGPoint posL = CGPointFromString([_nodepoints objectForKey:key.leftBranch]);
+            CGPoint posR = CGPointFromString([_nodepoints objectForKey:key.rightBranch]);
             
             // draw left branch
             CGContextSetLineDash(context, 30.0, arr, 2);
@@ -101,8 +134,9 @@
     // draw nodes
     
     
-    [nps enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
+    [_nodepoints enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
         CGPoint pos = CGPointFromString(obj);
+        NSLog(@"%@ %@", key.name, obj);
         
         if (!key.isLeaf) {
             CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
