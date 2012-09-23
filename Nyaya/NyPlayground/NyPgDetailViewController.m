@@ -18,7 +18,7 @@
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
-    __weak NySymbolView *_tappedSymbolView;
+    __weak NyNodeView *_tappedSymbolView;
 }
 @end
 
@@ -74,12 +74,12 @@
     }
     
 
-    else if ([touch.view isKindOfClass:[NyFormulaView class]]) {
+    else if ([touch.view isKindOfClass:[NyTreeView class]]) {
         return [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]] // tap formula view = select formula
         || [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]           // pan formula view = drag formula
         ;
     }
-    else if ([touch.view isKindOfClass:[NySymbolView class]]) {
+    else if ([touch.view isKindOfClass:[NyNodeView class]]) {
         return [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]     // tap symbol view = tap symbol
         || ([gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]
             && [(UISwipeGestureRecognizer*)gestureRecognizer direction] & (UISwipeGestureRecognizerDirectionDown|UISwipeGestureRecognizerDirectionUp)) // swipe symbol view down = swipe down symbol
@@ -94,22 +94,22 @@
 
 #pragma mark - CANVAS
 - (IBAction)canvasTap:(UITapGestureRecognizer *)sender {
-    for (NyFormulaView *formulaView in _formulaViews) {
+    for (NyTreeView *formulaView in _formulaViews) {
         formulaView.chosen = NO;
         [formulaView setNeedsDisplay];
     }
 }
 
 #pragma mark - Ny Formula View Data Source
-- (NySymbolView*)symbolView {
-    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
-    NySymbolView *symbolView = [viewArray objectAtIndex:3];
+- (NyNodeView*)symbolView {
+    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
+    NyNodeView *symbolView = [viewArray objectAtIndex:3];
     return symbolView;    
 }
 
 - (void)addNewFormulaAtCanvasLocation:(CGPoint)location {
-    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyFormulaView" owner:self options:nil];
-    NyFormulaView *formualaView = [viewArray objectAtIndex:0];
+    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
+    NyTreeView *formualaView = [viewArray objectAtIndex:0];
     //NySymbolView *symbolView = [viewArray objectAtIndex:3];
     
     //[formualaView addSubview:symbolView];
@@ -146,8 +146,8 @@
 
 #pragma mark - FORMULAs
 
-- (void)deselectOtherFormulas:(NyFormulaView*)formulaView {
-    [_formulaViews enumerateObjectsUsingBlock:^(NyFormulaView *obj, NSUInteger idx, BOOL *stop) {
+- (void)deselectOtherFormulas:(NyTreeView*)formulaView {
+    [_formulaViews enumerateObjectsUsingBlock:^(NyTreeView *obj, NSUInteger idx, BOOL *stop) {
         if (obj.chosen && obj != formulaView) {
             obj.chosen = NO;
             
@@ -161,7 +161,7 @@
 }
 
 - (IBAction)dragFormula:(UIPanGestureRecognizer *)sender {
-    NyFormulaView *formulaView = (NyFormulaView*)sender.view;
+    NyTreeView *formulaView = (NyTreeView*)sender.view;
     [self deselectOtherFormulas:formulaView];
     
     if (!formulaView.isChosen) {
@@ -178,19 +178,19 @@
 
 - (IBAction)selectFormula:(UITapGestureRecognizer *)sender {
     NSLog(@"selectFormula: %@", [sender.view class]);
-    NyFormulaView *formulaView = (NyFormulaView*)sender.view;
+    NyTreeView *formulaView = (NyTreeView*)sender.view;
     [self deselectOtherFormulas:formulaView];
     formulaView.chosen = !formulaView.isChosen;
     [formulaView setNeedsDisplay];
 }
 
 - (IBAction)lockFormula:(UIButton *)sender {
-    NyFormulaView *formulaView = (NyFormulaView*)sender.superview;
+    NyTreeView *formulaView = (NyTreeView*)sender.superview;
     formulaView.locked = !formulaView.isLocked;
 }
 
 - (IBAction)deleteFormula:(UIButton *)sender {
-    NyFormulaView *formulaView = (NyFormulaView*)sender.superview;
+    NyTreeView *formulaView = (NyTreeView*)sender.superview;
     [UIView animateWithDuration:1.0 animations:^{
         formulaView.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
         formulaView.alpha = 0.0;
@@ -206,10 +206,10 @@
 
 
 
-- (void)updateSymbolView:(NySymbolView*)symbolView withNode:(NyayaNode*)node {
+- (void)updateSymbolView:(NyNodeView*)symbolView withNode:(NyayaNode*)node {
     if (symbolView.node == node) return; // nothing to do
     
-    NyFormulaView *formulaView =  symbolView.formulaView;
+    NyTreeView *formulaView =  symbolView.formulaView;
     
     /*** move to model ***/
     NyayaNode *root = (NyayaNode*)formulaView.node;
@@ -341,8 +341,8 @@
 
 
 #pragma mark - user interaction
-- (void)showSymbolMenu:(NySymbolView*)symbolView {
-    NyFormulaView *formulaView = symbolView.formulaView;
+- (void)showSymbolMenu:(NyNodeView*)symbolView {
+    NyTreeView *formulaView = symbolView.formulaView;
     _tappedSymbolView = symbolView;
     
     UIMenuController *menuController = [UIMenuController sharedMenuController];
@@ -460,8 +460,8 @@
 
 - (IBAction)tapSymbol:(UITapGestureRecognizer *)sender {
     
-    NySymbolView *symbolView = (NySymbolView*)sender.view;
-    NyFormulaView *formulaView = symbolView.formulaView;
+    NyNodeView *symbolView = (NyNodeView*)sender.view;
+    NyTreeView *formulaView = symbolView.formulaView;
     formulaView.chosen = YES;
     [self deselectOtherFormulas:formulaView];
         

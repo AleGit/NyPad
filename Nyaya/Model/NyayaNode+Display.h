@@ -16,7 +16,7 @@
 
 @end
 
-@interface NyayaNodeVariable (Display)
+@interface NyayaNodeVariable (Display) <MutableDisplayNode>
 
 - (void)setDisplayValue:(NyayaBool)displayValue;
 

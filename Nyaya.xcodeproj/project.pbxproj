@@ -69,8 +69,8 @@
 		1166601D15B6E7D90070B5B8 /* NyayaTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166601C15B6E7D90070B5B8 /* NyayaTokenTests.m */; };
 		1166F19B15BE6C18007B7B50 /* TruthTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166F19A15BE6C18007B7B50 /* TruthTable.m */; };
 		1166F19F15BECE7C007B7B50 /* TruthTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1166F19E15BECE7C007B7B50 /* TruthTableTests.m */; };
-		1169BFAB1605B12A001CECCC /* NyFormulaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1169BFAA1605B12A001CECCC /* NyFormulaView.xib */; };
-		1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169BFAD1605C3C2001CECCC /* NyFormulaView.m */; };
+		1169BFAB1605B12A001CECCC /* NyTreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1169BFAA1605B12A001CECCC /* NyTreeView.xib */; };
+		1169BFAE1605C3C2001CECCC /* NyTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169BFAD1605C3C2001CECCC /* NyTreeView.m */; };
 		1169DC5615BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */; };
 		1169DC5A15BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169DC5915BC5C1B000BD3D0 /* NyayaNodeVariablesTests.m */; };
 		116D220715D925A2003DBD88 /* NyayaTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D220615D925A2003DBD88 /* NyayaTabBarViewController.m */; };
@@ -180,7 +180,7 @@
 		11DC674F1608558E00B9008B /* MathJax.js in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674E1608558E00B9008B /* MathJax.js */; };
 		11DDBF0D15EB63A200DFC94A /* iPadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0B15EB63A200DFC94A /* iPadIcon.png */; };
 		11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */; };
-		11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC6E1606ECF30069497A /* NySymbolView.m */; };
+		11E3EC6F1606ECF30069497A /* NyNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC6E1606ECF30069497A /* NyNodeView.m */; };
 		11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E3EC72160700980069497A /* NSObject+Nyaya.m */; };
 		11EC4D2615CFC3750090EBAB /* BasicBddTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2515CFC3750090EBAB /* BasicBddTests.m */; };
 		11EC4D2815CFC3970090EBAB /* BddNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EC4D2715CFC3970090EBAB /* BddNode.m */; };
@@ -297,9 +297,9 @@
 		1166F19A15BE6C18007B7B50 /* TruthTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TruthTable.m; path = Model/TruthTable.m; sourceTree = "<group>"; };
 		1166F19D15BECE7C007B7B50 /* TruthTableTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruthTableTests.h; sourceTree = "<group>"; };
 		1166F19E15BECE7C007B7B50 /* TruthTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruthTableTests.m; sourceTree = "<group>"; };
-		1169BFAA1605B12A001CECCC /* NyFormulaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyFormulaView.xib; path = NyPlayground/NyFormulaView.xib; sourceTree = "<group>"; };
-		1169BFAC1605C3C2001CECCC /* NyFormulaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyFormulaView.h; path = NyPlayground/NyFormulaView.h; sourceTree = "<group>"; };
-		1169BFAD1605C3C2001CECCC /* NyFormulaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyFormulaView.m; path = NyPlayground/NyFormulaView.m; sourceTree = "<group>"; };
+		1169BFAA1605B12A001CECCC /* NyTreeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTreeView.xib; path = NyPlayground/NyTreeView.xib; sourceTree = "<group>"; };
+		1169BFAC1605C3C2001CECCC /* NyTreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTreeView.h; path = NyPlayground/NyTreeView.h; sourceTree = "<group>"; };
+		1169BFAD1605C3C2001CECCC /* NyTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTreeView.m; path = NyPlayground/NyTreeView.m; sourceTree = "<group>"; };
 		1169DC5415BC3E19000BD3D0 /* NyayaNodeEvaluationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeEvaluationTests.h; sourceTree = "<group>"; };
 		1169DC5515BC3E19000BD3D0 /* NyayaNodeEvaluationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaNodeEvaluationTests.m; sourceTree = "<group>"; };
 		1169DC5815BC5C1B000BD3D0 /* NyayaNodeVariablesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaNodeVariablesTests.h; sourceTree = "<group>"; };
@@ -450,8 +450,8 @@
 		11DC674E1608558E00B9008B /* MathJax.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = MathJax.js; path = html/MathJax.js; sourceTree = "<group>"; };
 		11DDBF0B15EB63A200DFC94A /* iPadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPadIcon.png; path = AppIcons/iPadIcon.png; sourceTree = "<group>"; };
 		11DDBF0C15EB63A200DFC94A /* iPadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPadIcon@2x.png"; path = "AppIcons/iPadIcon@2x.png"; sourceTree = "<group>"; };
-		11E3EC6D1606ECF30069497A /* NySymbolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NySymbolView.h; path = NyPlayground/NySymbolView.h; sourceTree = "<group>"; };
-		11E3EC6E1606ECF30069497A /* NySymbolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NySymbolView.m; path = NyPlayground/NySymbolView.m; sourceTree = "<group>"; };
+		11E3EC6D1606ECF30069497A /* NyNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyNodeView.h; path = NyPlayground/NyNodeView.h; sourceTree = "<group>"; };
+		11E3EC6E1606ECF30069497A /* NyNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyNodeView.m; path = NyPlayground/NyNodeView.m; sourceTree = "<group>"; };
 		11E3EC71160700980069497A /* NSObject+Nyaya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Nyaya.h"; sourceTree = "<group>"; };
 		11E3EC72160700980069497A /* NSObject+Nyaya.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Nyaya.m"; sourceTree = "<group>"; };
 		11EC4D1F15CFBA210090EBAB /* BddNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BddNode.h; path = Nyaya/BDD/BddNode.h; sourceTree = "<group>"; };
@@ -539,17 +539,17 @@
 			children = (
 				11BFCBAA15F9E3E1004CBDA2 /* kariert.png */,
 				11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */,
-				1169BFAC1605C3C2001CECCC /* NyFormulaView.h */,
-				1169BFAA1605B12A001CECCC /* NyFormulaView.xib */,
-				1169BFAD1605C3C2001CECCC /* NyFormulaView.m */,
+				1169BFAC1605C3C2001CECCC /* NyTreeView.h */,
+				1169BFAA1605B12A001CECCC /* NyTreeView.xib */,
+				1169BFAD1605C3C2001CECCC /* NyTreeView.m */,
 				11BFCBA615F9E331004CBDA2 /* NyPgCanvasView.h */,
 				11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */,
 				1177496E15E7D68B00B5C071 /* NyPgDetailViewController.h */,
 				1177496F15E7D68B00B5C071 /* NyPgDetailViewController.m */,
 				1177497015E7D68B00B5C071 /* NyPgMasterViewController.h */,
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
-				11E3EC6D1606ECF30069497A /* NySymbolView.h */,
-				11E3EC6E1606ECF30069497A /* NySymbolView.m */,
+				11E3EC6D1606ECF30069497A /* NyNodeView.h */,
+				11E3EC6E1606ECF30069497A /* NyNodeView.m */,
 			);
 			name = NyPlayground;
 			sourceTree = "<group>";
@@ -1162,7 +1162,7 @@
 				11DBC0B41604F2A40007A82B /* tutorial1LI.html in Resources */,
 				11DBC0B71604F2CF0007A82B /* instructions1DS.html in Resources */,
 				11DBC0B81604F2CF0007A82B /* instructions1SY.html in Resources */,
-				1169BFAB1605B12A001CECCC /* NyFormulaView.xib in Resources */,
+				1169BFAB1605B12A001CECCC /* NyTreeView.xib in Resources */,
 				117BD6641607BB2E0025F381 /* abstract.tex in Resources */,
 				117BD6651607BB2E0025F381 /* appendix.tex in Resources */,
 				117BD6661607BB2E0025F381 /* content_concept.tex in Resources */,
@@ -1254,8 +1254,8 @@
 				110E7E511600775500EA2D7F /* NyayaFormula.m in Sources */,
 				11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */,
 				11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */,
-				1169BFAE1605C3C2001CECCC /* NyFormulaView.m in Sources */,
-				11E3EC6F1606ECF30069497A /* NySymbolView.m in Sources */,
+				1169BFAE1605C3C2001CECCC /* NyTreeView.m in Sources */,
+				11E3EC6F1606ECF30069497A /* NyNodeView.m in Sources */,
 				11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */,
 				113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */,
 			);

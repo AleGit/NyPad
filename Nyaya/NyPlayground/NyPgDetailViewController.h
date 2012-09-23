@@ -7,10 +7,10 @@
 //
 
 #import "NyDetailViewController.h"
-#import "NyFormulaView.h"
-#import "NySymbolView.h"
+#import "NyTreeView.h"
+#import "NyNodeView.h"
 
-@interface NyPgDetailViewController : NyDetailInputViewController <NyFormulaViewDataSource, NyFormulaViewDelegate>
+@interface NyPgDetailViewController : NyDetailInputViewController <NyTreeViewDataSource, NyTreeViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *canvasView;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
