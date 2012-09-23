@@ -167,7 +167,7 @@
                     self.navigationItem.title = self.inputName.text;
                 });
                 
-                BddNode *bdd = [formula OBDD:NO];
+                BddNode *bdd = [formula OBDD:YES];
                 NSUInteger bddLevelCount = [bdd height];
                 NSString *truthTableHtml = [[formula truthTable:YES] htmlDescription];
                 NSUInteger varCount = [[[formula truthTable:YES] variables] count];

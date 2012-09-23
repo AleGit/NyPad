@@ -30,14 +30,26 @@
 
 - (void)fillDictionary:(NSMutableDictionary*)nodePoints with:(BddNode*)bdd inRect:(CGRect) rect {
     if (bdd) {
-        CGFloat y = rect.origin.y + 35.0;
         CGFloat x = rect.origin.x + rect.size.width / 2.0;
+        CGFloat y = rect.origin.y + 35.0;
+        if (bdd.isLeaf) {
+            y = rect.origin.y + rect.size.height - 35.0;
+            
+        }
+        else {
+            CGFloat lc = (CGFloat)[bdd.leftBranch width];
+            CGFloat rc = (CGFloat)[bdd.rightBranch width];
+            CGFloat sum = lc+rc;
+            
+            
+            
+            CGRect left = CGRectMake(rect.origin.x, rect.origin.y + 70.0, rect.size.width * lc/sum, rect.size.height - 70.0);
+            [self fillDictionary:nodePoints with:bdd.leftBranch inRect:left];
+            CGRect right = CGRectMake(rect.origin.x + rect.size.width * lc/sum, rect.origin.y + 70.0, rect.size.width*rc/sum, rect.size.height - 70.0);
+            [self fillDictionary:nodePoints with:bdd.rightBranch inRect:right];
+        }
         nodePoints[bdd] = NSStringFromCGPoint(CGPointMake(x,y));
         
-        CGRect left = CGRectMake(rect.origin.x, rect.origin.y + 70.0, rect.size.width/2.0, rect.size.height - 70.0);
-        [self fillDictionary:nodePoints with:bdd.leftBranch inRect:left];
-        CGRect right = CGRectMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + 70.0, rect.size.width/2.0, rect.size.height - 70.0);
-        [self fillDictionary:nodePoints with:bdd.rightBranch inRect:right];
         
         
     }

@@ -102,8 +102,8 @@
     for (NSString *input in @[@"a"
          ,@"a+b.c+!d+e.f+g+!h+i+j.k+m+n+(a+(b+c).e+!d+e+f.g+h+i+j)+k+m+n" // tautology
          ,@"!(a+b.c+!d+e.f+g+!h+i+j.k+m+n+(a+(b+c).e+!d+e+f.g+h+i+j)+k+m+n)" // contradiction
-         ,@"!a+b.c+d+e.f.g+h+i.!j.k +l.m.n.o"
-         ,@"!a^b.c+d^e.f.g+h^i.!j.k +l^m^n^o"
+         // ,@"!a+b.c+d+e.f.g+h+i.!j.k +l.m.n.o"
+         // ,@"!a^b.c+d^e.f.g+h^i.!j.k +l^m^n^o"
         
          //, @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w" // crash
          //, @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w.x" // crash

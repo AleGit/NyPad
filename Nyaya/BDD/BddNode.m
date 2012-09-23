@@ -180,9 +180,9 @@
                 bdd = leftBranch;
             }
             else {
-                [allBdds enumerateObjectsUsingBlock:^(BddNode *bdd, NSUInteger idx, BOOL *stop) {
-                    if (bdd.leftBranch == leftBranch && bdd.rightBranch == rightBranch) {
-                        bdd = bdd; *stop = YES;
+                [allBdds enumerateObjectsUsingBlock:^(BddNode *ebdd, NSUInteger idx, BOOL *stop) {
+                    if (ebdd.leftBranch == leftBranch && ebdd.rightBranch == rightBranch) {
+                        bdd = ebdd; *stop = YES;
                     }
                 }];
             }

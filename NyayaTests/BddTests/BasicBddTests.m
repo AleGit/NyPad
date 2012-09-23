@@ -199,6 +199,68 @@
     STAssertEquals(b0, c0, nil);
 }
 
+- (void)testAxorBReduced {
+    NSArray *variables = @[[NyayaNode atom:@"a"], [NyayaNode atom:@"b"]];
+    NyayaNode *node = [NyayaNode xdisjunction:variables[0] with:variables[1]];
+    // a ^ b
+    
+    BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
+    
+    STAssertEqualObjects(bdd.name, @"a", nil);
+    //     a
+    //    . \
+    //   b   b
+    //   | x |
+    //   1   0
+    
+    BddNode *a0 = bdd.leftBranch;
+    BddNode *a1 = bdd.rightBranch;
+    STAssertEqualObjects(a0.name, @"b", nil);
+    STAssertEqualObjects(a1.name, @"b", nil);
+    
+    BddNode *a0b1 = a0.rightBranch;
+    BddNode *a1b0 = a1.leftBranch;
+    STAssertEqualObjects(a0b1.name, @"1", nil);
+    STAssertEqualObjects(a1b0.name, @"1", nil);
+    STAssertEquals(a0b1, a1b0, nil);
+    
+}
+
+- (void)testXorReduced {
+    NSArray *variables = @[[NyayaNode atom:@"a"], [NyayaNode atom:@"b"], [NyayaNode atom:@"c"]];
+    
+    
+    
+    
+    NyayaNode *node = [NyayaNode xdisjunction:variables[0] with:[NyayaNode xdisjunction:variables[1] with:variables[2]]];
+    // a ^ (b ^ c)
+    
+    BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
+    
+    STAssertEqualObjects(bdd.name, @"a", nil);
+    //     a
+    //    . \
+    //   b   b
+    //   | x |
+    //   c   c
+    //   | x |
+    //   0   1
+    
+    BddNode *a0 = bdd.leftBranch;
+    BddNode *a1 = bdd.rightBranch;
+    STAssertEqualObjects(a0.name, @"b", nil);
+    STAssertEqualObjects(a1.name, @"b", nil);
+    
+    BddNode *a0b1 = a0.rightBranch;
+    BddNode *a1b0 = a1.leftBranch;
+    STAssertEquals(a0b1, a1b0, nil);
+    
+    BddNode *a1b1 = a1.rightBranch;
+    BddNode *a0b0 = a0.leftBranch;
+    STAssertEquals(a1b1, a0b0, nil);
+
+}
+
 - (void)testObbd {
     NSArray *variables = @[[NyayaNode atom:@"a"], [NyayaNode atom:@"b"], [NyayaNode atom:@"c"]];
     
