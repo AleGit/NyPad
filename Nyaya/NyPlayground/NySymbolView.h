@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NyayaNode+Display.h"
+#import "DisplayNode.h"
+
 @class NyFormulaView;
 
 @interface NySymbolView : UIView
 
-@property (nonatomic, assign) NyayaBool displayValue;
-@property (nonatomic, weak) NyayaNode* node;
+@property (nonatomic, assign) NSUInteger displayValue;
+@property (nonatomic, weak) id<DisplayNode> node;
 @property (nonatomic, readonly) NSArray *subsymbols;
 @property (nonatomic, readonly) NySymbolView *supersymbol;
 @property (nonatomic, readonly) NyFormulaView *formulaView;

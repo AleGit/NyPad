@@ -7,8 +7,6 @@
 //
 
 #import "NySymbolView.h"
-#import "NyayaNode+Type.h"
-#import "NyayaNode+Display.h"
 #import "NyFormulaView.h"
 
 @interface NyFormulaView (Symbols)
@@ -79,8 +77,8 @@
 }
 
 - (void)setDisplayValue:(NyayaBool)displayValue {
-    if (_node.type == NyayaVariable) {
-        ((NyayaNodeVariable*)_node).displayValue = displayValue;
+    if ([_node conformsToProtocol:@protocol(MutableDisplayNode) ]) {
+        [((id<MutableDisplayNode>)_node) setDisplayValue:displayValue];
         
     }
     [self.formulaView refreshSymbols];
@@ -119,7 +117,7 @@
     }
 }
 
-- (void)setNode:(NyayaNode *)node {
+- (void)setNode:(id<DisplayNode>)node {
     _node = node;
     _symbolLabel.text = node.symbol;
 }

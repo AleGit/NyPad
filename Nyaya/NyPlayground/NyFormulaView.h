@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DisplayNode.h"
 #import "NySymbolView.h"
-#import "NyayaNode.h"
 
 @protocol NyFormulaViewDataSource
 
@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet id<NyFormulaViewDataSource> dataSource;
 @property (weak, nonatomic) IBOutlet id<NyFormulaViewDelegate> delegate;
 
-@property (strong, nonatomic) NyayaNode *node;
+@property (strong, nonatomic) id<DisplayNode> node;
 
 @property (assign, nonatomic, getter = isChosen) BOOL chosen;
 @property (assign, nonatomic, getter = isLocked) BOOL locked;

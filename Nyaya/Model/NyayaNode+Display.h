@@ -9,9 +9,10 @@
 #import "NyayaNode.h"
 #import "NyayaNode_Cluster.h"
 
-@interface NyayaNode (Display)
+@interface NyayaNode (Display) <DisplayNode>
 
 - (NyayaBool) displayValue;
+- (NSString*) headLabelText;
 
 @end
 

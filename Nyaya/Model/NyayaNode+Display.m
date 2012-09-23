@@ -7,6 +7,7 @@
 //
 
 #import "NyayaNode+Display.h"
+#import "NyayaNode+Attributes.h"
 #import "NyayaNode_Cluster.h"
 #import "NyayaStore.h"
 
@@ -14,6 +15,28 @@
 - (NyayaBool)displayValue {
     _displayValue = [[NyayaStore sharedInstance] displayValueForName:self.symbol];
     return _displayValue;
+}
+
+- (NSString*)headLabelText {
+    NSString *text = nil;
+    if ([self isConjunctiveNormalForm]) {
+        if ([self isDisjunctiveNormalForm]) text = @"cnf dnf";
+        else text = @"cnf";
+    }
+    else if ([self isDisjunctiveNormalForm]) {
+        text = @"dnf";
+    }
+    else if ([self isNegationNormalForm]) {
+        text = @"nnf";
+    }
+    else if ([self isImplicationFree]) {
+        text = @"imf";
+    }
+    else text = @"";
+    
+    
+    return text;
+    
 }
 @end
 

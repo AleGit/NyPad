@@ -14,6 +14,7 @@
 #import "NyayaNode+Transformations.h"
 #import "NyayaNode+Valuation.h"
 #import "NyayaNode+Attributes.h"
+#import "NyayaNode+Display.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
@@ -210,10 +211,13 @@
     
     NyFormulaView *formulaView =  symbolView.formulaView;
     
-    NyayaNode *root = formulaView.node;
+    /*** move to model ***/
+    NyayaNode *root = (NyayaNode*)formulaView.node;
     NSMutableSet *variables = [root.setOfVariables mutableCopy];
     NyayaNode *newroot = [root nodeByReplacingNodeAtIndexPath:symbolView.indexPath withNode:node];
     newroot = [newroot substitute:variables];
+    /*** move to model ***/
+    
     formulaView.node = newroot;
 }
 
@@ -243,25 +247,25 @@
 }
 
 - (void)negateNode:(UIMenuController*)ctrl {
-    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *node = (NyayaNode*)_tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode negation: node];
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
 
 - (void)implicateNode:(UIMenuController*)ctrl {
-    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *node = (NyayaNode*)_tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode implication:node with:node];
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
 
 - (void)conjunctNode:(UIMenuController*)ctrl {
-    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *node = (NyayaNode*)_tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode conjunction:node with:node];
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
 
 - (void)disjunctNode:(UIMenuController*)ctrl {
-    NyayaNode *node = _tappedSymbolView.node;
+    NyayaNode *node = (NyayaNode*)_tappedSymbolView.node;
     NyayaNode *newNode = [NyayaNode disjunction:node with:node];
     [self updateSymbolView:_tappedSymbolView withNode:newNode];
 }
@@ -311,27 +315,27 @@
 #pragma mark - equivalence transformations 
 
 - (void)collapseSymbol:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node collapsedNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node collapsedNode]];
 }
 
 - (void)imfSymbol:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node imfNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node imfNode]];
 }
 
 - (void)nnfSymbol:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node nnfNode]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node nnfNode]];
 }
 
 - (void)distributeLeft:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:0]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node distributedNodeToIndex:0]];
 }
 
 - (void)distributeRight:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node distributedNodeToIndex:1]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node distributedNodeToIndex:1]];
 }
 
 - (void)switchChildren:(UIMenuController*)ctrl {
-    [self updateSymbolView:_tappedSymbolView withNode:[_tappedSymbolView.node switchedNode:YES]];
+    [self updateSymbolView:_tappedSymbolView withNode:[(NyayaNode*)_tappedSymbolView.node switchedNode:YES]];
 }
 
 
@@ -345,7 +349,7 @@
     NSMutableArray *menuItems = [NSMutableArray array];
     
     if (formulaView.isLocked) {
-        NyayaNode *node = symbolView.node;      // level 0
+        NyayaNode *node = (NyayaNode*)symbolView.node;      // level 0
         NSString *key = nil;
         SEL selector = nil;
         
@@ -390,13 +394,13 @@
         
     }
     else {
-        NSString *s = symbolView.node.symbol;
+        NSString *s = ((NyayaNode*)symbolView.node).symbol;
         
-        if (symbolView.node.type == NyayaConstant) {
+        if (((NyayaNode*)symbolView.node).type == NyayaConstant) {
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
         }
 
-        else if (symbolView.node.type == NyayaVariable) {
+        else if (((NyayaNode*)symbolView.node).type == NyayaVariable) {
             if (![s isEqual:@"p"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]];
             if (![s isEqual:@"q"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"q" action:@selector(atomNodeQ:)]];
             if (![s isEqual:@"r"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"r" action:@selector(atomNodeR:)]];
@@ -416,17 +420,17 @@
             }
         }
         
-        else if (symbolView.node.arity > 0) {  // not a leaf
+        else if (((NyayaNode*)symbolView.node).arity > 0) {  // not a leaf
             [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"p" action:@selector(atomNodeP:)]]; // reduce to leave
             
             if (![s isEqual:@"¬"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"¬" action:@selector(negation:)]];
             
-            if (symbolView.node.arity > 1) {
+            if (((NyayaNode*)symbolView.node).arity > 1) {
                 if (![s isEqual:@"→"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"→" action:@selector(implication:)]];
                 if (![s isEqual:@"∧"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∧" action:@selector(conjunction:)]];
                 if (![s isEqual:@"∨"]) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"∨" action:@selector(disjunction:)]];
                 
-                if (![symbolView.node.nodes[0] isEqual:symbolView.node.nodes[1]])
+                if (![((NyayaNode*)symbolView.node).nodes[0] isEqual:((NyayaNode*)symbolView.node).nodes[1]])
                       [menuItems addObject:[[UIMenuItem alloc] initWithTitle:@"🔀" action:@selector(switchChildren:)]];
             }
             

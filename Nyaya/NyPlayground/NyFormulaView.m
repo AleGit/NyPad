@@ -8,7 +8,6 @@
 
 #import "NyFormulaView.h"
 #import "NySymbolView.h"
-#import "NyayaNode+Attributes.h"
 
 #define LOCK_BUTTON_IDX 0
 #define DELE_BUTTON_IDX 1
@@ -71,11 +70,12 @@
     return !_lockButton.isSelected;
 }
 
-- (void)removeAllSymbols {
-    NSArray *subviews = [self.subviews copy];
-    for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[NySymbolView class]]) [subview removeFromSuperview];
+- (NSArray*)symbolViews {
+    NSMutableArray *symbolViews = [NSMutableArray arrayWithCapacity:[self.subviews count]];
+    for (UIView *subview in self.subviews) {
+        if ([subview isKindOfClass:[NySymbolView class]]) [symbolViews addObject:subview];
     }
+    return symbolViews;
 }
 
 
@@ -83,11 +83,10 @@
 #define FDX 47.0
 #define FDY 61.0
 
-- (void)setNode:(NyayaNode *)node {
+- (void)setNode:(id<DisplayNode>)node {
+    NSArray *outdatedSymbolViews = [self symbolViews];
+    
     _node = node;
-    _headLabel.text = @"";
-    
-    
     CGPoint origin = self.frame.origin;
     CGSize oldsize = self.frame.size;
     CGSize newsize = [self sizeOfNode:node];
@@ -97,32 +96,23 @@
                                    MAX(2.0*FDX, newsize.width),
                                    MAX(1.5*FDY, newsize.height));
     
+    
     self.center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
    
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.frame = frame;
+        _headLabel.text = [node headLabelText];
+        
+        
     } completion:^(BOOL finished) {
-        
-        [self removeAllSymbols];
-        
+        for (UIView *view in outdatedSymbolViews) {
+            [view removeFromSuperview];
+        }
         [self addNode:node inRect:self.bounds];
         [self refreshSymbols];
         
-        if ([_node isConjunctiveNormalForm]) {
-            if ([_node isDisjunctiveNormalForm]) _headLabel.text = @"cnf dnf";
-            else _headLabel.text = @"cnf";
-        }
-        else if ([_node isDisjunctiveNormalForm]) {
-            _headLabel.text = @"dnf";
-        }
-        else if ([_node isNegationNormalForm]) {
-            _headLabel.text = @"nnf";
-        }
-        else if ([_node isImplicationFree]) {
-            _headLabel.text = @"imf";
-        }
-        else _headLabel.text = @"";
-
+        
+        
 
     }];
     
@@ -140,12 +130,12 @@
 }
 
 
-- (CGSize)sizeOfNode:(NyayaNode*)node {
+- (CGSize)sizeOfNode:(id<DisplayNode>)node {
     return CGSizeMake(FDX * (CGFloat)node.width, FDY * (CGFloat)node.height);
 }
 
 
-- (NySymbolView*)addNode:(NyayaNode*)node inRect:(CGRect)rect {
+- (NySymbolView*)addNode:(id<DisplayNode>)node inRect:(CGRect)rect {
     NySymbolView *symbolView = [self.dataSource symbolView];
     
     [self addSubview:symbolView];
@@ -156,7 +146,7 @@
     CGFloat yoffset = rect.origin.y + FDY;
     
     
-    for (NyayaNode *subnode in node.nodes) {
+    for (id<DisplayNode> subnode in node.nodes) {
         CGSize size = [self sizeOfNode:subnode];
         rect = CGRectMake(xoffset, yoffset, size.width, size.height);
         

@@ -240,6 +240,7 @@
 		110E7E561600A1B000EA2D7F /* NyayaDurationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaDurationTests.h; sourceTree = "<group>"; };
 		110E7E571600A1B000EA2D7F /* NyayaDurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaDurationTests.m; sourceTree = "<group>"; };
 		111104B115BC0147006EB260 /* connectives */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = connectives; path = Model/connectives; sourceTree = "<group>"; };
+		11138BD6160EF04E00EAD5E2 /* DisplayNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DisplayNode.h; path = Nyaya/BDD/DisplayNode.h; sourceTree = "<group>"; };
 		111B157415B7C71F0011A91A /* NyayaParserErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaParserErrorTests.h; sourceTree = "<group>"; };
 		111B157515B7C71F0011A91A /* NyayaParserErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaParserErrorTests.m; sourceTree = "<group>"; };
 		111F923315E89B1400EB6B1D /* Tutorials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tutorials.plist; path = NyTutorials/Tutorials.plist; sourceTree = "<group>"; };
@@ -974,6 +975,7 @@
 			children = (
 				11EC4D1F15CFBA210090EBAB /* BddNode.h */,
 				11EC4D2715CFC3970090EBAB /* BddNode.m */,
+				11138BD6160EF04E00EAD5E2 /* DisplayNode.h */,
 			);
 			name = BDD;
 			path = ..;

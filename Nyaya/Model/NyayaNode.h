@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TruthTable.h"
 #import "BddNode.h"
+#import "DisplayNode.h"
 
 @interface NyayaNode : NSObject <NSCopying>
 

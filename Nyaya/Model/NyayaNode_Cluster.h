@@ -12,8 +12,6 @@
 #import "BddNode.h"
 
 
-enum { NyayaUndefined=0, NyayaFalse, NyayaTrue };
-typedef NSUInteger NyayaBool;
 
 enum { // NyayaUndefined=0
     NyayaConstant=1, NyayaVariable,
