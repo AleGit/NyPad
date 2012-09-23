@@ -52,6 +52,7 @@
 // Constructs an Ordered BDD with variable order from array 'variables' (NIY)
 // the node SCHOULD be reduced and MUST be substituted
 +(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
++(BddNode*)obddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
 
 + (id)top;
 + (id)bottom;

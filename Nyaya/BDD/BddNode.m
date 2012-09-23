@@ -152,6 +152,61 @@
     return bdd;
 }
 
++(BddNode*)obddWithNode:(NyayaNode *)node order:(NSArray *)variables reduce:(BOOL)reduce bdds:(NSMutableArray*)allBdds {
+    __block BddNode *bdd = nil;
+    if ([variables count] == 0) {
+        BOOL eval = node.evaluationValue;
+        if (reduce) bdd = [allBdds objectAtIndex:(NSUInteger)eval]; // bottom is on index 0, top is on index 1;
+        else {
+            bdd = [[BddNode alloc] initWithName:eval ? @"1" : @"0" id:[allBdds count]];
+            [allBdds addObject:bdd];
+            
+        }
+    }
+    else {
+        NyayaNodeVariable *variable = [variables objectAtIndex:0];
+        NSArray *otherVariables = [variables subarrayWithRange:NSMakeRange(1, [variables count]-1)];
+        variable.evaluationValue = NO;
+        BddNode *leftBranch = [self obddWithNode:node order:otherVariables reduce:reduce bdds:allBdds];
+        
+        variable.evaluationValue = YES;
+        BddNode *rightBranch = [self obddWithNode:node order:otherVariables reduce:reduce bdds:allBdds];
+        
+        if (reduce) {
+            if (leftBranch == rightBranch) {
+                bdd = leftBranch;
+            }
+            else {
+                [allBdds enumerateObjectsUsingBlock:^(BddNode *bdd, NSUInteger idx, BOOL *stop) {
+                    if (bdd.leftBranch == leftBranch && bdd.rightBranch == rightBranch) {
+                        bdd = bdd; *stop = YES;
+                    }
+                }];
+            }
+        }
+        
+        if (!bdd) {
+            bdd = [[BddNode alloc] initWithName:variable.symbol
+                                             id:[allBdds count]   // new unique id
+                                     leftBranch:leftBranch
+                                    rightBranch:rightBranch];
+            [allBdds addObject:bdd];
+        }
+    }
+    
+    return bdd;
+}
+
++(BddNode*)obddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce; {
+    NSMutableArray *allNodes = nil;
+    
+    if (reduce) allNodes = [NSMutableArray arrayWithObjects:[BddNode bottom], [BddNode top], nil];
+    else allNodes = [NSMutableArray arrayWithCapacity:1 << [variables count]];
+    
+    return [self obddWithNode:node order:variables reduce:reduce bdds:allNodes];
+        
+}
+
 +(BddNode*)bddWithNode:(NyayaNode*)nynode order:(NSArray*)variables reduce:(BOOL)reduce {
     
     BddNode *bdd = nil;
