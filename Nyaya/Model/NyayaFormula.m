@@ -94,7 +94,7 @@
         NSArray *variables = [_slfNode.setOfVariables allObjects];
         
         
-        return [BddNode bddWithNode:_slfNode order:variables reduce:reduced];
+        return [BddNode obddWithNode:_slfNode order:variables reduce:reduced];
     }
     return nil;
 }

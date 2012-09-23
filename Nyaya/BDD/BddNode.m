@@ -19,7 +19,10 @@
     BddNode *_leftBranch;
     BddNode *_rightBranch;
     BOOL _reduced;
+    
+    // deprecated
     NSArray *_levels;
+    // use in deprecated +(BddNode*)lbddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
     
     NSString *_cnfDescription;
     NSString *_dnfDescritpion;
@@ -207,7 +210,7 @@
         
 }
 
-+(BddNode*)bddWithNode:(NyayaNode*)nynode order:(NSArray*)variables reduce:(BOOL)reduce {
++(BddNode*)lbddWithNode:(NyayaNode*)nynode order:(NSArray*)variables reduce:(BOOL)reduce {
     
     BddNode *bdd = nil;
     NSMutableArray *levels = [NSMutableArray arrayWithCapacity:[variables count]+1];
@@ -386,6 +389,14 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     return self;
+}
+
+- (NSUInteger)width {
+    return 1 + [self.leftBranch width] + [self.rightBranch width]; // 1 + 0 + 0 for leaves
+}
+
+- (NSUInteger)height {
+    return 1 + MAX([self.leftBranch height],[self.rightBranch height]); // 1 + MAX(0,0) for leaves
 }
 
 

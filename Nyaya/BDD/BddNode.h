@@ -44,15 +44,14 @@
 // OBDDs contain at most #(atoms)+1 levels.
 // (unordered BDDs will not contain levels
 // but drawing is not supported yet.)
-@property (nonatomic, readonly) NSArray *levels;        
 
 // Constructs an Ordered BDD with variable order of 'truth table'
 +(BddNode*)bddWithTruthTable:(TruthTable*)truthTable reduce:(BOOL)reduce;
 
-// Constructs an Ordered BDD with variable order from array 'variables' (NIY)
-// the node SCHOULD be reduced and MUST be substituted
-+(BddNode*)bddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
+
 +(BddNode*)obddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
++(BddNode*)lbddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
+
 
 + (id)top;
 + (id)bottom;
@@ -63,5 +62,8 @@
 
 - (NSString*)cnfDescription;
 - (NSString*)dnfDescription;
+
+- (NSUInteger)width;
+- (NSUInteger)height;
 
 @end

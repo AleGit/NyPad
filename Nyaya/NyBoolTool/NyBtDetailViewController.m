@@ -167,8 +167,8 @@
                     self.navigationItem.title = self.inputName.text;
                 });
                 
-                BddNode *bdd = [formula OBDD:YES];
-                NSUInteger bddLevelCount = bdd.levels.count;
+                BddNode *bdd = [formula OBDD:NO];
+                NSUInteger bddLevelCount = [bdd height];
                 NSString *truthTableHtml = [[formula truthTable:YES] htmlDescription];
                 NSUInteger varCount = [[[formula truthTable:YES] variables] count];
                 
@@ -302,7 +302,7 @@
     
     NSUInteger visibleLines = MIN(1 << varCount,TRUTH_TABLE_MAX_VISIBLE_ROWS) + 1;
     CGFloat htmlHeight = 40+visibleLines*25;
-    CGFloat bddHeight = 80 + (bddLevelCount-1)*70;
+    CGFloat bddHeight = 70 * bddLevelCount;
     
     CGRect f = self.bddView.frame;
     f = CGRectMake(f.origin.x, f.origin.y + yoffset, f.size.width, MAX(htmlHeight, bddHeight));

@@ -98,16 +98,16 @@
 }
 
 - (void)testBddCreation {
+    NSUInteger index = 0;
     for (NSString *input in @[@"a"
          ,@"a+b.c+!d+e.f+g+!h+i+j.k+m+n+(a+(b+c).e+!d+e+f.g+h+i+j)+k+m+n" // tautology
          ,@"!(a+b.c+!d+e.f+g+!h+i+j.k+m+n+(a+(b+c).e+!d+e+f.g+h+i+j)+k+m+n)" // contradiction
-         //,@"(a+b).(a+b.c+!d+e.f.g+!h+i+j.k+m+n+(a+(b+c).e+!d+e+f.g+h+i+j)+k+m+n)"
-         //, @"a^b^c^d^e^f^g^h^i^j^k^l^m^n^o"
-         //, @"(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d).(a+b).(b+!d)"
-         // , @"(a+b).(b+!d)"
+         ,@"!a+b.c+d+e.f.g+h+i.!j.k +l.m.n.o"
+         ,@"!a^b.c+d^e.f.g+h^i.!j.k +l^m^n^o"
+        
          //, @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w" // crash
          //, @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w.x" // crash
-         // , @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w.x+y" //  Request for large capacity 33554432 = 2^25
+         //, @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w.x+y" //  Request for large capacity 33554432 = 2^25
          // , @"a+b.c.d+e.f+g.h+i.j+k.l+m.n+o.p+q.r+s.t+u.v+w.x+y.z" // Request for large capacity 67108864 = 2^26
          // , @"a+b&c&d+e&f+g&h+i&j+k&l+m&n+o&p+q&r+s&t+u&v+w&x+y&z"
 
@@ -122,11 +122,15 @@
         NyayaNode *node = [formula syntaxTree:NO];
         node = [node reduce:NSIntegerMax];
         node = [node substitute:set];
+        
         NSDate *t0 = [NSDate date];
-        BddNode *bdd0 = [BddNode bddWithNode:node order:varibles reduce:YES];
+        BddNode *bdd0 = [BddNode obddWithNode:node order:varibles reduce:YES];
         NSTimeInterval duration0 = [[NSDate date] timeIntervalSinceDate:begin];
         NSLog(@"d0:%f (%f) %@", duration0, [t0 timeIntervalSinceDate:begin], [node description]);
         
+        if (index !=1 && index != 2) STAssertEquals(bdd0.height, [varibles count]+1, nil);
+        else STAssertEquals(bdd0.height, (NSUInteger)1, nil);
+        /*
         begin = [NSDate date];
         TruthTable *tTable = [formula truthTable:YES];
         BddNode *bdd1 = [BddNode bddWithTruthTable:tTable reduce:YES];
@@ -135,6 +139,8 @@
         STAssertFalse(bdd0 == bdd1, nil);
         STAssertTrue(duration0 != duration1, @"d0:%f d1:%f %@", duration0, duration1,input);
         NSLog(@"d1:%f %@ co=%u ta=%u sa=%u", duration1,input, tTable.isContradiction, tTable.isTautology, tTable.isContradiction);
+         */
+        index++;
     }
     
 }

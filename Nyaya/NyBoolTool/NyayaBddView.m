@@ -28,81 +28,32 @@
     //    [self drawDiagram:context];
 }
 
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
-{
-    if (self.bddNode.levels) [self drawOBDD:context]; // ordered bdd
-    else if (self.bddNode) {
-        NSLog(@"missing bdd.levels – unordered bdd");
+- (void)fillDictionary:(NSMutableDictionary*)nodePoints with:(BddNode*)bdd inRect:(CGRect) rect {
+    if (bdd) {
+        CGFloat y = rect.origin.y + 35.0;
+        CGFloat x = rect.origin.x + rect.size.width / 2.0;
+        nodePoints[bdd] = NSStringFromCGPoint(CGPointMake(x,y));
+        
+        CGRect left = CGRectMake(rect.origin.x, rect.origin.y + 70.0, rect.size.width/2.0, rect.size.height - 70.0);
+        [self fillDictionary:nodePoints with:bdd.leftBranch inRect:left];
+        CGRect right = CGRectMake(rect.origin.x + rect.size.width/2.0, rect.origin.y + 70.0, rect.size.width/2.0, rect.size.height - 70.0);
+        [self fillDictionary:nodePoints with:bdd.rightBranch inRect:right];
+        
+        
     }
 }
 
-
-- (NSDictionary*)nodePoints {
-    @autoreleasepool {
-        
-        NSSet *set0 = [NSSet setWithArray:[self.bddNode.levels objectAtIndex:0]];
-        BOOL optimized = [set0 count] < 3;
-        
-        CGFloat vSegments = (CGFloat)[self.bddNode.levels count] - 1.0;
-        CGFloat xmargin = optimized ? 5.0 + self.frame.size.width / (vSegments+2.0) : 25.0;
-        
-        
-        CGPoint pL = CGPointMake(xmargin, self.frame.size.height- 35.0);
-        CGPoint pR = CGPointMake(self.frame.size.width-xmargin, self.frame.size.height - 35.0);
-        CGPoint p0 = CGPointMake(self.frame.size.width/2.0, 25.0);
-        
-        NSMutableDictionary *nps = [NSMutableDictionary dictionary];
-        
-        
-        CGSize size = CGSizeMake(pR.x - pL.x, pR.y - p0.y);
-        
-        [self.bddNode.levels enumerateObjectsUsingBlock:^(NSArray* harr, NSUInteger vidx, BOOL *stop) {
-            CGFloat factor = optimized  ?   (vSegments-2*vidx) / vSegments     : (CGFloat)vidx / vSegments;
-            CGFloat xoffset = optimized ?   factor * factor * size.width/4.0   : factor * size.width/2.0;
-            
-            CGFloat vPos;
-            if (vSegments < 1)
-                vPos = p0.y;
-            else
-                vPos =  pL.y - (CGFloat)vidx/vSegments * size.height;
-            
-            NSMutableArray *rarr = [NSMutableArray array];
-            for (BddNode *node in harr) {
-                if (![rarr containsObject:node]) [rarr addObject:node];
-            }
-            CGFloat hSegments = (CGFloat)[rarr count] - 1.0;
-            
-            for (NSUInteger hidx = 0; hidx < [rarr count]; hidx++) {
-                BddNode *node = [rarr objectAtIndex:hidx];
-                
-                if (![nps objectForKey:node]) {
-                    CGFloat hPos;
-                    
-                    if (hSegments < 1.0) {
-                        hPos = p0.x;
-                    }
-                    else {
-                        hPos = pL.x + xoffset + ((CGFloat)hidx)/hSegments * (pR.x-pL.x-2*xoffset);
-                    }
-                    CGPoint npos = CGPointMake(hPos, vPos);
-                    NSString *obj = NSStringFromCGPoint(npos);
-                    
-                    [nps setObject:obj forKey:node];
-                }
-            }
-            
-            
-        }];
-        return nps;
-    }
-}
-
-- (void)drawOBDD:(CGContextRef)context {
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
     
     static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
     CGContextSetLineWidth(context, 3.0);
     
-    NSDictionary *nps = [self nodePoints];
+    NSMutableDictionary *nps = [NSMutableDictionary dictionary];
+    
+    
+    
+    
+    [self fillDictionary:nps with:self.bddNode inRect:self.bounds];
     
     // draw lines
     
