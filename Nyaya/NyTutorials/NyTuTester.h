@@ -29,6 +29,8 @@
 - (void)checkTest;
 - (void)removeTest;
 
+
+
 @end
 
 @protocol NyTuTesterDelegate <NSObject>
@@ -66,8 +68,11 @@
 @interface NyTuTester101 : NyTuTesterPlist
 @end
 
-@interface NyTuTester1DS : NyTuTesterPlist
+@interface NyTuTester102 : NyTuTesterPlist
 @end
 
-@interface NyTuTester1SY : NyTuTesterPlist
+@interface NyTuTester103 : NyTuTesterPlist
+@end
+
+@interface NyTuTester201 : NyTuTesterPlist
 @end

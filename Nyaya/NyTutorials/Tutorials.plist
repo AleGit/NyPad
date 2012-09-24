@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array> <!-- root -->
-	<string>Tutorials</string> <!-- title -->
+<array>
+	<string>Tutorials</string>
 	<array>
-		<string>Overview</string> <!-- section title -->
+		<string>Overview</string>
 		<array>
-			<string>Motivation</string> <!-- tutorial title -->
-			<string>101</string> <!-- tutorial key -->
+			<string>Motivation</string>
+			<string>101</string>
 		</array>
 		<array>
 			<string>Propositions</string>
-			<string>1DS</string>
+			<string>102</string>
 		</array>
 		<array>
 			<string>Symbols</string>
-			<string>1SY</string>
+			<string>103</string>
 		</array>
 		<array>
 			<string>Limits</string>
-			<string>1LI</string>
+			<string>104</string>
 		</array>
 	</array>
 	<array>

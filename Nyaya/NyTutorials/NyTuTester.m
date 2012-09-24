@@ -12,7 +12,11 @@
 
 @interface NyTuTester () {
     BOOL checked;
+@protected
+    NSString* _testerKey;
 }
+
+- (id)initWithKey:(NSString*)key;
 
 - (void)loadTestView:(UIView*)view;
 - (void)layoutSubviews:(UIView*)view;
@@ -42,9 +46,16 @@
 }
 
 + (id)testerForKey:(NSString *)key {
-    NyTuTester *tester = [[[self testerClassForKey:key] alloc] init];
-    tester->_testerKey = key;
+    NyTuTester *tester = [[[self testerClassForKey:key] alloc] initWithKey:key];
     return tester;
+}
+
+- (id)initWithKey:(NSString *)key {
+    self = [super init];
+    if (self) {
+        _testerKey = key;
+    }
+    return self;
 }
 
 // default
@@ -212,8 +223,8 @@
 
 @implementation  NyTuTesterPlist
 
-- (id) init {
-    self = [super init];
+- (id) initWithKey:(NSString*)key {
+    self = [super initWithKey:key];
     if (self) {
 
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
@@ -284,7 +295,7 @@
 
 @end
 
-@implementation NyTuTester1DS
+@implementation NyTuTester102
 
 - (BOOL)accessoryViewShouldBeVisible {
     return NO;
@@ -292,6 +303,6 @@
 
 @end
 
-@implementation  NyTuTester1SY
+@implementation  NyTuTester103
 
 @end
