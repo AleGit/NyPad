@@ -48,7 +48,7 @@
 		<string>No shoes, no shirt, no service</string>
 		<string>if not p or not q then not r</string>
 		<string>shoes, shirt, service</string>
-		<string>¬p ∨ ¬q → ¬s</string>
+		<string>¬p ∨ ¬q → ¬r</string>
 	</array>
 	<array>
 		<string>If Dick met Jane yesterday, they had a cup of coffee together or they took a walk in the park</string>

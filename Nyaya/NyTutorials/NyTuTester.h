@@ -24,6 +24,12 @@
 + (BOOL)testerExistsForKey:(NSString*)key;
 + (id)testerForKey:(NSString*)key;
 
+/* template methods :
+    first test:     intializes test view, calls next test
+    next test:      generates and presents a new test question
+    check text:     validatates user's answer
+    remove test:    releases test ressources
+ */
 - (void)firstTest:(UIView*)view;
 - (void)nextTest;
 - (void)checkTest;
@@ -50,18 +56,23 @@
 @property (nonatomic, weak) IBOutlet UITextView *solutionField;     // the content of the solution
 @property (nonatomic, weak) IBOutlet UITextView *answerField;       // the answer of the user
 
-@property (nonatomic, readonly) NSString *testerKey;
+@property (nonatomic, readonly) NSString *testerKey;                // key to find configuration and content for the test
+@property (nonatomic, readonly) BOOL success;
+
 @end
 
 @interface NyTuTesterPlist : NyTuTester
 
 @property (nonatomic, strong) NSDictionary *testDictionary;
 @property (nonatomic, strong) NSDictionary *questionsDictionary;
+
 @property (nonatomic, strong) NSString *questionLabelText;
 @property (nonatomic, strong) NSString *answerLabelText;
 @property (nonatomic, strong) NSString *solutionLabelText;
 
-@property (nonatomic, strong) NSString *question;       // question = key, solution = value from dictionary
+@property (nonatomic, readonly) NSString *question;       // question = key, solution = value from dictionary (101,102,103)
+@property (nonatomic, readonly) NSString *answer;
+@property (nonatomic, readonly) NSString *solution;
 
 @end
 

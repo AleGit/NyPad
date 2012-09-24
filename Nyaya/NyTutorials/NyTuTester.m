@@ -11,18 +11,20 @@
 #import "UITextField+Nyaya.h"
 
 @interface NyTuTester () {
-    BOOL checked;
+    BOOL _checked;
 @protected
     NSString* _testerKey;
+    BOOL _success;
 }
+@end
 
-- (id)initWithKey:(NSString*)key;
-
-- (void)loadTestView:(UIView*)view;
-- (void)layoutSubviews:(UIView*)view;
-- (void)configureSubviews:(UIView*)view;
-- (void)configureKeyboard;
-
+@interface NyTuTesterPlist () {
+    @protected
+    NSString *_question;
+    NSString *_answer;
+    NSString *_solution;
+    
+}
 @end
 
 @implementation NyTuTester
@@ -60,11 +62,6 @@
 
 // default
 - (UIModalPresentationStyle)modalPresentationStyle {
-#if DEBUG
-    static UIModalPresentationStyle style = 0;
-    style = (++style)%4;
-    return style;
-#endif
     return UIModalPresentationFormSheet;
 }
 
@@ -73,8 +70,13 @@
     return UIModalTransitionStyleCoverVertical;
 }
 
+- (NSString*)testViewNibName {
+    return @"StandardTestView";
+}
+
+// default
 - (void)loadTestView:(UIView*)view {
-    [[NSBundle mainBundle] loadNibNamed:@"StandardTestView" owner:self options:nil];
+    [[NSBundle mainBundle] loadNibNamed:[self testViewNibName] owner:self options:nil];
     [view insertSubview:self.testView atIndex:1];
     self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
 }
@@ -124,7 +126,7 @@
 }
 
 - (IBAction)process:(UIButton *)sender {
-    checked ? [self nextTest] : [self checkTest];
+    _checked ? [self nextTest] : [self checkTest];
 }
 
 - (IBAction)back:(UIButton *)sender {
@@ -150,9 +152,12 @@
 }
 
 #pragma mark - template methods …Test
-
+// a.) load and configure views for presenting test questions, validations and solutions
+// b.) call next test
 - (void)firstTest:(UIView *)view {
-     NSLog(@"%@ firstTest", [self class] );
+    NSLog(@"%@ firstTest", [self class] );
+    
+    // a.)
     
     [self loadTestView:view];
     [self layoutSubviews:view];
@@ -163,60 +168,83 @@
     
     [self configureKeyboard];
     
+    [self writeQALabels];
+    
+    // b.)
     [self nextTest];
 }
 
+- (void)clearQuestion {
+    self.questionField.text = @"";
+    self.answerField.text = @"";
+    self.solutionField.text = @"";
+    
+    self.answerField.backgroundColor = [UIColor whiteColor];
+}
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)writeQALabels {
+    @throw [[NSException alloc] initWithName:@"writeQALabels" reason:@"must be overriden" userInfo:nil];
+}
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)generateQuestion {
+    @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overriden" userInfo:nil];
+}
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)writeQuestion {
+    @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil];
+}
+
 - (void)nextTest {
-    checked = NO;
-    [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
     NSLog(@"%@ nextTest", [self class] );
-    BOOL success = [self clearTestView] && [self fillTestView];
-    [delegate tester:self didNextTest:success];
+    _checked = NO;
+    [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
+    
+    [self clearQuestion];
+    [self generateQuestion];
+    [self writeQuestion];
+   
+    [delegate tester:self didNextTest:YES];
+}
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)readAnswer {
+    @throw [[NSException alloc] initWithName:@"readAnswer" reason:@"must be overriden" userInfo:nil];
+}
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+
+- (void)validateAnswer {
+    @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overriden" userInfo:nil];
+}
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)writeSolution {
+    @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil];
 }
 
 -  (void)checkTest {
-    checked = YES;
-    [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
     NSLog(@"%@ checkTest", [self class] );
-    BOOL success = [self validateTestView];
-    [self.delegate tester:self didCheckTest:success];
+    
+    _checked = YES;
+    [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];    
+    
+    [self readAnswer];
+    [self validateAnswer];
+    [self writeSolution];
+    
+    [self.delegate tester:self didCheckTest:YES];
 }
 
 - (void)removeTest {
-    NSLog(@"%@ removeTest", [self class] );
+    NSLog(@"%@ removeTest", [self class]);
+    
     [self.testView removeFromSuperview];
     [self setTestView:nil];
     [self.delegate tester:self didRemoveTest:YES];
 }
 
 #pragma mark -
-
-- (BOOL)fillTestView {
-    BOOL success = YES;
-    
-    self.answerField.editable = YES;
-    
-    // [self.inputField becomeFirstResponder];
-    return success;
-}
-
-- (BOOL)validateTestView {
-    return YES;
-}
-
-- (BOOL)clearTestView {
-    
-    self.questionField.text = @"";
-    self.answerField.text = @"";
-    self.solutionField.text = @"";
-    
-    self.answerField.backgroundColor = [UIColor whiteColor];
-    
-    return YES;
-}
-
-
-
 
 
 @end
@@ -251,41 +279,53 @@
     return self;
 }
 
-- (BOOL)fillTestView {
-    BOOL success = [super fillTestView];
-    
+- (void)writeQALabels {
     self.questionLabel.text = self.questionLabelText;
     self.answerLabel.text = self.answerLabelText;
     self.solutionLabel.text = self.solutionLabelText;
-    
-    NSUInteger idx = arc4random() % [self.questionsDictionary count];
-    
-    self.question = [[self.questionsDictionary allKeys] objectAtIndex:idx];
-    self.questionField.text = self.question;
-    
-    return success ;
 }
 
-- (BOOL)validateTestView {
-    BOOL success = NO;
+
+- (void)clearQuestion {
+    [super clearQuestion];
     
+    _question = nil;
+    _answer = nil;
+    _solution = nil;
+    _success = NO;
+}
+
+- (void)generateQuestion {
+    NSUInteger idx = arc4random() % [self.questionsDictionary count];
+    _question = [[self.questionsDictionary allKeys] objectAtIndex:idx];
+    _solution = self.questionsDictionary[_question];
+}
+
+- (void)writeQuestion {
+    self.questionField.text = self.question;
+}
+
+- (void)readAnswer {
+    _answer = self.answerField.text;
+    _success = NO;
+}
+
+- (void)validateAnswer {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ .,;()]*" options:0 error:nil];
     
-    NSString *aCorrectAnswer = [self.questionsDictionary valueForKey:self.question];
-    NSString *yourAnswer = self.answerField.text;
+    NSString *aca = [regex stringByReplacingMatchesInString:self.solution options:0 range:NSMakeRange(0, [self.solution length]) withTemplate:@""];
+    NSString *yan = [regex stringByReplacingMatchesInString:self.answer options:0 range:NSMakeRange(0, [self.answer length]) withTemplate:@""];
     
-    NSString *aca = [regex stringByReplacingMatchesInString:aCorrectAnswer options:0 range:NSMakeRange(0, [aCorrectAnswer length]) withTemplate:@""];
-    NSString *yan = [regex stringByReplacingMatchesInString:yourAnswer options:0 range:NSMakeRange(0, [yourAnswer length]) withTemplate:@""];
-    
-    success = [aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0;
-    
-    self.answerField.backgroundColor = success ? [UIColor nyRightColor] : [UIColor nyWrongColor];
-    self.solutionField.text = aCorrectAnswer;
-    
-    return success;
+    _success = [aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0;
 }
 
+- (void)writeSolution {
+    self.answerField.backgroundColor = self.success ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+    self.solutionField.text = self.solution;
+}
 @end
+
+#pragma mark - Section 1xy
 
 @implementation  NyTuTester101
 
@@ -304,5 +344,15 @@
 @end
 
 @implementation  NyTuTester103
+
+@end
+
+#pragma mark - Section 2xy
+
+@implementation NyTuTester201
+
+- (void)generateQuestion {
+    _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
+}
 
 @end
