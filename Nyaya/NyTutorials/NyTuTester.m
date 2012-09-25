@@ -29,27 +29,115 @@
 
 @implementation NyTuTester
 
-// NyTuTester protocol properties
+
+/* **********************************************************************
+ @protocol NyTuTester <NSObject> 
+ ************************************************************************ */
+// properties (override styles in subclasses)
 @synthesize delegate;
+#pragma mark - ny tester protocol
+- (UIModalPresentationStyle)modalPresentationStyle { return UIModalPresentationFormSheet; }
+- (UIModalTransitionStyle)modalTransitionStyle { return UIModalTransitionStyleCoverVertical; }
+// creation
++ (BOOL)testerExistsForKey:(NSString*)key {
+    return [self testerClassForKey:key] != nil;
+}
++ (id)testerForKey:(NSString *)key {
+    NyTuTester *tester = [[[self testerClassForKey:key] alloc] initWithKey:key];
+    return tester;
+}
+// template methods
+- (void)firstTest:(UIView *)view {
+    NSLog(@"%@ firstTest", [self class] );
+    
+    // a) data
+    [self importTestData];
+    
+    // b) visuals
+    [self loadTestView:view];
+    [self layoutSubviews:view];
+    [self configureSubviews:view];
+    
+    [self loadAccessoryView];
+    [self configureAccessoryView];
+    
+    [self configureKeyboard];
+    
+    // c) labels
+    [self writeQALabels];
+    
+    // d) question
+    [self nextTest];
+}
+- (void)nextTest {
+    NSLog(@"%@ nextTest", [self class] );
+    
+    _checked = NO;
+    [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
+    
+    [self clearQuestion];
+    [self generateQuestion];
+    [self writeQuestion];
+    
+    [delegate tester:self didNextTest:YES];
+}
+-  (void)checkTest {
+    NSLog(@"%@ checkTest", [self class] );
+    
+    _checked = YES;
+    [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
+    
+    [self readAnswer];
+    [self validateAnswer];
+    [self writeSolution];
+    
+    [self.delegate tester:self didCheckTest:YES];
+}
 
-// NyAccessoryDelegate protocol properties
+- (void)removeTest {
+    NSLog(@"%@ removeTest", [self class]);
+    
+    [self.testView removeFromSuperview];
+    [self setTestView:nil];
+    [self.delegate tester:self didRemoveTest:YES];
+}
+
+
+#pragma mark - ny accsessory controller
+/* **********************************************************************
+ @protocol NyAccessoryController <NSObject>
+ ************************************************************************ */
+// properties
 @synthesize accessoryView, backButton, processButton, dismissButton;
+// creation (loading)
+- (void)loadAccessoryView {
+    if ([self accessoryViewShouldBeVisible]) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyBasicKeysView" owner:self options:nil];
+        [self configureAccessoryView];
+    }
+    else {
+        [self unloadAccessoryView];
+    }
+}
+- (void)configureAccessoryView {
+    self.answerField.inputView = self.accessoryView;
+    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+}
+- (void)unloadAccessoryView {
+    self.answerField.inputView = nil;
+    self.answerField.inputAccessoryView = nil;
+    self.accessoryView = nil;
+}
 
+#pragma mark - protocol helpers
+
+// NyTuTester creation (helpers)
 + (NSString*)testerClassNameForKey:(NSString*)key {
     return [NSString stringWithFormat:@"NyTuTester%@", key];
 }
 
 + (Class)testerClassForKey:(NSString*)key {
     return NSClassFromString([self testerClassNameForKey:key]);
-}
-
-+ (BOOL)testerExistsForKey:(NSString*)key {
-    return [self testerClassForKey:key] != nil;
-}
-
-+ (id)testerForKey:(NSString *)key {
-    NyTuTester *tester = [[[self testerClassForKey:key] alloc] initWithKey:key];
-    return tester;
 }
 
 - (id)initWithKey:(NSString *)key {
@@ -60,15 +148,10 @@
     return self;
 }
 
-// default
-- (UIModalPresentationStyle)modalPresentationStyle {
-    return UIModalPresentationFormSheet;
-}
+// NyAccessoryController creation (helpers, override in subclasses)
+- (BOOL)accessoryViewShouldBeVisible { return YES; }
 
-// default
-- (UIModalTransitionStyle)modalTransitionStyle {
-    return UIModalTransitionStyleCoverVertical;
-}
+#pragma mark - visual configuration
 
 - (NSString*)testViewNibName {
     return @"StandardTestView";
@@ -92,34 +175,15 @@
 
 #pragma mark - ny accessory controller protocols
 
-- (BOOL)accessoryViewShouldBeVisible {
-    return YES;
-}
-
-- (void)loadAccessoryView {
-    if ([self accessoryViewShouldBeVisible]) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyBasicKeysView" owner:self options:nil];
-        [self configureAccessoryView];
-    }
-    else {
-        [self unloadAccessoryView];
-    }
-}
 
 
 
-- (void)configureAccessoryView {
-    self.answerField.inputView = self.accessoryView;
-    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
-}
 
-- (void)unloadAccessoryView {
-    
-    self.answerField.inputView = nil;
-    self.answerField.inputAccessoryView = nil;
-    self.accessoryView = nil;
-    
-}
+
+
+
+
+
 
 - (IBAction)press:(UIButton *)sender {
     [self.answerField insertText:sender.currentTitle];
@@ -151,27 +215,11 @@
     // [self.inputField addTarget:self action:@selector(action:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
-#pragma mark - template methods …Test
-// a.) load and configure views for presenting test questions, validations and solutions
-// b.) call next test
-- (void)firstTest:(UIView *)view {
-    NSLog(@"%@ firstTest", [self class] );
-    
-    // a.)
-    
-    [self loadTestView:view];
-    [self layoutSubviews:view];
-    [self configureSubviews:view];
-    
-    [self loadAccessoryView];
-    [self configureAccessoryView];
-    
-    [self configureKeyboard];
-    
-    [self writeQALabels];
-    
-    // b.)
-    [self nextTest];
+
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)importTestData {
+    @throw [[NSException alloc] initWithName:@"importTestData" reason:@"must be overriden" userInfo:nil];
 }
 
 - (void)clearQuestion {
@@ -197,17 +245,7 @@
     @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil];
 }
 
-- (void)nextTest {
-    NSLog(@"%@ nextTest", [self class] );
-    _checked = NO;
-    [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
-    
-    [self clearQuestion];
-    [self generateQuestion];
-    [self writeQuestion];
-   
-    [delegate tester:self didNextTest:YES];
-}
+
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)readAnswer {
@@ -223,26 +261,7 @@
     @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil];
 }
 
--  (void)checkTest {
-    NSLog(@"%@ checkTest", [self class] );
-    
-    _checked = YES;
-    [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];    
-    
-    [self readAnswer];
-    [self validateAnswer];
-    [self writeSolution];
-    
-    [self.delegate tester:self didCheckTest:YES];
-}
 
-- (void)removeTest {
-    NSLog(@"%@ removeTest", [self class]);
-    
-    [self.testView removeFromSuperview];
-    [self setTestView:nil];
-    [self.delegate tester:self didRemoveTest:YES];
-}
 
 #pragma mark -
 
@@ -251,32 +270,28 @@
 
 @implementation  NyTuTesterPlist
 
-- (id) initWithKey:(NSString*)key {
-    self = [super initWithKey:key];
-    if (self) {
-
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
-        
-        self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
-        
-        self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
-        
-        if (!self.questionsDictionary) {
-            filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
-            NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
-            NSUInteger answerIndex = [[self.testDictionary objectForKey:@"solutionIndex"] integerValue];
-            NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
-            for (NSArray* qa in array) {
-                if (answerIndex < [qa count]) [qd setObject:[qa objectAtIndex:answerIndex] forKey:[qa objectAtIndex:0]];
-            }
-            self.questionsDictionary = [qd copy]; // create unmutable copy
+- (void)importTestData {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
+    
+    self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
+    
+    if (!self.questionsDictionary) {
+        filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
+        NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
+        NSUInteger answerIndex = [[self.testDictionary objectForKey:@"solutionIndex"] integerValue];
+        NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
+        for (NSArray* qa in array) {
+            if (answerIndex < [qa count]) [qd setObject:[qa objectAtIndex:answerIndex] forKey:[qa objectAtIndex:0]];
         }
-        
-        self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
-        self.answerLabelText = [self.testDictionary objectForKey:@"answerLabelText"];
-        self.solutionLabelText = [self.testDictionary objectForKey:@"solutionLabelText"];
+        self.questionsDictionary = [qd copy]; // create unmutable copy
     }
-    return self;
+    
+    self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
+    self.answerLabelText = [self.testDictionary objectForKey:@"answerLabelText"];
+    self.solutionLabelText = [self.testDictionary objectForKey:@"solutionLabelText"];
+    
 }
 
 - (void)writeQALabels {

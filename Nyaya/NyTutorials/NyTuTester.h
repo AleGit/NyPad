@@ -16,26 +16,18 @@
 @class NyTuTester;                  // forward declaration
 
 @protocol NyTuTester <NSObject>
-
+// properties
 @property(nonatomic,weak) id<NyTuTesterDelegate> delegate;
 @property(nonatomic,readonly) UIModalTransitionStyle modalTransitionStyle;
 @property(nonatomic,readonly) UIModalPresentationStyle modalPresentationStyle;
-
+// creation
 + (BOOL)testerExistsForKey:(NSString*)key;
 + (id)testerForKey:(NSString*)key;
-
-/* template methods :
-    first test:     intializes test view, calls next test
-    next test:      generates and presents a new test question
-    check text:     validatates user's answer
-    remove test:    releases test ressources
- */
+// template methods
 - (void)firstTest:(UIView*)view;
 - (void)nextTest;
 - (void)checkTest;
 - (void)removeTest;
-
-
 
 @end
 
