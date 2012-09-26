@@ -333,7 +333,7 @@
 }
 @end
 
-#pragma mark - Section 1xy
+#pragma mark - Section 1
 
 @implementation  NyTuTester101
 
@@ -355,9 +355,10 @@
 
 @end
 
-#pragma mark - Section 2xy
+#pragma mark - Section 2
 
 @implementation NyTuTester201
+
 
 - (void)generateQuestion {
     _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
