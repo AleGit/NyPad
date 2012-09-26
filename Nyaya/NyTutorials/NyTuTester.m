@@ -51,7 +51,7 @@
     NSLog(@"%@ firstTest", [self class] );
     
     // a) data
-    [self importTestData];
+    [self readTestData];
     
     // b) visuals
     [self loadTestView:view];
@@ -153,20 +153,10 @@
 
 #pragma mark - visual configuration
 
-- (NSString*)testViewNibName {
-    return @"StandardTestView";
-}
 
-// default
-- (void)loadTestView:(UIView*)view {
-    [[NSBundle mainBundle] loadNibNamed:[self testViewNibName] owner:self options:nil];
-    [view insertSubview:self.testView atIndex:1];
-    self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
-}
 
-- (void)layoutSubviews:(UIView*)view {
-    
-}
+
+
 
 - (void)configureSubviews:(UIView*)view {
     self.questionField.backgroundColor = [UIColor nyLightGreyColor];
@@ -209,19 +199,32 @@
     [self.answerField negate];
 }
 
-#pragma mark -
-
-- (void)configureKeyboard {
-    // [self.inputField addTarget:self action:@selector(action:) forControlEvents:UIControlEventEditingDidEndOnExit];
-}
-
-
+#pragma mark - firstTest (methods to be overriden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)importTestData {
-    @throw [[NSException alloc] initWithName:@"importTestData" reason:@"must be overriden" userInfo:nil];
+// MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)readTestData { @throw [[NSException alloc] initWithName:@"importTestData" reason:@"must be overriden" userInfo:nil]; }
+
+/* CAN BE OVERRIDEN IN SUBCLASSES */
+- (NSString*)testViewNibName { return @"StandardTestView"; }
+- (void)loadTestView:(UIView*)view {
+    [[NSBundle mainBundle] loadNibNamed:[self testViewNibName] owner:self options:nil];
+    [view insertSubview:self.testView atIndex:1];
+    self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
 }
 
+/* CAN BE OVERRIDEN IN SUBCLASSES */
+- (void)layoutSubviews:(UIView*)view { }
+
+/* CAN BE OVERRIDEN IN SUBCLASSES */
+- (void)configureKeyboard { }
+
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (void)writeQALabels {  @throw [[NSException alloc] initWithName:@"writeQALabels" reason:@"must be overriden" userInfo:nil]; }
+
+#pragma mark - nextTest (methods to be overriden)
+
+/* CAN BE OVERRIDEN IN SUBCLASSES */
 - (void)clearQuestion {
     self.questionField.text = @"";
     self.answerField.text = @"";
@@ -231,54 +234,35 @@
 }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeQALabels {
-    @throw [[NSException alloc] initWithName:@"writeQALabels" reason:@"must be overriden" userInfo:nil];
-}
+- (void)generateQuestion { @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overriden" userInfo:nil]; }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)generateQuestion {
-    @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overriden" userInfo:nil];
-}
+- (void)writeQuestion { @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil]; }
+
+#pragma mark - checkTest (methods to be overriden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeQuestion {
-    @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil];
-}
-
-
+- (void)readAnswer {  @throw [[NSException alloc] initWithName:@"readAnswer" reason:@"must be overriden" userInfo:nil]; }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)readAnswer {
-    @throw [[NSException alloc] initWithName:@"readAnswer" reason:@"must be overriden" userInfo:nil];
-}
+- (void)validateAnswer { @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overriden" userInfo:nil]; }
+
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-
-- (void)validateAnswer {
-    @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overriden" userInfo:nil];
-}
-/* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeSolution {
-    @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil];
-}
-
-
-
-#pragma mark -
-
+- (void)writeSolution { @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil]; }
 
 @end
 
+/* *******************************************************************************************************************
+ *
+ * ******************************************************************************************************************* */
+
 @implementation  NyTuTesterPlist
 
-- (void)importTestData {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
-    
-    self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    
+- (void)importQuestionsDictionary {
     self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
     
     if (!self.questionsDictionary) {
-        filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
         NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
         NSUInteger answerIndex = [[self.testDictionary objectForKey:@"solutionIndex"] integerValue];
         NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
@@ -287,6 +271,15 @@
         }
         self.questionsDictionary = [qd copy]; // create unmutable copy
     }
+    
+}
+
+- (void)readTestData {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
+    
+    self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    [self importQuestionsDictionary];
+    
     
     self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
     self.answerLabelText = [self.testDictionary objectForKey:@"answerLabelText"];
