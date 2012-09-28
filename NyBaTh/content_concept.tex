@@ -4,7 +4,7 @@
 The aim of this project was to design an interactive environment on a tablet computer 
 that allows the user to learn simple facts about the formalism of propositional logic 
 and standard transformations of Boolean functions. 
-The environment is meant to be self-explanatory. 
+The environment was meant to be self-explanatory. 
 
 The core of this concept builds on tutorials with exercises 
 and a playground where the learned knowledge can be used in different modes. 
@@ -12,9 +12,10 @@ A glossary of terms and a formula calculator (BoolTool) to check formulas will s
 
 \section{Tutorials}
 
-Ny$\bar{a}$ya for iPad covers syntax and semantics of propositional logic, but one some basic rules of natural deduction. 
-It introduces normal forms,
-truth tables and binary decision diagrams as different but equivalent representations of boolean functions.
+Ny$\bar{a}$ya for iPad covers syntax and semantics of propositional logic, 
+but only some basic rules of natural deduction. 
+It introduces normal forms, truth tables and binary decision diagrams 
+as different but equivalent representations of boolean functions.
 
 The structure of the tutorials and the content of the exercises are heavily based on the according sections of the book  
 {\em Logic in Computer Science} \cite{Huth:2004:LCS:975331} by M.~Huth and M.~Ryan.
@@ -41,11 +42,14 @@ Additional content is taken from the lecture {\em Logic} \cite{Middeldorp:2012:L
 General and specific configurations for the tutorials and additional content for the exercises 
 are stored in simple property lists\footnote{
 \href{http://www.apple.com/DTDs/PropertyList-1.0.dtd}{http://www.apple.com/DTDs/PropertyList-1.0.dtd}
-\tabref{tab:PLISTDTD}. }, which are simple xml-files with basic data types, that can be easily read and interpreted by different programs.
-The file “Tutorials.plist” \tabref{tab:TUTORIALPLIST} provides the basic data about available tutorial sections and tutorial titles to build a navigation menu.
+\tabref{tab:PLISTDTD}. }, which are xml-files with basic data types, that can be easily read and interpreted by different programs.
+The file “Tutorials.plist” \tabref{tab:TUTORIALPLIST} provides the basic data about available tutorial sections and tutorial titles 
+to build a navigation menu programmatically.
 
-Every tutorial includes a teaching part with examples (simple html files in utf8 encoding) and interactive challenges, 
-where the user gets immediate feedback. Every interactive part will present some instructions to master the challenge.
+Every tutorial includes a teaching part with examples (html files with utf8 encoding) 
+and interactive knowledge checker with exercises, 
+where the user gets immediate feedback. 
+Every interactive part will present some instructions to master the tasks.
 
 \subsection{Introduction}
 
@@ -88,14 +92,14 @@ and the following entries are sample solutions for different exercises.
 	<array>
 		<array> 
 			<string>If the barmoter falls, then it will rain.</string>
-			<string>if p then q or r</string>
-			<string>the barometer falls; it will rains</string>
+			<string>if p then q</string>
+			<string>the barometer falls; it will rain</string>
 			<string>p $\rightarrow$ q</string>
 		</array>
 		$\square$
 \end{lstlisting}
 \caption{QA1.plist – content file for the first three tutorials}
-\label{tab:QA1}
+\label{tab:QA1PLIST}
 \end{center}
 \end{table}%
 
@@ -109,15 +113,15 @@ with a dictionary that
 \begin{lstlisting}[firstnumber=5]
 <dict>
 	<key>questionLabelText</key>
-	<string>Guess $\square$ </string>
+	<string>Guess the structure …</string>
 	<key>answerLabelText</key>
- 	<string>Use $\square$ </string>
+ 	<string>Use … </string>
  	<key>solutionLabelText</key>
- 	<string>Solution $\square$ </string>
+ 	<string>Sample solution</string>
  	<key>questionsFile</key>
  	<string>QA1</string>
  	<key>solutionIndex</key>
- 	<integer> $\square$ </integer>
+ 	<integer>1</integer>
 </dict>
 \end{lstlisting}
 \caption{101.plist – configuration file for the first exercise}
@@ -136,8 +140,14 @@ with a dictionary that
 (101) The aim of logic in general is to reason about situations.\cite{Huth:2004:LCS:975331} 
 The common structure of two composite sentences in natural language 
 is reduced to “If p and not q, then r. Not r. p. Therefore, q“. 
-If the reasoning is correct, the user can it use in both situations.
+If the reasoning is correct, the user can it use in both situations. 
+
 In the interactive part the user has to guess the structure of composite sentences in natural language. 
+For he sample sentence 
+\verb+‘If the barometer falls,+ \verb+then it will rain’+ 
+from line 7 of \verb+QA1.plist+ (\tabref{tab:QA1PLIST})
+the user has to answer with line 8 
+\verb+‘if p then q’+, (solution index is defined as 1 in \verb+101.plist+, see \tabref{tab:101PLIST}).
 
 \subsubsection{Propositions – declarative sentences}
 \label{tut:102}
@@ -146,13 +156,21 @@ In the interactive part the user has to guess the structure of composite sentenc
 as indivisible building blocks of propositional logic 
 is explained in more detail. Some counterexamples are presented 
 and the ambiguity of natural language is demonstrated.
+
 The user has to find the propositions in composite sentences. 
+For he sample sentence from \verb+QA1.plist+ (\tabref{tab:QA1PLIST})
+the user has to answer with line 9 
+\verb+‘the barometer falls; it will rain’+, (solution index is defined as 2 in \verb+102.plist+).
+
 
 \subsubsection{Symbols – emphasize the structure}
 \label{tut:103}
 
 (103) The symbols to replace “if then”, “not”, “and” and “or” are introduced. 
+
 Now the user should transform the sentences from the first tutorial into pure propositional formulas. 
+For he sample sentence from \verb+QA1.plist+ (\tabref{tab:QA1PLIST})
+the user has to answer with \verb+‘p+ $\rightarrow$ \verb+q’+ (solution index is defined as 3 in \verb+103.plist+).
 
 \subsubsection{Limits}
 \label{tut:104}
@@ -172,6 +190,21 @@ The content of the exercises will be generated by the app and the user's solutio
 \label{tut:201}
 
 (201) The concept of well formed formulas is explained. 
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcccccccccc}
+$P$	&$::=$	&$p$ 	
+	&|		& $(\neg P)$ 
+	&|		&  $(P \wedge P)$ 
+	&|		&  $(P \vee P$ 
+	&|		&  $(P \rightarrow P)$ \\
+\end{tabular}
+\caption{grammer parenthesis)}
+\label{tab:BNF}
+\end{center}
+\end{table}
+
 The user has to build simple well formed formulas: 
 “a conjcuntion”, “an disjunction of an negation”, “a negation of an implication” and so on.
 They have to use parenthesis.
@@ -179,9 +212,36 @@ They have to use parenthesis.
 \subsubsection{Conventions for your convenience}
 \label{tut:202}
 
-(202) Precedence of connectivea is introduced. 
+(202) Precedence of connectives is introduced. 
 The user has to rewrite formulas 
 to save some parenthesis.
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcccc}
+$P$		&$::=$ & $D$ &|& $P \rightarrow D$\\
+$D$		&$::=$ & $C$ &|& $C \vee D$			\\
+$C$		&$::=$ & $N$ &|& $N \wedge C$ 		\\
+$N$		&$::=$ & $T$ &|& $\neg N$ 			\\
+$T$		&$::=$ & $p$ &|& $(P)$
+\end{tabular}
+\caption{grammar with precedences}
+\label{tab:BNF}
+\end{center}
+\end{table}
+
+%\begin{table}[htdp]
+%\begin{center}
+%\begin{tabular}{rcl}
+%P		&$::=$ & D [ $\rightarrow$ P ]\\
+%D		&$::=$ & C \{ $\vee$ C \}\\
+%C		&$::=$ & N  \{ $\wedge$ N \} \\
+%N		&$::=$ & $\neg$N | p | (P) \\
+%\end{tabular}
+%\caption{EBNF Grammar (with precedences)}
+%\label{tab:BNF}
+%\end{center}
+%\end{table}
 
 \subsubsection{Subformulas}
 \label{tut:203}
@@ -198,20 +258,47 @@ The user has to draw the syntax tree of simple formulas. They has to pay attenti
 \subsubsection{Additional symbols – Top and Bottom}
 \label{tut:205}
 
-(205) The tutorial introduces top and bottom  
+(205) The tutorial 
+introduces top $\top$ and bottom $ \bot$ 
 as abbreviations of conjunctions and disjunctions 
 of formulas with their negation (tautologies and contradictions). 
-
-$\top = \neg P \vee P = P \vee \neg P \qquad \bot  = \neg P \wedge P = P \wedge \neg P$
-
 The user has to rewrite some formulas replacing contradictions and tautologies with top and bottom.
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$\neg P \vee P$&$P \vee \neg P$  & $\neg P \wedge P$ & $P \wedge \neg P$ \\
+\hline
+$\top$ & $\top$ & $ \bot$&$ \bot$\\
+\end{tabular}
+\caption{tautologies and contradictions}
+\label{tab:TopBottom}
+\end{center}
+\end{table}%
 
 \subsubsection{Simplifying formulas – basic natural deduction rules}
 \label{tut:206}
 
 (206) The tutorial teaches the simplifying of conjunctions and disjunctions with top and bottom and the same sub formulas.
 
-The user has to rewrite some formulas eleminating top and bottom, double negations, dis- and conjunctions of the same atoms or sub formulas.
+
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+$\neg \neg P$ & $P \vee P$ & $P \wedge P$ & $P \vee Q$ & $P \wedge Q$\\
+\hline
+$P$ & $P$ & $P$ & $Q \vee P$ & $Q \wedge P$\\
+\end{tabular}
+\caption{basic rules}
+\label{tab:BasicRules}
+\end{center}
+\end{table}%
+
+The user has to rewrite some formulas eleminating 
+top, bottom, double negations, conjunctions and disjunctions 
+by using rules from 
+\tabref{tab:TopBottom} and \tabref{tab:BasicRules}.
 
 \subsubsection{Conjunctive Normal Form} 
 \label{tut:207}
@@ -219,6 +306,18 @@ The user has to rewrite some formulas eleminating top and bottom, double negatio
 It is shown that some formulas in cnf can be simplified to top.
 The user has to guess if a presented formula is in conjunctive normal form
 and if it can be simplified to top ($\top$)
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcc|l}
+$L$		&$::=$ & $p$ & $\neg p$ \\
+$D$		&$::=$ & $L$ & $L \vee D$\\
+$C$		&$::=$ & $D$ & $(D) \wedge C$
+\end{tabular}
+\caption{grammar for conjunctive normal form}
+\label{tab:BNF}
+\end{center}
+\end{table}
 
 \subsubsection{Disjunctive Normal Form} 
 \label{tut:208}

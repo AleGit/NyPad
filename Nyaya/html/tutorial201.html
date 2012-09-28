@@ -10,7 +10,54 @@
         <h1>201</h1>
         <h4>Nyāya :: Tutorial 201 :: Syntax</h4>
         
+        <p>We‘ve already learned that propositional symbols are build form atoms ‘p,q,r,…’ and connectives ‘¬∧∨→’.</p>
         
+        <table>
+            <tr>
+                <td>atoms</td>
+                <td>p,q,r,…</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>negation</td>
+                <td>¬</td>
+                <td>¬p</td>
+                <td>“not p”</td>
+            </tr>
+            <tr>
+                <td>conjunction</td>
+                <td>∧</td>
+                <td>p ∧ q</td>
+                <td>“p and q”</td>
+            </tr>
+            <tr>
+                <td>disjunction</td>
+                <td>∨</td>
+                <td>p ∨ q</td>
+                <td>“p or q”</td>
+            </tr>
+            <tr><td>implication</td>
+                <td>→</td>
+                <td>p → q</td>
+                <td>“if p then q”</td>
+            </tr>
+        </table>
+        
+        <p>To avoid amibuities we use parenthis in the formal grammer for propositional formulas.</p>
+        
+        <blockquote>P &nbsp;::=&nbsp; p &nbsp;|&nbsp; (¬P) &nbsp;|&nbsp; (P ∧ P) &nbsp;|&nbsp; (P ∨ P) &nbsp;|&nbsp; (P → P)</blockquote>
+        
+        A propositional formula ‘P’ (on the left side) is defined ‘::=’ through the expression on the right side.
+        The expression of the right side consists of serveral parts, devided by ‘|’, which means or.
+        So ‘P’ is either and atom ‘p’, or
+        the negation of a formula ‘(¬P)’, or
+        the conjunction of two formuals ‘(P ∧ P)’, or
+         the disjunction of two formuals ‘(P ∨ P)’, or
+         the implication of two formuals ‘(P → P)’.</p>
+        
+        
+        <p>A formal grammar (sometimes simply called a grammar) is a set of formation rules for strings in a formal language. The rules describe how to form strings from the language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context – only their form.</p>
         
         
         
