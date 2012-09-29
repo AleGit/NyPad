@@ -1,4 +1,55 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{ABR:2001:TLT}
+D.~Abraham, L.~Crawford, L.~Lesta, A.~Merceron, and K.~Yecef, Oct 2001.
+
+\bibitem{Apple:2012:CGC}
+{Apple Inc.}
+\newblock \textit{Coding Guidelines for Cocoa}.
+\newblock
+  \url{http://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/},
+  May 2012.
+
+\bibitem{Apple:2012:IAPG}
+{Apple Inc.}
+\newblock \textit{iOS App Programming Guide}.
+\newblock
+  \url{http://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/},
+  May 2012.
+
+\bibitem{Apple:2012:IHIG}
+{Apple Inc.}
+\newblock \textit{iOS Human Interface Guidelines}.
+\newblock
+  \url{http://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/},
+  May 2012.
+
+\bibitem{Apple:2012:IVPG}
+{Apple Inc.}
+\newblock \textit{View Programming Guide for iOS}.
+\newblock
+  \url{http://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/},
+  May 2012.
+
+\bibitem{Barwise:2008}
+D.~Barker-Plummer, J.~Barwise, and J.~Etchemendy.
+\newblock {\em Tarski's World -- Revised And Expanded}.
+\newblock Center for the Study of Language and Information/SRI, 2008.
+
+\bibitem{Buck:2009:CDP:1803585}
+E.~M. Buck and D.~A. Yacktman.
+\newblock {\em Cocoa Design Patterns}.
+\newblock Addison-Wesley Professional, 1st edition, 2009.
+
+\bibitem{Chacon:2009:PG:1618548}
+S.~Chacon.
+\newblock {\em Pro Git}.
+\newblock Apress, Berkely, CA, USA, 1st edition, 2009.
+
+\bibitem{GAMMAETAL}
+E.~Gamma, R.~Helm, R.~Johnson, and J.~Vlissides.
+\newblock {\em Design patterns: elements of reusable object-oriented software}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1995.
 
 \bibitem{Huth:2004:LCS:975331}
 M.~Huth and M.~Ryan.
@@ -6,10 +57,26 @@ M.~Huth and M.~Ryan.
   Systems}.
 \newblock Cambridge University Press, New York, NY, USA, 2004.
 
+\bibitem{Kochan:2009:PO:1538451}
+S.~Kochan.
+\newblock {\em Programming in Objective-C 2.0}.
+\newblock Addison-Wesley Professional, 2nd edition, 2009.
+
+\bibitem{Louden:1997:CCP:523017}
+K.~C. Louden.
+\newblock {\em Compiler Construction: Principles and Practice}.
+\newblock PWS Publishing Co., Boston, MA, USA, 1997.
+
 \bibitem{Middeldorp:2012:LICS}
 A.~Middeldorp.
 \newblock Logic (lecture).
 \newblock \url{http://cl-informatik.uibk.ac.at/teaching/ws11/lics/content.php},
   2011/2012.
+
+\bibitem{Raskin:2000:HIN:333103}
+J.~Raskin.
+\newblock {\em The humane interface: new directions for designing interactive
+  systems}.
+\newblock ACM Press/Addison-Wesley Publishing Co., New York, NY, USA, 2000.
 
 \end{thebibliography}
