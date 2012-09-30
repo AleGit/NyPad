@@ -1,8 +1,96 @@
 % !TEX encoding = UTF-8 Unicode
 
 
-\section{Project phases}
-
 \section{Tools}
 
-\section{Development Model}
+\subsection{Developing for the iPad}
+
+For the first steps in developing software for iPad
+a computer with Mac OS X and \href{sec:Xcode}{Xcode} (p.~\pageref{sec:Xcode}) is needed. 
+
+Knowledge of object-oriented programming, object-oriented design patterns, and the C programming language 
+builds a good base to learn the main platform-specific techniques 
+\href{sec:ObjC}{Objective-C} (p.~\pageref{sec:ObjC}),
+\href{sec:Cocoa}{Cocoa} (p.~\pageref{sec:Cocoa}), and
+\href{sec:MemoryManagement}{Memory Management} (p.~\pageref{sec:MemoryManagement}).
+
+In addition to the technical skills, it is to gain an overview to the necessary steps for 
+\href{sec:DAD}{Development and Distribution} (p.~\pageref{sec:DAD}) for the iPad platform.
+
+\subsubsection{Xcode}
+\label{sec:Xcode}
+
+Xcode is Apple's integrated development environment to create software for OS X and iOS devices.
+Xcode is free to download. It includes an iPad simulator, complete API documentations and development guides to various topics.
+
+\subsubsection{Objective-C}
+\label{sec:ObjC}
+Objective-C is a reflective, object-oriented extension of the C programming language,
+ which was developed by Tom Love and Brad Cox in the early 1980s (a few moments earlier than C++). 
+The syntax for objects and messages was based on Smalltalk. 
+Objective-C does not have method calls, but messages, which are bound to classes and instances at runtime.
+
+\subsubsection{Cocoa}
+\label{sec:Cocoa}
+
+Cocoa is the name for the object-oriented APIs for iOS (the operating system for iPhone and iPad). 
+Cocoa covers the Objective-C runtime and a set of libraries, the frameworks.
+\begin{itemize}
+\item The Foundation framework it provides the basis for programming with Objective-C. 
+In addition to the memory and exception handling it includes the base classes for strings, values, lists, sets and files.
+\item The UIKit framework provides a set of classes and functions for implementing graphical user interfaces. 
+The architecture of this framework follows the Model-View-Controller pattern 
+and the implementation provides a myriad of view and controller classes.
+\end{itemize}
+
+\subsubsection{Memory Management}
+\label{sec:MemoryManagement}
+The runtime of Objective-C does not offer – surprisingly especially for pure Java or C\# developers  – no garbage collection, 
+but an reference counting dynamic memory management. The necessary retains and releases are added automatically at compile time.
+This has the consequence that (strong) object graphs must be implemented as directed acyclic graphs. Back references have to be declared as weak.
+Otherwise objects would be never released. 
+The advantages of the reference counting in comparison to automatic garbage collection are in the foreseeable and economical run-time behavior.
+Objects are destroyed at a defined time. A separate thread for garbage collection is not necessary. 
+This were very important features in 2007, when the original iPhone was introduced, because
+the hardware for mobile devices was very limited, but looses importance every year.
+
+\subsubsection{Development and distribution}
+\label{sec:DAD}
+Development and distribution for Apple's platforms includes the coding effort and expenses for administration and configuration. 
+To install software on iOS devices – especially for distribution via the App Store – applications must be cryptographically signed. 
+The necessary certificates are created in the paid members section on Apple's Developer Portal. 
+Certificates, development and distribution profiles contain a bunch of identifiers for the identification and differentiation of developers (Team ID), 
+applications (App-ID) and lists of permissions (entitlements). 
+
+\subsection{Version Control}
+
+\subsubsection{Git}
+
+\subsubsection{Github}
+
+\section{Project management}
+
+\subsection{Phases}
+
+\subsubsection{Fooling around – Views}
+
+Spring 2012 – Playing with the visualization of syntax trees and different kinds of user interaction, informal specification of the feature set
+
+\subsubsection{Get serious – Model}
+
+Summer 2012 – Development of the Concept, Include Parser, data structure for AST, BDD
+
+\subsubsection{Make it usable – Controllers}
+
+Autumn 2012 – 
+
+\subsection{Development model}
+
+The development of this software did no follow a specific development model, 
+but did borrow some principles from agile development.
+
+\subsubsection{Test-driven development}
+
+\subsubsection{Refactoring}
+
+\subsubsection{Use cases}
