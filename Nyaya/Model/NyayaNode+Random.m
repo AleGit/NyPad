@@ -48,7 +48,7 @@
     NyayaNode* result = nil;
     NSUInteger maxLength = lengths.location + lengths.length;
     
-    NyayaNodeType rootType = (NyayaNodeType)[rootTypes randomIndex];
+    // NyayaNodeType rootType = (NyayaNodeType)[rootTypes randomIndex];
     
     NSMutableSet *atomSet = [NSMutableSet setWithCapacity:[variables count]];
     
