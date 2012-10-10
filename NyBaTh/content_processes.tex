@@ -49,10 +49,12 @@ The runtime of Objective-C does not offer – surprisingly especially for pure J
 but an reference counting dynamic memory management. The necessary retains and releases are added automatically at compile time.
 This has the consequence that (strong) object graphs must be implemented as directed acyclic graphs. Back references have to be declared as weak.
 Otherwise objects would be never released. 
+
 The advantages of the reference counting in comparison to automatic garbage collection are in the foreseeable and economical run-time behavior.
 Objects are destroyed at a defined time. A separate thread for garbage collection is not necessary. 
-This were very important features in 2007, when the original iPhone was introduced, because
-the hardware for mobile devices was very limited, but looses importance every year.
+
+%These were very important features in 2007, when the original iPhone was introduced, because
+%the hardware for mobile devices was very limited, but looses importance every year.
 
 \subsubsection{Development and distribution}
 \label{sec:DAD}
