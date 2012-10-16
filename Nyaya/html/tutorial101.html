@@ -6,7 +6,6 @@
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body>
-        <h4>101</h4>
         <h3>Motivation</h3>
         
         <h4>Everyday life</h4>
@@ -26,7 +25,7 @@
         </blockquote>
         
         <table class="right">
-            <tr><th></th><th>first example</th><th>second example</th></tr>
+            <tr><th>symbol</th><th>first example</th><th>second example</th></tr>
             <tr>
                 <td><code>p</code></td><td>the train is late</td><td>it is raining</td>
             </tr>
@@ -44,7 +43,7 @@
         
         <h4>Tic-Tac-Toe</h4>
         
-        <p>Of course propositional logic is used to implement game logic.<p>
+        <p>Propositional logic can be used to describe the winner rule of a game.<p>
         
         <table class="left">
             <tr><td>A</td><td>B</td><td>C</td></tr>
@@ -58,8 +57,9 @@
             <tr><td>X</td><td>X</td><td>O</td></tr>
         </table>
             
-        <p>We can build 18 basic sentences to describe a tic-tac-toe table.
-        “cell A holds O”, “cell A holds X”, … <code>ao ax bo bx co cx do dx eo ex fo fx go gx jo jx</code>.
+        <p>We build 18 basic sentences (propositions) to describe a tic-tac-toe table.
+        For “cell A holds O” we write “ao”,
+        for “cell A holds X” we write “ax”, … <code>ao ax bo bx co cx do dx eo ex fo fx go gx jo jx</code>.
         The partially filled table can be discribed as
         “<code>ao</code> and not <code>ax</code> and
         not <code>bo</code> and not <code>bx</code> and
@@ -70,7 +70,7 @@
         not <code>go</code> and <code>gx</code> and
         not <code>ho</code> and <code>hx</code> and
         <code>jo</code> and not <code>jx</code>”.
-        Of course there are some rules. If A holds O, then A does not hold X.
+        There are some conditions that must be fullfilled. If A holds O, then A does not hold X.
         If <code>ao</code> then not <code>ax</code>. If <code>ax</code> then not <code>ao</code>. … which are fullfilled.<p>
         
         <table class="right">
