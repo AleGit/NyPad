@@ -10,8 +10,8 @@
 		1102560215EBB4E0008B38F9 /* glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560115EBB4E0008B38F9 /* glossary.html */; };
 		1102560615EBB906008B38F9 /* NyGlossaryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1102560515EBB906008B38F9 /* NyGlossaryEntry.m */; };
 		1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */ = {isa = PBXBuildFile; fileRef = 1102560A15ECAE01008B38F9 /* selfhtmlcss.css */; };
-		1102562015ECCE2E008B38F9 /* tutorial102.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560D15ECCE2E008B38F9 /* tutorial102.html */; };
-		1102562115ECCE2E008B38F9 /* tutorial103.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560E15ECCE2E008B38F9 /* tutorial103.html */; };
+		1102562015ECCE2E008B38F9 /* tutorial111.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560D15ECCE2E008B38F9 /* tutorial111.html */; };
+		1102562115ECCE2E008B38F9 /* tutorial121.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560E15ECCE2E008B38F9 /* tutorial121.html */; };
 		1102562215ECCE2E008B38F9 /* tutorial201.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102560F15ECCE2E008B38F9 /* tutorial201.html */; };
 		1102562415ECCE2E008B38F9 /* tutorial221.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561115ECCE2E008B38F9 /* tutorial221.html */; };
 		1102562515ECCE2E008B38F9 /* tutorial231.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561215ECCE2E008B38F9 /* tutorial231.html */; };
@@ -33,7 +33,7 @@
 		11061F1D15EE131E00345516 /* instructions.css in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1C15EE131E00345516 /* instructions.css */; };
 		11061F2815EF5D8900345516 /* NyayaAssociativityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11061F2715EF5D8900345516 /* NyayaAssociativityTests.m */; };
 		11061F3115EF9BBD00345516 /* NyTuTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 11061F3015EF9BBD00345516 /* NyTuTester.m */; };
-		11061F3315EFA6EF00345516 /* 102.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11061F3215EFA6EF00345516 /* 102.plist */; };
+		11061F3315EFA6EF00345516 /* 111.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11061F3215EFA6EF00345516 /* 111.plist */; };
 		110E7E511600775500EA2D7F /* NyayaFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 110E7E501600775500EA2D7F /* NyayaFormula.m */; };
 		110E7E5516007F8400EA2D7F /* SenTestCase+NyayaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 110E7E5416007F8400EA2D7F /* SenTestCase+NyayaTests.m */; };
 		110E7E581600A1B000EA2D7F /* NyayaDurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 110E7E571600A1B000EA2D7F /* NyayaDurationTests.m */; };
@@ -59,7 +59,7 @@
 		1139123B15F7140600B83877 /* StandardTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139123A15F7140600B83877 /* StandardTestView.xib */; };
 		113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 113CAE3E160A3BC500BEBC90 /* NyayaNode+Transformations.m */; };
 		113CAE43160A470F00BEBC90 /* TransformationsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 113CAE42160A470F00BEBC90 /* TransformationsTest.m */; };
-		113FF75D15F07ED90073A410 /* 103.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* 103.plist */; };
+		113FF75D15F07ED90073A410 /* 121.plist in Resources */ = {isa = PBXBuildFile; fileRef = 113FF75C15F07ED90073A410 /* 121.plist */; };
 		1144248C15C68EA5000B3CD9 /* CopyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1144248B15C68EA5000B3CD9 /* CopyTests.m */; };
 		1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1162EBA315F4A62F0007EBAB /* BoolToolData.plist */; };
 		1162EBA815F4AB0A0007EBAB /* NyBoolToolEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1162EBA715F4AB0A0007EBAB /* NyBoolToolEntry.m */; };
@@ -172,7 +172,7 @@
 		11C93F0615F46E6300AB94DF /* UITextField+Nyaya.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C93F0515F46E6300AB94DF /* UITextField+Nyaya.m */; };
 		11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C93F0A15F4741000AB94DF /* NyayaBddView.m */; };
 		11CB867015F8634800D20A59 /* NyayaNode+Reductions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */; };
-		11DBC0B41604F2A40007A82B /* tutorial104.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B31604F2A40007A82B /* tutorial104.html */; };
+		11DBC0B41604F2A40007A82B /* tutorial131.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B31604F2A40007A82B /* tutorial131.html */; };
 		11DBC0B71604F2CF0007A82B /* instructions102.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B51604F2CF0007A82B /* instructions102.html */; };
 		11DBC0B81604F2CF0007A82B /* instructions103.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions103.html */; };
 		11DC67491608531C00B9008B /* slim interface.eml in Resources */ = {isa = PBXBuildFile; fileRef = 11DC67481608531C00B9008B /* slim interface.eml */; };
@@ -208,8 +208,8 @@
 		1102560415EBB906008B38F9 /* NyGlossaryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyGlossaryEntry.h; path = NyGlossary/NyGlossaryEntry.h; sourceTree = "<group>"; };
 		1102560515EBB906008B38F9 /* NyGlossaryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyGlossaryEntry.m; path = NyGlossary/NyGlossaryEntry.m; sourceTree = "<group>"; };
 		1102560A15ECAE01008B38F9 /* selfhtmlcss.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = selfhtmlcss.css; path = html/selfhtmlcss.css; sourceTree = "<group>"; };
-		1102560D15ECCE2E008B38F9 /* tutorial102.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial102.html; path = html/tutorial102.html; sourceTree = "<group>"; };
-		1102560E15ECCE2E008B38F9 /* tutorial103.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial103.html; path = html/tutorial103.html; sourceTree = "<group>"; };
+		1102560D15ECCE2E008B38F9 /* tutorial111.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial111.html; path = html/tutorial111.html; sourceTree = "<group>"; };
+		1102560E15ECCE2E008B38F9 /* tutorial121.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial121.html; path = html/tutorial121.html; sourceTree = "<group>"; };
 		1102560F15ECCE2E008B38F9 /* tutorial201.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial201.html; path = html/tutorial201.html; sourceTree = "<group>"; };
 		1102561115ECCE2E008B38F9 /* tutorial221.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial221.html; path = html/tutorial221.html; sourceTree = "<group>"; };
 		1102561215ECCE2E008B38F9 /* tutorial231.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial231.html; path = html/tutorial231.html; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		11061F2715EF5D8900345516 /* NyayaAssociativityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaAssociativityTests.m; sourceTree = "<group>"; };
 		11061F2F15EF9BBD00345516 /* NyTuTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyTuTester.h; path = Nyaya/NyTutorials/NyTuTester.h; sourceTree = "<group>"; };
 		11061F3015EF9BBD00345516 /* NyTuTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyTuTester.m; path = Nyaya/NyTutorials/NyTuTester.m; sourceTree = "<group>"; };
-		11061F3215EFA6EF00345516 /* 102.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 102.plist; path = Nyaya/NyTutorials/102.plist; sourceTree = "<group>"; };
+		11061F3215EFA6EF00345516 /* 111.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 111.plist; path = Nyaya/NyTutorials/111.plist; sourceTree = "<group>"; };
 		110E7E4F1600775500EA2D7F /* NyayaFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NyayaFormula.h; path = Model/NyayaFormula.h; sourceTree = "<group>"; };
 		110E7E501600775500EA2D7F /* NyayaFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaFormula.m; path = Model/NyayaFormula.m; sourceTree = "<group>"; };
 		110E7E5316007F8400EA2D7F /* SenTestCase+NyayaTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+NyayaTests.h"; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		113CAE3E160A3BC500BEBC90 /* NyayaNode+Transformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Transformations.m"; path = "Model/NyayaNode+Transformations.m"; sourceTree = "<group>"; };
 		113CAE41160A470F00BEBC90 /* TransformationsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformationsTest.h; sourceTree = "<group>"; };
 		113CAE42160A470F00BEBC90 /* TransformationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformationsTest.m; sourceTree = "<group>"; };
-		113FF75C15F07ED90073A410 /* 103.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 103.plist; path = Nyaya/NyTutorials/103.plist; sourceTree = "<group>"; };
+		113FF75C15F07ED90073A410 /* 121.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 121.plist; path = Nyaya/NyTutorials/121.plist; sourceTree = "<group>"; };
 		113FF75E15F0850D0073A410 /* NyAccessoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NyAccessoryController.h; path = Nyaya/NyBranches/NyAccessoryController.h; sourceTree = "<group>"; };
 		1144248A15C68EA5000B3CD9 /* CopyTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyTests.h; sourceTree = "<group>"; };
 		1144248B15C68EA5000B3CD9 /* CopyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyTests.m; sourceTree = "<group>"; };
@@ -444,7 +444,7 @@
 		11C93F0A15F4741000AB94DF /* NyayaBddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyayaBddView.m; path = NyBoolTool/NyayaBddView.m; sourceTree = "<group>"; };
 		11CB866E15F8634800D20A59 /* NyayaNode+Reductions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Reductions.h"; path = "Model/NyayaNode+Reductions.h"; sourceTree = "<group>"; };
 		11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Reductions.m"; path = "Model/NyayaNode+Reductions.m"; sourceTree = "<group>"; };
-		11DBC0B31604F2A40007A82B /* tutorial104.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial104.html; path = html/tutorial104.html; sourceTree = "<group>"; };
+		11DBC0B31604F2A40007A82B /* tutorial131.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial131.html; path = html/tutorial131.html; sourceTree = "<group>"; };
 		11DBC0B51604F2CF0007A82B /* instructions102.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions102.html; path = html/instructions102.html; sourceTree = "<group>"; };
 		11DBC0B61604F2CF0007A82B /* instructions103.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions103.html; path = html/instructions103.html; sourceTree = "<group>"; };
 		11DC67481608531C00B9008B /* slim interface.eml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "slim interface.eml"; path = "NyBaTh/mails/slim interface.eml"; sourceTree = SOURCE_ROOT; };
@@ -503,9 +503,9 @@
 			isa = PBXGroup;
 			children = (
 				111F923615E89D6800EB6B1D /* tutorial101.html */,
-				1102560D15ECCE2E008B38F9 /* tutorial102.html */,
-				1102560E15ECCE2E008B38F9 /* tutorial103.html */,
-				11DBC0B31604F2A40007A82B /* tutorial104.html */,
+				1102560D15ECCE2E008B38F9 /* tutorial111.html */,
+				1102560E15ECCE2E008B38F9 /* tutorial121.html */,
+				11DBC0B31604F2A40007A82B /* tutorial131.html */,
 				1102560F15ECCE2E008B38F9 /* tutorial201.html */,
 				11061F1115EE0F9A00345516 /* tutorial211.html */,
 				1102561115ECCE2E008B38F9 /* tutorial221.html */,
@@ -967,8 +967,8 @@
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
 				11F531BC15FC78B4003F6C11 /* QA1.plist */,
 				11B0B26415EFC66C006AFBFC /* 101.plist */,
-				11061F3215EFA6EF00345516 /* 102.plist */,
-				113FF75C15F07ED90073A410 /* 103.plist */,
+				11061F3215EFA6EF00345516 /* 111.plist */,
+				113FF75C15F07ED90073A410 /* 121.plist */,
 				1190AB021610670400BDE63F /* 201.plist */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
 				11C61BB615E91FF000F5BB28 /* NyTuTestViewController.m */,
@@ -1136,8 +1136,8 @@
 				11DDBF0E15EB63A200DFC94A /* iPadIcon@2x.png in Resources */,
 				1102560215EBB4E0008B38F9 /* glossary.html in Resources */,
 				1102560B15ECAE01008B38F9 /* selfhtmlcss.css in Resources */,
-				1102562015ECCE2E008B38F9 /* tutorial102.html in Resources */,
-				1102562115ECCE2E008B38F9 /* tutorial103.html in Resources */,
+				1102562015ECCE2E008B38F9 /* tutorial111.html in Resources */,
+				1102562115ECCE2E008B38F9 /* tutorial121.html in Resources */,
 				1102562215ECCE2E008B38F9 /* tutorial201.html in Resources */,
 				1102562415ECCE2E008B38F9 /* tutorial221.html in Resources */,
 				1102562515ECCE2E008B38F9 /* tutorial231.html in Resources */,
@@ -1156,10 +1156,10 @@
 				11061F1615EE0FE500345516 /* tutorial431.html in Resources */,
 				11061F1815EE0FFB00345516 /* tutorial511.html in Resources */,
 				11061F1D15EE131E00345516 /* instructions.css in Resources */,
-				11061F3315EFA6EF00345516 /* 102.plist in Resources */,
+				11061F3315EFA6EF00345516 /* 111.plist in Resources */,
 				11B0B26515EFC66C006AFBFC /* 101.plist in Resources */,
 				11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */,
-				113FF75D15F07ED90073A410 /* 103.plist in Resources */,
+				113FF75D15F07ED90073A410 /* 121.plist in Resources */,
 				1172EF5115F1F8F30038E6D0 /* NyBasicKeysView.xib in Resources */,
 				1172EF5315F1FBB40038E6D0 /* NyExtendedKeysView.xib in Resources */,
 				1162EBA415F4A6300007EBAB /* BoolToolData.plist in Resources */,
@@ -1167,7 +1167,7 @@
 				11BFCBAC15F9E3E1004CBDA2 /* kariert.png in Resources */,
 				11BFCBAD15F9E3E1004CBDA2 /* kariert@2x.png in Resources */,
 				11F531BD15FC78B4003F6C11 /* QA1.plist in Resources */,
-				11DBC0B41604F2A40007A82B /* tutorial104.html in Resources */,
+				11DBC0B41604F2A40007A82B /* tutorial131.html in Resources */,
 				11DBC0B71604F2CF0007A82B /* instructions102.html in Resources */,
 				11DBC0B81604F2CF0007A82B /* instructions103.html in Resources */,
 				1169BFAB1605B12A001CECCC /* NyTreeView.xib in Resources */,

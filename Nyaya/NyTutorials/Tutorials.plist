@@ -11,15 +11,15 @@
 		</array>
 		<array>
 			<string>Propositions</string>
-			<string>102</string>
+			<string>111</string>
 		</array>
 		<array>
 			<string>Symbols</string>
-			<string>103</string>
+			<string>121</string>
 		</array>
 		<array>
 			<string>Limits</string>
-			<string>104</string>
+			<string>131</string>
 		</array>
 	</array>
 	<array>
@@ -30,7 +30,7 @@
 		</array>
 		<array>
 			<string>Conventions</string>
-			<string>2PR</string>
+			<string>211</string>
 		</array>
 		<array>
 			<string>Subformulas</string>
@@ -84,7 +84,7 @@
 		</array>
 		<array>
 			<string>Disjunctive Normal Form</string>
-			<string>422</string>
+			<string>431</string>
 		</array>
 	</array>
 	<array>

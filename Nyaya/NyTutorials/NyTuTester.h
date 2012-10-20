@@ -71,10 +71,10 @@
 @interface NyTuTester101 : NyTuTesterPlist
 @end
 
-@interface NyTuTester102 : NyTuTesterPlist
+@interface NyTuTester111 : NyTuTesterPlist
 @end
 
-@interface NyTuTester103 : NyTuTesterPlist
+@interface NyTuTester121 : NyTuTesterPlist
 @end
 
 @interface NyTuTester201 : NyTuTesterPlist
