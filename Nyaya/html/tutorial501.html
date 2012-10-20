@@ -9,12 +9,88 @@
         
         
         <h3>Boolean Functions</h3>
+        
+        <h4>Definition</h4>
+        
+        <p>A Boolean function on n arguments is an assignment form {0,1}<sup>n</sup> to {0,1}. A Boolean function with zero arguments is actually a constant –
+        either 0 or 1. So there are two different Boolean functions c() with zero arguments.
+        You can construct four different Boolean functions f(a) with one argument. 16 differnt Boolean functions g(a,b) with 2 arguments. 256 different Boolean functions h(a,b,c) with 3 arguments.
+        In general you can construct are 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments.
+        </p>
+        
+        <table class="left">
+            <tr>
+                <th>c<sub>1</sub></th><th>c<sub>2</sub></th>
+            </tr>
+            <tr>
+                <td>0</td><td>1</td>
+            </tr>
+        </table>
+        
+        <table class="right">
+            <tr>
+                <th>a</th><th>b</th>
+                <th>g<sub>1</sub></th><th>g<sub>2</sub></th><th>g<sub>3</sub></th><th>g<sub>4</sub></th>
+                <th>g<sub>5</sub></th><th>g<sub>6</sub></th><th>g<sub>7</sub></th><th>g<sub>8</sub></th>
+                <th>g<sub>9</sub></th><th>g<sub>10</sub></th><th>g<sub>11</sub></th><th>g<sub>12</sub></th>
+                <th>g<sub>13</sub></th><th>g<sub>14</sub></th><th>g<sub>15</sub></th><th>g<sub>16</sub></th>
+            </tr>
+            <tr>
+                <td>0</td><td>0</td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+                <td>0</td><td>1</td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+                <td>1</td><td>0</td>
+                <td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td>
+                <td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+                <td>1</td><td>1</td>
+                <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
+                <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
+            </tr>
+            <tr>
+                <td> </td><td> </td>
+                <td>0</td><td>.</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
+                <td> </td><td> </td><td>ḇ</td><td> </td><td>ā</td><td></td><td> </td><td>1</td>
+            </tr>
+        </table>
+
+        
+        <table>
+            <tr>
+                <th>a</th><th>f<sub>1</sub></th><th>f<sub>2</sub></th><th>f<sub>3</sub></th><th>f<sub>4</sub></th>
+            </tr>
+            <tr>
+                <td>0</td><td>0</td><td>0</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+                <td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
+            </tr>
+            
+            <tr>
+                <td> </td><td>0</td><td>a</td><td>ā</td><td>1</td>
+            </tr>
+        </table>        
+        
+        
+        <h4>Special Boolean functions</h4>
+        
+        <h4>Representations</h4>
+        
+        <p>Propositional formulas and truth tables are different representations of Boolean functions.
                 
         
         <div class="rbox">
             <p>Does a.(b+c) = a.b+a.c look right, but a+b.c = (a+b).(a+c) does not?
             Don‘t mix up boolean expressios with arithmetic expressions.
-            The second expression holds too! You can check it in the table.<p>
+            The second expression holds too! You can check it with a truth table.<p>
             <table class="right">
                 <tr>
                     <td>a</td><td>b</td><td>c</td>
