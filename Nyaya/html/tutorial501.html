@@ -11,7 +11,9 @@
         <h3>Boolean Functions</h3>
         
         <p>In general a function is a mapping from one set of objects to another set of objects.
-        The natural sum function on n arguments is a mapping from {1,2,3,…}<sup>n</sup> to {1,2,3,…}.
+        The natural sum function on n arguments is a mapping
+        from &#x2115;<sup>n</sup> (set of <em>n</em>-tuples)
+        to &#x2115; (set of natural numbers).
         The sum function with three arguments maps (4,8,100) to 112 and we write sum(4,8,100) = 112.</p>
         
         <p><em>A Boolean function on n arguments is a mappging from {0,1}<sup>n</sup> to {0,1}.</em></p>
@@ -21,8 +23,10 @@
         
         <table class="left">
             <tr>
-                <td colspan="2">0 args</td>
+                <td colspan="2">Boolean functions<br>with 0 arguments</td>
             </tr>
+            <tr><td colspan="2"/></tr>
+
             <tr>
                 <th>c<sub>1</sub></th><th>c<sub>2</sub></th>
             </tr>
@@ -34,8 +38,10 @@
         
         <table class="right">
             <tr>
-                <td colspan="5">1 argument</td>
+                <td colspan="5">Boolean functions<br>with 1 argument</td>
             </tr>
+            <tr><td colspan="5"/></tr>
+
             <tr>
                 <th>a</th>
                 <th>f<sub>1</sub></th><th>f<sub>2</sub></th><th>f<sub>3</sub></th><th>f<sub>4</sub></th>
@@ -48,11 +54,12 @@
                 <td>1</td>
                 <td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
-            
+            <tr><td colspan="5"/></tr>
             <tr>
                 <td> </td>
                 <td>0</td><td>a</td><td>ā</td><td>1</td>
             </tr>
+
         </table>
         
         There are two different Boolean functions c() with zero arguments –
@@ -64,9 +71,7 @@
         
         <p><em>In general we can construct 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments.</em></p>
         
-        <p>Note that the only difference between some functions is the number of arguments, but not the results.
-        Compare the results of c<sub>1</sub> and f<sub>1</sub> with g<sub>1</sub>,
-        The results of g<sub>4</sub> are equal to the first argument, like the results of f<sub>2</sub>.</p>
+        
         
         
         
@@ -74,6 +79,7 @@
             <tr>
                 <td colspan="18">Boolean functions with 2 arguments</td>
             </tr>
+            <tr><td colspan="18"/></tr>
             <tr>
                 <th>a</th><th>b</th>
                 <th>g<sub>1</sub></th><th>g<sub>2</sub></th><th>g<sub>3</sub></th><th>g<sub>4</sub></th>
@@ -101,6 +107,7 @@
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
+            <tr><td colspan="18"/></tr>
             <tr>
                 <td colspan="2"> </td>
                 <td>0</td><td>.</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
@@ -108,15 +115,17 @@
             </tr>
         </table>
         
+        <p>Note that the only difference between some functions is the number of arguments, but not the results.
+        Compare the results of c<sub>1</sub> and f<sub>1</sub> with g<sub>1</sub>,
+        The results of g<sub>4</sub> are equal to the first argument, like the results of f<sub>2</sub>.</p>
+        
+        
+        <h4>Representations of Boolean functions</h4>
+        
+        <p>Propositional formulas and truth tables are different representations of Boolean functions.
+        
         
         <h4>Special Boolean functions</h4>
-        
-        <p>Some Boolean functions are highlighted – they have names and a special notation.
-        The complement is a Boolean function with one argument and maps the argument to to it's complement – “0” to “1” and “1” to “0”.
-        Usually the complement of “x” is notated as “x̄”. This is impractical for text input and “!x” is often used instead.
-        The product “.” maps two arguments to “1”, if both arguments are equal to “1”. Otherwise (if one or two arguments are “0”) “.” maps to “0”.
-        The sum “+” maps two arguments to “0”, if both arguments are equal to “0”. Otherwise “+” (if one or two arguments are “1”) maps to “1”.
-        The exclusive or “⊕” maps two arguments to “1”, if the arguments are different. Otherwise (if the arguments are equal) “⊕” maps to “0”.</p>
         
         <table class="right">
             <tr>
@@ -133,7 +142,7 @@
             </tr>
             <tr>
                 <td>0</td><td>1</td>
-                        <td>0</td><td>1</td><td>1</td>
+                <td>0</td><td>1</td><td>1</td>
             </tr>
             <tr>
                 <td>1</td><td>0</td>
@@ -144,10 +153,16 @@
                 <td>1</td><td>1</td><td>0</td>
             </tr>
         </table>
+
         
-        <h4>Representations of Boolean functions</h4>
+        <p>Some Boolean functions are highlighted – they have names and a special notation.
+        The complement is a Boolean function with one argument and maps the argument to to it's complement – “0” to “1” and “1” to “0”.
+        Usually the complement of “x” is notated as “x̄”. This is impractical for text input and “!x” or “~x” are often used instead.
+        The product “.” maps two arguments to “1”, if both arguments are equal to “1”. Otherwise (if one or two arguments are “0”) the product “.” maps it's argument's to “0”.
+        The sum “+” maps two arguments to “0”, if both arguments are equal to “0”. Otherwise (if one or two arguments are “1”) the sum “+” maps it's argument's to “1”.
+        The exclusive or “⊕” maps two arguments to “1”, if the arguments are different. Otherwise (if the arguments are equal) the exclusive or “⊕” maps it's argument's to “0”.</p>
         
-        <p>Propositional formulas and truth tables are different representations of Boolean functions.
+        
                 
         
         <div class="rbox">
@@ -205,7 +220,7 @@
             
         </div>
         
-        
+        <h4>Precedence and calculation rules</h4>
         
         
         
