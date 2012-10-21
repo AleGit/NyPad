@@ -10,15 +10,19 @@
         
         <h3>Boolean Functions</h3>
         
-        <h4>Definition</h4>
+        <p>In general a function is a mapping from on set of objects to another set of objects.
+        For example the natural sum function on n arguments is a mapping from {1,2,3,…}<sup>n</sup> to {1,2,3,…}.
+        The sum function with three arguments maps 4,8,100 to 112 and we write sum(4,8,100)=112.</p>
         
-        <p>A Boolean function on n arguments is an assignment form {0,1}<sup>n</sup> to {0,1}. A Boolean function with zero arguments is actually a constant –
-        either 0 or 1. So there are two different Boolean functions c() with zero arguments.
-        You can construct four different Boolean functions f(a) with one argument. 16 differnt Boolean functions g(a,b) with 2 arguments. 256 different Boolean functions h(a,b,c) with 3 arguments.
-        In general you can construct are 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments.
-        </p>
+        <p><em>A Boolean function on n arguments is a mappging from {0,1}<sup>n</sup> to {0,1}.</em></p>
+        
+        <p>For example g(0,1) = 1 is a Boolean function which maps the two arguments 0 and 1 to the result 1.
+        
         
         <table class="left">
+            <tr>
+                <td colspan="2">0 args</td>
+            </tr>
             <tr>
                 <th>c<sub>1</sub></th><th>c<sub>2</sub></th>
             </tr>
@@ -26,8 +30,44 @@
                 <td>0</td><td>1</td>
             </tr>
         </table>
+
         
         <table class="right">
+            <tr>
+                <td colspan="5">1 argument</td>
+            </tr>
+            <tr>
+                <th>a</th>
+                <th>f<sub>1</sub></th><th>f<sub>2</sub></th><th>f<sub>3</sub></th><th>f<sub>4</sub></th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td><td>0</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0</td><td>1</td><td>0</td><td>1</td>
+            </tr>
+            
+            <tr>
+                <td> </td>
+                <td>0</td><td>a</td><td>ā</td><td>1</td>
+            </tr>
+        </table>
+        
+        
+        A Boolean function with zero arguments is actually a constant –
+        either 0 or 1. So there are two different Boolean functions c() with zero arguments.
+        You can construct four different Boolean functions f(a) with one argument. 16 differnt Boolean functions g(a,b) with 2 arguments. 256 different Boolean functions h(a,b,c) with 3 arguments.
+        In general we can construct are 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments.
+        </p>
+        
+        
+        
+        <table class="right">
+            <tr>
+                <td colspan="18">Boolean functions with 2 arguments</td>
+            </tr>
             <tr>
                 <th>a</th><th>b</th>
                 <th>g<sub>1</sub></th><th>g<sub>2</sub></th><th>g<sub>3</sub></th><th>g<sub>4</sub></th>
@@ -56,28 +96,11 @@
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
             <tr>
-                <td> </td><td> </td>
+                <td colspan="2"> </td>
                 <td>0</td><td>.</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
                 <td> </td><td> </td><td>ḇ</td><td> </td><td>ā</td><td></td><td> </td><td>1</td>
             </tr>
         </table>
-
-        
-        <table>
-            <tr>
-                <th>a</th><th>f<sub>1</sub></th><th>f<sub>2</sub></th><th>f<sub>3</sub></th><th>f<sub>4</sub></th>
-            </tr>
-            <tr>
-                <td>0</td><td>0</td><td>0</td><td>1</td><td>1</td>
-            </tr>
-            <tr>
-                <td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
-            </tr>
-            
-            <tr>
-                <td> </td><td>0</td><td>a</td><td>ā</td><td>1</td>
-            </tr>
-        </table>        
         
         
         <h4>Special Boolean functions</h4>
@@ -90,7 +113,7 @@
         <div class="rbox">
             <p>Does a.(b+c) = a.b+a.c look right, but a+b.c = (a+b).(a+c) does not?
             Don‘t mix up boolean expressios with arithmetic expressions.
-            The second expression holds too! You can check it with a truth table.<p>
+            The second equivalence holds too! You can check it with a truth table.<p>
             <table class="right">
                 <tr>
                     <td>a</td><td>b</td><td>c</td>
