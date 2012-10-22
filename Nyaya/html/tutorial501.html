@@ -110,7 +110,7 @@
             <tr><td colspan="18"/></tr>
             <tr>
                 <td colspan="2"> </td>
-                <td>0</td><td>.</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
+                <td>0</td><td>•</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
                 <td> </td><td> </td><td>ḇ</td><td> </td><td>ā</td><td></td><td> </td><td>1</td>
             </tr>
         </table>
@@ -133,7 +133,7 @@
             </tr>
             <tr>
                 <th>a</th><th>b</th>
-                <td>ā</td><td>a . b</td><td>a + b</td><td>a ⊕ b</td>
+                <td>ā</td><td>a • b</td><td>a + b</td><td>a ⊕ b</td>
                 
             </tr>
             <tr>
@@ -156,19 +156,19 @@
 
         
         <p>Some Boolean functions are highlighted – they have names and a special notation.
-        The complement is a Boolean function with one argument and maps the argument to to it's complement – “0” to “1” and “1” to “0”.
-        Usually the complement of “x” is notated as “x̄”. This is impractical for text input and “!x” or “~x” are often used instead.
-        The product “.” maps two arguments to “1”, if both arguments are equal to “1”. Otherwise (if one or two arguments are “0”) the product “.” maps it's argument's to “0”.
-        The sum “+” maps two arguments to “0”, if both arguments are equal to “0”. Otherwise (if one or two arguments are “1”) the sum “+” maps it's argument's to “1”.
-        The exclusive or “⊕” maps two arguments to “1”, if the arguments are different. Otherwise (if the arguments are equal) the exclusive or “⊕” maps it's argument's to “0”.</p>
+        The complement is a Boolean function with one argument and maps the argument to to it's complement – «0» to «1» and «1» to «0».
+        Usually the complement of «x» is notated as «<span style="text-decoration:overline">x</span>». This is impractical for text input and «!x» or «~x» are often used instead.
+        The product «•» maps two arguments to «1», if both arguments are equal to «1». Otherwise (if one or two arguments are «0») the product «•» maps it's argument's to «0».
+        The sum «+» maps two arguments to «0», if both arguments are equal to «0». Otherwise (if one or two arguments are «1») the sum «+» maps it's argument's to «1».
+        The exclusive or «⊕» maps two arguments to «1», if the arguments are different. Otherwise (if the arguments are equal) the exclusive or «⊕» maps it's argument's to «0».</p>
         
         
                 
         
-        <div class="rbox">
-            <p>Does a.(b+c) = a.b+a.c look right, but a+b.c = (a+b).(a+c) does not?
-            Don‘t mix up boolean expressios with arithmetic expressions.
-            The second equivalence holds too! You can check it with a truth table.<p>
+        <div class="rbox" style="width:300px">
+            <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
+            Indeed, the second equivalence does not hold for arithmetic expressions,
+            but it does for Boolean expressions, which is easily shown with a truth table.<p>
             <table class="right">
                 <tr>
                     <td>a</td><td>b</td><td>c</td>
@@ -221,6 +221,24 @@
         </div>
         
         <h4>Precedence and calculation rules</h4>
+        
+        <p>The complement has the highest precedence. ā•b, ā+b and ā⊕b are to be interpreted as (ā)•b, (ā)+b and (ā)⊕b.
+        The product has a higher precedence than the sum and the exclusive or. a•b+c means (a•b)+c. a•b⊕c means (a•b)⊕c.
+        The sum has a higher precedence than the exclusive or. a+b⊕c is to be read as (a+b)⊕c.</p>
+        
+        <p><span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span>
+        &nbsp;&nbsp;
+        <span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></p>
+        
+        <p>a⊕b
+        = a•<span style="text-decoration:overline">b</span> + <span style="text-decoration:overline">a</span>•b
+        = (<span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>) • (a+b)
+        </p>
+        <p>0⊕a = a = a⊕0
+        &nbsp;&nbsp;
+        1⊕a = <span style="text-decoration:overline">a</span> = a⊕1</p>
+        
+        <p>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
         
         
         
