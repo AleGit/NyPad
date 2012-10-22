@@ -57,7 +57,7 @@
             <tr><td colspan="5"/></tr>
             <tr>
                 <td> </td>
-                <td>0</td><td>a</td><td>ā</td><td>1</td>
+                <td>0</td><td>a</td><td style="text-decoration:overline">a</td><td>1</td>
             </tr>
 
         </table>
@@ -111,7 +111,7 @@
             <tr>
                 <td colspan="2"> </td>
                 <td>0</td><td>•</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
-                <td> </td><td> </td><td>ḇ</td><td> </td><td>ā</td><td></td><td> </td><td>1</td>
+                <td> </td><td> </td><td style="text-decoration:overline">b</td><td> </td><td style="text-decoration:overline">a</td><td></td><td> </td><td>1</td>
             </tr>
         </table>
         
@@ -123,6 +123,12 @@
         <h4>Representations of Boolean functions</h4>
         
         <p>Propositional formulas and truth tables are different representations of Boolean functions.
+        When “0” is mapped to “F” (false) and “1” is mapped to “T” (true), 
+        the complement finds it‘s counterpart in the logical negation,
+        the product in the logical conjunction, and the sum in the logical disjunction.
+        
+        So every implication free propositional formula can be rewritten as Boolean expression without effort.
+        </p>
         
         
         <h4>Special Boolean functions</h4>
@@ -133,7 +139,7 @@
             </tr>
             <tr>
                 <th>a</th><th>b</th>
-                <td>ā</td><td>a • b</td><td>a + b</td><td>a ⊕ b</td>
+                <td style="text-decoration:overline">a</td><td>a • b</td><td>a + b</td><td>a ⊕ b</td>
                 
             </tr>
             <tr>
@@ -161,9 +167,6 @@
         The product «•» maps two arguments to «1», if both arguments are equal to «1». Otherwise (if one or two arguments are «0») the product «•» maps it's argument's to «0».
         The sum «+» maps two arguments to «0», if both arguments are equal to «0». Otherwise (if one or two arguments are «1») the sum «+» maps it's argument's to «1».
         The exclusive or «⊕» maps two arguments to «1», if the arguments are different. Otherwise (if the arguments are equal) the exclusive or «⊕» maps it's argument's to «0».</p>
-        
-        
-                
         
         <div class="rbox" style="width:300px">
             <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
@@ -222,11 +225,13 @@
         
         <h4>Precedence and calculation rules</h4>
         
-        <p>The complement has the highest precedence. ā•b, ā+b and ā⊕b are to be interpreted as (ā)•b, (ā)+b and (ā)⊕b.
-        The product has a higher precedence than the sum and the exclusive or. a•b+c means (a•b)+c. a•b⊕c means (a•b)⊕c.
-        The sum has a higher precedence than the exclusive or. a+b⊕c is to be read as (a+b)⊕c.</p>
+        <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
+        The product has a higher precedence than the sum and the exclusive or. «a•b+c» means «(a•b)+c». «a•b⊕c means «(a•b)⊕c».
+        The sum has a higher precedence than the exclusive or. «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
-        <p><span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span>
+        <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a</p>
+        <p><span style="text-decoration:overline" >ā</span> = a
+        &nbsp;&nbsp; <span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span>
         &nbsp;&nbsp;
         <span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></p>
         
