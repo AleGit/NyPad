@@ -128,7 +128,10 @@
         the product in the logical conjunction, and the sum in the logical disjunction.
         
         So every implication free propositional formula can be rewritten as Boolean expression without effort.
-        </p>
+        A Boolean expression without exclusive or can be rewritten as propositional formula easily.</p>
+        
+        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expression are often very complex representation of Boolean function.
+        The next tutorial will introduce a very convenient representaion of arbitrary Boolean functions.</p>
         
         
         <h4>Special Boolean functions</h4>
@@ -226,8 +229,8 @@
         <h4>Precedence and calculation rules</h4>
         
         <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
-        The product has a higher precedence than the sum and the exclusive or. «a•b+c» means «(a•b)+c». «a•b⊕c means «(a•b)⊕c».
-        The sum has a higher precedence than the exclusive or. «a+b⊕c» is to be read as «(a+b)⊕c».</p>
+        The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
+        The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
         <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a</p>
         <p><span style="text-decoration:overline" >ā</span> = a
@@ -242,6 +245,8 @@
         <p>0⊕a = a = a⊕0
         &nbsp;&nbsp;
         1⊕a = <span style="text-decoration:overline">a</span> = a⊕1</p>
+        
+        <p>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a</p>
         
         <p>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
         
