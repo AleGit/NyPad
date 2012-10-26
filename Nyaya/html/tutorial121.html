@@ -6,9 +6,66 @@
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body>
-        <h3>Connectives – Binders of Propositional Logic</h3>
-        Propositional logic is symbolic in nature.
-        We use small latin letters for simple sentences, that can be true or false.
+        <h3>Overview :: Connectives</h3>
+        
+        <h4>Compositions</h4>
+        
+        <p>Complex statements can be build from simple propositions. We already formalized</p>
+        
+        
+        <blockquote>If the train arrives late and there are no taxis at the station, then John is late for his meeting.
+            John is not late for his meeting.
+            The train did arrive late.
+            <i>Therefore</i>, there were taxis a the station.
+        </blockquote>
+        
+        <p>to</p>
+        
+         <blockquote>If <code>p</code> and not <code>q</code>, then <code>r</code>. Not <code>r</code>. <code>p</code>. <i>Therefore</i>,&nbsp;<code>q</code>.</blockquote>
+        
+        <p>As sequence of sentences has the same meaning as a enumeration of statements. So we can refine our informal model.</p>
+        
+        <blockquote><i>IF</i> (If <code>p</code> and not <code>q</code>, then <code>r</code>) AND (Not <code>r</code>) AND (<code>p</code>) <i>THEN</i> <code>q</code>.</blockquote>
+        
+        
+        
+        
+        <table class="right">
+            <tr>
+                <th>connective</th><th>meaning</th>
+            </tr>
+            <tr>
+                <td>¬</td><td>not</td>
+            </tr>
+            <tr>
+                <td>∨</td><td>or</td>
+            </tr>
+            <tr>
+                <td>∧</td><td>and</td>
+            </tr>
+            <tr>
+                <td>→</td><td>if … then</td>
+            </tr>
+        </table>
+        
+        <h4>Symbols</h4>
+        
+        <p>By using the symbols from the table on the right wie get a propositional formula.</p>
+        
+        <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>) ∧ (¬ <code>r</code>) ∧ (<code>p</code>) → &nbsp;<code>q</code></blockquote>
+        
+        <p>We have to recall that the modelling of statements in natural language is not part of propositional logic.
+        </p>
+        
+        <h4>Hidden compostions</h4>
+        
+        <p>To “translate“ natural sentences into atoms or compositions is not always unambiguous.
+        You can treat “Elephants are big, grey animals“ as one simple sentence,
+        and represent it with <cite>“p”</cite> (an atom).
+        Or you can decompose it to “Elephants are big and elephants are grey and elephants are animals”
+        which can be modelled as <cite>“p and q and r”</cite> (an composite).
+        This decomposition of sentences in natural language is part of the modelling process and can be very hard.
+        </p>
         
         
         
