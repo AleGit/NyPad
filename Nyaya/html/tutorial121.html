@@ -6,31 +6,11 @@
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body>
+
         <h3>Overview :: Connectives</h3>
         
-        <h4>Compositions</h4>
-        
-        <p>Complex statements can be build from simple propositions. We already formalized</p>
-        
-        
-        <blockquote>If the train arrives late and there are no taxis at the station, then John is late for his meeting.
-            John is not late for his meeting.
-            The train did arrive late.
-            <i>Therefore</i>, there were taxis a the station.
-        </blockquote>
-        
-        <p>to</p>
-        
-         <blockquote>If <code>p</code> and not <code>q</code>, then <code>r</code>. Not <code>r</code>. <code>p</code>. <i>Therefore</i>,&nbsp;<code>q</code>.</blockquote>
-        
-        <p>As sequence of sentences has the same meaning as a enumeration of statements. So we can refine our informal model.</p>
-        
-        <blockquote><i>IF</i> (If <code>p</code> and not <code>q</code>, then <code>r</code>) AND (Not <code>r</code>) AND (<code>p</code>) <i>THEN</i> <code>q</code>.</blockquote>
-        
-        
-        
-        
         <table class="right">
+            <tr><td colspan="2">basic connectives<br>of propositional logic</td></tr>
             <tr>
                 <th>connective</th><th>meaning</th>
             </tr>
@@ -48,24 +28,59 @@
             </tr>
         </table>
         
-        <h4>Symbols</h4>
+        <p>In the first tutorial we identified the propositions of two different statements and discovered that the statements have the same structure.</p>
+               
+        <blockquote>If <code>p</code> and not <code>q</code>, then <code>r</code>. Not <code>r</code>. <code>p</code>. <i>Therefore</i>,&nbsp;<code>q</code>.</blockquote>
         
-        <p>By using the symbols from the table on the right wie get a propositional formula.</p>
+
+        
+        <p>This paragraph is build from compositions of propositions and connectives.
+        In propositional logic a set of symbols is used to represent these connectives.</p>
+        
+        <h4>Patterns</h4>
+        
+        <p>We do not define the point “.“ as connective. Instead we replace occurences of “.“ with “and”.
+        For example “The sky is blue. The sea is green.” has the same meaning as “(The sky is blue) and (The sea is green)”.
+        Further we replace “… therefore …” with “if … then …”. “I am hungry. Therefore, I eat.” corresponds to “If I am hungry then I eat.”.</p>
+        
+        <table class="right">
+            <tr><td>composite</td><td>formula</td><td>symbol</td>
+            <tr>
+                <td>If <code>p</code> and not <code>q</code>, then <code>r</code>.</td>
+                <td>p ∧ q → r</td>
+                <td>P</td>
+            </tr>
+            <tr>
+                <td>Not <code>r</td>
+                <td>¬r</td>
+                <td>Q</td>
+            </tr>
+            <tr>
+                <td>P. Q. p. Therefore q.</td>
+                <td>P ∧ Q ∧ p → q.</td>
+                <td></td>
+            </tr>
+        </table>
+        
+        
+        <p>By using the patterns from above and the symbols from the table we further formalize the sentence from the first tutorial to a well formed propositional formula.</p>
         
         <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>) ∧ (¬ <code>r</code>) ∧ (<code>p</code>) → &nbsp;<code>q</code></blockquote>
+
+        <div class="rbox" style="width:300px">
+        <p>To “translate“ natural sentences into atoms or compositions is often ambiguous.
+        You can treat “Elephants are big, grey animals“ correctly as one simple sentence,
+        and represent it with <cite>“p”</cite> (an atom) or read it as composition <cite>“p ∧ q ∧ r”</cite>
+        (“Elephants are big and elephants are grey and elephants are animals”).
+        </p></div>
         
-        <p>We have to recall that the modelling of statements in natural language is not part of propositional logic.
-        </p>
+        <p>In the process of modelling we uses upper case Latin letters for representing composite sentences
+        and used them to build larger composite sentences or paragraphs.</p>
+    
         
-        <h4>Hidden compostions</h4>
         
-        <p>To “translate“ natural sentences into atoms or compositions is not always unambiguous.
-        You can treat “Elephants are big, grey animals“ as one simple sentence,
-        and represent it with <cite>“p”</cite> (an atom).
-        Or you can decompose it to “Elephants are big and elephants are grey and elephants are animals”
-        which can be modelled as <cite>“p and q and r”</cite> (an composite).
-        This decomposition of sentences in natural language is part of the modelling process and can be very hard.
-        </p>
+        
+        
         
         
         
