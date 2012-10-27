@@ -119,21 +119,6 @@
         Compare the results of c<sub>1</sub> and f<sub>1</sub> with g<sub>1</sub>,
         The results of g<sub>4</sub> are equal to the first argument, like the results of f<sub>2</sub>.</p>
         
-        
-        <h4>Representations of Boolean functions</h4>
-        
-        <p>Propositional formulas and truth tables are different representations of Boolean functions.
-        When “0” is mapped to “F” (false) and “1” is mapped to “T” (true), 
-        the complement finds it‘s counterpart in the logical negation,
-        the product in the logical conjunction, and the sum in the logical disjunction.
-        
-        So every implication free propositional formula can be rewritten as Boolean expression without effort.
-        A Boolean expression without exclusive or can be rewritten as propositional formula easily.</p>
-        
-        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expression are often very complex representation of Boolean function.
-        The next tutorial will introduce a very convenient representaion of arbitrary Boolean functions.</p>
-        
-        
         <h4>Special Boolean functions</h4>
         
         <table class="right">
@@ -171,7 +156,7 @@
         The sum «+» maps two arguments to «0», if both arguments are equal to «0». Otherwise (if one or two arguments are «1») the sum «+» maps it's argument's to «1».
         The exclusive or «⊕» maps two arguments to «1», if the arguments are different. Otherwise (if the arguments are equal) the exclusive or «⊕» maps it's argument's to «0».</p>
         
-        <div class="rbox" style="width:300px">
+        <div class="rbox" style="width:310px">
             <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
             Indeed, the second equivalence does not hold for arithmetic expressions,
             but it does for Boolean expressions, which is easily shown with a truth table.<p>
@@ -226,29 +211,35 @@
             
         </div>
         
-        <h4>Precedence and calculation rules</h4>
+        <h4>Precedences</h4>
         
         <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
         The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
         The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
-        <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a</p>
-        <p><span style="text-decoration:overline" >ā</span> = a
+        <h4>Calculation rules</h4>
+        
+        <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a
+        <br><span style="text-decoration:overline" >ā</span> = a
         &nbsp;&nbsp; <span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span>
         &nbsp;&nbsp;
-        <span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></p>
-        
-        <p>a⊕b
+        <span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>
+        <br>a⊕b
         = a•<span style="text-decoration:overline">b</span> + <span style="text-decoration:overline">a</span>•b
         = (<span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>) • (a+b)
-        </p>
-        <p>0⊕a = a = a⊕0
+        <br>
+        0⊕a = a = a⊕0
         &nbsp;&nbsp;
-        1⊕a = <span style="text-decoration:overline">a</span> = a⊕1</p>
+        1⊕a = <span style="text-decoration:overline">a</span> = a⊕1
+        <br>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a
+        <br>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
+        <br>a•a = a &nbsp;&nbsp; a+a=a &nbsp;&nbsp; a⊕a = 0 &nbsp;&nbsp;
+        a•ā = 0 = ā•a  &nbsp;&nbsp; a+ā = 1 =ā+a &nbsp;&nbsp; a⊕ā = 1 = ā⊕a</p>
         
-        <p>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a</p>
-        
-        <p>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
+        <h4>Example</h4>
+        <p>(a•1+0•<span style="text-decoration:overline">b</span>)⊕1⊕a =
+        (a+0)⊕1⊕a = a⊕1⊕a = ā⊕a = 1
+        </p>
         
         
         
