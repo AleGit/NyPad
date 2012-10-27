@@ -7,14 +7,19 @@
                 </head>
     <body>
         
-        <h3>Definition</h3>
+        <h3>Syntax Definition</h3>
+        
+        <div class="rbox" style="width:200px">
+            <p><small>A formal grammar (sometimes simply called a grammar) is a set of formation rules for strings in a formal language. The rules describe how to form strings from the language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context – only their form.
+            [<a href="http://en.wikipedia.org/wiki/Formal_grammar">Wikipedia</a>].
+            </small></p></div>
         
         <p>We‘ve already learned that propositional formulas are build form atoms ‘p,q,r,…’ and connectives ‘¬∧∨→’.</p>
         
         <table>
             <tr>
                 <td>atoms</td>
-                <td>p,q,r,…</td>
+                <td>p, …</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -43,20 +48,44 @@
             </tr>
         </table>
         
-        <p>To avoid amibuities we use parenthesis in the formal grammer for propositional formulas.</p>
+        <p>But it was a informal introduction only.
+        We have to define what a “well formed formula” in propositional logic looks like.
+        This definition is done with a formal grammar. Parenthesis are used to avoid ambiguities.</p>
         
         <blockquote>P &nbsp;::=&nbsp; p &nbsp;|&nbsp; (¬P) &nbsp;|&nbsp; (P ∧ P) &nbsp;|&nbsp; (P ∨ P) &nbsp;|&nbsp; (P → P)</blockquote>
         
         <p>A propositional formula ‘P’ (on the left side) is defined ‘::=’ through the expression on the right side.
-        The expression of the right side consists of serveral parts, devided by ‘|’, which means or.
+        The expression of the right side consists of serveral parts, devided by ‘|’, which separates alternatives for P.
         So ‘P’ is either and atom ‘p’, or
         the negation of a formula ‘(¬P)’, or
         the conjunction of two formuals ‘(P ∧ P)’, or
          the disjunction of two formuals ‘(P ∨ P)’, or
          the implication of two formuals ‘(P → P)’.</p>
+        <p>There is a inaccuracy in this definition.
+        Only the symbol ‘p’ is defined for atoms.
+        We use ‘p’ as representative for symbols {a,b,…,p,q,r,…,p<sub>1</sub>,p<sub>2</sub>,…} we want to use for atoms.
+        In a complete formal grammar the forms of atomes have to be defined,
+        which would distract from the core of the grammar above.
+        <em>A propositional formula can be build from other propositional formulas recursively.
+        Atoms terminate the recursion.</em>
+        </p>
         
-        <div class="rbox" style="width:300px">
-        <p>A formal grammar (sometimes simply called a grammar) is a set of formation rules for strings in a formal language. The rules describe how to form strings from the language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context – only their form.</p></div>
+        <h4>Example</h4>
+        
+        <p>To create a well formed formula, we start with “P” and replace it with “(P ∧ P)” (1).
+        Then we substitute the first “P” with “(P ∨ P)” (2) and the second “P” with “(¬P)” (3).
+        After that we replace the seconde “P” with “(P → P)”. …</p>
+        
+        <blockquote>P ➜<sub>1</sub> (P ∧ P) ➜<sub>2</sub> ((P ∨ P) ∧ P) ➜<sub>3</sub> ((P ∨ P) ∧ (¬P)) ➜<sub>4</sub> ((P ∨ (P → P)) ∧ (¬P))
+            <br>&nbsp;&nbsp;➜<sub>5</sub> ((P ∨ (P → (¬P))) ∧ (¬(P ∨ P))) ➜<sub>6</sub>  … ➜<sub>10</sub> ((p ∨ (q → (¬p))) ∧ (¬(q ∨ p)))
+        </blockquote>
+        <p>We observe that a lot of parenthesis are produced.</p>
+        
+        
+        
+
+        
+        
         
         
         
