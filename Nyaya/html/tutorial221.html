@@ -52,7 +52,7 @@
         <p>If you are using formulas in strict syntax, you can use any rule of the grammar to combine them to more complex formulas without additional work.
         But if you are using the syntax conventions, you have to be carefull when you are combining subformulas.</p>
         <p>For example if you combine the formulas <code>a ∨ b</code> and <code>c → d</code> with the rule <code>P ➜ (P∧P)</code> to a more complex formula
-        then the correct expression (after ommitting the outer parenthesis) is <code style="text-decoration:line-through">&nbsp;a ∨ b ∧ c → d&nbsp;</code> <code>(a ∨ b) ∧ (c → d)</code>.
+        then the correct expression (after ommitting the outer parenthesis) is <span style="text-decoration:line-through;color:red;"><code>&nbsp;a ∨ b ∧ c → d&nbsp;</code></span> <code>(a ∨ b) ∧ (c → d)</code>.
         You can verify this by rewriting the two subformulas to formulas in strict syntax.</p>
         
         <table>
@@ -91,7 +91,50 @@
 
         </table>
         
-        <h4>From formula to subformulas</p>
+        <h4>From formula to subformulas</h4>
+        <p>To determine the sub-formulas of a formula you rewrite the formula in strict syntax.
+        Your remove the outermost parentheses and you split the formula by be removing that connective,
+        which leaves one or two well formed subformulas.</p>
+        
+        <blockquote>
+            
+            <code style="text-decoration:line-through"><span style="color:red;"> ( </span>
+                (a <span style="color:red;">∨</span> b)
+                ∧
+                (c → d)
+                <span style="color:red;"> ) </span>
+            </code>
+            
+            &nbsp;&nbsp;
+            
+            <code><span style="color:red;"> ( </span>
+                (a ∨ b)
+                <span style="color:red;">∧</span>
+                (c → d)
+                <span style="color:red;"> ) </span>
+            </code>
+            
+            &nbsp;&nbsp;
+            
+            <code style="text-decoration:line-through"><span style="color:red;"> ( </span>
+                (a ∨ b)
+                ∧
+                (c <span style="color:red;">→</span> d)
+                <span style="color:red;"> ) </span>
+            </code>
+        </blockquote>
+
+        <p>Then your original formula must be reconstructable with one grammar rule from the extracted subformulas.</p>
+        
+        <blockquote>
+            <code>(a ∨ b)</code>
+            
+            &nbsp;&nbsp;
+            
+            <code>(c → d)</code>
+            
+            &nbsp;&nbsp;•&nbsp;&nbsp;P ➜ (P ∧ P)&nbsp;&nbsp;•&nbsp;&nbsp;<code>(a ∨ b) ∧ (c → d)</code>
+        </blockquote>
         
     </body>
 </html>
