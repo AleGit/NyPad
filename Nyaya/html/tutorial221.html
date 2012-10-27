@@ -7,9 +7,91 @@
                 </head>
     <body>
         
-        <h3>Syntax Subformulas</h3>
+        <h3>Subformulas</h3>
         
+        <table class="right">
+            <tr>
+                <th>formula</th>
+                <th>subformulas</th>
+            </tr>
+            <tr>
+                <td style="text-align:left">p</td>
+                <td style="text-align:left">p</td>
+            </tr>
+            <tr>
+                <td style="text-align:left">¬p</td>
+                <td style="text-align:left">p, ¬p</td>
+            </tr>
+            <tr>
+                <td style="text-align:left">p∧q</td>
+                <td style="text-align:left">p, q, p∧q</td>
+            </tr>
+            <tr>
+                <td style="text-align:left">p∨q</td>
+                <td style="text-align:left">p, q, p∨q</td>
+            </tr>
+            <tr>
+                <td style="text-align:left">p→q</td>
+                <td style="text-align:left">p, q, p→q</td>
+            </tr>
+        </table>
+
         
+        <p>When we use the grammar rule “P<sub>1</sub> ➜ (P<sub>2</sub> ∨ P<sub>3</sub>)”
+        we build the more complex formula “P<sub>1</sub>”
+        from two less complex formulas “P<sub>2</sub>” and “P<sub>3</sub>”.
+        
+        “P<sub>2</sub>” and “P<sub>3</sub>” are called subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”.
+        All subformulas of “P<sub>2</sub>” are subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”,
+        all subformulas of “P<sub>3</sub>” are subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)” and
+        “(P<sub>2</sub> ∨ P<sub>3</sub>)” is a subformula of “(P<sub>2</sub> ∨ P<sub>3</sub>)” too.
+        Per Definition atoms are the smallest subformulas of every formula.</p>       
+        
+        <h4>From subformulas to formulas</h4>
+        
+        <p>If you are using formulas in strict syntax, you can use any rule of the grammar to combine them to more complex formulas without additional work.
+        But if you are using the syntax conventions, you have to be carefull when you are combining subformulas.</p>
+        <p>For example if you combine the formulas <code>a ∨ b</code> and <code>c → d</code> with the rule <code>P ➜ (P∧P)</code> to a more complex formula
+        then the correct expression (after ommitting the outer parenthesis) is <code style="text-decoration:line-through">&nbsp;a ∨ b ∧ c → d&nbsp;</code> <code>(a ∨ b) ∧ (c → d)</code>.
+        You can verify this by rewriting the two subformulas to formulas in strict syntax.</p>
+        
+        <table>
+            <tr><td></td><td>subformulas</td><td>rule</td><td>strict syntax</td><td>syntax convention</td></tr>
+            <tr>
+                <td>1.</td>
+                <td>a, b</td>
+                <td>P ➜ (P ∨ P)</td>
+                <td>(a ∨ b)</td>
+                <th>a ∨ b</th>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>c, d</td>
+                <td>P ➜ (P → P)</td>
+                <td>(c → d)</td>
+                <th>c → d</th>
+            </tr>
+            
+            <tr>
+                <td>3.</td>
+                <td>(a ∨ b), (c → d)</td>
+                <td>P ➜ (P ∧ P)</td>
+                <td>((a ∨ b) ∧ (c → d))</td>
+                <th>(a ∨ b) ∧ (c → d)</th>
+            </tr>
+            
+            <tr>
+                <td>4.</td>
+                <td>((a ∨ b) ∧ (c → d))</td>
+                <td>P ➜ (¬P)</td>
+                <td>¬((a ∨ b) ∧ (c → d))</td>
+                <td>¬((a ∨ b) ∧ (c → d))</td>
+            </tr>
+            
+
+        </table>
+        
+        <h4>From formula to subformulas</p>
         
     </body>
 </html>

@@ -9,6 +9,98 @@
         
         <h3>Syntax Conventions</h3>
         
+        <p>The use of parenthesis has some advantages</p>
+        
+        <ul>
+            <li>The grammar is simple. It consits of four recursive rules and one rule for atoms.</li>
+            <li>Two formulas are equal when their string represenations are exactly the same.</li>
+        </ul>
+        
+        <table class="right">
+            <tr>
+                <th colspan="2">Associativity I</th>
+            </tr>
+            
+            <tr><td>strict syntax</td><td>convention</td></tr>
+            <tr><td>(¬(¬p))</td><td>¬¬p</td></tr>
+            <tr><td>((p ∨ q) ∨ r)</td><td>p ∨ q ∨ r</td></tr>
+            <tr><td>((p ∧ q) ∧ r)</td><td>p ∧ q ∧ r</td></tr>
+            <tr><td>(p → (q → r))</td><td>p → q → r</td></tr>
+        </table>
+        
+        <table class="left">
+            <tr>
+                <th colspan="2">Precedence I</th>
+            </tr>
+            
+            <tr><td>strict syntax</td><td>convention</td></tr>
+            <tr><td>((¬p)∧q)</td><td>¬p ∧ q</td></tr>
+            <tr><td>((¬p)∨q)</td><td>¬p ∨ q</td></tr>
+            <tr><td>((¬p)→q)</td><td>¬p → q</td></tr>
+            <tr><td colspan="2"></td></tr>
+            <tr><td>((p∧q)∨r)</td><td>p ∧ q ∨ r</td></tr>
+            <tr><td>((p∧q)→r)</td><td>p ∧ q → r</td></tr>
+            <tr><td>((p∨q)→r)</td><td>p ∨ q → r</td></tr>
+            <tr><td colspan="2"></td></tr>
+            
+            <tr><td>(p ∨ (q ∧ r))</td><td>p ∨ q ∧ r</td></tr>
+            <tr><td>(p → (q ∧ r))</td><td>p → q ∧ r</td></tr>
+            <tr><td>(p → (q ∨ r))</td><td>p → q ∨ r</td></tr>
+            
+            
+        </table>
+        
+        <p>But there is one big drawback. We have two write many parenthesis, which reduces the readability of the formulas.</p>
+        <p>To save some parenthesis we will ommit outer parenthesis and we will use associativity and precedence.</p>
+        <p>Negations and implications are right associative, while conjunctions and disjunctions are left associative.
+        Negations have the highest precedence. Conjunctions has a higher precedence than disjunctions. Implications has the lowest precedence.</p>
+        
+        
+        
+        <p>The tables “Precedence I” and “Associativity I“ show where inner parenthesis can be ommited by convention,
+        while the tables “Precedence II” and “Associativity II“ demonstrates where only outer parenthesis can be ommited.</p>
+        
+        <table class="right">
+            <tr>
+                <th colspan="2">Associativity II</th>
+            </tr>
+            
+            <tr><td>strict syntax</td><td>convention</td></tr>
+            <tr><td>(p ∨ (q ∨ r))</td><td>p ∨ (q ∨ r)</td></tr>
+            <tr><td>(p ∧ (q ∧ r))</td><td>p ∧ (q ∧ r)</td></tr>
+            <tr><td>((p → q) → r)</td><td>(p → q) → r</td></tr>
+            
+        </table>
+        
+        <table class="left">
+            <tr>
+                <th colspan="2">Precedence II</th>
+            </tr>
+            
+            <tr><td>strict syntax</td><td>convention</td></tr>
+            <tr><td>(¬(p∧q))</td><td>¬(p ∧ q)</td></tr>
+            <tr><td>(¬(p∨q))</td><td>¬(p ∨ q)</td></tr>
+            <tr><td>(¬(p→q))</td><td>¬(p → q)</td></tr>
+            <tr><td colspan="2"></td></tr>
+            <tr><td>(p∧(q∨r))</td><td>p ∧ (q ∨ r)</td></tr>
+            <tr><td>(p∧(q→r))</td><td>p ∧ (q → r)</td></tr>
+            <tr><td>(p∨(q→r))</td><td>p ∨ (q → r)</td></tr>
+            <tr><td colspan="2"></td></tr>
+            
+            <tr><td>((p∨q)∧r)</td><td>(p ∨ q) ∧ r</td></tr>
+            <tr><td>((p→q)∧r)</td><td>(p → q) ∧ r</td></tr>
+            <tr><td>((p→q)∨r)</td><td>(p → q) ∨ r</td></tr>
+            
+            
+        </table>
+        
+        <p>With these conventions different strings can represent syntactically the same propositional formula. </p>
+        
+        <div class="rbox" style="width:380px">
+        <p>Do not hesitate to use parenthesis to emphisize the structure of a formula, especially when conjunctions are used in combination with disjunctions.</p>
+        <blockquote><center> <code>a ∨ b ∧ c ∧ d ∧ e ∧ f ∨ g ∧ h</code> <br>vs.<br> <code>a ∨ (b ∧ c ∧ d ∧ e ∧ f) ∨ (g ∧ h)</code></center></blockquote></div>
+        
+        
         
         
     </body>
