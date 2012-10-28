@@ -7,9 +7,127 @@
                 </head>
     <body>
         
-        <h3>Satisfiability and Validity</h3>
+        <h3>Properties</h3>
+        
+        <h4>Satisfiability</h4>
+        
+        <blockquote>A propositional formula P is satisfiable,
+            <br>if there is at least one truth assignment, that <i>v</i>(P) = T.</blockquote>
+
+        
+        <blockquote>A propositional formula P is not satisfiable,
+            <br>if there is no truth assignment, that <i>v</i>(P) = T.</blockquote>
+        
+        <h4>Validity</h4>
+        
+        <blockquote>A propositional formula P is valid,
+            <br>if <i>v</i>(P) = T for every possible truth assignment.</blockquote>
+        
+        <blockquote>A propositional formula P is not valid,
+            <br>if there is at least one truth assignment, that <i>v</i>(P) = F.</blockquote>
+        
+        <h4>Examples</h4>
+        
+        <ul>
+            <li><code>¬a, a∧b, a∨b, a→b</code> are satisfiable, but not valid.</li>
+            <li><code>⊥, a∧¬a</code> are not satisfiable. Hence they are not valid too.</li>
+            <li><code>⊤, a∨¬a, (p∧¬q→r)∧(¬r)∧(p)→q</code> are valid. Hence they are satisfiable too.</li>
+            
+        </ul>
+        
+        <p>For these and similar simple examples satisfiability and validity can be checked by using truth table.
+        Due the exponentential growing costs of computing truth tables this is not a practical way.</p>
         
         
+        <table>
+            <tr>
+                <td>p</td>
+                <td>q</td>
+                <td>r</td>
+                <td>p∧¬q→r</td>
+                <td>¬r</td>
+                <td>(p∧¬q→r)∧(¬r)∧(p)→q</td>
+                <td>reason</td>
+            </tr>
+            
+            <!-- Txx -->
+            <tr>
+                <td>T</td>
+                <th>T</th>
+                <td>T</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>right side of implication is true</small></td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <th>T</th>
+                <td>F</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>right side of implication is true</small></td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td>T</td>
+                <td></td>
+                <th>F</th>
+                <td>T</td>
+                <td><small>left side of implication is false</small></td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td>F</td>
+                <th>F</th>
+                <td></td>
+                <td>T</td>
+                <td><small>left side of implication is false</small></td>
+            </tr>
+            <!-- Fxx -->
+            <tr>
+                <td>F</td>
+                <th>T</th>
+                <td>T</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>right side of implication is true</small></td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <th>T</th>
+                <td>F</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>right side of implication is true</small></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td>F</td>
+                <td>T</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>left side of implication is false</small></td>
+            </tr>
+            <tr>
+                <th>F</th>
+                <td>F</td>
+                <td>F</td>
+                <td></td>
+                <td></td>
+                <td>T</td>
+                <td><small>left side of implication is false</small></td>
+            </tr>
+        </table>
+        
+        <p>We can spare some calculation time with smarter valuation.
+        This will help sometimes, but truth tables stay unpractical for “big” formulas.</p>
         
     </body>
 </html>
