@@ -7,9 +7,80 @@
                 </head>
     <body>
         
-        <h3>Eintailment and Equivalence</h3>
+        <h3>Semantic Entailment</h3>
+        
+        <p>For propositional formulas P<sub>1</sub>, P<sub>3</sub>, …, P<sub>n</sub>, Q
+        and the semantic entailment relation ⊨, 
+        we define the semantic entailment</p>
+        
+        <blockquote>P<sub>1</sub>, P<sub>3</sub>, …, P<sub>n</sub> ⊨ Q</blockquote>
+        
+        <p>A semantic entailment holds,
+        if for all valuations which evaluate all P<sub>i</sub> on the left side to true,
+        Q is evaluated to true too.</p>
         
         
+        
+        <p>We can use a truth table to check if a semantic entailment holds.</p>
+        
+        <table class="right">
+            <tr>
+                <td>a</td><td>b</td><td>a ∧ b</td><td>⊨</td><td>a ∨ b</td><td>⊨</td><td>a ∧ b</td>
+            </tr>
+            <tr>
+                <td>T</th><td>T</td><th>T</th><td>ok</td><th>T</th><td>ok</td><th>T</th>
+            </tr>
+            <tr>
+                <td>T</th><td>F</td><td>F</td><td>—</td><th>T</th><td>no</td><td>F</td>
+            </tr>
+            <tr>
+                <td>F</th><td>T</td><td>F</td><td>—</td><th>T</th><td>no</td><td>F</td>
+            </tr>
+            <tr>
+                <td>F</th><td>F</td><td>F</td><td>—</td><td>F</td><td>—</td><td>F</td>
+            </tr>
+        </table>
+
+        
+        <ul>
+            <li>a ⊨ ¬a &nbsp; does not hold</li>
+            <li>a, b ⊨ a ∧ b &nbsp; holds</li>
+            <li>a ⊨ a ∧ b &nbsp; does not hold</li>
+            <li>a ∧ b ⊨ a ∨ b &nbsp; holds</li>
+            <li>a ∨ b ⊨ a ∧ b &nbsp; does not hold</li>
+            <li>b ⊨ a → b &nbsp; holds</li>
+        </ul>
+        
+        <h4>Semantic Equivalence</h4>
+        
+        <p>For propositional formulas P and Q,
+        where the semantic entailment P ⊨ Q holds
+        and the semantic entailment Q ⊨ P holds,
+        we say P and Q are semantically equivalent.</p>
+        <blockquote>P ≡ Q</blockquote>
+            
+        
+        
+        <p>You have to check for all cases where the left side evaluates to true, if the right side evaluates to true too.
+        Ditto you have to check for all cases where the right side evaluates to true, if the left side evaluates to true too.
+        If both holds, than the left and right side are semantically equivalent.</p>
+        
+        
+        <ul>
+            <li>a ≡ ¬¬a</li>
+            <li>a ∧ b ≡ b ∧ a</li>
+            <li>a ∨ b ≡ b ∨ a</li>
+            <li>a → b ≢ b → a</li>
+            <li>⊥ ≡ a ∧ ¬a</li>
+            <li>⊤ ≡ a ∨ ¬a</li>
+        </ul>
+        
+        <p>Semantically equivalent sub-formulas can be substituted, because for the same truth assingment they evaluate to the same truth value. So they do not change the evaluation of a formula.</p>
+        
+        
+            
+            
+            
         
     </body>
 </html>
