@@ -7,7 +7,243 @@
                 </head>
     <body>
         
-        <h3>Truth Tables</h3>
+        <h3>Truth Tables</h3> <table class="right">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td />
+                <td>a∧b</td>
+                <td>a∨b</td>
+                <td>a→b</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>T</td>
+                <td />
+                <td>T</td>
+                <td>T</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td />
+                <td>F</td>
+                <td>T</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td />
+                <td>F</td>
+                <td>T</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>F</td>
+                <td />
+                <td>F</td>
+                <td>F</td>
+                <td>T</td>
+            </tr>
+        </table>
+        
+        <p>In the last tutorial we wrote down one truth assignment for the set of variables of a formula
+        and calculated the truth value of the formula.
+        
+        
+        
+       
+
+        
+        <table class="left">
+            <tr>
+                <td>a</td>
+                <td />
+                <td>¬a</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td />
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td />
+                <td>T</td>
+            </tr>
+        </table>        
+        
+        When we write down all possible truth assignments of a formula
+        and we calculate the truth value of the formula for each assignment
+        we create the truth table of the formula.</p>
+        <p>There are two different truth assignments for one variable
+        and so there are 2×2=4 different truth assignments for two variables.
+        </p>
+        <table class="right">
+            <tr>
+                <td></td>
+                <td />
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td />
+                <td>¬b</td>
+                <td>¬b ∧ c</td>
+                <td>a ∨ (¬b ∧ c)</td>
+                <td>(a ∨ (¬b ∧ c)) → a</td>
+            </tr>
+            
+            <!-- Txx -->
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>T</td> <!-- a -->
+                <td>T</td> <!-- b -->
+                <td>T</td> <!-- c -->
+                <td />
+                <td>F</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>T</td> <!-- a -->
+                <td>T</td> <!-- b -->
+                <td>F</td> <!-- c -->
+                <td />
+                <td>F</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>T</td> <!-- a -->
+                <td>F</td> <!-- b -->
+                <td>T</td> <!-- c -->
+                <td />
+                <td>T</td> <!-- ¬b -->
+                <td>T</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>T</td> <!-- a -->
+                <td>F</td> <!-- b -->
+                <td>F</td> <!-- c -->
+                <td />
+                <td>T</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <!-- Fxx -->
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>F</td> <!-- a -->
+                <td>T</td> <!-- b -->
+                <td>T</td> <!-- c -->
+                <td />
+                <td>F</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>F</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>F</td> <!-- a -->
+                <td>T</td> <!-- b -->
+                <td>F</td> <!-- c -->
+                <td />
+                <td>F</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>F</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>F</td> <!-- a -->
+                <td>F</td> <!-- b -->
+                <td>T</td> <!-- c -->
+                <td />
+                <td>T</td> <!-- ¬b -->
+                <td>T</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>F</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td />
+                <td>F</td> <!-- a -->
+                <td>F</td> <!-- b -->
+                <td>F</td> <!-- c -->
+                <td />
+                <td>T</td> <!-- ¬b -->
+                <td>F</td> <!-- ¬b ∧ c -->
+                <td>F</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>T</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+        </table>
+        
+        
+        
+        <p>In general there are 2<sup>n</sup> different truth assignments for <i>n</i> variables.
+        Thus the calculation of a truth table for a formula with many variables is a very expensive operation,
+        because for each additional variable the calculation time will double.</p>
+        
+        <p>Although truth tables are unpractical for “big” formulas,
+        they are are useful do demonstrate some properties of “small” formulas.</p>
+        
+        <h4>Top and bottom</h4>
+        
+        <table class="left">
+            <tr>
+                <td>a</td>
+                <td />
+                <td>¬a</td>
+                <td>a ∧ ¬a</td>
+                <td>a ∨ ¬a</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td />
+                <td>F</td>
+                <td>F</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td />
+                <td>T</td>
+                <td>F</td>
+                <td>T</td>
+            </tr>
+        </table>
+
+        
+        <p>We‘ve defined top and bottom
+        as abbrivations of <code>a ∨ ¬a</code> and <code>a ∧ ¬a</code>.
+        Since <code>⊤</code> or <code>⊥</code> does not contain any variables,
+        their valuation should not depend on any truth assignment,
+        which is easily shown by calculating a truth table.</p>
         
         
         
