@@ -203,7 +203,6 @@
 		9A926828163C4B7E00C3879B /* ST_c.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926821163C4B7E00C3879B /* ST_c.png */; };
 		9A926829163C4B7E00C3879B /* ST_cd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926822163C4B7E00C3879B /* ST_cd.png */; };
 		9A92682A163C4B7E00C3879B /* ST_nabcd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926823163C4B7E00C3879B /* ST_nabcd.png */; };
-		9A92682C163C4C8700C3879B /* ST_nabcd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92682B163C4C8700C3879B /* ST_nabcd.png */; };
 		9A92682E163C4C9E00C3879B /* ST_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92682D163C4C9E00C3879B /* ST_d.png */; };
 /* End PBXBuildFile section */
 
@@ -1242,7 +1241,6 @@
 				9A926828163C4B7E00C3879B /* ST_c.png in Resources */,
 				9A926829163C4B7E00C3879B /* ST_cd.png in Resources */,
 				9A92682A163C4B7E00C3879B /* ST_nabcd.png in Resources */,
-				9A92682C163C4C8700C3879B /* ST_nabcd.png in Resources */,
 				9A92682E163C4C9E00C3879B /* ST_d.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

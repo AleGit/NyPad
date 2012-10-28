@@ -28,56 +28,60 @@
             </tr>
         </table>
         
-        <p>In the first tutorial we identified the propositions of two different statements and discovered that the statements have the same structure.</p>
+        <p>In the first tutorial we identified the simple propositions of two different statements and discovered that the composite propositions have the same structure.</p>
                
         <blockquote>If <code>p</code> and not <code>q</code>, then <code>r</code>. Not <code>r</code>. <code>p</code>. <i>Therefore</i>,&nbsp;<code>q</code>.</blockquote>
         
 
         
-        <p>This paragraph is build from compositions of propositions and connectives.
+        <p>This paragraph is build from combinations of simple propositions and connectives.
         In propositional logic a set of symbols is used to represent these connectives.</p>
         
-        <h4>Patterns</h4>
+        <h4>Sequents</h4>
+        
+        <p>A sequent is a collection of (composite) propositions (the premesis)
+        an a (composite) proposition on the right side of “⊢”.
+        We use uppercase latin letters for (composite) propositions (formulas)
+        to distinguish them from simple propositions (atoms).</p>
+        
         <table class="right">
-            <tr><td>composite</td><td>formula</td><td>symbol</td></tr>
             <tr>
-                <td>If <code>p</code> and not <code>q</code>, then <code>r</code>.</td>
-                <td>p ∧ q → r</td>
-                <td>P</td>
-            </tr>
-            <tr>
-                <td>Not <code>r</td>
-                <td>¬r</td>
-                <td>Q</td>
-            </tr>
-            <tr>
-                <td>P. Q. p. Therefore q.</td>
-                <td>P ∧ Q ∧ p → q.</td>
-                <td></td>
+                <td>⊢</td><td>therefore</td>
             </tr>
         </table>
-        <p>We do not define the point “.“ as connective. Instead we replace occurences of “.“ with “and”.
-        For example “The sky is blue. The sea is green.” has the same meaning as “(The sky is blue) and (The sea is green)”.
-        Further we replace “… therefore …” with “if … then …”. “I am hungry. Therefore, I eat.” corresponds to “If I am hungry then I eat.”.</p>
+        
+        <blockquote>P<sub>1</sub>, ..., P<sub>n</sub></n> ⊢ Q</code></blockquote>
         
         
+        <p>Our paragraph from above is build from three sentences and a conclusion.</p>
+        <ul>
+            <li>If <code>p</code> and not <code>q</code>, then <code>r</code>.</li>
+            <li>Not <code>r</code>.</li>
+            <li>p.</li>
+            <li><i>Therefore</i>,&nbsp;<code>q</code>.</li>
+        </ul>
+        
+        <p>Using the basic connectives we can write our paragraph formally as sequent.</p>
+        
+        <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>), (¬ <code>r</code>), (<code>p</code>) ⊢ <code>q</code></blockquote>
         
         
-        <p>By using the patterns from above and the symbols from the table we further formalize the sentence from the first tutorial to a well formed propositional formula.</p>
-        
-        <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>) ∧ (¬ <code>r</code>) ∧ (<code>p</code>) → &nbsp;<code>q</code></blockquote>
 
-        <div class="rbox" style="width:300px">
+        <div class="rbox" style="width:270px">
         <p><small>To “translate“ natural sentences into atoms or compositions is often ambiguous.
         You can treat “Elephants are big, grey animals“ correctly as one simple sentence,
         and represent it with <cite>“p”</cite> (an atom) or read it as composition <cite>“p ∧ q ∧ r”</cite>
         (“Elephants are big and elephants are grey and elephants are animals”).
         </p></small></div>
         
-        <p>In the process of modelling we have used upper case Latin letters for representing composite sentences
-        and used them to build larger composite sentences or paragraphs.
-        Further we have used parenthesis to emphasize the structure of the formula.</p>
-    
+        <p>Which can be read as “If the first premise holds, and the second premise holds, and the third premise holds,
+        then the conclusion should hold.“
+        
+        <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>) ∧ (¬ <code>r</code>) ∧ (<code>p</code>) → <code>q</code></blockquote>
+        
+        <p>But we still can‘t proove it.</p>
+        
+            
         
         
         

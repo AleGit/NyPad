@@ -9,6 +9,70 @@
         
         <h3>Valuation</h3>
         
+        <p>In the previous chapter we‘ve defined the syntax of propositional formula,
+        but we‘ve ignored that propositions can be true or false.
+        We didn‘t attach any meaning to our formulas.
+        We didn‘t define any semantics of propositional logic.
+        This will be done now.</p>
+        
+        
+        <p>The set of variables of a formula is the set of sub-formulas of the formula, where the elements are atoms.
+        The set of variables of the formula <code>a ∨ ¬b ∧ c → a</code> is {a,b,c}.
+        A <em>valuation</em> or <em>truth assingment</em> is a mapping from the set of variables to the set of truth values {true, false}. We will use “T” as abbreviation for “true” and “F” as abbreviation for “false”.</p>
+        
+        <blockquote><i>v</i>(a) = F &nbsp;&nbsp;&nbsp; <i>v</i>(b) = F &nbsp;&nbsp;&nbsp; <i>v</i>(c) = T</blockquote>
+        
+        <p>We extend the valuation to formulas recursivly for composite formulas.</p>
+        
+        <ul>
+            <li><i>v</i>(¬P) = T if and only if <i>v</i>(P) = F. Otherwise <i>v</i>(¬P) = F.</li>
+            <li><i>v</i>(P∧Q) = T if and only if <i>v</i>(P) = T and <i>v</i>(Q) = T. Otherwise <i>v</i>(P∧Q) = F.</li>
+            <li><i>v</i>(P∧Q) = F if and only if <i>v</i>(P) = F and <i>v</i>(Q) = F. Otherwise <i>v</i>(P∨Q) = T.</li>
+            <li><i>v</i>(P→Q) = F if and only if <i>v</i>(P) = T and <i>v</i>(Q) = F. Otherwise <i>v</i>(P→Q) = T.</li>
+        </ul>
+        
+        <h4>Example</h4>
+        
+        <ul>
+            <li><i>v</i>(a) = F &nbsp; assingment</li>
+            <li><i>v</i>(b) = F &nbsp; assingment</li>
+            <li><i>v</i>(c) = T &nbsp; assingment</li>
+            <li><i>v</i>(¬b) = T &nbsp; because <i>v</i>(b) = F.</li>
+            <li><i>v</i>(¬b∧c) = T &nbsp; because <i>v</i>(¬b) = T and <i>v</i>(c) = T.</li>
+            <li><i>v</i>(a∨(¬b∧c)) = T &nbsp; because <i>v</i>(¬b∧c) = T.</li>
+            <li><i>v</i>((a∨(¬b∧c))→a) = F &nbsp; because  <i>v</i>(c) = T and <i>v</i>(a) = F.</li>
+        </ul>
+        
+        <table class="right">
+            <tr>
+                <td></td>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>¬b</td>
+                <td>¬b ∧ c</td>
+                <td>a ∨ (¬b ∧ c)</td>
+                <td>(a ∨ (¬b ∧ c)) → a</td>
+            </tr>
+            
+            <tr>
+                <td><i>v</i></td>
+                <td>F</td> <!-- a -->
+                <td>F</td> <!-- b -->
+                <td>T</td> <!-- c -->
+                <td>T</td> <!-- ¬b -->
+                <td>T</td> <!-- ¬b ∧ c -->
+                <td>T</td> <!-- a ∨ (¬b ∧ c) -->
+                <td>F</td> <!-- (a ∨ (¬b ∧ c)) → a< -->
+            </tr>
+        </table>
+        
+        <p>We transfer the valuation from the atoms to the sub-formulas until a value is assigned to the formula.
+        For clarity we can write down the results in a table with two rows.
+        In the first row we write down all sub-formulas (including variables and the formula itself).
+        In the second row we fill in the values of the variables.
+        Then we fill in the values of composite sub-formulas step by step. </p>
+        
         
         
     </body>
