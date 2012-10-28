@@ -7,7 +7,9 @@
                 </head>
     <body>
         
-        <h3>Truth Tables</h3> <table class="right">
+        <h3>Truth Tables</h3>
+        
+        <table class="right">
             <tr>
                 <td>a</td>
                 <td>b</td>
@@ -210,7 +212,7 @@
         because for each additional variable the calculation time will double.</p>
         
         <p>Although truth tables are unpractical for “big” formulas,
-        they are are useful do demonstrate some properties of “small” formulas.</p>
+        they are very useful do demonstrate or proof some properties for “small” formulas.</p>
         
         <h4>Top and bottom</h4>
         
@@ -245,6 +247,52 @@
         their valuation should not depend on any truth assignment,
         which is easily shown by calculating a truth table.</p>
         
+        <h4>Symmetry</h4>
+        
+        <table class="right">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td />
+                <td>b→a</td>
+                <td>a→b</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>T</td>
+                <td />
+                <td>T</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td />
+                <th>T</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td />
+                <th>F</th>
+                <th>T</th>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>F</td>
+                <td />
+                <td>T</td>
+                <td>T</td>
+            </tr>
+        
+        </table>
+
+        <p>As you can check for yourself <i>v</i>(<code>a∧b</code>) is equal to <i>v</i>(<code>b∧a</code>) for all truth assignments. Further <i>v</i>(<code>a∧b</code>) is equal to <i>v</i>(<code>b∧a</code>) too.
+        But <i>v</i>(<code>a→b</code>) is not equal to <i>v</i>(<code>b→a</code>) for all truth assignments.
+            
+        
+                
         
         
     </body>
