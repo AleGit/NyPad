@@ -2,13 +2,151 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>Normal Forms :: Negation Normal Form</title>
+            <title>Normal Forms :: Negation Normal Forms</title>
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body>
         
-        <h3>Negation Normal Form</h3>
+        <h3>Negation Normal Forms</h3>
         
+        <table class="right">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>¬(a ∧ b)</td>
+                <td>≡</td>
+                <td>¬a ∨ ¬b</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>T</td>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>F</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+        </table>
+        
+        <p>A propositional formula in negation normal form
+        does not contain implications, negations of conjunctions or negations of disjunctions.
+        A negation normal form contains negations of atoms, conjunctions and disjunctions.</p>
+        
+        <blockquote>P &nbsp;::=&nbsp; p &nbsp;|&nbsp; ¬p &nbsp;|&nbsp; (P ∧ P) &nbsp;|&nbsp; (P ∨ P)</blockquote>
+        
+        
+
+        <table class="right">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>¬(a ∨ b)</td>
+                <td>≡</td>
+                <td>¬a ∧ ¬b</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>T</td>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>F</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+        </table>
+
+        
+
+        <p>Still we do not want to reduce the expressiveness of our formulas.
+        We substitute negations of conjunctions and negations of disjunctions with equivalent formulas.
+        For that we use De Morgan‘s laws.</p>
+        
+        <blockquote>¬(a ∧ b) ≡ ¬a ∨ ¬b &nbsp;&nbsp;&nbsp; ¬(a ∨ b) ≡ ¬a ∧ ¬b</blockquote>
+        
+        
+                <table class="right">
+            <tr>
+                <td>a</td>
+                <td>≡</td>
+                <td>¬¬a</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+        </table>
+        
+        <p>While substituting implications and
+        negations of conjunctions or dicjunctions
+        we easily get double negations of atoms,
+        which are not allowed in negation normal forms.
+        But double negations can be substituted too.</p>
+
+        <blockquote>¬¬a ≡ a</blockquote>
+        
+        <h4>Examples</h4>
+        
+        <ul>
+            <li>a ∧ b → a ≡ ¬(a ∧ b) ∨ a ≡ (¬a ∨ ¬b) ∨ b = ¬a ∨ ¬b ∨ a</li>
+            <li>a → b → a ≡ a → (¬b ∨ a) ≡ ¬a ∨ (¬b ∨ a) ≡ ¬a ∨ b ∨ a</li>
+            <li>(a → b) → a ≡ (¬a ∨ b) → a ≡ ¬(¬a ∨ b) ∨ a ≡ (¬¬a ∧ b) ∨ a ≡ (a ∧ b) ∨ a</li>
+            <li>¬a → b ≡ ¬¬a ∨ b ≡ a ∨ b</li>
+            <li>¬(a → b) ≡ ¬(¬a ∨ b) ≡ ¬¬a ∧ ¬b ≡ a ∧ ¬b</li>
+        </ul>
+        
+        <p>Note that (¬a ∨ ¬b) ∨ b and ¬a ∨ ¬b ∨ a in the first example are equal formulas.
+        We can remove the parenthesis because of syntax conventions.
+        Note that ¬a ∨ (¬b ∨ a) ∨ b and ¬a ∨ b ∨ a in the second example are equivalent formulas.
+        We can remove the parenthesis because we get a semantically equivalent formula. </p>
+        
+        <p>We observe that negation normal forms looks easier to evaluate.</p>
+        
+        
+
         
         
     </body>
