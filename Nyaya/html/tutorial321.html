@@ -25,16 +25,16 @@
         
         <table class="right">
             <tr>
-                <td>a</td><td>b</td><td>a ∧ b</td><td>⊨</td><td>a ∨ b</td><td>⊨</td><td>a ∧ b</td>
+                <td>a</td><td>b</td><td>a ∧ b</td><td>⊨</td><td>a ∨ b</td><td>⊭</td><td>a ∧ b</td>
             </tr>
             <tr>
-                <td>T</th><td>T</td><th>T</th><td>ok</td><th>T</th><td>ok</td><th>T</th>
+                <td>T</th><td>T</td><th>T</th><td>=</td><th>T</th><td>=</td><th>T</th>
             </tr>
             <tr>
-                <td>T</th><td>F</td><td>F</td><td>—</td><th>T</th><td>no</td><td>F</td>
+                <td>T</th><td>F</td><td>F</td><td>—</td><th>T</th><td>≠</td><td>F</td>
             </tr>
             <tr>
-                <td>F</th><td>T</td><td>F</td><td>—</td><th>T</th><td>no</td><td>F</td>
+                <td>F</th><td>T</td><td>F</td><td>—</td><th>T</th><td>≠</td><td>F</td>
             </tr>
             <tr>
                 <td>F</th><td>F</td><td>F</td><td>—</td><td>F</td><td>—</td><td>F</td>
@@ -75,7 +75,9 @@
             <li>⊤ ≡ a ∨ ¬a</li>
         </ul>
         
-        <p>Semantically equivalent sub-formulas can be substituted, because for the same truth assingment they evaluate to the same truth value. So they do not change the evaluation of a formula.</p>
+        <p>Sub-formulas can be substituted with equivalent formulas,
+        because for the same truth assingment they evaluate to the same truth value.
+        So they do not change the evaluation of a formula and does not affect satisfiability or validity.</p>
         
         
             

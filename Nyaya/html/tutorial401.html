@@ -9,6 +9,68 @@
         
         <h3>Implication Free Form</h3>
         
+        <p>A propositional formula in implication free form does not include any implications.
+        The grammar for implication free forms is</p>
+        
+        <blockquote>P &nbsp;::=&nbsp; p &nbsp;|&nbsp; (¬P) &nbsp;|&nbsp; (P ∧ P) &nbsp;|&nbsp; (P ∨ P)</blockquote>
+        
+        <table class="right">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>a → b</td>
+                <td>≡</td>
+                <td>¬a ∨ b</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>T</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>F</td>
+                <td>F</td>
+                <td>=</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>T</td>
+                <td>T</td>
+                <td>=</td>
+                <td>T</td>
+            </tr>
+        </table>
+        
+        <p>We do not want to reduce the expressiveness of our formulas so we substitute implications with equivalent formulas.</p>
+        
+        <blockquote>P → Q ≡ ¬P ∨ Q</blockquote>
+        
+        <h4>Examples</h4>
+        
+        <ul>
+            <li>a ∧ b → a ≡ ¬(a ∧ b) ∨ a</li>
+            <li>a → b → a ≡ a → (¬b ∨ a) ≡ ¬a ∨ (¬b ∨ a)</li>
+            <li>(a → b) → a ≡ (¬a ∨ b) → a ≡ ¬(¬a ∨ b) ∨ a</li>
+            <li>¬a → b ≡ ¬¬a ∨ b</li>
+            <li>¬(a → b) ≡ ¬(¬a ∨ b)</li>
+        </ul>
+        
+        <p>We observe that we introduce additional negations to our formulas.</p>
+        
+        
+        
+        
         
         
     </body>
