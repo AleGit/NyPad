@@ -9,6 +9,43 @@
         
         <h3>Conjunctive Normal Form</h3>
         
+        <p>A literal is an atom or the negation of an atom.
+        A propositional formula in conjunctive normal form (CNF)
+        is a conjunction of clauses, where each clause is a disjunction of literals.</p>
+        
+        <blockquote>L &nbsp;::=&nbsp; p &nbsp;|&nbsp; ¬p</blockquote>
+        <blockquote>D &nbsp;::=&nbsp; L &nbsp;|&nbsp; L ∨ D</blockquote>
+        <blockquote>P &nbsp;::=&nbsp; D &nbsp;|&nbsp; D ∧ P</blockquote>
+        
+        <table class="right">
+            <tr><td></td><td></td><td>CNF</td></tr>
+            <tr>
+                <td>a ∨ (b ∧ c)</td>
+                <td>≡</td>
+                <td>(a ∨ b) ∧ (a ∨ c)</td>
+            </tr>
+            <tr><td>(a ∧ b) ∨ c</td>
+                <td>≡</td>
+                <td>(a ∨ c) ∧ (b ∨ c)</td>
+            </tr>
+                         
+        </table>
+        
+        <p>By definition a CNF is implication free and in negation normal form.</p>
+        <p>To transform a arbitrary formula into CNF,
+        we transform the formula into NNF, then
+        we distribute disjunctions over conjunctions.</p>
+        
+        <h4>Validity </h4>
+        
+        <p>A disjunctive clause of literals is valid (always evaluates to true)
+        if it includes a pair of complementary literals
+        (an atom and the negation of the same atom).
+        A conjunction of clauses is valid if all clauses are valid.</p>
+        
+        <blockquote>A CNF is valid, if every clause contains a least one pair of complementary literals.</blockquote>
+        
+        
         
         
     </body>
