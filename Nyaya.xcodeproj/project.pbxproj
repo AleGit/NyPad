@@ -204,6 +204,18 @@
 		9A926829163C4B7E00C3879B /* ST_cd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926822163C4B7E00C3879B /* ST_cd.png */; };
 		9A92682A163C4B7E00C3879B /* ST_nabcd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926823163C4B7E00C3879B /* ST_nabcd.png */; };
 		9A92682E163C4C9E00C3879B /* ST_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92682D163C4C9E00C3879B /* ST_d.png */; };
+		9AEC707B1642B70A0067991E /* OBDD_idendity.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70741642B70A0067991E /* OBDD_idendity.png */; };
+		9AEC707C1642B70A0067991E /* OBDD_implication1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70751642B70A0067991E /* OBDD_implication1.png */; };
+		9AEC707D1642B70A0067991E /* OBDD_implication2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70761642B70A0067991E /* OBDD_implication2.png */; };
+		9AEC707E1642B70A0067991E /* OBDD_negation.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70771642B70A0067991E /* OBDD_negation.png */; };
+		9AEC707F1642B70A0067991E /* OBDD_product.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70781642B70A0067991E /* OBDD_product.png */; };
+		9AEC70801642B70A0067991E /* OBDD_sum.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70791642B70A0067991E /* OBDD_sum.png */; };
+		9AEC70811642B70A0067991E /* OBDD_xor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC707A1642B70A0067991E /* OBDD_xor.png */; };
+		9AEC70871642B7220067991E /* ROBDD_implication1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70821642B7220067991E /* ROBDD_implication1.png */; };
+		9AEC70881642B7220067991E /* ROBDD_implication2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70831642B7220067991E /* ROBDD_implication2.png */; };
+		9AEC70891642B7220067991E /* ROBDD_product.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70841642B7220067991E /* ROBDD_product.png */; };
+		9AEC708A1642B7220067991E /* ROBDD_sum.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70851642B7220067991E /* ROBDD_sum.png */; };
+		9AEC708B1642B7220067991E /* ROBDD_xor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC70861642B7220067991E /* ROBDD_xor.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -499,6 +511,18 @@
 		9A926823163C4B7E00C3879B /* ST_nabcd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ST_nabcd.png; path = html/ST_nabcd.png; sourceTree = "<group>"; };
 		9A92682B163C4C8700C3879B /* ST_nabcd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ST_nabcd.png; path = html/ST_nabcd.png; sourceTree = "<group>"; };
 		9A92682D163C4C9E00C3879B /* ST_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ST_d.png; path = html/ST_d.png; sourceTree = "<group>"; };
+		9AEC70741642B70A0067991E /* OBDD_idendity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_idendity.png; path = html/OBDD_idendity.png; sourceTree = "<group>"; };
+		9AEC70751642B70A0067991E /* OBDD_implication1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_implication1.png; path = html/OBDD_implication1.png; sourceTree = "<group>"; };
+		9AEC70761642B70A0067991E /* OBDD_implication2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_implication2.png; path = html/OBDD_implication2.png; sourceTree = "<group>"; };
+		9AEC70771642B70A0067991E /* OBDD_negation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_negation.png; path = html/OBDD_negation.png; sourceTree = "<group>"; };
+		9AEC70781642B70A0067991E /* OBDD_product.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_product.png; path = html/OBDD_product.png; sourceTree = "<group>"; };
+		9AEC70791642B70A0067991E /* OBDD_sum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_sum.png; path = html/OBDD_sum.png; sourceTree = "<group>"; };
+		9AEC707A1642B70A0067991E /* OBDD_xor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OBDD_xor.png; path = html/OBDD_xor.png; sourceTree = "<group>"; };
+		9AEC70821642B7220067991E /* ROBDD_implication1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ROBDD_implication1.png; path = html/ROBDD_implication1.png; sourceTree = "<group>"; };
+		9AEC70831642B7220067991E /* ROBDD_implication2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ROBDD_implication2.png; path = html/ROBDD_implication2.png; sourceTree = "<group>"; };
+		9AEC70841642B7220067991E /* ROBDD_product.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ROBDD_product.png; path = html/ROBDD_product.png; sourceTree = "<group>"; };
+		9AEC70851642B7220067991E /* ROBDD_sum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ROBDD_sum.png; path = html/ROBDD_sum.png; sourceTree = "<group>"; };
+		9AEC70861642B7220067991E /* ROBDD_xor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ROBDD_xor.png; path = html/ROBDD_xor.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,20 +553,10 @@
 		1102560C15ECCCB7008B38F9 /* htmltutorials */ = {
 			isa = PBXGroup;
 			children = (
-				9A926811163C362D00C3879B /* BST_conjunction.png */,
-				9A926812163C362D00C3879B /* BST_disjunction.png */,
-				9A926813163C362D00C3879B /* BST_implication.png */,
-				9A926814163C362D00C3879B /* BST_negation.png */,
-				9A926815163C362D00C3879B /* BST_p.png */,
-				9A92681D163C4B7D00C3879B /* ST_a.png */,
-				9A92681E163C4B7D00C3879B /* ST_ab.png */,
-				9A92681F163C4B7D00C3879B /* ST_abcd.png */,
-				9A926820163C4B7D00C3879B /* ST_b.png */,
-				9A926821163C4B7E00C3879B /* ST_c.png */,
-				9A926822163C4B7E00C3879B /* ST_cd.png */,
-				9A92682D163C4C9E00C3879B /* ST_d.png */,
-				9A92682B163C4C8700C3879B /* ST_nabcd.png */,
-				9A926823163C4B7E00C3879B /* ST_nabcd.png */,
+				9AEC70731642B6EB0067991E /* ROBDD */,
+				9AEC70721642B6E30067991E /* OBDD */,
+				9AEC70711642B6C40067991E /* BasicSyntaxTrees */,
+				9AEC706F1642B69F0067991E /* SyntaxTrees */,
 				111F923615E89D6800EB6B1D /* tutorial101.html */,
 				1102560D15ECCE2E008B38F9 /* tutorial111.html */,
 				1102560E15ECCE2E008B38F9 /* tutorial121.html */,
@@ -1058,6 +1072,60 @@
 			name = NyayaParser_v3_Tests;
 			sourceTree = "<group>";
 		};
+		9AEC706F1642B69F0067991E /* SyntaxTrees */ = {
+			isa = PBXGroup;
+			children = (
+				9A92681D163C4B7D00C3879B /* ST_a.png */,
+				9A92681E163C4B7D00C3879B /* ST_ab.png */,
+				9A92681F163C4B7D00C3879B /* ST_abcd.png */,
+				9A926820163C4B7D00C3879B /* ST_b.png */,
+				9A926821163C4B7E00C3879B /* ST_c.png */,
+				9A926822163C4B7E00C3879B /* ST_cd.png */,
+				9A92682D163C4C9E00C3879B /* ST_d.png */,
+				9A92682B163C4C8700C3879B /* ST_nabcd.png */,
+				9A926823163C4B7E00C3879B /* ST_nabcd.png */,
+			);
+			name = SyntaxTrees;
+			sourceTree = "<group>";
+		};
+		9AEC70711642B6C40067991E /* BasicSyntaxTrees */ = {
+			isa = PBXGroup;
+			children = (
+				9A926811163C362D00C3879B /* BST_conjunction.png */,
+				9A926812163C362D00C3879B /* BST_disjunction.png */,
+				9A926813163C362D00C3879B /* BST_implication.png */,
+				9A926814163C362D00C3879B /* BST_negation.png */,
+				9A926815163C362D00C3879B /* BST_p.png */,
+			);
+			name = BasicSyntaxTrees;
+			sourceTree = "<group>";
+		};
+		9AEC70721642B6E30067991E /* OBDD */ = {
+			isa = PBXGroup;
+			children = (
+				9AEC70741642B70A0067991E /* OBDD_idendity.png */,
+				9AEC70751642B70A0067991E /* OBDD_implication1.png */,
+				9AEC70761642B70A0067991E /* OBDD_implication2.png */,
+				9AEC70771642B70A0067991E /* OBDD_negation.png */,
+				9AEC70781642B70A0067991E /* OBDD_product.png */,
+				9AEC70791642B70A0067991E /* OBDD_sum.png */,
+				9AEC707A1642B70A0067991E /* OBDD_xor.png */,
+			);
+			name = OBDD;
+			sourceTree = "<group>";
+		};
+		9AEC70731642B6EB0067991E /* ROBDD */ = {
+			isa = PBXGroup;
+			children = (
+				9AEC70821642B7220067991E /* ROBDD_implication1.png */,
+				9AEC70831642B7220067991E /* ROBDD_implication2.png */,
+				9AEC70841642B7220067991E /* ROBDD_product.png */,
+				9AEC70851642B7220067991E /* ROBDD_sum.png */,
+				9AEC70861642B7220067991E /* ROBDD_xor.png */,
+			);
+			name = ROBDD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1242,6 +1310,18 @@
 				9A926829163C4B7E00C3879B /* ST_cd.png in Resources */,
 				9A92682A163C4B7E00C3879B /* ST_nabcd.png in Resources */,
 				9A92682E163C4C9E00C3879B /* ST_d.png in Resources */,
+				9AEC707B1642B70A0067991E /* OBDD_idendity.png in Resources */,
+				9AEC707C1642B70A0067991E /* OBDD_implication1.png in Resources */,
+				9AEC707D1642B70A0067991E /* OBDD_implication2.png in Resources */,
+				9AEC707E1642B70A0067991E /* OBDD_negation.png in Resources */,
+				9AEC707F1642B70A0067991E /* OBDD_product.png in Resources */,
+				9AEC70801642B70A0067991E /* OBDD_sum.png in Resources */,
+				9AEC70811642B70A0067991E /* OBDD_xor.png in Resources */,
+				9AEC70871642B7220067991E /* ROBDD_implication1.png in Resources */,
+				9AEC70881642B7220067991E /* ROBDD_implication2.png in Resources */,
+				9AEC70891642B7220067991E /* ROBDD_product.png in Resources */,
+				9AEC708A1642B7220067991E /* ROBDD_sum.png in Resources */,
+				9AEC708B1642B7220067991E /* ROBDD_xor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
