@@ -17,10 +17,70 @@
         the product in the logical conjunction, and the sum in the logical disjunction.
         
         So every implication free propositional formula can be rewritten as Boolean expression without effort.
-        A Boolean expression without exclusive or can be rewritten as propositional formula easily.</p>
+        A Boolean expression without xor can be rewritten as propositional formula easily.</p>
         
-        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expression are often very complex representations of Boolean function.
+        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expressions
+        are often very complex or representations of Boolean functions.
+        Often validity or satisfiability are not easy to decide in these
+        for propositional formulas and Boolean expressions.
+        Truth tables are expensive to compute and take much storage.
+        
         </p>
+        
+        
+        
+        <img style="float:right" src="BDT.png" width="317px" />
+        
+        <h4>Binary Decision Trees</h4>
+        
+        <p>An efficient representation/definition of Boolean functions can be done with reduced ordered binary decision diagrams. We start with an arbitrary binary decision tree to define an binary function g(x,y,z) with three arguments.
+        </p><p>To calculate the value of g(1,1,0) we start at the root node “x on the top”.
+        Because x=1 we follow the solid line to “z“.
+        Because z=0 we follow the dotted line to “y”.
+        Because y=1 we follow the solid line to the result “0”.
+        </p>
+        
+        <table class="right">
+            <tr>
+                <td>x</td>
+                <td>1</td><td style="background-color:lightgrey">1</td><td>1</td><td>1</td>
+                <td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <td>y</td>
+                <td>1</td><td style="background-color:lightgrey">1</td><td>0</td><td>0</td>
+                <td>1</td><td>1</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <td>z</td>
+                <td>1</td><td style="background-color:lightgrey">0</td><td>1</td><td>0</td>
+                <td>1</td><td>0</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>g(x,y,z)</td>
+                <td>1</td><td style="background-color:lightgrey">0</td><td>1</td><td>1</td>
+                <td>1</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+        </table>
+        
+        <p>We make the following observations</p>
+        
+        <ul>
+            <li>The leftmost decision node “x” seams unnessessary,
+        because we can only reach this node if x=0.
+        So we must go to the leftmost “0” and can't
+        go to the leftmost “1”.
+        If we remove the leftmost 1 and replace leftmost “x” with “0“,
+        the same Boolean function is defined.</li>
+        
+            <li>The function is satisfiable. (There is at least one real path to 1)</li>
+            <li>The function is not valid. (There is at least one real path to 0)</li>
+        <li>If x=0 the the result does not depende on z.</li>
+            <li>If x=1 and z=1 the result does not depend on y.</li>
+            
+        
+        </ul>
+    
         
     </body>
 </html>
