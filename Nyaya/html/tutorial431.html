@@ -32,23 +32,28 @@
         </table>
         
         <p>By definition a DNF is implication free and in negation normal form.</p>
-        <p>To transform a arbitrary formula into CNF,
+        <p>To transform an arbitrary propositional formula into CNF,
         we transform the formula into NNF, then
         we distribute conjunctions over disjunctions.</p>
         
         <h4>Examples</h4>
         
         <ul>
-            <li></li>
+            <li>a → b ≡ ¬a ∨ b</li>
+            <li>a ∨ b ∧ c ∨ d = (a ∨ b) ∧ (c ∨ d) ≡ ((a ∨ b) ∧ c) ∨ ((a ∨ b) ∧ d)
+                <br>≡ (a ∧ c) ∨ (b ∧ c) ∨ (a ∧ d) ∨ (b ∧ d)</li>
+            <li>a ∨ b ∧ c ∨ d = (a ∨ b) ∧ (c ∨ d) ≡ (a ∧ (c ∨ d)) ∨ (b ∧ (c ∨ d))
+                <br>≡ (a ∧ c) ∨ (a ∧ d) ∨ (b ∧ c) ∨ (b ∧ d)</li>
         </ul>
         
         <h4>Satisfiability</h4>
         
         <p>A conjunctive clause of literals is satisfiable (evaluates to true for at least one truth assignment)
-        if it does not contain a pair of complementary literals.
+        if it does not contain a pair of complementary literals (an atom and the negation of the same atom).
         A disjunction of clauses is satisfiable if at least one clause is satisfiable.</p>
         
-        <blockquote>A DNF is satisfiable it it least one clause does not contain a pair of complementary literals.</blockquote>
+        <blockquote>A propositional formula in disjunctive normal form is satisfiable<br>
+            if at least one conjunctive clause does not contain a pair of complementary literals.</blockquote>
         
     </body>
 </html>

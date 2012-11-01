@@ -32,9 +32,19 @@
         </table>
         
         <p>By definition a CNF is implication free and in negation normal form.</p>
-        <p>To transform a arbitrary formula into CNF,
+        <p>To transform an arbitrary propositional formula into CNF,
         we transform the formula into NNF, then
         we distribute disjunctions over conjunctions.</p>
+        
+        <h4>Examples</h4>
+        
+        <ul>
+            <li>a → b ≡ ¬a ∨ b</li>
+            <li>a ∧ b ∨ c ∧ d = (a ∧ b) ∨ (c ∧ d) ≡ ((a ∧ b) ∨ c) ∧ ((a ∧ b) ∨ d)
+                <br>≡ (a ∨ c) ∧ (b ∨ c) ∧ (a ∨ d) ∧ (b ∨ d)</li>
+            <li>a ∧ b ∨ c ∧ d = (a ∧ b) ∨ (c ∧ d) ≡ (a ∨ (c ∧ d)) ∧ (b ∨ (c ∧ d))
+                <br>≡ (a ∨ c) ∧ (a ∨ d) ∧ (b ∨ c) ∧ (b ∨ d)</li>
+        </ul>
         
         <h4>Validity </h4>
         
@@ -43,7 +53,10 @@
         (an atom and the negation of the same atom).
         A conjunction of clauses is valid if all clauses are valid.</p>
         
-        <blockquote>A CNF is valid, if every clause contains a least one pair of complementary literals.</blockquote>
+        <blockquote>A propositional formula in conjunctive normal form is valid<br>
+            if every disjunctive clause contains at least one pair of complementary literals.</blockquote>
+        
+        <div><p>Note: An arbitrary propositional formula P is satisfiable if ¬P is not valid.</p><div>
         
         
         
