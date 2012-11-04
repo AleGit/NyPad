@@ -24,10 +24,6 @@
         
         
         <table class="left">
-            <tr>
-                <td colspan="2">Boolean functions<br>with 0 arguments</td>
-            </tr>
-            <tr><td colspan="2"/></tr>
 
             <tr>
                 <th>c<sub>1</sub></th><th>c<sub>2</sub></th>
@@ -35,31 +31,34 @@
             <tr>
                 <td>0</td><td>1</td>
             </tr>
+            <!--
+            <tr>
+                <td colspan="2">Boolean functions<br>with 0 arguments</td>
+            </tr>
+             -->
+
         </table>
 
         
         <table class="right">
-            <tr>
-                <td colspan="5">Boolean functions<br>with 1 argument</td>
-            </tr>
-            <tr><td colspan="5"/></tr>
 
             <tr>
                 <th>a</th>
+                <td />
                 <th>f<sub>1</sub></th><th>f<sub>2</sub></th><th>f<sub>3</sub></th><th>f<sub>4</sub></th>
             </tr>
             <tr>
                 <td>0</td>
+                <td />
                 <td>0</td><td>0</td><td>1</td><td>1</td>
             </tr>
             <tr>
                 <td>1</td>
+                <td />
                 <td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
-            <tr><td colspan="5"/></tr>
             <tr>
-                <td> </td>
-                <td>0</td><td>a</td><td style="text-decoration:overline">a</td><td>1</td>
+                <td colspan="6">One argument</td>
             </tr>
 
         </table>
@@ -69,7 +68,7 @@
         the second one to 1.
         <!-- Often, constant functions are abbreviated to 0 and 1.-->
         There are four different Boolean functions with one argument
-        and 16 differnt Boolean functions g(a,b) with 2 arguments.
+        and 16 differnt Boolean functions with 2 arguments.
         <!--Eight of the functions with two arguments map the 0 and 1 to the result 1.--></p>
         
         <p><em>In general there are 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments. </em></p>
@@ -80,11 +79,8 @@
         
         <table class="right">
             <tr>
-                <td colspan="18">Boolean functions with 2 arguments</td>
-            </tr>
-            <tr><td colspan="18"/></tr>
-            <tr>
                 <th>a</th><th>b</th>
+                <td />
                 <th>g<sub>1</sub></th><th>g<sub>2</sub></th><th>g<sub>3</sub></th><th>g<sub>4</sub></th>
                 <th>g<sub>5</sub></th><th>g<sub>6</sub></th><th>g<sub>7</sub></th><th>g<sub>8</sub></th>
                 <th>g<sub>9</sub></th><th>g<sub>10</sub></th><th>g<sub>11</sub></th><th>g<sub>12</sub></th>
@@ -92,44 +88,37 @@
             </tr>
             <tr>
                 <td>0</td><td>0</td>
+                <td />
                 <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
                 <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
             </tr>
             <tr>
                 <td>0</td><td>1</td>
+                <td />
                 <td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td>
                 <td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td>
             </tr>
             <tr>
                 <td>1</td><td>0</td>
+                <td />
                 <td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td>
                 <td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td>
             </tr>
             <tr>
                 <td>1</td><td>1</td>
+                <td />
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
-            <!--
-            <tr><td colspan="18"/></tr>
-            
             <tr>
-                <td colspan="2"> </td>
-                <td>0</td><td>•</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
-                <td> </td><td> </td><td style="text-decoration:overline">b</td><td> </td><td style="text-decoration:overline">a</td><td></td><td> </td><td>1</td>-->
+                <td colspan="19">Boolean functions with 2 arguments</td>
             </tr>
         </table>
         
-        <!--
-        <p>Note that the only difference between some functions is the number of arguments, but not the results.
-        Compare the results of c<sub>1</sub> and f<sub>1</sub> with g<sub>1</sub>,
-        The results of g<sub>4</sub> are equal to the first argument, like the results of f<sub>2</sub>.</p>
-         -->
+        <p>Some Boolean functions are highlighted – they have names and special representations.</p>
+        <p>The <em>complement</em> is a Boolean function that maps one argument to it's counterpart – «0» to «1» and «1» to «0».
         
         <table class="right">
-            <tr>
-                <td colspan="18">Representations</td>
-            </tr>
             <tr>
                 <th>a</th><th>b</th>
                 <td style="text-decoration:overline">a</td><td>a • b</td><td>a + b</td><td>a ⊕ b</td>
@@ -158,106 +147,19 @@
                 <td>g<sub>8</sub></td>
                 <td>g<sub>7</sub></td>
             </tr>
+            <tr>
+                <td colspan="18">Representations</td>
+            </tr>
         </table>
 
         
-        <p>Some Boolean functions are highlighted – they have names and special representations.
-        The complement is a Boolean function with one argument and maps the argument to to it's complement – «0» to «1» and «1» to «0».
+        
         Usually the complement of «x» is notated as «<span style="text-decoration:overline">x</span>». This is impractical for text input and «!x» or «~x» are often used instead.
-        The product «•» maps two arguments to «1», if both arguments are equal to «1». Otherwise (if one or two arguments are «0») the product «•» maps it's argument's to «0».
-        The sum «+» maps two arguments to «0», if both arguments are equal to «0». Otherwise (if one or two arguments are «1») the sum «+» maps it's argument's to «1».
-        The exclusive or «⊕» maps two arguments to «1», if the arguments are different. Otherwise (if the arguments are equal) the exclusive or «⊕» maps it's argument's to «0».</p>
+        </p><p>The <em>product</em> «•» maps two arguments to «1», if both arguments are equal to «1». Otherwise (if one or two arguments are «0») the product «•» maps it's argument's to «0».
+        </p><p>The <em>sum</em> «+» maps two arguments to «0», if both arguments are equal to «0». Otherwise (if one or two arguments are «1») the sum «+» maps it's argument's to «1».
+        </p><p>The <em>exclusive or</em> «⊕» maps two arguments to «1», if the arguments are different. Otherwise (if the arguments are equal) the exclusive or «⊕» maps it's arguments to «0».</p>
         
-        <div class="rbox" style="width:310px">
-            <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
-            Indeed, the second equivalence does not hold for arithmetic expressions,
-            but both Boolean expression represent the same Boolean function.<p>
-            <table class="right">
-                <tr>
-                    <td>a</td><td>b</td><td>c</td>
-                    <td>b.c</td><th>a+b.c</th>
-                    <td>a+b</td><td>a+c</td><th>(a+b).(a+c)</th>
-                </tr>
-                <tr>
-                    <td>0</td><td>0</td><td>0</td>
-                    <td>0</td><th>0</th>
-                    <td>0</td><td>0</td><th>0</th>
-                </tr>
-                <tr>
-                    <td>0</td><td>0</td><td>1</td>
-                    <td>0</td><th>0</th>
-                    <td>0</td><td>1</td><th>0</th>
-                </tr>
-                <tr>
-                    <td>0</td><td>1</td><td>0</td>
-                    <td>0</td><th>0</th>
-                    <td>1</td><td>0</td><th>0</th>
-                </tr>
-                <tr>
-                    <td>0</td><td>1</td><td>1</td>
-                    <td>1</td><th>1</th>
-                    <td>1</td><td>1</td><th>1</th>
-                </tr>
-                <tr>
-                    <td>1</td><td>0</td><td>0</td>
-                    <td>0</td><th>1</th>
-                    <td>1</td><td>1</td><th>1</th>
-                </tr>
-                <tr>
-                    <td>1</td><td>0</td><td>1</td>
-                    <td>0</td><th>1</th>
-                    <td>1</td><td>1</td><th>1</th>
-                </tr>
-                <tr>
-                    <td>1</td><td>1</td><td>0</td>
-                    <td>1</td><th>1</th>
-                    <td>1</td><td>1</td><th>1</th>
-                </tr>
-                <tr>
-                    <td>1</td><td>1</td><td>1</td>
-                    <td>1</td><th>1</th>
-                    <td>1</td><td>1</td><th>1</th>
-                </tr>
-                
-            </tr></table>
-            
-        </div>
-        
-        <h4>Boolean epressions</h4>
-
-        
-        <h4>Precedences</h4>
-        
-        <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
-        The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
-        The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
-        
-        <!--
-        <h4>Calculation rules</h4>
-        
-        <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a
-        <br><span style="text-decoration:overline" >ā</span> = a
-        &nbsp;&nbsp; <span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span>
-        &nbsp;&nbsp;
-        <span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>
-        <br>a⊕b
-        = a•<span style="text-decoration:overline">b</span> + <span style="text-decoration:overline">a</span>•b
-        = (<span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>) • (a+b)
-        <br>
-        0⊕a = a = a⊕0
-        &nbsp;&nbsp;
-        1⊕a = <span style="text-decoration:overline">a</span> = a⊕1
-        <br>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a
-        <br>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
-        <br>a•a = a &nbsp;&nbsp; a+a=a &nbsp;&nbsp; a⊕a = 0 &nbsp;&nbsp;
-        a•ā = 0 = ā•a  &nbsp;&nbsp; a+ā = 1 =ā+a &nbsp;&nbsp; a⊕ā = 1 = ā⊕a</p>
-         -->
-        <!--
-        <h4>Example</h4>
-        <p>(a•1+0•<span style="text-decoration:overline">b</span>)⊕1⊕a =
-        (a+0)⊕1⊕a = a⊕1⊕a = ā⊕a = 1
-        </p>-->
-        
+               
         
         
     </body>
