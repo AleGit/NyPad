@@ -24,7 +24,6 @@
 		1102562D15ECCE2E008B38F9 /* tutorial411.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561A15ECCE2E008B38F9 /* tutorial411.html */; };
 		1102563015ECCE2E008B38F9 /* tutorial501.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561D15ECCE2E008B38F9 /* tutorial501.html */; };
 		1102563215ECCE2E008B38F9 /* tutorial521.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102561F15ECCE2E008B38F9 /* tutorial521.html */; };
-		1102563415ECE8F2008B38F9 /* tutorial251.html in Resources */ = {isa = PBXBuildFile; fileRef = 1102563315ECE8F0008B38F9 /* tutorial251.html */; };
 		1103D6EF15F3CC72003D5193 /* NayayDerivationValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1103D6EE15F3CC72003D5193 /* NayayDerivationValidation.m */; };
 		11061F1215EE0F9A00345516 /* tutorial211.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1115EE0F9A00345516 /* tutorial211.html */; };
 		11061F1515EE0FE500345516 /* tutorial421.html in Resources */ = {isa = PBXBuildFile; fileRef = 11061F1315EE0FE500345516 /* tutorial421.html */; };
@@ -249,7 +248,6 @@
 		1102561A15ECCE2E008B38F9 /* tutorial411.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial411.html; path = html/tutorial411.html; sourceTree = "<group>"; };
 		1102561D15ECCE2E008B38F9 /* tutorial501.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial501.html; path = html/tutorial501.html; sourceTree = "<group>"; };
 		1102561F15ECCE2E008B38F9 /* tutorial521.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial521.html; path = html/tutorial521.html; sourceTree = "<group>"; };
-		1102563315ECE8F0008B38F9 /* tutorial251.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial251.html; path = html/tutorial251.html; sourceTree = "<group>"; };
 		1103D6ED15F3CC72003D5193 /* NayayDerivationValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NayayDerivationValidation.h; sourceTree = "<group>"; };
 		1103D6EE15F3CC72003D5193 /* NayayDerivationValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NayayDerivationValidation.m; sourceTree = "<group>"; };
 		11061F1115EE0F9A00345516 /* tutorial211.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial211.html; path = html/tutorial211.html; sourceTree = "<group>"; };
@@ -571,7 +569,6 @@
 				1102561115ECCE2E008B38F9 /* tutorial221.html */,
 				1102561215ECCE2E008B38F9 /* tutorial231.html */,
 				1102561315ECCE2E008B38F9 /* tutorial241.html */,
-				1102563315ECE8F0008B38F9 /* tutorial251.html */,
 				1102561515ECCE2E008B38F9 /* tutorial301.html */,
 				1102561615ECCE2E008B38F9 /* tutorial311.html */,
 				1102561715ECCE2E008B38F9 /* tutorial321.html */,
@@ -1265,7 +1262,6 @@
 				1102562D15ECCE2E008B38F9 /* tutorial411.html in Resources */,
 				1102563015ECCE2E008B38F9 /* tutorial501.html in Resources */,
 				1102563215ECCE2E008B38F9 /* tutorial521.html in Resources */,
-				1102563415ECE8F2008B38F9 /* tutorial251.html in Resources */,
 				11061F1215EE0F9A00345516 /* tutorial211.html in Resources */,
 				11061F1515EE0FE500345516 /* tutorial421.html in Resources */,
 				11061F1615EE0FE500345516 /* tutorial431.html in Resources */,
