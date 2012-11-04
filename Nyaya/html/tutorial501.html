@@ -20,7 +20,7 @@
         
         <p><em>A Boolean function on n arguments is a mappging from {0,1}<sup>n</sup> to {0,1}.</em></p>
         
-        <p>For example g(0,1) = 1 is a Boolean function which maps the two arguments 0 and 1 to the result 1.
+        <!--<p>For example g(0,1) = 1 is a Boolean function which maps the two arguments 0 and 1 to the result 1.-->
         
         
         <table class="left">
@@ -64,14 +64,15 @@
 
         </table>
         
-        There are two different Boolean functions c() with zero arguments –
-        the constant function c<sub>1</sub>()=0 and the constant function c<sub>2</sub>()=1.
-        Often, constant functions are abbreviated to 0 and 1.
-        You can construct four different Boolean functions f(a) with one argument
+        <p>There are two different Boolean functions with zero arguments –
+        the first one maps every element of {()} to 0,
+        the second one to 1.
+        <!-- Often, constant functions are abbreviated to 0 and 1.-->
+        There are four different Boolean functions with one argument
         and 16 differnt Boolean functions g(a,b) with 2 arguments.
-        Eight of the functions with two arguments map the 0 and 1 to the result 1.</p>
+        <!--Eight of the functions with two arguments map the 0 and 1 to the result 1.--></p>
         
-        <p><em>In general we can construct 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments.</em></p>
+        <p><em>In general there are 2<sup>2<sup>n</sup></sup> different Boolean functions with n arguments. </em></p>
         
         
         
@@ -109,23 +110,25 @@
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
                 <td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
             </tr>
+            <!--
             <tr><td colspan="18"/></tr>
+            
             <tr>
                 <td colspan="2"> </td>
                 <td>0</td><td>•</td><td> </td><td>a</td><td> </td><td>b</td><td>⊕</td><td>+</td>
-                <td> </td><td> </td><td style="text-decoration:overline">b</td><td> </td><td style="text-decoration:overline">a</td><td></td><td> </td><td>1</td>
+                <td> </td><td> </td><td style="text-decoration:overline">b</td><td> </td><td style="text-decoration:overline">a</td><td></td><td> </td><td>1</td>-->
             </tr>
         </table>
         
+        <!--
         <p>Note that the only difference between some functions is the number of arguments, but not the results.
         Compare the results of c<sub>1</sub> and f<sub>1</sub> with g<sub>1</sub>,
         The results of g<sub>4</sub> are equal to the first argument, like the results of f<sub>2</sub>.</p>
-        
-        <h4>Special Boolean functions</h4>
+         -->
         
         <table class="right">
             <tr>
-                <td colspan="18">Special Boolean functions</td>
+                <td colspan="18">Representations</td>
             </tr>
             <tr>
                 <th>a</th><th>b</th>
@@ -148,10 +151,17 @@
                 <td>1</td><td>1</td>
                 <td>1</td><td>1</td><td>0</td>
             </tr>
+            <tr>
+                <td colspan="2" />
+                <td>f<sub>3</sub></td>
+                <td>g<sub>2</sub></td>
+                <td>g<sub>8</sub></td>
+                <td>g<sub>7</sub></td>
+            </tr>
         </table>
 
         
-        <p>Some Boolean functions are highlighted – they have names and a special notation.
+        <p>Some Boolean functions are highlighted – they have names and special representations.
         The complement is a Boolean function with one argument and maps the argument to to it's complement – «0» to «1» and «1» to «0».
         Usually the complement of «x» is notated as «<span style="text-decoration:overline">x</span>». This is impractical for text input and «!x» or «~x» are often used instead.
         The product «•» maps two arguments to «1», if both arguments are equal to «1». Otherwise (if one or two arguments are «0») the product «•» maps it's argument's to «0».
@@ -161,7 +171,7 @@
         <div class="rbox" style="width:310px">
             <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
             Indeed, the second equivalence does not hold for arithmetic expressions,
-            but it does for Boolean expressions, which is easily shown with a truth table.<p>
+            but both Boolean expression represent the same Boolean function.<p>
             <table class="right">
                 <tr>
                     <td>a</td><td>b</td><td>c</td>
@@ -213,12 +223,16 @@
             
         </div>
         
+        <h4>Boolean epressions</h4>
+
+        
         <h4>Precedences</h4>
         
         <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
         The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
         The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
+        <!--
         <h4>Calculation rules</h4>
         
         <p>a•b = b•a &nbsp;&nbsp; a+b = b+a &nbsp;&nbsp; a⊕b = b⊕a
@@ -237,11 +251,12 @@
         <br>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
         <br>a•a = a &nbsp;&nbsp; a+a=a &nbsp;&nbsp; a⊕a = 0 &nbsp;&nbsp;
         a•ā = 0 = ā•a  &nbsp;&nbsp; a+ā = 1 =ā+a &nbsp;&nbsp; a⊕ā = 1 = ā⊕a</p>
-        
+         -->
+        <!--
         <h4>Example</h4>
         <p>(a•1+0•<span style="text-decoration:overline">b</span>)⊕1⊕a =
         (a+0)⊕1⊕a = a⊕1⊕a = ā⊕a = 1
-        </p>
+        </p>-->
         
         
         

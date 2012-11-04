@@ -51,11 +51,14 @@
         
         <h4>From subformulas to formulas</h4>
         
-        <p>If you are using formulas in strict syntax, you can use any rule of the grammar to combine them to more complex formulas without additional work.
-        But if you are using the syntax conventions, you have to be carefull when you are combining subformulas.</p>
-        <p>For example if you combine the formulas <code>a ∨ b</code> and <code>c → d</code> with the rule <code>P ➜ (P∧P)</code> to a more complex formula
+        <p>If we are using formulas in strict syntax,
+        we can use any rule of the grammar to combine them
+        to more complex formulas without additional work.
+        But if we are using the syntax conventions,
+        we have to be carefull when we are combining subformulas.</p>
+        <p>For example if we combine the formulas <code>a ∨ b</code> and <code>c → d</code> with the rule <code>P ➜ (P∧P)</code> to a more complex formula
         then the correct expression (after ommitting the outer parenthesis) is <span style="text-decoration:line-through;color:red;"><code>&nbsp;a ∨ b ∧ c → d&nbsp;</code></span> <code>(a ∨ b) ∧ (c → d)</code>.
-        You can verify this by rewriting the two subformulas to formulas in strict syntax.</p>
+        We can verify this by rewriting the two subformulas to formulas in strict syntax.</p>
         
         <table>
             <tr><td></td><td>subformulas</td><td>rule</td><td>strict syntax</td><td>syntax convention</td></tr>
@@ -94,9 +97,9 @@
         </table>
         
         <h4>From formula to subformulas</h4>
-        <p>To determine the sub-formulas of a formula you rewrite the formula in strict syntax.
-        Your remove the outermost parentheses and you split the formula by be removing that connective,
-        which leaves one or two well formed subformulas.</p>
+        <p>To determine the sub-formulas of a formula we rewrite the formula in strict syntax.
+        We remove the outermost parentheses and we split the formula by be removing the root connective,
+        which leaves one (negation) or two (conjunction, disjunction, implication) well formed subformulas.</p>
         
         <blockquote>
             
@@ -126,7 +129,7 @@
             </code>
         </blockquote>
 
-        <p>Then your original formula must be reconstructable from the extracted subformula(s) with one grammar rule.</p>
+        <p>Then our original formula must be reconstructable from the extracted subformula(s) with the grammar rule for the removed connective.</p>
         
         <blockquote>
             <code>(a ∨ b)</code>

@@ -41,8 +41,8 @@
         
         <h4>Sequents</h4>
         
-        <p>A sequent is a collection of (composite) propositions (the premesis)
-        an a (composite) proposition on the right side of “⊢”.
+        <p>A sequent is a collection of (composite) propositions (the “premesis”)
+        an a collection of (composite) propositions (the “conclusions”) on the right side of “⊢”.
         We use uppercase latin letters for (composite) propositions (formulas)
         to distinguish them from simple propositions (atoms).</p>
         
@@ -52,10 +52,10 @@
             </tr>
         </table>
         
-        <blockquote>P<sub>1</sub>, ..., P<sub>n</sub></n> ⊢ Q</code></blockquote>
+        <blockquote>P<sub>1</sub>, …, P<sub>n</sub></n> ⊢ Q<sub>1</sub>, …, Q<sub>m</sub></code></blockquote>
         
         
-        <p>Our paragraph from above is build from three sentences and a conclusion.</p>
+        <p>Our paragraph from above is build from three sentences and one conclusion.</p>
         <ul>
             <li>If <code>p</code> and not <code>q</code>, then <code>r</code>.</li>
             <li>Not <code>r</code>.</li>
@@ -63,19 +63,20 @@
             <li><i>Therefore</i>,&nbsp;<code>q</code>.</li>
         </ul>
         
-        <p>Using the basic connectives we can write our paragraph formally as sequent.</p>
+        <p>Using the basic connectives we can write our paragraph as sequent.</p>
         
+        <div class="rbox" style="width:270px">
+        <p><small>To “translate“ natural sentences into atoms or compositions is often ambiguous.
+        We can treat “Elephants are big, grey animals“ correctly as one simple sentence,
+        and represent it with <cite>“p”</cite> (an atom) or read it as composition <cite>“p ∧ q ∧ r”</cite>
+        (“Elephants are big and elephants are grey and elephants are animals”).
+        </p></small></div>
+
         <blockquote>(<code>p</code> ∧ ¬<code>q</code> → <code>r</code>), (¬ <code>r</code>), (<code>p</code>) ⊢ <code>q</code></blockquote>
         
         
 
-        <div class="rbox" style="width:270px">
-        <p><small>To “translate“ natural sentences into atoms or compositions is often ambiguous.
-        You can treat “Elephants are big, grey animals“ correctly as one simple sentence,
-        and represent it with <cite>“p”</cite> (an atom) or read it as composition <cite>“p ∧ q ∧ r”</cite>
-        (“Elephants are big and elephants are grey and elephants are animals”).
-        </p></small></div>
-        
+                
         <p>Which can be read as “If the first premise holds, and the second premise holds, and the third premise holds,
         then the conclusion should hold.“
         

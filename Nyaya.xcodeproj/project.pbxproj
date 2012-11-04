@@ -191,6 +191,7 @@
 		11F906C915CECB2A001CD0F3 /* BasicTruthTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C815CECB2A001CD0F3 /* BasicTruthTableTests.m */; };
 		11F906CC15CED420001CD0F3 /* BasicPrecedenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */; };
 		11F906CF15CEDF58001CD0F3 /* BasicNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */; };
+		9A0592D51646585200E314E2 /* tutorial502.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D41646585200E314E2 /* tutorial502.html */; };
 		9A926816163C362D00C3879B /* BST_conjunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926811163C362D00C3879B /* BST_conjunction.png */; };
 		9A926817163C362D00C3879B /* BST_disjunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926812163C362D00C3879B /* BST_disjunction.png */; };
 		9A926818163C362D00C3879B /* BST_implication.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926813163C362D00C3879B /* BST_implication.png */; };
@@ -498,6 +499,7 @@
 		11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicPrecedenceTests.m; sourceTree = "<group>"; };
 		11F906CD15CEDF58001CD0F3 /* BasicNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNormalFormTests.h; sourceTree = "<group>"; };
 		11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNormalFormTests.m; sourceTree = "<group>"; };
+		9A0592D41646585200E314E2 /* tutorial502.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial502.html; path = html/tutorial502.html; sourceTree = "<group>"; };
 		9A926811163C362D00C3879B /* BST_conjunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_conjunction.png; path = html/BST_conjunction.png; sourceTree = "<group>"; };
 		9A926812163C362D00C3879B /* BST_disjunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_disjunction.png; path = html/BST_disjunction.png; sourceTree = "<group>"; };
 		9A926813163C362D00C3879B /* BST_implication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_implication.png; path = html/BST_implication.png; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				11061F1315EE0FE500345516 /* tutorial421.html */,
 				11061F1415EE0FE500345516 /* tutorial431.html */,
 				1102561D15ECCE2E008B38F9 /* tutorial501.html */,
+				9A0592D41646585200E314E2 /* tutorial502.html */,
 				11061F1715EE0FFB00345516 /* tutorial511.html */,
 				1102561F15ECCE2E008B38F9 /* tutorial521.html */,
 			);
@@ -1326,6 +1329,7 @@
 				9AEC708A1642B7220067991E /* ROBDD_sum.png in Resources */,
 				9AEC708B1642B7220067991E /* ROBDD_xor.png in Resources */,
 				9AEC708D1643114A0067991E /* BDT.png in Resources */,
+				9A0592D51646585200E314E2 /* tutorial502.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
