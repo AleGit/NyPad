@@ -11,30 +11,26 @@
         
         <h3>Binary Decision Trees</h3>
         
-        <h4>Representations of Boolean functions</h4>
+        <p>Boolean expressions, propositional formuals, syntax trees, and truth tables
+        are different represenations of Boolean functions.</p>
         
-        <p>Propositional formulas and truth tables are different representations of Boolean functions.
-        When “0” is mapped to “F” (false) and “1” is mapped to “T” (true),
-        the complement finds it‘s counterpart in the logical negation,
-        the product in the logical conjunction, and the sum in the logical disjunction.
+        <p>In general the following properties are not easy to decide when using the first three representations</p>
+        <ul>
+            <li>Does the represented Boolean function map to 1 only? (validity)</li>
+            <li>Does the represented Boolean function map to 1 at least once? (satisfiability)</li>
+            <li>Do two descriptions represent the same Boolean function? (equivalence)</li>
+        </ul>
         
-        So every implication free propositional formula can be rewritten as Boolean expression without effort.
-        A Boolean expression without xor can be rewritten as propositional formula easily.</p>
-        
-        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expressions
-        can be very complex or representations of Boolean functions.
-        Validity and/or satisfiability are hard to decide
-        for propositional formulas and Boolean expressions very often.
-        Very different propositional formulas or Boolean expressions can represent the same Boolean function. 
-        Truth tables are expensive to compute and take much storage.
-        Another representation of Boolean functions are binary decision diagrams.
+        <p>A complete truth table does answer this questions easily.
+        But it is very expansive to compute and store a complete truth table.
+        A more memory-friendly representation of Boolean functions are binary decision trees or more general binary decision diagrams.
         </p>
         
         <img style="float:right" src="BDT.png" width="317px" />
         
-        <h4>Binary Decision Trees</h4>
+        <h4>Example</h4>
         
-        <p>We start with an arbitrary binary decision tree to define an binary function g(x,y,z) with three arguments.
+        <p>We start with an arbitrary binary decision tree to represent a Boolean function g(x,y,z) with three arguments.
         </p><p>To calculate the value of g(1,1,0) we start at the root node “x on the top”.
         Because x=1 we follow the solid line to “z“.
         Because z=0 we follow the dotted line to “y”.
@@ -81,7 +77,8 @@
             <li>The function is not valid. (There is at least one real path to 0)</li>
         <li>If x=0 the the result does not depende on z.</li>
             <li>If x=1 and z=1 the result does not depend on y.</li>
-            
+            <li>Because of the invalid path we had to check more carefully</li>
+    
         
         </ul>
     

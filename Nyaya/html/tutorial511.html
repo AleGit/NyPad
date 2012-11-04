@@ -12,22 +12,25 @@
         
         <h3>Boolean Expressions</h3>
 
+        <p>With Boolean expressions –
+        combinations of complements, products, sums, and exclusive ors –
+        we can represent each Boolean function. For the grammar</p>
         
+        <blockquote>P &nbsp;::=&nbsp;
+            p &nbsp;|&nbsp;
+            (<span style="text-decoration:overline">P</span>) &nbsp;|&nbsp;
+            (P • P) &nbsp;|&nbsp;
+            (P + P) &nbsp;|&nbsp;
+            (P ⊕ P)</blockquote>
         
-        
-
-        
-        
-        
-        
-        <h4>Precedences</h4>
+        <p>we ommit outer parentheses and use precedences as syntax conventions.</p>
         
         <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
         The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
         The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
         
-        <div class="rbox" style="width:310px">
+        <div class="rbox" style="width:280px">
             <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
             Indeed, the second equivalence does not hold for arithmetic expressions,
             but both Boolean expression represent the same Boolean function.<p>
@@ -84,65 +87,54 @@
         
         <h4>Equivalence of Boolean expressions</h4>
         
-        <p>Two Boolean expressions are equivalent if they represent the same Boolean expression.</p>
+        <p>Two Boolean expressions are equivalent if they represent the same Boolean function.</p>
         
         <table>
             <tr>
-                <td>a•b = b•a</td>
-                <td>a+b = b+a</td>
-                <td>a⊕b = b⊕a</td>
-                <td><span style="text-decoration:overline" >ā</span> = a</td>
-            </tr>
+                <td colspan="6"><span style="text-decoration:overline" >ā</span> = a</td></td>
             <tr>
-                <td colspan="2"><span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span></td>
-                <td colspan="2"><span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></td>
+            </tr>
+                <td colspan="3"><span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span></td>
+                <td colspan="3"><span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></td>
                 
             </tr>
             <tr>
-                <td colspan="4">a⊕b
+                <td colspan="2">a•b = b•a</td>
+                <td colspan="2">a+b = b+a</td>
+                <td colspan="2">a⊕b = b⊕a</td>
+            <tr>
+                <td colspan="2">a•0 = 0</td>
+                <td colspan="2">a+0 = a</td>
+                <td colspan="2">a⊕0 = a</td>
+            </tr>
+            <tr>
+                <td colspan="2">a•1 = a</td>
+                <td colspan="2">a+1 = 1</td>
+                <td colspan="2">a⊕1 = <span style="text-decoration:overline">a</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">a•a = a</td>
+                <td colspan="2">a+a = a</td>
+                <td colspan="2">a⊕a = 0</td>
+            </tr>
+            <tr>
+                <td colspan="2">a•<span style="text-decoration:overline">a</span> = 0</td>
+                <td colspan="2">a+<span style="text-decoration:overline">a</span> = 1</td>
+                <td colspan="2">a⊕<span style="text-decoration:overline">a</span> = 1</td>
+            </tr>
+            
+            <tr>
+                <td colspan="6">a+b•c = (a+b)•(a+c)</td>
+            </tr>
+            <tr>
+                <td colspan="6">a•(b+c) = a•b+a•c</td>
+            </tr>
+            <tr>
+                <td colspan="6">a⊕b
                     = a•<span style="text-decoration:overline">b</span> + <span style="text-decoration:overline">a</span>•b
                     = (<span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>) • (a+b)</td>
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </table>
-        
-         &nbsp;&nbsp; 
-         &nbsp;&nbsp;
-        
-        
-         0⊕a = a = a⊕0
-         &nbsp;&nbsp;
-         1⊕a = <span style="text-decoration:overline">a</span> = a⊕1
-         <br>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a
-         <br>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
-         <br>a•a = a &nbsp;&nbsp; a+a=a &nbsp;&nbsp; a⊕a = 0 &nbsp;&nbsp;
-         a•ā = 0 = ā•a  &nbsp;&nbsp; a+ā = 1 =ā+a &nbsp;&nbsp;
-        <br>a⊕ā = 1 = ā⊕a</p>
-         
-        
+            </table>        
          <h4>Example</h4>
          <p>(a•1+0•<span style="text-decoration:overline">b</span>)⊕1⊕a =
          (a+0)⊕1⊕a = a⊕1⊕a = ā⊕a = 1
