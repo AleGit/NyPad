@@ -2,89 +2,153 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>Binary Decicion Diagrams :: Binary Decicion Diagrams</title>
+            <title>Binary Decicion Diagrams :: Boolean Expressions</title>
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body>
         
+        
         <div class="chapter">Chapter 5<br>Binary Decision Diagrams</div>
         
-        <h3>Binary Decision Trees</h3>
+        <h3>Boolean Expressions</h3>
+
         
-        <h4>Representations of Boolean functions</h4>
         
-        <p>Propositional formulas and truth tables are different representations of Boolean functions.
-        When “0” is mapped to “F” (false) and “1” is mapped to “T” (true),
-        the complement finds it‘s counterpart in the logical negation,
-        the product in the logical conjunction, and the sum in the logical disjunction.
         
-        So every implication free propositional formula can be rewritten as Boolean expression without effort.
-        A Boolean expression without xor can be rewritten as propositional formula easily.</p>
+
         
-        <p>Propositional formulas, CNFs, DNFs, truth tables and Boolean expressions
-        can be very complex or representations of Boolean functions.
-        Validity and/or satisfiability are hard to decide
-        for propositional formulas and Boolean expressions very often.
-        Very different propositional formulas or Boolean expressions can represent the same Boolean function. 
-        Truth tables are expensive to compute and take much storage.
-        Another representation of Boolean functions are binary decision diagrams.
-        </p>
         
-        <img style="float:right" src="BDT.png" width="317px" />
         
-        <h4>Binary Decision Trees</h4>
         
-        <p>We start with an arbitrary binary decision tree to define an binary function g(x,y,z) with three arguments.
-        </p><p>To calculate the value of g(1,1,0) we start at the root node “x on the top”.
-        Because x=1 we follow the solid line to “z“.
-        Because z=0 we follow the dotted line to “y”.
-        Because y=1 we follow the solid line to the result “0”.
-        So this binary decision tree defines g(1,1,0)=0.
-        </p>
+        <h4>Precedences</h4>
         
-        <!--
-        <table class="right">
-            <tr>
-                <td>x</td>
-                <td>1</td><td style="background-color:lightgrey">1</td><td>1</td><td>1</td>
-                <td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr>
-                <td>y</td>
-                <td>1</td><td style="background-color:lightgrey">1</td><td>0</td><td>0</td>
-                <td>1</td><td>1</td><td>0</td><td>0</td>
-            </tr>
-            <tr>
-                <td>z</td>
-                <td>1</td><td style="background-color:lightgrey">0</td><td>1</td><td>0</td>
-                <td>1</td><td>0</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>g(x,y,z)</td>
-                <td>1</td><td style="background-color:lightgrey">0</td><td>1</td><td>1</td>
-                <td>1</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-        </table>
-         -->
+        <p>The complement has the highest precedence. «ā•b», «ā+b» and «ā⊕b» are to be interpreted as «(ā)•b», «(ā)+b» and «(ā)⊕b».
+        The product has a higher precedence than the sum and the exclusive or – «a•b+c» means «(a•b)+c» and «a•b⊕c means «(a•b)⊕c».
+        The sum has a higher precedence than the exclusive or – «a+b⊕c» is to be read as «(a+b)⊕c».</p>
         
-        <p>We make the following observations</p>
         
-        <ul>
-            <li>The leftmost decision node “x” seams unnessessary,
-        because we can only reach this node if x=0.
-        So we must go to the leftmost “0” and can't
-        go to the leftmost “1”.
-        If we remove the leftmost 1 and replace leftmost “x” with “0“,
-        the same Boolean function is defined.</li>
-        
-            <li>The function is satisfiable. (There is at least one real path to 1)</li>
-            <li>The function is not valid. (There is at least one real path to 0)</li>
-        <li>If x=0 the the result does not depende on z.</li>
-            <li>If x=1 and z=1 the result does not depend on y.</li>
+        <div class="rbox" style="width:310px">
+            <p>Does a•(b+c) = a•b+a•c look right, but a+b•c = (a+b)•(a+c) does not?
+            Indeed, the second equivalence does not hold for arithmetic expressions,
+            but both Boolean expression represent the same Boolean function.<p>
+            <table class="right">
+                <tr>
+                    <td>a</td><td>b</td><td>c</td>
+                    <td>b.c</td><th>a+b.c</th>
+                    <td>a+b</td><td>a+c</td><th>(a+b).(a+c)</th>
+                </tr>
+                <tr>
+                    <td>0</td><td>0</td><td>0</td>
+                    <td>0</td><th>0</th>
+                    <td>0</td><td>0</td><th>0</th>
+                </tr>
+                <tr>
+                    <td>0</td><td>0</td><td>1</td>
+                    <td>0</td><th>0</th>
+                    <td>0</td><td>1</td><th>0</th>
+                </tr>
+                <tr>
+                    <td>0</td><td>1</td><td>0</td>
+                    <td>0</td><th>0</th>
+                    <td>1</td><td>0</td><th>0</th>
+                </tr>
+                <tr>
+                    <td>0</td><td>1</td><td>1</td>
+                    <td>1</td><th>1</th>
+                    <td>1</td><td>1</td><th>1</th>
+                </tr>
+                <tr>
+                    <td>1</td><td>0</td><td>0</td>
+                    <td>0</td><th>1</th>
+                    <td>1</td><td>1</td><th>1</th>
+                </tr>
+                <tr>
+                    <td>1</td><td>0</td><td>1</td>
+                    <td>0</td><th>1</th>
+                    <td>1</td><td>1</td><th>1</th>
+                </tr>
+                <tr>
+                    <td>1</td><td>1</td><td>0</td>
+                    <td>1</td><th>1</th>
+                    <td>1</td><td>1</td><th>1</th>
+                </tr>
+                <tr>
+                    <td>1</td><td>1</td><td>1</td>
+                    <td>1</td><th>1</th>
+                    <td>1</td><td>1</td><th>1</th>
+                </tr>
+                
+                </tr></table>
             
+        </div>
         
-        </ul>
-    
+        <h4>Equivalence of Boolean expressions</h4>
+        
+        <p>Two Boolean expressions are equivalent if they represent the same Boolean expression.</p>
+        
+        <table>
+            <tr>
+                <td>a•b = b•a</td>
+                <td>a+b = b+a</td>
+                <td>a⊕b = b⊕a</td>
+                <td><span style="text-decoration:overline" >ā</span> = a</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span style="text-decoration:overline">a+b</span> = <span style="text-decoration:overline">a</span>.<span style="text-decoration:overline">b</span></td>
+                <td colspan="2"><span style="text-decoration:overline">a•b</span> = <span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span></td>
+                
+            </tr>
+            <tr>
+                <td colspan="4">a⊕b
+                    = a•<span style="text-decoration:overline">b</span> + <span style="text-decoration:overline">a</span>•b
+                    = (<span style="text-decoration:overline">a</span>+<span style="text-decoration:overline">b</span>) • (a+b)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </table>
+        
+         &nbsp;&nbsp; 
+         &nbsp;&nbsp;
+        
+        
+         0⊕a = a = a⊕0
+         &nbsp;&nbsp;
+         1⊕a = <span style="text-decoration:overline">a</span> = a⊕1
+         <br>a+1 = 1 = 1+a &nbsp; a+0 = a = 0+a &nbsp; a•1 = a = 1*a &nbsp; a•0 = 0 =0•a
+         <br>a•(b+c) = a•b+a•c &nbsp;&nbsp; a+b•c = (a+b)•(a+c)
+         <br>a•a = a &nbsp;&nbsp; a+a=a &nbsp;&nbsp; a⊕a = 0 &nbsp;&nbsp;
+         a•ā = 0 = ā•a  &nbsp;&nbsp; a+ā = 1 =ā+a &nbsp;&nbsp;
+        <br>a⊕ā = 1 = ā⊕a</p>
+         
+        
+         <h4>Example</h4>
+         <p>(a•1+0•<span style="text-decoration:overline">b</span>)⊕1⊕a =
+         (a+0)⊕1⊕a = a⊕1⊕a = ā⊕a = 1
+         </p>
+        
+        
         
     </body>
 </html>

@@ -91,15 +91,15 @@
 		</array>
 		<array>
 			<string>Boolean Expressions</string>
-			<string>502</string>
+			<string>51</string>
 		</array>
 		<array>
 			<string>Binary Decisions</string>
-			<string>511</string>
+			<string>521</string>
 		</array>
 		<array>
 			<string>Reduced BDDs</string>
-			<string>521</string>
+			<string>531</string>
 		</array>
 	</array>
 </array>
