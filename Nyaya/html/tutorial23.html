@@ -9,12 +9,12 @@
         
         <div class="chapter">Chapter 2<br>Syntax</div>
         
-        <h3>Subformulas</h3>
+        <h3>Sub-formulas</h3>
         
         <table class="right">
             <tr>
                 <th>formula</th>
-                <th>subformulas</th>
+                <th>sub-formulas</th>
             </tr>
             <tr>
                 <td style="text-align:left">p</td>
@@ -43,25 +43,26 @@
         we build the more complex formula “P<sub>1</sub>”
         from two less complex formulas “P<sub>2</sub>” and “P<sub>3</sub>”.
         
-        “P<sub>2</sub>” and “P<sub>3</sub>” are called subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”.
-        All subformulas of “P<sub>2</sub>” are subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”,
-        all subformulas of “P<sub>3</sub>” are subformulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)” and
-        “(P<sub>2</sub> ∨ P<sub>3</sub>)” is a subformula of “(P<sub>2</sub> ∨ P<sub>3</sub>)” too.
-        Per Definition atoms are the smallest subformulas of every formula.</p>       
+        “P<sub>2</sub>” and “P<sub>3</sub>” are called sub-formulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”.
+        All sub-formulas of “P<sub>2</sub>” are sub-formulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)”,
+        all sub-formulas of “P<sub>3</sub>” are sub-formulas of “(P<sub>2</sub> ∨ P<sub>3</sub>)” and
+        “(P<sub>2</sub> ∨ P<sub>3</sub>)” is also a sub-formula of “(P<sub>2</sub> ∨ P<sub>3</sub>)”.
+        Per definition atoms are the smallest sub-formulas of every formula.</p>
         
-        <h4>From subformulas to formulas</h4>
+        <h4>From sub-formulas to formulas</h4>
         
         <p>If we are using formulas in strict syntax,
         we can use any rule of the grammar to combine them
         to more complex formulas without additional work.
         But if we are using the syntax conventions,
-        we have to be carefull when we are combining subformulas.</p>
+        we have to be careful when we are combining sub-formulas.</p>
         <p>For example if we combine the formulas <code>a ∨ b</code> and <code>c → d</code> with the rule <code>P ➜ (P∧P)</code> to a more complex formula
-        then the correct expression (after ommitting the outer parenthesis) is <span style="text-decoration:line-through;color:red;"><code>&nbsp;a ∨ b ∧ c → d&nbsp;</code></span> <code>(a ∨ b) ∧ (c → d)</code>.
-        We can verify this by rewriting the two subformulas to formulas in strict syntax.</p>
+        then the correct expression (after omitting the outer parenthesis) is
+        <span style="text-decoration:line-through;color:red;"><code>&nbsp;a ∨ b ∧ c → d&nbsp;</code></span> <code>(a ∨ b) ∧ (c → d)</code>.
+        We can verify this by rewriting the two sub-formulas to formulas in strict syntax.</p>
         
         <table>
-            <tr><td></td><td>subformulas</td><td>rule</td><td>strict syntax</td><td>syntax convention</td></tr>
+            <tr><td></td><td>sub-formulas</td><td>rule</td><td>strict syntax</td><td>syntax convention</td></tr>
             <tr>
                 <td>1.</td>
                 <td>a, b</td>
@@ -96,10 +97,10 @@
 
         </table>
         
-        <h4>From formula to subformulas</h4>
+        <h4>From formula to sub-formulas</h4>
         <p>To determine the sub-formulas of a formula we rewrite the formula in strict syntax.
-        We remove the outermost parentheses and we split the formula by be removing the root connective,
-        which leaves one (negation) or two (conjunction, disjunction, implication) well formed subformulas.</p>
+        We remove the outermost parenthesis and we split the formula by removing the root connective,
+        which leaves one (in the case of a negation) or two (conjunction, disjunction, implication) well formed sub-formulas.</p>
         
         <blockquote>
             
@@ -129,7 +130,7 @@
             </code>
         </blockquote>
 
-        <p>Then our original formula must be reconstructable from the extracted subformula(s) with the grammar rule for the removed connective.</p>
+        <p>Then our original formula must be reconstructable from the extracted sub-formula(s) with the grammar rule for the removed connective.</p>
         
         <blockquote>
             <code>(a ∨ b)</code>

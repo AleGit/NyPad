@@ -7,7 +7,7 @@
                 </head>
     <body>
         
-        <div class="chapter">Chapter 3<br>Sematics</div>
+        <div class="chapter">Chapter 3<br>Semantics</div>
         
         <h3>Valuation</h3>
         
@@ -20,11 +20,11 @@
         
         <p>The set of variables of a formula is the set of sub-formulas of the formula, where the elements are atoms.
         The set of variables of the formula <code>a ∨ ¬b ∧ c → a</code> is {a,b,c}.
-        A <em>valuation</em> or <em>truth assingment</em> is a mapping from the set of variables to the set of truth values {true, false}. We will use “T” as abbreviation for “true” and “F” as abbreviation for “false”.</p>
+        A <em>valuation</em> or <em>truth assignment</em> is a mapping from the set of variables to the set of truth values {true, false}. We will use “T” as abbreviation for “true” and “F” as abbreviation for “false”.</p>
         
         <blockquote><i>v</i>(a) = F &nbsp;&nbsp;&nbsp; <i>v</i>(b) = F &nbsp;&nbsp;&nbsp; <i>v</i>(c) = T</blockquote>
         
-        <p>We extend the valuation to formulas recursivly for composite formulas.</p>
+        <p>We extend the valuation to formulas recursively for composite formulas.</p>
         
         <ul>
             <li><i>v</i>(¬P) = T if and only if <i>v</i>(P) = F. Otherwise <i>v</i>(¬P) = F.</li>
@@ -36,9 +36,9 @@
         <h4>Example</h4>
         
         <ul>
-            <li><i>v</i>(a) = F &nbsp; assingment</li>
-            <li><i>v</i>(b) = F &nbsp; assingment</li>
-            <li><i>v</i>(c) = T &nbsp; assingment</li>
+            <li><i>v</i>(a) = F &nbsp; assignment</li>
+            <li><i>v</i>(b) = F &nbsp; assignment</li>
+            <li><i>v</i>(c) = T &nbsp; assignment</li>
             <li><i>v</i>(¬b) = T &nbsp; because <i>v</i>(b) = F.</li>
             <li><i>v</i>(¬b∧c) = T &nbsp; because <i>v</i>(¬b) = T and <i>v</i>(c) = T.</li>
             <li><i>v</i>(a∨(¬b∧c)) = T &nbsp; because <i>v</i>(¬b∧c) = T.</li>

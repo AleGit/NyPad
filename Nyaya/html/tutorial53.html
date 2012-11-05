@@ -22,7 +22,7 @@
         </ul>
         
         <p>A complete truth table does answer this questions easily.
-        But it is very expansive to compute and store a complete truth table.
+        But it is very expensive to compute and store a complete truth table.
         A more memory-friendly representation of Boolean functions are binary decision trees or more general binary decision diagrams.
         </p>
         
@@ -66,16 +66,16 @@
         <p>We make the following observations</p>
         
         <ul>
-            <li>The leftmost decision node “x” seams unnessessary,
+            <li>The leftmost decision node “x” seams unnecessary,
         because we can only reach this node if x=0.
-        So we must go to the leftmost “0” and can't
+        So we must go to the leftmost “0” and can not
         go to the leftmost “1”.
         If we remove the leftmost 1 and replace leftmost “x” with “0“,
         the same Boolean function is defined.</li>
         
             <li>The function is satisfiable. (There is at least one real path to 1)</li>
             <li>The function is not valid. (There is at least one real path to 0)</li>
-        <li>If x=0 the the result does not depende on z.</li>
+        <li>If x=0 the the result does not depends on z.</li>
             <li>If x=1 and z=1 the result does not depend on y.</li>
             <li>Because of the invalid path we had to check more carefully.</li>
     

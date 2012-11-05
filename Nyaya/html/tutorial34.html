@@ -7,18 +7,18 @@
                 </head>
     <body>
         
-        <div class="chapter">Chapter 3<br>Sematics</div>
+        <div class="chapter">Chapter 3<br>Semantics</div>
         
         <h3>Properties</h3>
         
         <h4>Satisfiability</h4>
         
         <blockquote>A propositional formula P is satisfiable,
-            <br>if there is at least one truth assignment, that <i>v</i>(P) = T.</blockquote>
+            <br>if there is at least one truth assignment that <i>v</i>(P) = T.</blockquote>
 
         
         <blockquote>A propositional formula P is not satisfiable,
-            <br>if there is no truth assignment, that <i>v</i>(P) = T.</blockquote>
+            <br>if there is no truth assignment that <i>v</i>(P) = T.</blockquote>
         
         <h4>Validity</h4>
         
@@ -32,13 +32,13 @@
         
         <ul>
             <li><code>¬a, a∧b, a∨b, a→b</code> are satisfiable, but not valid.</li>
-            <li><code>⊥, a∧¬a</code> are not satisfiable. Hence they are not valid too.</li>
-            <li><code>⊤, a∨¬a, (p∧¬q→r)∧(¬r)∧(p)→q</code> are valid. Hence they are satisfiable too.</li>
+            <li><code>⊥, a∧¬a</code> are not satisfiable. Hence they are not valid.</li>
+            <li><code>⊤, a∨¬a, (p∧¬q→r)∧(¬r)∧(p)→q</code> are valid. Hence they are satisfiable.</li>
             
         </ul>
         
         <p>For these and similar simple examples satisfiability and validity can be checked by using truth tables.
-        Due the exponentential growing costs of computing truth tables this is not a practical way.</p>
+        Due the exponential growing costs of computing truth tables this is not a practical way.</p>
         
         
         <table>
@@ -128,8 +128,8 @@
             </tr>
         </table>
         
-        <p>We can spare some calculation time with smarter valuation.
-        This will help sometimes, but truth tables stay unpractical for “big” formulas.</p>
+        <p>We can save some calculation time with smarter valuation.
+        This will help some of the time, but truth tables stay unpractical for “big” formulas.</p>
         
     </body>
 </html>
