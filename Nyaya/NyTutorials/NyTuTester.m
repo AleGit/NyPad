@@ -335,7 +335,7 @@
 
 #pragma mark - Section 1
 
-@implementation  NyTuTester101
+@implementation  NyTuTester11
 
 - (BOOL)accessoryViewShouldBeVisible {
     return NO;
@@ -343,7 +343,7 @@
 
 @end
 
-@implementation NyTuTester111
+@implementation NyTuTester12
 
 - (BOOL)accessoryViewShouldBeVisible {
     return NO;
@@ -351,13 +351,13 @@
 
 @end
 
-@implementation  NyTuTester121
+@implementation  NyTuTester13
 
 @end
 
 #pragma mark - Section 2
 
-@implementation NyTuTester201
+@implementation NyTuTester21
 
 
 - (void)generateQuestion {
