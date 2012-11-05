@@ -191,6 +191,8 @@
 		11F906CC15CED420001CD0F3 /* BasicPrecedenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */; };
 		11F906CF15CEDF58001CD0F3 /* BasicNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */; };
 		9A0592D51646585200E314E2 /* tutorial52.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D41646585200E314E2 /* tutorial52.html */; };
+		9A0592D8164840BF00E314E2 /* BDD_unordered.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D7164840BE00E314E2 /* BDD_unordered.png */; };
+		9A0592DA1648461000E314E2 /* tutorial01.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D91648460F00E314E2 /* tutorial01.html */; };
 		9A926816163C362D00C3879B /* BST_conjunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926811163C362D00C3879B /* BST_conjunction.png */; };
 		9A926817163C362D00C3879B /* BST_disjunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926812163C362D00C3879B /* BST_disjunction.png */; };
 		9A926818163C362D00C3879B /* BST_implication.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A926813163C362D00C3879B /* BST_implication.png */; };
@@ -498,6 +500,8 @@
 		11F906CD15CEDF58001CD0F3 /* BasicNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNormalFormTests.h; sourceTree = "<group>"; };
 		11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNormalFormTests.m; sourceTree = "<group>"; };
 		9A0592D41646585200E314E2 /* tutorial52.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial52.html; path = html/tutorial52.html; sourceTree = "<group>"; };
+		9A0592D7164840BE00E314E2 /* BDD_unordered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BDD_unordered.png; path = html/BDD_unordered.png; sourceTree = "<group>"; };
+		9A0592D91648460F00E314E2 /* tutorial01.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial01.html; path = html/tutorial01.html; sourceTree = "<group>"; };
 		9A926811163C362D00C3879B /* BST_conjunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_conjunction.png; path = html/BST_conjunction.png; sourceTree = "<group>"; };
 		9A926812163C362D00C3879B /* BST_disjunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_disjunction.png; path = html/BST_disjunction.png; sourceTree = "<group>"; };
 		9A926813163C362D00C3879B /* BST_implication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BST_implication.png; path = html/BST_implication.png; sourceTree = "<group>"; };
@@ -555,11 +559,13 @@
 		1102560C15ECCCB7008B38F9 /* htmltutorials */ = {
 			isa = PBXGroup;
 			children = (
-				9AEC708C164311480067991E /* BDT.png */,
-				9AEC70731642B6EB0067991E /* ROBDD */,
-				9AEC70721642B6E30067991E /* OBDD */,
 				9AEC70711642B6C40067991E /* BasicSyntaxTrees */,
+				9A0592D7164840BE00E314E2 /* BDD_unordered.png */,
+				9AEC708C164311480067991E /* BDT.png */,
+				9AEC70721642B6E30067991E /* OBDD */,
+				9AEC70731642B6EB0067991E /* ROBDD */,
 				9AEC706F1642B69F0067991E /* SyntaxTrees */,
+				9A0592D91648460F00E314E2 /* tutorial01.html */,
 				111F923615E89D6800EB6B1D /* tutorial11.html */,
 				1102560D15ECCE2E008B38F9 /* tutorial12.html */,
 				1102560E15ECCE2E008B38F9 /* tutorial13.html */,
@@ -1326,6 +1332,8 @@
 				9AEC708B1642B7220067991E /* ROBDD_xor.png in Resources */,
 				9AEC708D1643114A0067991E /* BDT.png in Resources */,
 				9A0592D51646585200E314E2 /* tutorial52.html in Resources */,
+				9A0592D8164840BF00E314E2 /* BDD_unordered.png in Resources */,
+				9A0592DA1648461000E314E2 /* tutorial01.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
