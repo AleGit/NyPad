@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *tutorialHtml;
 @property (strong, nonatomic) NSString *tutorialKey;
+@property (strong, nonatomic) UIBarButtonItem *exerciseButton;
 @end
 
 @implementation NyTuDetailViewController
@@ -45,7 +46,6 @@
 - (void)configureView
 {
     self.backButton.hidden = YES;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     if (self.detailItem) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@", self.sectionTitle, self.tutorialTitle];
@@ -53,7 +53,16 @@
         NSURL *tutorialUrl = [[NSBundle mainBundle] URLForResource:self.tutorialFileName withExtension:@"html"];
         
         if (tutorialUrl) {
-            self.navigationItem.rightBarButtonItem.enabled=[NyTuTester testerExistsForKey:self.tutorialKey];
+            BOOL enabled = [NyTuTester testerExistsForKey:self.tutorialKey];
+            if (enabled && !self.navigationItem.rightBarButtonItem) {
+                self.navigationItem.rightBarButtonItem = self.exerciseButton;
+                self.navigationItem.rightBarButtonItem.enabled = YES;
+            }
+            else if (self.navigationItem.rightBarButtonItem) {
+                self.navigationItem.rightBarButtonItem = nil;
+            }
+            
+            
             self.tutorialHtml = [tutorialUrl lastPathComponent];
             self.webView.delegate = self;
             
@@ -72,12 +81,13 @@
     [super viewDidLoad];
     
     self.backButton.hidden = YES;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.exerciseButton = self.navigationItem.rightBarButtonItem;
 }
 
 - (void)viewDidUnload {
     self.webView = nil;
     self.backButton = nil;
+    self.exerciseButton = nil;
     
     [super viewDidUnload];
 }
