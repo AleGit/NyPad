@@ -146,7 +146,7 @@
 		11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473BE1603392400EA2508 /* NyayaConstants.m */; };
 		11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473C116035DFC00EA2508 /* TruthTable+HTML.m */; };
 		11B0B26515EFC66C006AFBFC /* 11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* 11.plist */; };
-		11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions101.html */; };
+		11B0B26915EFEC13006AFBFC /* instructions11.html in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26715EFEC13006AFBFC /* instructions11.html */; };
 		11B97E0A15F9B56F00A183DA /* DisplayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0915F9B56F00A183DA /* DisplayTests.m */; };
 		11B97E0E15F9B63700A183DA /* ValuationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B97E0D15F9B63700A183DA /* ValuationTests.m */; };
 		11BFCBA815F9E331004CBDA2 /* NyPgCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */; };
@@ -172,8 +172,8 @@
 		11C93F0B15F4741000AB94DF /* NyayaBddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C93F0A15F4741000AB94DF /* NyayaBddView.m */; };
 		11CB867015F8634800D20A59 /* NyayaNode+Reductions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */; };
 		11DBC0B41604F2A40007A82B /* tutorial14.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B31604F2A40007A82B /* tutorial14.html */; };
-		11DBC0B71604F2CF0007A82B /* instructions102.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B51604F2CF0007A82B /* instructions102.html */; };
-		11DBC0B81604F2CF0007A82B /* instructions103.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions103.html */; };
+		11DBC0B71604F2CF0007A82B /* instructions12.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B51604F2CF0007A82B /* instructions12.html */; };
+		11DBC0B81604F2CF0007A82B /* instructions13.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DBC0B61604F2CF0007A82B /* instructions13.html */; };
 		11DC67491608531C00B9008B /* slim interface.eml in Resources */ = {isa = PBXBuildFile; fileRef = 11DC67481608531C00B9008B /* slim interface.eml */; };
 		11DC674B160854B900B9008B /* clnewstylewide.css in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674A160854B900B9008B /* clnewstylewide.css */; };
 		11DC674D1608550800B9008B /* clsample.html in Resources */ = {isa = PBXBuildFile; fileRef = 11DC674C1608550800B9008B /* clsample.html */; };
@@ -433,7 +433,7 @@
 		11A473C016035DFC00EA2508 /* TruthTable+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TruthTable+HTML.h"; path = "NyBoolTool/TruthTable+HTML.h"; sourceTree = "<group>"; };
 		11A473C116035DFC00EA2508 /* TruthTable+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TruthTable+HTML.m"; path = "NyBoolTool/TruthTable+HTML.m"; sourceTree = "<group>"; };
 		11B0B26415EFC66C006AFBFC /* 11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 11.plist; path = Nyaya/NyTutorials/11.plist; sourceTree = "<group>"; };
-		11B0B26715EFEC13006AFBFC /* instructions101.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions101.html; path = html/instructions101.html; sourceTree = "<group>"; };
+		11B0B26715EFEC13006AFBFC /* instructions11.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions11.html; path = html/instructions11.html; sourceTree = "<group>"; };
 		11B97E0815F9B56F00A183DA /* DisplayTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayTests.h; path = NyayaNodeCategoryTests/DisplayTests.h; sourceTree = "<group>"; };
 		11B97E0915F9B56F00A183DA /* DisplayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayTests.m; path = NyayaNodeCategoryTests/DisplayTests.m; sourceTree = "<group>"; };
 		11B97E0C15F9B63700A183DA /* ValuationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValuationTests.h; path = NyayaNodeCategoryTests/ValuationTests.h; sourceTree = "<group>"; };
@@ -472,8 +472,8 @@
 		11CB866E15F8634800D20A59 /* NyayaNode+Reductions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NyayaNode+Reductions.h"; path = "Model/NyayaNode+Reductions.h"; sourceTree = "<group>"; };
 		11CB866F15F8634800D20A59 /* NyayaNode+Reductions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NyayaNode+Reductions.m"; path = "Model/NyayaNode+Reductions.m"; sourceTree = "<group>"; };
 		11DBC0B31604F2A40007A82B /* tutorial14.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial14.html; path = html/tutorial14.html; sourceTree = "<group>"; };
-		11DBC0B51604F2CF0007A82B /* instructions102.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions102.html; path = html/instructions102.html; sourceTree = "<group>"; };
-		11DBC0B61604F2CF0007A82B /* instructions103.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions103.html; path = html/instructions103.html; sourceTree = "<group>"; };
+		11DBC0B51604F2CF0007A82B /* instructions12.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions12.html; path = html/instructions12.html; sourceTree = "<group>"; };
+		11DBC0B61604F2CF0007A82B /* instructions13.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions13.html; path = html/instructions13.html; sourceTree = "<group>"; };
 		11DC67481608531C00B9008B /* slim interface.eml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "slim interface.eml"; path = "NyBaTh/mails/slim interface.eml"; sourceTree = SOURCE_ROOT; };
 		11DC674A160854B900B9008B /* clnewstylewide.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = clnewstylewide.css; path = html/clnewstylewide.css; sourceTree = "<group>"; };
 		11DC674C1608550800B9008B /* clsample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = clsample.html; path = html/clsample.html; sourceTree = "<group>"; };
@@ -703,9 +703,9 @@
 		11061F1915EE10DC00345516 /* htmlinstructions */ = {
 			isa = PBXGroup;
 			children = (
-				11B0B26715EFEC13006AFBFC /* instructions101.html */,
-				11DBC0B51604F2CF0007A82B /* instructions102.html */,
-				11DBC0B61604F2CF0007A82B /* instructions103.html */,
+				11B0B26715EFEC13006AFBFC /* instructions11.html */,
+				11DBC0B51604F2CF0007A82B /* instructions12.html */,
+				11DBC0B61604F2CF0007A82B /* instructions13.html */,
 				11061F1C15EE131E00345516 /* instructions.css */,
 			);
 			name = htmlinstructions;
@@ -1275,7 +1275,7 @@
 				11061F1D15EE131E00345516 /* instructions.css in Resources */,
 				11061F3315EFA6EF00345516 /* 12.plist in Resources */,
 				11B0B26515EFC66C006AFBFC /* 11.plist in Resources */,
-				11B0B26915EFEC13006AFBFC /* instructions101.html in Resources */,
+				11B0B26915EFEC13006AFBFC /* instructions11.html in Resources */,
 				113FF75D15F07ED90073A410 /* 13.plist in Resources */,
 				1172EF5115F1F8F30038E6D0 /* NyBasicKeysView.xib in Resources */,
 				1172EF5315F1FBB40038E6D0 /* NyExtendedKeysView.xib in Resources */,
@@ -1285,8 +1285,8 @@
 				11BFCBAD15F9E3E1004CBDA2 /* kariert@2x.png in Resources */,
 				11F531BD15FC78B4003F6C11 /* QA1.plist in Resources */,
 				11DBC0B41604F2A40007A82B /* tutorial14.html in Resources */,
-				11DBC0B71604F2CF0007A82B /* instructions102.html in Resources */,
-				11DBC0B81604F2CF0007A82B /* instructions103.html in Resources */,
+				11DBC0B71604F2CF0007A82B /* instructions12.html in Resources */,
+				11DBC0B81604F2CF0007A82B /* instructions13.html in Resources */,
 				1169BFAB1605B12A001CECCC /* NyTreeView.xib in Resources */,
 				117BD6641607BB2E0025F381 /* abstract.tex in Resources */,
 				117BD6651607BB2E0025F381 /* appendix.tex in Resources */,

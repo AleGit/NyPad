@@ -9,6 +9,7 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
+#import "NyayaFormula.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -352,6 +353,13 @@
 @end
 
 @implementation  NyTuTester13
+
+- (void)validateAnswer {
+    NyayaFormula *solutionFormula = [NyayaFormula formulaWithString:self.solution];
+    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
+    
+    _success = [[solutionFormula truthTable:YES] isEqual:[answerFormula truthTable:YES]];
+}
 
 @end
 

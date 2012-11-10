@@ -65,7 +65,7 @@
 	<array>
 		<string>If Smith has installed central heating, then he has sold his car or he has not paid his mortage</string>
 		<string>if p then q or not r</string>
-		<string>Smith has installed central heating; he has sold his car; he has not paid his mortage</string>
+		<string>Smith has installed central heating; he has sold his car; he has paid his mortage</string>
 		<string></string>
 	</array>
 </array>
