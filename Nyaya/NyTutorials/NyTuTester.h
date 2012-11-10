@@ -77,5 +77,8 @@
 @interface NyTuTester13 : NyTuTesterPlist
 @end
 
-@interface NyTuTester21 : NyTuTesterPlist
+//@interface NyTuTester21 : NyTuTesterPlist
+//@end
+
+@interface NyTuTester24 : NyTuTesterPlist
 @end

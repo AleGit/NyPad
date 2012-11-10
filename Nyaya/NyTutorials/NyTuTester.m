@@ -365,11 +365,22 @@
 
 #pragma mark - Section 2
 
-@implementation NyTuTester21
+//@implementation NyTuTester21
+//
+//
+//- (void)generateQuestion {
+//    _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
+//}
+//@end
 
+@implementation NyTuTester24
+
+- (UIModalPresentationStyle)modalPresentationStyle { return UIModalPresentationPageSheet; }
+- (NSString*)testViewNibName { return @"SyntaxTreeTestView"; }
 
 - (void)generateQuestion {
     _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
+    _solution = @"";
 }
 
 @end

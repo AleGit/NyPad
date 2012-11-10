@@ -54,11 +54,11 @@
         
         if (tutorialUrl) {
             BOOL enabled = [NyTuTester testerExistsForKey:self.tutorialKey];
-            if (enabled && !self.navigationItem.rightBarButtonItem) {
+            if (enabled) {
                 self.navigationItem.rightBarButtonItem = self.exerciseButton;
                 self.navigationItem.rightBarButtonItem.enabled = YES;
             }
-            else if (self.navigationItem.rightBarButtonItem) {
+            else if (!enabled) {
                 self.navigationItem.rightBarButtonItem = nil;
             }
             
