@@ -9,7 +9,7 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
-#import "NyayaFormula.h"
+#import "NyayaNode+Display.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -375,12 +375,55 @@
 
 @implementation NyTuTester24
 
+- (NyNodeView*)symbolView {
+    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
+    NyNodeView *symbolView = [viewArray objectAtIndex:3];
+    return symbolView;
+}
+
 - (UIModalPresentationStyle)modalPresentationStyle { return UIModalPresentationPageSheet; }
 - (NSString*)testViewNibName { return @"SyntaxTreeTestView"; }
 
+- (void)layoutSubviews:(UIView*)view {
+    CGPoint location = CGPointMake(self.canvasView.center.x, 20.0);
+    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
+    _syntaxTreeView = [viewArray objectAtIndex:0];
+        // formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0 - symbolView.center.y);
+    _syntaxTreeView.center = CGPointMake(location.x, location.y + _syntaxTreeView.frame.size.height/2.0);
+    
+    _syntaxTreeView.hideCloser = YES;
+    _syntaxTreeView.hideHeader = YES;
+    _syntaxTreeView.hideLock = YES;
+    _syntaxTreeView.hideValuation = YES;
+    
+    
+    
+    
+    [self.canvasView addSubview:_syntaxTreeView];
+    
+    _syntaxTreeView.delegate = nil;
+    // syntaxTreeView.dataSource = nil;
+}
+
+
 - (void)generateQuestion {
-    _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
-    _solution = @"";
+    NyayaFormula *formula = nil;
+    
+    if (_syntaxTreeView.node) {
+        formula = [NyayaFormula formulaWithString:@"p+q&r>p"];
+    }
+    else {
+        formula = [NyayaFormula formulaWithString:@"p&q"];
+    }
+    
+    _syntaxTreeView.node = [formula syntaxTree:NO];
+    _solution = [_syntaxTreeView.node description];
+}
+
+- (void)validateAnswer {
+    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
+    
+    _success = [_syntaxTreeView.node isEqual:[answerFormula syntaxTree:NO]];
 }
 
 @end

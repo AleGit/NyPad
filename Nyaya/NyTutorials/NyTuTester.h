@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "NyAccessoryController.h"
+#import "NyTreeView.h"
+#import "NyayaFormula.h"
 
 
 @class NyTuTestViewController;      // external declaration
@@ -80,5 +82,8 @@
 //@interface NyTuTester21 : NyTuTesterPlist
 //@end
 
-@interface NyTuTester24 : NyTuTesterPlist
+@interface NyTuTester24 : NyTuTesterPlist <NyTreeViewDataSource>
+@property (weak, nonatomic) IBOutlet UIView *canvasView;
+@property (weak, nonatomic) NyTreeView *syntaxTreeView;
+@property (strong, nonatomic) NyayaFormula *formula;
 @end
