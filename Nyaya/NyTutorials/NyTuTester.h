@@ -82,7 +82,7 @@
 //@interface NyTuTester21 : NyTuTesterPlist
 //@end
 
-@interface NyTuTester24 : NyTuTesterPlist <NyTreeViewDataSource>
+@interface NyTuTester24 : NyTuTesterPlist <NyTreeViewDataSource, NyTreeViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *canvasView;
 @property (weak, nonatomic) NyTreeView *syntaxTreeView;
 @property (strong, nonatomic) NyayaFormula *formula;

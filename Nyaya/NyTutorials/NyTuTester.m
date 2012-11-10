@@ -426,4 +426,30 @@
     _success = [_syntaxTreeView.node isEqual:[answerFormula syntaxTree:NO]];
 }
 
+- (void)dragFormula:(UIPanGestureRecognizer *)sender {
+    
+}
+
+- (void)selectFormula:(UITapGestureRecognizer *)sender {
+    
+}
+
+- (void)swipeSymbol:(UISwipeGestureRecognizer *)sender {
+    
+}
+
+- (void)deleteFormula:(UIButton *)sender {
+    
+}
+
+- (void)lockFormula:(UIButton *)sender {
+    
+}
+
+- (void)tapSymbol:(UITapGestureRecognizer *)sender {
+    
+}
+
+
+
 @end
