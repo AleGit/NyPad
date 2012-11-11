@@ -54,6 +54,7 @@
     
     // a) data
     [self readTestData];
+    [self configureTestContext];
     
     // b) visuals
     [self loadTestView:view];
@@ -90,7 +91,12 @@
     [processButton setTitle:NSLocalizedString(@"next", nil) forState:UIControlStateNormal];
     
     [self readAnswer];
+    
     [self validateAnswer];
+    
+    if (_success) _succCount++;
+    else _failCount++;
+    
     [self writeSolution];
     
     [self.delegate tester:self didCheckTest:YES];
@@ -204,11 +210,18 @@
 #pragma mark - firstTest (methods to be overriden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-// MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)readTestData { @throw [[NSException alloc] initWithName:@"importTestData" reason:@"must be overriden" userInfo:nil]; }
+- (void)readTestData { @throw [[NSException alloc] initWithName:@"readTestData" reason:@"must be overriden" userInfo:nil]; }
+
+/* CAN BE OVERRIDEN IN SUBCLASSES, SHOULD BE CALLED THEN */
+- (void)configureTestContext {
+    _succCount = 0;
+    _failCount = 0;
+}
 
 /* CAN BE OVERRIDEN IN SUBCLASSES */
 - (NSString*)testViewNibName { return @"StandardTestView"; }
+
+/* SHOULD NOT BE OVERRIDEN IN SUBCLASSES */
 - (void)loadTestView:(UIView*)view {
     [[NSBundle mainBundle] loadNibNamed:[self testViewNibName] owner:self options:nil];
     [view insertSubview:self.testView atIndex:1];
@@ -280,7 +293,8 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
     
     self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    [self importQuestionsDictionary];
+    
+    [self importQuestionsDictionary]; // MAY FAIL (questions must be generated in code)
     
     
     self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
@@ -374,7 +388,38 @@
 //}
 //@end
 
+@interface NyTuTesterRandom ()
+
+- (void)setLengths: (NSRange)lengths;
+
+@end
+
+@implementation NyTuTesterRandom
+
+- (void)setLengths: (NSRange)lengths {
+    _lengths = lengths;
+}
+
+- (void)configureTestContext {
+    [super configureTestContext];
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
+    [indexSet addIndex:NyayaConjunction];
+    [indexSet addIndex:NyayaDisjunction];
+    [indexSet addIndex:NyayaImplication];
+    
+    _rootTypes = [indexSet copy];
+    _nodeTypes = [indexSet copy];
+    _lengths = NSMakeRange(1,2);
+    _variables = @[@"p", @"q", @"r"];
+    
+}
+
+@end
+
 @implementation NyTuTester24
+
+
 
 - (NyNodeView*)symbolView {
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
@@ -408,19 +453,19 @@
 
 
 - (void)generateQuestion {
-//    NyayaFormula *formula = nil;
-//    
-//    if (_syntaxTreeView.node) {
-//        formula = [NyayaFormula formulaWithString:@"p+q&r>p"];
-//    }
-//    else {
-//        formula = [NyayaFormula formulaWithString:@"p&q"];
-//    }
-//    
-//    _syntaxTreeView.node = [formula syntaxTree:NO];
-//    _solution = [_syntaxTreeView.node description];
+    if (self.lengths.length > 3 && self.succCount < self.failCount) {
+        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length-1);
+        
+    }
     
-    NyayaNode* node = [NyayaNode randomNode];
+    if (self.succCount > (1+self.failCount)*2 && self.lengths.length < 10) {
+        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length+1);
+    }
+    
+    NyayaNode* node = [NyayaNode randomTreeWithRootTypes:self.rootTypes
+                                               nodeTypes:self.nodeTypes
+                                                 lengths:self.lengths
+                                               variables:self.variables];
     _syntaxTreeView.node = node;
     _solution = [node description];
 }
@@ -429,6 +474,9 @@
     NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
     
     _success = [_syntaxTreeView.node isEqual:[answerFormula syntaxTree:NO]];
+    
+    
+    
 }
 
 - (void)dragFormula:(UIPanGestureRecognizer *)sender {

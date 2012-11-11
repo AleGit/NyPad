@@ -52,6 +52,8 @@
 
 @property (nonatomic, readonly) NSString *testerKey;                // key to find configuration and content for the test
 @property (nonatomic, readonly) BOOL success;
+@property (nonatomic, readonly) NSUInteger succCount;
+@property (nonatomic, readonly) NSUInteger failCount;
 
 @end
 
@@ -68,6 +70,8 @@
 @property (nonatomic, readonly) NSString *answer;
 @property (nonatomic, readonly) NSString *solution;
 
+
+
 @end
 
 @interface NyTuTester11 : NyTuTesterPlist
@@ -82,8 +86,16 @@
 //@interface NyTuTester21 : NyTuTesterPlist
 //@end
 
-@interface NyTuTester24 : NyTuTesterPlist <NyTreeViewDataSource, NyTreeViewDelegate>
+@interface NyTuTesterRandom : NyTuTesterPlist
+
+@property (readonly, nonatomic) NSIndexSet *rootTypes;
+@property (readonly, nonatomic) NSIndexSet *nodeTypes;
+@property (readonly, nonatomic) NSRange lengths;
+@property (readonly, nonatomic) NSArray *variables;
+@end
+
+@interface NyTuTester24 : NyTuTesterRandom <NyTreeViewDataSource, NyTreeViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *canvasView;
 @property (weak, nonatomic) NyTreeView *syntaxTreeView;
-@property (strong, nonatomic) NyayaFormula *formula;
+
 @end
