@@ -10,6 +10,7 @@
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
 #import "NyayaNode+Display.h"
+#import "NyayaNode+Random.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -407,17 +408,21 @@
 
 
 - (void)generateQuestion {
-    NyayaFormula *formula = nil;
+//    NyayaFormula *formula = nil;
+//    
+//    if (_syntaxTreeView.node) {
+//        formula = [NyayaFormula formulaWithString:@"p+q&r>p"];
+//    }
+//    else {
+//        formula = [NyayaFormula formulaWithString:@"p&q"];
+//    }
+//    
+//    _syntaxTreeView.node = [formula syntaxTree:NO];
+//    _solution = [_syntaxTreeView.node description];
     
-    if (_syntaxTreeView.node) {
-        formula = [NyayaFormula formulaWithString:@"p+q&r>p"];
-    }
-    else {
-        formula = [NyayaFormula formulaWithString:@"p&q"];
-    }
-    
-    _syntaxTreeView.node = [formula syntaxTree:NO];
-    _solution = [_syntaxTreeView.node description];
+    NyayaNode* node = [NyayaNode randomNode];
+    _syntaxTreeView.node = node;
+    _solution = [node description];
 }
 
 - (void)validateAnswer {

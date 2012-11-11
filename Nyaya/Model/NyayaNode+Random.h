@@ -10,6 +10,8 @@
 
 @interface NyayaNode (Random)
 
++ (NyayaNode*)randomNode;
+
 + (NyayaNode*)randomNodeWithRootTypes:(NSIndexSet*)rootTypes        // possible root node type(s)
                             nodeTypes:(NSIndexSet*)nodeTypes        // possible sub node type(s),
                               lengths:(NSRange)lengths              // number of nodes and leafs

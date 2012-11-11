@@ -11,6 +11,20 @@
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Type.h"
 
+@interface NSArray (Random)
+
+- (id)randomObject;
+
+@end
+
+@implementation NSArray (Random)
+
+- (id)randomObject {
+    NSUInteger xth = arc4random() % [self count];
+    return [self objectAtIndex:xth];
+}
+@end
+
 @interface NSIndexSet (Random)
 
 - (NSUInteger)randomIndex;
@@ -40,25 +54,70 @@
 
 @implementation NyayaNode (Random)
 
++ (NyayaNode*)randomNode {
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
+    [indexSet addIndex:NyayaConjunction];
+    [indexSet addIndex:NyayaDisjunction];
+    [indexSet addIndex:NyayaImplication];
+    return [NyayaNode randomNodeWithRootTypes:indexSet
+                                    nodeTypes:indexSet
+                                      lengths:NSMakeRange(5,5)
+                                    variables:@[@"p",@"q",@"r"]];
+}
 
 + (NyayaNode *)randomNodeWithRootTypes:(NSIndexSet *)rootTypes
                              nodeTypes:(NSIndexSet *)nodeTypes
                                lengths:(NSRange)lengths
                              variables:(NSArray *)variables {
+    if (!nodeTypes) nodeTypes = rootTypes;
+    
     NyayaNode* result = nil;
-    NSUInteger maxLength = lengths.location + lengths.length;
+    NyayaNode* first = nil;
+    NyayaNode* second = nil;
+    NSUInteger minLength = lengths.location;
+    NSUInteger maxLength = minLength + lengths.length;
     
     // NyayaNodeType rootType = (NyayaNodeType)[rootTypes randomIndex];
     
-    NSMutableSet *atomSet = [NSMutableSet setWithCapacity:[variables count]];
+    NSMutableArray *subTrees = [NSMutableArray arrayWithCapacity:maxLength];
     
     for (NSString *var in variables) {
-        [atomSet addObject:[NyayaNode atom:var]];
+        [subTrees addObject:[NyayaNode atom:var]];
     }
     
-    NSArray *atoms = [atomSet allObjects];
+    NyayaNodeType rootType = [rootTypes randomIndex];
+    NyayaNodeType type = rootType;
     
-    maxLength = maxLength - 1 - [atoms count]; // root leaves
+    do  {
+        do {
+            first = [subTrees randomObject];
+            second = type != NyayaNegation ? [subTrees randomObject] : nil;
+        }
+        while (maxLength <= ([first length] + [second length]));
+        
+        switch (type) {
+            case NyayaNegation:
+                result = [NyayaNode negation:first];
+                break;
+            case NyayaDisjunction:
+                result = [NyayaNode conjunction:first with:second];
+                break;
+            case NyayaConjunction:
+                result = [NyayaNode conjunction:first with:second];
+                break;
+            case NyayaImplication:
+                result = [NyayaNode conjunction:first with:second];
+                break;
+            default:
+                continue;
+        }
+        
+        [subTrees addObject:result];
+        type = [nodeTypes randomIndex];
+    }
+    while ([result length] < minLength);
+    
+    
     
     
     
