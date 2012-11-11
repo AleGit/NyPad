@@ -161,27 +161,12 @@
 
 #pragma mark - visual configuration
 
-
-
-
-
-
 - (void)configureSubviews:(UIView*)view {
     self.questionField.backgroundColor = [UIColor nyLightGreyColor];
     self.solutionField.backgroundColor = [UIColor nyLightGreyColor];
 }
 
 #pragma mark - ny accessory controller protocols
-
-
-
-
-
-
-
-
-
-
 
 - (IBAction)press:(UIButton *)sender {
     [self.answerField insertText:sender.currentTitle];
@@ -267,36 +252,15 @@
 
 @end
 
-/* *******************************************************************************************************************
- *
- * ******************************************************************************************************************* */
+/***************************************************************************************************************************/
+#pragma mark - basic implementations
 
 @implementation  NyTuTesterPlist
-
-- (void)importQuestionsDictionary {
-    self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
-    
-    if (!self.questionsDictionary) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
-        NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
-        NSUInteger answerIndex = [[self.testDictionary objectForKey:@"solutionIndex"] integerValue];
-        NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
-        for (NSArray* qa in array) {
-            if (answerIndex < [qa count]) [qd setObject:[qa objectAtIndex:answerIndex] forKey:[qa objectAtIndex:0]];
-        }
-        self.questionsDictionary = [qd copy]; // create unmutable copy
-    }
-    
-}
 
 - (void)readTestData {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:self.testerKey ofType:@"plist"];
     
     self.testDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    
-    [self importQuestionsDictionary]; // MAY FAIL (questions must be generated in code)
-    
-    
     self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
     self.answerLabelText = [self.testDictionary objectForKey:@"answerLabelText"];
     self.solutionLabelText = [self.testDictionary objectForKey:@"solutionLabelText"];
@@ -317,12 +281,6 @@
     _answer = nil;
     _solution = nil;
     _success = NO;
-}
-
-- (void)generateQuestion {
-    NSUInteger idx = arc4random() % [self.questionsDictionary count];
-    _question = [[self.questionsDictionary allKeys] objectAtIndex:idx];
-    _solution = self.questionsDictionary[_question];
 }
 
 - (void)writeQuestion {
@@ -349,6 +307,114 @@
 }
 @end
 
+/***************************************************************************************************************************/
+@implementation NyTuTesterDictionaryQuestions
+
+- (void)importQuestionsDictionary {
+    self.questionsDictionary = [self.testDictionary objectForKey:@"questions"];
+    
+    if (!self.questionsDictionary) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[self.testDictionary objectForKey:@"questionsFile"] ofType:@"plist"];
+        NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
+        NSUInteger answerIndex = [[self.testDictionary objectForKey:@"solutionIndex"] integerValue];
+        NSMutableDictionary *qd = [NSMutableDictionary dictionaryWithCapacity:[array count]];
+        for (NSArray* qa in array) {
+            if (answerIndex < [qa count]) [qd setObject:[qa objectAtIndex:answerIndex] forKey:[qa objectAtIndex:0]];
+        }
+        self.questionsDictionary = [qd copy]; // create unmutable copy
+    }
+}
+
+- (void)readTestData {
+    [super readTestData];
+    [self importQuestionsDictionary];
+}
+
+- (void)generateQuestion {
+    NSUInteger idx = arc4random() % [self.questionsDictionary count];
+    _question = [[self.questionsDictionary allKeys] objectAtIndex:idx];
+    _solution = self.questionsDictionary[_question];
+}
+@end
+
+/***************************************************************************************************************************/
+@interface NyTuTesterRandomQuestions ()
+
+- (void)setRootTypes: (NSIndexSet*)rootTypes;
+- (void)setNodeTypes: (NSIndexSet*)nodeTypes;
+- (void)setLengths: (NSRange)lengths;
+- (void)setVariables: (NSArray*)variables;
+- (void)setQuestionTree: (NyayaNode*)questionTree;
+
+@end
+
+@implementation NyTuTesterRandomQuestions
+
+- (void)setRootTypes:(NSIndexSet *)rootTypes {
+    _rootTypes = rootTypes;
+}
+
+- (void)setNodeTypes:(NSIndexSet *)nodeTypes {
+    _nodeTypes = nodeTypes;
+}
+
+- (void)setLengths: (NSRange)lengths {
+    _lengths = lengths;
+}
+
+- (void)setVariables:(NSArray *)variables {
+    _variables = variables;
+}
+
+- (void)setQuestionTree:(NyayaNode *)questionTree {
+    _questionTree = questionTree;
+}
+
+- (void)configureTestContext {
+    [super configureTestContext];
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
+    [indexSet addIndex:NyayaConjunction];
+    [indexSet addIndex:NyayaDisjunction];
+    [indexSet addIndex:NyayaImplication];
+    
+    self.rootTypes = [indexSet copy];
+    self.nodeTypes = [indexSet copy];
+    self.lengths = NSMakeRange(1,2);
+    self.variables = @[@"p", @"q", @"r"];
+    
+}
+
+- (void)generateQuestion {
+    if (self.lengths.length > 3 && self.succCount < self.failCount) {
+        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length-1);
+        
+    }
+    
+    if (self.succCount > (1+self.failCount)*2 && self.lengths.length < 10) {
+        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length+1);
+    }
+    
+    self.questionTree = [NyayaNode randomTreeWithRootTypes:self.rootTypes
+                                               nodeTypes:self.nodeTypes
+                                                 lengths:self.lengths
+                                               variables:self.variables];
+    
+    _solution = [self.questionTree description];
+}
+
+
+
+
+- (void)validateAnswer {
+    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
+    
+    _success = [self.questionTree isEqual:[answerFormula syntaxTree:NO]];
+}
+
+@end
+
+/***************************************************************************************************************************/
 #pragma mark - Section 1
 
 @implementation  NyTuTester11
@@ -388,49 +454,7 @@
 //}
 //@end
 
-@interface NyTuTesterRandom ()
 
-- (void)setRootTypes: (NSIndexSet*)rootTypes;
-- (void)setNodeTypes: (NSIndexSet*)nodeTypes;
-- (void)setLengths: (NSRange)lengths;
-- (void)setVariables: (NSArray*)variables;
-
-@end
-
-@implementation NyTuTesterRandom
-
-- (void)setRootTypes:(NSIndexSet *)rootTypes {
-    _rootTypes = rootTypes;
-}
-
-- (void)setNodeTypes:(NSIndexSet *)nodeTypes {
-    _nodeTypes = nodeTypes;
-}
-
-- (void)setLengths: (NSRange)lengths {
-    _lengths = lengths;
-}
-
-- (void)setVariables:(NSArray *)variables {
-    _variables = variables;
-}
-
-- (void)configureTestContext {
-    [super configureTestContext];
-    
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
-    [indexSet addIndex:NyayaConjunction];
-    [indexSet addIndex:NyayaDisjunction];
-    [indexSet addIndex:NyayaImplication];
-    
-    self.rootTypes = [indexSet copy];
-    self.nodeTypes = [indexSet copy];
-    self.lengths = NSMakeRange(1,2);
-    self.variables = @[@"p", @"q", @"r"];
-    
-}
-
-@end
 
 @implementation NyTuTester24
 
@@ -466,32 +490,8 @@
     // syntaxTreeView.dataSource = nil;
 }
 
-
-- (void)generateQuestion {
-    if (self.lengths.length > 3 && self.succCount < self.failCount) {
-        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length-1);
-        
-    }
-    
-    if (self.succCount > (1+self.failCount)*2 && self.lengths.length < 10) {
-        self.lengths = NSMakeRange(self.lengths.location, self.lengths.length+1);
-    }
-    
-    NyayaNode* node = [NyayaNode randomTreeWithRootTypes:self.rootTypes
-                                               nodeTypes:self.nodeTypes
-                                                 lengths:self.lengths
-                                               variables:self.variables];
-    _syntaxTreeView.node = node;
-    _solution = [node description];
-}
-
-- (void)validateAnswer {
-    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
-    
-    _success = [_syntaxTreeView.node isEqual:[answerFormula syntaxTree:NO]];
-    
-    
-    
+- (void)writeQuestion {
+    self.syntaxTreeView.node = self.questionTree;
 }
 
 - (void)dragFormula:(UIPanGestureRecognizer *)sender {

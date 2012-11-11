@@ -60,7 +60,6 @@
 @interface NyTuTesterPlist : NyTuTester
 
 @property (nonatomic, strong) NSDictionary *testDictionary;
-@property (nonatomic, strong) NSDictionary *questionsDictionary;
 
 @property (nonatomic, strong) NSString *questionLabelText;
 @property (nonatomic, strong) NSString *answerLabelText;
@@ -70,31 +69,38 @@
 @property (nonatomic, readonly) NSString *answer;
 @property (nonatomic, readonly) NSString *solution;
 
-
-
 @end
 
-@interface NyTuTester11 : NyTuTesterPlist
+@interface NyTuTesterDictionaryQuestions : NyTuTesterPlist
+@property (nonatomic, strong) NSDictionary *questionsDictionary;
 @end
 
-@interface NyTuTester12 : NyTuTesterPlist
-@end
-
-@interface NyTuTester13 : NyTuTesterPlist
-@end
-
-//@interface NyTuTester21 : NyTuTesterPlist
-//@end
-
-@interface NyTuTesterRandom : NyTuTesterPlist
+@interface NyTuTesterRandomQuestions : NyTuTesterPlist
 
 @property (readonly, nonatomic) NSIndexSet *rootTypes;
 @property (readonly, nonatomic) NSIndexSet *nodeTypes;
 @property (readonly, nonatomic) NSRange lengths;
 @property (readonly, nonatomic) NSArray *variables;
+@property (readonly, nonatomic) NyayaNode *questionTree;
 @end
 
-@interface NyTuTester24 : NyTuTesterRandom <NyTreeViewDataSource, NyTreeViewDelegate>
+/*****************************************************************************************/
+
+@interface NyTuTester11 : NyTuTesterDictionaryQuestions
+@end
+
+@interface NyTuTester12 : NyTuTesterDictionaryQuestions
+@end
+
+@interface NyTuTester13 : NyTuTesterDictionaryQuestions
+@end
+
+/*****************************************************************************************/
+
+//@interface NyTuTester21 : NyTuTesterPlist
+//@end
+
+@interface NyTuTester24 : NyTuTesterRandomQuestions <NyTreeViewDataSource, NyTreeViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *canvasView;
 @property (weak, nonatomic) NyTreeView *syntaxTreeView;
 
