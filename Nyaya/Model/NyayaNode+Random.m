@@ -13,15 +13,24 @@
 
 @interface NSArray (Random)
 
-- (id)randomObject;
+- (id)randomObject:(NSUInteger)maxLength;
 
 @end
 
 @implementation NSArray (Random)
 
-- (id)randomObject {
-    NSUInteger xth = arc4random() % [self count];
-    return [self objectAtIndex:xth];
+- (id)randomObject:(NSUInteger)maxLength {
+    if (maxLength == 0) maxLength = 1;
+    
+    NyayaNode *node = nil;
+    
+    do {
+        NSUInteger xth = arc4random() % [self count];
+        node = [self objectAtIndex:xth];
+    }
+    while (maxLength < [node length]);
+    
+    return node;
 }
 @end
 
@@ -54,18 +63,18 @@
 
 @implementation NyayaNode (Random)
 
-+ (NyayaNode*)randomNode {
++ (NyayaNode*)randomTree {
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
     [indexSet addIndex:NyayaConjunction];
     [indexSet addIndex:NyayaDisjunction];
     [indexSet addIndex:NyayaImplication];
-    return [NyayaNode randomNodeWithRootTypes:indexSet
+    return [NyayaNode randomTreeWithRootTypes:indexSet
                                     nodeTypes:indexSet
-                                      lengths:NSMakeRange(5,5)
+                                      lengths:NSMakeRange(1,11)
                                     variables:@[@"p",@"q",@"r"]];
 }
 
-+ (NyayaNode *)randomNodeWithRootTypes:(NSIndexSet *)rootTypes
++ (NyayaNode *)randomTreeWithRootTypes:(NSIndexSet *)rootTypes
                              nodeTypes:(NSIndexSet *)nodeTypes
                                lengths:(NSRange)lengths
                              variables:(NSArray *)variables {
@@ -74,8 +83,11 @@
     NyayaNode* result = nil;
     NyayaNode* first = nil;
     NyayaNode* second = nil;
+    
     NSUInteger minLength = lengths.location;
-    NSUInteger maxLength = minLength + lengths.length;
+    NSUInteger maxLength = lengths.location + lengths.length;
+    if (minLength < maxLength)
+        minLength += arc4random() % lengths.length;
     
     // NyayaNodeType rootType = (NyayaNodeType)[rootTypes randomIndex];
     
@@ -86,14 +98,18 @@
     }
     
     NyayaNodeType rootType = [rootTypes randomIndex];
+    
     NyayaNodeType type = rootType;
     
+    if (maxLength < 2) return [subTrees randomObject:1];
+        
     do  {
+        NSUInteger count = 0;
         do {
-            first = [subTrees randomObject];
-            second = type != NyayaNegation ? [subTrees randomObject] : nil;
+            first = [subTrees randomObject: maxLength -1 - (type != NyayaNegation)];
+            second = type != NyayaNegation ? [subTrees randomObject: maxLength - 1 - [first length]] : nil;
         }
-        while (maxLength <= ([first length] + [second length]));
+        while ([second isEqual: first] && ++count < [subTrees count]*3);
         
         switch (type) {
             case NyayaNegation:
@@ -103,10 +119,10 @@
                 result = [NyayaNode conjunction:first with:second];
                 break;
             case NyayaConjunction:
-                result = [NyayaNode conjunction:first with:second];
+                result = [NyayaNode disjunction:first with:second];
                 break;
             case NyayaImplication:
-                result = [NyayaNode conjunction:first with:second];
+                result = [NyayaNode implication:first with:second];
                 break;
             default:
                 continue;
@@ -116,11 +132,6 @@
         type = [nodeTypes randomIndex];
     }
     while ([result length] < minLength);
-    
-    
-    
-    
-    
     
     return result;
     
