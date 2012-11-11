@@ -47,6 +47,10 @@
 {
     self.backButton.hidden = YES;
     
+    if (self.navigationItem.rightBarButtonItem) {
+        self.exerciseButton = self.navigationItem.rightBarButtonItem;
+    }
+    
     if (self.detailItem) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ – %@", self.sectionTitle, self.tutorialTitle];
         
@@ -81,7 +85,9 @@
     [super viewDidLoad];
     
     self.backButton.hidden = YES;
-    self.exerciseButton = self.navigationItem.rightBarButtonItem;
+    if (self.navigationItem.rightBarButtonItem) {
+        self.exerciseButton = self.navigationItem.rightBarButtonItem;
+    }
 }
 
 - (void)viewDidUnload {

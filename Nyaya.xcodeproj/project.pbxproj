@@ -142,7 +142,7 @@
 		1188B55215F788E3004186C0 /* NSSet+NyayaToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55115F788E3004186C0 /* NSSet+NyayaToken.m */; };
 		1188B55515F7B5DE004186C0 /* BaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55415F7B5DE004186C0 /* BaseTests.m */; };
 		1188B55815F7BF6D004186C0 /* DerivationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188B55715F7BF6D004186C0 /* DerivationsTests.m */; };
-		1190AB031610670400BDE63F /* 21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1190AB021610670400BDE63F /* 21.plist */; };
+		1190AB031610670400BDE63F /* 22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1190AB021610670400BDE63F /* 22.plist */; };
 		11A473BF1603392400EA2508 /* NyayaConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473BE1603392400EA2508 /* NyayaConstants.m */; };
 		11A473C216035DFC00EA2508 /* TruthTable+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A473C116035DFC00EA2508 /* TruthTable+HTML.m */; };
 		11B0B26515EFC66C006AFBFC /* 11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B0B26415EFC66C006AFBFC /* 11.plist */; };
@@ -430,7 +430,7 @@
 		1188B55415F7B5DE004186C0 /* BaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTests.m; path = NyayaNodeCategoryTests/BaseTests.m; sourceTree = "<group>"; };
 		1188B55615F7BF6D004186C0 /* DerivationsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DerivationsTests.h; path = NyayaNodeCategoryTests/DerivationsTests.h; sourceTree = "<group>"; };
 		1188B55715F7BF6D004186C0 /* DerivationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DerivationsTests.m; path = NyayaNodeCategoryTests/DerivationsTests.m; sourceTree = "<group>"; };
-		1190AB021610670400BDE63F /* 21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 21.plist; path = Nyaya/NyTutorials/21.plist; sourceTree = "<group>"; };
+		1190AB021610670400BDE63F /* 22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 22.plist; path = Nyaya/NyTutorials/22.plist; sourceTree = "<group>"; };
 		11A473BD1603392400EA2508 /* NyayaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NyayaConstants.h; sourceTree = "<group>"; };
 		11A473BE1603392400EA2508 /* NyayaConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NyayaConstants.m; sourceTree = "<group>"; };
 		11A473C016035DFC00EA2508 /* TruthTable+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TruthTable+HTML.h"; path = "NyBoolTool/TruthTable+HTML.h"; sourceTree = "<group>"; };
@@ -1040,7 +1040,7 @@
 				11B0B26415EFC66C006AFBFC /* 11.plist */,
 				11061F3215EFA6EF00345516 /* 12.plist */,
 				113FF75C15F07ED90073A410 /* 13.plist */,
-				1190AB021610670400BDE63F /* 21.plist */,
+				1190AB021610670400BDE63F /* 22.plist */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
 				11C61BB615E91FF000F5BB28 /* NyTuTestViewController.m */,
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
@@ -1313,7 +1313,7 @@
 				11DC674B160854B900B9008B /* clnewstylewide.css in Resources */,
 				11DC674D1608550800B9008B /* clsample.html in Resources */,
 				11DC674F1608558E00B9008B /* MathJax.js in Resources */,
-				1190AB031610670400BDE63F /* 21.plist in Resources */,
+				1190AB031610670400BDE63F /* 22.plist in Resources */,
 				9A926816163C362D00C3879B /* BST_conjunction.png in Resources */,
 				9A926817163C362D00C3879B /* BST_disjunction.png in Resources */,
 				9A926818163C362D00C3879B /* BST_implication.png in Resources */,

@@ -11,6 +11,7 @@
 #import "UITextField+Nyaya.h"
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Random.h"
+#import "NyayaNode+Description.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -400,6 +401,7 @@
                                                  lengths:self.lengths
                                                variables:self.variables];
     
+    _question = [self.questionTree description];
     _solution = [self.questionTree description];
 }
 
@@ -414,8 +416,9 @@
 
 @end
 
-/***************************************************************************************************************************/
-#pragma mark - Section 1
+/**************************************************************************************************************************
+ **************************************************************************************************************************/
+#pragma mark - Chapter 1
 
 @implementation  NyTuTester11
 
@@ -444,21 +447,33 @@
 
 @end
 
-#pragma mark - Section 2
+#pragma mark - Chapter 2
 
-//@implementation NyTuTester21
-//
-//
-//- (void)generateQuestion {
-//    _question = [NSString stringWithFormat:@"Hello World at %@", [NSDate date]];
-//}
-//@end
+@implementation NyTuTester22
+
+- (void)configureTestContext {
+    [super configureTestContext];
+    
+    self.lengths = NSMakeRange(1,5);
+    
+}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    _solution = [self.questionTree treeDescription];
+}
+
+- (void)validateAnswer {
+    _success = [_solution isEqualToString:[self.answer stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    
+}
+
+
+@end
 
 
 
 @implementation NyTuTester24
-
-
 
 - (NyNodeView*)symbolView {
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];

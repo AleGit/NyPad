@@ -97,8 +97,8 @@
 
 /*****************************************************************************************/
 
-//@interface NyTuTester21 : NyTuTesterPlist
-//@end
+@interface NyTuTester22 : NyTuTesterRandomQuestions
+@end
 
 @interface NyTuTester24 : NyTuTesterRandomQuestions <NyTreeViewDataSource, NyTreeViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *canvasView;
