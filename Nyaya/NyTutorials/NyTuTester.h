@@ -100,6 +100,9 @@
 @interface NyTuTester22 : NyTuTesterRandomQuestions
 @end
 
+@interface NyTuTester23 : NyTuTesterRandomQuestions
+@end
+
 @interface NyTuTester24 : NyTuTesterRandomQuestions <NyTreeViewDataSource, NyTreeViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *canvasView;
 @property (weak, nonatomic) NyTreeView *syntaxTreeView;

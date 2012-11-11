@@ -9,9 +9,10 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
+#import "NyayaNode+Description.h"
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Random.h"
-#import "NyayaNode+Description.h"
+#import "NyayaNode+Valuation.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -449,13 +450,13 @@
 
 #pragma mark - Chapter 2
 
+// syntax conventions
 @implementation NyTuTester22
 
 - (void)configureTestContext {
     [super configureTestContext];
     
-    self.lengths = NSMakeRange(1,5);
-    
+    self.lengths = NSMakeRange(3,5);
 }
 
 - (void)generateQuestion {
@@ -471,8 +472,43 @@
 
 @end
 
+// sub-formulas
+@implementation NyTuTester23
+
+- (void)configureTestContext {
+    [super configureTestContext];
+    
+    self.lengths = NSMakeRange(3,2);
+}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    _solution = [[[self.questionTree setOfSubformulas] allObjects] componentsJoinedByString:@","] ;
+}
+
+- (void)validateAnswer {
+    NSMutableSet *solutionSubformulas = [NSMutableSet set];
+    NSMutableSet *answerSubformulas = [NSMutableSet set];
+    
+    for (NSString *sf in [self.questionTree setOfSubformulas]) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:sf];
+        [solutionSubformulas addObject:[formula syntaxTree:NO]];
+    }
+    
+    
+    
+    for (NSString *sf in  [self.answer componentsSeparatedByString:@","]) {
+        NyayaFormula *formula = [NyayaFormula formulaWithString:sf];
+        [answerSubformulas addObject:[formula syntaxTree:NO]];
+    }
+    _success = [solutionSubformulas isEqual:answerSubformulas];
+    
+}
 
 
+@end
+
+// syntax tree
 @implementation NyTuTester24
 
 - (NyNodeView*)symbolView {
