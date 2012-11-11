@@ -390,14 +390,29 @@
 
 @interface NyTuTesterRandom ()
 
+- (void)setRootTypes: (NSIndexSet*)rootTypes;
+- (void)setNodeTypes: (NSIndexSet*)nodeTypes;
 - (void)setLengths: (NSRange)lengths;
+- (void)setVariables: (NSArray*)variables;
 
 @end
 
 @implementation NyTuTesterRandom
 
+- (void)setRootTypes:(NSIndexSet *)rootTypes {
+    _rootTypes = rootTypes;
+}
+
+- (void)setNodeTypes:(NSIndexSet *)nodeTypes {
+    _nodeTypes = nodeTypes;
+}
+
 - (void)setLengths: (NSRange)lengths {
     _lengths = lengths;
+}
+
+- (void)setVariables:(NSArray *)variables {
+    _variables = variables;
 }
 
 - (void)configureTestContext {
@@ -408,10 +423,10 @@
     [indexSet addIndex:NyayaDisjunction];
     [indexSet addIndex:NyayaImplication];
     
-    _rootTypes = [indexSet copy];
-    _nodeTypes = [indexSet copy];
-    _lengths = NSMakeRange(1,2);
-    _variables = @[@"p", @"q", @"r"];
+    self.rootTypes = [indexSet copy];
+    self.nodeTypes = [indexSet copy];
+    self.lengths = NSMakeRange(1,2);
+    self.variables = @[@"p", @"q", @"r"];
     
 }
 
