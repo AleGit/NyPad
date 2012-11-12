@@ -102,6 +102,55 @@
     [self.webView goBack];
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSString *fileName = [[request.URL lastPathComponent] stringByDeletingPathExtension];
+    
+    if (navigationType == UIWebViewNavigationTypeLinkClicked
+        && request.URL.isFileURL
+        && [fileName hasPrefix:@"tutorial"]
+        ) {
+    
+        /*
+         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorials" ofType:@"plist"];
+         self.tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
+         
+         NSArray *tutorialSection = [self.tutorialSections objectAtIndex:indexPath.section+1];
+         NSString *sectionTitle = [tutorialSection objectAtIndex:0];
+         NSArray *tutorial = [tutorialSection objectAtIndex:indexPath.row +1];
+         self.detailViewController.detailItem = @[sectionTitle, tutorial];
+        */
+        
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorials" ofType:@"plist"];
+        NSArray *tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
+        NSString *sectionTitle = @"sectionTitle";
+        NSArray *tutorial = nil;
+        NSString *key = [fileName stringByReplacingOccurrencesOfString:@"tutorial" withString:@""];
+        
+        for (NSUInteger section = 1; section < [tutorialSections count]; section++) {
+        
+            NSArray *tutorialSection = tutorialSections[section];
+            sectionTitle = [tutorialSection objectAtIndex:0];
+            for (NSUInteger row = 1; row < [tutorialSection count]; row++) {
+                tutorial = tutorialSection[row];
+                if ([key isEqual:tutorial[1]]) break;
+                else tutorial = nil;
+                
+            }
+            
+            if (tutorial) break;
+            
+        }
+        
+        
+        self.detailItem = @[sectionTitle, tutorial];
+        
+        NSLog(@"%@ %@", sectionTitle, tutorial);
+        [self configureView];
+        return NO;
+    }
+    return YES;
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.backButton.hidden = !self.webView.canGoBack || [self.tutorialHtml isEqual:[webView.request.URL lastPathComponent]];
 }
