@@ -475,6 +475,12 @@
 // sub-formulas
 @implementation NyTuTester23
 
+- (void)configureAccessoryView {
+    [super configureAccessoryView];
+    [((UIButton*)[self.accessoryView viewWithTag:32]) setTitle:@"," forState:UIControlStateNormal];
+    
+}
+
 - (void)configureTestContext {
     [super configureTestContext];
     
