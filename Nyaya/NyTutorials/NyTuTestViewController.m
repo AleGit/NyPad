@@ -29,8 +29,18 @@
 	// Do any additional setup after loading the view.
     
     NSURL *url = [[NSBundle mainBundle] URLForResource:self.instructionsName withExtension:@"html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.instructionsView loadRequest:request];
+    
+    if (url) {
+        self.instructionsView.hidden = NO;
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        
+        [self.instructionsView loadRequest:request];
+    }
+    else {
+        self.instructionsView.hidden = YES;
+    }
+    
     
     self.nextButton.enabled = NO;
     [self.tester firstTest:self.view];
@@ -40,7 +50,6 @@
 {
     [self setInstructionsView:nil];
     [self setCheckButton:nil];
-    [self setNextButton:nil];
     [self setNextButton:nil];
     [self setDoneButton:nil];
     [super viewDidUnload];

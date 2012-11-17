@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Ny Welcome View Controller - Nyāya-->
@@ -142,7 +142,7 @@
                                 </items>
                             </toolbar>
                             <webView contentMode="scaleToFill" id="oFz-Le-iqp">
-                                <rect key="frame" x="0.0" y="306" width="540" height="319"/>
+                                <rect key="frame" x="1" y="300" width="540" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
@@ -268,14 +268,6 @@
                             <view contentMode="scaleToFill" id="D8M-GJ-Ed7" customClass="NyPgCanvasView">
                                 <rect key="frame" x="0.0" y="0.0" width="703" height="655"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ZvL-8X-3LC">
-                                        <rect key="frame" x="20" y="20" width="663" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -290,7 +282,6 @@
                     <navigationItem key="navigationItem" title="Playground" id="be5-hE-dL5"/>
                     <connections>
                         <outlet property="canvasView" destination="D8M-GJ-Ed7" id="mcf-zQ-aT9"/>
-                        <outlet property="inputField" destination="ZvL-8X-3LC" id="slq-6W-FBS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0d-EJ-78B" sceneMemberID="firstResponder"/>
@@ -771,6 +762,118 @@
         <image name="i4.png" width="30" height="30"/>
         <image name="i5.png" width="30" height="30"/>
     </resources>
+    <classes>
+        <class className="NyBtDetailViewController" superclassName="NyDetailInputViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="didEndOnExit:"/>
+                <relationship kind="action" name="editingChanged:"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="process:" candidateClass="UIButton"/>
+                <relationship kind="action" name="send:"/>
+                <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
+                <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="cnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="contradictionLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="inputName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nnfField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="nnfLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="parsedField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="resultView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="satisfiabilityLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="stdField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="stdLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tautologyLabel" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="truthTableView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
+        </class>
+        <class className="NyDetailInputViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailInputViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="back:" candidateClass="UIButton"/>
+                <relationship kind="action" name="dismiss:" candidateClass="UIButton"/>
+                <relationship kind="action" name="negate:" candidateClass="UIButton"/>
+                <relationship kind="action" name="parenthesize:" candidateClass="UIButton"/>
+                <relationship kind="action" name="press:" candidateClass="UIButton"/>
+                <relationship kind="action" name="process:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dismissButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="inputField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="processButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NyDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
+        </class>
+        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
+        </class>
+        <class className="NyMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
+        </class>
+        <class className="NyPgCanvasView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgCanvasView.h"/>
+        </class>
+        <class className="NyPgDetailViewController" superclassName="NyDetailInputViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="canvasLongPress:" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="action" name="canvasTap:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="canvasView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
+        </class>
+        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="back:"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
+        </class>
+        <class className="NyTuTestViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuTestViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="check:"/>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="action" name="next:"/>
+                <relationship kind="outlet" name="checkButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="instructionsView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="nextButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NyWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NyayaBddView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaBddView.h"/>
+        </class>
+        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

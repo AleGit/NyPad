@@ -135,8 +135,11 @@
 @implementation NyayaNodeImplication (Display)
 
 - (NyayaBool)displayValue {
+    if (self.firstNode == self.secondNode) _displayValue = NyayaTrue;
+    
     NyayaBool firstValue = [self firstValue];
     NyayaBool secondValue = [self secondValue];
+    
     
     if (firstValue == NyayaFalse || secondValue == NyayaTrue) _displayValue = NyayaTrue;
     else if (firstValue == NyayaTrue && secondValue == NyayaFalse) _displayValue = NyayaFalse;
@@ -151,6 +154,8 @@
 
 @implementation NyayaNodeBicondition (Display)
 - (NyayaBool)displayValue {
+    if (self.firstNode == self.secondNode) return NyayaTrue;
+    
     NyayaBool firstValue = [self firstValue];
     NyayaBool secondValue = [self secondValue];
     

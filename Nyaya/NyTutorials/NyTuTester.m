@@ -523,7 +523,7 @@
     return symbolView;
 }
 
-- (UIModalPresentationStyle)modalPresentationStyle { return UIModalPresentationPageSheet; }
+// - (UIModalPresentationStyle)modalPresentationStyle { return UIModalPresentationPageSheet; }
 - (NSString*)testViewNibName { return @"SyntaxTreeTestView"; }
 
 - (void)layoutSubviews:(UIView*)view {

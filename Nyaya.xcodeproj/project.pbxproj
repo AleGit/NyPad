@@ -193,7 +193,6 @@
 		8156385F16500DA9006A9B99 /* 23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8156385E16500DA9006A9B99 /* 23.plist */; };
 		81C865BD164E8BD200A77B02 /* 24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BC164E8BD100A77B02 /* 24.plist */; };
 		81C865BF164E967F00A77B02 /* SyntaxTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */; };
-		81C865C1164EA3C900A77B02 /* instructions24.html in Resources */ = {isa = PBXBuildFile; fileRef = 81C865C0164EA3C900A77B02 /* instructions24.html */; };
 		9A0592D51646585200E314E2 /* tutorial52.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D41646585200E314E2 /* tutorial52.html */; };
 		9A0592D8164840BF00E314E2 /* BDD_unordered.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D7164840BE00E314E2 /* BDD_unordered.png */; };
 		9A0592DA1648461000E314E2 /* tutorial01.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D91648460F00E314E2 /* tutorial01.html */; };
@@ -506,7 +505,6 @@
 		8156385E16500DA9006A9B99 /* 23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 23.plist; path = Nyaya/NyTutorials/23.plist; sourceTree = "<group>"; };
 		81C865BC164E8BD100A77B02 /* 24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 24.plist; path = Nyaya/NyTutorials/24.plist; sourceTree = "<group>"; };
 		81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyntaxTreeTestView.xib; path = Nyaya/NyTutorials/SyntaxTreeTestView.xib; sourceTree = "<group>"; };
-		81C865C0164EA3C900A77B02 /* instructions24.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = instructions24.html; path = html/instructions24.html; sourceTree = "<group>"; };
 		9A0592D41646585200E314E2 /* tutorial52.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial52.html; path = html/tutorial52.html; sourceTree = "<group>"; };
 		9A0592D7164840BE00E314E2 /* BDD_unordered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BDD_unordered.png; path = html/BDD_unordered.png; sourceTree = "<group>"; };
 		9A0592D91648460F00E314E2 /* tutorial01.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial01.html; path = html/tutorial01.html; sourceTree = "<group>"; };
@@ -711,7 +709,6 @@
 		11061F1915EE10DC00345516 /* htmlinstructions */ = {
 			isa = PBXGroup;
 			children = (
-				81C865C0164EA3C900A77B02 /* instructions24.html */,
 				11B0B26715EFEC13006AFBFC /* instructions11.html */,
 				11DBC0B51604F2CF0007A82B /* instructions12.html */,
 				11DBC0B61604F2CF0007A82B /* instructions13.html */,
@@ -1348,7 +1345,6 @@
 				9A0592DA1648461000E314E2 /* tutorial01.html in Resources */,
 				81C865BD164E8BD200A77B02 /* 24.plist in Resources */,
 				81C865BF164E967F00A77B02 /* SyntaxTreeTestView.xib in Resources */,
-				81C865C1164EA3C900A77B02 /* instructions24.html in Resources */,
 				8156385F16500DA9006A9B99 /* 23.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
