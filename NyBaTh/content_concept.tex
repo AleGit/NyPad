@@ -116,7 +116,7 @@ with which the user's answer will be checked with some tolerance.
 \end{center}
 \end{table}%
 
-\subsubsection{Applications of Propositional logic}
+\subsubsection{Applications}
 \label{tut:11}
 
 (11) The aim of logic in general is to reason about situations.\cite{Huth:2004:LCS:975331} 
@@ -335,7 +335,7 @@ The valuation of arbitrary formulas by evaluating all sub-formulas is described.
 
 The user has to guess or calculate the evaluation of a given formula with a given truth assignment of the atoms of the formula.
 
-\subsubsection{Truth tables}
+\subsubsection{Truth Tables}
 \label{tut:32}
 (32)
 The concept of truth tables is explained and demonstrated with the basic connectives. 
@@ -343,9 +343,9 @@ The valuation of arbitrary formulas by evaluating all sub-formulas is demonstrat
 
 The user has to fill in truth tables for formulas with a maximum of three atoms.
 
-\subsubsection{Semantic Entailment and Equivalence}
+\subsubsection{Entailment and Equivalence}
 \label{tut:33}
-(33) Semantic entailment and equivalenced is defined and explained with various examples.
+(33) Semantic entailment and equivalence is defined and explained with various examples.
 
 The user has to guess or calculate whether a given semantic entailment or equivalence holds. 
 
@@ -580,15 +580,15 @@ $B$	&$::=$	&$p$
 The user has to rewrite formulas with propositional symbols into Boolean expressions.
 The implication may be a challenge for some users. 
 
-\subsubsection{Binary decision trees}
-\label{tut:53)
+\subsubsection{Binary Decisions}
+\label{tut:53}
 
 (53)
 
 The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
 
-\subsubsection{Binary decision diagrams}
-\label{tut:54)
+\subsubsection{ROBDD}
+\label{tut:54}
 
 (54)
 
@@ -596,11 +596,13 @@ The user has to check whether a binary decision diagram is ordered or reduced.
 
 \section{Playgrounds}
 
-In the playground the user can create arbitrary formulas by building a syntax tree,
-they can assign truth values to the atoms of the formula 
-and perform equivalence transformations on the formula
-with a graphical user interface.
+In the playground the user can create arbitrary propositional formulas 
+by building syntax tree.
+Truth values can be assigned to the atoms of a formula and 
+the evaluation of the (sub-) formulas will be displayed graphically.
+Equivalence transformations can be applied to the nodes of a formula.
 
+[optional]
 When a user taps a node in the syntax tree the corresponding sub formula 
 in the textual representation of the syntax tree will be marked with square brackets.
 Once, for example,  the user taps the disjunction node in the syntax tree of 
@@ -608,17 +610,29 @@ $a \wedge (b \vee c) $, then
 $a \wedge [\,(b \vee c) \,]$ is displayed.
 
 The interactive manipulation of the graphical representation of a syntax tree supports two modes of interaction.
-In the free mode ambitrary modifications can be applied to the syntax tree, which usually leads to a non equipvalent formula. 
+In the free mode arbitrary modifications can be applied to the syntax tree, which usually leads to a new formula,
+that is not equivalent to the old formula, which was manipulated.
+ 
 In the locked mode only equivalence transformations can be applied.
 
-\subsection{Manipulate formulas in free mode}
+\subsection{Free mode }
 
 In the free mode arbitrary formulas can be created by adding, replacing and removing connectives and atoms. 
 The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \bot, p, q, r, … \}$.
 
-\subsection{Manipulate formulas in locked mode}
+Truth values can be assigned by tapping leaf nodes (atoms). 
+Green represents true, red false, and blue expresses that no value is assigned.
+Similar the valuations of super and root-nodes are displayed.
+Obvious evaluations like
+$P \vee \neg P$, 
+$P \rightarrow P$,
+$P \wedge \neg P$,
+$\top \vee P$, etc.
+which do not depend on complete truth assignments are displayed too.
 
-In the locked mode equivalence transformations can be applied on (sub-) formulas (\tabref{tab:ET:ALL})
+\subsection{Locked mode}
+
+In the locked mode equivalence transformations can be applied on (sub-) formulas (see \tabref{tab:ET:ALL})
 – depending on the kind of node. 
 
 

@@ -44,7 +44,7 @@
 			<string>23</string>
 		</array>
 		<array>
-			<string>Syntax tree</string>
+			<string>Syntax Trees</string>
 			<string>24</string>
 		</array>
 		<array>
@@ -105,7 +105,7 @@
 			<string>53</string>
 		</array>
 		<array>
-			<string>Reduced BDDs</string>
+			<string>ROBDD</string>
 			<string>54</string>
 		</array>
 	</array>
