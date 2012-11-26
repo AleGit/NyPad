@@ -715,9 +715,12 @@ Some additions should be added for comfort.
 As minimum the embedded BoolTool must support the latin letters as identifiers for atoms, 
 “T” and “F” as names for top and bottom, and the symbols
 “\verb#!&.|+>^#” as connectives, because these ascii-symbols can be found on almost every keyboard.
-In environments with native unicode support it is is desirable that standard symbols of propositional logic
-“$ \neg \vee \wedge \rightarrow $” are accepted too.
-This enables the local persisting of formulas with standard syntax of propositional logic.
+Standard “$ \neg \vee \wedge \rightarrow $” and additional symbols of propositional logic
+ should be accepted too (see \ref{tab:BASICSYMBOLS}).
+A limitation of the identifiers for atoms on Latin letters is not necessary.
+Therefore the input tokens are defined with a regular expression (see \tabref{tab:REGEX}),
+which allows a very flexible lexxer.
+
 
 \begin{table}[htdp]
 \begin{center}
@@ -730,45 +733,12 @@ $\top | \bot
 | > | \rightarrow | \models
 | ( | ) | , | ; 
 | {\setminus}w+$ 
-\caption{Regular expresson for a lexxer to build a more flexible parser}
+\caption{Regular expresson for the lexxer of Nyaya}
 \label{tab:REGEX}
 \end{center}
 \end{table}%
 
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{lccccc}
-Name	& Atom 	& Negation		& Conjunction		& Disjunction		&  Implication \\
-		&  		& NOT		& AND		& OR		&   \\
-ASCII 	& p,q,r 	& ! 			& \& \quad .	& |  \quad +			&> 	\\
-Symbol  	&		& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
-UTF-8	&		& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
-Unicode	&		& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
-HTML	&		& \&not;		& \&and;		& \&or;		& \&rarr;  \\
-LaTeX	&		& \verb+\neg+	& \verb+\wedge+ & \verb+\vee+ & \verb+\rightarrow+ \\
 
-\end{tabular}
-\caption{basic atoms and connectives in different encodings}
-\end{center}
-\label{tab:BASICSYMBOLS}
-\end{table}%
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{ccccc}
-Tautology		& Contradiction		& \multicolumn{2}{c}{Exclusive Disjunction}	& Biconditional \\	
-TOP			& BOTTOM		& EOR & XOR							& IFF \\
-T \quad 1		& F  \quad 0		& \multicolumn{2}{c}{\textasciicircum} 		& <> \\
-$\top$		& $\bot$			& $\veebar$ 							&$\oplus$   			&$ \leftrightarrow$\\
-E2 8A A4		& E2 8A A5		& E2 8A BB							& E2 8A 95			&E2 86 94\\
-U+22A4		& U+22A5			& U+22BB							& U+2295				&U+2194\\
-			& \&perp;			&									& \&oplus;				& \&harr;\\
-\verb+\top+	& \verb+\bot+	& \verb+\veebar+ & \verb+\oplus+	& \verb+\leftrightarrow+
-\end{tabular}
-\caption{additional atoms and connectives}
-\end{center}
-\label{tab:ADDITIONALSYMBOLS}
-\end{table}%
 
 % ⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+
 

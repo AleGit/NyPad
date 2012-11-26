@@ -99,3 +99,39 @@
 \label{tab:CONFIG}
 \end{center}
 \end{table}%
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{lccccc}
+Name	& Atom 	& Negation		& Conjunction		& Disjunction		&  Implication \\
+		&  		& NOT		& AND		& OR		&   \\
+ASCII 	& p,q,r 	& ! 			& \& \quad .	& |  \quad +			&> 	\\
+Symbol  	&		& $\neg$		& $\wedge$	& {$\vee$}		&$\rightarrow$ \\ 
+UTF-8	&		& C2 AC		& E2 88 A7	& {E2 88 A8}	&E2 86 92\\
+Unicode	&		& U+00AC 	& U+2227		& {U+2228}	&U+2192\\
+HTML	&		& \&not;		& \&and;		& \&or;		& \&rarr;  \\
+LaTeX	&		& \verb+\neg+	& \verb+\wedge+ & \verb+\vee+ & \verb+\rightarrow+ \\
+
+\end{tabular}
+\caption{basic symbols in different representations}
+\end{center}
+\label{tab:BASICSYMBOLS}
+\end{table}%
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{ccccc}
+Tautology		& Contradiction		& \multicolumn{2}{c}{Exclusive Disjunction}	& Biconditional \\	
+TOP			& BOTTOM		& EOR & XOR							& IFF \\
+T \quad 1		& F  \quad 0		& \multicolumn{2}{c}{\textasciicircum} 		& <> \\
+$\top$		& $\bot$			& $\veebar$ 							&$\oplus$   			&$ \leftrightarrow$\\
+E2 8A A4		& E2 8A A5		& E2 8A BB							& E2 8A 95			&E2 86 94\\
+U+22A4		& U+22A5			& U+22BB							& U+2295				&U+2194\\
+			& \&perp;			&									& \&oplus;				& \&harr;\\
+\verb+\top+	& \verb+\bot+	& \verb+\veebar+ & \verb+\oplus+	& \verb+\leftrightarrow+
+\end{tabular}
+\caption{additional symbols}
+\end{center}
+\label{tab:ADDITIONALSYMBOLS}
+\end{table}%
+

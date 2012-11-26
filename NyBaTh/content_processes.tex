@@ -5,14 +5,15 @@
 
 \subsection{Developing for the iPad}
 
-For the first steps in developing software for iPad
-a computer with Mac OS X and \href{sec:Xcode}{Xcode} (p.~\pageref{sec:Xcode}) is needed. 
-
-Knowledge of object-oriented programming, object-oriented design patterns, and the C programming language 
+A computer with Mac OS X and 
+\href{sec:Xcode}{Xcode} are needed for first steps in developing software for iPad. 
+Knowledge of object-oriented programming, object-oriented design patterns, 
+and the C programming language 
 builds a good base to learn the main platform-specific techniques 
-\href{sec:ObjC}{Objective-C} (p.~\pageref{sec:ObjC}),
-\href{sec:Cocoa}{Cocoa} (p.~\pageref{sec:Cocoa}), and
-\href{sec:MemoryManagement}{Memory Management} (p.~\pageref{sec:MemoryManagement}).
+\href{sec:ObjC}{Objective-C},
+\href{sec:Cocoa}{Cocoa}, and
+\href{sec:MemoryManagement}{Memory Management}
+with automatic reference counting.
 
 In addition to the technical skills, it is to gain an overview to the necessary steps for 
 \href{sec:DAD}{Development and Distribution} (p.~\pageref{sec:DAD}) for the iPad platform.
@@ -20,38 +21,44 @@ In addition to the technical skills, it is to gain an overview to the necessary 
 \subsubsection{Xcode}
 \label{sec:Xcode}
 
-Xcode is Apple's integrated development environment to create software for OS X and iOS devices.
-Xcode is free to download. It includes an iPad simulator, complete API documentations and development guides to various topics.
+Xcode is Apple's integrated development environment to create software for OS X and iOS devices 
+.
+Xcode is free to download. It includes an iPad simulator, complete API documentations and development guides to various topics. Xcode supports the source management systems git and subversion. 
+Git will be installed along various other development tools with Xcode.
 
 \subsubsection{Objective-C}
 \label{sec:ObjC}
 Objective-C is a reflective, object-oriented extension of the C programming language,
  which was developed by Tom Love and Brad Cox in the early 1980s (a few moments earlier than C++). 
-The syntax for objects and messages was based on Smalltalk. 
-Objective-C does not have method calls, but messages, which are bound to classes and instances at runtime.
+The syntax for objects and methods is based on Smalltalk. 
+Objective-C method calls will be bound to functions at runtime with no need to be defined formally at compile time.
 
-\subsubsection{Cocoa}
+\subsubsection{Cocoa Touch}
 \label{sec:Cocoa}
 
-Cocoa is the name for the object-oriented APIs for iOS (the operating system for iPhone and iPad). 
-Cocoa covers the Objective-C runtime and a set of libraries, the frameworks.
+Cocoa Touch is the name for the object-oriented APIs for iOS (the operating system for iPhone and iPad). 
+Cocoa Touch covers the platform specific Objective-C runtime and a platform specific set of libraries, the frameworks.
+
 \begin{itemize}
 \item The Foundation framework it provides the basis for programming with Objective-C. 
 In addition to the memory and exception handling it includes the base classes for strings, values, lists, sets and files.
-\item The UIKit framework provides a set of classes and functions for implementing graphical user interfaces. 
+\item The UIKit framework provides a set of classes and functions for implementing (touch based) graphical user interfaces. 
 The architecture of this framework follows the Model-View-Controller pattern 
 and the implementation provides a myriad of view and controller classes.
 \end{itemize}
 
 \subsubsection{Memory Management}
 \label{sec:MemoryManagement}
-The runtime of Objective-C does not offer – surprisingly especially for pure Java or C\# developers  – no garbage collection, 
-but an reference counting dynamic memory management. The necessary retains and releases are added automatically at compile time.
-This has the consequence that (strong) object graphs must be implemented as directed acyclic graphs. Back references have to be declared as weak.
-Otherwise objects would be never released. 
+The Objective-C runtime does not offer – surprisingly for Java or C\# developers  – garbage collection, 
+but dynamic memory management based on reference counting. 
+The necessary retains and releases are added automatically at compile time.
+This has the consequence that (strong) object graphs must be implemented as directed acyclic graphs. 
+Back references have to be declared as weak.
+Otherwise objects would never be released. 
 
-The advantages of the reference counting in comparison to automatic garbage collection are in the foreseeable and economical run-time behavior.
-Objects are destroyed at a defined time. A separate thread for garbage collection is not necessary. 
+The advantages of reference counting in comparison to automatic garbage collection 
+are the deterministic and economical run-time behavior.
+Objects are destroyed at a defined time and a separate thread for garbage collection is not necessary. 
 
 %These were very important features in 2007, when the original iPhone was introduced, because
 %the hardware for mobile devices was very limited, but looses importance every year.
@@ -62,13 +69,35 @@ Development and distribution for Apple's platforms includes the coding effort an
 To install software on iOS devices – especially for distribution via the App Store – applications must be cryptographically signed. 
 The necessary certificates are created in the paid members section on Apple's Developer Portal. 
 Certificates, development and distribution profiles contain a bunch of identifiers for the identification and differentiation of developers (Team ID), 
-applications (App-ID) and lists of permissions (entitlements). 
+applications (App-ID) and a list of permissions (entitlements). 
 
-\subsection{Version Control}
+\subsection{Source Code Management}
+\label{sec:SCM}
+
+
+
 
 \subsubsection{Git}
 
+Git \cite{Git:Main} is a distributed source control management and revision control system 
+- originally developed by Linus Torvalds for Linux kernel development. 
+It supports local repositories with full source code history for development 
+and the synchronization and merging with remote repositories for collaboration or backup. 
+\cite{Chacon:2009:PG:1618548} 
+
+Since Apple's IDE Xcode supports Git's local repositories out of the box it was obvious to use git as source control.
+
 \subsubsection{Github}
+
+GitHub \cite{GitHub:Main} is hosting service for projects that use Git. 
+GitHub offers free accounts for public repositories, 
+which can be seen and downloaded by anyone
+using a web-browser or git.
+Committing changes is restricted to users chosen by the owner of the repository.
+
+
+As Nyaya is a student project and the source code should be publicly accessible,
+GitHub seems to be suitable to house the project.
 
 \section{Project execution}
 
@@ -93,6 +122,10 @@ but did borrow some principles from agile development.
 
 \subsubsection{Test-driven development}
 
+
+
 \subsubsection{Refactoring}
 
 \subsubsection{Use cases}
+
+

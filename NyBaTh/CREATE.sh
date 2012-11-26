@@ -4,6 +4,6 @@
 /usr/texbin/bibtex thesis
 /usr/texbin/pdflatex thesis
 /usr/texbin/pdflatex thesis
-open thesis.pdf
+# open thesis.pdf
 
 echo "fertig"
