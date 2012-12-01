@@ -1,29 +1,29 @@
 % !TEX encoding = UTF-8 Unicode
 
-
 \section{Tools}
 
 \subsection{Developing for the iPad}
 
-A computer with Mac OS X and 
-\href{sec:Xcode}{Xcode} are needed for first steps in developing software for iPad. 
+First steps in developing applications for iPad can be made on a computer running Mac OS X (OS) and 
+\href{sec:Xcode}{Xcode} (IDE), which is as free download from the Mac App Store.
 Knowledge of object-oriented programming, object-oriented design patterns, 
 and the C programming language 
-builds a good base to learn the main platform-specific techniques 
+builds a good base to learn the main platform-specific technologies 
 \href{sec:ObjC}{Objective-C},
 \href{sec:Cocoa}{Cocoa}, and
-\href{sec:MemoryManagement}{Memory Management}
+\href{sec:MemoryManagement}{memory management}
 with automatic reference counting.
 
-In addition to the technical skills, it is to gain an overview to the necessary steps for 
-\href{sec:DAD}{Development and Distribution} (p.~\pageref{sec:DAD}) for the iPad platform.
+In addition to the technical skills, an overview of the necessary steps for 
+\href{sec:DAD}{Development and Distribution} (p.~\pageref{sec:DAD}) for the iPad platform
+is to gain.
 
 \subsubsection{Xcode}
 \label{sec:Xcode}
 
-Xcode is Apple's integrated development environment to create software for OS X and iOS devices 
-.
-Xcode is free to download. It includes an iPad simulator, complete API documentations and development guides to various topics. Xcode supports the source management systems git and subversion. 
+Xcode is Apple's integrated development environment to create software for OS X and iOS devices.
+It includes an iPad simulator, complete API documentations and development guides to various topics. 
+Xcode supports the source management systems git and subversion. 
 Git will be installed along various other development tools with Xcode.
 
 \subsubsection{Objective-C}
@@ -32,6 +32,13 @@ Objective-C is a reflective, object-oriented extension of the C programming lang
  which was developed by Tom Love and Brad Cox in the early 1980s (a few moments earlier than C++). 
 The syntax for objects and methods is based on Smalltalk. 
 Objective-C method calls will be bound to functions at runtime with no need to be defined formally at compile time.
+Objective-C is organized in header and implementation files 
+with \verb+@interface+ and \verb+@implementation+ sections for
+the declaration and definition of classes, properties, fields and operations.
+\verb+@interface+ must not be mixed up with the Java/C\# \verb+interface+ directive. 
+The latter one corresponds to \verb+@protocol+.
+
+
 
 \subsubsection{Cocoa Touch}
 \label{sec:Cocoa}
@@ -56,9 +63,11 @@ This has the consequence that (strong) object graphs must be implemented as dire
 Back references have to be declared as weak.
 Otherwise objects would never be released. 
 
-The advantages of reference counting in comparison to automatic garbage collection 
-are the deterministic and economical run-time behavior.
-Objects are destroyed at a defined time and a separate thread for garbage collection is not necessary. 
+The disadvantage is that deallocated objects can still be referenced, which would corrupt the event loop,
+without the possibility of error recovery by exception handling.
+The advantages are the deterministic and economical run-time behavior.
+Objects are destroyed at a defined time and a separate thread for garbage collection isn't needed. 
+
 
 %These were very important features in 2007, when the original iPhone was introduced, because
 %the hardware for mobile devices was very limited, but looses importance every year.
@@ -74,26 +83,31 @@ applications (App-ID) and a list of permissions (entitlements).
 \subsection{Source Code Management}
 \label{sec:SCM}
 
+Every software project includes the need for source code management,
+which minimizes the risk of losing working code
+by human error or technical failure.
+This should be done by powerful, yet lightweight tools.
 
 
 
 \subsubsection{Git}
 
-Git \cite{Git:Main} is a distributed source control management and revision control system 
-- originally developed by Linus Torvalds for Linux kernel development. 
-It supports local repositories with full source code history for development 
-and the synchronization and merging with remote repositories for collaboration or backup. 
-\cite{Chacon:2009:PG:1618548} 
+Git is a distributed source control management and revision control system 
+- originally developed by Linus Torvalds for Linux kernel development \cite{Git:Main}.
+Git supports local repositories with full source code history for development.
+Local repositories can be synchronized and merged with remote repositories for collaboration and backup
+\cite{Chacon:2009:PG:1618548}.
 
-Since Apple's IDE Xcode supports Git's local repositories out of the box it was obvious to use git as source control.
+Since Apple's IDE Xcode works with Git's local repositories out of the box,
+it was obvious to use Git as source control.
 
 \subsubsection{Github}
 
-GitHub \cite{GitHub:Main} is hosting service for projects that use Git. 
+GitHub \cite{GitHub:Main} is a hosting service for projects that use Git. 
 GitHub offers free accounts for public repositories, 
 which can be seen and downloaded by anyone
-using a web-browser or git.
-Committing changes is restricted to users chosen by the owner of the repository.
+using a web-browser or a Git client.
+Committing changes is restricted to users chosen by the owner of the repository on GitHub.
 
 
 As Nyaya is a student project and the source code should be publicly accessible,
@@ -103,17 +117,24 @@ GitHub seems to be suitable to house the project.
 
 \subsection{Phases}
 
-\subsubsection{Fooling around – Views}
+\subsubsection{Exploring UI capabilities}
 
-Spring 2012 – Playing with the visualization of syntax trees and different kinds of user interaction, informal specification of the feature set
+After the informal specification of the feature set and the initial presentation of the project
+the capabilities of graphical visualization and  user interaction were explored on iPad.
+In this phase several prototypes were developed for interactive syntax tress and exercises.
 
-\subsubsection{Getting seriously – Model}
+\subsubsection{Implementing core components}
 
-Summer 2012 – Development of the Concept, Include Parser, data structure for AST, BDD
+%Summer 2012 – Development of the Concept, Include Parser, data structure for AST, BDD
 
-\subsubsection{Make it usable – Controllers and Content}
+After the formulation of the general concept with tutorials including exercices, a playground, a glossary, and the embedding of BoolTool,
+the main classes for the representation of abstract syntax trees and binary decision diagrams were implemented.
+After several attempts to cross-compile BoolTool's ocaml sources and to use the binaries on iPad, a left recursive descendent parser for input strings with the syntax propositional logic was implement in Objective-C. 
 
-Autumn 2012 – 
+\subsubsection{Completing (content, controllers, configuration}
+
+Although the general concept was developed, content was still missing. The tutorials had to be written and the exercises had to be generated. Content and configuration files had to be added to the project. 
+The different views has to be controlled and the navigation between the different use cases had to be added. 
 
 \subsection{Development model}
 
@@ -122,10 +143,24 @@ but did borrow some principles from agile development.
 
 \subsubsection{Test-driven development}
 
+Parsers, trees and operations on trees are the ideal application for test driven development.
+First, the expected results are defined in test cases, then the functionality is implemented.
+So it is ensured that on every point of the development cycle 
+the core of the application is still working as defined,
+when all unit tests succeed.
 
 
 \subsubsection{Refactoring}
 
+Due some memory and performance issues on the iPad 
+some implementations had to be reconsidered 
+and some functionality had to be reimplemented.
+This could be done without headaches because 
+the local repository provided a complete development history 
+and unit tests provided a quick check, whether the reimplementation was correct.
+
+
 \subsubsection{Use cases}
 
+In the written concept of an interactive environment for BoolTool that enables the learning  of simple facts about propositional logic the collection of use cases was defined.
 

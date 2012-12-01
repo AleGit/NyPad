@@ -24,4 +24,10 @@ K.~C. Louden.
 \newblock {\em Compiler Construction: Principles and Practice}.
 \newblock PWS Publishing Co., Boston, MA, USA, 1997.
 
+\bibitem{Middeldorp:2012:LICS}
+A.~Middeldorp.
+\newblock Logic (lecture).
+\newblock \url{http://cl-informatik.uibk.ac.at/teaching/ws11/lics/content.php},
+  2011/2012.
+
 \end{thebibliography}
