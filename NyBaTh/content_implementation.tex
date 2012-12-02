@@ -6,8 +6,8 @@
 The general design of Ny$\bar{a}$ya follows the Model-View-Controller pattern,
 which is originated in Smalltalk \cite[p.4]{GAMMAETAL} (like the Objective-C syntax)
 and separates the representation of data from the user interaction.
-Cocoa \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers,
-that cover many use cases of data presentation and user interaction. 
+Cocoa \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers.
+Those cover many use cases of data presentation and user interaction. 
 
 \section{Model}
 
@@ -31,6 +31,40 @@ Due to the unambiguous relationship between propositional formulas and Boolean e
 \end{center}
 \end{figure}
 
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyayaNodeCluster.png}
+\caption{Node class cluster}
+\label{fig:NyayaNodeCluster}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyayaNodeCreation.png}
+\caption{Node factory interface}
+\label{fig:NyayaNodeCreation}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyayaNodeValuation.png}
+\caption{Node valuation interface}
+\label{fig:NyayaNodeValuation}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.5]{diagrams/AcyclicSyntaxGraph.pdf}
+\caption{Abstract syntax tree and internal representation}
+\label{fig:NyayaNodeDisplay}
+\end{center}
+\end{figure}
+
 \subsection{Binary Decision Diagrams}
 
 \subsection{Parser}
@@ -42,7 +76,7 @@ Due to the unambiguous relationship between propositional formulas and Boolean e
 \begin{center}
 $\top | \bot 
 | \neg | !
-| \wedge | \&
+| \wedge | \& | .
 | \vee | {\setminus}| | {\setminus}+ 
 | \veebar | \oplus | \textasciicircum
 | = | <> | \leftrightarrow 
@@ -79,41 +113,11 @@ negation       ::= $\neg$ negation | ( formula ) | identifier
 
 \section{Views}
 
-\section{Controllers}
-
-
-
-
-
-%\UML{Creation.png}
-
-%\UML{Valuation.png}
-
-%\UML{Display.png}
-
-% \UML{NyayaNodeDisplay.png}
-%
 \begin{figure}[htbp]
 \begin{center}
-\UML{NyayaNodeCluster.png}
-\caption{Node class cluster}
-\label{fig:NyayaNodeCluster}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\UML{NyayaNodeCreation.png}
-\caption{Node factory interface}
-\label{fig:NyayaNodeCreation}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\UML{NyayaNodeValuation.png}
-\caption{Node valuation interface}
-\label{fig:NyayaNodeValuation}
+\UML{TreeView.png}
+\caption{Tree viewr}
+\label{fig:TreeView}
 \end{center}
 \end{figure}
 
@@ -125,13 +129,13 @@ negation       ::= $\neg$ negation | ( formula ) | identifier
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.5]{diagrams/AcyclicSyntaxGraph.pdf}
-\caption{Abstract syntax tree and internal representation}
-\label{fig:NyayaNodeDisplay}
-\end{center}
-\end{figure}
+\section{Controllers}
+
+
+
+
+
+
 
 
 \section{Unit-Tests}
