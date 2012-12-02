@@ -3,7 +3,85 @@
 
 \section{Architecture}
 
-\section{Classes}
+The general design of Ny$\bar{a}$ya follows the Model-View-Controller pattern,
+which is originated in Smalltalk \cite[p.4]{GAMMAETAL} (like the Objective-C syntax)
+and separates the representation of data from the user interaction.
+Cocoa \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers,
+that cover many use cases of data presentation and user interaction. 
+
+\section{Model}
+
+Ny$\bar{a}$ya must hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
+
+\subsection{Formulas}
+Propositional formulas and Boolean expressions are subsets of the set of all Unicode strings. 
+Therefore they are easily represented by the Cocoa Foundation's \seeref{secitem:CocoaFoundation} 
+standard string class. 
+
+Due to the unambiguous relationship between propositional formulas and Boolean expressions Ny$\bar{a}$ya allows the use of a mixed syntax and additional symbols for the user's convenience. 
+
+
+\subsection{Abstract Syntax Trees}
+
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyayaNode.png}
+\caption{Abstract node class}
+\label{fig:NyayaNodeCluster}
+\end{center}
+\end{figure}
+
+\subsection{Binary Decision Diagrams}
+
+\subsection{Parser}
+
+
+\cite{Louden:1997:CCP:523017}
+
+\begin{table}[htdp]
+\begin{center}
+$\top | \bot 
+| \neg | !
+| \wedge | \&
+| \vee | {\setminus}| | {\setminus}+ 
+| \veebar | \oplus | \textasciicircum
+| = | <> | \leftrightarrow 
+| > | \rightarrow | \models
+| ( | ) | , | ; 
+| {\setminus}w+$ 
+\caption{Regular expression for the lexxer of Ny$\bar{a}$ya}
+\label{tab:REGEX}
+\end{center}
+\end{table}
+
+
+The set of valid sub-strings (symbols and identifiers) is defined by a regular expression (see \tabref{tab:REGEX}). 
+The input string is split into tokens by the standard regular expression class of Cocoa Foundation.
+
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape]
+formula        ::= entailment
+entailment     ::= sequence [ $\models$ entailment]
+sequence       ::= bicondition { ; bicondition } 
+bicondition    ::= implication [ $\leftrightarrow$ bicondition ]
+implication    ::= xdisjunction [ $ \rightarrow$ implication ]
+xdisjunction   ::= disjunction { $\veebar$ disjunction }
+disjunction    ::= conjunction { $\vee$ conjunction }
+conjunction    ::= negation { $\wedge$ negation }
+negation       ::= $\neg$ negation | ( formula ) | identifier
+\end{lstlisting}
+\caption{EBNF grammer for the parser of Ny$\bar{a}$ya}
+\label{tab:EBNF}
+\end{center}
+\end{table}
+
+
+\section{Views}
+
+\section{Controllers}
+
+
 
 
 
@@ -55,11 +133,6 @@
 \end{center}
 \end{figure}
 
-
-
-
-\subsection{Parser}
-\cite{Louden:1997:CCP:523017}
 
 \section{Unit-Tests}
 

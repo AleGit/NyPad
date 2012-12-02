@@ -111,7 +111,9 @@
 - (NSString*)errorDescriptions {
     return [_errors componentsJoinedByString:@"•"];
 }
-    
+
+
+// 1. formula ::= entailment
 - (NyayaNode*)parseFormula {
     NyayaNode* result = [self parseEntailment];
     if (_level == 0 && _token && ![_errors count]) [self addErrorDescription:NyayaErrorUnusedToken];
@@ -120,6 +122,7 @@
     return [self substitute: result];;
 }
 
+// 2. entailment ::= sequence [ MODELS entailment ]
 - (NyayaNode*)parseEntailment {
     NyayaNode* result = nil;
     _level++;
@@ -134,6 +137,7 @@
     
 }
 
+// 3. sequence ::= biconditional { ; biconditional }
 - (NyayaNode*)parseSequence {
     NyayaNode* result = nil;
     _level++;
@@ -146,6 +150,7 @@
     return [self substitute: result];;
 }
 
+// 4. biconditional ::= implication [ <-> biconditional ]
 - (NyayaNode*)parseBicondition {
     NyayaNode* result = nil;
     _level++;
@@ -153,7 +158,7 @@
     // [v2] bicondition = disjunction [ BIC bicondition ]
     // [v3] bicondition = xdisjunction [ BIC bicondition ]
     // [v3.1] bicondition = implication [ BIC bicondition ]
-    result = [self parseImplication];       // consumes xdisjunction
+    result = [self parseImplication];
     if ([_token isBiconditionToken]) {
         [self nextToken];                   // consumes BIC token
         result = [NyayaNode bicondition:result with:[self parseBicondition]];
@@ -163,6 +168,7 @@
     return [self substitute: result];;
 }
 
+// 5. implication ::= xdisjunction [ IMP implication ]
 - (NyayaNode*)parseImplication {
     NyayaNode* result = nil;
     _level++;
@@ -179,6 +185,7 @@
     return [self substitute: result];;
 }
 
+// 6. xdisjunction ::= disjunction { XOR disjunction }
 - (NyayaNode*)parseXdisjunction {
     NyayaNode *result;
     _level++;
@@ -197,6 +204,7 @@
     
 }
 
+// 7. disjunction ::= conjunction { OR conjunction }
 - (NyayaNode*)parseDisjunction {
     NyayaNode* result = nil;
     _level++;
@@ -212,6 +220,7 @@
     return [self substitute: result];;
 }
 
+// 8. conjunction ::= negation { AND negation }
 - (NyayaNode*)parseConjunction {
     NyayaNode* result = nil;
     _level++;
@@ -235,7 +244,8 @@
     return [self substitute:result];
 }
 
-// negation    = "¬" negation | "(" formula ")" | term 
+// negation    = "¬" negation | "(" formula ")" | term
+// 9. negation :== NOT negation | ( formula ) | term
 - (NyayaNode*)parseNegation { 
     NyayaNode *result = nil;
     

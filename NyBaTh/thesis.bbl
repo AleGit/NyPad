@@ -13,6 +13,11 @@ S.~Chacon.
 \newblock {\em Pro Git}.
 \newblock Apress, Berkely, CA, USA, 1st edition, 2009.
 
+\bibitem{GAMMAETAL}
+E.~Gamma, R.~Helm, R.~Johnson, and J.~Vlissides.
+\newblock {\em Design patterns: elements of reusable object-oriented software}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1995.
+
 \bibitem{Huth:2004:LCS:975331}
 M.~Huth and M.~Ryan.
 \newblock {\em Logic in Computer Science: Modelling and Reasoning about
