@@ -8,6 +8,11 @@
 \textit{GitHub}.
 \newblock \url{http://www.github.com}, Nov 2012.
 
+\bibitem{Buck:2009:CDP:1803585}
+E.~M. Buck and D.~A. Yacktman.
+\newblock {\em Cocoa Design Patterns}.
+\newblock Addison-Wesley Professional, 1st edition, 2009.
+
 \bibitem{Chacon:2009:PG:1618548}
 S.~Chacon.
 \newblock {\em Pro Git}.
@@ -23,6 +28,11 @@ M.~Huth and M.~Ryan.
 \newblock {\em Logic in Computer Science: Modelling and Reasoning about
   Systems}.
 \newblock Cambridge University Press, New York, NY, USA, 2004.
+
+\bibitem{Kochan:2009:PO:1538451}
+S.~Kochan.
+\newblock {\em Programming in Objective-C 2.0}.
+\newblock Addison-Wesley Professional, 2nd edition, 2009.
 
 \bibitem{Louden:1997:CCP:523017}
 K.~C. Louden.

@@ -23,37 +23,74 @@ Due to the unambiguous relationship between propositional formulas and Boolean e
 
 \subsection{Abstract Syntax Trees}
 
+Cocoa Touch Foundation does not provide a class to represent trees, 
+but with an class implementing the composite pattern \cite[p.163ff]{GAMMAETAL}
+arbitrary graphs and therefore trees can be represented easily.
+
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNode.png}
-\caption{Abstract node class}
+\caption{node class to represent an abstract syntax tree}
 \label{fig:NyayaNodeCluster}
 \end{center}
 \end{figure}
+
+The node class is implemented as an class cluster, 
+which is an Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
+– an application of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
+The abstract and public class \verb+NyayaNode+ 
+provides a set of static and public methods (see \figref{fig:NyayaNodeCreation}),
+that returns instances of non public sub-classes (see \figref{fig:NyayaNodeCluster})
+of \verb+NyayaNode+.
 
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeCluster.png}
-\caption{Node class cluster}
+\caption{public root class and non public subclasses}
 \label{fig:NyayaNodeCluster}
 \end{center}
 \end{figure}
 
+
+
+Actual the creational methods are implemented as class category, 
+which is a language feature of Objective-C \cite[p.225ff]{Kochan:2009:PO:1538451}
+– an application of the decorator design pattern \cite[p.175ff]{GAMMAETAL} –
+for extending the functionality beyond representing a tree. 
+
+\begin{itemize}
+\item Attributes
+\item Creation  (see \figref{fig:NyayaNodeCreation})
+
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeCreation.png}
-\caption{Node factory interface}
+\caption{Creation of nodes}
 \label{fig:NyayaNodeCreation}
 \end{center}
 \end{figure}
 
+\item Derivations
+\item Description
+\item Display  % (see \figref{fig:NyayaNodeDisplay)
+\item Random
+\item Reductions
+\item Resolution
+\item Transformations
+\item Type
+\item Valuation (see \figref{fig:NyayaNodeValuation})
+
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeValuation.png}
-\caption{Node valuation interface}
+\caption{Valuation of trees}
 \label{fig:NyayaNodeValuation}
 \end{center}
 \end{figure}
+
+\end{itemize}
+
+
 
 
 
