@@ -4,10 +4,10 @@
 \section{Architecture}
 
 The general design of Ny$\bar{a}$ya follows the Model-View-Controller pattern,
-which is originated in Smalltalk \cite[p.4]{GAMMAETAL} (like the Objective-C syntax)
-and separates the representation of data from the user interaction.
-Cocoa \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers.
-Those cover many use cases of data presentation and user interaction. 
+which is originated in Smalltalk \cite[p.4]{GAMMAETAL}, 
+that separates the representation of data from the user interaction.
+Cocoa Touch \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers.
+Those cover many use cases of data presentation and user interaction.
 
 \section{Model}
 
@@ -15,16 +15,17 @@ Ny$\bar{a}$ya must hold different representations of Boolean functions – propo
 
 \subsection{Formulas}
 Propositional formulas and Boolean expressions are subsets of the set of all Unicode strings. 
-Therefore they are easily represented by the Cocoa Foundation's \seeref{secitem:CocoaFoundation} 
-standard string class. 
+Therefore they are easily represented by the standard string class of Cocoa. 
 
-Due to the unambiguous relationship between propositional formulas and Boolean expressions Ny$\bar{a}$ya allows the use of a mixed syntax and additional symbols for the user's convenience. 
-
+Due to the unambiguous relationship between propositional formulas and Boolean expressions 
+Ny$\bar{a}$ya allows the use of a mixed syntax and additional symbols as input
+for the user's convenience. The input expression $!a \wedge b + c \oplus a$ translates to the propositional formula
+$\neg a \wedge b \vee c \veebar a$.
 
 \subsection{Abstract Syntax Trees}
 
-Cocoa Touch Foundation does not provide a class to represent trees, 
-but with an class implementing the composite pattern \cite[p.163ff]{GAMMAETAL}
+Cocoa does not provide a class to represent trees, 
+but with instances of a class that implements the composite pattern \cite[p.163ff]{GAMMAETAL}
 arbitrary graphs and therefore trees can be represented easily.
 
 \begin{figure}[htbp]
@@ -37,7 +38,7 @@ arbitrary graphs and therefore trees can be represented easily.
 
 The node class is implemented as an class cluster, 
 which is an Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
-– an application of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
+– an adaption of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
 The abstract and public class \verb+NyayaNode+ 
 provides a set of static and public methods (see \figref{fig:NyayaNodeCreation}),
 that returns instances of non public sub-classes (see \figref{fig:NyayaNodeCluster})
@@ -51,34 +52,40 @@ of \verb+NyayaNode+.
 \end{center}
 \end{figure}
 
-
-
 Actual the creational methods are implemented as class category, 
 which is a language feature of Objective-C \cite[p.225ff]{Kochan:2009:PO:1538451}
-– an application of the decorator design pattern \cite[p.175ff]{GAMMAETAL} –
-for extending the functionality beyond representing a tree. 
+– an adaption of the decorator design pattern \cite[p.175ff]{GAMMAETAL} –
+for extending the functionality of the node class beyond representing a tree. 
+There is a standard implementation of the category methods in the root class,
+that will be overridden in the subclasses, that differ from the standard implementation.
+For example \verb+isLiteral:bool+ returns false for the root class, and all classes but the variable node
+and the negation node, when it's child node is a variable node.
+The variable node adds setters for some class attributes (see \figref{fig:NyayaNodeCreation}).
+
 
 \begin{itemize}
-\item Attributes
-\item Creation  (see \figref{fig:NyayaNodeCreation})
+\item The category “Attributes”  
+
+\item The category “Creation” implements the production rules of the grammar to create syntax trees recursively.
 
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeCreation.png}
-\caption{Creation of nodes}
+\caption{Production rules}
 \label{fig:NyayaNodeCreation}
 \end{center}
 \end{figure}
 
-\item Derivations
-\item Description
-\item Display  % (see \figref{fig:NyayaNodeDisplay)
-\item Random
-\item Reductions
-\item Resolution
-\item Transformations
-\item Type
-\item Valuation (see \figref{fig:NyayaNodeValuation})
+\item The category “Derivations defines methods to derive equivalent syntax trees, which are implication free, in negation normal, conjunctive normal or disjunctive normal form.
+
+\item The category “Description”
+\item The category “Display”  % (see \figref{fig:NyayaNodeDisplay)
+\item The category “Random”
+\item The category “Reductions”
+\item The category “Resolution”
+\item The category “Transformations”
+\item The category “Type”
+\item The category “Valuation (see \figref{fig:NyayaNodeValuation})
 
 \begin{figure}[htbp]
 \begin{center}
