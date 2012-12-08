@@ -60,13 +60,15 @@ There is a standard implementation of the category methods in the root class,
 that will be overridden in the subclasses, that differ from the standard implementation.
 For example \verb+isLiteral:bool+ returns false for the root class, and all classes but the variable node
 and the negation node, when it's child node is a variable node.
-The variable node adds setters for some class attributes (see \figref{fig:NyayaNodeCreation}).
+The variable node adds setters for some class attributes (see \figref{fig:NyayaNodeValuation}).
 
 
 \begin{itemize}
-\item The category “Attributes”  
+\item The category “Attributes”  provides information about the number of sub-nodes of a node 
+and the normal forms the sub-tree matches.
 
-\item The category “Creation” implements the production rules of the grammar to create syntax trees recursively.
+\item The category “Creation” (\figref{fig:NyayaNodeCreation})
+implements the production rules of the grammar to create syntax trees recursively.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -76,16 +78,20 @@ The variable node adds setters for some class attributes (see \figref{fig:NyayaN
 \end{center}
 \end{figure}
 
-\item The category “Derivations defines methods to derive equivalent syntax trees, which are implication free, in negation normal, conjunctive normal or disjunctive normal form.
+\item The category “Derivations” defines methods to derive semantically equivalent normal forms.
 
-\item The category “Description”
-\item The category “Display”  % (see \figref{fig:NyayaNodeDisplay)
-\item The category “Random”
-\item The category “Reductions”
-\item The category “Resolution”
-\item The category “Transformations”
-\item The category “Type”
-\item The category “Valuation (see \figref{fig:NyayaNodeValuation})
+\item The category “Description” provides methods to convert a syntax tree into its string representation – 
+a propositional formula either in strict syntax with many parentheses or in a usually shorter formula using precedences and associativity.
+\item The category “Display”  allows valuations with incomplete truth assignments and is
+used in the SyntaxTreeView, where the user can assign truth values to some atoms.
+% (see \figref{fig:NyayaNodeDisplay)
+\item The category “Random” creates arbitrary syntax trees with a given set of operators and within a range for the number of nodes and is used in exercises.
+%\item The category “Reductions”
+%\item The category “Resolution”
+%\item The category “Transformations”
+%\item The category “Type”
+\item The category “Valuation” (\figref{fig:NyayaNodeValuation}) 
+provides fast valuations with complete truth assignments to create truth tables and binary decision trees. 
 
 \begin{figure}[htbp]
 \begin{center}

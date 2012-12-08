@@ -579,7 +579,9 @@ $B$	&$::=$	&$p$
 \end{table}
 
 The user has to rewrite formulas with propositional symbols into Boolean expressions.
-The implication may be a challenge for some users. 
+The implication may be a challenge for some users, 
+but is doable because the implication free form was introduced 
+in an earlier tutorial.
 
 \subsubsection{Binary Decisions}
 \label{tut:53}
@@ -708,24 +710,29 @@ Terms, definitions and truth tables from the tutorials are listed in the glossar
 
 \section{BoolTool}
 
-Of course the interactive environment should contain the functionality of the \href{web fronted} of BoolTool.
-Some additions should be added for comfort.
+The interactive environment have to contain the extended functionality of the \href{web fronted} of BoolTool.
 
 \subsection{Input}
 
-As minimum the embedded BoolTool must support the latin letters as identifiers for atoms, 
-“T” and “F” as names for top and bottom, and the symbols
-“\verb#!&.|+>^#” as connectives, because these ascii-symbols can be found on almost every keyboard.
-Standard “$ \neg \vee \wedge \rightarrow $” and additional symbols of propositional logic
- should be accepted too (see \ref{tab:BASICSYMBOLS}).
-A limitation of the identifiers for atoms on Latin letters is not necessary.
-Therefore the input tokens are defined with a regular expression (see \tabref{tab:REGEX}),
-which allows a very flexible lexxer.
+As minimum the embedded BoolTool must support Latin letters as identifiers for atoms, 
+\verb#T# (top), 
+\verb#F# (bottom),
+\verb#!# (negation), 
+\verb#&# (conjunction),
+\verb#+# (disjunction),
+\verb#># (implication) and 
+\verb#^# (exclusive disjunction), because these ASCII-symbols can be found on almost every keyboard.
+The standard symbols “$ \neg \vee \wedge \rightarrow $” and additional symbols of propositional logic and Boolean expressions
+ should be accepted too (see \tabref{tab:BASICSYMBOLS}) for extended or custom keyboards.
+A limitation of the identifiers for atoms on Latin letters is not necessary (\figref{fig:BoolToolChineseInput})
 
-
-
-
-
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.18,trim=0 43cm 0cm 0, clip=true]{concept/RainHD.png}
+\caption{Implication with Chinese symbols for rain and wet}
+\label{fig:BoolToolChineseInput}
+\end{center}
+\end{figure}
 
 % ⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+
 
@@ -736,15 +743,23 @@ conjunctive normal form,
 disjunctive normal form, 
 truth table and 
 (reduced) ordered binary decision diagram 
-of user's input (\figref{fig:BoolToolOutput}). 
+of user's input (\figref{fig:BoolToolROBDD}). 
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=13cm]{concept/BoolTool.png}
-\caption{Boolean function $p \oplus q \oplus r$}
-\label{fig:BoolToolOutput}
+\includegraphics[scale=0.25,trim=16.5cm 11.4cm 34.5cm 31.8cm, clip=true]{concept/RainHD.png}
+\caption{Reduced ordered binary decision diagram}
+\label{fig:BoolToolROBDD}
 \end{center}
 \end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=13cm]{concept/BoolTool.png}
+%\caption{Boolean function $p \oplus q \oplus r$}
+%\label{fig:BoolToolOutput}
+%\end{center}
+%\end{figure}
 
 
 
