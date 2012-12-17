@@ -179,7 +179,8 @@ to link the object code to the Xcode project and to bridge and call functions fr
 the implementation of a simple translator 
 for propositional formulas (a subset of all possible strings)
 into syntax trees looked more promising. 
-This was achieved by using standard techniques of compiler construction \cite{Louden:1997:CCP:523017}. 
+
+The generation of a syntax tree from a formula  is carried out in two steps. 
 
 \subsubsection{Scanning}
 
@@ -198,13 +199,18 @@ $\top | \bot
 \label{tab:REGEX}
 \end{center}
 \end{table}
-The set of valid tokens (identifiers, connectives and parentheses) 
-is defined by a regular expression (\tabref{tab:REGEX}). 
-In the first step of translating a propositional formula,
-the input string is transformed into an array of strings 
+In the first step the input string is transformed into an array of strings – tokens –
 using the standard regular expression class of Cocoa Foundation.
+A set of valid tokens, which represent identifiers, connectives and parentheses
+is defined by a regular expression (\tabref{tab:REGEX}). 
 
 \subsubsection{Parsing}
+
+In the second step the array of tokens is parsed top-down 
+using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
+controlled by an ebnf grammar (\tabref{tab:EBNF}), 
+that defines precedence and associativity too.
+
 \begin{table}[htdp]
 \begin{center}
 \begin{lstlisting}[mathescape]
@@ -218,13 +224,17 @@ disjunction    ::= conjunction { $\vee$ conjunction }
 conjunction    ::= negation { $\wedge$ negation }
 negation       ::= $\neg$ negation | ( formula ) | identifier
 \end{lstlisting}
-\caption{EBNF grammer for the parser of Ny$\bar{a}$ya}
+\caption{Simplified EBNF grammar for the parser of Ny$\bar{a}$ya}
 \label{tab:EBNF}
 \end{center}
 \end{table}
 
 
-\section{Views}
+\section{Views and Controllers}
+
+\subsection{Tutorials}
+
+\subsection{Playground}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -233,6 +243,13 @@ negation       ::= $\neg$ negation | ( formula ) | identifier
 \label{fig:TreeView}
 \end{center}
 \end{figure}
+
+\subsection{Glossary}
+
+\subsection{BoolTool}
+
+
+
 
 \begin{figure}[htbp]
 \begin{center}
