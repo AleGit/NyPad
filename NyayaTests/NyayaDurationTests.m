@@ -8,8 +8,10 @@
 
 #import "NyayaDurationTests.h"
 #import "NyayaFormula.h"
+#import "NyayaNode+Derivations.h"
 #import "NyayaNode+Reductions.h"
 #import "NyayaNode+Valuation.h"
+#import "NyayaNode+Creation.h"
 
 @interface NyayaDurationTests () {
     NSTimeInterval defaultMaxDuration;
@@ -143,5 +145,27 @@
         index++;
     }
     
+}
+
+- (void)testXorDervivations {
+    NyayaNode *formula = nil;
+    for (NSString *atom in @[@"a", @"b",@"c",@"e",@"f",@"g",@"h"//,@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u"
+         ]) {
+        if (!formula) formula = [NyayaNode atom:atom];
+        else formula = [NyayaNode xdisjunction:formula with:[NyayaNode atom: atom]];
+        NyayaNode *imf = [formula deriveImf:NSIntegerMax];
+        NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
+        NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
+        NSLog(@"%@ %7u %7u %7u %7u %7u", atom, [[formula setOfVariables] count], [formula length], [imf length], [nnf length], [cnf length]);
+        
+        
+
+    }
+    
+    NSString *cnf7 = @"((((((a + (! b + (! c + (! d + (! e + (! f + ! g)))))) & (! a + (b + (! c + (! d + (! e + (! f + ! g))))))) & ((a + (! b + (c + (! d + (! e + (! f + ! g)))))) & (! a + (b + (c + (! d + (! e + (! f + ! g)))))))) & (((a + (! b + (! c + (d + (! e + (! f + ! g)))))) & (! a + (b + (! c + (d + (! e + (! f + ! g))))))) & ((a + (! b + (c + (d + (! e + (! f + ! g)))))) & (! a + (b + (c + (d + (! e + (! f + ! g))))))))) & ((((a + (! b + (! c + (! d + (e + (! f + ! g)))))) & (! a + (b + (! c + (! d + (e + (! f + ! g))))))) & ((a + (! b + (c + (! d + (e + (! f + ! g)))))) & (! a + (b + (c + (! d + (e + (! f + ! g)))))))) & (((a + (! b + (! c + (d + (e + (! f + ! g)))))) & (! a + (b + (! c + (d + (e + (! f + ! g))))))) & ((a + (! b + (c + (d + (e + (! f + ! g)))))) & (! a + (b + (c + (d + (e + (! f + ! g)))))))))) & (((((a + (! b + (! c + (! d + (! e + (f + ! g)))))) & (! a + (b + (! c + (! d + (! e + (f + ! g))))))) & ((a + (! b + (c + (! d + (! e + (f + ! g)))))) & (! a + (b + (c + (! d + (! e + (f + ! g)))))))) & (((a + (! b + (! c + (d + (! e + (f + ! g)))))) & (! a + (b + (! c + (d + (! e + (f + ! g))))))) & ((a + (! b + (c + (d + (! e + (f + ! g)))))) & (! a + (b + (c + (d + (! e + (f + ! g))))))))) & ((((a + (! b + (! c + (! d + (e + (f + ! g)))))) & (! a + (b + (! c + (! d + (e + (f + ! g))))))) & ((a + (! b + (c + (! d + (e + (f + ! g)))))) & (! a + (b + (c + (! d + (e + (f + ! g)))))))) & (((a + (! b + (! c + (d + (e + (f + ! g)))))) & (! a + (b + (! c + (d + (e + (f + ! g))))))) & ((a + (! b + (c + (d + (e + (f + ! g)))))) & (! a + (b + (c + (d + (e + (f + ! g))))))))))) & ((((((a + (! b + (! c + (! d + (! e + (! f + g)))))) & (! a + (b + (! c + (! d + (! e + (! f + g))))))) & ((a + (! b + (c + (! d + (! e + (! f + g)))))) & (! a + (b + (c + (! d + (! e + (! f + g)))))))) & (((a + (! b + (! c + (d + (! e + (! f + g)))))) & (! a + (b + (! c + (d + (! e + (! f + g))))))) & ((a + (! b + (c + (d + (! e + (! f + g)))))) & (! a + (b + (c + (d + (! e + (! f + g))))))))) & ((((a + (! b + (! c + (! d + (e + (! f + g)))))) & (! a + (b + (! c + (! d + (e + (! f + g))))))) & ((a + (! b + (c + (! d + (e + (! f + g)))))) & (! a + (b + (c + (! d + (e + (! f + g)))))))) & (((a + (! b + (! c + (d + (e + (! f + g)))))) & (! a + (b + (! c + (d + (e + (! f + g))))))) & ((a + (! b + (c + (d + (e + (! f + g)))))) & (! a + (b + (c + (d + (e + (! f + g)))))))))) & (((((a + (! b + (! c + (! d + (! e + (f + g)))))) & (! a + (b + (! c + (! d + (! e + (f + g))))))) & ((a + (! b + (c + (! d + (! e + (f + g)))))) & (! a + (b + (c + (! d + (! e + (f + g)))))))) & (((a + (! b + (! c + (d + (! e + (f + g)))))) & (! a + (b + (! c + (d + (! e + (f + g))))))) & ((a + (! b + (c + (d + (! e + (f + g)))))) & (! a + (b + (c + (d + (! e + (f + g))))))))) & ((((a + (! b + (! c + (! d + (e + (f + g)))))) & (! a + (b + (! c + (! d + (e + (f + g))))))) & ((a + (! b + (c + (! d + (e + (f + g)))))) & (! a + (b + (c + (! d + (e + (f + g)))))))) & (((a + (! b + (! c + (d + (e + (f + g)))))) & (! a + (b + (! c + (d + (e + (f + g))))))) & ((a + (! b + (c + (d + (e + (f + g)))))) & (! a + (b + (c + (d + (e + (f + g)))))))))))";
+    
+    NyayaParser *parser7 = [NyayaParser parserWithString:cnf7];
+    formula = [parser7 parseFormula];
+    NSLog(@"%7u", [formula length]);
 }
 @end

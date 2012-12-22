@@ -152,10 +152,10 @@ At run-time syntax trees are represented by acyclic syntax graphs,
 where multiple sub-trees can be represented by the same instance-graph
 (\figref{fig:AST+ASG}).
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 \begin{center}
 \includegraphics[scale=0.5,trim=0cm 5.4cm 0cm 1cm,clip=true]{diagrams/AcyclicSyntaxGraph.pdf}
-\caption{Abstrac syntax tree – acyclic graph }{$\neg( (a\vee b) \wedge (a \rightarrow a\vee b))$}
+\caption{Abstract syntax tree – acyclic graph }{$\neg( (a\vee b) \wedge (a \rightarrow a\vee b))$}
 \label{fig:AST+ASG}
 \end{center}
 \end{figure}
@@ -209,39 +209,64 @@ was simply defined by writing a suitable regular expression (see \tabref{tab:REG
 
 In the second step the list of input tokens is parsed top-down 
 using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
-following an ebnf grammar outlined in \tabref{tab:EBNF}), 
+following an ebnf grammar outlined in \tabref{tab:CoreEBNF}), 
 that defines precedence and associativity of connectives too.
 
 \begin{table}[htdp]
 \begin{center}
 \begin{lstlisting}[mathescape]
 formula        ::= entailment
-entailment     ::= sequence [ $\models$ entailment]
-sequence       ::= bicondition { ; bicondition } 
-bicondition    ::= implication [ $\leftrightarrow$ bicondition ]
-implication    ::= xdisjunction [ $ \rightarrow$ implication ]
-xdisjunction   ::= disjunction { $\veebar$ disjunction }
-disjunction    ::= conjunction { $\vee$ conjunction }
-conjunction    ::= negation { $\wedge$ negation }
-negation       ::= $\neg$ negation | ( formula ) | identifier
+entailment     ::= sequence [ '$\models$' entailment]
+sequence       ::= bicondition { ';' bicondition } 
+bicondition    ::= implication [ '$\leftrightarrow$' bicondition ]
+implication    ::= xdisjunction [ '$ \rightarrow$' implication ]
+xdisjunction   ::= disjunction { '$\veebar$' disjunction }
+disjunction    ::= conjunction { '$\vee$' conjunction }
+conjunction    ::= negation { '$\wedge$' negation }
+negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 \end{lstlisting}
-\caption{Simplified EBNF grammar for the parser}
-\label{tab:EBNF}
+\caption{Core EBNF grammar for the parser}
+\label{tab:CoreEBNF}
 \end{center}
 \end{table}
 
-\subsubsection{Restrictions}
+\subsubsection{Drawbacks}
 
 \verb+NyayaParser+ does not parse as fast and efficiently as BoolTool's parser, but it is 
 {\em good enough}, because it has to parse manual user input only.
-There are no memory or run-time issues with thousands of characters.
+Tests has shown that there are no memory or run-time issues with thousands of input characters.
 
-(Nevertheless not every input can be translated into normal forms or binary decision diagrams. 
-The attempt to derive a conjunctive normal from 
-an exclusive disjunction of twenty or more different variables 
-will always fail with the chosen implementation of the algorithm,
-because the number of nodes more than doubles with every additional distinct atom.
-But this is not a limitation of the parser)
+Although Ny$\bar{a}$ya can parse every {\em real-world} user input,
+Ny$\bar{a}$ya will fail to derive normal forms or to create a binary decision diagram from some possible user input,
+especially when the formula contains to many exclusive disjunctions.
+
+With every exclusive disjunction of a formula $P$ and an atom $p$, 
+that is not already used in $P$,
+the number of nodes (5.1) will at least double 
+when deriving an equivalent implication free formula  (5.2) or (5.3), 
+which includes the absence of exclusive disjunctions.
+
+\begin{eqnarray}
+\#(P \oplus p) & = & 1 \cdot\#(P) + 2) \\
+\#((P \wedge \neg p) \vee  (\neg P \wedge p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
+\#((P \vee p) \wedge  (\neg P \vee \neg p)) & = & 2 \cdot (\#(P) + 2) + 3
+\end{eqnarray}
+
+An exclusive disjunction of 20 different will be parsed to an syntax tree with 39 nodes.
+The syntax tree representing the implication free derivation will contain over four million nodes.
+
+%\begin{eqnarray}
+%P \vee p & = & ((a \vee b) \wedge  (\neg a \vee \neg b)) \vee p \\
+%& = & (a \vee b \vee p) \wedge (\neg a \vee \neg b \vee p) \\ 
+%\neg P \vee \neg p & = &\neg((a \vee b) \wedge  (\neg a \vee \neg b)) \vee \neg p \\
+%& = & ((\neg a \wedge \neg b) \vee (a \wedge b)) \vee \neg p \\
+%& = &
+%\end{eqnarray}
+
+
+So every attempt to derive a conjunctive normal form 
+will eventually exceed iPad's memory.
+These are a limitations of the node class, but not of the parser class.
 
 \subsubsection{Enhancements}
 
@@ -251,7 +276,24 @@ But this is not a limitation of the parser)
 
 \item multiple input tokens for negations, conjunctives (AND, $\wedge$, $\cdot$), disjunctive etc. are supported 
 
-\item standard connective tokens and localized connective tokens are possible
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape,firstnumber=7]
+disjunction    ::= conjunction { OR conjunction }
+conjunction    ::= negation { AND negation }
+\end{lstlisting}
+\begin{lstlisting}[mathescape,firstnumber=15]
+OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
+AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
+\end{lstlisting}
+\caption{Excerpts from a localized grammar (Italian)}
+\label{tab:LocalizedEBNF}
+\end{center}
+\end{table}
+
+\item 
+
+standard connective tokens and localized connective tokens are possible
 
 \item atom names are not restricted to latin letters, chinese is possible too.
 
@@ -277,6 +319,20 @@ Nodes with the name “0” or “1” are leaf nodes and therefore must not hav
 The other nodes must have valid left and right branches. The class provides factory method(s) to create 
 (reduced, ordered) binary decision diagrams from representations of Boolean functions
 (\figref{fig:BddNode}).
+
+\subsection{Truth Tables}
+
+\subsubsection{Row index}
+
+Limitation 32 different atoms means 4294967296 different truth assignments
+
+\subsubsection{Compact truth table}
+
+\verb+Mutable index set+ stores index ranges.
+
+\subsubsection{Extended truth table}
+
+Memory intensiv
 
 \section{Views and Controllers}
 

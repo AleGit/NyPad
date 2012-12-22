@@ -380,7 +380,7 @@ the grammar for implication free forms is defined
 $D$		&$::=$ & $C$ &|& $C \vee D$			\\
 $C$		&$::=$ & $N$ &|& $N \wedge C$ 		\\
 $N$		&$::=$ & $T$ &|& $\neg N$ 			\\
-$T$		&$::=$ & $p$ &|& $(P)$
+$T$		&$::=$ & $p$ &|& $(D)$
 \end{tabular}
 \caption{Grammar without implications}
 \label{tab:BNFGRIFF}
@@ -398,7 +398,7 @@ $P \rightarrow Q$ \\
 ————\\
 $\neg P \;\vee\; Q$
 \end{tabular}
-\caption{Equivalence transformation toward implication free form}
+\caption{Equivalence transformation towards implication free form}
 \label{tab:ET_IFF}
 \end{center}
 \end{table}
@@ -417,9 +417,10 @@ By removing all  rules for arbitrary negations, the negation normal form is defi
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccl}
-$D$		&$::=$ & $C$ &|& $C \vee D$			\\
-$C$		&$::=$ & $N$ &|& $N \wedge C$ 		\\
-$N$		&$::=$ & $(P)$ & | & $p $ | $\neg p$
+$D$		&$::=$ & $C$ 		&|& 	$C \vee D$\\
+$C$		&$::=$ & $N$ 		&|& 	$N \wedge C$ \\
+$N$		&$::=$ & $(D)$ 	&|& 	$L$\\
+$L$		&$::=$ & $p $ 		&|& 	$\neg p$
 \end{tabular}
 \caption{Grammar for negation normal form}
 \label{tab:BNFGRNNF}
@@ -521,7 +522,7 @@ $(P\wedge Q) \vee (P\wedge Q)$ 	& $(P\wedge R) \vee (Q\wedge R)$
 
 The user has to rewrite formulas to a disjunctive normal form. 
 The presented formula is in negation normal form 
-but may be already be in disjunctive normal form.
+but may already be in disjunctive normal form.
 
 %\subsubsection{From general formula to CNF or DNF}
 %\label{tut:406}
@@ -558,6 +559,7 @@ but may be already be in disjunctive normal form.
 The symbols $+,.,\oplus$ for building Boolean expressions are introduced as special representation of
 specific unitary and binary Boolean functions.
 
+
 \subsubsection{Boolean expressions}
 \label{tut:52}
 
@@ -586,7 +588,8 @@ in an earlier tutorial.
 \subsubsection{Binary Decisions}
 \label{tut:53}
 
-(53)
+(53) Binary decision nodes are introduced. 
+The valuation of binary decision trees is explained.
 
 The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
 
@@ -597,46 +600,43 @@ The user has to fill in the result nodes in a binary decision tree for a given B
 
 The user has to check whether a binary decision diagram is ordered or reduced.
 
-\section{Playgrounds}
+\section{Playground}
 
 In the playground the user can create arbitrary propositional formulas 
-by building syntax tree.
-Truth values can be assigned to the atoms of a formula and 
-the evaluation of the (sub-) formulas will be displayed graphically.
-Equivalence transformations can be applied to the nodes of a formula.
+by building syntax trees interactively.
+Truth assignments can be applied and will be visualized.
+The playground supports a least the following use cases.
 
-[optional]
-When a user taps a node in the syntax tree the corresponding sub formula 
-in the textual representation of the syntax tree will be marked with square brackets.
-Once, for example,  the user taps the disjunction node in the syntax tree of 
-$a \wedge (b \vee c) $, then
-$a \wedge [\,(b \vee c) \,]$ is displayed.
+\begin{itemize}
 
-The interactive manipulation of the graphical representation of a syntax tree supports two modes of interaction.
-In the free mode arbitrary modifications can be applied to the syntax tree, which usually leads to a new formula,
-that is not equivalent to the old formula, which was manipulated.
- 
-In the locked mode only equivalence transformations can be applied.
-
-\subsection{Free mode }
-
-In the free mode arbitrary formulas can be created by adding, replacing and removing connectives and atoms. 
+\item In the {\em free mode} arbitrary formulas can be created by adding, replacing and removing connectives and atoms. The process starts with an atom, which an be expanded or replaced. 
+Connectives can be changed any time, sub-formulas can be reordered.
 The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \bot, p, q, r, … \}$.
 
-Truth values can be assigned by tapping leaf nodes (atoms). 
-Green represents true, red false, and blue expresses that no value is assigned.
-Similar the valuations of super and root-nodes are displayed.
-Obvious evaluations like
-$P \vee \neg P$, 
-$P \rightarrow P$,
-$P \wedge \neg P$,
-$\top \vee P$, etc.
-which do not depend on complete truth assignments are displayed too.
-
-\subsection{Locked mode}
-
-In the locked mode equivalence transformations can be applied on (sub-) formulas (see \tabref{tab:ET:ALL})
+\item In the {\em locked mode} only equivalence transformations can be applied to nodes (see \tabref{tab:ET:ALL})
 – depending on the kind of node. 
+
+\item Truth values can be assigned to leaf nodes, 
+which represent the atoms of the corresponding propositional formula. 
+By default no truth values are assigned to atoms, which is visualized by a blue color of the node.
+A green color represents ‘true’, and a red color ‘false’.
+The valuation of connective nodes is calculated automatically 
+and displayed using the same blue, green and red colors.
+
+\item Connective nodes of obvious tautologies like
+$P \vee \neg P$ or
+$P \rightarrow P$ are displayed with a green color – 
+independent form the valuation status of any sub-node.
+
+\item Connective nodes of obvious contradictions like $P \wedge \neg P$ are displayed with a red color – 
+independent form the valuation status of any sub-node.
+
+\item While working with a syntax tree, the corresponding propositional formula is shown on top of the playground.
+
+\item While selecting a sub-node of the syntax tree – the root of a sub-tree – 
+for manipulation the corresponding sub-formula will be highlighted in the corresponding propositional formula.
+
+\end{itemize}
 
 
 \begin{table}[htdp]
