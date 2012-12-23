@@ -13,14 +13,14 @@ Those cover many use cases of data presentation and user interaction.
 
 Ny$\bar{a}$ya must hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
 
-\subsection{Formulas}
-Propositional formulas and Boolean expressions are subsets of the set of all Unicode strings. 
-Therefore they are easily represented by the standard string class of Cocoa. 
+\subsection{Propositional formulas and Boolean expressions}
+Since propositional formulas and Boolean expressions are subsets of the set of all Unicode strings,
+they are easily represented by the standard string classes of actual frameworks. 
 
 Due to the unambiguous relationship between propositional formulas and Boolean expressions 
 Ny$\bar{a}$ya allows the use of a mixed syntax and additional symbols as input
 for the user's convenience. The input expression $!a \wedge b + c \oplus a$ translates into the propositional formula
-$\neg a \wedge b \vee c \veebar a$.
+$\neg a \wedge b \vee c \veebar a$ (see \vref{subsec:Parser}).
 
 \subsection{Abstract Syntax Trees}
 
@@ -163,8 +163,38 @@ where multiple sub-trees can be represented by the same instance-graph
 This eases the detection of obvious tautologies $P \vee \neg P$, $P \rightarrow P$ and contradictions $P \wedge \neg P$,
 because the sub-tree $P$ on the left side is represented by the same object-graph as the sub-tree $P$ on the right side.
 
+\subsubsection{Limitations}
+
+The derivation of normal forms will fail on some relatively small syntax trees.
+especially when the formula contains too many exclusive disjunctions.
+
+With every exclusive disjunction of a formula $P$ and an atom $p$, 
+that is not already used in $P$,
+the number of nodes will at least double 
+when deriving an equivalent implication free form.
+“Implication free” means also the absence of exclusive disjunctions (see \tabref{tab:BNFGRIFF}).
+
+\begin{eqnarray*}
+\#(P \oplus p) & = & 1 \cdot(\#(P) + 2) \\
+\#((P \wedge \neg p) \vee  (\neg P \wedge p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
+\#((P \vee p) \wedge  (\neg P \vee \neg p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
+\end{eqnarray*}
+
+The syntax tree for an exclusive disjunction of 20 different atoms is build from 39 nodes.
+The syntax tree of a semantically equivalent implication free form will contain over four million nodes.
+Deriving the the negation normal form does not increase or decrease the number of nodes significantly,
+but the necessary distributions of disjunctions will multiply the number of nodes again.
+
+To ensure the stability of Ny$\bar{a}$ya 
+and since it is near impossible 
+to present a propositional formulas with thousands of symbols 
+to the user in a meaningful way, 
+the derivation of normal forms is aborted, when the results surpass a defined size.
+
+
 
 \subsection{Parser}
+\label{subsec:Parser}
 
 The backend of \verb+BoolTool+\footnote{
 \href{http://cl-informatik.uibk.ac.at/software/booltool/}{cl-informatik.uibk.ac.at/software/booltool/}} 
@@ -182,7 +212,6 @@ into syntax trees looked more promising.
 The generation of a syntax tree from a formula  is carried out in two steps. 
 
 \subsubsection{Scanning}
-
 
 In the first step the input string is transformed into an array of strings – the list of input tokens –
 using the standard regular expression class of Cocoa Foundation.
@@ -230,79 +259,75 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 \end{center}
 \end{table}
 
-\subsubsection{Drawbacks}
+\subsubsection{Limitations}
 
-\verb+NyayaParser+ does not parse as fast and efficiently as BoolTool's parser, but it is 
-{\em good enough}, because it has to parse manual user input only.
-Tests has shown that there are no memory or run-time issues with thousands of input characters.
+Ny$\bar{a}$ya does not parse as fast and (memory) efficient as BoolTool's parser,
+primarily because recursion and token probing are more expansive operations in Objective-C than in OCaml.
+The creation of a syntax graph instead of an syntax tree adds more overhead.
+But Ny$\bar{a}$ya's implementation is {\em good enough}, 
+because {\em real world} user input is limited to at most few thousands characters.
 
-Although Ny$\bar{a}$ya can parse every {\em real-world} user input,
-Ny$\bar{a}$ya will fail to derive normal forms or to create a binary decision diagram from some possible user input,
-especially when the formula contains to many exclusive disjunctions.
-
-With every exclusive disjunction of a formula $P$ and an atom $p$, 
-that is not already used in $P$,
-the number of nodes (5.1) will at least double 
-when deriving an equivalent implication free formula  (5.2) or (5.3), 
-which includes the absence of exclusive disjunctions.
-
-\begin{eqnarray}
-\#(P \oplus p) & = & 1 \cdot\#(P) + 2) \\
-\#((P \wedge \neg p) \vee  (\neg P \wedge p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
-\#((P \vee p) \wedge  (\neg P \vee \neg p)) & = & 2 \cdot (\#(P) + 2) + 3
-\end{eqnarray}
-
-An exclusive disjunction of 20 different will be parsed to an syntax tree with 39 nodes.
-The syntax tree representing the implication free derivation will contain over four million nodes.
-
-%\begin{eqnarray}
-%P \vee p & = & ((a \vee b) \wedge  (\neg a \vee \neg b)) \vee p \\
-%& = & (a \vee b \vee p) \wedge (\neg a \vee \neg b \vee p) \\ 
-%\neg P \vee \neg p & = &\neg((a \vee b) \wedge  (\neg a \vee \neg b)) \vee \neg p \\
-%& = & ((\neg a \wedge \neg b) \vee (a \wedge b)) \vee \neg p \\
-%& = &
-%\end{eqnarray}
-
-
-So every attempt to derive a conjunctive normal form 
-will eventually exceed iPad's memory.
-These are a limitations of the node class, but not of the parser class.
+Unit tests has shown that the there are no memory or run-time issues, 
+although the parsing can take a second or two on an iPad.
 
 \subsubsection{Enhancements}
 
+Despite the drawbacks mentioned above
+the benefits far outweigh the disadvantages of implementing an own parser.
+
 \begin{itemize}
 
-\item input is unicode
+\item Ny$\bar{a}$ya parses strings with Unicode characters, 
+therefore identifiers are not limited to Latin letters and
+$\alpha + \omega$ will be parsed correctly. 
 
-\item multiple input tokens for negations, conjunctives (AND, $\wedge$, $\cdot$), disjunctive etc. are supported 
+\item The grammar rules for operators are defined as sets of tokens, 
+which will be initialized at application start. So the symbols for operators
+can be localized with standard mechanism.
 
 \begin{table}[htdp]
 \begin{center}
 \begin{lstlisting}[mathescape,firstnumber=7]
 disjunction    ::= conjunction { OR conjunction }
-conjunction    ::= negation { AND negation }
 \end{lstlisting}
 \begin{lstlisting}[mathescape,firstnumber=15]
 OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
-AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
 \end{lstlisting}
-\caption{Excerpts from a localized grammar (Italian)}
+\caption{A localized grammar (Italian)}
 \label{tab:LocalizedEBNF}
 \end{center}
 \end{table}
+% conjunction    ::= negation { AND negation }
+% AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
 
-\item 
 
-standard connective tokens and localized connective tokens are possible
+\begin{table}[htdp]
+\begin{center}
+\begin{lstlisting}[mathescape,numbers=none,multicols=2]
+IMP = "$\rightarrow$ $>$ IMPLIES";
+OR  = "$\vee$ | + OR";
+AND = "$\wedge$ & . AND";
+NEG = "$\neg$ ! ~ NOT";
+IMP = "$\rightarrow$ $>$ IMPLICA";
+OR  = "$\vee$ | + O";
+AND = "$\wedge$ & . E";
+NEG = "$\neg$ ! ~ NON";
+\end{lstlisting}
+\caption{Localizable.strings in en.lproj and it.lproj}
+\label{tab:LocalizableStrings}
+\end{center}
+\end{table}
 
-\item atom names are not restricted to latin letters, chinese is possible too.
 
-\item parser generates optimized syntax graphs with objective-c run-time objects
+\item The parser generates syntax graphs with objective-c run-time objects,
+which are well suited for the use cases in an interactive environment.
 
 \end{itemize}
 
+\subsection{Truth Tables}
 
-
+Truth tables are either small enough to be computed on demand or too big to be stored in memory.
+Either way there is not reason to store filled truth tables at run-time.
 
 \subsection{Binary Decision Diagrams}
 
@@ -320,19 +345,8 @@ The other nodes must have valid left and right branches. The class provides fact
 (reduced, ordered) binary decision diagrams from representations of Boolean functions
 (\figref{fig:BddNode}).
 
-\subsection{Truth Tables}
 
-\subsubsection{Row index}
 
-Limitation 32 different atoms means 4294967296 different truth assignments
-
-\subsubsection{Compact truth table}
-
-\verb+Mutable index set+ stores index ranges.
-
-\subsubsection{Extended truth table}
-
-Memory intensiv
 
 \section{Views and Controllers}
 
@@ -347,6 +361,8 @@ Memory intensiv
 \label{fig:TreeView}
 \end{center}
 \end{figure}
+
+
 
 \subsection{Glossary}
 
@@ -363,7 +379,6 @@ Memory intensiv
 \end{center}
 \end{figure}
 
-\section{Controllers}
 
 
 
@@ -375,6 +390,8 @@ Memory intensiv
 \section{Unit-Tests}
 
 \section{Content}
+
+Plain text, xml data and html pages are stored in UTF-8 encoded files. 
 
 
 

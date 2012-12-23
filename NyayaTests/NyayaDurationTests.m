@@ -166,6 +166,6 @@
     
     NyayaParser *parser7 = [NyayaParser parserWithString:cnf7];
     formula = [parser7 parseFormula];
-    NSLog(@"%7u", [formula length]);
+    NSLog(@"%7u \n%@", [formula length], [formula description]);
 }
 @end
