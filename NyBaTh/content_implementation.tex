@@ -282,8 +282,7 @@ therefore identifiers are not limited to Latin letters and
 $\alpha + \omega$ will be parsed correctly. 
 
 \item The grammar rules for operators are defined as sets of tokens, 
-which will be initialized at application start. So the symbols for operators
-can be localized with standard mechanism.
+which will be initialized at application start. 
 
 \begin{table}[htdp]
 \begin{center}
@@ -293,13 +292,15 @@ disjunction    ::= conjunction { OR conjunction }
 \begin{lstlisting}[mathescape,firstnumber=15]
 OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
 \end{lstlisting}
-\caption{A localized grammar (Italian)}
+\caption{Excerpts from a localized grammar (Italian)}
 \label{tab:LocalizedEBNF}
 \end{center}
 \end{table}
 % conjunction    ::= negation { AND negation }
 % AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
 
+\item Symbols for operators
+can be localized using the standard localization framework of Cocoa.
 
 \begin{table}[htdp]
 \begin{center}
@@ -339,10 +340,12 @@ Binary decision trees and diagrams are represented by trees or acyclic directed 
 \label{fig:BddNode}
 \end{center}
 \end{table}
- with a name, a left branch and a right branch. The name is either an identifier (name of a variable), “0” or “1". 
+ with properties for a name, a left branch and a right branch. The name is either an identifier (name of a variable), “0” or “1". 
 Nodes with the name “0” or “1” are leaf nodes and therefore must not have a left or right branch.
-The other nodes must have valid left and right branches. The class provides factory method(s) to create 
-(reduced, ordered) binary decision diagrams from representations of Boolean functions
+The other nodes are decision nodes and therefore must have left and right branches. 
+
+The class provides factory method(s) to create 
+(un)reduced ordered binary decision diagrams from abstract syntax trees
 (\figref{fig:BddNode}).
 
 
@@ -368,9 +371,6 @@ The other nodes must have valid left and right branches. The class provides fact
 
 \subsection{BoolTool}
 
-
-
-
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeDisplay.png}
@@ -379,19 +379,13 @@ The other nodes must have valid left and right branches. The class provides fact
 \end{center}
 \end{figure}
 
-
-
-
-
-
-
-
-
 \section{Unit-Tests}
 
 \section{Content}
 
 Plain text, xml data and html pages are stored in UTF-8 encoded files. 
+All content is embedded in Ny$\bar{a}$ya's app bundle,
+which can be downloaded from the App Store. 
 
 
 
