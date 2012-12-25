@@ -353,9 +353,33 @@ The class provides factory method(s) to create
 
 \section{Views and Controllers}
 
+Ny$\bar{a}$ya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
+is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
+At start the tab bar controller will be instantiated and invoked by Ny$\bar{a}$ya's application delegate. 
+The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
+and will appoint of one of it's view controllers, which will present it's view such as the welcome screen.
+
+Tabbing an \verb+UITabBarItem+ will cause the tab bar to delegate the event to it's \verb+UITabBarDelegate+ – the tab bar controller.
+The tab bar controller will switch the selected view controller, which then will present it's content.
+
+Except for the welcome view controller 
+all content view controllers are split view controllers 
+with a master view controller and a detail view controller.
+
+\subsection{Welcome}
+
+The welcome view controller is simple subclass of\verb+ UIViewController+ and presents it's content in an not so simple \verb+UIWebView+,
+which is a fully functional, but ‘naked’ web-browser, i.e. links are followed and there is a page history, but no back-button is presented.
+The behavior of the web view can be altered by implementing a web view delegate – usually the controller.
+
 \subsection{Tutorials}
 
+The tutorials master view controller presents a table view with 
+sections for introduction, syntax, semantics, normal forms and binary decision diagrams tutorials.
+
 \subsection{Playground}
+
+The playground master view controller presents a table view with stored and selectable formulas.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -365,11 +389,16 @@ The class provides factory method(s) to create
 \end{center}
 \end{figure}
 
-
-
 \subsection{Glossary}
 
+The glossary master view controller presents a table view with the list of technical terms,
+which will be filled by the anchor embedded the glossary document.
+Tapping an term will scroll the web view to the term, 
+controlled by the glossary detail view controller.
+
 \subsection{BoolTool}
+
+The BoolTool master view controller presents a table view with stored and selectable formulas.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -379,7 +408,7 @@ The class provides factory method(s) to create
 \end{center}
 \end{figure}
 
-\section{Unit-Tests}
+%\section{Unit-Tests}
 
 \section{Content}
 

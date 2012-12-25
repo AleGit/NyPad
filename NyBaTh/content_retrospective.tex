@@ -8,32 +8,32 @@ Some features have to be re-engineered before additional features can be impleme
 
 \section{Important improvements}
 
-It is planned to implement the following features 
-
-\subsubsection{Technical}
+Although some technical aspects of Ny$\bar{a}$ya are working correctly, they need a revision, 
+because they are too inflexible or too slow.
 
 \begin{itemize}
 
-\item Content updates from a web-server 
-with no need to update the Ny$\bar{a}$ya application in the App Store 
-for every small correction of a typing error. 
+\item At this time content updates can only be done with an application update in the App Store,
+which will lead to some delay in the distribution of the correction of typing errors. 
 
-\item Speed up the creation of binary decision diagrams
+\item Syntax trees are stored memory optimized as acyclic syntax diagrams. 
+Nevertheless the valuation does not use this fact and the same sub-tree will be evaluated multiple times.
 
-\item Optimizations in valuations and transformations
+\item The creation of binary decision diagrams is very slow for formulas with more than 15 different atoms.
 
 \end{itemize}
 
-\subsubsection{User Interface}
+Some aspects of Ny$\bar{a}$ya’s user interface does not use the full richness of Cocoa touch. 
+Others lack the graphical sophistication that users are accustomed on the iOS platform.
 
 \begin{itemize}
 
-\item Accessibility features of iOS should be supported too – especially 
+\item Accessibility features of iOS have to be supported – especially 
 \verb+VoiceOver+, \verb+Zoom+, \verb+LargeText+ and \verb+AssistiveTouch+.
 
 \item Although English is the technical language of computer science,
 a translation of the tutorials into as many languages as possible will increase the practical value of Ny$\bar{a}$ya.
-Ny$\bar{a}$ya will support English, Spanish, German, French, Italian, Czech, Slovakian, Hungarian, Croatian, Slovenian, Romanian and Turkish
+Ny$\bar{a}$ya should support English, Spanish, German, French, Italian, Czech, Slovakian, Hungarian, Croatian, Slovenian, Romanian and Turkish
 until the end of 2013.
 %
 %%\begin{itemize}
@@ -45,7 +45,8 @@ until the end of 2013.
 %
 
 
-\item Both content and user interface should be presented in a visually more appealing manner.
+\item Content and user interface should be presented in a visually more appealing manner.
+For the first css-definitions should be developed, for the second additional images have to be created.
 
 \end{itemize}
 %
@@ -62,10 +63,12 @@ until the end of 2013.
 
 \section{Outlook}
 
-Even it is unlikely that any of the following features will be implemented in the foreseeable future, 
-the following features are obvious evolutions, that would broaden the scope of Ny$\bar{a}$ya.
+To broaden the scope of Ny$\bar{a}$ya new features could be added or the application could brought to other platforms.
 
 \subsection{Additional features}
+
+Even it is unlikely the following features will be implemented in the foreseeable future, 
+the following use cases are obvious evolutions.
 
 \begin{itemize}
 
@@ -76,18 +79,23 @@ the following features are obvious evolutions, that would broaden the scope of N
 \end{itemize}
 
 
-\subsection{Platforms}
+\subsection{Additional platforms}
+
+The author of Ny$\bar{a}$a is an apologist of native client applications,
+although he admits that they are many useful use cases for web-applications, 
+i.e. html with javascript. 
+Unfortunately the freely available development tool chains for (graphical) html/javascript-applications
+are very limited and far from consolidated, although the underlining standards html-5, css-3 
+and JavaScript 1.8 would provide anything needed, the workload to create sophisticated web-apps 
+is much higher than to develop native apps on the same level.
+
+So the most likely platforms to be supported by Ny$\bar{a}$ya are Mac OS X and Android.
+
 \begin{itemize}
-
-\item For a Mac OS X version some aspects of the user interface must be re-thought and re-implemented, 
+\item
+For a Mac OS X version some aspects of the user interface must be re-thought and re-implemented, 
 because Mac OS X does not support a touch interface.
-
-\item For a Android version the model must be translated into Java and the user interface must be re-implemented.
-
-
-
+\item
+For an Android version the model must be translated into Java and the user interface must be re-implemented.
 \end{itemize}
-
-
-
 
