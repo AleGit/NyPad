@@ -3,7 +3,7 @@
 
 \section{Architecture}
 
-The general design of Ny$\bar{a}$ya follows the Model-View-Controller pattern,
+The general design of \Nyaya follows the Model-View-Controller pattern,
 which is originated in Smalltalk \cite[p.4]{GAMMAETAL}, 
 that separates the representation of data from the user interaction.
 Cocoa Touch \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers.
@@ -11,14 +11,14 @@ Those cover many use cases of data presentation and user interaction.
 
 \section{Model}
 
-Ny$\bar{a}$ya must hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
+\Nyaya must hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
 
 \subsection{Propositional formulas and Boolean expressions}
 Since propositional formulas and Boolean expressions are subsets of the set of all Unicode strings,
 they are easily represented by the standard string classes of actual frameworks. 
 
 Due to the unambiguous relationship between propositional formulas and Boolean expressions 
-Ny$\bar{a}$ya allows the use of a mixed syntax and additional symbols as input
+\Nyaya allows the use of a mixed syntax and additional symbols as input
 for the user's convenience. The input expression $!a \wedge b + c \oplus a$ translates into the propositional formula
 $\neg a \wedge b \vee c \veebar a$ (see \vref{subsec:Parser}).
 
@@ -185,7 +185,7 @@ The syntax tree of a semantically equivalent implication free form will contain 
 Deriving the the negation normal form does not increase or decrease the number of nodes significantly,
 but the necessary distributions of disjunctions will multiply the number of nodes again.
 
-To ensure the stability of Ny$\bar{a}$ya 
+To ensure the stability of \Nyaya 
 and since it is near impossible 
 to present a propositional formulas with thousands of symbols 
 to the user in a meaningful way, 
@@ -261,10 +261,10 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 
 \subsubsection{Limitations}
 
-Ny$\bar{a}$ya does not parse as fast and (memory) efficient as BoolTool's parser,
+\Nyaya does not parse as fast and (memory) efficient as BoolTool's parser,
 primarily because recursion and token probing are more expansive operations in Objective-C than in OCaml.
 The creation of a syntax graph instead of an syntax tree adds more overhead.
-But Ny$\bar{a}$ya's implementation is {\em good enough}, 
+But \Nyaya's implementation is {\em good enough}, 
 because {\em real world} user input is limited to at most few thousands characters.
 
 Unit tests has shown that the there are no memory or run-time issues, 
@@ -277,7 +277,7 @@ the benefits far outweigh the disadvantages of implementing an own parser.
 
 \begin{itemize}
 
-\item Ny$\bar{a}$ya parses strings with Unicode characters, 
+\item \Nyaya parses strings with Unicode characters, 
 therefore identifiers are not limited to Latin letters and
 $\alpha + \omega$ will be parsed correctly. 
 
@@ -353,9 +353,9 @@ The class provides factory method(s) to create
 
 \section{Views and Controllers}
 
-Ny$\bar{a}$ya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
+\Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
 is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
-At start the tab bar controller will be instantiated and invoked by Ny$\bar{a}$ya's application delegate. 
+At start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
 The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
 and will appoint of one of it's view controllers, which will present it's view such as the welcome screen.
 
@@ -365,6 +365,7 @@ The tab bar controller will switch the selected view controller, which then will
 Except for the welcome view controller 
 all content view controllers are split view controllers 
 with a master view controller and a detail view controller.
+The tutorial master view controller and the BoolTool master view controller shares a list of persisted formulas.
 
 \subsection{Welcome}
 
@@ -384,16 +385,17 @@ The playground master view controller presents a table view with stored and sele
 \begin{figure}[htbp]
 \begin{center}
 \UML{TreeView.png}
-\caption{Syntax tree view}
+\caption{Canvas view with multiple syntax tree views}
 \label{fig:TreeView}
 \end{center}
 \end{figure}
 
 \subsection{Glossary}
 
-The glossary master view controller presents a table view with the list of technical terms,
-which will be filled by the anchor embedded the glossary document.
-Tapping an term will scroll the web view to the term, 
+The glossary master view controller reads all elements with an id from the glossary content document,
+creates an alphabetical ordered list of technical terms using the texts included between the corresponding element-tags.
+This list of technical terms defined by the glossary document is presented in a table view.
+Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
 controlled by the glossary detail view controller.
 
 \subsection{BoolTool}
@@ -413,7 +415,7 @@ The BoolTool master view controller presents a table view with stored and select
 \section{Content}
 
 Plain text, xml data and html pages are stored in UTF-8 encoded files. 
-All content is embedded in Ny$\bar{a}$ya's app bundle,
+All content is embedded in \Nyaya's app bundle,
 which can be downloaded from the App Store. 
 
 
