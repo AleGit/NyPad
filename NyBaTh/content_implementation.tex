@@ -363,8 +363,8 @@ Tabbing an \verb+UITabBarItem+ will cause the tab bar to delegate the event to i
 The tab bar controller will switch the selected view controller, which then will present it's content.
 
 Except for the welcome view controller 
-all content view controllers are split view controllers 
-with a master view controller and a detail view controller.
+all content view controllers inherits from split view controller,
+which provides a master view controller and a detail view controller.
 The tutorial master view controller and the BoolTool master view controller shares a list of persisted formulas.
 
 \subsection{Welcome}
@@ -377,6 +377,8 @@ The behavior of the web view can be altered by implementing a web view delegate 
 
 The tutorials master view controller presents a table view with 
 sections for introduction, syntax, semantics, normal forms and binary decision diagrams tutorials.
+
+Test view controller 
 
 \subsection{Playground}
 
