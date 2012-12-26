@@ -353,10 +353,7 @@ The class provides a factory method to create
 (un)reduced ordered binary decision diagrams from abstract syntax trees
 (\figref{fig:BddNode}).
 
-
-
-
-\section{Views and Controllers}
+\newpage\section{Views and Controllers}
 
 \Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
 is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
@@ -382,9 +379,10 @@ The behavior of the web view can be altered by implementing a web view delegate 
 
 The tutorials master view controller presents a table view with 
 sections for introduction, syntax, semantics, normal forms and binary decision diagrams tutorials.
-Tabbing an entry will cause the detail view controller to present the corresponding tutorial in a web view.
+Tabbing an entry will cause the detail view controller to present the corresponding tutorial in a web view
+with an exercise button on the top of the page.
 
-Tabbing on the exercise button will put the exercise view controller in charge. 
+Tabbing this exercise button will put the exercise view controller in charge. 
 An suitable overlay view will be opened, 
 and an instance of a matched class implementing of\verb+ NyTuTester+ will be created.
 
@@ -404,6 +402,9 @@ When the test view is closed by the user \verb+removeTest+ will dispose resource
 \subsection{Playground}
 
 The playground master view controller presents a table view with stored and selectable formulas.
+The user can use a formula from this list to add an syntax view to the detail view - the canvas.
+Or the user can add a new syntax tree to the canvas.
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -434,12 +435,20 @@ The BoolTool master view controller presents a table view with stored and select
 \end{figure}
 
 %\section{Unit-Tests}
-
+%\newpage
 \section{Content}
 
-Plain text, xml data and html pages are stored in UTF-8 encoded files. 
-All content is embedded in \Nyaya's app bundle,
-which can be downloaded from the App Store. 
+\subsection{On delivery}
+
+Xml configuration data and html documents are stored in UTF-8 encoded files. 
+The content is embedded in \Nyaya's app bundle,
+which can be downloaded and installed from the App Store. 
+
+\subsection{Persisted formulas}
+
+Formulas from the playground and BoolTool are persisted in the simple property list file \verb+BoolToolData+ 
+in the documents folder of the app.
+
 
 
 
