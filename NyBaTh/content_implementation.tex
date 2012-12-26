@@ -6,7 +6,8 @@
 The general design of \Nyaya follows the Model-View-Controller pattern,
 which is originated in Smalltalk \cite[p.4]{GAMMAETAL}, 
 that separates the representation of data from the user interaction.
-Cocoa Touch \seeref{sec:Cocoa} encourages the use of MVC by providing a rich set of useful views and controllers.
+Cocoa Touch \seeref{sec:Cocoa} encourages the use of MVC 
+by providing a rich set of useful views and controllers with the framework UIKit.
 Those cover many use cases of data presentation and user interaction.
 
 \section{Model}
@@ -181,8 +182,8 @@ when deriving an equivalent implication free form.
 \end{eqnarray*}
 
 The syntax tree for an exclusive disjunction of 20 different atoms is build from 39 nodes.
-The syntax tree of a semantically equivalent implication free form will contain over four million nodes.
-Deriving the the negation normal form does not increase or decrease the number of nodes significantly,
+The syntax tree of a semantically equivalent implication free form will already contain over four million nodes.
+Deriving the negation normal form does not increase or decrease the number of nodes significantly,
 but the necessary distributions of disjunctions will multiply the number of nodes again.
 
 To ensure the stability of \Nyaya 
@@ -332,19 +333,23 @@ Either way there is not reason to store filled truth tables at run-time.
 
 \subsection{Binary Decision Diagrams}
 
-Binary decision trees and diagrams are represented by trees or acyclic directed graphs built from instances of a simple class
+Binary decision trees and diagrams are represented by trees 
+or acyclic directed graphs built from instances of a simple node class
+ with attributes for a name, a left branch and a right branch. 
 \begin{table}[htdp]
 \begin{center}
 \UML{BddNode.png}
-\caption{Public attributes and factory method of BddNode}
+\caption{Attributes and factory method of BddNode}
 \label{fig:BddNode}
 \end{center}
 \end{table}
- with properties for a name, a left branch and a right branch. The name is either an identifier (name of a variable), “0” or “1". 
-Nodes with the name “0” or “1” are leaf nodes and therefore must not have a left or right branch.
-The other nodes are decision nodes and therefore must have left and right branches. 
+The name is either an identifier, i.e. the name of a variable, “0” or “1". 
+Nodes with the name “0” or “1” are leaf nodes or result nodes
+and must not have a left or right branch.
+The other nodes with the name of a variable are decision nodes 
+and must have valid left and right branches. 
 
-The class provides factory method(s) to create 
+The class provides a factory method to create 
 (un)reduced ordered binary decision diagrams from abstract syntax trees
 (\figref{fig:BddNode}).
 
@@ -377,8 +382,24 @@ The behavior of the web view can be altered by implementing a web view delegate 
 
 The tutorials master view controller presents a table view with 
 sections for introduction, syntax, semantics, normal forms and binary decision diagrams tutorials.
+Tabbing an entry will cause the detail view controller to present the corresponding tutorial in a web view.
 
-Test view controller 
+Tabbing on the exercise button will put the exercise view controller in charge. 
+An suitable overlay view will be opened, 
+and an instance of a matched class implementing of\verb+ NyTuTester+ will be created.
+
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyTuTester.png}
+\caption{Tester interface}
+\label{fig:Tester}
+\end{center}
+\end{figure}
+
+The method \verb+firstTest+ initializes the test parameters and fills the test view with instructions and labels. 
+Then it calls \verb+nextTest+, which will fill the test view with a new question by every call.
+The method \verb+checkTest+ evaluates the user's answer and displays the result in the test view.
+When the test view is closed by the user \verb+removeTest+ will dispose resources attached to the test view.
 
 \subsection{Playground}
 
