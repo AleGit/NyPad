@@ -265,8 +265,6 @@ The user has to write formulas for presented syntax trees. They can use parenthe
 as abbreviations of conjunctions and disjunctions 
 of formulas with their negation (tautologies and contradictions, \tabref{tab:TopBottom}).
 
-CIM
-
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{c|c|c|c}
@@ -277,7 +275,9 @@ $\top$ & $\top$ & $ \bot$&$ \bot$\\
 \caption{tautologies and contradictions}
 \label{tab:TopBottom}
 \end{center}
-\end{table}%
+\end{table}
+
+The user has to simply given formulas.
 
 %\subsubsection{Simplifying formulas – basic natural deduction rules}
 %\label{tut:206}
@@ -334,7 +334,7 @@ The truth assignment for atoms $(p,q,r,…)$ is introduced.
 The extended valuation for negation, conjunction, disjunction and implication is defined.
 The valuation of arbitrary formulas by evaluating all sub-formulas is described.
 
-The user has to guess or calculate the evaluation of a given formula with a given truth assignment of the atoms of the formula.
+The user has to guess or calculate the evaluation of a given formula with a given truth assignment for the atoms of the formula.
 
 \subsubsection{Truth Tables}
 \label{tut:32}
@@ -395,7 +395,7 @@ and proved with a truth table.
 \begin{center}
 \begin{tabular}{r}
 $P \rightarrow Q$ \\ 
-————\\
+\hline
 $\neg P \;\vee\; Q$
 \end{tabular}
 \caption{Equivalence transformation towards implication free form}
@@ -431,13 +431,13 @@ The equivalence transformations to transform negations of conjunctions,
 negations of disjunctions, 
 and double negations (see \tabref{tab:ET_NNF})
 into negation normal forms are presented 
-and proved with truth tables.
+and proved with a truth table.
 
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{ccr}
 $\neg (P \wedge Q) $&$ \neg (P \vee Q)$&$ \neg \neg P$\\
-————— & —————& ———\\
+\hline
 $\neg P \vee \neg Q$&$\neg P \wedge \neg Q$&$P$
 \end{tabular}
 \caption{Equivalence transformations towards negation normal form}
@@ -468,13 +468,14 @@ $L$	&$::=$ & $p$ 	&$|$ & $\neg p$
 \end{center}
 \end{table}
 
-The user learns the distribution of disjunctions over conjunctions (\tabref{tab:ET_CNF}).
+The distribution of disjunctions over conjunctions is presented (\tabref{tab:ET_CNF})
+and proved with a truth table.
 
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{cc}
 $P \vee (Q \wedge R)$ & $(P \wedge Q) \vee R$\\
-———————— & ————————\\
+\hline
 $(P\vee Q) \wedge (P\vee R)$ & $(P\vee R) \wedge (Q\vee R)$
 \end{tabular}
 \caption{Equivalence transformations towards conjunctive normal form}
@@ -506,13 +507,14 @@ $L$	&$::=$ & $p$ 	&$|$ & $\neg p$
 \end{center}
 \end{table}
 
-The user learns the distribution of conjunctions over disjunctions (\tabref{tab:ET_DNF}).
+The distribution of conjunctions over disjunctions is presented (\tabref{tab:ET_DNF})
+and proved with a truth table.
 
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{cc}
 $P \wedge (Q \vee R)$ 			& $(P \wedge Q) \wedge R$\\
-———————— & ————————\\
+\hline
 $(P\wedge Q) \vee (P\wedge Q)$ 	& $(P\wedge R) \vee (Q\wedge R)$
 \end{tabular}
 \caption{Equivalence transformations towards disjunctive normal form}
@@ -556,15 +558,16 @@ but may already be in disjunctive normal form.
 \label{tut:51}
 
 (51) N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set ${0,1}$.
-The symbols $+,.,\oplus$ for building Boolean expressions are introduced as special representation of
-specific unitary and binary Boolean functions.
+The Boolean operators $\bar{ \;\;}\;+\;\cdot\;\oplus$ are introduced as special representations of
+specific unitary and binary Boolean functions. For convenience an exclamation mark $!(B)$ 
+will be used for the negation of a Boolean expression $B$ instead of the bar $\bar{B}$. 
 
-
+The user has to guess or calculate the results for composite expressions.
 \subsubsection{Boolean expressions}
 \label{tut:52}
 
-(52) The grammar for Boolean expressions is provided. 
-The equivalence of Boolean expressions is defined.
+(52) The grammar for Boolean expressions is defined. 
+The equivalence relation of Boolean expressions is explained.
 
 \begin{table}[htdp]
 \begin{center}
@@ -593,12 +596,13 @@ The valuation of binary decision trees is explained.
 
 The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
 
-\subsubsection{ROBDD}
+\subsubsection{Binary Decision Diagrams}
 \label{tut:54}
 
-(54)
+(54) Arbitrary binary decision diagrams are explained. 
+Ordered and reduced binary decision diagrams are introduced.
 
-The user has to check whether a binary decision diagram is ordered or reduced.
+The user has to check whether a binary decision diagram is ordered and/or reduced.
 
 \section{Playground}
 
@@ -689,20 +693,19 @@ $(P\vee Q)$&$\TAP{\vee}$&$R$			&$(P\wedge Q)$&$\TAP{\wedge}$&$R$	\\
 \end{center}
 \end{table}%
 
-%\begin{table}[htdp]
-%\begin{center}
-%\begin{tabular}{rcl|rcl}
-%
-%$P$&$ \TAP{\leftrightarrow}$&$Q$					&$P$&$ \TAP{\veebar}$&$Q$			\\
-%\hline
-%$P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$ \TAP{\vee}$&$\neg (Q \rightarrow P)$				\\
-%
-%\end{tabular}
-%\caption{Additional transformations in locked mode}
-%\label{tab:addnf}
-%\end{center}
-%\end{table}%
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{rcl|rcl}
 
+$P$&$ \TAP{\leftrightarrow}$&$Q$					&$P$&$ \TAP{\veebar}$&$Q$			\\
+\hline
+$P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$ \TAP{\vee}$&$\neg (Q \rightarrow P)$				\\
+
+\end{tabular}
+\caption{Additional transformations in locked mode}
+\label{tab:addnf}
+\end{center}
+\end{table}%
 
 \section{Glossary}
 
@@ -710,24 +713,29 @@ Terms, definitions and truth tables from the tutorials are listed in the glossar
 
 \section{BoolTool}
 
-The interactive environment have to contain the functionality of the \href{web fronted} of BoolTool.
+The interactive environment have to contain the functionality of the
+\href{http://cl-informatik.uibk.ac.at/software/booltool/}{BoolTool web frontend}.
 
 \subsection{Input}
 
-As minimum the embedded BoolTool must support Latin letters as identifiers for atoms, 
-\verb#T# (top), 
-\verb#F# (bottom),
-\verb#!# (negation), 
-\verb#&# (conjunction),
-\verb#+# (disjunction),
-\verb#># (implication) and 
-\verb#^# (exclusive disjunction), because these ASCII-symbols can be found on almost every keyboard.
+At least the embedded BoolTool must support Latin letters as identifiers for atoms, 
+and have to parse the symbols
+\verb#T# as top, 
+\verb#F# as bottom,
+\verb#!# as negation operator, 
+\verb#&# as conjunction operator,
+\verb#+# as disjunction operator,
+\verb#># as implication operator,
+\verb#^# as exclusive disjunction operator,
+and \verb#(# as left and \verb#)# as right parentheses, 
+because these ASCII-symbols can be found on almost every keyboard.
 
 Standard symbols “$ \neg \vee \wedge \rightarrow $” 
 and additional symbols of propositional logic and Boolean expressions
 should be accepted too (see \tabref{tab:BASICSYMBOLS}) 
 to make extended or custom keyboards more useful.
-A limitation of the Latin characters for identifiers should be avoided (\figref{fig:BoolToolChineseInput}).
+A limitation of the Latin characters for identifiers should be avoided, 
+because Chinese symbols make good identifiers too (\figref{fig:BoolToolChineseInput}).
 
 \begin{figure}[htbp]
 \begin{center}

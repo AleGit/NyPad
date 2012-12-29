@@ -377,10 +377,11 @@ The behavior of the web view can be altered by implementing a web view delegate 
 
 \subsection{Tutorials}
 
-The tutorials master view controller presents a table view with 
-sections for introduction, syntax, semantics, normal forms and binary decision diagrams tutorials.
+The tutorials master view controller presents a table view with five sections of tutorials.
+The sections organize the tutorial titles for 
+introduction, syntax, semantics, normal forms and binary decision diagrams.
 Tabbing an entry will cause the detail view controller to present the corresponding tutorial in a web view
-with an exercise button on the top of the page.
+with an additional exercise button on the top of the view.
 
 Tabbing this exercise button will put the exercise view controller in charge. 
 An suitable overlay view will be opened, 
@@ -401,16 +402,30 @@ When the test view is closed by the user \verb+removeTest+ will dispose resource
 
 \subsection{Playground}
 
-The playground master view controller presents a table view with stored and selectable formulas.
-The user can use a formula from this list to add an syntax view to the detail view - the canvas.
-Or the user can add a new syntax tree to the canvas.
-
+The playground master view controller presents a table view with the list of stored and selectable formulas.
+The user can use a formula from this list to add a tree view to the detail view – the canvas view.
+Or the user can add a new tree view by an tap and hold gesture to the canvas view.
+The canvas view can hold multiple syntax trees.
 
 \begin{figure}[htbp]
 \begin{center}
 \UML{TreeView.png}
 \caption{Canvas view with multiple syntax tree views}
 \label{fig:TreeView}
+\end{center}
+\end{figure}
+
+The nodes of the syntax tree view are drawn as circles around \verb+symbol()+ 
+method defined in the category
+\verb+Display+ of the class \verb+NyayaNode+..
+The color of the border is determined by the value of \verb+displayValue()+.
+
+
+\begin{figure}[htbp]
+\begin{center}
+\UML{NyayaNodeDisplay.png}
+\caption{Node display interface}
+\label{fig:NyayaNodeDisplay}
 \end{center}
 \end{figure}
 
@@ -425,29 +440,39 @@ controlled by the glossary detail view controller.
 \subsection{BoolTool}
 
 The BoolTool master view controller presents a table view with stored and selectable formulas.
+An editable text field with an attached customized keyboard will allow the user to enter their formulas.
 
-\begin{figure}[htbp]
-\begin{center}
-\UML{NyayaNodeDisplay.png}
-\caption{Node display interface}
-\label{fig:NyayaNodeDisplay}
-\end{center}
-\end{figure}
+The output will be presented in different views. Read only text views are used for the normal form, 
+a web form is used for the truth table and a customized view will draw the binary decision diagram.
+
+
 
 %\section{Unit-Tests}
 %\newpage
-\section{Content}
+\section{Application content}
 
-\subsection{On delivery}
+Beside the classes to determines the run-time behavior of the application,
+the storage of application content must be defined.
 
-Xml configuration data and html documents are stored in UTF-8 encoded files. 
-The content is embedded in \Nyaya's app bundle,
-which can be downloaded and installed from the App Store. 
+\subsection{Content on delivery}
 
-\subsection{Persisted formulas}
+Configuration data, localization data and html documents
+are stored in UTF-8 encoded text files.
+All graphical content such as icons and diagrams are stored in portable network graphics.
+These content files are embedded in \Nyaya's app bundle
+and will be downloaded along the application execution data,
+while receiving \Nyaya for iPad from the App Store.
 
-Formulas from the playground and BoolTool are persisted in the simple property list file \verb+BoolToolData+ 
+\subsection{User created content}
+
+Formulas from the playground and BoolTool are persisted 
+in the simple property list file \verb+BoolToolData+ 
 in the documents folder of the app.
+
+\subsection{Export and import of content}
+
+Single formulas can be exported from or imported into editable text fields 
+by simple using the standard copy and paste mechanism of iOS.
 
 
 
