@@ -20,7 +20,7 @@
     NSString *expected = @"¬¬a";
     NSString *expected2 = @"(¬(¬a))";
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testNegationAnd {
@@ -32,7 +32,7 @@
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation, nil);
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable, nil);
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testAndNegation {
@@ -44,7 +44,7 @@
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable, nil);
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation, nil);
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testNegationOr {
@@ -56,7 +56,7 @@
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation, nil);
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable, nil);
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testOrNegation {
@@ -68,7 +68,7 @@
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable, nil);
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation, nil);
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testSequence {
@@ -77,7 +77,7 @@
     NSString *expected = @"a ↔ b; a ∧ b ↔ c";
     NSString *expected2 = @"((a↔b);((a∧b)↔c))";
     STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 - (void)testComplex {
@@ -89,7 +89,7 @@
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaImplication, nil);
     STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaDisjunction, nil);
     STAssertEqualObjects([node description], expected, [[node description] commonPrefixWithString:expected options:0]);
-    STAssertEqualObjects([node treeDescription], expected2, nil);
+    STAssertEqualObjects([node strictDescription], expected2, nil);
 }
 
 @end

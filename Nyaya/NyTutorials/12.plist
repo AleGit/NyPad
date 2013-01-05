@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Find the simple declarative sentences (propositions).</string>
+	<string>Extract the smallest declarative sentences.</string>
 	<key>answerLabelText</key>
-	<string>Your list of propositions without ‘if’, ‘then’, ‘and’, ‘or’, and ‘not’.</string>
+	<string>Write a solution like ‘it is raining; the street is wet’.</string>
 	<key>solutionLabelText</key>
-	<string>Sample solution (your correct answer may not match exactly)</string>
+	<string>Sample solution</string>
 	<key>questionsFile</key>
 	<string>QA1</string>
 	<key>solutionIndex</key>

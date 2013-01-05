@@ -28,14 +28,40 @@
     return _descriptionCache;
 }
 
-- (NSString*)treeDescription {
+- (NSString*)testDescription {
     switch (self.type) {
         case NyayaVariable:
         case NyayaConstant:
             return _symbol;
         case NyayaNegation:
             return [NSString stringWithFormat:@"(%@%@)",
-                    self.symbol, [[(NyayaNodeUnary*)self firstNode] treeDescription]];
+                    self.symbol, [[(NyayaNodeUnary*)self firstNode] testDescription]];
+        case NyayaConjunction:
+        case NyayaSequence:
+        case NyayaDisjunction:
+        case NyayaBicondition:
+        case NyayaImplication:
+        case NyayaXdisjunction:
+            return [NSString stringWithFormat:@"(%@ %@ %@)",
+                    [[(NyayaNodeBinary*)self firstNode] testDescription],
+                    self.symbol,
+                    [[(NyayaNodeBinary*)self secondNode] testDescription]];
+        case NyayaFunction:
+        default:
+            return [NSString stringWithFormat:@"%@(%@)",
+                    self.symbol,
+                    [[self valueForKeyPath:@"nodes.testDescription"] componentsJoinedByString:@","]];
+    }
+}
+
+- (NSString*)strictDescription {
+    switch (self.type) {
+        case NyayaVariable:
+        case NyayaConstant:
+            return _symbol;
+        case NyayaNegation:
+            return [NSString stringWithFormat:@"(%@%@)",
+                    self.symbol, [[(NyayaNodeUnary*)self firstNode] strictDescription]];
         case NyayaConjunction:
         case NyayaSequence:
         case NyayaDisjunction:
@@ -43,16 +69,18 @@
         case NyayaImplication:
         case NyayaXdisjunction:
             return [NSString stringWithFormat:@"(%@%@%@)",
-                    [[(NyayaNodeBinary*)self firstNode] treeDescription],
+                    [[(NyayaNodeBinary*)self firstNode] strictDescription],
                     self.symbol,
-                    [[(NyayaNodeBinary*)self secondNode] treeDescription]];
+                    [[(NyayaNodeBinary*)self secondNode] strictDescription]];
         case NyayaFunction:
         default:
             return [NSString stringWithFormat:@"%@(%@)",
                     self.symbol,
-                    [[self valueForKeyPath:@"nodes.treeDescription"] componentsJoinedByString:@","]];
+                    [[self valueForKeyPath:@"nodes.strictDescription"] componentsJoinedByString:@","]];
     }
 }
+
+
 
 @end
 

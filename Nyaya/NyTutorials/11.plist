@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Guess the structure of the composite declarative sentence.</string>
+	<string>Guess the structure of the composite sentence.</string>
 	<key>answerLabelText</key>
-	<string>Use ‘p’, ‘q’, ‘r’ for the simple declarative sentences.</string>
+	<string>Write a solution like ‘if p then q’, ‘p or q’, etc.</string>
 	<key>solutionLabelText</key>
-	<string>Sample solution (you may have found an other correct expression)</string>
+	<string>Sample solution</string>
 	<key>questionsFile</key>
 	<string>QA1</string>
 	<key>solutionIndex</key>

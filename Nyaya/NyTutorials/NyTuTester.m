@@ -9,9 +9,11 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
+#import "NyayaNode.h"
 #import "NyayaNode+Description.h"
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Random.h"
+#import "NyayaNode+Type.h"
 #import "NyayaNode+Valuation.h"
 
 @interface NyTuTester () {
@@ -83,6 +85,7 @@
     [self clearQuestion];
     [self generateQuestion];
     [self writeQuestion];
+    [self showKeyboard];
     
     [delegate tester:self didNextTest:YES];
 }
@@ -206,7 +209,7 @@
 }
 
 /* CAN BE OVERRIDEN IN SUBCLASSES */
-- (NSString*)testViewNibName { return @"StandardTestView"; }
+- (NSString*)testViewNibName { return @"TextTestView"; }
 
 /* SHOULD NOT BE OVERRIDEN IN SUBCLASSES */
 - (void)loadTestView:(UIView*)view {
@@ -241,6 +244,9 @@
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)writeQuestion { @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil]; }
 
+/* MAY BE OVERRIDDEN IN SUBCLASSES */
+- (void)showKeyboard { [self.answerField becomeFirstResponder]; };
+
 #pragma mark - checkTest (methods to be overriden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
@@ -266,6 +272,7 @@
     self.questionLabelText = [self.testDictionary objectForKey:@"questionLabelText"];
     self.answerLabelText = [self.testDictionary objectForKey:@"answerLabelText"];
     self.solutionLabelText = [self.testDictionary objectForKey:@"solutionLabelText"];
+    self.additionalLabelText = [self.testDictionary objectForKey:@"additionalLabelText"];
     
 }
 
@@ -273,6 +280,7 @@
     self.questionLabel.text = self.questionLabelText;
     self.answerLabel.text = self.answerLabelText;
     self.solutionLabel.text = self.solutionLabelText;
+    self.additionalLabel.text = self.additionalLabelText;
 }
 
 
@@ -348,6 +356,10 @@
 - (void)setVariables: (NSArray*)variables;
 - (void)setQuestionTree: (NyayaNode*)questionTree;
 
+- (NSRange)testContextLengths;
+- (NSUInteger)wrongSyntaxRate; // 0 (NO) ... 100 (ALWAYS)
+- (BOOL)createWrongSyntax;
+
 @end
 
 @implementation NyTuTesterRandomQuestions
@@ -382,9 +394,15 @@
     
     self.rootTypes = [indexSet copy];
     self.nodeTypes = [indexSet copy];
-    self.lengths = NSMakeRange(1,2);
+    self.lengths = [self testContextLengths];
     self.variables = @[@"p", @"q", @"r"];
     
+}
+
+- (NSRange)testContextLengths { return NSMakeRange(3,5); }
+- (NSUInteger)wrongSyntaxRate { return 15; } // 15 of 100
+- (BOOL)createWrongSyntax {
+    return (arc4random() % 100) < [self wrongSyntaxRate];
 }
 
 - (void)generateQuestion {
@@ -399,20 +417,21 @@
     
     self.questionTree = [NyayaNode randomTreeWithRootTypes:self.rootTypes
                                                nodeTypes:self.nodeTypes
-                                                 lengths:self.lengths
+                                                   lengths:self.lengths
                                                variables:self.variables];
     
     _question = [self.questionTree description];
-    _solution = [self.questionTree description];
+    _solution = _question;
 }
 
 
 
 
 - (void)validateAnswer {
-    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
+    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:_answer];
     
-    _success = [self.questionTree isEqual:[answerFormula syntaxTree:NO]];
+    _success = [_solution isEqualToString:_answer] ||
+    [self.questionTree isEqual:[answerFormula syntaxTree:NO]];
 }
 
 @end
@@ -451,23 +470,50 @@
 #pragma mark - Chapter 2
 
 // syntax conventions
+
+@implementation NyTuTester21
+
+- (NSRange)testContextLengths { return NSMakeRange(1,4);}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    _question = [self.questionTree testDescription];
+    
+    if ([self createWrongSyntax]) {
+        NSUInteger length = [_question length];
+        NSUInteger loc = length;
+        while (loc == length || [@[@" ", @"¬"] containsObject:[_question substringWithRange:NSMakeRange(loc,1)]]) {
+            loc = arc4random() % length;
+        } 
+        _question = [[_question stringByReplacingCharactersInRange:NSMakeRange(loc,1) withString:@" "]
+                     stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+        _solution = @""; // mark incorrect syntax
+    }
+    else {
+        _solution = self.questionTree.symbol;
+    }
+}
+/*
+- (void)validateAnswer {
+    _success = [_solution isEqualToString:[self.answer stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    
+}*/
+@end
+
+// syntax conventions
 @implementation NyTuTester22
 
-- (void)configureTestContext {
-    [super configureTestContext];
-    
-    self.lengths = NSMakeRange(3,5);
-}
-
+/*
 - (void)generateQuestion {
     [super generateQuestion];
     _solution = [self.questionTree treeDescription];
 }
 
+
 - (void)validateAnswer {
     _success = [_solution isEqualToString:[self.answer stringByReplacingOccurrencesOfString:@" " withString:@""]];
     
-}
+}*/
 
 
 @end
@@ -481,10 +527,8 @@
     
 }
 
-- (void)configureTestContext {
-    [super configureTestContext];
-    
-    self.lengths = NSMakeRange(3,2);
+- (NSRange)testContextLengths {
+    return NSMakeRange(3,2);
 }
 
 - (void)generateQuestion {
@@ -546,6 +590,8 @@
     _syntaxTreeView.delegate = nil;
     // syntaxTreeView.dataSource = nil;
 }
+
+- (NSUInteger)wrongSyntaxRate { return 0; }
 
 - (void)writeQuestion {
     self.syntaxTreeView.node = self.questionTree;

@@ -45,6 +45,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *questionLabel;        // how to read the question
 @property (nonatomic, weak) IBOutlet UILabel *solutionLabel;        // how to read the solution
 @property (nonatomic, weak) IBOutlet UILabel *answerLabel;          // how to write the answer
+@property (nonatomic, weak) IBOutlet UILabel *additionalLabel;      // additional information
 
 @property (nonatomic, weak) IBOutlet UITextView *questionField;     // the content of the question
 @property (nonatomic, weak) IBOutlet UITextView *solutionField;     // the content of the solution
@@ -64,6 +65,7 @@
 @property (nonatomic, strong) NSString *questionLabelText;
 @property (nonatomic, strong) NSString *answerLabelText;
 @property (nonatomic, strong) NSString *solutionLabelText;
+@property (nonatomic, strong) NSString *additionalLabelText;
 
 @property (nonatomic, readonly) NSString *question;       // question = key, solution = value from dictionary (101,102,103)
 @property (nonatomic, readonly) NSString *answer;
@@ -96,6 +98,9 @@
 @end
 
 /*****************************************************************************************/
+
+@interface NyTuTester21 : NyTuTesterRandomQuestions
+@end
 
 @interface NyTuTester22 : NyTuTesterRandomQuestions
 @end

@@ -158,7 +158,7 @@
         NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
         NyayaNode *formula = [parser parseFormula];
         STAssertEqualObjects([formula description], expected, key);
-        STAssertEqualObjects([formula treeDescription], tree, key);
+        STAssertEqualObjects([formula strictDescription], tree, key);
         
         count++;
         

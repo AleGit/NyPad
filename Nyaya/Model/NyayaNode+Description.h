@@ -10,7 +10,8 @@
 
 @interface NyayaNode (Description)
 
-- (NSString*)treeDescription;
+- (NSString*)strictDescription;
+- (NSString*)testDescription;
 - (NSString*)description:(NyayaNode*)subnode;
 
 @end

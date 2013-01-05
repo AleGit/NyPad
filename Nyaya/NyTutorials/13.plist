@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Try to find a model</string>
+	<string>Translate the composite sentence into formula.</string>
 	<key>answerLabelText</key>
-	<string>Use connectives “¬ ∧ ∨ →” and atoms “p q r”</string>
+	<string>Write a formula like ‘p→q’, ‘¬p ∨ q’.</string>
 	<key>solutionLabelText</key>
 	<string>Sample solution</string>
 	<key>questionsFile</key>
