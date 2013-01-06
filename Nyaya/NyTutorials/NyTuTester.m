@@ -350,6 +350,8 @@
 /***************************************************************************************************************************/
 @interface NyTuTesterRandomQuestions ()
 
+@property BOOL hasWrongSyntax;
+
 - (void)setRootTypes: (NSIndexSet*)rootTypes;
 - (void)setNodeTypes: (NSIndexSet*)nodeTypes;
 - (void)setLengths: (NSRange)lengths;
@@ -358,7 +360,7 @@
 
 - (NSRange)testContextLengths;
 - (NSUInteger)wrongSyntaxRate; // 0 (NO) ... 100 (ALWAYS)
-- (BOOL)createWrongSyntax;
+- (BOOL)changeQuestion;
 
 @end
 
@@ -401,11 +403,10 @@
 
 - (NSRange)testContextLengths { return NSMakeRange(3,5); }
 - (NSUInteger)wrongSyntaxRate { return 15; } // 15 of 100
-- (BOOL)createWrongSyntax {
-    return (arc4random() % 100) < [self wrongSyntaxRate];
-}
 
 - (void)generateQuestion {
+    self.hasWrongSyntax = NO;
+    
     if (self.lengths.length > 3 && self.succCount < self.failCount) {
         self.lengths = NSMakeRange(self.lengths.location, self.lengths.length-1);
         
@@ -422,6 +423,23 @@
     
     _question = [self.questionTree description];
     _solution = _question;
+}
+
+- (BOOL)changeQuestion {
+    self.hasWrongSyntax = (arc4random() % 100) < [self wrongSyntaxRate];
+    if (self.hasWrongSyntax) {
+        NSUInteger length = [_question length];
+        NSUInteger loc = length;
+        while (loc == length || [@[@" ", @"¬"] containsObject:[_question substringWithRange:NSMakeRange(loc,1)]]) {
+            loc = arc4random() % length;
+        }
+        _question = [[_question stringByReplacingCharactersInRange:NSMakeRange(loc,1) withString:@" "]
+                     stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+        
+    }
+    
+    return self.hasWrongSyntax;
+    
 }
 
 
@@ -478,16 +496,8 @@
 - (void)generateQuestion {
     [super generateQuestion];
     _question = [self.questionTree testDescription];
-    
-    if ([self createWrongSyntax]) {
-        NSUInteger length = [_question length];
-        NSUInteger loc = length;
-        while (loc == length || [@[@" ", @"¬"] containsObject:[_question substringWithRange:NSMakeRange(loc,1)]]) {
-            loc = arc4random() % length;
-        } 
-        _question = [[_question stringByReplacingCharactersInRange:NSMakeRange(loc,1) withString:@" "]
-                     stringByReplacingOccurrencesOfString:@"  " withString:@" "];
-        _solution = @""; // mark incorrect syntax
+    if ([self changeQuestion]) {
+        _solution = @"";
     }
     else {
         _solution = self.questionTree.symbol;
@@ -503,17 +513,25 @@
 // syntax conventions
 @implementation NyTuTester22
 
-/*
+
 - (void)generateQuestion {
     [super generateQuestion];
-    _solution = [self.questionTree treeDescription];
+    _question = [self.questionTree description];
+    
+    if ([self changeQuestion]) {
+        _solution = @"";
+    }
+    else {
+        _solution = [self.questionTree testDescription];
+    }
 }
 
 
 - (void)validateAnswer {
-    _success = [_solution isEqualToString:[self.answer stringByReplacingOccurrencesOfString:@" " withString:@""]];
-    
-}*/
+    _success = [_solution isEqualToString:_answer]
+    || [[self.questionTree strictDescription] isEqualToString:
+        [self.answer stringByReplacingOccurrencesOfString:@" " withString:@""]];
+}
 
 
 @end
@@ -533,7 +551,7 @@
 
 - (void)generateQuestion {
     [super generateQuestion];
-    _solution = [[[self.questionTree setOfSubformulas] allObjects] componentsJoinedByString:@","] ;
+    _solution = [[[self.questionTree setOfSubformulas] allObjects] componentsJoinedByString:@", "] ;
 }
 
 - (void)validateAnswer {
@@ -545,13 +563,13 @@
         [solutionSubformulas addObject:[formula syntaxTree:NO]];
     }
     
-    
-    
+    NSUInteger count = 0;
     for (NSString *sf in  [self.answer componentsSeparatedByString:@","]) {
         NyayaFormula *formula = [NyayaFormula formulaWithString:sf];
         [answerSubformulas addObject:[formula syntaxTree:NO]];
+        count++;
     }
-    _success = [solutionSubformulas isEqual:answerSubformulas];
+    _success = [solutionSubformulas count] == count && [solutionSubformulas isEqual:answerSubformulas];
     
 }
 
@@ -581,9 +599,6 @@
     _syntaxTreeView.hideHeader = YES;
     _syntaxTreeView.hideLock = YES;
     _syntaxTreeView.hideValuation = YES;
-    
-    
-    
     
     [self.canvasView addSubview:_syntaxTreeView];
     
@@ -621,6 +636,19 @@
     
 }
 
+@end
+
+@implementation NyTuTester25
+
+- (void)loadAccessoryView {
+    if ([self accessoryViewShouldBeVisible]) {
+        [[NSBundle mainBundle] loadNibNamed:@"NyExtendedKeysView" owner:self options:nil];
+        [self configureAccessoryView];
+    }
+    else {
+        [self unloadAccessoryView];
+    }
+}
 
 
 @end

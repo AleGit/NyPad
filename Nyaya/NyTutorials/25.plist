@@ -2,9 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>questionLabelText</key>
+	<string>Simplify given formula.</string>
 	<key>answerLabelText</key>
-	<string>Write down the formula for the syntax tree.</string>
+	<string>Write your solution.</string>
 	<key>solutionLabelText</key>
-	<string>Solution with precedences and associativity.</string>
+	<string>Solution</string>
+	<key>questionsFile</key>
+	<string>QA25</string>
+	<key>solutionIndex</key>
+	<integer>1</integer>
 </dict>
 </plist>

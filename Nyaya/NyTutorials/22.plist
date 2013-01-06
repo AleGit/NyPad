@@ -3,10 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Rewrite formula in strict syntax</string>
+	<string>Rewrite given formula to strict syntax.</string>
 	<key>answerLabelText</key>
-	<string>Use connectives “¬ ∧ ∨ →” and atoms “p q r”</string>
+	<string>Write formula.</string>
 	<key>solutionLabelText</key>
-	<string>Sample solution</string>
+	<string>Solution (empty if given formula is not well formed).</string>
+	<key>additionalLabelText</key>
+	<string>P := p | (¬P) |  (P ∧ P) | (P ∨ P) | (P → P)</string>
 </dict>
 </plist>

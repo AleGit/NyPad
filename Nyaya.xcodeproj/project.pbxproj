@@ -190,6 +190,8 @@
 		11F906C915CECB2A001CD0F3 /* BasicTruthTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906C815CECB2A001CD0F3 /* BasicTruthTableTests.m */; };
 		11F906CC15CED420001CD0F3 /* BasicPrecedenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */; };
 		11F906CF15CEDF58001CD0F3 /* BasicNormalFormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */; };
+		811DBCED16995EFD0084CCC3 /* 25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 811DBCEC16995EFD0084CCC3 /* 25.plist */; };
+		811DBCF01699611C0084CCC3 /* QA25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 811DBCEF1699611B0084CCC3 /* QA25.plist */; };
 		8156385F16500DA9006A9B99 /* 23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8156385E16500DA9006A9B99 /* 23.plist */; };
 		816E685D1698323400D929FE /* TextTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816E685C1698323400D929FE /* TextTestView.xib */; };
 		816E68601698413400D929FE /* 21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 816E685F1698413400D929FE /* 21.plist */; };
@@ -504,6 +506,8 @@
 		11F906CB15CED420001CD0F3 /* BasicPrecedenceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicPrecedenceTests.m; sourceTree = "<group>"; };
 		11F906CD15CEDF58001CD0F3 /* BasicNormalFormTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNormalFormTests.h; sourceTree = "<group>"; };
 		11F906CE15CEDF58001CD0F3 /* BasicNormalFormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNormalFormTests.m; sourceTree = "<group>"; };
+		811DBCEC16995EFD0084CCC3 /* 25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 25.plist; path = Nyaya/NyTutorials/25.plist; sourceTree = "<group>"; };
+		811DBCEF1699611B0084CCC3 /* QA25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA25.plist; path = Nyaya/NyTutorials/QA25.plist; sourceTree = "<group>"; };
 		8156385E16500DA9006A9B99 /* 23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 23.plist; path = Nyaya/NyTutorials/23.plist; sourceTree = "<group>"; };
 		816E685C1698323400D929FE /* TextTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextTestView.xib; path = Nyaya/NyTutorials/TextTestView.xib; sourceTree = "<group>"; };
 		816E685F1698413400D929FE /* 21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 21.plist; path = Nyaya/NyTutorials/21.plist; sourceTree = "<group>"; };
@@ -1044,11 +1048,13 @@
 				1190AB021610670400BDE63F /* 22.plist */,
 				8156385E16500DA9006A9B99 /* 23.plist */,
 				81C865BC164E8BD100A77B02 /* 24.plist */,
+				811DBCEC16995EFD0084CCC3 /* 25.plist */,
 				11061F2F15EF9BBD00345516 /* NyTuTester.h */,
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
 				11C61BB615E91FF000F5BB28 /* NyTuTestViewController.m */,
 				11F531BC15FC78B4003F6C11 /* QA1.plist */,
+				811DBCEF1699611B0084CCC3 /* QA25.plist */,
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
 				81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */,
 				816E685C1698323400D929FE /* TextTestView.xib */,
@@ -1354,6 +1360,8 @@
 				8156385F16500DA9006A9B99 /* 23.plist in Resources */,
 				816E685D1698323400D929FE /* TextTestView.xib in Resources */,
 				816E68601698413400D929FE /* 21.plist in Resources */,
+				811DBCED16995EFD0084CCC3 /* 25.plist in Resources */,
+				811DBCF01699611C0084CCC3 /* QA25.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

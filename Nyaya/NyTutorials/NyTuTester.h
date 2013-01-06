@@ -113,3 +113,6 @@
 @property (weak, nonatomic) NyTreeView *syntaxTreeView;
 
 @end
+
+@interface NyTuTester25 : NyTuTesterDictionaryQuestions
+@end

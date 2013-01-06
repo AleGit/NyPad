@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Write down all sub-formulas</string>
+	<string>Extract sub-formulas from given formula.</string>
 	<key>answerLabelText</key>
 	<string>Separate sub-formulas with ‘,’</string>
 	<key>solutionLabelText</key>
-	<string>Sample solution</string>
+	<string>Solution (order does not matter).</string>
 </dict>
 </plist>

@@ -44,7 +44,7 @@
 								<reference key="NSNextResponder" ref="670920515"/>
 								<int key="NSvFlags">1290</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{20, 393}, {500, 17}}</string>
+								<string key="NSFrame">{{20, 387}, {500, 17}}</string>
 								<reference key="NSSuperview" ref="670920515"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="294801313"/>
@@ -78,7 +78,7 @@
 							<object class="IBUITextView" id="294801313">
 								<reference key="NSNextResponder" ref="670920515"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{20, 418}, {500, 33}}</string>
+								<string key="NSFrame">{{20, 412}, {500, 33}}</string>
 								<reference key="NSSuperview" ref="670920515"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="943304662"/>
@@ -338,18 +338,8 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NyTuTester</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">press:</string>
-						<string key="NS.object.0">UIButton</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">press:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">press:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="additionalLabel">UILabel</string>
 						<string key="answerField">UITextView</string>
 						<string key="answerLabel">UILabel</string>
 						<string key="questionField">UITextView</string>
@@ -359,6 +349,10 @@
 						<string key="testView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="additionalLabel">
+							<string key="name">additionalLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="answerField">
 							<string key="name">answerField</string>
 							<string key="candidateClassName">UITextView</string>
@@ -396,20 +390,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NyTuTester24</string>
 					<string key="superclassName">NyTuTesterRandomQuestions</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="dragFormula:">UIPanGestureRecognizer</string>
-						<string key="lockFormula:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="dragFormula:">
-							<string key="name">dragFormula:</string>
-							<string key="candidateClassName">UIPanGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="lockFormula:">
-							<string key="name">lockFormula:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">canvasView</string>
 						<string key="NS.object.0">UIView</string>

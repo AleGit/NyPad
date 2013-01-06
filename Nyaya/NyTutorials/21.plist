@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Check the syntax for the formula.</string>
+	<string>Check syntax of given formula.</string>
 	<key>answerLabelText</key>
-	<string>Write first symbol used to create formula (if well formed).</string>
+	<string>Write first connective symbol used to create formula (if well formed).</string>
 	<key>solutionLabelText</key>
-	<string>Solution (empty for not well formed formula)</string>
+	<string>Solution (¬,∧,∨,→ or empty if given formula is not well formed).</string>
 	<key>additionalLabelText</key>
 	<string>P := p | (¬P) |  (P ∧ P) | (P ∨ P) | (P → P)</string>
 </dict>
