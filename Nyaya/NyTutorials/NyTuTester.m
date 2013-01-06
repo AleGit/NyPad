@@ -10,6 +10,8 @@
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
 #import "NyayaNode.h"
+#import "NyayaNode+Creation.h"
+#import "NyayaNode+Derivations.h"
 #import "NyayaNode+Description.h"
 #import "NyayaNode+Display.h"
 #import "NyayaNode+Random.h"
@@ -648,6 +650,68 @@
     else {
         [self unloadAccessoryView];
     }
+}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    // tautology or contradiction?
+    
+    NyayaNode *P = self.questionTree;
+    NyayaNode *NP = [NyayaNode negation:P];
+    
+    switch (arc4random() % 4) {
+        case 0:
+            P = [P deriveImf:NSIntegerMax];
+            break;
+        case 1:
+            P = [[P deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax];
+            break;
+        default:
+            break;
+    }
+    
+    switch (arc4random() % 4) {
+        case 0:
+            NP = [NP deriveImf:NSIntegerMax];
+            break;
+        case 1:
+            NP = [[NP deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax];
+            break;
+        default:
+            break;
+    }
+
+    
+    
+    switch (arc4random() % 5) {
+        case 0: // P ∨ ¬P
+            self.questionTree = [NyayaNode disjunction:P with:NP];
+            _solution = @"⊤";
+            break;
+        case 1: // ¬P ∨ P
+            self.questionTree = [NyayaNode disjunction:NP with:P];
+            _solution = @"⊤";
+            break;
+        case 2: // P → P
+            self.questionTree = [NyayaNode implication:P with:P];
+            _solution = @"⊤";
+            break;
+        case 3: // P ∧ ¬P
+            self.questionTree = [NyayaNode conjunction:P with:NP];
+            _solution = @"⊥";
+            break;
+        case 4: // ¬P ∧ P
+            self.questionTree = [NyayaNode conjunction:NP with:P];
+            _solution = @"⊥";
+            break;
+        
+    }
+        
+    _question = [self.questionTree description];
+}
+
+- (void)validateAnswer {
+    _success = [_solution isEqualToString:_answer];
 }
 
 

@@ -114,5 +114,5 @@
 
 @end
 
-@interface NyTuTester25 : NyTuTesterDictionaryQuestions
+@interface NyTuTester25 : NyTuTesterRandomQuestions
 @end

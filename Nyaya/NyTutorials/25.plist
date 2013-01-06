@@ -3,14 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Simplify given formula.</string>
+	<string>Simplify given formula to Top or Bottom.</string>
 	<key>answerLabelText</key>
-	<string>Write your solution.</string>
+	<string>Write ‘⊤’ or ‘⊥’.</string>
 	<key>solutionLabelText</key>
 	<string>Solution</string>
-	<key>questionsFile</key>
-	<string>QA25</string>
-	<key>solutionIndex</key>
-	<integer>1</integer>
 </dict>
 </plist>
