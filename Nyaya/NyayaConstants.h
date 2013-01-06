@@ -14,3 +14,11 @@ extern const NSUInteger TRUTH_TABLE_MAX_VISIBLE_ROWS;
 extern NSString *const TRUTH_TABLE_U_ROWS;
 extern NSString *const TRUTH_TABLE_U_TRUE_OF_U_ROWS;
 extern NSString *const TRUTH_TABLE_U_FALSE_OF_U_ROWS;
+
+extern const NSUInteger KEY_BACKGROUND_TAG;
+extern const NSUInteger KEY_CLOSE_TAG;
+extern const NSUInteger KEY_PROCESS_TAG;
+extern const NSUInteger KEY_BACKSPACE_TAG;
+extern const NSUInteger KEY_FALSE_TAG;
+extern const NSUInteger KEY_TRUE_TAG;
+extern const NSUInteger KEY_SPACE_TAG;

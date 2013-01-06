@@ -9,6 +9,7 @@
 #import "NyDetailViewController.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
+#import "NyayaConstants.h"
 
 @interface NyDetailViewController ()
 
@@ -117,7 +118,7 @@
 }
 
 - (void)configureAccessoryView {
-    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    [self.accessoryView viewWithTag:KEY_BACKGROUND_TAG].backgroundColor = [UIColor nyKeyboardBackgroundColor];
     self.inputField.inputView = self.accessoryView;
 }
 

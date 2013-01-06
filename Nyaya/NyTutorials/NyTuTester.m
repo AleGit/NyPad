@@ -9,7 +9,7 @@
 #import "NyTuTester.h"
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
-#import "NyayaNode.h"
+#import "NyayaNode_Cluster.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Derivations.h"
 #import "NyayaNode+Description.h"
@@ -17,6 +17,7 @@
 #import "NyayaNode+Random.h"
 #import "NyayaNode+Type.h"
 #import "NyayaNode+Valuation.h"
+#import "NyayaConstants.h"
 
 @interface NyTuTester () {
     BOOL _checked;
@@ -125,9 +126,10 @@
 // properties
 @synthesize accessoryView, backButton, processButton, dismissButton;
 // creation (loading)
+- (NSString*)accessoryViewNibName { return @"NyBasicKeysView"; };
 - (void)loadAccessoryView {
     if ([self accessoryViewShouldBeVisible]) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyBasicKeysView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:[self accessoryViewNibName] owner:self options:nil];
         [self configureAccessoryView];
     }
     else {
@@ -136,7 +138,14 @@
 }
 - (void)configureAccessoryView {
     self.answerField.inputView = self.accessoryView;
-    [self.accessoryView viewWithTag:100].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    [self.accessoryView viewWithTag:KEY_BACKGROUND_TAG].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    /*
+    UIButton *close = (UIButton*)[self.accessoryView viewWithTag:KEY_CLOSE_TAG];
+    UIButton *button = (UIButton*)[self.accessoryView viewWithTag:KEY_PROCESS_TAG];
+    CGRect c = close.frame;
+    CGRect f = button.frame;
+    button.frame = CGRectMake(f.origin.x, f.origin.y, c.origin.x - f.origin.x + c.size.width, f.size.height);
+     */
 }
 - (void)unloadAccessoryView {
     self.answerField.inputView = nil;
@@ -543,7 +552,7 @@
 
 - (void)configureAccessoryView {
     [super configureAccessoryView];
-    [((UIButton*)[self.accessoryView viewWithTag:32]) setTitle:@"," forState:UIControlStateNormal];
+    [((UIButton*)[self.accessoryView viewWithTag:KEY_SPACE_TAG]) setTitle:@"," forState:UIControlStateNormal];
     
 }
 
@@ -642,15 +651,14 @@
 
 @implementation NyTuTester25
 
-- (void)loadAccessoryView {
-    if ([self accessoryViewShouldBeVisible]) {
-        [[NSBundle mainBundle] loadNibNamed:@"NyExtendedKeysView" owner:self options:nil];
-        [self configureAccessoryView];
-    }
-    else {
-        [self unloadAccessoryView];
-    }
+
+- (void)configureAccessoryView {
+    [super configureAccessoryView];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_TRUE_TAG] setTitle:@"⊤" forState:UIControlStateNormal];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_FALSE_TAG] setTitle:@"⊥" forState:UIControlStateNormal];
 }
+
+- (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
 
 - (NyayaNode *)switchNodes:(NyayaNode*)P {
     NyayaNode *P0 = nil;
@@ -747,6 +755,40 @@
 - (void)validateAnswer {
     _success = [_solution isEqualToString:_answer];
 }
+@end
 
+@implementation NyTuTester31
+
+- (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    NSMutableString *question = [[self.questionTree description] mutableCopy];
+    [question appendString:@" 🔹"];
+    NSSet *set = [self.questionTree setOfVariables];
+    __block BOOL first = YES;
+    
+    [set enumerateObjectsUsingBlock:^(NyayaNodeVariable *variable, BOOL *stop) {
+        variable.evaluationValue = (BOOL)(arc4random() % 2);
+        
+        if (!first) [question appendString:@","];
+        
+        if (variable.evaluationValue) {
+            [question appendFormat:@" v(%@)=T ", variable.symbol ];
+        }
+        else {
+            [question appendFormat:@" v(%@)=F ", variable.symbol];
+        }
+        
+        first = NO;
+        
+    }];
+    _question = [question copy];
+    
+    if (self.questionTree.evaluationValue)
+        _solution = @"T";
+    else
+        _solution = @"F";
+}
 
 @end
