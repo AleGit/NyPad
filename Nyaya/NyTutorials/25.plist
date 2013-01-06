@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Simplify given formula to Top or Bottom.</string>
+	<string>Guess if given formula simplifies to Top or Bottom.</string>
 	<key>answerLabelText</key>
-	<string>Write ‘⊤’ or ‘⊥’.</string>
+	<string>Write ‘⊤’ for to, ‘⊥’ for bottom, and nothing if neither.</string>
 	<key>solutionLabelText</key>
 	<string>Solution</string>
 </dict>

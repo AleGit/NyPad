@@ -652,6 +652,31 @@
     }
 }
 
+- (NyayaNode *)switchNodes:(NyayaNode*)P {
+    NyayaNode *P0 = nil;
+    switch (P.type) {
+        case NyayaNegation:                 // P
+            P0 = P.nodes[0];                // ¬Q
+            if (P0.type == NyayaNegation)   // ¬¬R
+                return P0.nodes[0];         // return R
+            else
+                return [NyayaNode negation: [self switchNodes:P0]];
+            break;
+        
+        case NyayaConjunction:
+            return [NyayaNode conjunction:P.nodes[1] with:P.nodes[0]];
+            break;
+        
+        case NyayaDisjunction:
+            return [NyayaNode disjunction:P.nodes[1] with:P.nodes[0]];
+            break;
+            
+        default:
+            return P;
+    }
+    
+}
+
 - (void)generateQuestion {
     [super generateQuestion];
     // tautology or contradiction?
@@ -659,31 +684,19 @@
     NyayaNode *P = self.questionTree;
     NyayaNode *NP = [NyayaNode negation:P];
     
-    switch (arc4random() % 4) {
+    switch (arc4random() % 3) {
         case 0:
-            P = [P deriveImf:NSIntegerMax];
+            P = [self switchNodes:P];
             break;
         case 1:
-            P = [[P deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax];
+            NP = [self switchNodes:NP];
             break;
+        case 2:
         default:
             break;
     }
     
-    switch (arc4random() % 4) {
-        case 0:
-            NP = [NP deriveImf:NSIntegerMax];
-            break;
-        case 1:
-            NP = [[NP deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax];
-            break;
-        default:
-            break;
-    }
-
-    
-    
-    switch (arc4random() % 5) {
+    switch (arc4random() % 10) {
         case 0: // P ∨ ¬P
             self.questionTree = [NyayaNode disjunction:P with:NP];
             _solution = @"⊤";
@@ -703,6 +716,27 @@
         case 4: // ¬P ∧ P
             self.questionTree = [NyayaNode conjunction:NP with:P];
             _solution = @"⊥";
+            break;
+            
+        case 5: // P ∨ P
+            self.questionTree = [NyayaNode disjunction:P with:P];
+            _solution = @"";
+            break;
+        case 6: // ¬P ∨ ¬P
+            self.questionTree = [NyayaNode disjunction:NP with:NP];
+            _solution = @"";
+            break;
+        case 7: // P → ¬P
+            self.questionTree = [NyayaNode implication:P with:NP];
+            _solution = @"";
+            break;
+        case 8: // P ∧ P
+            self.questionTree = [NyayaNode conjunction:P with:P];
+            _solution = @"";
+            break;
+        case 9: // ¬P ∧ ¬P
+            self.questionTree = [NyayaNode conjunction:NP with:NP];
+            _solution = @"";
             break;
         
     }
