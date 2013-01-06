@@ -199,6 +199,8 @@
 		819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */; };
 		81C865BD164E8BD200A77B02 /* 24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BC164E8BD100A77B02 /* 24.plist */; };
 		81C865BF164E967F00A77B02 /* SyntaxTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */; };
+		81FED8541699E5CD00F33BC4 /* TruthTableTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */; };
+		81FED8571699E64800F33BC4 /* 32.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8561699E64800F33BC4 /* 32.plist */; };
 		9A0592D51646585200E314E2 /* tutorial52.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D41646585200E314E2 /* tutorial52.html */; };
 		9A0592D8164840BF00E314E2 /* BDD_unordered.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D7164840BE00E314E2 /* BDD_unordered.png */; };
 		9A0592DA1648461000E314E2 /* tutorial01.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D91648460F00E314E2 /* tutorial01.html */; };
@@ -517,6 +519,8 @@
 		819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTrueFalseKeysView.xib; path = Nyaya/NyBranches/NyTrueFalseKeysView.xib; sourceTree = "<group>"; };
 		81C865BC164E8BD100A77B02 /* 24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 24.plist; path = Nyaya/NyTutorials/24.plist; sourceTree = "<group>"; };
 		81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyntaxTreeTestView.xib; path = Nyaya/NyTutorials/SyntaxTreeTestView.xib; sourceTree = "<group>"; };
+		81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TruthTableTestView.xib; path = Nyaya/NyTutorials/TruthTableTestView.xib; sourceTree = "<group>"; };
+		81FED8561699E64800F33BC4 /* 32.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 32.plist; path = Nyaya/NyTutorials/32.plist; sourceTree = "<group>"; };
 		9A0592D41646585200E314E2 /* tutorial52.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial52.html; path = html/tutorial52.html; sourceTree = "<group>"; };
 		9A0592D7164840BE00E314E2 /* BDD_unordered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BDD_unordered.png; path = html/BDD_unordered.png; sourceTree = "<group>"; };
 		9A0592D91648460F00E314E2 /* tutorial01.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial01.html; path = html/tutorial01.html; sourceTree = "<group>"; };
@@ -1055,6 +1059,7 @@
 				81C865BC164E8BD100A77B02 /* 24.plist */,
 				811DBCEC16995EFD0084CCC3 /* 25.plist */,
 				8196878E1699B70A006174CD /* 31.plist */,
+				81FED8561699E64800F33BC4 /* 32.plist */,
 				11061F2F15EF9BBD00345516 /* NyTuTester.h */,
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
@@ -1063,6 +1068,7 @@
 				811DBCEF1699611B0084CCC3 /* QA25.plist */,
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
 				81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */,
+				81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */,
 				816E685C1698323400D929FE /* TextTestView.xib */,
 			);
 			name = NyTuTests;
@@ -1370,6 +1376,8 @@
 				811DBCF01699611C0084CCC3 /* QA25.plist in Resources */,
 				8196878F1699B70A006174CD /* 31.plist in Resources */,
 				819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */,
+				81FED8541699E5CD00F33BC4 /* TruthTableTestView.xib in Resources */,
+				81FED8571699E64800F33BC4 /* 32.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

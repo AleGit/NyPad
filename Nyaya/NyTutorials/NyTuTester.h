@@ -119,3 +119,6 @@
 
 @interface NyTuTester31: NyTuTesterRandomQuestions
 @end
+
+@interface NyTuTester32: NyTuTesterRandomQuestions
+@end

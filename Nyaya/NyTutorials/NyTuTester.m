@@ -786,3 +786,10 @@
 }
 
 @end
+
+@implementation NyTuTester32
+
+- (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
+- (NSString*)testViewNibName { return @"TruthTableTestView"; }
+
+@end
