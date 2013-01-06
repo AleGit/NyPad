@@ -22,3 +22,4 @@ extern const NSUInteger KEY_BACKSPACE_TAG;
 extern const NSUInteger KEY_FALSE_TAG;
 extern const NSUInteger KEY_TRUE_TAG;
 extern const NSUInteger KEY_SPACE_TAG;
+extern const NSUInteger KEY_COMMA_TAG;

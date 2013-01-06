@@ -26,3 +26,4 @@ const NSUInteger KEY_BACKSPACE_TAG = 103;
 const NSUInteger KEY_FALSE_TAG = 104;
 const NSUInteger KEY_TRUE_TAG = 105;
 const NSUInteger KEY_SPACE_TAG = 106;
+const NSUInteger KEY_COMMA_TAG = 107;

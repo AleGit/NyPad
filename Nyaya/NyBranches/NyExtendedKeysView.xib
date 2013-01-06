@@ -337,13 +337,13 @@
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSNextKeyView" ref="304787866"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">3</int>
+								<int key="IBUITag">105</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⊥</string>
+								<string key="IBUINormalTitle">⊤</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -362,13 +362,13 @@
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSNextKeyView" ref="1024001866"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">6</int>
+								<int key="IBUITag">104</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">⊤</string>
+								<string key="IBUINormalTitle">⊥</string>
 								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
 								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -487,7 +487,7 @@
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSNextKeyView" ref="935037485"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">7</int>
+								<int key="IBUITag">103</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -510,7 +510,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{593, 62}, {46, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">101</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>

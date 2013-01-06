@@ -139,13 +139,13 @@
 - (void)configureAccessoryView {
     self.answerField.inputView = self.accessoryView;
     [self.accessoryView viewWithTag:KEY_BACKGROUND_TAG].backgroundColor = [UIColor nyKeyboardBackgroundColor];
-    /*
+    
     UIButton *close = (UIButton*)[self.accessoryView viewWithTag:KEY_CLOSE_TAG];
     UIButton *button = (UIButton*)[self.accessoryView viewWithTag:KEY_PROCESS_TAG];
     CGRect c = close.frame;
     CGRect f = button.frame;
     button.frame = CGRectMake(f.origin.x, f.origin.y, c.origin.x - f.origin.x + c.size.width, f.size.height);
-     */
+    
 }
 - (void)unloadAccessoryView {
     self.answerField.inputView = nil;
@@ -549,12 +549,6 @@
 
 // sub-formulas
 @implementation NyTuTester23
-
-- (void)configureAccessoryView {
-    [super configureAccessoryView];
-    [((UIButton*)[self.accessoryView viewWithTag:KEY_SPACE_TAG]) setTitle:@"," forState:UIControlStateNormal];
-    
-}
 
 - (NSRange)testContextLengths {
     return NSMakeRange(3,2);

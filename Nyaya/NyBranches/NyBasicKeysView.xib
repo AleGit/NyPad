@@ -295,6 +295,32 @@
 								<string key="NSFrame">{{478, 10}, {44, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="112036558"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">107</int>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<int key="IBUIButtonType">1</int>
+								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<string key="IBUINormalTitle">, </string>
+								<reference key="IBUIHighlightedTitleColor" ref="745966607"/>
+								<reference key="IBUIDisabledTitleColor" ref="745966607"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="773972786"/>
+								<reference key="IBUIFontDescription" ref="83551989"/>
+								<reference key="IBUIFont" ref="1016642842"/>
+							</object>
+							<object class="IBUIButton" id="112036558">
+								<reference key="NSNextResponder" ref="694661933"/>
+								<int key="NSvFlags">1313</int>
+								<object class="NSPSMatrix" key="NSFrameMatrix"/>
+								<string key="NSFrame">{{530, 10}, {44, 44}}</string>
+								<reference key="NSSuperview" ref="694661933"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="459287744"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">106</int>
@@ -318,12 +344,12 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{530, 10}, {51, 44}}</string>
+								<string key="NSFrame">{{582, 10}, {51, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="445706464"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">12</int>
+								<int key="IBUITag">103</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -349,7 +375,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">8</int>
+								<int key="IBUITag">101</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -370,7 +396,7 @@
 								<reference key="NSNextResponder" ref="694661933"/>
 								<int key="NSvFlags">1313</int>
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{589, 10}, {89, 44}}</string>
+								<string key="NSFrame">{{644, 10}, {34, 44}}</string>
 								<reference key="NSSuperview" ref="694661933"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="544661315"/>
@@ -572,6 +598,15 @@
 					</object>
 					<int key="connectionID">95</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">press:</string>
+						<reference key="source" ref="112036558"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">100</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -617,6 +652,7 @@
 							<reference ref="452934762"/>
 							<reference ref="544661315"/>
 							<reference ref="459287744"/>
+							<reference ref="112036558"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -685,6 +721,11 @@
 						<reference key="object" ref="544661315"/>
 						<reference key="parent" ref="694661933"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">99</int>
+						<reference key="object" ref="112036558"/>
+						<reference key="parent" ref="694661933"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -746,52 +787,33 @@
 				<real value="3" key="93.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="93.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="93.showNotes"/>
+				<string key="99.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="3" key="99.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<reference key="99.IBUserGuides" ref="0"/>
+				<boolean value="NO" key="99.showNotes"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">98</int>
+			<int key="maxID">100</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">NyTuTester</string>
 					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="back:">UIButton</string>
-						<string key="dismiss:">UIButton</string>
-						<string key="negate:">UIButton</string>
-						<string key="parenthesize:">UIButton</string>
-						<string key="press:">UIButton</string>
-						<string key="process:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="back:">
-							<string key="name">back:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="dismiss:">
-							<string key="name">dismiss:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="negate:">
-							<string key="name">negate:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="parenthesize:">
-							<string key="name">parenthesize:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="press:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">press:</string>
+						<string key="NS.object.0">UIButton</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">press:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">press:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBActionInfo" key="process:">
-							<string key="name">process:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="accessoryView">UIView</string>
 						<string key="additionalLabel">UILabel</string>
