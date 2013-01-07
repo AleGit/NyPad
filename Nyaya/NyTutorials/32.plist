@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Evaluate formula</string>
+	<string>Evaluate formula and fill out truth table.</string>
 	<key>answerLabelText</key>
 	<string>Write ‘F’ or ‘T’ into fields.</string>
 	<key>solutionLabelText</key>

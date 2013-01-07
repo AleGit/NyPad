@@ -792,4 +792,101 @@
 - (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
 - (NSString*)testViewNibName { return @"TruthTableTestView"; }
 
+// first test
+
+- (void)configureSubviews:(UIView*)view {
+    self.questionField.backgroundColor = [UIColor nyLightGreyColor];
+    
+    [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        [button addTarget:(self) action:@selector(toggleTF:) forControlEvents:UIControlEventTouchUpInside];
+        button.tintColor = [UIColor nyLightGreyColor];
+    }];
+    
+    [self.fields3 enumerateObjectsUsingBlock:^(UITextView *textView, NSUInteger idx, BOOL *stop) {
+        textView.backgroundColor = [UIColor nyLightGreyColor];
+    }];
+    
+    [self.fields2 enumerateObjectsUsingBlock:^(UITextView *textView, NSUInteger idx, BOOL *stop) {
+        textView.backgroundColor = [UIColor nyLightGreyColor];
+    }];
+    
+    [self.fields1 enumerateObjectsUsingBlock:^(UITextView *textView, NSUInteger idx, BOOL *stop) {
+        textView.backgroundColor = [UIColor nyLightGreyColor];
+    }];
+
+}
+
+// next test
+
+- (void)clearQuestion {
+    self.questionField.text = @"";
+    [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        [button setTitle:@"" forState:UIControlStateNormal];
+        [button setTitle:@"" forState:UIControlStateSelected];
+        [button setTitle:@"?" forState:UIControlStateHighlighted];
+    }];
+}
+
+- (void)writeQuestion {
+    [super writeQuestion];
+    
+    NSSet *vars = self.questionTree.setOfVariables;
+    
+    __block BOOL hide;
+    
+    void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(UIView *view, NSUInteger idx, BOOL *stop) {
+        view.hidden = hide;
+    };
+    
+    hide = NO;
+    switch ([vars count]) {
+        case 3:
+            [self.fields3 enumerateObjectsUsingBlock: block];
+            [self.buttons3 enumerateObjectsUsingBlock: block];
+        case 2:
+            [self.fields2 enumerateObjectsUsingBlock: block];
+            [self.buttons2 enumerateObjectsUsingBlock: block];
+        case 1:
+            [self.fields1 enumerateObjectsUsingBlock: block];
+    }
+
+    hide = YES;
+    switch ([vars count]) {
+        case 1:
+            [self.fields2 enumerateObjectsUsingBlock: block];
+            [self.buttons2 enumerateObjectsUsingBlock: block];
+        case 2:
+            [self.fields3 enumerateObjectsUsingBlock: block];
+            [self.buttons3 enumerateObjectsUsingBlock: block];
+    }
+}
+
+// check test
+
+- (void)readAnswer {
+    
+}
+
+- (void)validateAnswer {
+    _success = NO;
+    
+}
+
+- (void)writeSolution {
+    
+}
+
+- (IBAction)toggleTF:(UIButton *)sender {
+    if (sender.isSelected) {
+        [sender setTitle:@"T" forState:UIControlStateNormal];
+        sender.selected = NO;
+    }
+    else {
+        [sender setTitle:@"F" forState:UIControlStateSelected];
+        sender.selected = YES;
+        
+    }
+    
+    
+}
 @end

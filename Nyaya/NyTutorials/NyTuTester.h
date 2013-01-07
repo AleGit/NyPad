@@ -121,4 +121,21 @@
 @end
 
 @interface NyTuTester32: NyTuTesterRandomQuestions
+
+@property (strong, nonatomic) IBOutletCollection(UITextView) NSArray *fields3;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons3;
+
+
+@property (strong, nonatomic) IBOutletCollection(UITextView) NSArray *fields2;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons2;
+
+
+@property (strong, nonatomic) IBOutletCollection(UITextView) NSArray *fields1;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ftButtons;
+
+- (IBAction)toggleTF:(UIButton *)sender;
+
 @end
