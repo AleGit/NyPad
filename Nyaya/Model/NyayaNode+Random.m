@@ -124,6 +124,10 @@
             case NyayaImplication:
                 result = [NyayaNode implication:first with:second];
                 break;
+            case NyayaConstant:
+                if ([subTrees count] % 2) result = [NyayaNode atom:@"T"];
+                else result = [NyayaNode atom:@"F"];
+                break;
             default:
                 continue;
         }

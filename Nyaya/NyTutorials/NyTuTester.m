@@ -787,10 +787,30 @@
 
 @end
 
+@interface NyTuTester32 ()
+@property (strong, nonatomic) NSArray *valueNodes;
+@end
+
 @implementation NyTuTester32
 
 - (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
 - (NSString*)testViewNibName { return @"TruthTableTestView"; }
+
+- (void)configureTestContext {
+    [super configureTestContext];
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
+    [indexSet addIndex:NyayaConjunction];
+    [indexSet addIndex:NyayaDisjunction];
+    [indexSet addIndex:NyayaImplication];
+    [indexSet addIndex:NyayaConstant];
+    
+    self.rootTypes = [indexSet copy];
+    self.nodeTypes = [indexSet copy];
+    self.lengths = [self testContextLengths];
+    self.variables = @[@"p", @"q", @"r"];
+    
+}
 
 // first test
 
@@ -828,9 +848,22 @@
 }
 
 - (void)writeQuestion {
-    [super writeQuestion];
     
-    NSSet *vars = self.questionTree.setOfVariables;
+    
+    self.questionField.text = [[[self.questionTree description] stringByReplacingOccurrencesOfString:@"T" withString:@"⊤"]
+                               stringByReplacingOccurrencesOfString:@"F" withString:@"⊥"];
+    
+    self.valueNodes = [[self.questionTree setOfVariables] allObjects];
+    NSUInteger valuesCount = [self.valueNodes count];
+    
+    switch (valuesCount) {
+        case 3:
+            self.variable3.text = [[self.valueNodes objectAtIndex:2] symbol];
+        case 2:
+            self.variable2.text = [[self.valueNodes objectAtIndex:1] symbol];
+        case 1:
+            self.variable1.text = [[self.valueNodes objectAtIndex:0] symbol];
+    };
     
     __block BOOL hide;
     
@@ -839,7 +872,7 @@
     };
     
     hide = NO;
-    switch ([vars count]) {
+    switch (valuesCount) {
         case 3:
             [self.fields3 enumerateObjectsUsingBlock: block];
             [self.buttons3 enumerateObjectsUsingBlock: block];
@@ -848,10 +881,14 @@
             [self.buttons2 enumerateObjectsUsingBlock: block];
         case 1:
             [self.fields1 enumerateObjectsUsingBlock: block];
+            [self.buttons1 enumerateObjectsUsingBlock: block];
     }
 
     hide = YES;
-    switch ([vars count]) {
+    switch (valuesCount) {
+        case 0:
+            [self.fields1 enumerateObjectsUsingBlock: block];
+            [self.buttons1 enumerateObjectsUsingBlock: block];
         case 1:
             [self.fields2 enumerateObjectsUsingBlock: block];
             [self.buttons2 enumerateObjectsUsingBlock: block];
