@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Evaluate formula and fill out truth table.</string>
+	<string>Evaluate formula and tap on buttons to change truth values.</string>
 	<key>answerLabelText</key>
-	<string>Write ‘F’ or ‘T’ into fields.</string>
+	<string>Answer</string>
 	<key>solutionLabelText</key>
-	<string>Solution</string>
+	<string>Wrong values are rotated.</string>
 </dict>
 </plist>

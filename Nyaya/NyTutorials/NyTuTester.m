@@ -817,10 +817,17 @@
 - (void)configureSubviews:(UIView*)view {
     self.questionField.backgroundColor = [UIColor nyLightGreyColor];
     
-    [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
-        [button addTarget:(self) action:@selector(toggleTF:) forControlEvents:UIControlEventTouchUpInside];
+    __block BOOL active = YES;
+    void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        if (active) [button addTarget:(self) action:@selector(toggleTF:) forControlEvents:UIControlEventTouchUpInside];
         button.tintColor = [UIColor nyLightGreyColor];
-    }];
+        [button setTitle:@"F" forState:UIControlStateNormal];
+        [button setTitle:@"T" forState:UIControlStateSelected];
+    };
+    
+    [self.ftButtons enumerateObjectsUsingBlock: block];
+    active = NO;
+    [self.solutionButtons enumerateObjectsUsingBlock:block];
     
     [self.fields3 enumerateObjectsUsingBlock:^(UITextView *textView, NSUInteger idx, BOOL *stop) {
         textView.backgroundColor = [UIColor nyLightGreyColor];
@@ -841,11 +848,9 @@
 - (void)clearQuestion {
     self.questionField.text = @"";
     [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
-        [button setTitle:@"" forState:UIControlStateNormal];
-        [button setTitle:@"" forState:UIControlStateSelected];
-        [button setTitle:@"?" forState:UIControlStateHighlighted];
-        [button setTitleColor:nil forState:UIControlStateNormal];
-        [button setTitleColor:nil forState:UIControlStateSelected];
+        button.selected = NO;
+        button.highlighted = NO;
+        button.transform = CGAffineTransformIdentity;
     }];
 }
 
@@ -925,7 +930,19 @@
                     ((NyayaNodeVariable*)self.valueNodes[0]).evaluationValue = value & 1 ? YES : NO;
             }
             
-            NSLog(@"tag=%u value=%u eval=%u button=%u", button.tag, value, self.questionTree.evaluationValue, button.selected);
+            if (button.isSelected != self.questionTree.evaluationValue) {
+                
+                [UIView animateWithDuration:0.25f animations:^{
+                    
+                    button.transform = CGAffineTransformMakeRotation(-0.1f);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.5f animations:^{
+                        
+                        button.transform = CGAffineTransformMakeRotation(0.1f);
+                    }];
+                }];
+                _success = NO;
+            }
         }
     }];
     
@@ -940,8 +957,6 @@
     [self.solutionButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
         if (button.tag < rows) {
             button.hidden = NO;
-            [button setTitle:@"F" forState:UIControlStateNormal];
-            [button setTitle:@"T" forState:UIControlStateSelected];
             
             NSUInteger value = rows - button.tag-1;
 
@@ -955,7 +970,6 @@
             }
             
             button.selected = (self.questionTree.evaluationValue);
-            NSLog(@"tag=%u value=%u eval=%u", button.tag, value, self.questionTree.evaluationValue);
         }
     }];
     
@@ -965,16 +979,6 @@
 }
 
 - (IBAction)toggleTF:(UIButton *)sender {
-    if (sender.isSelected) {
-        [sender setTitle:@"T" forState:UIControlStateNormal];
-        sender.selected = NO;
-    }
-    else {
-        [sender setTitle:@"F" forState:UIControlStateSelected];
-        sender.selected = YES;
-        
-    }
-    
-    
+    sender.selected = !sender.isSelected;
 }
 @end
