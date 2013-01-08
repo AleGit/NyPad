@@ -850,7 +850,12 @@
     [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
         button.selected = NO;
         button.highlighted = NO;
-        button.transform = CGAffineTransformIdentity;
+        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            button.transform = CGAffineTransformIdentity;
+        } completion:nil];
+        
+        
+        
     }];
 }
 
@@ -932,16 +937,19 @@
             
             if (button.isSelected != self.questionTree.evaluationValue) {
                 
-                [UIView animateWithDuration:0.25f animations:^{
-                    
-                    button.transform = CGAffineTransformMakeRotation(-0.1f);
+                [UIView animateWithDuration:0.2f animations:^{
+                    button.transform = CGAffineTransformMakeRotation(-0.15f);
                 } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.5f animations:^{
-                        
-                        button.transform = CGAffineTransformMakeRotation(0.1f);
-                    }];
+                    [UIView animateWithDuration:0.4f delay:0.1*(float)button.tag options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
+                        button.transform = CGAffineTransformMakeRotation(0.15f);
+                    } completion:nil];
                 }];
                 _success = NO;
+            }
+            else {
+                [UIView animateWithDuration:0.4f delay:0.1*(float)button.tag options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
+                    button.transform = CGAffineTransformMakeScale(1.1, 1.1);
+                } completion:nil];                
             }
         }
     }];
