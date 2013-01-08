@@ -133,6 +133,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons1;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ftButtons;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *solutionButtons;
 
 - (IBAction)toggleTF:(UIButton *)sender;
 

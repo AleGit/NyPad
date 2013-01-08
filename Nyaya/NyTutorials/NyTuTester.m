@@ -844,12 +844,12 @@
         [button setTitle:@"" forState:UIControlStateNormal];
         [button setTitle:@"" forState:UIControlStateSelected];
         [button setTitle:@"?" forState:UIControlStateHighlighted];
+        [button setTitleColor:nil forState:UIControlStateNormal];
+        [button setTitleColor:nil forState:UIControlStateSelected];
     }];
 }
 
 - (void)writeQuestion {
-    
-    
     self.questionField.text = [[[self.questionTree description] stringByReplacingOccurrencesOfString:@"T" withString:@"⊤"]
                                stringByReplacingOccurrencesOfString:@"F" withString:@"⊥"];
     
@@ -871,7 +871,7 @@
         view.hidden = hide;
     };
     
-    hide = NO;
+    hide = NO;    
     switch (valuesCount) {
         case 3:
             [self.fields3 enumerateObjectsUsingBlock: block];
@@ -885,6 +885,8 @@
     }
 
     hide = YES;
+    [self.solutionButtons enumerateObjectsUsingBlock:block];
+
     switch (valuesCount) {
         case 0:
             [self.fields1 enumerateObjectsUsingBlock: block];
@@ -905,11 +907,60 @@
 }
 
 - (void)validateAnswer {
-    _success = NO;
+    _success = YES;
+    
+    NSUInteger count = [self.valueNodes count];
+    NSUInteger rows = 1 << count;
+    
+    [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        if (button.tag < rows) {          
+            NSUInteger value = rows - button.tag-1;
+            
+            switch (count) {
+                case 3:
+                    ((NyayaNodeVariable*)self.valueNodes[2]).evaluationValue = value & 4 ? YES : NO;
+                case 2:
+                    ((NyayaNodeVariable*)self.valueNodes[1]).evaluationValue = value & 2 ? YES : NO;
+                case 1:
+                    ((NyayaNodeVariable*)self.valueNodes[0]).evaluationValue = value & 1 ? YES : NO;
+            }
+            
+            NSLog(@"tag=%u value=%u eval=%u button=%u", button.tag, value, self.questionTree.evaluationValue, button.selected);
+        }
+    }];
     
 }
 
 - (void)writeSolution {
+    NSUInteger count = [self.valueNodes count];
+    NSUInteger rows = 1 << count;
+    
+    NSLog(@"count=%u rows=%u", count, rows);
+    
+    [self.solutionButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        if (button.tag < rows) {
+            button.hidden = NO;
+            [button setTitle:@"F" forState:UIControlStateNormal];
+            [button setTitle:@"T" forState:UIControlStateSelected];
+            
+            NSUInteger value = rows - button.tag-1;
+
+            switch (count) {
+                case 3:
+                    ((NyayaNodeVariable*)self.valueNodes[2]).evaluationValue = value & 4 ? YES : NO;
+                case 2:
+                    ((NyayaNodeVariable*)self.valueNodes[1]).evaluationValue = value & 2 ? YES : NO;
+                case 1:
+                    ((NyayaNodeVariable*)self.valueNodes[0]).evaluationValue = value & 1 ? YES : NO;
+            }
+            
+            button.selected = (self.questionTree.evaluationValue);
+            NSLog(@"tag=%u value=%u eval=%u", button.tag, value, self.questionTree.evaluationValue);
+        }
+    }];
+    
+    
+    
     
 }
 
