@@ -36,9 +36,19 @@
         }
     }];
   
-#ifdef DEBUG
-    self.selectedViewController = [self.viewControllers objectAtIndex:1]; // 1=tutorial, 2=playground, 3=gloassary, 4=booltool
-#endif
+
+    NSString *currentSytemVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *requiredSystemVersion = @"6.0";
+    NSComparisonResult result = [currentSytemVersion compare: requiredSystemVersion options:NSNumericSearch];
+    NSLog(@"%@ %@ %i", currentSytemVersion, requiredSystemVersion, result);
+    
+    if (result == NSOrderedAscending) { // current < required
+        // Workaround: On iOS < 6.0.1 the playground crashes if it is not shown first
+        self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2 = playground
+    }
+    else {
+        self.selectedViewController = [self.viewControllers objectAtIndex:1]; // 1=tutorial, 2=playground, 3=gloassary, 4=booltool
+    }
 }
 
 - (void)viewDidUnload
