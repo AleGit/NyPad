@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questionLabelText</key>
+	<string>Is the given formula in disjunctive normal form?</string>
+	<key>answerLabelText</key>
+	<string>If not, transform formula to disjunctive normal from.</string>
+	<key>solutionLabelText</key>
+	<string>Disjunctive normal form equivalent to given formula.</string>
+</dict>
+</plist>

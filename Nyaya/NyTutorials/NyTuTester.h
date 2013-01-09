@@ -50,6 +50,9 @@
 @property (nonatomic, weak) IBOutlet UITextView *questionField;     // the content of the question
 @property (nonatomic, weak) IBOutlet UITextView *solutionField;     // the content of the solution
 @property (nonatomic, weak) IBOutlet UITextView *answerField;       // the answer of the user
+@property (weak, nonatomic) IBOutlet UILabel *okLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nokLabel;
+@property (weak, nonatomic) IBOutlet UILabel *validationLabel;
 
 @property (nonatomic, readonly) NSString *testerKey;                // key to find configuration and content for the test
 @property (nonatomic, readonly) BOOL success;
@@ -137,4 +140,23 @@
 
 - (IBAction)toggleTF:(UIButton *)sender;
 
+@end
+
+@protocol NyTuTesterNormalForm <NyTuTester>
+
+- (NyayaNode*)answerTree;
+- (NyayaNode*)solutionTree;
+
+@end
+
+@interface NyTuTester41: NyTuTesterRandomQuestions <NyTuTesterNormalForm>
+@end
+
+@interface NyTuTester42: NyTuTester41
+@end
+
+@interface NyTuTester43: NyTuTester42
+@end
+
+@interface NyTuTester44: NyTuTester42
 @end

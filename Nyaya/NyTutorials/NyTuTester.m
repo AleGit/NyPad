@@ -10,6 +10,7 @@
 #import "UIColor+Nyaya.h"
 #import "UITextField+Nyaya.h"
 #import "NyayaNode_Cluster.h"
+#import "NyayaNode+Attributes.h"
 #import "NyayaNode+Creation.h"
 #import "NyayaNode+Derivations.h"
 #import "NyayaNode+Description.h"
@@ -86,6 +87,7 @@
     [processButton setTitle:NSLocalizedString(@"check", nil) forState:UIControlStateNormal];
     
     [self clearQuestion];
+    [self hideValidation];
     [self generateQuestion];
     [self writeQuestion];
     [self showKeyboard];
@@ -101,6 +103,8 @@
     [self readAnswer];
     
     [self validateAnswer];
+    
+    [self writeValidation];
     
     if (_success) _succCount++;
     else _failCount++;
@@ -249,6 +253,14 @@
     self.answerField.backgroundColor = [UIColor whiteColor];
 }
 
+- (void)hideValidation {
+    
+    self.okLabel.hidden = YES;
+    self.nokLabel.hidden = YES;
+    self.validationLabel.text = @"";
+    self.validationLabel.hidden = YES;
+}
+
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)generateQuestion { @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overriden" userInfo:nil]; }
 
@@ -265,6 +277,12 @@
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)validateAnswer { @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overriden" userInfo:nil]; }
+
+- (void)writeValidation {
+    self.okLabel.hidden = !self.success;
+    self.nokLabel.hidden = self.success;
+    self.validationLabel.hidden = self.success;
+}
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)writeSolution { @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil]; }
@@ -302,6 +320,9 @@
     _answer = nil;
     _solution = nil;
     _success = NO;
+    
+    self.okLabel.hidden = YES;
+    self.nokLabel.hidden = YES;
 }
 
 - (void)writeQuestion {
@@ -322,8 +343,18 @@
     _success = [aca compare:yan options:NSCaseInsensitiveSearch|NSWidthInsensitiveSearch] == 0;
 }
 
-- (void)writeSolution {
+- (void)writeValidation {
+    [super writeValidation];
+    
     self.answerField.backgroundColor = self.success ? [UIColor nyRightColor] : [UIColor nyWrongColor];
+    
+    self.okLabel.hidden = !self.success;
+    self.nokLabel.hidden = self.success;
+    
+}
+
+- (void)writeSolution {
+    
     self.solutionField.text = self.solution;
 }
 @end
@@ -988,5 +1019,128 @@
 
 - (IBAction)toggleTF:(UIButton *)sender {
     sender.selected = !sender.isSelected;
+}
+@end
+
+@implementation NyTuTester41
+
+- (BOOL)areEquivalent {
+    if (!self.questionTree && !self.answerTree) return YES;
+    else if (!self.questionTree) return NO;
+    else if (!self.answerTree) return NO;
+    else {
+        TruthTable *tq = [[TruthTable alloc] initWithNode:self.questionTree];
+        TruthTable *ta = [[TruthTable alloc] initWithNode:self.answerTree];
+        
+        return [ta isEqual:tq];
+    }
+}
+
+- (NyayaNode*)answerTree {
+    NyayaParser *parser = [NyayaParser parserWithString:self.answerField.text];
+    NyayaNode* node = [parser parseFormula];
+    if (parser.hasErrors) return nil;
+    else return node;
+}
+
+- (BOOL)questionIsInNormalForm {
+    return [self.questionTree isImplicationFree];
+}
+
+- (BOOL)answerIsInNormalForm {
+    return [self.answerTree isImplicationFree];
+}
+
+- (NSString*)notInNormalForm {
+    return NSLocalizedString(@"NOT IMPLICATION FREE", @"NOT IMPLICATION FREE");
+}
+
+- (void)validateAnswer {    NSMutableString *s = [NSMutableString string];
+    
+    if ([self questionIsInNormalForm] && [self.answerField.text length] == 0) {
+        _success = YES;
+    }
+    else if ([self.answerField.text length] == 0) {
+        _success = NO;
+        [s appendString: @"ANSWER IS MISSING"];
+    }
+    else if (![self answerIsInNormalForm]) {
+        _success = NO;
+        [s appendString: [self notInNormalForm]];
+    }
+    else if (![self areEquivalent]) {
+        _success = NO;
+        [s appendString:NSLocalizedString(@"NOT EQUIVALENT", @"NOT EQUIVALENT")];
+    }
+    else {
+        _success = YES;
+    }
+    self.validationLabel.text = s;
+}
+
+- (void)writeSolution {
+    self.solutionField.text = [self.solutionTree description];
+}
+
+- (NyayaNode*)solutionTree {
+    return [self.questionTree deriveImf:NSIntegerMax];
+}@end
+
+@implementation NyTuTester42
+
+- (BOOL)questionIsInNormalForm {
+    return [self.questionTree isNegationNormalForm];
+}
+
+- (BOOL)answerIsInNormalForm {
+    return [self.answerTree isNegationNormalForm];
+}
+
+- (NSString*)notInNormalForm {
+    return NSLocalizedString(@"NOT IN NEGATION NORMAL FORM", @"NOT IN NEGATION NORMAL FORM");
+}
+
+- (NyayaNode*)solutionTree {
+    return [super.solutionTree deriveImf:NSIntegerMax];
+}
+@end
+
+@implementation NyTuTester43
+
+- (BOOL)questionIsInNormalForm {
+    return [self.questionTree isConjunctiveNormalForm];
+}
+
+
+- (BOOL)answerIsInNormalForm {
+    return [self.answerTree isConjunctiveNormalForm];
+}
+
+- (NyayaNode*)solutionTree {
+    return [super.solutionTree deriveCnf:NSIntegerMax];
+}
+
+- (NSString*)notInNormalForm {
+    return NSLocalizedString(@"NOT IN CONJUNCTOON NORMAL FORM", @"NOT IN CONJUNCTOON NORMAL FORM");
+}
+@end
+
+@implementation NyTuTester44
+
+- (BOOL)questionIsInNormalForm {
+    return [self.questionTree isDisjunctiveNormalForm];
+}
+
+
+- (BOOL)answerIsInNormalForm {
+    return [self.answerTree isDisjunctiveNormalForm];
+}
+
+- (NyayaNode*)solutionTree {
+    return [super.solutionTree deriveDnf:NSIntegerMax];
+}
+
+- (NSString*)notInNormalForm {
+    return NSLocalizedString(@"NOT IN DISJUNCTOON NORMAL FORM", @"NOT IN DISJUNCTOON NORMAL FORM");
 }
 @end
