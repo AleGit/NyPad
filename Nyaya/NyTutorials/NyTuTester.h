@@ -80,7 +80,7 @@
 @property (nonatomic, strong) NSDictionary *questionsDictionary;
 @end
 
-@interface NyTuTesterRandomQuestions : NyTuTesterPlist
+@interface NyTuTesterRandomQuestions : NyTuTesterDictionaryQuestions
 
 @property (readonly, nonatomic) NSIndexSet *rootTypes;
 @property (readonly, nonatomic) NSIndexSet *nodeTypes;
@@ -89,7 +89,9 @@
 @property (readonly, nonatomic) NyayaNode *questionTree;
 @end
 
-/*****************************************************************************************/
+
+
+#pragma mark - Chapter 1 Introduction
 
 @interface NyTuTester11 : NyTuTesterDictionaryQuestions
 @end
@@ -100,7 +102,9 @@
 @interface NyTuTester13 : NyTuTesterDictionaryQuestions
 @end
 
-/*****************************************************************************************/
+
+
+#pragma mark - Chapter 2 syntax
 
 @interface NyTuTester21 : NyTuTesterRandomQuestions
 @end
@@ -119,6 +123,10 @@
 
 @interface NyTuTester25 : NyTuTesterRandomQuestions
 @end
+
+
+
+#pragma mark - Chapter 3 semantics
 
 @interface NyTuTester31: NyTuTesterRandomQuestions
 @end
@@ -141,6 +149,14 @@
 - (IBAction)toggleTF:(UIButton *)sender;
 
 @end
+
+@interface NyTuTester33: NyTuTesterRandomQuestions
+@end
+
+@interface NyTuTester34: NyTuTesterRandomQuestions
+@end
+
+#pragma mark - Chapter 4 normal forms
 
 @interface NyTuTester40 : NyTuTesterRandomQuestions
 

@@ -26,7 +26,7 @@
 + (NSArray*)defaultNotTokens   { return @[@"!",@"¬"]; }
 + (NSArray*)defaultAndTokens   { return @[@"&",@"∧",@"."]; }
 + (NSArray*)defaultOrTokens   { return @[@"|",@"∨",@"+"]; }
-+ (NSArray*)defaultBicTokens   { return @[@"=",@"↔",@"<>"]; }
++ (NSArray*)defaultBicTokens   { return @[@"=",@"↔",@"<>",@"≡",@"≣"]; }
 + (NSArray*)defaultImpTokens   { return @[@">",@"→"]; }
 + (NSArray*)defaultXorTokens   { return @[@"^",@"⊻",@"⊕"]; }
 + (NSArray*)defaultLparTokens  { return @[@"("]; }

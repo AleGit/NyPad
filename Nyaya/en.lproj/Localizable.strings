@@ -8,7 +8,7 @@
 
 // tokenizer
 
-"NYAYA_TOKEN_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
+"NYAYA_TOKEN_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|≡|≣|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
 //                          T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
 
 "NYAYA_CONNECTIVES_ASCII"    = "F,T,!,&,|,^,>,=";      // comma separated list of ascii symbols for connectives (unused)

@@ -197,6 +197,9 @@
 		816E68601698413400D929FE /* 21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 816E685F1698413400D929FE /* 21.plist */; };
 		8196878F1699B70A006174CD /* 31.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8196878E1699B70A006174CD /* 31.plist */; };
 		819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */; };
+		819731A6169F50C40088E9D9 /* 33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A4169F50C40088E9D9 /* 33.plist */; };
+		819731A7169F50C40088E9D9 /* 34.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A5169F50C40088E9D9 /* 34.plist */; };
+		819731AA169F522E0088E9D9 /* QA33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A9169F522D0088E9D9 /* QA33.plist */; };
 		819BA0C0169DD90F00545496 /* 41.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819BA0BC169DD90F00545496 /* 41.plist */; };
 		819BA0C1169DD90F00545496 /* 42.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819BA0BD169DD90F00545496 /* 42.plist */; };
 		819BA0C2169DD90F00545496 /* 43.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819BA0BE169DD90F00545496 /* 43.plist */; };
@@ -521,6 +524,9 @@
 		816E685F1698413400D929FE /* 21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 21.plist; path = Nyaya/NyTutorials/21.plist; sourceTree = "<group>"; };
 		8196878E1699B70A006174CD /* 31.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 31.plist; path = Nyaya/NyTutorials/31.plist; sourceTree = "<group>"; };
 		819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTrueFalseKeysView.xib; path = Nyaya/NyBranches/NyTrueFalseKeysView.xib; sourceTree = "<group>"; };
+		819731A4169F50C40088E9D9 /* 33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 33.plist; path = Nyaya/NyTutorials/33.plist; sourceTree = "<group>"; };
+		819731A5169F50C40088E9D9 /* 34.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 34.plist; path = Nyaya/NyTutorials/34.plist; sourceTree = "<group>"; };
+		819731A9169F522D0088E9D9 /* QA33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA33.plist; path = Nyaya/NyTutorials/QA33.plist; sourceTree = "<group>"; };
 		819BA0BC169DD90F00545496 /* 41.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 41.plist; path = Nyaya/NyTutorials/41.plist; sourceTree = "<group>"; };
 		819BA0BD169DD90F00545496 /* 42.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 42.plist; path = Nyaya/NyTutorials/42.plist; sourceTree = "<group>"; };
 		819BA0BE169DD90F00545496 /* 43.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 43.plist; path = Nyaya/NyTutorials/43.plist; sourceTree = "<group>"; };
@@ -1068,6 +1074,8 @@
 				811DBCEC16995EFD0084CCC3 /* 25.plist */,
 				8196878E1699B70A006174CD /* 31.plist */,
 				81FED8561699E64800F33BC4 /* 32.plist */,
+				819731A4169F50C40088E9D9 /* 33.plist */,
+				819731A5169F50C40088E9D9 /* 34.plist */,
 				819BA0BC169DD90F00545496 /* 41.plist */,
 				819BA0BD169DD90F00545496 /* 42.plist */,
 				819BA0BE169DD90F00545496 /* 43.plist */,
@@ -1078,6 +1086,7 @@
 				11C61BB615E91FF000F5BB28 /* NyTuTestViewController.m */,
 				11F531BC15FC78B4003F6C11 /* QA1.plist */,
 				811DBCEF1699611B0084CCC3 /* QA25.plist */,
+				819731A9169F522D0088E9D9 /* QA33.plist */,
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
 				81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */,
 				81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */,
@@ -1394,6 +1403,9 @@
 				819BA0C1169DD90F00545496 /* 42.plist in Resources */,
 				819BA0C2169DD90F00545496 /* 43.plist in Resources */,
 				819BA0C3169DD90F00545496 /* 44.plist in Resources */,
+				819731A6169F50C40088E9D9 /* 33.plist in Resources */,
+				819731A7169F50C40088E9D9 /* 34.plist in Resources */,
+				819731AA169F522E0088E9D9 /* QA33.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

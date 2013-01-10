@@ -403,10 +403,19 @@
 - (NSRange)testContextLengths;
 - (NSUInteger)wrongSyntaxRate; // 0 (NO) ... 100 (ALWAYS)
 - (BOOL)changeQuestion;
+- (NyayaNode*)randomTree;
 
 @end
 
 @implementation NyTuTesterRandomQuestions
+
+- (NyayaNode*)randomTree {
+    return [NyayaNode randomTreeWithRootTypes:self.rootTypes
+                             nodeTypes:self.nodeTypes
+                               lengths:self.lengths
+                             variables:self.variables];
+    
+}
 
 - (void)setRootTypes:(NSIndexSet *)rootTypes {
     _rootTypes = rootTypes;
@@ -458,10 +467,7 @@
         self.lengths = NSMakeRange(self.lengths.location, self.lengths.length+1);
     }
     
-    self.questionTree = [NyayaNode randomTreeWithRootTypes:self.rootTypes
-                                               nodeTypes:self.nodeTypes
-                                                   lengths:self.lengths
-                                               variables:self.variables];
+    self.questionTree = [self randomTree];
     
     _question = [self.questionTree description];
     _solution = _question;
@@ -831,18 +837,11 @@
 
 - (void)configureTestContext {
     [super configureTestContext];
-    
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaNegation];
-    [indexSet addIndex:NyayaConjunction];
-    [indexSet addIndex:NyayaDisjunction];
-    [indexSet addIndex:NyayaImplication];
+
+    NSMutableIndexSet *indexSet = [self.rootTypes mutableCopy];
     [indexSet addIndex:NyayaConstant];
-    
     self.rootTypes = [indexSet copy];
     self.nodeTypes = [indexSet copy];
-    self.lengths = [self testContextLengths];
-    self.variables = @[@"p", @"q", @"r"];
-    
 }
 
 // first test
@@ -1024,7 +1023,59 @@
 }
 @end
 
-#pragma mark - Chapter 3 normal forms
+@implementation NyTuTester33
+    
+- (void)generateQuestion {
+    
+    BOOL empty = NO;
+    
+    if (arc4random() % 2) {
+        NSMutableString *s = [NSMutableString string];
+        while ([s length] < arc4random() % 25) {
+            if ([s length] > 0) [s appendString:@"; "];
+            [s appendString:[[self randomTree] description]];
+        }
+        empty = [s length] == 0;
+        
+        [s appendString:@" ⊨ "];
+        [s appendString:[[self randomTree] description]];
+        
+        _question = s;
+        
+        
+    }
+    else {
+        
+        _question = [NSString stringWithFormat:@"%@ ≡ %@", [[self randomTree] description], [[self randomTree] description]];
+        
+    }
+    
+    if (empty) _solution = NSLocalizedString(@"HOLDS", nil);
+    else {
+        
+        NyayaParser *parser = [NyayaParser parserWithString:_question];
+        NyayaNode *tree = [parser parseFormula];
+        TruthTable *tt = [[TruthTable alloc] initWithNode:tree];
+        if ([tt isTautology]) _solution = NSLocalizedString(@"HOLDS", nil);
+        else _solution = NSLocalizedString(@"DOES_NOT_HOLD", nil);
+    }
+}
+
+@end
+
+@implementation NyTuTester34
+
+- (void)generateQuestion {
+    
+    
+        
+        
+        
+    }
+
+@end
+
+#pragma mark - Chapter 4 normal forms
 
 @implementation NyTuTester40
 - (NyayaNode*)answerTree {
@@ -1164,3 +1215,6 @@
     return [super.solutionTree deriveDnf:NSIntegerMax];
 }
 @end
+
+#pragma mark - Chapter 5 binary decisions
+
