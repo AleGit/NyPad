@@ -212,39 +212,39 @@
     [self.answerField negate];
 }
 
-#pragma mark - firstTest (methods to be overriden)
+#pragma mark - firstTest (methods to be overridden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)readTestData { @throw [[NSException alloc] initWithName:@"readTestData" reason:@"must be overriden" userInfo:nil]; }
+- (void)readTestData { @throw [[NSException alloc] initWithName:@"readTestData" reason:@"must be overridden" userInfo:nil]; }
 
-/* CAN BE OVERRIDEN IN SUBCLASSES, SHOULD BE CALLED THEN */
+/* CAN BE overridden IN SUBCLASSES, SHOULD BE CALLED THEN */
 - (void)configureTestContext {
     _succCount = 0;
     _failCount = 0;
 }
 
-/* CAN BE OVERRIDEN IN SUBCLASSES */
+/* CAN BE overridden IN SUBCLASSES */
 - (NSString*)testViewNibName { return @"TextTestView"; }
 
-/* SHOULD NOT BE OVERRIDEN IN SUBCLASSES */
+/* SHOULD NOT BE overridden IN SUBCLASSES */
 - (void)loadTestView:(UIView*)view {
     [[NSBundle mainBundle] loadNibNamed:[self testViewNibName] owner:self options:nil];
     [view insertSubview:self.testView atIndex:1];
     self.testView.frame = CGRectMake(0.0, 44.0, view.frame.size.width, view.frame.size.height);
 }
 
-/* CAN BE OVERRIDEN IN SUBCLASSES */
+/* CAN BE overridden IN SUBCLASSES */
 - (void)layoutSubviews:(UIView*)view { }
 
-/* CAN BE OVERRIDEN IN SUBCLASSES */
+/* CAN BE overridden IN SUBCLASSES */
 - (void)configureKeyboard { }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeQALabels {  @throw [[NSException alloc] initWithName:@"writeQALabels" reason:@"must be overriden" userInfo:nil]; }
+- (void)writeQALabels {  @throw [[NSException alloc] initWithName:@"writeQALabels" reason:@"must be overridden" userInfo:nil]; }
 
-#pragma mark - nextTest (methods to be overriden)
+#pragma mark - nextTest (methods to be overridden)
 
-/* CAN BE OVERRIDEN IN SUBCLASSES */
+/* CAN BE overridden IN SUBCLASSES */
 - (void)clearQuestion {
     self.questionField.text = @"";
     self.answerField.text = @"";
@@ -262,21 +262,21 @@
 }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)generateQuestion { @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overriden" userInfo:nil]; }
+- (void)generateQuestion { @throw [[NSException alloc] initWithName:@"generateQuestion" reason:@"must be overridden" userInfo:nil]; }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeQuestion { @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overriden" userInfo:nil]; }
+- (void)writeQuestion { @throw [[NSException alloc] initWithName:@"writeQuestion" reason:@"must be overridden" userInfo:nil]; }
 
 /* MAY BE OVERRIDDEN IN SUBCLASSES */
 - (void)showKeyboard { [self.answerField becomeFirstResponder]; };
 
-#pragma mark - checkTest (methods to be overriden)
+#pragma mark - checkTest (methods to be overridden)
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)readAnswer {  @throw [[NSException alloc] initWithName:@"readAnswer" reason:@"must be overriden" userInfo:nil]; }
+- (void)readAnswer {  @throw [[NSException alloc] initWithName:@"readAnswer" reason:@"must be overridden" userInfo:nil]; }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)validateAnswer { @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overriden" userInfo:nil]; }
+- (void)validateAnswer { @throw [[NSException alloc] initWithName:@"validateAnswer" reason:@"must be overridden" userInfo:nil]; }
 
 - (void)writeValidation {
     self.okLabel.hidden = !self.success;
@@ -285,7 +285,7 @@
 }
 
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
-- (void)writeSolution { @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overriden" userInfo:nil]; }
+- (void)writeSolution { @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overridden" userInfo:nil]; }
 
 @end
 
@@ -782,6 +782,8 @@
 }
 @end
 
+#pragma mark - Chapter 3 semantics
+
 @implementation NyTuTester31
 
 - (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
@@ -1022,9 +1024,20 @@
 }
 @end
 
-@implementation NyTuTester41
+#pragma mark - Chapter 3 normal forms
 
-- (BOOL)areEquivalent {
+@implementation NyTuTester40
+- (NyayaNode*)answerTree {
+    NyayaParser *parser = [NyayaParser parserWithString:self.answerField.text];
+    NyayaNode* node = [parser parseFormula];
+    if (parser.hasErrors) return nil;
+    else return node;
+}
+- (NyayaNode*)solutionTree {
+    return self.questionTree;
+}
+
+- (BOOL)questionAndAnswerAreEquivalent {
     if (!self.questionTree && !self.answerTree) return YES;
     else if (!self.questionTree) return NO;
     else if (!self.answerTree) return NO;
@@ -1036,41 +1049,34 @@
     }
 }
 
-- (NyayaNode*)answerTree {
-    NyayaParser *parser = [NyayaParser parserWithString:self.answerField.text];
-    NyayaNode* node = [parser parseFormula];
-    if (parser.hasErrors) return nil;
-    else return node;
-}
+- (BOOL)questionIsInNormalForm { @throw [[NSException alloc] initWithName:@"answerIsInNormalForm" reason:@"must be overidden" userInfo:nil]; }
+- (BOOL)answerIsInNormalForm { @throw [[NSException alloc] initWithName:@"answerIsInNormalForm" reason:@"must be overidden" userInfo:nil]; }
 
-- (BOOL)questionIsInNormalForm {
-    return [self.questionTree isImplicationFree];
-}
+/* MUST BE OVERRIDDEN IN SUBCLASSES */
+- (NSString*)localizedNotInNormalForm { @throw [[NSException alloc] initWithName:@"localizedNotInNormalForm" reason:@"must be overidden" userInfo:nil]; }
 
-- (BOOL)answerIsInNormalForm {
-    return [self.answerTree isImplicationFree];
-}
+- (NSString*)localizedAnswerIsMissing { return NSLocalizedString(@"ANSWER_IS_MISSING", nil); }
 
-- (NSString*)notInNormalForm {
-    return NSLocalizedString(@"NOT IMPLICATION FREE", @"NOT IMPLICATION FREE");
-}
+- (NSString*)localizedQuestionAndAnswerAreNotEquivalent { return NSLocalizedString(@"QUESTION_AND_ANSWER_ARE_NOT_EQUIVALENT", nil); };
 
-- (void)validateAnswer {    NSMutableString *s = [NSMutableString string];
+- (void)validateAnswer {
+    
+    NSMutableString *s = [NSMutableString string];
     
     if ([self questionIsInNormalForm] && [self.answerField.text length] == 0) {
         _success = YES;
     }
     else if ([self.answerField.text length] == 0) {
         _success = NO;
-        [s appendString: @"ANSWER IS MISSING"];
+        [s appendString: [self localizedAnswerIsMissing]];
     }
     else if (![self answerIsInNormalForm]) {
         _success = NO;
-        [s appendString: [self notInNormalForm]];
+        [s appendString: [self localizedNotInNormalForm]];
     }
-    else if (![self areEquivalent]) {
+    else if (![self questionAndAnswerAreEquivalent]) {
         _success = NO;
-        [s appendString:NSLocalizedString(@"NOT EQUIVALENT", @"NOT EQUIVALENT")];
+        [s appendString: [self localizedQuestionAndAnswerAreNotEquivalent]];
     }
     else {
         _success = YES;
@@ -1081,12 +1087,32 @@
 - (void)writeSolution {
     self.solutionField.text = [self.solutionTree description];
 }
+@end
+
+@implementation NyTuTester41
+
+- (NSString*)localizedNotInNormalForm {
+    return NSLocalizedString(@"NOT_IMPLICATION_FREE", nil);
+}
+
+- (BOOL)questionIsInNormalForm {
+    return [self.questionTree isImplicationFree];
+}
+
+- (BOOL)answerIsInNormalForm {
+    return [self.answerTree isImplicationFree];
+}
 
 - (NyayaNode*)solutionTree {
-    return [self.questionTree deriveImf:NSIntegerMax];
-}@end
+    return [super.solutionTree deriveImf:NSIntegerMax];
+}
+@end
 
 @implementation NyTuTester42
+
+- (NSString*)localizedNotInNormalForm {
+    return NSLocalizedString(@"NOT_IN_NEGATION_NORMAL_FORM", nil);
+}
 
 - (BOOL)questionIsInNormalForm {
     return [self.questionTree isNegationNormalForm];
@@ -1096,10 +1122,6 @@
     return [self.answerTree isNegationNormalForm];
 }
 
-- (NSString*)notInNormalForm {
-    return NSLocalizedString(@"NOT IN NEGATION NORMAL FORM", @"NOT IN NEGATION NORMAL FORM");
-}
-
 - (NyayaNode*)solutionTree {
     return [super.solutionTree deriveImf:NSIntegerMax];
 }
@@ -1107,10 +1129,13 @@
 
 @implementation NyTuTester43
 
+- (NSString*)localizedNotInNormalForm {
+    return NSLocalizedString(@"NOT_IN_CUNJUNCTIVE_NORMAL_FORM", nil);
+}
+
 - (BOOL)questionIsInNormalForm {
     return [self.questionTree isConjunctiveNormalForm];
 }
-
 
 - (BOOL)answerIsInNormalForm {
     return [self.answerTree isConjunctiveNormalForm];
@@ -1119,18 +1144,17 @@
 - (NyayaNode*)solutionTree {
     return [super.solutionTree deriveCnf:NSIntegerMax];
 }
-
-- (NSString*)notInNormalForm {
-    return NSLocalizedString(@"NOT IN CONJUNCTOON NORMAL FORM", @"NOT IN CONJUNCTOON NORMAL FORM");
-}
 @end
 
 @implementation NyTuTester44
 
+- (NSString*)localizedNotInNormalForm {
+    return NSLocalizedString(@"NOT_IN_DISJUNCTOON_NORMAL_FORM", nil);
+}
+
 - (BOOL)questionIsInNormalForm {
     return [self.questionTree isDisjunctiveNormalForm];
 }
-
 
 - (BOOL)answerIsInNormalForm {
     return [self.answerTree isDisjunctiveNormalForm];
@@ -1138,9 +1162,5 @@
 
 - (NyayaNode*)solutionTree {
     return [super.solutionTree deriveDnf:NSIntegerMax];
-}
-
-- (NSString*)notInNormalForm {
-    return NSLocalizedString(@"NOT IN DISJUNCTOON NORMAL FORM", @"NOT IN DISJUNCTOON NORMAL FORM");
 }
 @end

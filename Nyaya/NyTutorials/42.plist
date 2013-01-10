@@ -5,8 +5,8 @@
 	<key>questionLabelText</key>
 	<string>Is the given formula in negation normal form?</string>
 	<key>answerLabelText</key>
-	<string>If not, transform formula to negation normal from.</string>
+	<string>If not, apply equivalence transformations.</string>
 	<key>solutionLabelText</key>
-	<string>Negation normal form equivalent to given formula.</string>
+	<string>An equivalent formula in negation normal form.</string>
 </dict>
 </plist>

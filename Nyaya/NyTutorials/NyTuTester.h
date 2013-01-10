@@ -142,14 +142,14 @@
 
 @end
 
-@protocol NyTuTesterNormalForm <NyTuTester>
+@interface NyTuTester40 : NyTuTesterRandomQuestions
 
 - (NyayaNode*)answerTree;
 - (NyayaNode*)solutionTree;
 
 @end
 
-@interface NyTuTester41: NyTuTesterRandomQuestions <NyTuTesterNormalForm>
+@interface NyTuTester41: NyTuTester40
 @end
 
 @interface NyTuTester42: NyTuTester41
