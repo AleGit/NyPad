@@ -1065,13 +1065,16 @@
 
 @implementation NyTuTester34
 
-- (void)generateQuestion {
+- (void)validateAnswer {
     
+    NyayaParser *parser = [NyayaParser parserWithString:_question];
+    NyayaNode *tree = [parser parseFormula];
+    TruthTable *tt = [[TruthTable alloc] initWithNode:tree];
+    if ([tt isTautology]) _solution = NSLocalizedString(@"VALID", nil);
+    else if ([tt isSatisfiable]) _solution = NSLocalizedString(@"SATISFIABLE", nil);
+    else _solution = NSLocalizedString(@"SATISFIABLE", nil);
     
-        
-        
-        
-    }
+}
 
 @end
 
