@@ -155,6 +155,10 @@
 @end
 
 @interface NyTuTester34: NyTuTesterRandomQuestions
+
+@property (weak, nonatomic) IBOutlet UISwitch *validSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *satisSwitch;
+
 @end
 
 #pragma mark - Chapter 4 normal forms

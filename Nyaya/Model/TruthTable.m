@@ -164,8 +164,6 @@
 #pragma mark - output
 
 - (BOOL)evalAtRow:(NSUInteger)rowIdx {
-    // return *(_evals + rowIdx);
-    
     if ([_trueIndices containsIndex:rowIdx]) return YES;
     else return FALSE;
 }

@@ -1100,7 +1100,16 @@
 
 @end
 
+@interface NyTuTester34 () {
+    BOOL _valid;
+    BOOL _satis;
+    
+}
+@end
+
 @implementation NyTuTester34
+
+- (NSString*)testViewNibName { return @"Test34View"; }
 
 - (void)validateAnswer {
     
@@ -1108,9 +1117,32 @@
     NyayaNode *tree = [parser parseFormula];
     TruthTable *tt = [[TruthTable alloc] initWithNode:tree];
     [tt evaluateTable];
-    if ([tt isTautology]) _solution = NSLocalizedString(@"VALID", nil);
-    else if ([tt isSatisfiable]) _solution = NSLocalizedString(@"SATISFIABLE", nil);
-    else _solution = NSLocalizedString(@"SATISFIABLE", nil);
+    _valid = [tt isTautology];
+    _satis = [tt isSatisfiable];
+    
+    if (_valid) _solution = NSLocalizedString(@"VALID_AND_SATISFIABLE", nil);
+    else if (_satis) _solution = NSLocalizedString(@"NOT VALID, BUT SATISFIABLE", nil);
+    else _solution = NSLocalizedString(@"NOT_VALID, NOT_SATISFIABLE", nil);
+    
+    self.validationLabel.text = _solution;
+    
+    if (self.validSwitch.isOn != _valid) {
+        
+        [UIView animateWithDuration:0.2f animations:^{
+            self.validSwitch.transform = CGAffineTransformMakeRotation(-0.05f);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4f delay:0.0 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
+                self.validSwitch.transform = CGAffineTransformMakeRotation(0.05f);
+            } completion:nil];
+        }];
+        
+    }
+    
+    if (self.satisSwitch.isOn != _satis) {
+        
+    }
+    
+    _success = self.validSwitch.isOn == _valid && self.satisSwitch.isOn == _satis;
     
 }
 

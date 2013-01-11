@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Entailment and equivalence.</string>
+	<string>Does the entailment or equivalence hold?</string>
 	<key>answerLabelText</key>
 	<string>Answer</string>
 	<key>solutionLabelText</key>
