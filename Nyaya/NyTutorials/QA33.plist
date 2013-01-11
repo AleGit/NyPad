@@ -2,21 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-<!-- top -->
-	<array>
-		<string>¬p ∨ p</string>
-	</array>
-	<array>
-		<string>q → q</string>
-	</array>
-	<array>
-		<string>r ∨ ¬r</string>
-	</array>
-	<array>
-		<string>⊥ → ¬r</string>
-	</array>
-	<array>
-		<string>⊥ ∨ ¬q</string>
-	</array>
+	<string>¬p ∨ r ⊨ r ∧ ¬p</string>
+	<string>¬p ∧ r ⊨ r ∨ ¬p</string>
+	<string>¬p ∨ p ⊨ p ∧ ¬p</string>
+	<string>¬p ∧ p ⊨ p ∨ ¬p</string>
+	<string>⊨ p ∧ r</string>
+	<string>p ⊨ r</string>
+	<string>p ⊨ p</string>
+	<string>¬p ⊨ p</string>
+	<string>p; r ⊨ r</string>
+	<string>p; ¬r ⊨ p ∨ r</string>
 </array>
 </plist>

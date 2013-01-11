@@ -80,7 +80,7 @@
 @property (nonatomic, strong) NSDictionary *questionsDictionary;
 @end
 
-@interface NyTuTesterRandomQuestions : NyTuTesterDictionaryQuestions
+@interface NyTuTesterRandomQuestions : NyTuTesterPlist
 
 @property (readonly, nonatomic) NSIndexSet *rootTypes;
 @property (readonly, nonatomic) NSIndexSet *nodeTypes;
@@ -151,6 +151,7 @@
 @end
 
 @interface NyTuTester33: NyTuTesterRandomQuestions
+@property (strong, nonatomic) NSArray *questionsArray;
 @end
 
 @interface NyTuTester34: NyTuTesterRandomQuestions

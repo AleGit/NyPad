@@ -1024,42 +1024,79 @@
 @end
 
 @implementation NyTuTester33
+
+- (void)readTestData {
+    [super readTestData];
     
+    NSString *filename = [self.testDictionary objectForKey:@"questionsFile"];
+    
+    if (filename) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"plist"];
+        self.questionsArray = [NSArray arrayWithContentsOfFile:filePath];
+    }
+}
+
+- (void)generateTableQuestion {
+    NSUInteger idx = arc4random() % [self.questionsArray count];
+    _question = [self.questionsArray objectAtIndex:idx];
+}
+
+- (void)generateRandomEquivalentQuestion {
+    _question = [NSString stringWithFormat:@"%@ ≡ %@", [[self randomTree] description], [[self randomTree] description]];
+}
+
+- (void)generateRandomeEntailmentQuestion {
+    NSMutableString *s = [NSMutableString string];
+    while ([s length] < arc4random() % 25) {
+        if ([s length] > 0) [s appendString:@"; "];
+        [s appendString:[[self randomTree] description]];
+    }
+    
+    [s appendString:[s length] == 0 ? @"⊨ " : @" ⊨ "];
+    [s appendString:[[self randomTree] description]];
+    
+    _question = s;
+}
+
 - (void)generateQuestion {
     
-    BOOL empty = NO;
+    BOOL holds = NO;
     
-    if (arc4random() % 2) {
-        NSMutableString *s = [NSMutableString string];
-        while ([s length] < arc4random() % 25) {
-            if ([s length] > 0) [s appendString:@"; "];
-            [s appendString:[[self randomTree] description]];
-        }
-        empty = [s length] == 0;
-        
-        [s appendString:@" ⊨ "];
-        [s appendString:[[self randomTree] description]];
-        
-        _question = s;
-        
-        
-    }
-    else {
-        
-        _question = [NSString stringWithFormat:@"%@ ≡ %@", [[self randomTree] description], [[self randomTree] description]];
-        
+    
+    switch (arc4random() % 3) {
+            
+        default:
+        case 0:
+            [self generateTableQuestion];
+            break;
+        case 1:
+            [self generateRandomEquivalentQuestion];
+            break;
+        case 2:
+            [self generateRandomeEntailmentQuestion];
+            break;
     }
     
-    if (empty) _solution = NSLocalizedString(@"HOLDS", nil);
+    if ([_question hasPrefix:@"⊨ "]) holds = YES;
     else {
         
         NyayaParser *parser = [NyayaParser parserWithString:_question];
         NyayaNode *tree = [parser parseFormula];
+        self.answerField.text = [tree description];
         TruthTable *tt = [[TruthTable alloc] initWithNode:tree];
-        if ([tt isTautology]) _solution = NSLocalizedString(@"HOLDS", nil);
-        else _solution = NSLocalizedString(@"DOES_NOT_HOLD", nil);
+        [tt evaluateTable];
+        if ([tt isTautology]) holds = YES;
+        else holds = NO;
     }
+    
+    
+    if (holds) _solution = NSLocalizedString(@"HOLDS", nil);
+    else _solution = NSLocalizedString(@"DOES_NOT_HOLD", nil);
+    
+    
 }
+
+
 
 @end
 
@@ -1070,6 +1107,7 @@
     NyayaParser *parser = [NyayaParser parserWithString:_question];
     NyayaNode *tree = [parser parseFormula];
     TruthTable *tt = [[TruthTable alloc] initWithNode:tree];
+    [tt evaluateTable];
     if ([tt isTautology]) _solution = NSLocalizedString(@"VALID", nil);
     else if ([tt isSatisfiable]) _solution = NSLocalizedString(@"SATISFIABLE", nil);
     else _solution = NSLocalizedString(@"SATISFIABLE", nil);
