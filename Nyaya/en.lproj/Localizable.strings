@@ -8,8 +8,11 @@
 
 // tokenizer
 
-"NYAYA_TOKEN_PATTERN" = "⊨|⊤|⊥|¬|!|∧|&|\\.|∨|\\+|\\||=|↔|<>|≡|≣|→|>|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
-//                          T  F ! ! & & &   +   +  +  = = = > > ^  ^  ^  (   )  , ;  WORDs
+"NYAYA_TOKEN_PATTERN" = "⊤|⊥|¬|!|∧|&|\\.|•|∨|\\+|\\||=|↔|<>|≡|≣|→|>|⊨|⊻|⊕|\\^|\\(|\\)|,|;|\\w+";
+//                       > T F  !!  & & & &   + + +   = = = = =  > > >  ^ ^ ^   (   )  , ;  WORDs
+
+"NYAYA_TOKEN_PATTERN_LATEX" = "\\\\neg|\\\\wedge|\\\\vee|\\\\rightarrow|\\\\top|\\\\bot|\\\\oplus|\\\\leftrightarrow|\\\\\\w+";
+// "NYAYA_TOKEN_PATTERN_LATEX" = "\\\\\\w+";
 
 "NYAYA_CONNECTIVES_ASCII"    = "F,T,!,&,|,^,>,=";      // comma separated list of ascii symbols for connectives (unused)
 "NYAYA_CONNECTIVES_STANDARD" = "⊥,⊤,¬,∧,∨,⊻,→,↔";      // comma separated list of standard symbols for connectives (unused)

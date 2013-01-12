@@ -29,6 +29,7 @@ NSString *const NYAYA_CONNECTIVES_STANDARD = @"⊥,⊤,¬,∧,∨,⊻,↔,→"; 
 NSString *const NYAYA_CONNECTIVES_BOOLEAN  = @"0,1,!,.,+,⊕,↔,→";      // comma separated list of boolean symbols for connectives (unused)
 
 NSString *const NYAYA_TOKEN_PATTERN_KEY = @"NYAYA_TOKEN_PATTERN";
+NSString *const NYAYA_TOKEN_PATTERN_LATEX_KEY = @"NYAYA_TOKEN_PATTERN_LATEX";
 NSString *const NYAYA_CONNECTIVES_ASCII_KEY = @"NYAYA_CONNECTIVES_ASCII";
 NSString *const NYAYA_CONNECTIVES_STANDARD_KEY = @"NYAYA_CONNECTIVES_STANDARD";
 NSString *const NYAYA_CONNECTIVES_BOOLEAN_KEY = @"NYAYA_CONNECTIVES_BOOLEAN";
@@ -55,10 +56,13 @@ NSString *const NYAYA_CONNECTIVES_BOOLEAN_KEY = @"NYAYA_CONNECTIVES_BOOLEAN";
     static dispatch_once_t pred = 0;
     __strong static NSString *_pattern = nil;
     dispatch_once(&pred, ^{
-        _pattern = NSLocalizedString(NYAYA_TOKEN_PATTERN_KEY, nil);
+        _pattern = [NSLocalizedString(NYAYA_TOKEN_PATTERN_KEY, nil) stringByAppendingFormat:@"|%@", NSLocalizedString(NYAYA_TOKEN_PATTERN_LATEX_KEY,nil)];
+        
+        /*
         if ([_pattern isEqualToString:NYAYA_TOKEN_PATTERN_KEY]) {
             _pattern = NYAYA_TOKEN_PATTERN;
         }
+         */
     });
     return _pattern;
 }

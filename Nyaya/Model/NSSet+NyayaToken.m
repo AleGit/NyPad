@@ -21,14 +21,14 @@
     return set;
 }
 
-+ (NSArray*)defaultTrueTokens  { return @[@"T",@"⊤",@"1"]; }
-+ (NSArray*)defaultFalseTokens { return @[@"F",@"⊥",@"0"]; }
-+ (NSArray*)defaultNotTokens   { return @[@"!",@"¬"]; }
-+ (NSArray*)defaultAndTokens   { return @[@"&",@"∧",@"."]; }
-+ (NSArray*)defaultOrTokens   { return @[@"|",@"∨",@"+"]; }
-+ (NSArray*)defaultBicTokens   { return @[@"=",@"↔",@"<>",@"≡",@"≣"]; }
-+ (NSArray*)defaultImpTokens   { return @[@">",@"→"]; }
-+ (NSArray*)defaultXorTokens   { return @[@"^",@"⊻",@"⊕"]; }
++ (NSArray*)defaultTrueTokens  { return @[@"T",@"⊤",@"1",@"\\top"]; }
++ (NSArray*)defaultFalseTokens { return @[@"F",@"⊥",@"0",@"\\bot"]; }
++ (NSArray*)defaultNotTokens   { return @[@"!",@"¬",@"\\neg"]; }
++ (NSArray*)defaultAndTokens   { return @[@"&",@"∧",@".",@"•",@"\\wedge"]; }
++ (NSArray*)defaultOrTokens   { return @[@"|",@"∨",@"+",@"\\vee"]; }
++ (NSArray*)defaultBicTokens   { return @[@"=",@"↔",@"<>",@"≡",@"≣",@"\\leftrightarrow"]; }
++ (NSArray*)defaultImpTokens   { return @[@">",@"→",@"\\rightarrow"]; }
++ (NSArray*)defaultXorTokens   { return @[@"^",@"⊻",@"⊕",@"\\oplus"]; }
 + (NSArray*)defaultLparTokens  { return @[@"("]; }
 + (NSArray*)defaultRparTokens  { return @[@")"]; }
 + (NSArray*)defaultCommaTokens { return @[@","]; }
