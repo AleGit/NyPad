@@ -201,6 +201,7 @@
 		8170791116A17B3400907851 /* 54.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790D16A17B3400907851 /* 54.plist */; };
 		8196878F1699B70A006174CD /* 31.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8196878E1699B70A006174CD /* 31.plist */; };
 		819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */; };
+		8196FF8116A1AB05004D3A1B /* BinaryTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8196FF8016A1AB05004D3A1B /* BinaryTreeView.m */; };
 		819731A6169F50C40088E9D9 /* 33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A4169F50C40088E9D9 /* 33.plist */; };
 		819731A7169F50C40088E9D9 /* 34.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A5169F50C40088E9D9 /* 34.plist */; };
 		819731AA169F522E0088E9D9 /* QA33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A9169F522D0088E9D9 /* QA33.plist */; };
@@ -211,6 +212,7 @@
 		819CBB1216A036AB001BB9AB /* Test34View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819CBB1116A036AB001BB9AB /* Test34View.xib */; };
 		81C865BD164E8BD200A77B02 /* 24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BC164E8BD100A77B02 /* 24.plist */; };
 		81C865BF164E967F00A77B02 /* SyntaxTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */; };
+		81F6D59F16A191AC00E09A95 /* BinaryTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F6D59E16A191AC00E09A95 /* BinaryTreeTestView.xib */; };
 		81FED8541699E5CD00F33BC4 /* TruthTableTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */; };
 		81FED8571699E64800F33BC4 /* 32.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8561699E64800F33BC4 /* 32.plist */; };
 		9A0592D51646585200E314E2 /* tutorial52.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A0592D41646585200E314E2 /* tutorial52.html */; };
@@ -465,7 +467,7 @@
 		11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgCanvasView.m; path = NyPlayground/NyPgCanvasView.m; sourceTree = "<group>"; };
 		11BFCBAA15F9E3E1004CBDA2 /* kariert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kariert.png; path = NyPlayground/kariert.png; sourceTree = "<group>"; };
 		11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "kariert@2x.png"; path = "NyPlayground/kariert@2x.png"; sourceTree = "<group>"; };
-		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11C375E915B3D23D005C5C9C /* nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		11C375F115B3D23D005C5C9C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -533,6 +535,8 @@
 		8170790D16A17B3400907851 /* 54.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 54.plist; path = Nyaya/NyTutorials/54.plist; sourceTree = "<group>"; };
 		8196878E1699B70A006174CD /* 31.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 31.plist; path = Nyaya/NyTutorials/31.plist; sourceTree = "<group>"; };
 		819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTrueFalseKeysView.xib; path = Nyaya/NyBranches/NyTrueFalseKeysView.xib; sourceTree = "<group>"; };
+		8196FF7F16A1AB05004D3A1B /* BinaryTreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTreeView.h; path = Nyaya/NyTutorials/BinaryTreeView.h; sourceTree = "<group>"; };
+		8196FF8016A1AB05004D3A1B /* BinaryTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BinaryTreeView.m; path = Nyaya/NyTutorials/BinaryTreeView.m; sourceTree = "<group>"; };
 		819731A4169F50C40088E9D9 /* 33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 33.plist; path = Nyaya/NyTutorials/33.plist; sourceTree = "<group>"; };
 		819731A5169F50C40088E9D9 /* 34.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 34.plist; path = Nyaya/NyTutorials/34.plist; sourceTree = "<group>"; };
 		819731A9169F522D0088E9D9 /* QA33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA33.plist; path = Nyaya/NyTutorials/QA33.plist; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 		819CBB1116A036AB001BB9AB /* Test34View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Test34View.xib; path = Nyaya/NyTutorials/Test34View.xib; sourceTree = "<group>"; };
 		81C865BC164E8BD100A77B02 /* 24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 24.plist; path = Nyaya/NyTutorials/24.plist; sourceTree = "<group>"; };
 		81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyntaxTreeTestView.xib; path = Nyaya/NyTutorials/SyntaxTreeTestView.xib; sourceTree = "<group>"; };
+		81F6D59E16A191AC00E09A95 /* BinaryTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BinaryTreeTestView.xib; path = Nyaya/NyTutorials/BinaryTreeTestView.xib; sourceTree = "<group>"; };
 		81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TruthTableTestView.xib; path = Nyaya/NyTutorials/TruthTableTestView.xib; sourceTree = "<group>"; };
 		81FED8561699E64800F33BC4 /* 32.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 32.plist; path = Nyaya/NyTutorials/32.plist; sourceTree = "<group>"; };
 		9A0592D41646585200E314E2 /* tutorial52.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tutorial52.html; path = html/tutorial52.html; sourceTree = "<group>"; };
@@ -934,7 +939,7 @@
 		11C375EA15B3D23D005C5C9C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11C375E915B3D23D005C5C9C /* Nyaya.app */,
+				11C375E915B3D23D005C5C9C /* nyaya.app */,
 				11C3761515B3D23D005C5C9C /* NyayaTests.octest */,
 			);
 			name = Products;
@@ -1074,6 +1079,8 @@
 		11C61BB815E91FFC00F5BB28 /* NyTuTests */ = {
 			isa = PBXGroup;
 			children = (
+				8196FF7F16A1AB05004D3A1B /* BinaryTreeView.h */,
+				8196FF8016A1AB05004D3A1B /* BinaryTreeView.m */,
 				11B0B26415EFC66C006AFBFC /* 11.plist */,
 				11061F3215EFA6EF00345516 /* 12.plist */,
 				113FF75C15F07ED90073A410 /* 13.plist */,
@@ -1102,6 +1109,7 @@
 				811DBCEF1699611B0084CCC3 /* QA25.plist */,
 				819731A9169F522D0088E9D9 /* QA33.plist */,
 				1139123A15F7140600B83877 /* StandardTestView.xib */,
+				81F6D59E16A191AC00E09A95 /* BinaryTreeTestView.xib */,
 				81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */,
 				81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */,
 				816E685C1698323400D929FE /* TextTestView.xib */,
@@ -1221,7 +1229,7 @@
 			);
 			name = Nyaya;
 			productName = Nyaya;
-			productReference = 11C375E915B3D23D005C5C9C /* Nyaya.app */;
+			productReference = 11C375E915B3D23D005C5C9C /* nyaya.app */;
 			productType = "com.apple.product-type.application";
 		};
 		11C3761415B3D23D005C5C9C /* NyayaTests */ = {
@@ -1426,6 +1434,7 @@
 				8170790F16A17B3400907851 /* 52.plist in Resources */,
 				8170791016A17B3400907851 /* 53.plist in Resources */,
 				8170791116A17B3400907851 /* 54.plist in Resources */,
+				81F6D59F16A191AC00E09A95 /* BinaryTreeTestView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1506,6 +1515,7 @@
 				11E3EC73160700980069497A /* NSObject+Nyaya.m in Sources */,
 				113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */,
 				11EAB8E0161432D800C8DE32 /* NyayaNode+Random.m in Sources */,
+				8196FF8116A1AB05004D3A1B /* BinaryTreeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
