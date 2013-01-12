@@ -195,6 +195,10 @@
 		8156385F16500DA9006A9B99 /* 23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8156385E16500DA9006A9B99 /* 23.plist */; };
 		816E685D1698323400D929FE /* TextTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816E685C1698323400D929FE /* TextTestView.xib */; };
 		816E68601698413400D929FE /* 21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 816E685F1698413400D929FE /* 21.plist */; };
+		8170790E16A17B3400907851 /* 51.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790A16A17B3400907851 /* 51.plist */; };
+		8170790F16A17B3400907851 /* 52.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790B16A17B3400907851 /* 52.plist */; };
+		8170791016A17B3400907851 /* 53.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790C16A17B3400907851 /* 53.plist */; };
+		8170791116A17B3400907851 /* 54.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790D16A17B3400907851 /* 54.plist */; };
 		8196878F1699B70A006174CD /* 31.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8196878E1699B70A006174CD /* 31.plist */; };
 		819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */; };
 		819731A6169F50C40088E9D9 /* 33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A4169F50C40088E9D9 /* 33.plist */; };
@@ -523,6 +527,10 @@
 		8156385E16500DA9006A9B99 /* 23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 23.plist; path = Nyaya/NyTutorials/23.plist; sourceTree = "<group>"; };
 		816E685C1698323400D929FE /* TextTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextTestView.xib; path = Nyaya/NyTutorials/TextTestView.xib; sourceTree = "<group>"; };
 		816E685F1698413400D929FE /* 21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 21.plist; path = Nyaya/NyTutorials/21.plist; sourceTree = "<group>"; };
+		8170790A16A17B3400907851 /* 51.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 51.plist; path = Nyaya/NyTutorials/51.plist; sourceTree = "<group>"; };
+		8170790B16A17B3400907851 /* 52.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 52.plist; path = Nyaya/NyTutorials/52.plist; sourceTree = "<group>"; };
+		8170790C16A17B3400907851 /* 53.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 53.plist; path = Nyaya/NyTutorials/53.plist; sourceTree = "<group>"; };
+		8170790D16A17B3400907851 /* 54.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 54.plist; path = Nyaya/NyTutorials/54.plist; sourceTree = "<group>"; };
 		8196878E1699B70A006174CD /* 31.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 31.plist; path = Nyaya/NyTutorials/31.plist; sourceTree = "<group>"; };
 		819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTrueFalseKeysView.xib; path = Nyaya/NyBranches/NyTrueFalseKeysView.xib; sourceTree = "<group>"; };
 		819731A4169F50C40088E9D9 /* 33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 33.plist; path = Nyaya/NyTutorials/33.plist; sourceTree = "<group>"; };
@@ -1082,6 +1090,10 @@
 				819BA0BD169DD90F00545496 /* 42.plist */,
 				819BA0BE169DD90F00545496 /* 43.plist */,
 				819BA0BF169DD90F00545496 /* 44.plist */,
+				8170790A16A17B3400907851 /* 51.plist */,
+				8170790B16A17B3400907851 /* 52.plist */,
+				8170790C16A17B3400907851 /* 53.plist */,
+				8170790D16A17B3400907851 /* 54.plist */,
 				11061F2F15EF9BBD00345516 /* NyTuTester.h */,
 				11061F3015EF9BBD00345516 /* NyTuTester.m */,
 				11C61BB515E91FF000F5BB28 /* NyTuTestViewController.h */,
@@ -1410,6 +1422,10 @@
 				819731A7169F50C40088E9D9 /* 34.plist in Resources */,
 				819731AA169F522E0088E9D9 /* QA33.plist in Resources */,
 				819CBB1216A036AB001BB9AB /* Test34View.xib in Resources */,
+				8170790E16A17B3400907851 /* 51.plist in Resources */,
+				8170790F16A17B3400907851 /* 52.plist in Resources */,
+				8170791016A17B3400907851 /* 53.plist in Resources */,
+				8170791116A17B3400907851 /* 54.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

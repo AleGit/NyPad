@@ -97,19 +97,30 @@
         [subTrees addObject:[NyayaNode atom:var]];
     }
     
+    if ([subTrees count] == 0) {
+        [subTrees addObject:[NyayaNode atom:@"T"]];
+        [subTrees addObject:[NyayaNode atom:@"F"]];
+    }
+    
     NyayaNodeType rootType = [rootTypes randomIndex];
     
     NyayaNodeType type = rootType;
     
-    if (maxLength < 2) return [subTrees randomObject:1];
-        
+    if (maxLength < 2 && 0 < [subTrees count]) return [subTrees randomObject:1];
+    
+    NSInteger outerLoopCount = 0;
+    NSInteger resultLength = 0;
     do  {
+        resultLength = [result length];
         NSUInteger count = 0;
         do {
-            first = [subTrees randomObject: maxLength -1 - (type != NyayaNegation)];
-            second = type != NyayaNegation ? [subTrees randomObject: maxLength - 1 - [first length]] : nil;
+            if (type != NyayaConstant) {
+                first = [subTrees randomObject: maxLength -1 - (type != NyayaNegation)];
+                second = type != NyayaNegation ? [subTrees randomObject: maxLength - 1 - [first length]] : nil;
+            }
         }
         while ([second isEqual: first] && ++count < [subTrees count]*3);
+        
         
         switch (type) {
             case NyayaNegation:
@@ -121,11 +132,14 @@
             case NyayaConjunction:
                 result = [NyayaNode disjunction:first with:second];
                 break;
+            case NyayaXdisjunction:
+                result = [NyayaNode xdisjunction:first with:second];
+                break;
             case NyayaImplication:
                 result = [NyayaNode implication:first with:second];
                 break;
             case NyayaConstant:
-                if ([subTrees count] % 2) result = [NyayaNode atom:@"T"];
+                if (arc4random() % 2) result = [NyayaNode atom:@"T"];
                 else result = [NyayaNode atom:@"F"];
                 break;
             default:
@@ -135,7 +149,11 @@
         [subTrees addObject:result];
         type = [nodeTypes randomIndex];
     }
-    while ([result length] < minLength);
+    while ([result length] < minLength && resultLength < [result length] && ++outerLoopCount < 150);
+    
+    if (!result || [result length] == 0) {
+        result = [subTrees randomObject:maxLength];
+    }
     
     return result;
     

@@ -1290,4 +1290,62 @@
 @end
 
 #pragma mark - Chapter 5 binary decisions
+@implementation NyTuTester50
+@end
+
+@implementation NyTuTester51
+
+- (NSRange)testContextLengths {
+    return NSMakeRange(5,3);
+}
+
+- (NSString*)accessoryViewNibName { return @"NyTrueFalseKeysView"; }
+
+- (void)configureAccessoryView {
+    [super configureAccessoryView];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_TRUE_TAG] setTitle:@"1" forState:UIControlStateNormal];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_FALSE_TAG] setTitle:@"0" forState:UIControlStateNormal];
+}
+
+- (void)configureTestContext {
+    [super configureTestContext];
+
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSetWithIndex:NyayaConjunction];
+    [indexSet addIndex:NyayaDisjunction];
+    [indexSet addIndex:NyayaXdisjunction];
+    // [indexSet addIndex:NyayaNegation];
+    
+    self.rootTypes = [indexSet copy];
+    self.nodeTypes = [indexSet copy];
+    self.lengths = [self testContextLengths];
+    self.variables = @[]; // no variables
+    
+}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    NSMutableString *qm = [[self.questionTree strictDescription] mutableCopy];
+    
+    [qm replaceOccurrencesOfString:@"T" withString:@"1" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"F" withString:@"0" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"¬" withString:@"!" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"∧" withString:@"•" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"∨" withString:@"+" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"⊻" withString:@"⊕" options:0 range: NSMakeRange(0, [qm length])];
+    
+    
+    _question = qm;
+    
+    _solution = self.questionTree.evaluationValue ? @"1" : @"0";
+}
+@end
+
+@implementation NyTuTester52
+@end
+
+@implementation NyTuTester53
+@end
+
+@implementation NyTuTester54
+@end
 

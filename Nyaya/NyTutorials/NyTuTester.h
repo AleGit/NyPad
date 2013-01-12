@@ -181,3 +181,20 @@
 
 @interface NyTuTester44: NyTuTester42
 @end
+
+#pragma mark - Chapter 5 binary decisions
+
+@interface NyTuTester50 : NyTuTesterRandomQuestions
+@end
+
+@interface NyTuTester51 : NyTuTester50
+@end
+
+@interface NyTuTester52 : NyTuTester50
+@end
+
+@interface NyTuTester53 : NyTuTester50
+@end
+
+@interface NyTuTester54 : NyTuTester50
+@end
