@@ -152,6 +152,8 @@
 
 @interface NyTuTester33: NyTuTesterRandomQuestions
 @property (strong, nonatomic) NSArray *questionsArray;
+@property (weak, nonatomic) IBOutlet UISwitch *holdsSwitch;
+
 @end
 
 @interface NyTuTester34: NyTuTesterRandomQuestions

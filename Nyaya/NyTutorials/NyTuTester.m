@@ -1042,6 +1042,8 @@
 
 @implementation NyTuTester33
 
+- (NSString*)testViewNibName { return @"Test33View"; }
+
 - (void)readTestData {
     [super readTestData];
     
@@ -1075,10 +1077,13 @@
     _question = s;
 }
 
+- (void)clearQuestion {
+    [super clearQuestion];
+    [self animateEnd:self.holdsSwitch];
+    self.holdsSwitch.on = NO;
+}
+
 - (void)generateQuestion {
-    
-    BOOL holds = NO;
-    
     
     switch (arc4random() % 3) {
             
@@ -1094,6 +1099,14 @@
             break;
     }
     
+    
+    
+    
+}
+
+- (void)validateAnswer {
+    BOOL holds = NO;
+    
     if ([_question hasPrefix:@"⊨ "]) holds = YES;
     else {
         
@@ -1106,10 +1119,10 @@
         else holds = NO;
     }
     
+    _success = self.holdsSwitch.isOn == holds;
     
-    if (holds) _solution = NSLocalizedString(@"HOLDS", nil);
-    else _solution = NSLocalizedString(@"DOES_NOT_HOLD", nil);
     
+    if (!_success) [self animateWrong:self.holdsSwitch withDelay:0.0];
     
 }
 
