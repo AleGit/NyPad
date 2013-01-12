@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Complete the binary decision diagram.</string>
+	<string>Complete the binary decision tree.</string>
 	<key>answerLabelText</key>
 	<string>Answer</string>
 	<key>solutionLabelText</key>

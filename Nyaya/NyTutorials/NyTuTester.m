@@ -1391,6 +1391,12 @@
 @implementation NyTuTester53
 - (NSString*)testViewNibName { return @"BinaryTreeTestView"; }
 
+- (void)clearQuestion{
+    [self.binaryButtons enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
+        [self animateEnd:obj];
+        obj.selected = NO;
+    }];
+}
 
 
 - (void)configureSubviews:(UIView*)view {
@@ -1418,7 +1424,35 @@
 }
 
 - (void)validateAnswer {
-    _success = NO;
+    NSSet *vars = [self.questionTree setOfVariables];
+    _success = YES;
+    
+    [self.binaryButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        BOOL p,q,r;
+        NSInteger value = button.tag;
+        
+        p = value & 4 ? YES : NO;
+        q = value & 2 ? YES : NO;
+        r = value & 1 ? YES : NO;
+        
+        
+        [vars enumerateObjectsUsingBlock:^(NyayaNodeVariable *node, BOOL *stop) {
+            if ([node.symbol isEqualToString:@"p"]) node.evaluationValue = p;
+            else if ([node.symbol isEqualToString:@"q"]) node.evaluationValue = q;
+            else if ([node.symbol isEqualToString:@"r"]) node.evaluationValue = r;
+        }];
+        
+        
+        if (button.isSelected != self.questionTree.evaluationValue) {
+            [self animateWrong:button withDelay:0.0];
+            _success = NO;
+
+        }
+        else {
+            [self animateRight:button withDelay:0.0];
+        }
+        
+    }];
 }
 
 
