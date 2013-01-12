@@ -635,7 +635,8 @@
     NSUInteger count = 0;
     for (NSString *sf in  [self.answer componentsSeparatedByString:@","]) {
         NyayaFormula *formula = [NyayaFormula formulaWithString:sf];
-        [answerSubformulas addObject:[formula syntaxTree:NO]];
+        NyayaNode *node = [formula syntaxTree:NO];
+        if (node) [answerSubformulas addObject:node];
         count++;
     }
     _success = [solutionSubformulas count] == count && [solutionSubformulas isEqual:answerSubformulas];
@@ -1265,7 +1266,7 @@
 }
 
 - (NyayaNode*)solutionTree {
-    return [super.solutionTree deriveImf:NSIntegerMax];
+    return [super.solutionTree deriveNnf:NSIntegerMax];
 }
 @end
 
