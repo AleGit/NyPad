@@ -23,3 +23,14 @@ extern const NSUInteger KEY_FALSE_TAG;
 extern const NSUInteger KEY_TRUE_TAG;
 extern const NSUInteger KEY_SPACE_TAG;
 extern const NSUInteger KEY_COMMA_TAG;
+
+extern const NSUInteger KEY_LEFT_PAREN_TAG;
+extern const NSUInteger KEY_RIGHT_PAREN_TAG;
+extern const NSUInteger KEY_SEMICOLON_TAG;
+extern const NSUInteger KEY_COLON_TAG;
+
+extern const NSUInteger KEY_NOT_TAG;
+extern const NSUInteger KEY_AND_TAG;
+extern const NSUInteger KEY_OR_TAG;
+extern const NSUInteger KEY_XOR_TAG;
+extern const NSUInteger KEY_IMP_TAG;

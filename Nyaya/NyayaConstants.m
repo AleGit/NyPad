@@ -27,3 +27,15 @@ const NSUInteger KEY_FALSE_TAG = 104;
 const NSUInteger KEY_TRUE_TAG = 105;
 const NSUInteger KEY_SPACE_TAG = 106;
 const NSUInteger KEY_COMMA_TAG = 107;
+
+const NSUInteger KEY_LEFT_PAREN_TAG = 108;
+const NSUInteger KEY_RIGHT_PAREN_TAG = 109;
+const NSUInteger KEY_SEMICOLON_TAG = 110;
+const NSUInteger KEY_COLON_TAG = 111;
+
+const NSUInteger KEY_NOT_TAG = 121;
+const NSUInteger KEY_AND_TAG = 122;
+const NSUInteger KEY_OR_TAG = 123;
+const NSUInteger KEY_XOR_TAG = 124;
+const NSUInteger KEY_IMP_TAG = 125;
+const NSUInteger KEY_BIC_TAG = 126;

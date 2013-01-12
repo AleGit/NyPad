@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>questionLabelText</key>
-	<string>Is the given formula valid and/or satisfiable?</string>
+	<string>Rewrite the propostitional formula as Boolean expression.</string>
 	<key>answerLabelText</key>
-	<string>Answer</string>
+	<string>Write an equivalent Boolean expression.</string>
 	<key>solutionLabelText</key>
 	<string>Solution</string>
 </dict>

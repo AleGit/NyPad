@@ -1291,6 +1291,20 @@
 
 #pragma mark - Chapter 5 binary decisions
 @implementation NyTuTester50
+
+- (NSString*)boolarizeString:(NSString*)text {
+    NSMutableString *qm = [text mutableCopy];
+    
+    [qm replaceOccurrencesOfString:@"T" withString:@"1" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"F" withString:@"0" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"¬" withString:@"!" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"∧" withString:@"•" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"∨" withString:@"+" options:0 range: NSMakeRange(0, [qm length])];
+    [qm replaceOccurrencesOfString:@"⊻" withString:@"⊕" options:0 range: NSMakeRange(0, [qm length])];
+    
+    return qm;
+    
+}
 @end
 
 @implementation NyTuTester51
@@ -1324,23 +1338,32 @@
 
 - (void)generateQuestion {
     [super generateQuestion];
-    NSMutableString *qm = [[self.questionTree strictDescription] mutableCopy];
-    
-    [qm replaceOccurrencesOfString:@"T" withString:@"1" options:0 range: NSMakeRange(0, [qm length])];
-    [qm replaceOccurrencesOfString:@"F" withString:@"0" options:0 range: NSMakeRange(0, [qm length])];
-    [qm replaceOccurrencesOfString:@"¬" withString:@"!" options:0 range: NSMakeRange(0, [qm length])];
-    [qm replaceOccurrencesOfString:@"∧" withString:@"•" options:0 range: NSMakeRange(0, [qm length])];
-    [qm replaceOccurrencesOfString:@"∨" withString:@"+" options:0 range: NSMakeRange(0, [qm length])];
-    [qm replaceOccurrencesOfString:@"⊻" withString:@"⊕" options:0 range: NSMakeRange(0, [qm length])];
-    
-    
-    _question = qm;
-    
+    _question = [self boolarizeString:[self.questionTree strictDescription]];    
     _solution = self.questionTree.evaluationValue ? @"1" : @"0";
 }
 @end
 
 @implementation NyTuTester52
+
+- (void)configureAccessoryView {
+    [super configureAccessoryView];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_NOT_TAG] setTitle:@"!" forState:UIControlStateNormal];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_AND_TAG] setTitle:@"•" forState:UIControlStateNormal];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_OR_TAG] setTitle:@"+" forState:UIControlStateNormal];
+    [(UIButton*)[self.accessoryView viewWithTag:KEY_IMP_TAG] setTitle:@"⊕" forState:UIControlStateNormal];
+}
+
+- (void)generateQuestion {
+    [super generateQuestion];
+    _solution = [self boolarizeString:[[self.questionTree deriveImf:NSIntegerMax] description]];
+}
+
+- (void)validateAnswer {
+    NyayaFormula *solutionFormula = [NyayaFormula formulaWithString:self.solution];
+    NyayaFormula *answerFormula = [NyayaFormula formulaWithString:self.answer];
+    
+    _success = [[solutionFormula truthTable:YES] isEqual:[answerFormula truthTable:YES]];
+}
 @end
 
 @implementation NyTuTester53
