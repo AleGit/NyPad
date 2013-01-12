@@ -10,6 +10,7 @@
 #import "NyAccessoryController.h"
 #import "NyTreeView.h"
 #import "NyayaFormula.h"
+#import "NyayaBddView.h"
 
 
 @class NyTuTestViewController;      // external declaration
@@ -58,6 +59,8 @@
 @property (nonatomic, readonly) BOOL success;
 @property (nonatomic, readonly) NSUInteger succCount;
 @property (nonatomic, readonly) NSUInteger failCount;
+
+- (IBAction)toggleButton:(UIButton *)sender;
 
 @end
 
@@ -145,9 +148,6 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ftButtons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *solutionButtons;
-
-- (IBAction)toggleTF:(UIButton *)sender;
-
 @end
 
 @interface NyTuTester33: NyTuTesterRandomQuestions
@@ -191,10 +191,16 @@
 @end
 
 @interface NyTuTester52 : NyTuTester50
+
+
+
 @end
 
 @interface NyTuTester53 : NyTuTester50
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *binaryButtons;
+@property (weak, nonatomic) IBOutlet NyayaBddView *BddView;
+
 @end
 
-@interface NyTuTester54 : NyTuTester50
-@end
+// @interface NyTuTester54 : NyTuTester50
+// @end

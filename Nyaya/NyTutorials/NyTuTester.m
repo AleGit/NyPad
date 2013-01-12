@@ -287,6 +287,33 @@
 /* MUST BE OVERRIDDEN IN SUBCLASSES */
 - (void)writeSolution { @throw [[NSException alloc] initWithName:@"writeSolution" reason:@"must be overridden" userInfo:nil]; }
 
+- (IBAction)toggleButton:(UIButton *)sender {
+    sender.selected = !sender.isSelected;
+}
+
+- (void)animateWrong:(UIView*)view withDelay:(NSTimeInterval)delay {
+    [UIView animateWithDuration:0.2f animations:^{
+        view.transform = CGAffineTransformMakeRotation(-0.15f);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.4f delay:delay options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
+            view.transform = CGAffineTransformMakeRotation(0.15f);
+        } completion:nil];
+    }];
+}
+
+- (void)animateRight: (UIView*)view withDelay:(NSTimeInterval)delay {
+    [UIView animateWithDuration:0.4f delay:delay options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
+        view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:nil];
+}
+
+- (void)animateEnd: (UIView*)view {
+    [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        view.transform = CGAffineTransformIdentity;
+    } completion:nil];
+    
+}
+
 @end
 
 /***************************************************************************************************************************/
@@ -851,7 +878,7 @@
     
     __block BOOL active = YES;
     void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(UIButton *button, NSUInteger idx, BOOL *stop) {
-        if (active) [button addTarget:(self) action:@selector(toggleTF:) forControlEvents:UIControlEventTouchUpInside];
+        if (active) [button addTarget:(self) action:@selector(toggleButton:) forControlEvents:UIControlEventTouchUpInside];
         button.tintColor = [UIColor nyLightGreyColor];
         [button setTitle:@"F" forState:UIControlStateNormal];
         [button setTitle:@"T" forState:UIControlStateSelected];
@@ -882,9 +909,7 @@
     [self.ftButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
         button.selected = NO;
         button.highlighted = NO;
-        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            button.transform = CGAffineTransformIdentity;
-        } completion:nil];
+        [self animateEnd:button];
         
         
         
@@ -948,6 +973,8 @@
     
 }
 
+
+
 - (void)validateAnswer {
     _success = YES;
     
@@ -969,19 +996,12 @@
             
             if (button.isSelected != self.questionTree.evaluationValue) {
                 
-                [UIView animateWithDuration:0.2f animations:^{
-                    button.transform = CGAffineTransformMakeRotation(-0.15f);
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.4f delay:0.1*(float)button.tag options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
-                        button.transform = CGAffineTransformMakeRotation(0.15f);
-                    } completion:nil];
-                }];
+                [self animateWrong:button withDelay:0.1*(float)button.tag];
                 _success = NO;
             }
+            
             else {
-                [UIView animateWithDuration:0.4f delay:0.1*(float)button.tag options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
-                    button.transform = CGAffineTransformMakeScale(1.1, 1.1);
-                } completion:nil];                
+                [self animateRight:button withDelay:0.1*(float)button.tag];
             }
         }
     }];
@@ -1016,10 +1036,6 @@
     
     
     
-}
-
-- (IBAction)toggleTF:(UIButton *)sender {
-    sender.selected = !sender.isSelected;
 }
 @end
 
@@ -1111,6 +1127,15 @@
 
 - (NSString*)testViewNibName { return @"Test34View"; }
 
+- (void)clearQuestion {
+    [super clearQuestion];
+    [self animateEnd:self.validSwitch];
+    [self animateEnd:self.satisSwitch];
+    
+    self.validSwitch.on = NO;
+    self.satisSwitch.on = NO;
+}
+
 - (void)validateAnswer {
     
     NyayaParser *parser = [NyayaParser parserWithString:_question];
@@ -1127,18 +1152,11 @@
     self.validationLabel.text = _solution;
     
     if (self.validSwitch.isOn != _valid) {
-        
-        [UIView animateWithDuration:0.2f animations:^{
-            self.validSwitch.transform = CGAffineTransformMakeRotation(-0.05f);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.4f delay:0.0 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse) animations:^{
-                self.validSwitch.transform = CGAffineTransformMakeRotation(0.05f);
-            } completion:nil];
-        }];
-        
+        [self animateWrong:self.validSwitch withDelay:0.0];
     }
     
     if (self.satisSwitch.isOn != _satis) {
+        [self animateWrong:self.satisSwitch withDelay:0.0];
         
     }
     
@@ -1353,6 +1371,8 @@
     [(UIButton*)[self.accessoryView viewWithTag:KEY_IMP_TAG] setTitle:@"⊕" forState:UIControlStateNormal];
 }
 
+
+
 - (void)generateQuestion {
     [super generateQuestion];
     _solution = [self boolarizeString:[[self.questionTree deriveImf:NSIntegerMax] description]];
@@ -1366,9 +1386,45 @@
 }
 @end
 
+
+
 @implementation NyTuTester53
+- (NSString*)testViewNibName { return @"BinaryTreeTestView"; }
+
+
+
+- (void)configureSubviews:(UIView*)view {
+    [super configureSubviews:view];
+    
+    void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(UIButton *button, NSUInteger idx, BOOL *stop) {
+        [button addTarget:(self) action:@selector(toggleButton:) forControlEvents:UIControlEventTouchUpInside];
+        button.tintColor = [UIColor nyLightGreyColor];
+        [button setTitle:@"0" forState:UIControlStateNormal];
+        [button setTitle:@"1" forState:UIControlStateSelected];
+    };
+    
+    [self.binaryButtons enumerateObjectsUsingBlock:block];
+    
+        
+    NyayaFormula *formula = [NyayaFormula formulaWithString:@"p+q+r"];
+    BddNode *bdd = [formula OBDD:NO];
+    self.BddView.bddNode = bdd;
+    
+    self.BddView.backgroundColor = nil;
+    [self.BddView setNeedsDisplay];
+
+    
+    
+}
+
+- (void)validateAnswer {
+    _success = NO;
+}
+
+
 @end
 
-@implementation NyTuTester54
-@end
+// @implementation NyTuTester54
+//- (NSString*)testViewNibName { return @"BinaryTreeTestView"; }
+//@end
 
