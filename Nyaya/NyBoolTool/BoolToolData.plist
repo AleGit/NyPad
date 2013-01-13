@@ -4,7 +4,7 @@
 <array>
 	<array>
 		<date>2013-01-13T04:37:22Z</date>
-		<string>(p ∨ q) ∧ r</string>
+		<string>a ∧ (b ∨ c)</string>
 	</array>
 </array>
 </plist>

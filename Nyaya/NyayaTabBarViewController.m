@@ -47,7 +47,7 @@
         self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2 = playground
     }
     else {
-        self.selectedViewController = [self.viewControllers objectAtIndex:4]; // 1=tutorial, 2=playground, 3=gloassary, 4=booltool
+        self.selectedViewController = [self.viewControllers objectAtIndex:0]; // 1=tutorial, 2=playground, 3=gloassary, 4=booltool
     }
 }
 
