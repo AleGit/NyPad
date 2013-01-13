@@ -49,14 +49,15 @@
 
 - (CGRect)replaceOutside: (CGRect)frame {
     
-    for (CGFloat overlap = -1; overlap < 25; overlap += 5) { // accept some overlap
+    for (CGFloat overlap = 0; overlap < 5; overlap++) { // accept some overlap
     
     for (CGFloat y = 15.0; y+frame.size.height/3 < self.view.frame.size.height; y += 10.0) {
         for (CGFloat x = 15.0; x+frame.size.width/2 < self.view.frame.size.width; x += 10.0) {
             CGRect newRect = CGRectMake(x, y, frame.size.width, frame.size.height);
             __block BOOL outside = YES;
             [_formulaViews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-                if (CGRectIntersectsRect(CGRectInset(obj.frame, overlap, overlap), CGRectInset(newRect, overlap, overlap))) {
+                if (CGRectIntersectsRect(CGRectInset(obj.frame, -1+overlap*obj.frame.size.width/20.0, -1+overlap*obj.frame.size.height/20.0),
+                                         CGRectInset(newRect, -1+overlap*newRect.size.width/20.0, -1+overlap*newRect.size.height/20.0))) {
                     outside = NO;
                     *stop = YES;
                 }
