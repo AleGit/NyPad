@@ -20,10 +20,6 @@
 
 @implementation NyBtDetailViewController
 
-- (NSString*)localizedBarButtonItemTitle {
-    return NSLocalizedString(@"Formulas", nil);
-}
-
 #pragma mark - additional ib actions
 
 - (IBAction)send:(id)sender {

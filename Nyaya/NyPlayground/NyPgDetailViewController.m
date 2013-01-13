@@ -15,6 +15,7 @@
 #import "NyayaNode+Valuation.h"
 #import "NyayaNode+Attributes.h"
 #import "NyayaNode+Display.h"
+#import "NyayaFormula.h"
 
 @interface NyPgDetailViewController () {
     NSMutableArray *_formulaViews;
@@ -24,11 +25,48 @@
 
 @implementation NyPgDetailViewController
 
-- (NSString*)localizedBarButtonItemTitle {
-    return NSLocalizedString(@"Playground", @"Playground");
-}
 
 #pragma mark - VIEW
+
+- (CGPoint)pointOutside {
+    
+    for (CGFloat y = 45.0; y+90 < self.view.frame.size.height; y += 10.0) {
+        for (CGFloat x = 45.0; x+90 < self.view.frame.size.width; x += 10.0) {
+            CGPoint point = CGPointMake(x,y);
+            __block BOOL free = YES;
+            [_formulaViews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+                if (CGRectContainsPoint(CGRectInset(obj.frame, -5.0, -5.0), point)) {
+                    free = NO;
+                    *stop = YES;
+                }
+            }];
+            if (free) return point;
+        }
+    }
+    
+    return CGPointMake(105.0,105.0);
+}
+
+- (CGRect)replaceOutside: (CGRect)frame {
+    
+    for (CGFloat y = 15.0; y+30.0 < self.view.frame.size.height; y += 10.0) {
+        for (CGFloat x = 15.0; x+30.0 < self.view.frame.size.width; x += 10.0) {
+            CGRect newRect = CGRectMake(x, y, frame.size.width, frame.size.height);
+            __block BOOL outside = YES;
+            [_formulaViews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+                if (CGRectIntersectsRect(obj.frame, newRect)) {
+                    outside = NO;
+                    *stop = YES;
+                }
+            }];
+            if (outside) return newRect;
+        }
+    }
+    
+    CGPoint point = [self pointOutside];
+    return CGRectMake(point.x, point.y, frame.size.width, frame.size.height);
+    
+}
 
 - (void)configureView
 {
@@ -36,13 +74,18 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        // self.detailDescriptionLabel.text = [self.detailItem description];
+        
+        NSString *input = [(id)self.detailItem input];
+        NyayaFormula *formula = [NyayaFormula formulaWithString:input];
+        [self addNode: [formula syntaxTree:YES] location: CGPointMake(0.0,0.0)];
+        
     }
 }
 
 - (void)viewDidLoad {
     _formulaViews = [NSMutableArray arrayWithCapacity:10];
-    [self addNewFormulaAtCanvasLocation:CGPointMake(self.canvasView.center.x, 50.0)];
+    // [self addNewNodeLocation:CGPointMake(self.canvasView.center.x, 50.0)];
 }
 
 - (void)viewDidUnload {
@@ -107,32 +150,39 @@
     return symbolView;    
 }
 
-- (void)addNewFormulaAtCanvasLocation:(CGPoint)location {
+- (void)addNewNodeLocation:(CGPoint)location {
+    NyayaNode *node = [NyayaNode atom:@"p"];
+    [self addNode:node location:location];
+}
+
+- (void)addNode:(NyayaNode*)node location:(CGPoint)location {
+    BOOL relocate = location.x == 0 && location.y == 0;
+    
     NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"NyTreeView" owner:self options:nil];
     NyTreeView *formualaView = [viewArray objectAtIndex:0];
-    //NySymbolView *symbolView = [viewArray objectAtIndex:3];
     
-    //[formualaView addSubview:symbolView];
-    // symbolView.center = CGPointMake(formualaView.frame.size.width/2.0, symbolView.frame.size.height);
-    // formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0 - symbolView.center.y);
-    formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0);
     
     formualaView.chosen = YES;
-    formualaView.locked = NO;
-    
-    
-    [_formulaViews addObject:formualaView];
-    
-    NyayaNode *node = [NyayaNode atom:@"p"];
+    formualaView.locked = NO;    
     formualaView.node = node;
     formualaView.alpha = 0.0;
     formualaView.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
     
+    if (!relocate) formualaView.center = CGPointMake(location.x, location.y + formualaView.frame.size.height/2.0);
     [self.canvasView addSubview:formualaView];
+    CGRect newFrame = [self replaceOutside:formualaView.bounds];
+    [_formulaViews addObject:formualaView];
+    
+    [self deselectOtherFormulas:formualaView];
     
     [UIView animateWithDuration:1.0 animations:^{
         formualaView.alpha = 1.0;
         formualaView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        
+        if (relocate) {
+            formualaView.frame = newFrame;
+            
+        }
     }];
 }
 
@@ -140,7 +190,7 @@
     if (sender.state == UIGestureRecognizerStateBegan) {
         [self deselectOtherFormulas:nil];
         CGPoint location = [sender locationInView:self.canvasView];
-        [self addNewFormulaAtCanvasLocation:location];
+        [self addNewNodeLocation:location];
     }
 }
 

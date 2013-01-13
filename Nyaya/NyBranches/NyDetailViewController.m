@@ -106,6 +106,10 @@
 
 #pragma mark - ny accessor controller protocol
 
+- (NSString*)localizedBarButtonItemTitle {
+    return NSLocalizedString(@"Formulas", nil);
+}
+
 - (BOOL)accessoryViewShouldBeVisible {
     return YES;
 }
