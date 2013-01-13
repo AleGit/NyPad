@@ -15,8 +15,6 @@
     return (NyBtDetailViewController*)super.detailViewController;
 }
 
-- (BOOL)tableViewIsAddable {
-    return NO;
-}
+
 
 @end

@@ -183,6 +183,10 @@
 
 @implementation NyMasterDataViewController
 
+- (BOOL)tableViewIsAddable {
+    return NO;
+}
+
 - (BOOL)save:(NSDate *)date input:(NSString *)input {
     if ([input length] == 0) return NO;
     
@@ -259,6 +263,17 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",object.date];
     cell.textLabel.text = object.input;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_objects removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self writeMasterData];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
 }
 
 

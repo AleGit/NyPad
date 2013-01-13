@@ -9,7 +9,7 @@
 #import "NyMasterViewController.h"
 #import "NyPgDetailViewController.h"
 
-@interface NyPgMasterViewController : NyMasterViewController
+@interface NyPgMasterViewController : NyMasterDataViewController
 
 @property (readonly, nonatomic) NyPgDetailViewController *playgroundViewController;
 
