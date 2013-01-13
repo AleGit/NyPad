@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+body {
+    margin-left:70px; margin-right:70px; margin-top:40px; margin-bottom:70px;
+    /*  background-color:#F8F8F8;
+    background-image: -webkit-linear-gradient(top left, #EEFFEE 25%, #CCFFCC 75%); */
+    background-image:url(syntaxtree.png), -webkit-linear-gradient(top left, #F9F9F9 25%, #E6E6E6 75%);
+    
+}
+
+h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
+    font-family:Arial,Helvetica,sans-serif; color:#555555;
+}
+
+th { background-color:LightGrey; }
+
+/* h1,h2,h3 {clear:both;} */
+
+h1 { font-size:42px; text-decoration:none; }
+
+span.sb { color:green; /*font-family:Verdana;*/ font-weight:normal}
+
+
+a:link { color:#AA5522; text-decoration:none; }
+
+a:visited { color:#772200; text-decoration:none; }
+
+a:active { color:#000000;  text-decoration:none; }
+
+a.an { text-decoration:none; }
+
+div.chapter {
+    float:right;
+    font-size:12px;
+    text-align:right;
+}
+
+div.rbox {
+    float:right;
+    border-width:thin;
+    border-style:dashed;
+    
+    margin:4px; width:50%;
+    padding-left:14px;
+    padding-right:14px;
+}
+
+
+table { border:solid 1px #555555; border-collapse:collapse; }
+table.left { float:left; margin:3px 20px 13px 0px; }
+table.right { float:right; margin:3px 0px 13px 20px; }
+
+tr, th, td { border:solid 1px #AAAAAA; text-align:center; padding:2px 3px 2px 3px;}
+td.green { background-color:#DDFFDD; }
+td.red { background-color:#FFDDDD; }
+
+code { font-family:Arial,Helvetica; color:#0000C0; font-weight:normal;}
+/* kbd,tt,samp { font-family:Courier New,Courier; color:#0000C0; } */
+
+/****************************************
+ *** definitions for hi-res rendering ***
+ ****************************************/
+
+@media (-webkit-min-device-pixel-ratio:2.0)     /* does not work on iPadSimulator 5.0 but 5.1 */
+,(min--moz-device-pixel-ratio:2.0)              /* works in firexox with zoom */
+{
+    body { background-image:url(syntaxtree@2x.png); background-size:1024px 1024px; }
+}
+
+/****************************************
+ *** definitions for print            ***
+ ****************************************/
+
+@media print {
+    h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
+        color:#000000;
+    }
+    
+    table { float:left; margin:3px 20px 16px 0px; border:solid 0.5pt black; border-collapse:expanded; }
+    
+    tr, th, td { border:solid 0.2pt grey; text-align:center;}
+    
+    span.sb { color:green; border:solid 0.2pt orange; }
+    
+}
