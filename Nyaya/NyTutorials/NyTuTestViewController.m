@@ -28,6 +28,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    /*
     NSURL *url = [[NSBundle mainBundle] URLForResource:self.instructionsName withExtension:@"html"];
     
     if (url) {
@@ -39,7 +40,7 @@
     }
     else {
         self.instructionsView.hidden = YES;
-    }
+    }*/
     
     
     self.nextButton.enabled = NO;
