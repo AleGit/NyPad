@@ -541,6 +541,7 @@
 		819731A4169F50C40088E9D9 /* 33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 33.plist; path = Nyaya/NyTutorials/33.plist; sourceTree = "<group>"; };
 		819731A5169F50C40088E9D9 /* 34.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 34.plist; path = Nyaya/NyTutorials/34.plist; sourceTree = "<group>"; };
 		819731A9169F522D0088E9D9 /* QA33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA33.plist; path = Nyaya/NyTutorials/QA33.plist; sourceTree = "<group>"; };
+		8197FD0216A27E3900B830CD /* InputSaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InputSaver.h; path = Nyaya/NyBranches/InputSaver.h; sourceTree = "<group>"; };
 		819AAB0A16A1F85D00FDCA31 /* Test34View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Test34View.xib; path = Nyaya/NyTutorials/Test34View.xib; sourceTree = "<group>"; };
 		819AAB0C16A1F90300FDCA31 /* Test33View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Test33View.xib; path = Nyaya/NyTutorials/Test33View.xib; sourceTree = "<group>"; };
 		819BA0BC169DD90F00545496 /* 41.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 41.plist; path = Nyaya/NyTutorials/41.plist; sourceTree = "<group>"; };
@@ -700,6 +701,7 @@
 				1177498415E7D74900B5C071 /* NyDetailViewController.m */,
 				1177498515E7D74900B5C071 /* NyMasterViewController.h */,
 				1177498615E7D74900B5C071 /* NyMasterViewController.m */,
+				8197FD0216A27E3900B830CD /* InputSaver.h */,
 			);
 			name = NyBranches;
 			path = ..;

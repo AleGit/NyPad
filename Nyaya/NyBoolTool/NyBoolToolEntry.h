@@ -10,9 +10,9 @@
 
 @interface NyBoolToolEntry : NSObject
 
-+ (id)entryWithTitle:(NSString*)title input:(NSString*)input;
++ (id)entryWithDate:(NSDate*)date input:(NSString*)input;
 
-@property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSString* input;
 
 @end

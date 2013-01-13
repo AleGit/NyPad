@@ -21,7 +21,7 @@
 @implementation NyBtDetailViewController
 
 - (NSString*)localizedBarButtonItemTitle {
-    return NSLocalizedString(@"BoolTool", @"BoolTool");
+    return NSLocalizedString(@"Formulas", nil);
 }
 
 #pragma mark - additional ib actions
@@ -53,13 +53,11 @@
     [super configureView];
     // Update the user interface for the detail item.
     
+    self.navigationItem.title = @"BoolTool";
+    
     if (self.detailItem) {
-        self.inputName.text = ((NyBoolToolEntry*)self.detailItem).title;
         self.inputField.text = ((NyBoolToolEntry*)self.detailItem).input;
         self.inputField.delegate = self;
-        
-        self.navigationItem.title = [self.detailItem title];
-        
         
         [self.inputField resignFirstResponder];
         [self resetOutputViews];
@@ -95,18 +93,12 @@
     [self setDnfLabel:nil];
     [self setDnfField:nil];
     [self setResultView:nil];
-    [self setStdLabel:nil];
-    [self setStdField:nil];
     [self setBddView:nil];
-    [self setInputName:nil];
     [self setTruthTableView:nil];
     [super viewDidUnload];
 }
 
 - (void)resetOutputViews {
-    
-    
-    self.stdField.text = @"";
     self.nnfField.text = @"";
     self.cnfField.text = @"";
     self.dnfField.text = @"";
@@ -163,8 +155,7 @@
             
             if (formula.isWellFormed) {
                 dispatch_async(mq, ^{
-                    [self.inputSaver save:self.inputName.text input:self.parsedField.text]; // must be the main thread
-                    self.navigationItem.title = self.inputName.text;
+                    [self.inputSaver save:[NSDate date] input:self.parsedField.text]; // must be the main thread
                 });
                 
                 BddNode *bdd = [formula OBDD:YES];
@@ -290,12 +281,11 @@
     CGFloat yoffset = 0.0;
     
     
-    for (UITextView *textView in @[_stdField, _nnfField, _cnfField, _dnfField]) {
+    for (UITextView *textView in @[_nnfField, _cnfField, _dnfField]) {
         CGSize size = [self textViewSize: textView];
         yoffset += [self resizeView: textView toSize:size yOffset:yoffset];
     }
     
-    [self centerView:self.stdLabel verticallyTo:self.stdField.frame];
     [self centerView:self.nnfLabel verticallyTo:self.nnfField.frame];
     [self centerView:self.cnfLabel verticallyTo:self.cnfField.frame];
     [self centerView:self.dnfLabel verticallyTo:self.dnfField.frame];
@@ -322,8 +312,9 @@
     [self.bddView setNeedsDisplay];
 }
 
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    self.inputName.text = @"";
+    textField.text = @"";
     return YES;
 }
 @end

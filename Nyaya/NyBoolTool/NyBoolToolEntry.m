@@ -10,17 +10,17 @@
 
 @implementation NyBoolToolEntry
 
-- (id)initWithTitle:(NSString *)title input:(NSString *)input {
+- (id)initWithDate:(NSDate *)date input:(NSString *)input {
     self = [super init];
     if (self) {
-        _title = title;
+        _date = date;
         _input = input;
     }
     return self;
 }
 
-+ (id)entryWithTitle:(NSString *)title input:(NSString *)input {
-    return [[NyBoolToolEntry alloc] initWithTitle:title input:input];
++ (id)entryWithDate:(NSDate *)date input:(NSString *)input {
+    return [[NyBoolToolEntry alloc] initWithDate:date input:input];
     
 }
 

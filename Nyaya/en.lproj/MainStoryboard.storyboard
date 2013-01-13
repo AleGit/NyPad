@@ -313,18 +313,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="8K9-l0-yLe" style="IBUITableViewCellStyleDefault" id="t9d-m1-fZK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="8K9-l0-yLe" detailTextLabel="1CD-aF-evJ" style="IBUITableViewCellStyleSubtitle" id="t9d-m1-fZK">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8K9-l0-yLe">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8K9-l0-yLe">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1CD-aF-evJ">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
@@ -499,20 +506,8 @@
                         <rect key="frame" x="0.0" y="64" width="703" height="655"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="832-7W-yfJ">
-                                <rect key="frame" x="20" y="20" width="79" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" keyboardType="alphabet" returnKeyType="send"/>
-                                <connections>
-                                    <action selector="didEndOnExit:" destination="mdJ-xw-K5Z" eventType="editingDidEndOnExit" id="de6-ry-6L6"/>
-                                    <action selector="editingChanged:" destination="mdJ-xw-K5Z" eventType="editingChanged" id="Fgv-6s-Awt"/>
-                                    <action selector="editingDidBegin:" destination="mdJ-xw-K5Z" eventType="editingDidBegin" id="zqg-Mc-W7I"/>
-                                </connections>
-                            </textField>
                             <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" id="x3q-AL-9lz">
-                                <rect key="frame" x="107" y="20" width="576" height="37"/>
+                                <rect key="frame" x="20" y="20" width="663" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
@@ -524,7 +519,7 @@
                                 </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, " id="bva-gS-5tb">
-                                <rect key="frame" x="107" y="65" width="576" height="37"/>
+                                <rect key="frame" x="20" y="65" width="663" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
@@ -535,70 +530,58 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Tautology" textAlignment="center" id="rB3-XC-X1G">
-                                        <rect key="frame" x="107" y="20" width="160" height="37"/>
+                                        <rect key="frame" x="20" y="20" width="160" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Satisfiable" textAlignment="center" id="dk3-gu-CJ0">
-                                        <rect key="frame" x="275" y="20" width="160" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="271" y="20" width="160" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Contradiction" textAlignment="center" id="Wq2-bY-uVG">
-                                        <rect key="frame" x="443" y="20" width="160" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="523" y="20" width="160" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="STD" id="1We-Ua-4hw">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="NNF" id="Z9H-Lf-bZB">
                                         <rect key="frame" x="20" y="68" width="79" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem " id="5B6-sD-v2M">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem " id="Ev8-0C-DyS">
                                         <rect key="frame" x="107" y="65" width="576" height="37"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="NNF" id="Z9H-Lf-bZB">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="CNF" id="78L-5J-yak">
                                         <rect key="frame" x="20" y="113" width="79" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem " id="Ev8-0C-DyS">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum " id="3cV-YF-ZoP">
                                         <rect key="frame" x="107" y="110" width="576" height="37"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="CNF" id="78L-5J-yak">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="DNF" id="Hoq-ts-ZFa">
                                         <rect key="frame" x="20" y="158" width="79" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum " id="3cV-YF-ZoP">
-                                        <rect key="frame" x="107" y="155" width="576" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                    </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="DNF" id="Hoq-ts-ZFa">
-                                        <rect key="frame" x="20" y="203" width="79" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, " id="0b9-32-rZT">
-                                        <rect key="frame" x="107" y="200" width="576" height="37"/>
+                                        <rect key="frame" x="107" y="155" width="576" height="37"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -610,7 +593,7 @@
                                         <dataDetectorType key="dataDetectorTypes"/>
                                     </webView>
                                     <view opaque="NO" contentMode="scaleToFill" id="Pzh-UR-frg" customClass="NyayaBddView">
-                                        <rect key="frame" x="20" y="245" width="663" height="134"/>
+                                        <rect key="frame" x="20" y="197" width="663" height="182"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -650,14 +633,11 @@
                         <outlet property="dnfField" destination="0b9-32-rZT" id="Gjf-tb-BJS"/>
                         <outlet property="dnfLabel" destination="Hoq-ts-ZFa" id="xy0-bH-nzX"/>
                         <outlet property="inputField" destination="x3q-AL-9lz" id="ppj-Fr-psz"/>
-                        <outlet property="inputName" destination="832-7W-yfJ" id="Gux-Xw-Gn3"/>
                         <outlet property="nnfField" destination="Ev8-0C-DyS" id="wei-1s-FST"/>
                         <outlet property="nnfLabel" destination="Z9H-Lf-bZB" id="KWe-6Y-xOC"/>
                         <outlet property="parsedField" destination="bva-gS-5tb" id="TqB-1V-MHU"/>
                         <outlet property="resultView" destination="2Mp-tK-Ncl" id="NYj-WD-VlX"/>
                         <outlet property="satisfiabilityLabel" destination="dk3-gu-CJ0" id="j9d-5g-gvf"/>
-                        <outlet property="stdField" destination="5B6-sD-v2M" id="TNE-T5-gU3"/>
-                        <outlet property="stdLabel" destination="1We-Ua-4hw" id="pJk-0f-OpM"/>
                         <outlet property="tautologyLabel" destination="rB3-XC-X1G" id="dAc-Eu-Hww"/>
                         <outlet property="truthTableView" destination="4R9-pc-TXy" id="o8X-C1-skb"/>
                     </connections>
@@ -693,7 +673,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="4Wm-0n-N18" detailTextLabel="qDn-Ye-RIo" style="IBUITableViewCellStyleSubtitle" id="wK5-ZZ-GaU">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="4Wm-0n-N18" detailTextLabel="QuD-aF-fag" style="IBUITableViewCellStyleSubtitle" id="wK5-ZZ-GaU">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -703,14 +683,14 @@
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Wm-0n-N18">
                                             <rect key="frame" x="10" y="2" width="38" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="18"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qDn-Ye-RIo">
-                                            <rect key="frame" x="10" y="24" width="47" height="17"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QuD-aF-fag">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
@@ -755,112 +735,6 @@
         <image name="i4.png" width="30" height="30"/>
         <image name="i5.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="NyBtDetailViewController" superclassName="NyDetailInputViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="didEndOnExit:"/>
-                <relationship kind="action" name="editingChanged:"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="process:" candidateClass="UIButton"/>
-                <relationship kind="action" name="send:"/>
-                <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
-                <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="cnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="contradictionLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="dnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="inputName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nnfField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="nnfLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="parsedField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="resultView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="satisfiabilityLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="stdField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="stdLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="tautologyLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="truthTableView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyBtMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyBtMasterViewController.h"/>
-        </class>
-        <class className="NyDetailInputViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailInputViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dismissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="processButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="NyDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyDetailViewController.h"/>
-        </class>
-        <class className="NyGlDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyGlMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyGlMasterViewController.h"/>
-        </class>
-        <class className="NyMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyMasterViewController.h"/>
-        </class>
-        <class className="NyPgCanvasView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgCanvasView.h"/>
-        </class>
-        <class className="NyPgDetailViewController" superclassName="NyDetailInputViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="canvasLongPress:" candidateClass="UILongPressGestureRecognizer"/>
-                <relationship kind="action" name="canvasTap:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="canvasView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NyPgMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyPgMasterViewController.h"/>
-        </class>
-        <class className="NyTuDetailViewController" superclassName="NyDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyTuMasterViewController" superclassName="NyMasterViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuMasterViewController.h"/>
-        </class>
-        <class className="NyTuTestViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyTuTestViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="check:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="next:"/>
-                <relationship kind="outlet" name="checkButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="instructionsView" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NyWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyWelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NyayaBddView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaBddView.h"/>
-        </class>
-        <class className="NyayaTabBarViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NyayaTabBarViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

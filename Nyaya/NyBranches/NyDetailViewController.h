@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NyAccessoryController.h"
+#import "InputSaver.h"
+
 
 @interface NyDetailViewController : UIViewController  <UISplitViewControllerDelegate>
 
@@ -21,7 +23,7 @@
 @interface NyDetailInputViewController : NyDetailViewController <NyAccessoryController,UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *inputField;
-
+@property (weak, nonatomic) id<InputSaver> inputSaver;
 @end
 
 

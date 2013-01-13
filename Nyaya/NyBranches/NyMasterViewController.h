@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputSaver.h"
 
 @class NyDetailViewController;
+
+
 
 @interface NyMasterViewController : UITableViewController
 {
@@ -20,5 +23,9 @@
 
 - (NSString*)bundlePath:(NSString*)fileName;
 - (NSString*)documentPath: (NSString*)fileName;
+
+@end
+
+@interface NyMasterDataViewController : NyMasterViewController <InputSaver>
 
 @end

@@ -8,6 +8,7 @@
 
 #import "NyDetailViewController.h"
 #import "NyMasterViewController.h"
+#import "NyBoolToolEntry.h"
 
 @interface NyMasterViewController ()
 
@@ -177,5 +178,88 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);NSString *documentsDirectory = [paths objectAtIndex:0];
     return[[documentsDirectory stringByAppendingPathComponent:@"BoolToolData"] stringByAppendingPathExtension:@"plist"];
 }
+
+@end
+
+@implementation NyMasterDataViewController
+
+- (BOOL)save:(NSDate *)date input:(NSString *)input {
+    if ([input length] == 0) return NO;
+    
+    BOOL newEntryWasSaved = NO;
+    NSUInteger idx = [_objects indexOfObjectPassingTest:^BOOL(NyBoolToolEntry *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj.input isEqualToString:input]) {
+            obj.date = date;
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    }];
+    
+    if (idx == NSNotFound) {
+        
+        [_objects insertObject:[NyBoolToolEntry entryWithDate:date input:input] atIndex:0];
+        newEntryWasSaved = YES; // a new entry was created
+    }
+    else {
+        NyBoolToolEntry *entry = [_objects objectAtIndex:idx];
+        [_objects removeObjectAtIndex:idx];
+        [_objects insertObject:entry atIndex:0];
+    }
+    
+    
+    [self.tableView reloadData];
+    
+    [self writeMasterData];
+    
+    return newEntryWasSaved;
+    
+}
+- (void)readMasterData {
+ 
+    [(id)self.detailViewController setInputSaver:self];
+    
+    NSArray *array = [NSArray arrayWithContentsOfFile:[self documentPath:@"BoolToolData"]];
+    
+    if ([array count] == 0 || [[array objectAtIndex:0] count] < 2) {
+        array = [NSArray arrayWithContentsOfFile:[self bundlePath:@"BoolToolData"]];
+    }
+    
+    if ([array count] == 0 || [[array objectAtIndex:0] count] != 2) {
+        array = @[@[@"P",@"p ∨ q ∧ r"]];
+    }
+    
+    NSMutableArray *entries = [NSMutableArray arrayWithCapacity:[array count]];
+    for (NSArray *entry in array) {
+        if ([entry count] == 2) {
+            [entries addObject:[NyBoolToolEntry entryWithDate:[entry objectAtIndex:0] input:[entry objectAtIndex:1]]];
+        }
+    }
+    
+    if ([entries count] > 0) {
+        _objects = entries;
+    }
+}
+
+- (void)writeMasterData {
+    NSString *path = [self documentPath:@"BoolToolData"];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[_objects count]];
+    for (NyBoolToolEntry *entry in _objects) {
+        [array addObject:@[entry.date, entry.input]];
+    }
+    [array writeToFile:path atomically:YES];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    NyBoolToolEntry *object = [_objects objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",object.date];
+    cell.textLabel.text = object.input;
+    return cell;
+}
+
 
 @end

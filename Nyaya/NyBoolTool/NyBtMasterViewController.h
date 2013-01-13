@@ -9,7 +9,7 @@
 #import "NyMasterViewController.h"
 #import "NyBtDetailViewController.h"
 
-@interface NyBtMasterViewController : NyMasterViewController
+@interface NyBtMasterViewController : NyMasterDataViewController
 
 @property (readonly, nonatomic) NyBtDetailViewController *booltoolViewController;
 

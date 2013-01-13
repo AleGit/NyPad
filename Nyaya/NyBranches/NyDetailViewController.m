@@ -81,7 +81,7 @@
 // ****************************
 - (void)configureView {
     if (_detailItem) self.navigationItem.title = [_detailItem description];
-    else self.navigationItem.title = [self localizedBarButtonItemTitle];
+    self.navigationItem.title = [self localizedBarButtonItemTitle];
 }
 
 - (void)setDetailItem:(id)newDetailItem
