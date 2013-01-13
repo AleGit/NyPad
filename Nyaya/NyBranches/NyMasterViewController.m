@@ -115,7 +115,11 @@
 // ****************************
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    NSInteger count = 0;
+    //dispatch_sync(dispatch_get_main_queue(), ^{
+        count = _objects.count;
+    //});
+    return count;
 }
 
 // ****************************
@@ -183,6 +187,15 @@
 
 @implementation NyMasterDataViewController
 
++ (NSMutableArray *)dataArray {
+    static dispatch_once_t pred = 0;
+    __strong static NSMutableArray* _array = nil;
+    dispatch_once(&pred, ^{
+        _array = [NSMutableArray arrayWithCapacity:40];
+    });
+    return _array;
+}
+
 - (BOOL)tableViewIsAddable {
     return NO;
 }
@@ -201,14 +214,17 @@
     }];
     
     if (idx == NSNotFound) {
-        
-        [_objects insertObject:[NyBoolToolEntry entryWithDate:date input:input] atIndex:0];
+        //dispatch_sync(dispatch_get_main_queue(), ^{
+            [_objects insertObject:[NyBoolToolEntry entryWithDate:date input:input] atIndex:0];
+        //});
         newEntryWasSaved = YES; // a new entry was created
     }
     else {
         NyBoolToolEntry *entry = [_objects objectAtIndex:idx];
+        // dispatch_sync(dispatch_get_main_queue(), ^{
         [_objects removeObjectAtIndex:idx];
-        [_objects insertObject:entry atIndex:0];
+            [_objects insertObject:entry atIndex:0];
+        //});
     }
     
     
@@ -219,62 +235,84 @@
     return newEntryWasSaved;
     
 }
-- (void)readMasterData {
- 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [(id)self.detailViewController setInputSaver:self];
     
-    NSArray *array = [NSArray arrayWithContentsOfFile:[self documentPath:@"BoolToolData"]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
+- (void)readMasterData {
+    _objects = [NyMasterDataViewController dataArray];
     
-    if ([array count] == 0 || [[array objectAtIndex:0] count] < 2) {
-        array = [NSArray arrayWithContentsOfFile:[self bundlePath:@"BoolToolData"]];
-    }
-    
-    if ([array count] == 0 || [[array objectAtIndex:0] count] != 2) {
-        array = @[@[@"P",@"p ∨ q ∧ r"]];
-    }
-    
-    NSMutableArray *entries = [NSMutableArray arrayWithCapacity:[array count]];
-    for (NSArray *entry in array) {
-        if ([entry count] == 2) {
-            [entries addObject:[NyBoolToolEntry entryWithDate:[entry objectAtIndex:0] input:[entry objectAtIndex:1]]];
+    if ([_objects count] == 0) {
+        
+        NSArray *array = [NSArray arrayWithContentsOfFile:[self documentPath:@"BoolToolData"]];
+        
+        if ([array count] == 0 || [[array objectAtIndex:0] count] < 2) {
+            array = [NSArray arrayWithContentsOfFile:[self bundlePath:@"BoolToolData"]];
         }
-    }
-    
-    if ([entries count] > 0) {
-        _objects = entries;
+        
+        if ([array count] == 0 || [[array objectAtIndex:0] count] != 2) {
+            array = @[@[@"P",@"p ∨ q ∧ r"]];
+        }
+        
+        NSMutableArray *entries = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSArray *entry in array) {
+            if ([entry count] == 2) {
+                [entries addObject:[NyBoolToolEntry entryWithDate:[entry objectAtIndex:0] input:[entry objectAtIndex:1]]];
+            }
+        }
+        
+        if ([entries count] > 0) {
+            [_objects addObjectsFromArray:entries];
+        }
     }
 }
 
 - (void)writeMasterData {
     NSString *path = [self documentPath:@"BoolToolData"];
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[_objects count]];
-    for (NyBoolToolEntry *entry in _objects) {
-        [array addObject:@[entry.date, entry.input]];
-    }
-    [array writeToFile:path atomically:YES];
+    //dispatch_sync(dispatch_get_main_queue(), ^{
+        for (NyBoolToolEntry *entry in _objects) {
+            [array addObject:@[entry.date, entry.input]];
+        }
+        [array writeToFile:path atomically:YES];
+    //});
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
-    NyBoolToolEntry *object = [_objects objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",object.date];
-    cell.textLabel.text = object.input;
+    cell.textLabel.text = NSLocalizedString(@"UNAVAILABLE",nil);
+    // dispatch_sync(dispatch_get_main_queue(), ^{
+        if (indexPath.row < [_objects count]) {
+            NyBoolToolEntry *object = [_objects objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",object.date];
+            cell.textLabel.text = object.input;
+    }
+    //});
     return cell;
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
+        // dispatch_sync(dispatch_get_main_queue(), ^{
+            [_objects removeObjectAtIndex:indexPath.row];
+        //});
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self writeMasterData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
-
 
 @end

@@ -23,7 +23,7 @@
 @interface NyDetailInputViewController : NyDetailViewController <NyAccessoryController,UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *inputField;
-@property (weak, nonatomic) id<InputSaver> inputSaver;
+@property (weak, nonatomic) id<BoolToolDataSaver> inputSaver;
 @end
 
 

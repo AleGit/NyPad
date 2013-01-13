@@ -26,6 +26,6 @@
 
 @end
 
-@interface NyMasterDataViewController : NyMasterViewController <InputSaver>
+@interface NyMasterDataViewController : NyMasterViewController <BoolToolDataSaver>
 
 @end

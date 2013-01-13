@@ -1,5 +1,5 @@
 //
-//  InputSaver.h
+//  BoolToolData.h
 //  Nyaya
 //
 //  Created by Alexander Maringele on 13.01.13.
@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol BoolToolDataSaver<NSObject>
-+ (NSMutableArray*)dataArray;
-- (void)writeMasterData;
-- (BOOL)save:(NSDate*)date input:(NSString*)input;
+@interface BoolToolData : NSObject
+
 @end

@@ -205,6 +205,7 @@
 		819731A6169F50C40088E9D9 /* 33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A4169F50C40088E9D9 /* 33.plist */; };
 		819731A7169F50C40088E9D9 /* 34.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A5169F50C40088E9D9 /* 34.plist */; };
 		819731AA169F522E0088E9D9 /* QA33.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819731A9169F522D0088E9D9 /* QA33.plist */; };
+		8197BF8816A292F2002B7205 /* BoolToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8197BF8716A292F2002B7205 /* BoolToolData.m */; };
 		819AAB0B16A1F85D00FDCA31 /* Test34View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819AAB0A16A1F85D00FDCA31 /* Test34View.xib */; };
 		819AAB0D16A1F90300FDCA31 /* Test33View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819AAB0C16A1F90300FDCA31 /* Test33View.xib */; };
 		819BA0C0169DD90F00545496 /* 41.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819BA0BC169DD90F00545496 /* 41.plist */; };
@@ -541,6 +542,8 @@
 		819731A4169F50C40088E9D9 /* 33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 33.plist; path = Nyaya/NyTutorials/33.plist; sourceTree = "<group>"; };
 		819731A5169F50C40088E9D9 /* 34.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 34.plist; path = Nyaya/NyTutorials/34.plist; sourceTree = "<group>"; };
 		819731A9169F522D0088E9D9 /* QA33.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = QA33.plist; path = Nyaya/NyTutorials/QA33.plist; sourceTree = "<group>"; };
+		8197BF8616A292F2002B7205 /* BoolToolData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoolToolData.h; path = Nyaya/NyBranches/BoolToolData.h; sourceTree = "<group>"; };
+		8197BF8716A292F2002B7205 /* BoolToolData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoolToolData.m; path = Nyaya/NyBranches/BoolToolData.m; sourceTree = "<group>"; };
 		8197FD0216A27E3900B830CD /* InputSaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InputSaver.h; path = Nyaya/NyBranches/InputSaver.h; sourceTree = "<group>"; };
 		819AAB0A16A1F85D00FDCA31 /* Test34View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Test34View.xib; path = Nyaya/NyTutorials/Test34View.xib; sourceTree = "<group>"; };
 		819AAB0C16A1F90300FDCA31 /* Test33View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Test33View.xib; path = Nyaya/NyTutorials/Test33View.xib; sourceTree = "<group>"; };
@@ -702,6 +705,8 @@
 				1177498515E7D74900B5C071 /* NyMasterViewController.h */,
 				1177498615E7D74900B5C071 /* NyMasterViewController.m */,
 				8197FD0216A27E3900B830CD /* InputSaver.h */,
+				8197BF8616A292F2002B7205 /* BoolToolData.h */,
+				8197BF8716A292F2002B7205 /* BoolToolData.m */,
 			);
 			name = NyBranches;
 			path = ..;
@@ -1522,6 +1527,7 @@
 				113CAE3F160A3BC500BEBC90 /* NyayaNode+Transformations.m in Sources */,
 				11EAB8E0161432D800C8DE32 /* NyayaNode+Random.m in Sources */,
 				8196FF8116A1AB05004D3A1B /* BinaryTreeView.m in Sources */,
+				8197BF8816A292F2002B7205 /* BoolToolData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
