@@ -7,7 +7,8 @@ and standard transformations of Boolean functions.
 The environment was meant to be self-explanatory. 
 
 The core of this concept builds on tutorials with exercises 
-and a playground where the learned knowledge can be used in different modes. 
+and a playground where the %learned 
+acquired knowledge can be used in different modes. 
 A glossary of terms and a formula calculator (BoolTool) to check formulas will support the user in their learning.
 
 \section{Tutorials}
@@ -17,7 +18,8 @@ but only some basic rules of natural deduction.
 It introduces normal forms, truth tables and binary decision diagrams 
 as different but equivalent representations of Boolean functions.
 
-The structure of the tutorials and the content of the exercises are heavily based on the according sections of the book  
+The structure of the tutorials and the content of the exercises are heavily based on %the according
+related sections of the book  
 {\em Logic in Computer Science} \cite{Huth:2004:LCS:975331} by M.~Huth and M.~Ryan.
 Additional content was taken from the lecture {\em Logic} \cite{Middeldorp:2012:LICS} by {A. Middeldorp}.
 
@@ -168,9 +170,9 @@ but
 \subsubsection{Limits}
 \label{tut:14}
 
-(14) Some examples are given to demonstrate that not every situation can modeled in propositional logic.
+(14) Some examples are given to demonstrate that not every situation can be modeled in propositional logic.
 
-The user has to ‘guess’ whether sentences in natural language are suitable for propositional logic.
+% The user has to ‘guess’ whether sentences in natural language are suitable for propositional logic.
 
 \subsection{Syntax}
 
@@ -243,7 +245,7 @@ $T$		&$::=$ & $p$ &|& $(P)$
 
 (23) Sub-formulas (starting from atoms) are used to build bigger formulas. Big formulas are build from many sub-formulas.
 
-The user have to extract the set of sub-formulas from composite formulas. 
+The user has to extract the set of sub-formulas from composite formulas. 
 A correct answer for 
 ‘$a \vee b \wedge c$’ would be
 ‘$a,b,c,b\wedge c, a \vee b \wedge c$‘. 
@@ -255,7 +257,7 @@ But no sub-formula may occur more than once.
 
 (24) Syntax trees as graphical representation of well formed formulas are introduced. 
 
-The user has to write formulas for presented syntax trees. They can use parentheses as they like – still the formulas has to match the syntax trees exactly. ‘$a \vee b$’ does not match the syntax tree representing ‘$b \vee a$’, where the node ‘$a$’ is on the right branch of the node ‘$\vee$’.
+The user has to write formulas for presented syntax trees. They can use parentheses as they like – still the formulas have to match the syntax trees exactly. ‘$a \vee b$’ does not match the syntax tree representing ‘$b \vee a$’, where the node ‘$a$’ is on the right branch of the node ‘$\vee$’.
 
 \subsubsection{Top and Bottom}
 \label{tut:25}
@@ -277,7 +279,7 @@ $\top$ & $\top$ & $ \bot$&$ \bot$\\
 \end{center}
 \end{table}
 
-The user has to simply given formulas.
+The user has to simplify given formulas using the tautologies, contradictions and basic rules of natural deduction.
 
 %\subsubsection{Simplifying formulas – basic natural deduction rules}
 %\label{tut:206}
@@ -364,7 +366,7 @@ The advantages of propositional formulas in special shapes will be emphasized.
 %in \tabref{tab:CNF} and \tabref{tab:DNF}.
 The definitions of implication free forms, negation normal form, 
 conjunctive normal forms and disjunctive normal forms will be provided. 
-An receipt to transform arbitrary propositional formulas into specific normal forms will be delivered.
+A recipe to transform arbitrary propositional formulas into specific normal forms will be delivered.
 Rules to detect satisfiability or validity from normal forms will be mentioned.
 
 \subsubsection{Implication Free Form}
@@ -606,14 +608,14 @@ The user has to check whether a binary decision diagram is ordered and/or reduce
 
 \section{Playground}
 
-In the playground the user can create arbitrary propositional formulas 
+On the playground the user can create arbitrary propositional formulas 
 by building syntax trees interactively.
 Truth assignments can be applied and will be visualized.
 The playground supports a least the following use cases.
 
 \begin{itemize}
 
-\item In the {\em free mode} arbitrary formulas can be created by adding, replacing and removing connectives and atoms. The process starts with an atom, which an be expanded or replaced. 
+\item In the {\em free mode} arbitrary formulas can be created by adding, replacing and removing connectives and atoms. The process starts with an atom, which can be expanded or replaced. 
 Connectives can be changed any time, sub-formulas can be reordered.
 The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \bot, p, q, r, … \}$.
 
@@ -713,13 +715,13 @@ Terms, definitions and truth tables from the tutorials are listed in the glossar
 
 \section{BoolTool}
 
-The interactive environment have to contain the functionality of the
+The interactive environment has to contain the functionality of the
 \href{http://cl-informatik.uibk.ac.at/software/booltool/}{BoolTool web frontend}.
 
 \subsection{Input}
 
-At least the embedded BoolTool must support Latin letters as identifiers for atoms, 
-and have to parse the symbols
+In the least the embedded BoolTool must support Latin letters as identifiers for atoms, 
+and has to parse the symbols
 \verb#T# as top, 
 \verb#F# as bottom,
 \verb#!# as negation operator, 
@@ -734,8 +736,8 @@ Standard symbols “$ \neg \vee \wedge \rightarrow $”
 and additional symbols of propositional logic and Boolean expressions
 should be accepted too (see \tabref{tab:BASICSYMBOLS}) 
 to make extended or custom keyboards more useful.
-A limitation of the Latin characters for identifiers should be avoided, 
-because Chinese symbols make good identifiers too (\figref{fig:BoolToolChineseInput}).
+A limitation to Latin characters should be avoided, since, for example, 
+Chinese symbols also make good identifiers. (\figref{fig:BoolToolChineseInput}).
 
 \begin{figure}[htbp]
 \begin{center}

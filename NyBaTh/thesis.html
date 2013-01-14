@@ -1,0 +1,2708 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+           "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<meta name="GENERATOR" content="TtH 4.03">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+ <style type="text/css"><!--
+ .tiny {font-size:30%;}
+ .scriptsize {font-size:xx-small;}
+ .footnotesize {font-size:x-small;}
+ .smaller {font-size:smaller;}
+ .small {font-size:small;}
+ .normalsize {font-size:medium;}
+ .large {font-size:large;}
+ .larger {font-size:x-large;}
+ .largerstill {font-size:xx-large;}
+ .huge {font-size:300%;}
+ --></style>
+
+ 												     
+<title>name=computer,</title>
+
+<div class="p"><!----></div>
+name=computer,
+  description=is a programmable machine that receives input,
+               stores and manipulates data, and provides
+               output in a useful format
+
+
+<div class="p"><!----></div>
+  name=na&#239;ve,
+  description=is a French loanword (adjective, form of naïf)
+               indicating having or showing a lack of experience,
+               understanding or sophistication
+
+
+<div class="p"><!----></div>
+ 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ `"
+  
+<div class="p"><!----></div>
+
+<title>\Nyaya for iPad\vspace{0.5cm}\ \LARGE{Interactive Environment for BoolTool}</title>
+    
+<h1 align="center">Ny<span class="overacc2">&#x2015;</span>ayafor iPad<br /><br /><span class="largerstill">Interactive Environment for BoolTool</span> </h1>
+
+
+
+<h3 align="center">Alexander&nbsp;Maringele </h3>
+
+<h3 align="center"><a href="pics/NyayaAppIcon1024.png">Figure</a><br />Jan 13, 2013
+</h3>
+
+
+<div class="p"><!----></div>
+
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<h1>Contents </h1>
+
+<a href="#tth_chAp1"
+>1&nbsp; Introduction</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.1"
+>1.1&nbsp; Propositional logic</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.2"
+>1.2&nbsp; BoolTool</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.3"
+>1.3&nbsp; Ny\mathaccentV bar016aya </a><br />
+<a href="#tth_chAp2"
+>2&nbsp; Related Work</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc2.1"
+>2.1&nbsp; Websites</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc2.2"
+>2.2&nbsp; Apps for iPad</a><br />
+<a href="#tth_chAp3"
+>3&nbsp; Concept</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1"
+>3.1&nbsp; Tutorials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1.1"
+>3.1.1&nbsp; Introduction</a><br />
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1.2"
+>3.1.2&nbsp; Syntax</a><br />
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1.3"
+>3.1.3&nbsp; Semantics</a><br />
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1.4"
+>3.1.4&nbsp; Normal Forms</a><br />
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1.5"
+>3.1.5&nbsp; Binary Decision Diagrams</a><br />
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.2"
+>3.2&nbsp; Playground</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3"
+>3.3&nbsp; Glossary</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.4"
+>3.4&nbsp; BoolTool</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.4.1"
+>3.4.1&nbsp; Input</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.4.2"
+>3.4.2&nbsp; Output</a><br />
+<a href="#tth_chAp4"
+>4&nbsp; Tools and Processes</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.1"
+>4.1&nbsp; Tools</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.1.1"
+>4.1.1&nbsp; Developing for the iPad</a><br />
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.1.2"
+>4.1.2&nbsp; Source Code Management</a><br />
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.2"
+>4.2&nbsp; Project execution</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.2.1"
+>4.2.1&nbsp; Phases</a><br />
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.2.2"
+>4.2.2&nbsp; Development model</a><br />
+
+
+
+<a href="#tth_chAp5"
+>5&nbsp; Implementation</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.1"
+>5.1&nbsp; Architecture</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2"
+>5.2&nbsp; Model</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2.1"
+>5.2.1&nbsp; Propositional formulas and Boolean expressions</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2.2"
+>5.2.2&nbsp; Abstract Syntax Trees</a><br />
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2.3"
+>5.2.3&nbsp; Parser</a><br />
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2.4"
+>5.2.4&nbsp; Truth Tables</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.2.5"
+>5.2.5&nbsp; Binary Decision Diagrams</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3"
+>5.3&nbsp; Views and Controllers</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3.1"
+>5.3.1&nbsp; Welcome</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3.2"
+>5.3.2&nbsp; Tutorials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3.3"
+>5.3.3&nbsp; Playground</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3.4"
+>5.3.4&nbsp; Glossary</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.3.5"
+>5.3.5&nbsp; BoolTool</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.4"
+>5.4&nbsp; Application content</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.4.1"
+>5.4.1&nbsp; Content on delivery</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.4.2"
+>5.4.2&nbsp; User created content</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc5.4.3"
+>5.4.3&nbsp; Export and import of content</a><br />
+<a href="#tth_chAp6"
+>6&nbsp; Retrospective</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc6.1"
+>6.1&nbsp; Important improvements</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc6.2"
+>6.2&nbsp; Outlook</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc6.2.1"
+>6.2.1&nbsp; Additional features</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc6.2.2"
+>6.2.2&nbsp; Additional platforms</a><br />
+<a href="#tth_chAp7"
+>7&nbsp; Conclusion and Summary</a><br />
+
+
+
+<a href="#tth_chApA"
+>A&nbsp; Symbols</a><br />
+<a href="#tth_chApB"
+>B&nbsp; Definitions</a><br />
+<a href="#tth_chApC"
+>C&nbsp; Screenshots</a><br />
+
+
+ <a id="tth_chAp1"></a><h1>
+Chapter 1 <br />Introduction</h1> 			
+
+<div class="p"><!----></div>
+
+<blockquote><div>The aim of logic in computer science is to develop languages 
+to model the situations we encounter as computer science professionals, 
+in such way that we can reason about them formally. [<a href="#Huth:2004:LCS:975331" id="CITEHuth:2004:LCS:975331">6</a>]
+</div></blockquote>
+
+<div class="p"><!----></div>
+Logic is used daily. Although the core of reasoning and the foundation of computer science, 
+logic still takes time and practice to be mastered sound and complete. 
+Uncertainty in the formalisms of logic leads to fundamental inaccuracies 
+in the modeling of various applications in computer science. 
+Therefore logic is a mandatory part of every computer science course. 
+
+<div class="p"><!----></div>
+Each tool that promotes a deeper and more accurate understanding of formalisms and applications of logic,
+or simply provides an easier introduction to formal logic, 
+is a welcome addition to the toolbox of training.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Propositional logic</h2>
+
+<div class="p"><!----></div>
+Propositional logic is – to put it simply - the entry point and the innermost core of logic. 
+It is a powerful formal language, which can be used in many fields. 
+But it also has limits of expressiveness and so 
+there are many more powerful formal languages of logic, 
+which can not be mastered without a sufficient understanding  of propositional logic.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;BoolTool</h2>
+
+<div class="p"><!----></div>
+BoolTool by the Computational Logic Research Group at the University of Innsbruck allows the manipulation and evaluation of Boolean functions. The tool supports different representations of Boolean functions and a variety of different algorithms.
+Propositional logic is one of many representations of Boolean functions.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc3"></a><h2>
+3&nbsp;&nbsp;Ny<span class="overacc2">&#x2015;</span>aya</h2>
+
+<div class="p"><!----></div>
+The aim of Ny<span class="overacc2">&#x2015;</span>ayawas to build an interactive environment on an iPad,
+that allows the user to learn simple facts about the formalism of propositional logic 
+and standard transformations of Boolean functions. 
+The environment had to be self-explanatory and had to be integrated with BoolTool. 
+
+<div class="p"><!----></div>
+
+
+<div class="p"><!----></div>
+ <a id="tth_chAp2"></a><h1>
+Chapter 2 <br />Related Work</h1>						
+
+<div class="p"><!----></div>
+Ny<span class="overacc2">&#x2015;</span>aya for iPad is not the first program,  that processes expressions of propositional logic. 
+Besides powerful SAT-solvers and automatic provers, which rarely can be used by beginners,
+there are some software products, that can be used on a basic level of experience with propositional logic and Boolean expressions.  
+Most of them provide a (short) introduction to propositional logic, but they seldom offer tutorials or exercises. 	
+
+<div class="p"><!----></div>
+The following list presents some software products accessible
+via website and apps available for iPad.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Websites</h2>
+
+<div class="p"><!----></div>
+
+<ul>
+<li> <a href="http://www.cs.wfu.edu/~burg/JavaPackages/indexswingnet.html"><b>PLogic Applet</a></b> 
+by S. Lukins, A. Levicki, and 
+<a href="http://www.cs.wfu.edu/~burg">J. Burg</a> at the
+<a href="http://www.cs.wfu.edu">Wake Forest University</a>, is a
+tutorial program for propositional logic 
+“that serves a double role as an educational tool and a research environment”<a href="#tthFtNtAAB" id="tthFrefAAB"><sup>1</sup></a> and focuses 
+ on interactive theorem-proving.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<a href="http://cl-informatik.uibk.ac.at/software/booltool/"><b>
+<a href="clshortlogo_new.pdf">Figure</a>BoolTool</a></b> 
+by the 
+<a href="http://cl-informatik.uibk.ac.at/">Computational Logic</a> 
+research group at the 
+<a href="http://informatik.uibk.ac.at">University of Innsbruck</a>
+“is an interface to the program BoolTool which allows the manipulation and evaluation of boolean functions.”<a href="#tthFtNtAAC" id="tthFrefAAC"><sup>2</sup></a>. 
+It computes truth tables and binary decision diagrams and checks for satisfiability and validity.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<a href="http://www.wolframalpha.com/input/?i=a+or+b+and+c"><b>
+<a href="related/WolframAlpha.jpg">Figure</a> Wolfram Alpha</a></b> 
+by 
+<a href="http://www.wolfram.com/">Wolfram Research</a> – the makers of 
+<a href="http://www.wolfram.com/mathematica/">Mathematica</a> – supports
+propositional logic by calculating truth tables and minimal forms, 
+but does not draw syntax trees or binary decision diagrams.
+Instead it draws a logic circuit and a venn diagram from the input. 
+Additionaly it calculates the truth density
+and the boolean operator number of the input formula. 
+
+<div class="p"><!----></div>
+Wolfram Alpha does not calculate exactly for an arbitrary number of variables in propositional formulas.
+For example no truth table, conjunctive normal form, no disjunctive normal form is calculated
+for the input
+<a href="http://www.wolframalpha.com/input/?i=a+xor+b+xor+c+xor+d+xor+e+xor+f+xor+g+xor+h+xor+i+xor+j">
+a\veebar b\veebar c\veebar d\veebar e\veebar f\veebar g\veebar h\veebar i\veebar j.</a>
+The truth density is only sampled and does not match the exact result 0.5.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;Apps for iPad</h2>
+
+<div class="p"><!----></div>
+Some apps for iPad or iPod touch that handle aspects of propositional logic.
+
+<div class="p"><!----></div>
+
+<ul>
+<li>  <a href="http://itunes.apple.com/at/app/constraints/id418722652?mt=8"><b>
+<a href="related/Constraints.png">Figure</a> Constraints</a></b>
+by 
+<a href="http://www.mysvc.it/myapps/constraints/">Davide Cucciniello</a> 
+is a “SAT based propositional (boolean) logic engine defined by a list of models, 
+where a model includes a list of constraints (a Knowledge Base) 
+each defined by a propositional formula (x and (y or not z)) 
+including a set of propositional (boolean) variables (x,y,z) 
+and operators (and,or,not).”<a href="#tthFtNtAAD" id="tthFrefAAD"><sup>3</sup></a> 
+lets you build models in an interactive way. It also provides a short introduction in propositional logic, but no tutorials.
+<div class="p"><!----></div>
+</li>
+
+<li> <a href="http://itunes.apple.com/at/app/truth-table-generator/id507190346?mt=8"><b>
+<a href="related/TruthTables.png">Figure</a> Truth Table Generator</a></b> 
+by
+<a href="http://www.mertzwerkz.com/truth.html">Mertz Werkz LLP</a>    
+“constructs truth tables for the Boolean expressions you enter”.<a href="#tthFtNtAAE" id="tthFrefAAE"><sup>4</sup></a>
+It does that nicely by using standard symbols of propositional logic (and a limited set of atoms), but nothing more.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<a href="http://itunes.apple.com/at/app/boolean-logic-cheat-sheet/id341959531?mt=8"><b>
+<a href="related/CheatSheet.png">Figure</a> Boolean Algebra Cheat Sheet</a></b> 
+by 
+Clint Johnson presents two pages of logic “rules and laws“ in low picture quality. So “all of your Boolean 
+logic needs.”<a href="#tthFtNtAAF" id="tthFrefAAF"><sup>5</sup></a> 
+does not feel quite right.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<a href="http://itunes.apple.com/at/app/logic-mania/id434019152?mt=8"><b>
+<a href="related/LogicMania.png">Figure</a> Logic Mania</a></b> 
+by 
+Imagination Creations presents seven logic gates in a list. 
+Their semantics are shown in a per-gate-simulation where the user chooses the input and the app shows the result. 
+A combination of gates is not possible. It's quite nice but the statement “THE [sic] reference application for students 
+studying logic gates.”<a href="#tthFtNtAAG" id="tthFrefAAG"><sup>6</sup></a>
+seems exaggerated.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<a href="http://itunes.apple.com/at/app/circuit-coder/id492180472?mt=8"><b>
+<a href="related/CircuitCoder.png">Figure</a> Circuit Coder</a></b> 
+by 
+<a href="http://sweyla.com/">Trycycle Design HB</a> is a game about building digital circuits,
+which is an application of propositional logic.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+
+<div class="p"><!----></div>
+ <a id="tth_chAp3"></a><h1>
+Chapter 3 <br />Concept</h1>	
+<a id="ch:concept">
+</a>						
+
+<div class="p"><!----></div>
+The aim of this project was to design an interactive environment on a tablet computer 
+that allows the user to learn simple facts about the formalism of propositional logic 
+and standard transformations of Boolean functions. 
+The environment was meant to be self-explanatory. 
+
+<div class="p"><!----></div>
+The core of this concept builds on tutorials with exercises 
+and a playground where the learned knowledge can be used in different modes. 
+A glossary of terms and a formula calculator (BoolTool) to check formulas will support the user in their learning.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Tutorials</h2>
+
+<div class="p"><!----></div>
+Ny<span class="overacc2">&#x2015;</span>ayafor iPad covers syntax and semantics of propositional logic, 
+but only some basic rules of natural deduction. 
+It introduces normal forms, truth tables and binary decision diagrams 
+as different but equivalent representations of Boolean functions.
+
+<div class="p"><!----></div>
+The structure of the tutorials and the content of the exercises are heavily based on the according sections of the book  
+<em>Logic in Computer Science</em> [<a href="#Huth:2004:LCS:975331">6</a>] by M.&nbsp;Huth and M.&nbsp;Ryan.
+Additional content was taken from the lecture <em>Logic</em> [<a href="#Middeldorp:2012:LICS" id="CITEMiddeldorp:2012:LICS">9</a>] by A. Middeldorp.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb1">
+</a> 
+<div style="text-align:center">[mathescape,firstnumber=5]
+  &lt;array&#62; 		&lt;!- root with title and sections -&#62;
+    &lt;string&#62;Tutorials&lt;/string&#62; 					&lt;!- title -&#62;
+    &lt;array&#62;			&lt;!- section with section title and tutorials-&#62;
+      &lt;string&#62;Introduction&lt;/string&#62; 				&lt;!- section title -&#62;
+      &lt;array&#62;		&lt;!- tutorial with title and id -&#62;
+        &lt;string&#62;Motivation&lt;/string&#62; 	&lt;!- tutorial title -&#62;
+        &lt;string&#62;11&lt;/string&#62; 						&lt;!- tutorial id -&#62;
+      &lt;/array&#62;
+		\square
+
+
+<div style="text-align:center">Table 1: Tutorials.plist – the configuration file for all tutorials</div>
+<a id="tab:TUTORIALPLIST">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+General and specific configurations for the tutorials and additional content for the exercises 
+are stored in simple property lists<a href="#tthFtNtAAH" id="tthFrefAAH"><sup>7</sup></a>, 
+which are xml-files with some basic data types for data and collections, 
+that can be easily read and interpreted by different programs.
+The file “Tutorials.plist” (see table ) 
+provides the basic data about available tutorial sections and tutorial titles 
+to build a navigation menu programmatically.
+
+<div class="p"><!----></div>
+Every tutorial includes a teaching part with examples (html-files in utf-8 encoding) 
+and an interactive knowledge checker with exercises, 
+where the user gets immediate feedback. 
+Every interactive part will present some instructions to master the task.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.1"></a><h3>
+1.1&nbsp;&nbsp;Introduction</h3>
+
+<div class="p"><!----></div>
+The first tutorial section with four tutorials 
+(, 
+, 
+,
+) 
+gives an informal introduction to modeling, 
+i.e. the translation from sentences in natural language to sentences in the formal language of propositional logic.
+
+<div class="p"><!----></div>
+The content file “QA1.plist” (see table ) contains
+an array (starts at line 5) 
+of arrays that include sentences and sample solutions 
+(the first exercise starts at line 6). 
+The first string is the sample sentence (at line 7), 
+which must be analyzed by the user
+and the following strings are sample solutions for different exercises. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb2">
+</a> 
+<div style="text-align:center">[firstnumber=5]
+&lt;array&#62;
+  &lt;array&#62; 
+    &lt;string&#62;If the barometer falls, then it will rain.&lt;/string&#62;
+    &lt;string&#62;if p then q&lt;/string&#62;
+    &lt;string&#62;the barometer falls; it will rain&lt;/string&#62;
+    &lt;string&#62;p &#8594; q&lt;/string&#62;
+  &lt;/array&#62;
+\square
+
+
+<div style="text-align:center">Table 2: QA1.plist – content file for the first three tutorials</div>
+<a id="tab:QA1PLIST">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+Each tutorial has its own configuration file 
+(see table )
+with a dictionary that
+describes the task and defines the index of the sample solution,
+with which the user's answer will be checked with some tolerance.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb3">
+</a> 
+<div style="text-align:center">[firstnumber=5]
+&lt;dict&#62;
+  &lt;key&#62;questionLabelText&lt;/key&#62;
+  &lt;string&#62;Guess the structure …&lt;/string&#62;
+  &lt;key&#62;answerLabelText&lt;/key&#62;
+  &lt;string&#62;Use … &lt;/string&#62;
+   &lt;key&#62;solutionLabelText&lt;/key&#62;
+   &lt;string&#62;Sample solution&lt;/string&#62;
+   &lt;key&#62;questionsFile&lt;/key&#62;
+   &lt;string&#62;QA1&lt;/string&#62;
+   &lt;key&#62;solutionIndex&lt;/key&#62;
+   &lt;integer&#62;1&lt;/integer&#62;
+&lt;/dict&#62;
+
+
+<div style="text-align:center">Table 3: 11.plist – configuration file for the first exercise</div>
+<a id="tab:11PLIST">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.1"></a><h4>
+1.1.1&nbsp;&nbsp;Applications</h4>
+<a id="tut:11">
+</a>
+
+<div class="p"><!----></div>
+(11) The aim of logic in general is to reason about situations [<a href="#Huth:2004:LCS:975331">6</a>]. 
+In this tutorial it is shown, how two different paragraphs in natural language 
+can be reduced to the same formal sentence “If p and not q, then r. Not r. p. Therefore, q“. 
+If the reasoning is correct, the user can use it in both situations. 
+
+<div class="p"><!----></div>
+In the interactive part the user has to ‘guess’ the formal structure of composite sentences in natural language. 
+The sentence 
+<tt>‘If&nbsp;the&nbsp;barometer&nbsp;falls,</tt> <tt>then&nbsp;it&nbsp;will&nbsp;rain’</tt> 
+from line 7 of <tt>QA1.plist</tt> (table )
+has to be translated into
+<tt>‘if&nbsp;p&nbsp;then&nbsp;q’</tt> from line 8 (the solution index is defined as 1 in <tt>11.plist</tt>, see table ).
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.2"></a><h4>
+1.1.2&nbsp;&nbsp;Propositions</h4>
+<a id="tut:12">
+</a>
+
+<div class="p"><!----></div>
+(12) The concept of propositions – simple declarative sentences – 
+as indivisible building blocks of propositional logic 
+is explained in more detail. Some counter-examples are presented 
+and the ambiguity of natural language is demonstrated.
+
+<div class="p"><!----></div>
+The user has to find the propositions in composite sentences. 
+The correct answer for 
+<tt>‘If&nbsp;the&nbsp;barometer&nbsp;falls,</tt> <tt>then&nbsp;it&nbsp;will&nbsp;rain’</tt> 
+would be  
+<tt>‘the&nbsp;barometer&nbsp;falls;&nbsp;it&nbsp;will&nbsp;rain’</tt> 
+from line 9 
+(the solution index is defined as 2 in <tt>12.plist</tt>).
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.3"></a><h4>
+1.1.3&nbsp;&nbsp;Connectives</h4>
+<a id="tut:13">
+</a>
+
+<div class="p"><!----></div>
+(13) The basic symbols of propositional logic to connect propositions are introduced. 
+“&#8594;”, “&#172;”, “&#8743;”, and “&#8744;”
+ will replace “if then”, “not”, “and” and “or”. 
+
+<div class="p"><!----></div>
+For the sentence
+<tt>‘If&nbsp;the&nbsp;barometer&nbsp;falls,</tt> <tt>then&nbsp;it&nbsp;will&nbsp;rain’</tt> 
+a correct answer is
+<tt>‘p</tt> &#8594; <tt>q’</tt> 
+from line 10 
+(the solution index is defined as 3 in <tt>13.plist</tt>),
+but 
+‘&#172;p &#8744;q’ would be accepted too.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.4"></a><h4>
+1.1.4&nbsp;&nbsp;Limits</h4>
+<a id="tut:14">
+</a>
+
+<div class="p"><!----></div>
+(14) Some examples are given to demonstrate that not every situation can modeled in propositional logic.
+
+<div class="p"><!----></div>
+The user has to ‘guess’ whether sentences in natural language are suitable for propositional logic.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.2"></a><h3>
+1.2&nbsp;&nbsp;Syntax</h3>
+
+<div class="p"><!----></div>
+After the informal introduction into the atoms and connectives of propositional logic, 
+the formal aspects of propositional logic will be introduced to the user.
+
+<div class="p"><!----></div>
+The content of these exercises will be generated by the app and the user's solution will be checked without tolerance.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.1"></a><h4>
+1.2.1&nbsp;&nbsp;Definition</h4>
+<a id="tut:21">
+</a>
+
+<div class="p"><!----></div>
+(21) The definition of well formed formulas is explained. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb4">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">P	</td><td align="center">::=	</td><td align="center">p 	
+	</td><td align="center"> - 		</td><td align="center">(&#172;P) 
+	</td><td align="center"> - 		</td><td align="center">(P &#8743;P) 
+	</td><td align="center"> - 		</td><td align="center">(P &#8744;P) 
+	</td><td align="center"> - 		</td><td align="center">(P &#8594; P) </td></tr></table>
+
+
+<div style="text-align:center">Table 4: Grammar with mandatory parentheses</div>
+<a id="tab:BNFGRPA">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to check whether a formula matches the strict definition of 
+a propositional formula (see table ).
+If the formula is well formed, the user has to write down the name of the root connective, i.e
+negation, conjunction, disjunction or implication. 
+If the formula is not well formed, the user has to leave the answer field empty.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.2"></a><h4>
+1.2.2&nbsp;&nbsp;Conventions</h4>
+<a id="tut:22">
+</a>
+
+<div class="p"><!----></div>
+(22) The conventions of precedences and associativity  of connectives to save parentheses are introduced. 
+
+<div class="p"><!----></div>
+The user has to rewrite formulas from strict syntax to formulas using conventions and vice versa.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb5">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">P		</td><td align="center">::= </td><td align="center">D </td><td align="center"> - </td><td align="left">D &#8594; P</td></tr>
+<tr><td align="right">D		</td><td align="center">::= </td><td align="center">C </td><td align="center"> - </td><td align="left">D &#8744;C			</td></tr>
+<tr><td align="right">C		</td><td align="center">::= </td><td align="center">N </td><td align="center"> - </td><td align="left">C &#8743;N 		</td></tr>
+<tr><td align="right">N		</td><td align="center">::= </td><td align="center">T </td><td align="center"> - </td><td align="left">&#172;N 			</td></tr>
+<tr><td align="right">T		</td><td align="center">::= </td><td align="center">p </td><td align="center"> - </td><td align="left">(P)
+</td></tr></table>
+
+
+<div style="text-align:center">Table 5: Grammar with precedence and associativity</div>
+<a id="tab:BNFGRPR">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.3"></a><h4>
+1.2.3&nbsp;&nbsp;Sub-formulas</h4>
+<a id="tut:23">
+</a>
+
+<div class="p"><!----></div>
+(23) Sub-formulas (starting from atoms) are used to build bigger formulas. Big formulas are build from many sub-formulas.
+
+<div class="p"><!----></div>
+The user have to extract the set of sub-formulas from composite formulas. 
+A correct answer for 
+‘a &#8744;b &#8743;c’ would be
+‘a,b,c,b&#8743;c, a &#8744;b &#8743;c‘. 
+The order of the sub-formulas does not matter and the user can use parentheses as they like it.
+But no sub-formula may occur more than once.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.4"></a><h4>
+1.2.4&nbsp;&nbsp;Syntax Trees</h4>
+<a id="tut:24">
+</a>
+
+<div class="p"><!----></div>
+(24) Syntax trees as graphical representation of well formed formulas are introduced. 
+
+<div class="p"><!----></div>
+The user has to write formulas for presented syntax trees. They can use parentheses as they like – still the formulas has to match the syntax trees exactly. ‘a &#8744;b’ does not match the syntax tree representing ‘b &#8744;a’, where the node ‘a’ is on the right branch of the node ‘&#8744;’.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.5"></a><h4>
+1.2.5&nbsp;&nbsp;Top and Bottom</h4>
+<a id="tut:25">
+</a>
+
+<div class="p"><!----></div>
+(25) Some natural deduction rules are introduced. 
+“T” (top) and “ &#8869;” (bottom) are defined
+as abbreviations of conjunctions and disjunctions 
+of formulas with their negation (tautologies and contradictions, table ).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb6">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">&#172;P &#8744;P</td><td align="center">P &#8744;&#172;P  </td><td align="center">&#172;P &#8743;P </td><td align="center">P &#8743;&#172;P </td></tr>
+<tr><td align="center">T </td><td align="center">T </td><td align="center"> &#8869;</td><td align="center"> &#8869;</td></tr></table>
+
+
+<div style="text-align:center">Table 6: tautologies and contradictions</div>
+<a id="tab:TopBottom">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to simply given formulas.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb7">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">&#172;&#172;P </td><td align="center">P &#8744;P </td><td align="center">P &#8743;P </td><td align="center">P &#8744;Q </td><td align="center">P &#8743;Q</td></tr>
+<tr><td align="center">P </td><td align="center">P </td><td align="center">P </td><td align="center">Q &#8744;P </td><td align="center">Q &#8743;P</td></tr></table>
+
+
+<div style="text-align:center">Table 7: basic rules</div>
+<a id="tab:BasicRules">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.3"></a><h3>
+1.3&nbsp;&nbsp;Semantics</h3>
+
+<div class="p"><!----></div>
+After the introduction of well formed formulas the meaning of logical connectives is defined.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.3.1"></a><h4>
+1.3.1&nbsp;&nbsp;Valuation</h4>
+<a id="tut:31">
+</a>
+(31)
+The truth assignment for atoms (p,q,r,…) is introduced. 
+The extended valuation for negation, conjunction, disjunction and implication is defined.
+The valuation of arbitrary formulas by evaluating all sub-formulas is described.
+
+<div class="p"><!----></div>
+The user has to guess or calculate the evaluation of a given formula with a given truth assignment for the atoms of the formula.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.3.2"></a><h4>
+1.3.2&nbsp;&nbsp;Truth Tables</h4>
+<a id="tut:32">
+</a>
+(32)
+The concept of truth tables is explained and demonstrated with the basic connectives. 
+The valuation of arbitrary formulas by evaluating all sub-formulas is demonstrated again.
+
+<div class="p"><!----></div>
+The user has to fill in truth tables for formulas with a maximum of three atoms.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.3.3"></a><h4>
+1.3.3&nbsp;&nbsp;Entailment and Equivalence</h4>
+<a id="tut:33">
+</a>
+(33) Semantic entailment and equivalence is defined and explained with various examples.
+
+<div class="p"><!----></div>
+The user has to guess or calculate whether a given semantic entailment or equivalence holds. 
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.3.4"></a><h4>
+1.3.4&nbsp;&nbsp;Satisfiability and Validity</h4>
+<a id="tut:34">
+</a>
+(34) The properties satisfiability and validity of propositional formulas are defined and demonstrated. 
+The relationship of these properties with top and bottom is mentioned. 
+
+<div class="p"><!----></div>
+The user has to guess or calculate whether a given formula is satisfiable or valid.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.4"></a><h3>
+1.4&nbsp;&nbsp;Normal Forms</h3>
+
+<div class="p"><!----></div>
+The advantages of propositional formulas in special shapes will be emphasized.
+The definitions of implication free forms, negation normal form, 
+conjunctive normal forms and disjunctive normal forms will be provided. 
+An receipt to transform arbitrary propositional formulas into specific normal forms will be delivered.
+Rules to detect satisfiability or validity from normal forms will be mentioned.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.4.1"></a><h4>
+1.4.1&nbsp;&nbsp;Implication Free Form</h4>
+<a id="tut:41">
+</a>
+(41)
+By removing the rule for P from the grammar in table  
+the grammar for implication free forms is defined  
+(see table ). 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb8">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">D		</td><td align="center">::= </td><td align="center">C </td><td align="center"> - </td><td align="left">C &#8744;D			</td></tr>
+<tr><td align="right">C		</td><td align="center">::= </td><td align="center">N </td><td align="center"> - </td><td align="left">N &#8743;C 		</td></tr>
+<tr><td align="right">N		</td><td align="center">::= </td><td align="center">T </td><td align="center"> - </td><td align="left">&#172;N 			</td></tr>
+<tr><td align="right">T		</td><td align="center">::= </td><td align="center">p </td><td align="center"> - </td><td align="left">(D)
+</td></tr></table>
+
+
+<div style="text-align:center">Table 8: Grammar without implications</div>
+<a id="tab:BNFGRIFF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The equivalence transformation (see table ) 
+for removing implications is presented
+and proved with a truth table. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb9">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">P &#8594; Q </td></tr>
+<tr><td align="right">&#172;P &nbsp;&nbsp;&#8744;&nbsp;&nbsp;Q
+</td></tr></table>
+
+
+<div style="text-align:center">Table 9: Equivalence transformation towards implication free form</div>
+<a id="tab:ET_IFF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to check whether a given formula is implication free.
+If the formula is not implication free the user has to transform it into an implication free form
+using the equivalence transformation.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.4.2"></a><h4>
+1.4.2&nbsp;&nbsp;Negation Normal Form</h4>
+<a id="tut:42">
+</a>
+
+<div class="p"><!----></div>
+(42)
+By removing all  rules for arbitrary negations, the negation normal form is defined
+ (table ). 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb10">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">D		</td><td align="center">::= </td><td align="center">C 		</td><td align="center"> - </td><td align="left">C &#8744;D</td></tr>
+<tr><td align="right">C		</td><td align="center">::= </td><td align="center">N 		</td><td align="center"> - </td><td align="left">N &#8743;C </td></tr>
+<tr><td align="right">N		</td><td align="center">::= </td><td align="center">(D) 	</td><td align="center"> - </td><td align="left">L</td></tr>
+<tr><td align="right">L		</td><td align="center">::= </td><td align="center">p  		</td><td align="center"> - </td><td align="left">&#172;p
+</td></tr></table>
+
+
+<div style="text-align:center">Table 10: Grammar for negation normal form</div>
+<a id="tab:BNFGRNNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The equivalence transformations to transform negations of conjunctions,
+negations of disjunctions, 
+and double negations (see table )
+into negation normal forms are presented 
+and proved with a truth table.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb11">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">&#172;(P &#8743;Q) </td><td align="center"> &#172;(P &#8744;Q)</td><td align="right"> &#172;&#172;P</td></tr>
+<tr><td align="center">&#172;P &#8744;&#172;Q</td><td align="center">&#172;P &#8743;&#172;Q</td><td align="right">P
+</td></tr></table>
+
+
+<div style="text-align:center">Table 11: Equivalence transformations towards negation normal form</div>
+<a id="tab:ET_NNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to check whether a given formula is in negation normal form.
+If the formula is not in negation normal form
+the user has to transform it into negation normal form.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.4.3"></a><h4>
+1.4.3&nbsp;&nbsp;Conjunctive Normal Form</h4>
+<a id="tut:43">
+</a>
+
+<div class="p"><!----></div>
+(43) A formula in conjunctive normal form is a conjunctive concatenation of disjunctive clauses.
+A disjunctive clause is a disjunctive concatenation of literals. 
+A literal is an atom or the negation of an atom. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb12">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">C	</td><td align="center">::= </td><td align="center">(D) 	</td><td align="center">&#124; </td><td align="left">(D) &#8743;C</td></tr>
+<tr><td align="right">D	</td><td align="center">::= </td><td align="center">L 	</td><td align="center">&#124; </td><td align="left">L &#8744;D</td></tr>
+<tr><td align="right">L	</td><td align="center">::= </td><td align="center">p 	</td><td align="center">&#124; </td><td align="left">&#172;p 
+</td></tr></table>
+
+
+<div style="text-align:center">Table 12: Grammar for conjunctive normal form</div>
+<a id="tab:CNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The distribution of disjunctions over conjunctions is presented (table )
+and proved with a truth table.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb13">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">P &#8744;(Q &#8743;R) </td><td align="center">(P &#8743;Q) &#8744;R</td></tr>
+<tr><td align="center">(P&#8744;Q) &#8743;(P&#8744;R) </td><td align="center">(P&#8744;R) &#8743;(Q&#8744;R)
+</td></tr></table>
+
+
+<div style="text-align:center">Table 13: Equivalence transformations towards conjunctive normal form</div>
+<a id="tab:ET_CNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to rewrite formulas to a conjunctive normal form.  
+The presented formula is in negation normal form 
+but may already be in conjunctive normal form.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.4.4"></a><h4>
+1.4.4&nbsp;&nbsp;Disjunctive Normal Form</h4>
+<a id="tut:44">
+</a>
+
+<div class="p"><!----></div>
+(44) A formula in disjunctive normal form is a disjunctive concatenation of conjunctive clauses.
+A conjunctive clause is a conjunctive concatenation of literals. 
+A literal is an atom or the negation of an atom. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb14">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">D	</td><td align="center">::= </td><td align="center">C 	</td><td align="center">&#124; </td><td align="left">C &nbsp;&nbsp;&#8744;D</td></tr>
+<tr><td align="right">C	</td><td align="center">::= </td><td align="center">L 	</td><td align="center">&#124; </td><td align="left">L &#8743;D</td></tr>
+<tr><td align="right">L	</td><td align="center">::= </td><td align="center">p 	</td><td align="center">&#124; </td><td align="left">&#172;p
+</td></tr></table>
+
+
+<div style="text-align:center">Table 14: Grammar for disjunctive normal form</div>
+<a id="tab:DNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The distribution of conjunctions over disjunctions is presented (table )
+and proved with a truth table.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb15">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">P &#8743;(Q &#8744;R) 			</td><td align="center">(P &#8743;Q) &#8743;R</td></tr>
+<tr><td align="center">(P&#8743;Q) &#8744;(P&#8743;Q) 	</td><td align="center">(P&#8743;R) &#8744;(Q&#8743;R)
+</td></tr></table>
+
+
+<div style="text-align:center">Table 15: Equivalence transformations towards disjunctive normal form</div>
+<a id="tab:ET_DNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to rewrite formulas to a disjunctive normal form. 
+The presented formula is in negation normal form 
+but may already be in disjunctive normal form.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.5"></a><h3>
+1.5&nbsp;&nbsp;Binary Decision Diagrams</h3>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.5.1"></a><h4>
+1.5.1&nbsp;&nbsp;Boolean functions</h4>
+<a id="tut:51">
+</a>
+
+<div class="p"><!----></div>
+(51) N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set 0,1.
+The Boolean operators <span class="overacc2">&#x2015;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&#183;&nbsp;&nbsp;&#8853; are introduced as special representations of
+specific unitary and binary Boolean functions. For convenience an exclamation mark !(B) 
+will be used for the negation of a Boolean expression B instead of the bar <span class="overacc2">&#x2015;</span>B. 
+
+<div class="p"><!----></div>
+The user has to guess or calculate the results for composite expressions.
+
+      <a id="tth_sEc1.5.2"></a><h4>
+1.5.2&nbsp;&nbsp;Boolean expressions</h4>
+<a id="tut:52">
+</a>
+
+<div class="p"><!----></div>
+(52) The grammar for Boolean expressions is defined. 
+The equivalence relation of Boolean expressions is explained.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb16">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">B	</td><td align="center">::=	</td><td align="center">p 	
+	</td><td align="center"> - 		</td><td align="center">(<span class="overacc2">&#x2015;</span>B) 
+	</td><td align="center"> - 		</td><td align="center">(B &#183;B) 
+	</td><td align="center"> - 		</td><td align="center">(B + B) 
+	</td><td align="center"> - 		</td><td align="center">(B &#8853;B) </td></tr></table>
+
+
+<div style="text-align:center">Table 16: Grammar for Boolean expressions</div>
+<a id="tab:BNFGRBE">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The user has to rewrite formulas with propositional symbols into Boolean expressions.
+The implication may be a challenge for some users, 
+but is doable because the implication free form was introduced 
+in an earlier tutorial.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.5.3"></a><h4>
+1.5.3&nbsp;&nbsp;Binary Decisions</h4>
+<a id="tut:53">
+</a>
+
+<div class="p"><!----></div>
+(53) Binary decision nodes are introduced. 
+The valuation of binary decision trees is explained.
+
+<div class="p"><!----></div>
+The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.5.4"></a><h4>
+1.5.4&nbsp;&nbsp;Binary Decision Diagrams</h4>
+<a id="tut:54">
+</a>
+
+<div class="p"><!----></div>
+(54) Arbitrary binary decision diagrams are explained. 
+Ordered and reduced binary decision diagrams are introduced.
+
+<div class="p"><!----></div>
+The user has to check whether a binary decision diagram is ordered and/or reduced.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;Playground</h2>
+
+<div class="p"><!----></div>
+In the playground the user can create arbitrary propositional formulas 
+by building syntax trees interactively.
+Truth assignments can be applied and will be visualized.
+The playground supports a least the following use cases.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> In the <em>free mode</em> arbitrary formulas can be created by adding, replacing and removing connectives and atoms. The process starts with an atom, which an be expanded or replaced. 
+Connectives can be changed any time, sub-formulas can be reordered.
+The smallest possible formula consists of one atom with one symbol from the set { T, &#8869;, p, q, r, … }.
+<div class="p"><!----></div>
+</li>
+
+<li> In the <em>locked mode</em> only equivalence transformations can be applied to nodes (see table )
+– depending on the kind of node.
+<div class="p"><!----></div>
+</li>
+
+<li> Truth values can be assigned to leaf nodes, 
+which represent the atoms of the corresponding propositional formula. 
+By default no truth values are assigned to atoms, which is visualized by a blue color of the node.
+A green color represents ‘true’, and a red color ‘false’.
+The valuation of connective nodes is calculated automatically 
+and displayed using the same blue, green and red colors.
+<div class="p"><!----></div>
+</li>
+
+<li> Connective nodes of obvious tautologies like
+P &#8744;&#172;P or
+P &#8594; P are displayed with a green color – 
+independent form the valuation status of any sub-node.
+<div class="p"><!----></div>
+</li>
+
+<li> Connective nodes of obvious contradictions like P &#8743;&#172;P are displayed with a red color – 
+independent form the valuation status of any sub-node.
+<div class="p"><!----></div>
+</li>
+
+<li> While working with a syntax tree, the corresponding propositional formula is shown on top of the playground.
+<div class="p"><!----></div>
+</li>
+
+<li> While selecting a sub-node of the syntax tree – the root of a sub-tree – 
+for manipulation the corresponding sub-formula will be highlighted in the corresponding propositional formula.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb17">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8594; </span>&nbsp;&nbsp;</td><td align="left">Q				</td><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#172;</span>&nbsp;&nbsp;</td><td align="left">&#172;P			</td></tr>
+<tr><td align="right">&#172;P </td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">Q					</td><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF"><b>P</b></span>&nbsp;&nbsp;</td><td align="left"> 				</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#172;</span>&nbsp;&nbsp;</td><td align="left">(P &#8744;Q)				</td><td align="right"> </td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#172;</span>&nbsp;&nbsp;</td><td align="left">(P &#8743;Q)	</td></tr>
+<tr><td align="right">&#172;P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">&#172;Q			</td><td align="right">&#172;P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">&#172;Q	</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">P						</td><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">P			</td></tr>
+<tr><td align="right"></td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF"><b>P</b></span>&nbsp;&nbsp;</td><td align="left">							</td><td align="right"></td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF"><b>P</b></span>&nbsp;&nbsp;</td><td align="left">					</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">&#172;P					</td><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">&#172;P		</td></tr>
+<tr><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">T</span>&nbsp;&nbsp;</td><td align="left"> 							</td><td align="right"></td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8869;</span>&nbsp;&nbsp;</td><td align="left"> 				</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">T					</td><td align="right">P	</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">T			</td></tr>
+<tr><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">T</span>&nbsp;&nbsp;</td><td align="left"> 							</td><td align="right"></td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF"><b>P</b></span>&nbsp;&nbsp;</td><td align="left"> 				</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">&#8869;					</td><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">&#8869;		</td></tr>
+<tr><td align="right"> </td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF"><b>P</b></span>&nbsp;&nbsp;</td><td align="left"> 							</td><td align="right"> </td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8869;</span>&nbsp;&nbsp;</td><td align="left"> 				</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">Q						</td><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">Q			</td></tr>
+<tr><td align="right">Q</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">P						</td><td align="right">Q</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">P			</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8743;R)				</td><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8744;R)			</td></tr>
+<tr><td align="right">(P&#8744;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">(P&#8744;R)		</td><td align="right">(P&#8743;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">(P&#8743;R)	</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">(P&#8743;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">R				</td><td align="right">(P&#8744;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">R			</td></tr>
+<tr><td align="right">(P&#8744;R)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8744;R)		</td><td align="right">(P&#8743;R)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8743;R)	</td></tr>
+<tr><td align="right"></td></tr>
+<tr><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8744;R)				</td><td align="right">P</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">(Q&#8743;R)			</td></tr>
+<tr><td align="right">(P&#8744;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">R			</td><td align="right">(P&#8743;Q)</td><td align="center">&nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">R	</td></tr></table>
+
+
+<div style="text-align:center">Table 17: Transformations which are offered in locked mode</div>
+<a id="tab:ET:ALL">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb18">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8596; </span>&nbsp;&nbsp;</td><td align="left">Q					</td><td align="right">P</td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">\veebar </span>&nbsp;&nbsp;</td><td align="left">Q			</td></tr>
+<tr><td align="right">P &#8594; Q </td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8743;</span>&nbsp;&nbsp;</td><td align="left">Q &#8594; P	</td><td align="right">&#172;(P &#8594; Q) </td><td align="center"> &nbsp;&nbsp;<span style="color:#FF00FF">&#8744;</span>&nbsp;&nbsp;</td><td align="left">&#172;(Q &#8594; P)				</td></tr></table>
+
+
+<div style="text-align:center">Table 18: Additional transformations in locked mode</div>
+<a id="tab:addnf">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <a id="tth_sEc3"></a><h2>
+3&nbsp;&nbsp;Glossary</h2>
+
+<div class="p"><!----></div>
+Terms, definitions and truth tables from the tutorials are listed in the glossary in a searchable and hyperlinked form.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc4"></a><h2>
+4&nbsp;&nbsp;BoolTool</h2>
+
+<div class="p"><!----></div>
+The interactive environment have to contain the functionality of the
+<a href="http://cl-informatik.uibk.ac.at/software/booltool/">BoolTool web frontend</a>.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc4.1"></a><h3>
+4.1&nbsp;&nbsp;Input</h3>
+
+<div class="p"><!----></div>
+At least the embedded BoolTool must support Latin letters as identifiers for atoms, 
+and have to parse the symbols
+<tt>T</tt> as top, 
+<tt>F</tt> as bottom,
+<tt>!</tt> as negation operator, 
+<tt>&amp;</tt> as conjunction operator,
+<tt>+</tt> as disjunction operator,
+<tt>&gt;</tt> as implication operator,
+<tt>^</tt> as exclusive disjunction operator,
+and <tt>(</tt> as left and <tt>)</tt> as right parentheses, 
+because these ASCII-symbols can be found on almost every keyboard.
+
+<div class="p"><!----></div>
+Standard symbols “ &#172;&#8744;&#8743;&#8594; ” 
+and additional symbols of propositional logic and Boolean expressions
+should be accepted too (see table ) 
+to make extended or custom keyboards more useful.
+A limitation of the Latin characters for identifiers should be avoided, 
+because Chinese symbols make good identifiers too (figure ).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg1">
+</a> 
+<div style="text-align:center"><a href="concept/RainHD.png">Figure</a>
+
+<div style="text-align:center">Figure 1: Implication with Chinese symbols for rain and wet</div>
+<a id="fig:BoolToolChineseInput">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc4.2"></a><h3>
+4.2&nbsp;&nbsp;Output</h3>
+
+<div class="p"><!----></div>
+BoolTool calculates validity and satisfiability, 
+conjunctive normal form, 
+disjunctive normal form, 
+truth table and 
+(reduced) ordered binary decision diagram 
+of user's input (figure ). 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg2">
+</a> 
+<div style="text-align:center"><a href="concept/RainHD.png">Figure</a>
+
+<div style="text-align:center">Figure 2: Reduced ordered binary decision diagram</div>
+<a id="fig:BoolToolROBDD">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <a id="tth_chAp4"></a><h1>
+Chapter 4 <br />Tools and Processes</h1>					
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Tools</h2>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.1"></a><h3>
+1.1&nbsp;&nbsp;Developing for the iPad</h3>
+
+<div class="p"><!----></div>
+First steps in developing applications for iPad can be made on a computer running Mac OS X (OS) and 
+<a href="sec:Xcode">Xcode</a> (IDE), which is as free download from the Mac App Store.
+Knowledge of object-oriented programming, object-oriented design patterns, 
+and the C programming language 
+builds a good base to learn the main platform-specific technologies 
+<a href="sec:ObjC">Objective-C</a>,
+<a href="sec:Cocoa">Cocoa</a>, and
+<a href="sec:MemoryManagement">memory management</a>
+with automatic reference counting.
+
+<div class="p"><!----></div>
+In addition to the technical skills, an overview of the necessary steps for 
+<a href="sec:DAD">Development and Distribution</a> (p.&nbsp;<a href="#sec:DAD">pageref</a>) for the iPad platform
+is to gain.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.1"></a><h4>
+1.1.1&nbsp;&nbsp;Xcode</h4>
+<a id="sec:Xcode">
+</a>
+
+<div class="p"><!----></div>
+Xcode is Apple's integrated development environment to create software for OS X and iOS devices.
+It includes an iPad simulator, complete API documentations and development guides to various topics. 
+Xcode supports the source management systems git and subversion. 
+Git will be installed along various other development tools with Xcode.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.2"></a><h4>
+1.1.2&nbsp;&nbsp;Objective-C</h4>
+<a id="sec:ObjC">
+</a>
+Objective-C is a reflective, object-oriented extension of the C programming language,
+ which was developed by Tom Love and Brad Cox in the early 1980s (a few moments earlier than C++). 
+The syntax for objects and methods is based on Smalltalk. 
+Objective-C method calls will be bound to functions at runtime with no need to be defined formally at compile time.
+Objective-C is organized in header and implementation files 
+with <tt>@interface</tt> and <tt>@implementation</tt> sections for
+the declaration and definition of classes, properties, fields and operations.
+<tt>@interface</tt> must not be mixed up with the Java/C# <tt>interface</tt> directive. 
+The latter one corresponds to <tt>@protocol</tt>.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.3"></a><h4>
+1.1.3&nbsp;&nbsp;Cocoa Touch</h4>
+<a id="sec:Cocoa">
+</a>
+
+<div class="p"><!----></div>
+Cocoa Touch is the name for the object-oriented APIs for iOS (the operating system for iPhone and iPad). 
+Cocoa Touch covers the platform specific Objective-C runtime and a platform specific set of libraries, the frameworks.
+
+<div class="p"><!----></div>
+
+<ul>
+<li><a id="secitem:CocoaFoundation">
+</a>The Foundation framework it provides the basis for programming with Objective-C. 
+In addition to the memory and exception handling it includes the base classes for strings, values, lists, sets and files.
+<div class="p"><!----></div>
+</li>
+
+<li><a id="secitem:CocoaUIKit">
+</a> The UIKit framework provides a set of classes and functions for implementing (touch based) graphical user interfaces. 
+The architecture of this framework follows the Model-View-Controller pattern 
+and the implementation provides a myriad of view and controller classes.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.4"></a><h4>
+1.1.4&nbsp;&nbsp;Memory Management</h4>
+<a id="sec:MemoryManagement">
+</a>
+The Objective-C runtime does not offer – surprisingly for Java or C# developers  – garbage collection, 
+but dynamic memory management based on reference counting. 
+The necessary retains and releases are added automatically at compile time.
+This has the consequence that (strong) object graphs must be implemented as directed acyclic graphs. 
+Back references have to be declared as weak.
+Otherwise objects would never be released. 
+
+<div class="p"><!----></div>
+The disadvantage is that deallocated objects can still be referenced, which would corrupt the event loop,
+without the possibility of error recovery by exception handling.
+The advantages are the deterministic and economical run-time behavior.
+Objects are destroyed at a defined time and a separate thread for garbage collection isn't needed. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.1.5"></a><h4>
+1.1.5&nbsp;&nbsp;Development and distribution</h4>
+<a id="sec:DAD">
+</a>
+Development and distribution for Apple's platforms includes the coding effort and expenses for administration and configuration. 
+To install software on iOS devices – especially for distribution via the App Store – applications must be cryptographically signed. 
+The necessary certificates are created in the paid members section on Apple's Developer Portal. 
+Certificates, development and distribution profiles contain a bunch of identifiers for the identification and differentiation of developers (Team ID), 
+applications (App-ID) and a list of permissions (entitlements). 
+
+<div class="p"><!----></div>
+     <a id="tth_sEc1.2"></a><h3>
+1.2&nbsp;&nbsp;Source Code Management</h3>
+<a id="sec:SCM">
+</a>
+
+<div class="p"><!----></div>
+Every software project includes the need for source code management,
+which minimizes the risk of losing working code
+by human error or technical failure.
+This should be done by powerful, yet lightweight tools.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.1"></a><h4>
+1.2.1&nbsp;&nbsp;Git</h4>
+
+<div class="p"><!----></div>
+Git is a distributed source code management and revision control system 
+- originally developed by Linus Torvalds for Linux kernel development [<a href="#Git:Main" id="CITEGit:Main">1</a>].
+Git supports local repositories with full source code history for development.
+Local repositories can be synchronized and merged with remote repositories for collaboration and backup
+[<a href="#Chacon:2009:PG:1618548" id="CITEChacon:2009:PG:1618548">4</a>].
+
+<div class="p"><!----></div>
+Since Apple's IDE Xcode works with Git's local repositories out of the box,
+it was obvious to use Git as source control for the project.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc1.2.2"></a><h4>
+1.2.2&nbsp;&nbsp;Github</h4>
+
+<div class="p"><!----></div>
+GitHub [<a href="#GitHub:Main" id="CITEGitHub:Main">2</a>] is a hosting service for projects that use Git. 
+GitHub offers free accounts for public repositories, 
+which can be seen and downloaded by anyone
+using a web-browser or a Git client.
+Committing changes is restricted to users chosen by the owner of the repository on GitHub.
+
+<div class="p"><!----></div>
+As Nyaya is a student project and the source code should be publicly accessible,
+GitHub seemed suitable to house the project.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;Project execution</h2>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.1"></a><h3>
+2.1&nbsp;&nbsp;Phases</h3>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.1.1"></a><h4>
+2.1.1&nbsp;&nbsp;Exploring UI capabilities</h4>
+
+<div class="p"><!----></div>
+After the informal specification of the feature set and the initial presentation of the project
+the capabilities of graphical visualization and  user interaction were explored on iPad.
+In this phase several prototypes were developed for interactive syntax tress and exercises.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.1.2"></a><h4>
+2.1.2&nbsp;&nbsp;Core components</h4>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+After the formulation of the general concept with tutorials including exercices, a playground, a glossary, and the embedding of BoolTool,
+the main classes for the representation of abstract syntax trees and binary decision diagrams were implemented.
+After several attempts to cross-compile BoolTool's ocaml sources and to use the binaries on iPad, a left recursive descendent parser for input strings with the syntax propositional logic was implement in Objective-C. 
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.1.3"></a><h4>
+2.1.3&nbsp;&nbsp;Content, controllers, and configuration</h4>
+
+<div class="p"><!----></div>
+Although the general concept was developed, content was still missing. The tutorials had to be written and the exercises had to be generated. Content and configuration files had to be added to the project. 
+The different views has to be controlled and the navigation between the different use cases had to be added. 
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.2"></a><h3>
+2.2&nbsp;&nbsp;Development model</h3>
+
+<div class="p"><!----></div>
+The development of this software did no follow a specific development model, 
+but did borrow some principles from agile development.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.1"></a><h4>
+2.2.1&nbsp;&nbsp;Test-driven development</h4>
+
+<div class="p"><!----></div>
+Parsers, trees and operations on trees were the ideal application for test driven development.
+First, the expected results were defined in test cases, then the functionality was implemented.
+So it was ensured that on every point of the development cycle 
+the core of the application was still working as defined,
+when all unit tests had succeeded.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.2"></a><h4>
+2.2.2&nbsp;&nbsp;Refactoring</h4>
+
+<div class="p"><!----></div>
+Due occurring memory and performance issues on the iPad
+some implementations had to be reconsidered 
+and some functionality had to be reimplemented.
+This could be done without headaches because 
+the local repository provided a complete development history 
+and unit tests provided a quick check, whether the reimplementation was correct.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.3"></a><h4>
+2.2.3&nbsp;&nbsp;Use cases</h4>
+
+<div class="p"><!----></div>
+With the written concept (see chapter ) of an interactive environment for BoolTool 
+that enables the learning  of simple facts about propositional logic the collection of use cases was defined. 
+These use cases represent the real value of the project 
+and they mark the criterion for completion of development.
+
+<div class="p"><!----></div>
+ <a id="tth_chAp5"></a><h1>
+Chapter 5 <br />Implementation</h1>						
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Architecture</h2>
+
+<div class="p"><!----></div>
+The general design of Ny<span class="overacc2">&#x2015;</span>ayafollows the Model-View-Controller pattern,
+which is originated in Smalltalk [<a href="#GAMMAETAL" id="CITEGAMMAETAL">5</a>,p.4], 
+that separates the representation of data from the user interaction.
+Cocoa Touch (see ) encourages the use of MVC 
+by providing a rich set of useful views and controllers with the framework UIKit.
+Those cover many use cases of data presentation and user interaction.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;Model</h2>
+
+<div class="p"><!----></div>
+Ny<span class="overacc2">&#x2015;</span>ayamust hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.1"></a><h3>
+2.1&nbsp;&nbsp;Propositional formulas and Boolean expressions</h3>
+Since propositional formulas and Boolean expressions are subsets of the set of all Unicode strings,
+they are easily represented by the standard string classes of actual frameworks. 
+
+<div class="p"><!----></div>
+Due to the unambiguous relationship between propositional formulas and Boolean expressions 
+Ny<span class="overacc2">&#x2015;</span>ayaallows the use of a mixed syntax and additional symbols as input
+for the user's convenience. The input expression !a &#8743;b + c &#8853;a translates into the propositional formula
+&#172;a &#8743;b &#8744;c \veebar a (see ).
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.2"></a><h3>
+2.2&nbsp;&nbsp;Abstract Syntax Trees</h3>
+
+<div class="p"><!----></div>
+Cocoa does not provide a class to represent trees, 
+but with instances of a class, 
+that implements the composite pattern [<a href="#GAMMAETAL">5</a>,p.163ff]
+arbitrary graphs and therefore syntax trees can be represented easily.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg1">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyayaNode.png">Figure</a>
+
+<div style="text-align:center">Figure 1: Node class to represent an abstract syntax tree</div>
+<a id="fig:NyayaNodeCluster">
+</a>
+</div>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.1"></a><h4>
+2.2.1&nbsp;&nbsp;Node class cluster</h4>
+
+<div class="p"><!----></div>
+The node class is implemented as a class cluster, 
+which is an Cocoa design pattern [<a href="#Buck:2009:CDP:1803585" id="CITEBuck:2009:CDP:1803585">3</a>,p.282ff]
+– an adaption of the the abstract factory design pattern [<a href="#GAMMAETAL">5</a>,p.87ff].
+The abstract and public class <tt>NyayaNode</tt> 
+provides a set of static and public methods (see figure ),
+that returns instances of non public sub-classes (see figure )
+of <tt>NyayaNode</tt>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg2">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyayaNodeCluster.png">Figure</a>
+
+<div style="text-align:center">Figure 2: Public root class and non public subclasses</div>
+<a id="fig:NyayaNodeCluster">
+</a>
+</div>
+
+<div class="p"><!----></div>
+Actual the creational methods were implemented as a class category in a different source file. 
+Class categories are a language feature of Objective-C [<a href="#Kochan:2009:PO:1538451" id="CITEKochan:2009:PO:1538451">7</a>,p.225ff]
+– an adaption of the decorator design pattern [<a href="#GAMMAETAL">5</a>,p.175ff] – 
+to extend or organize the functionality of given classes beyond their core purpose. 
+
+<div class="p"><!----></div>
+There are base implementations of category methods in the root node class,
+that will be overridden in subclasses.
+For example <tt>isLiteral:bool</tt> returns false for all node instances
+except for instances of variables
+and instances of negations of variables.
+
+<div class="p"><!----></div>
+The variable node class adds setters for the categories <tt>Valuation</tt>  (figure )
+and <tt>Display</tt>.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.2"></a><h4>
+2.2.2&nbsp;&nbsp;Node class categories</h4>
+
+<div class="p"><!----></div>
+
+<ul>
+<li> The category “Creation” implements the production rules of the grammar 
+to create syntax trees recursively (figure ).
+Since the constructors of all classes in the cluster are hidden, 
+the production of invalid syntax trees is prevented.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg3">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyayaNodeCreation.png">Figure</a>
+
+<div style="text-align:center">Figure 3: Production rules</div>
+<a id="fig:NyayaNodeCreation">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Description” provides methods to convert a syntax tree into one of it's string representations – 
+either a propositional formula in strict syntax with many parentheses 
+or a formula using precedences and associativity.
+In most cases, the second form leads to shorter strings with less parentheses. 
+In rare case, only the outer parentheses are omitted.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Display”  allows extended valuations (undefined, false, true) 
+with incomplete truth assignments. 
+It is used for the interactive syntax tree view on the playground, 
+where the user can assign truth values to some or all atoms.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Attributes”  provides information about the number of sub-nodes of a node 
+and the normal forms the sub-tree matches.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Transformations” provides equivalence transformations 
+and methods to create 
+ semantically different syntax trees by replacing atoms, connectives or sub-trees with
+atoms, connectives or trees.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Derivations” defines methods to derive semantically equivalent normal forms from a given syntax tree.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Random” creates arbitrary syntax trees with a given set of connectives and atoms and within a range for the number of nodes. It is used to create formulas for the exercises.
+<div class="p"><!----></div>
+</li>
+
+<li> The  category “Type” provides one method, that returns the type of a node, i.e constant, variable, type of connective as an enum.
+<div class="p"><!----></div>
+</li>
+
+<li> The category “Valuation” (figure ) 
+provides fast valuations with complete truth assignments. 
+It is used to create truth tables and binary decision diagrams. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg4">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyayaNodeValuation.png">Figure</a>
+
+<div style="text-align:center">Figure 4: Valuation of trees</div>
+<a id="fig:NyayaNodeValuation">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+</li>
+</ul>
+
+      <a id="tth_sEc2.2.3"></a><h4>
+2.2.3&nbsp;&nbsp;Immutable syntax trees</h4>
+
+<div class="p"><!----></div>
+Instances of node classes are not mutable 
+regarding their function as nodes of abstract syntax trees. 
+This means nodes can be created, but not modified.
+The symbol of an atom can not be changed, 
+a connective node can not be altered into an other one,
+and child nodes of a connective node can not be replaced or reordered.
+
+<div class="p"><!----></div>
+Derivations or transformations do not change the structure of an existing syntax tree,
+but rather create a new independent syntax tree.
+
+<div class="p"><!----></div>
+Obviously mutable truth assignments does not affect the immutable structure of a syntax tree,
+because truth assignments are semantics, not syntax. 
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.4"></a><h4>
+2.2.4&nbsp;&nbsp;Acyclic syntax graphs</h4>
+
+<div class="p"><!----></div>
+Since the representation of abstract syntax trees is implemented immutable,
+there is no need to create multiple instances for syntactically equivalent sub-trees. 
+At run-time syntax trees are represented by acyclic syntax graphs, 
+where multiple sub-trees can be represented by the same instance-graph
+(figure ).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg5">
+</a> 
+<div style="text-align:center"><a href="diagrams/AcyclicSyntaxGraph.pdf">Figure</a>
+
+<div style="text-align:center">Figure 5: Abstract syntax tree – acyclic graph </div>&#172;( (a&#8744;b) &#8743;(a &#8594; a&#8744;b))
+<a id="fig:AST+ASG">
+</a>
+</div>
+
+<div class="p"><!----></div>
+This eases the detection of obvious tautologies P &#8744;&#172;P, P &#8594; P and contradictions P &#8743;&#172;P,
+because the sub-tree P on the left side is represented by the same object-graph as the sub-tree P on the right side.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.2.5"></a><h4>
+2.2.5&nbsp;&nbsp;Limitations</h4>
+
+<div class="p"><!----></div>
+The derivation of normal forms will fail on some relatively small syntax trees.
+especially when the formula contains too many exclusive disjunctions.
+
+<div class="p"><!----></div>
+With every exclusive disjunction of a formula P and an atom p, 
+that is not already used in P,
+the number of nodes will at least double 
+when deriving an equivalent implication free form.
+“Implication free” means also the absence of exclusive disjunctions (see table ).
+
+<div class="p"><!----></div>
+
+<br clear="all" /><table border="0" width="100%"><tr><td>
+<table border="0" cellspacing="0" cellpadding="0">
+ <tr><td width="50%"></td><td nowrap="nowrap" align="right" colspan="1"><table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+#(P &#8853;p) </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+ = </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+1 &#183;(#(P) + 2) </td></tr></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td nowrap="nowrap" align="right" colspan="1"><table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+#((P &#8743;&#172;p) &#8744;(&#172;P &#8743;p)) </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+ = </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+2 &#183;(#(P) + 2) + 3 </td></tr></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td nowrap="nowrap" align="right" colspan="1"><table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+#((P &#8744;p) &#8743;(&#172;P &#8744;&#172;p)) </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+ = </td></tr></table></td><td nowrap="nowrap" align="left">
+<table border="0" cellspacing="0" cellpadding="2"><tr><td nowrap="nowrap" align="left">
+2 &#183;(#(P) + 2) + 3 </td></tr></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td nowrap="nowrap" align="right" colspan="1"><table><tr><td nowrap="nowrap" align="right" colspan="1"></td></tr></table></td><td width="50%"></td></tr></table>
+</td></tr></table>
+
+
+
+<div class="p"><!----></div>
+The syntax tree for an exclusive disjunction of 20 different atoms is build from 39 nodes.
+The syntax tree of a semantically equivalent implication free form will already contain over four million nodes.
+Deriving the negation normal form does not increase or decrease the number of nodes significantly,
+but the necessary distributions of disjunctions will multiply the number of nodes again.
+
+<div class="p"><!----></div>
+To ensure the stability of Ny<span class="overacc2">&#x2015;</span>aya
+and since it is near impossible 
+to present a propositional formulas with thousands of symbols 
+to the user in a meaningful way, 
+the derivation of normal forms is aborted, when the results surpass a defined size.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.3"></a><h3>
+2.3&nbsp;&nbsp;Parser</h3>
+<a id="subsec:Parser">
+</a>
+
+<div class="p"><!----></div>
+The backend of <tt>BoolTool</tt><a href="#tthFtNtAAI" id="tthFrefAAI"><sup>8</sup></a> 
+– parsing and transformation of Boolean functions – 
+is implemented in <tt>OCaml</tt><a href="#tthFtNtAAJ" id="tthFrefAAJ"><sup>9</sup></a>, 
+a functional programming language, which is well suited for this kind of task.
+
+<div class="p"><!----></div>
+After several failed attempts to cross-compile the <tt>OCaml</tt> sources to iPad's processor architecture (ARM),
+to link the object code to the Xcode project and to bridge and call functions from C, 
+the implementation of a simple translator 
+for propositional formulas (a subset of all possible strings)
+into syntax trees looked more promising. 
+
+<div class="p"><!----></div>
+The generation of a syntax tree from a formula  is carried out in two steps. 
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.3.1"></a><h4>
+2.3.1&nbsp;&nbsp;Scanning</h4>
+
+<div class="p"><!----></div>
+In the first step the input string is transformed into an array of strings – the list of input tokens –
+using the standard regular expression class of Cocoa Foundation.
+
+<div class="p"><!----></div>
+<a id="tth_tAb1">
+</a> 
+<div style="text-align:center">T&#124; &#8869;&#124; &#172;&#124; !&#124; &#8743;&#124; &amp; &#124; .&#124; &#8744;&#124; \&#124; &#124; \+ &#124; \veebar &#124; &#8853;&#124; \textasciicircum&#124; = &#124;  &lt;  &gt;  &#124; &#8596; &#124;  &gt;  &#124; &#8594; &#124; \models&#124; ( &#124; ) &#124; , &#124; ; &#124; \w+ 
+
+<div style="text-align:center">Table 1: Regular expression for the scanner</div>
+<a id="tab:REGEX">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The set of valid tokens, which includes identifiers, connectives and parentheses
+was simply defined by writing a suitable regular expression (see table ), 
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.3.2"></a><h4>
+2.3.2&nbsp;&nbsp;Parsing</h4>
+
+<div class="p"><!----></div>
+In the second step the list of input tokens is parsed top-down 
+using a recursive-descent parsing algorithm [<a href="#Louden:1997:CCP:523017" id="CITELouden:1997:CCP:523017">8</a>,p.144ff] 
+following an ebnf grammar outlined in table ), 
+that defines precedence and associativity of connectives too.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb2">
+</a> 
+<div style="text-align:center">[mathescape]
+formula        ::= entailment
+entailment     ::= sequence [ '\models' entailment]
+sequence       ::= bicondition  ';' bicondition  
+bicondition    ::= implication [ '&#8596;' bicondition ]
+implication    ::= xdisjunction [ ' &#8594;' implication ]
+xdisjunction   ::= disjunction  '\veebar' disjunction 
+disjunction    ::= conjunction  '&#8744;' conjunction 
+conjunction    ::= negation  '&#8743;' negation 
+negation       ::= '&#172;' negation  -  '(' formula ')'  -  identifier
+
+
+<div style="text-align:center">Table 2: Core EBNF grammar for the parser</div>
+<a id="tab:CoreEBNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.3.3"></a><h4>
+2.3.3&nbsp;&nbsp;Limitations</h4>
+
+<div class="p"><!----></div>
+Ny<span class="overacc2">&#x2015;</span>ayadoes not parse as fast and (memory) efficient as BoolTool's parser,
+primarily because recursion and token probing are more expansive operations in Objective-C than in OCaml.
+The creation of a syntax graph instead of an syntax tree adds more overhead.
+But Ny<span class="overacc2">&#x2015;</span>aya's implementation is <em>good enough</em>, 
+because <em>real world</em> user input is limited to at most few thousands characters.
+
+<div class="p"><!----></div>
+Unit tests has shown that the there are no memory or run-time issues, 
+although the parsing can take a second or two on an iPad.
+
+<div class="p"><!----></div>
+      <a id="tth_sEc2.3.4"></a><h4>
+2.3.4&nbsp;&nbsp;Enhancements</h4>
+
+<div class="p"><!----></div>
+Despite the drawbacks mentioned above
+the benefits far outweigh the disadvantages of implementing an own parser.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> Ny<span class="overacc2">&#x2015;</span>ayaparses strings with Unicode characters, 
+therefore identifiers are not limited to Latin letters and
+&#945;+ &#969; will be parsed correctly.
+<div class="p"><!----></div>
+</li>
+
+<li> The grammar rules for operators are defined as sets of tokens, 
+which will be initialized at application start. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb3">
+</a> 
+<div style="text-align:center">[mathescape,firstnumber=7]
+disjunction    ::= conjunction  OR conjunction 
+
+[mathescape,firstnumber=15]
+OR             ::= '&#8744;'  -  '&#124;'  -  '+'  -  'O'
+
+
+<div style="text-align:center">Table 3: Excerpts from a localized grammar (Italian)</div>
+<a id="tab:LocalizedEBNF">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+</li>
+
+<li> Symbols for operators
+can be localized using the standard localization framework of Cocoa.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb4">
+</a> 
+<div style="text-align:center">[mathescape,numbers=none,multicols=2]
+IMP = "&#8594;  &gt;  IMPLIES";
+OR  = "&#8744;  -  + OR";
+AND = "&#8743; </td><td width="150">
+ . AND";
+NEG = "&#172; ! &nbsp; NOT";
+IMP = "&#8594;  &gt;  IMPLICA";
+OR  = "&#8744;  -  + O";
+AND = "&#8743; </td><td width="150">
+ . E";
+NEG = "&#172; ! &nbsp; NON";
+
+
+<div style="text-align:center">Table 4: Localizable.strings in en.lproj and it.lproj</div>
+<a id="tab:LocalizableStrings">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+</li>
+
+<li> The parser generates syntax graphs with objective-c run-time objects,
+which are well suited for the use cases in an interactive environment.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.4"></a><h3>
+2.4&nbsp;&nbsp;Truth Tables</h3>
+
+<div class="p"><!----></div>
+Truth tables are either small enough to be computed on demand or too big to be stored in memory.
+Either way there is not reason to store filled truth tables at run-time.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.5"></a><h3>
+2.5&nbsp;&nbsp;Binary Decision Diagrams</h3>
+
+<div class="p"><!----></div>
+Binary decision trees and diagrams are represented by trees 
+or acyclic directed graphs built from instances of a simple node class
+ with attributes for a name, a left branch and a right branch. 
+
+<div class="p"><!----></div>
+<a id="tth_tAb5">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/BddNode.png">Figure</a>
+
+<div style="text-align:center">Table 5: Attributes and factory method of BddNode</div>
+<a id="fig:BddNode">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The name is either an identifier, i.e. the name of a variable, “0” or “1". 
+Nodes with the name “0” or “1” are leaf nodes or result nodes
+and must not have a left or right branch.
+The other nodes with the name of a variable are decision nodes 
+and must have valid left and right branches. 
+
+<div class="p"><!----></div>
+The class provides a factory method to create 
+(un)reduced ordered binary decision diagrams from abstract syntax trees
+(figure ).
+
+<div class="p"><!----></div>
+ <a id="tth_sEc3"></a><h2>
+3&nbsp;&nbsp;Views and Controllers</h2>
+
+<div class="p"><!----></div>
+Ny<span class="overacc2">&#x2015;</span>aya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
+is organized by a sub-class of<tt>&nbsp;UITabBarController</tt> (an heir of <tt>UIViewController</tt>). 
+At start the tab bar controller will be instantiated and invoked by Ny<span class="overacc2">&#x2015;</span>aya's application delegate. 
+The tab bar controller will present it's <tt>UITabBar</tt> (an heir of <tt>UIView</tt>)
+and will appoint of one of it's view controllers, which will present it's view such as the welcome screen.
+
+<div class="p"><!----></div>
+Tabbing an <tt>UITabBarItem</tt> will cause the tab bar to delegate the event to it's <tt>UITabBarDelegate</tt> – the tab bar controller.
+The tab bar controller will switch the selected view controller, which then will present it's content.
+
+<div class="p"><!----></div>
+Except for the welcome view controller 
+all content view controllers inherits from split view controller,
+which provides a master view controller and a detail view controller.
+The tutorial master view controller and the BoolTool master view controller shares a list of persisted formulas.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc3.1"></a><h3>
+3.1&nbsp;&nbsp;Welcome</h3>
+
+<div class="p"><!----></div>
+The welcome view controller is simple subclass of<tt>&nbsp;UIViewController</tt> and presents it's content in an not so simple <tt>UIWebView</tt>,
+which is a fully functional, but ‘naked’ web-browser, i.e. links are followed and there is a page history, but no back-button is presented.
+The behavior of the web view can be altered by implementing a web view delegate – usually the controller.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc3.2"></a><h3>
+3.2&nbsp;&nbsp;Tutorials</h3>
+
+<div class="p"><!----></div>
+The tutorials master view controller presents a table view with five sections of tutorials.
+The sections organize the tutorial titles for 
+introduction, syntax, semantics, normal forms and binary decision diagrams.
+Tabbing an entry will cause the detail view controller to present the corresponding tutorial in a web view
+with an additional exercise button on the top of the view.
+
+<div class="p"><!----></div>
+Tabbing this exercise button will put the exercise view controller in charge. 
+An suitable overlay view will be opened, 
+and an instance of a matched class implementing of<tt>&nbsp;NyTuTester</tt> will be created.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg6">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyTuTester.png">Figure</a>
+
+<div style="text-align:center">Figure 6: Tester interface</div>
+<a id="fig:Tester">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The method <tt>firstTest</tt> initializes the test parameters and fills the test view with instructions and labels. 
+Then it calls <tt>nextTest</tt>, which will fill the test view with a new question by every call.
+The method <tt>checkTest</tt> evaluates the user's answer and displays the result in the test view.
+When the test view is closed by the user <tt>removeTest</tt> will dispose resources attached to the test view.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc3.3"></a><h3>
+3.3&nbsp;&nbsp;Playground</h3>
+
+<div class="p"><!----></div>
+The playground master view controller presents a table view with the list of stored and selectable formulas.
+The user can use a formula from this list to add a tree view to the detail view – the canvas view.
+Or the user can add a new tree view by an tap and hold gesture to the canvas view.
+The canvas view can hold multiple syntax trees.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg7">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/TreeView.png">Figure</a>
+
+<div style="text-align:center">Figure 7: Canvas view with multiple syntax tree views</div>
+<a id="fig:TreeView">
+</a>
+</div>
+
+<div class="p"><!----></div>
+The nodes of the syntax tree view are drawn as circles around <tt>symbol()</tt> 
+method defined in the category
+<tt>Display</tt> of the class <tt>NyayaNode</tt>..
+The color of the border is determined by the value of <tt>displayValue()</tt>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg8">
+</a> 
+<div style="text-align:center"><a href="uml/Nyaya/NyayaNodeDisplay.png">Figure</a>
+
+<div style="text-align:center">Figure 8: Node display interface</div>
+<a id="fig:NyayaNodeDisplay">
+</a>
+</div>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc3.4"></a><h3>
+3.4&nbsp;&nbsp;Glossary</h3>
+
+<div class="p"><!----></div>
+The glossary master view controller reads all elements with an id from the glossary content document,
+creates an alphabetical ordered list of technical terms using the texts included between the corresponding element-tags.
+This list of technical terms defined by the glossary document is presented in a table view.
+Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
+controlled by the glossary detail view controller.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc3.5"></a><h3>
+3.5&nbsp;&nbsp;BoolTool</h3>
+
+<div class="p"><!----></div>
+The BoolTool master view controller presents a table view with stored and selectable formulas.
+An editable text field with an attached customized keyboard will allow the user to enter their formulas.
+
+<div class="p"><!----></div>
+The output will be presented in different views. Read only text views are used for the normal form, 
+a web form is used for the truth table and a customized view will draw the binary decision diagram.
+
+<div class="p"><!----></div>
+
+ <a id="tth_sEc4"></a><h2>
+4&nbsp;&nbsp;Application content</h2>
+
+<div class="p"><!----></div>
+Beside the classes to determines the run-time behavior of the application,
+the storage of application content must be defined.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc4.1"></a><h3>
+4.1&nbsp;&nbsp;Content on delivery</h3>
+
+<div class="p"><!----></div>
+Configuration data, localization data and html documents
+are stored in UTF-8 encoded text files.
+All graphical content such as icons and diagrams are stored in portable network graphics.
+These content files are embedded in Ny<span class="overacc2">&#x2015;</span>aya's app bundle
+and will be downloaded along the application execution data,
+while receiving Ny<span class="overacc2">&#x2015;</span>ayafor iPad from the App Store.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc4.2"></a><h3>
+4.2&nbsp;&nbsp;User created content</h3>
+
+<div class="p"><!----></div>
+Formulas from the playground and BoolTool are persisted 
+in the simple property list file <tt>BoolToolData</tt> 
+in the documents folder of the app.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc4.3"></a><h3>
+4.3&nbsp;&nbsp;Export and import of content</h3>
+
+<div class="p"><!----></div>
+Single formulas can be exported from or imported into editable text fields 
+by simple using the standard copy and paste mechanism of iOS.
+
+<div class="p"><!----></div>
+ <a id="tth_chAp6"></a><h1>
+Chapter 6 <br />Retrospective</h1> 			
+
+<div class="p"><!----></div>
+The first version of Ny<span class="overacc2">&#x2015;</span>ayais a fully functional eLearning App, 
+which covers it’s purpose well.
+But it is still far from perfect.
+Some features have to be re-engineered before additional features can be implemented.
+
+<div class="p"><!----></div>
+ <a id="tth_sEc1"></a><h2>
+1&nbsp;&nbsp;Important improvements</h2>
+
+<div class="p"><!----></div>
+Although some technical aspects of Ny<span class="overacc2">&#x2015;</span>ayaare working correctly, they need a revision, 
+because they are too inflexible or too slow.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> At this time content updates can only be done with an application update in the App Store,
+which will lead to some delay in the distribution of the correction of typing errors or an update of the glossary.
+<div class="p"><!----></div>
+</li>
+
+<li> Syntax trees are stored memory optimized as acyclic syntax diagrams. 
+Nevertheless the valuation does not use this fact and the same sub-tree will be evaluated multiple times.
+<div class="p"><!----></div>
+</li>
+
+<li> The creation of binary decision diagrams is very slow for formulas with more than 15 different atoms.
+<div class="p"><!----></div>
+</li>
+
+<li> Individual formulas can be imported and exported with the clipboard-mechanism of iOS. 
+But this should also be possible with all persisted formulas at once.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+Some aspects of Ny<span class="overacc2">&#x2015;</span>aya’s user interface does not use the full richness of Cocoa touch. 
+Others lack the graphical sophistication that users are accustomed on the iOS platform.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> Accessibility features of iOS have to be supported – especially 
+<tt>VoiceOver</tt>, <tt>Zoom</tt>, <tt>LargeText</tt> and <tt>AssistiveTouch</tt>,
+which will enable Ny<span class="overacc2">&#x2015;</span>ayato reach a wider audience.
+<div class="p"><!----></div>
+</li>
+
+<li> Although English is the technical language of computer science,
+localizations of the user interface, the tutorials and the glossary will increase 
+the reachable audience too.
+<div class="p"><!----></div>
+</li>
+
+<li> Content and user interface should be presented in a visually more appealing manner.
+For the first css-definitions should be developed, for the second additional images have to be created.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+ <a id="tth_sEc2"></a><h2>
+2&nbsp;&nbsp;Outlook</h2>
+
+<div class="p"><!----></div>
+To increase the number of potential users
+Ny<span class="overacc2">&#x2015;</span>ayacould be extended with new feature
+or Ny<span class="overacc2">&#x2015;</span>ayacould be ported to other platforms.
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.1"></a><h3>
+2.1&nbsp;&nbsp;Additional features</h3>
+
+<div class="p"><!----></div>
+Even it is unlikely the following features will be implemented in the foreseeable future, 
+the following use cases would be obvious evolutions for Ny<span class="overacc2">&#x2015;</span>aya.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> Creation and editing of arbitrary binary decision diagrams similar to abstract syntax trees.
+<div class="p"><!----></div>
+</li>
+
+<li> Definition of arbitrary Boolean functions with truth tables, propositional formulas, abstract syntax trees or binary decision diagrams.
+<div class="p"><!----></div>
+</li>
+
+<li> Syntax tree, truth tables and binary decision diagrams should be exportable too.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <a id="tth_sEc2.2"></a><h3>
+2.2&nbsp;&nbsp;Additional platforms</h3>
+
+<div class="p"><!----></div>
+The author of Ny<span class="overacc2">&#x2015;</span>aa is an apologist of native client applications,
+although he admits that they are many useful use cases for modern web-applications, 
+using html5, css3 and JavaScript. 
+Unfortunately the freely available development tool chains for (graphical) html/javascript-applications
+are very limited and far from consolidated, although the underlining standards html5, css3 
+and JavaScript 1.8 would provide anything needed, the workload to create sophisticated web-apps 
+is much higher than to develop native apps on the same level.
+
+<div class="p"><!----></div>
+So the most likely platforms to be supported by Ny<span class="overacc2">&#x2015;</span>ayaare Mac OS X and Android.
+
+<div class="p"><!----></div>
+
+<ul>
+<li>For a Mac OS X version some aspects of the user interface must be re-thought and re-implemented, 
+because Mac OS X does not support a touch interface.
+<div class="p"><!----></div>
+</li>
+
+<li>
+For an Android version the model must be translated into Java and the user interface must be re-implemented.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+ <a id="tth_chAp7"></a><h1>
+Chapter 7 <br />Conclusion and Summary</h1>				
+
+<div class="p"><!----></div>
+Besides the work as .NET developer for administrative tools of a payment system, 
+the software project Ny<span class="overacc2">&#x2015;</span>ayafor iPad was a welcome diversion.
+Coping an entire different platform and mastering 
+the memory restrictions and the very limited cpu speed of an original iPad 
+(in comparsion to a modern pc) were exciting tasks. 
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<h1>List of Figures </h1>
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg3.1"
+>3.1&nbsp;  Implication with Chinese symbols for rain and wet</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg3.2"
+>3.2&nbsp;  Reduced ordered binary decision diagram</a><br />
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.1"
+>5.1&nbsp;  Node class to represent an abstract syntax tree</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.2"
+>5.2&nbsp;  Public root class and non public subclasses</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.3"
+>5.3&nbsp;  Production rules</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.4"
+>5.4&nbsp;  Valuation of trees</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.5"
+>5.5&nbsp;  Abstract syntax tree    acyclic graph </a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.6"
+>5.6&nbsp;  Tester interface</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.7"
+>5.7&nbsp;  Canvas view with multiple syntax tree views</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIg5.8"
+>5.8&nbsp;  Node display interface</a><br />
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIgC.1"
+>C.1&nbsp;  Tutorial</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIgC.2"
+>C.2&nbsp;  Playground</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_fIgC.3"
+>C.3&nbsp;  BoolTool</a><br />
+
+
+<div class="p"><!----></div>
+
+<h1>List of Tables </h1>
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.1"
+>3.1&nbsp;  Tutorials.plist    the configuration file for all tutorials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.2"
+>3.2&nbsp;  QA1.plist    content file for the first three tutorials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.3"
+>3.3&nbsp;  11.plist    configuration file for the first exercise</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.4"
+>3.4&nbsp;  Grammar with mandatory parentheses</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.5"
+>3.5&nbsp;  Grammar with precedence and associativity</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.6"
+>3.6&nbsp;  tautologies and contradictions</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.7"
+>3.7&nbsp;  basic rules</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.8"
+>3.8&nbsp;  Grammar without implications</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.9"
+>3.9&nbsp;  Equivalence transformation towards implication free form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.10"
+>3.10&nbsp;  Grammar for negation normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.11"
+>3.11&nbsp;  Equivalence transformations towards negation normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.12"
+>3.12&nbsp;  Grammar for conjunctive normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.13"
+>3.13&nbsp;  Equivalence transformations towards conjunctive normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.14"
+>3.14&nbsp;  Grammar for disjunctive normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.15"
+>3.15&nbsp;  Equivalence transformations towards disjunctive normal form</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.16"
+>3.16&nbsp;  Grammar for Boolean expressions</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.17"
+>3.17&nbsp;  Transformations which are offered in locked mode</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb3.18"
+>3.18&nbsp;  Additional transformations in locked mode</a><br />
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb5.1"
+>5.1&nbsp;  Regular expression for the scanner</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb5.2"
+>5.2&nbsp;  Core EBNF grammar for the parser</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb5.3"
+>5.3&nbsp;  Excerpts from a localized grammar (Italian)</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb5.4"
+>5.4&nbsp;  Localizable.strings in en.lproj and it.lproj</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAb5.5"
+>5.5&nbsp;  Attributes and factory method of BddNode</a><br />
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAbA.1"
+>A.1&nbsp;  basic symbols in different representations</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAbA.2"
+>A.2&nbsp;  additional symbols</a><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_tAbB.1"
+>B.1&nbsp;  <a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd">PropertyList-1.0.dtd</a></a><br />
+
+
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <a id="tth_chApA"></a><h1>
+Appendix 1 <br />Symbols</h1>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb1">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="left">Name	</td><td align="center">Atom 	</td><td align="center">Negation		</td><td align="center">Conjunction		</td><td align="center">Disjunction		</td><td align="center">Implication </td></tr>
+<tr><td align="left"></td><td align="center"></td><td align="center">NOT		</td><td align="center">AND		</td><td align="center">OR		</td><td align="center"></td></tr>
+<tr><td align="left">ASCII 	</td><td align="center">p,q,r 	</td><td align="center">! 			</td><td align="center">&amp; &nbsp;&nbsp;&nbsp; .	</td><td align="center"> -   &nbsp;&nbsp;&nbsp; +			</td><td align="center">&#62; 	</td></tr>
+<tr><td align="left">Symbol  	</td><td align="center"></td><td align="center">&#172;		</td><td align="center">&#8743;	</td><td align="center">&#8744;		</td><td align="center">&#8594; </td></tr>
+<tr><td align="left">UTF-8	</td><td align="center"></td><td align="center">C2 AC		</td><td align="center">E2 88 A7	</td><td align="center">E2 88 A8	</td><td align="center">E2 86 92</td></tr>
+<tr><td align="left">Unicode	</td><td align="center"></td><td align="center">U+00AC 	</td><td align="center">U+2227		</td><td align="center">U+2228	</td><td align="center">U+2192</td></tr>
+<tr><td align="left">HTML	</td><td align="center"></td><td align="center">&amp;not;		</td><td align="center">&amp;and;		</td><td align="center">&amp;or;		</td><td align="center">&amp;rarr;  </td></tr>
+<tr><td align="left">LaTeX	</td><td align="center"></td><td align="center"><tt>\neg</tt>	</td><td align="center"><tt>\wedge</tt> </td><td align="center"><tt>\vee</tt> </td><td align="center"><tt>\rightarrow</tt> </td></tr></table>
+
+
+<div style="text-align:center">Table 1: basic symbols in different representations</div>
+</div>
+<a id="tab:BASICSYMBOLS">
+</a>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb2">
+</a> 
+<div style="text-align:center">
+<table>
+<tr><td align="center">Tautology		</td><td align="center">Contradiction		</td><td colspan="2" align="center">Exclusive Disjunction	</td><td align="center">Biconditional </td></tr>
+<tr><td align="center">TOP			</td><td align="center">BOTTOM		</td><td align="center">EOR </td><td align="center">XOR							</td><td align="center">IFF </td></tr>
+<tr><td align="center">T &nbsp;&nbsp;&nbsp; 1		</td><td align="center">F  &nbsp;&nbsp;&nbsp; 0		</td><td colspan="2" align="center"> 		</td><td align="center">&lt;&#62; </td></tr>
+<tr><td align="center">T		</td><td align="center">&#8869;			</td><td align="center">\veebar 							</td><td align="center">&#8853;   			</td><td align="center"> &#8596;</td></tr>
+<tr><td align="center">E2 8A A4		</td><td align="center">E2 8A A5		</td><td align="center">E2 8A BB							</td><td align="center">E2 8A 95			</td><td align="center">E2 86 94</td></tr>
+<tr><td align="center">U+22A4		</td><td align="center">U+22A5			</td><td align="center">U+22BB							</td><td align="center">U+2295				</td><td align="center">U+2194</td></tr>
+<tr><td align="center"></td><td align="center">&amp;perp;			</td><td align="center"></td><td align="center">&amp;oplus;				</td><td align="center">&amp;harr;</td></tr>
+<tr><td align="center"><tt>\top</tt>	</td><td align="center"><tt>\bot</tt>	</td><td align="center"><tt>\veebar</tt> </td><td align="center"><tt>\oplus</tt>	</td><td align="center"><tt>\leftrightarrow</tt>
+</td></tr></table>
+
+
+<div style="text-align:center">Table 2: additional symbols</div>
+</div>
+<a id="tab:ADDITIONALSYMBOLS">
+</a>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <a id="tth_chApB"></a><h1>
+Appendix 2 <br />Definitions</h1>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_tAb1">
+</a> 
+<div style="text-align:center">[mathescape]
+&lt;!ENTITY &lt;!ELEMENT plist &lt;!ATTLIST plist version CDATA "1.0" &#62;
+
+<div class="p"><!----></div>
+&lt;!- Collections -&#62;
+&lt;!ELEMENT array (&lt;!ELEMENT dict (key, &lt;!ELEMENT key (#PCDATA)&#62;
+
+<div class="p"><!----></div>
+&lt;!- Primitive types -&#62;
+&lt;!ELEMENT string (#PCDATA)&#62;
+&lt;!ELEMENT data (#PCDATA)&#62; 
+    &lt;!- Contents interpreted as Base-64 encoded -&#62;
+&lt;!ELEMENT date (#PCDATA)&#62; 
+    &lt;!- Contents should conform to a subset of ISO 8601 (in particular, YYYY '-' MM '-' DD 'T' HH ':' MM ':' SS 'Z'.  Smaller units may be omitted with a loss of precision) -&#62;
+
+<div class="p"><!----></div>
+&lt;!- Numerical primitives -&#62;
+&lt;!ELEMENT true EMPTY&#62;  &lt;!- Boolean constant true -&#62;
+&lt;!ELEMENT false EMPTY&#62; &lt;!- Boolean constant false -&#62;
+&lt;!ELEMENT real (#PCDATA)&#62; 
+    &lt;!- Contents should represent a floating point number matching ("+"  -  "-")? d+ ("."d*)? (&#203;" ("+"  -  "-") d+)? where d is a digit 0-9.  -&#62;
+&lt;!ELEMENT integer (#PCDATA)&#62; 
+    &lt;!- Contents should represent a (possibly signed) integer number in base 10 -&#62;
+
+
+<div style="text-align:center">Table 1: <a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd">PropertyList-1.0.dtd</a></div>
+<a id="tab:PLISTDTD">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <a id="tth_chApC"></a><h1>
+Appendix 3 <br />Screenshots</h1>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg1">
+</a> 
+<div style="text-align:center"><a href="pics/S_Tutorials.png">Figure</a>
+
+<div style="text-align:center">Figure 1: Tutorial</div>
+<a id="fig:ScreenshotTutorials">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg2">
+</a> 
+<div style="text-align:center"><a href="pics/S_Playground.png">Figure</a>
+
+<div style="text-align:center">Figure 2: Playground</div>
+<a id="fig:ScreenshotPlayground">
+</a>
+</div>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a id="tth_fIg3">
+</a> 
+<div style="text-align:center"><a href="pics/S_BoolTool.png">Figure</a>
+
+<div style="text-align:center">Figure 3: BoolTool</div>
+<a id="fig:ScrrenshotBoolTool">
+</a>
+</div>
+
+<div class="p"><!----></div>
+<hr /><h3>Footnotes:</h3>
+
+<div class="p"><!----></div>
+<a id="tthFtNtAAB"></a><a href="#tthFrefAAB"><sup>1</sup></a>
+<a href="http://www.cs.wfu.edu/~burg/papers/PropLogic.pdf"><tt>http://www.cs.wfu.edu/~burg/papers/PropLogic.pdf</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAC"></a><a href="#tthFrefAAC"><sup>2</sup></a>
+<a href="http://cl-informatik.uibk.ac.at/software/booltool/?page=info"><tt>http://cl-informatik.uibk.ac.at/software/booltool/?page=info</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAD"></a><a href="#tthFrefAAD"><sup>3</sup></a>
+<a href="http://www.mysvc.it/myapps/constraints/"><tt>http://www.mysvc.it/myapps/constraints/</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAE"></a><a href="#tthFrefAAE"><sup>4</sup></a>
+<a href="http://www.mertzwerkz.com/truth.html"><tt>http://www.mertzwerkz.com/truth.html</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAF"></a><a href="#tthFrefAAF"><sup>5</sup></a>
+<a href="http://itunes.apple.com/at/app/boolean-logic-cheat-sheet/id341959531?mt=8"><tt>http://itunes.apple.com/at/app/boolean-logic-cheat-sheet/id341959531?mt=8</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAG"></a><a href="#tthFrefAAG"><sup>6</sup></a>
+<a href="http://itunes.apple.com/at/app/logic-mania/id434019152?mt=8"><tt>http://itunes.apple.com/at/app/logic-mania/id434019152?mt=8</tt></a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAH"></a><a href="#tthFrefAAH"><sup>7</sup></a>
+<a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd">http://www.apple.com/DTDs/PropertyList-1.0.dtd</a>
+(see table ). 
+<div class="p"><!----></div>
+<a id="tthFtNtAAI"></a><a href="#tthFrefAAI"><sup>8</sup></a>
+<a href="http://cl-informatik.uibk.ac.at/software/booltool/">cl-informatik.uibk.ac.at/software/booltool/</a>
+<div class="p"><!----></div>
+<a id="tthFtNtAAJ"></a><a href="#tthFrefAAJ"><sup>9</sup></a>
+<a href="http://ocaml.org">ocaml.org</a>
+<br /><br /><hr /><small>File translated from
+T<sub><span class="small">E</span></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><span class="small">T</span></sub>H</a>,
+version 4.03.<br />On 13 Jan 2013, 12:33.</small>
+</html>

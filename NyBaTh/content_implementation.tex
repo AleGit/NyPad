@@ -8,7 +8,7 @@ which is originated in Smalltalk \cite[p.4]{GAMMAETAL},
 that separates the representation of data from the user interaction.
 Cocoa Touch \seeref{sec:Cocoa} encourages the use of MVC 
 by providing a rich set of useful views and controllers with the framework UIKit.
-Those cover many use cases of data presentation and user interaction.
+These cover many use cases of data presentation and user interaction.
 
 \section{Model}
 
@@ -41,8 +41,8 @@ arbitrary graphs and therefore syntax trees can be represented easily.
 \subsubsection{Node class cluster}
 
 The node class is implemented as a class cluster, 
-which is an Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
-– an adaption of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
+which is a Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
+– an adaptation of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
 The abstract and public class \verb+NyayaNode+ 
 provides a set of static and public methods (see \figref{fig:NyayaNodeCreation}),
 that returns instances of non public sub-classes (see \figref{fig:NyayaNodeCluster})
@@ -56,9 +56,9 @@ of \verb+NyayaNode+.
 \end{center}
 \end{figure}
 
-Actual the creational methods were implemented as a class category in a different source file. 
+Actually the creational methods were implemented as a class category in a different source file. 
 Class categories are a language feature of Objective-C \cite[p.225ff]{Kochan:2009:PO:1538451}
-– an adaption of the decorator design pattern \cite[p.175ff]{GAMMAETAL} – 
+– an adaptation of the decorator design pattern \cite[p.175ff]{GAMMAETAL} – 
 to extend or organize the functionality of given classes beyond their core purpose. 
 
 There are base implementations of category methods in the root node class,
@@ -114,7 +114,8 @@ atoms, connectives or trees.
 
 %\item The category “Reductions”
 %\item The category “Resolution”
-\item The  category “Type” provides one method, that returns the type of a node, i.e constant, variable, type of connective as an enum.
+\item The  category “Type” provides a method, 
+that returns the type of a node, i.e constant, variable, type of connective as an enum.
 
 
 \item The category “Valuation” (\figref{fig:NyayaNodeValuation}) 
@@ -136,13 +137,13 @@ Instances of node classes are not mutable
 regarding their function as nodes of abstract syntax trees. 
 This means nodes can be created, but not modified.
 The symbol of an atom can not be changed, 
-a connective node can not be altered into an other one,
+a connective node can not be altered into another one,
 and child nodes of a connective node can not be replaced or reordered.
 
 Derivations or transformations do not change the structure of an existing syntax tree,
 but rather create a new independent syntax tree.
 
-Obviously mutable truth assignments does not affect the immutable structure of a syntax tree,
+Obviously mutable truth assignments do not affect the immutable structure of a syntax tree,
 because truth assignments are semantics, not syntax. 
 
 \subsubsection{Acyclic syntax graphs}
@@ -188,8 +189,10 @@ but the necessary distributions of disjunctions will multiply the number of node
 
 To ensure the stability of \Nyaya 
 and since it is near impossible 
-to present a propositional formulas with thousands of symbols 
-to the user in a meaningful way, 
+to present a propositional formula 
+with thousands of symbols 
+in a meaningful way
+to the user, 
 the derivation of normal forms is aborted, when the results surpass a defined size.
 
 
@@ -264,17 +267,17 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 
 \Nyaya does not parse as fast and (memory) efficient as BoolTool's parser,
 primarily because recursion and token probing are more expansive operations in Objective-C than in OCaml.
-The creation of a syntax graph instead of an syntax tree adds more overhead.
+The creation of a syntax graph instead of a syntax tree adds more overhead.
 But \Nyaya's implementation is {\em good enough}, 
-because {\em real world} user input is limited to at most few thousands characters.
+because {\em real world} user input is limited to at most a few thousands characters.
 
-Unit tests has shown that the there are no memory or run-time issues, 
+The unit tests have shown that there are no memory or run-time issues, 
 although the parsing can take a second or two on an iPad.
 
 \subsubsection{Enhancements}
 
 Despite the drawbacks mentioned above
-the benefits far outweigh the disadvantages of implementing an own parser.
+the benefits far outweigh the disadvantages of implementing its own parser.
 
 \begin{itemize}
 
@@ -321,7 +324,7 @@ NEG = "$\neg$ ! ~ NON";
 \end{table}
 
 
-\item The parser generates syntax graphs with objective-c run-time objects,
+\item The parser generates syntax graphs with Objective-C run-time objects,
 which are well suited for the use cases in an interactive environment.
 
 \end{itemize}
@@ -329,7 +332,7 @@ which are well suited for the use cases in an interactive environment.
 \subsection{Truth Tables}
 
 Truth tables are either small enough to be computed on demand or too big to be stored in memory.
-Either way there is not reason to store filled truth tables at run-time.
+Either way there is no reason to store filled truth tables at run-time.
 
 \subsection{Binary Decision Diagrams}
 
@@ -359,10 +362,10 @@ The class provides a factory method to create
 is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
 At start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
 The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
-and will appoint of one of it's view controllers, which will present it's view such as the welcome screen.
+and will appoint of one of its view controllers, which will present its view such as the welcome screen.
 
-Tabbing an \verb+UITabBarItem+ will cause the tab bar to delegate the event to it's \verb+UITabBarDelegate+ – the tab bar controller.
-The tab bar controller will switch the selected view controller, which then will present it's content.
+Tabbing an \verb+UITabBarItem+ will cause the tab bar to delegate the event to its \verb+UITabBarDelegate+ – the tab bar controller.
+The tab bar controller will switch the selected view controller, which then will present its content.
 
 Except for the welcome view controller 
 all content view controllers inherits from split view controller,
@@ -371,7 +374,8 @@ The tutorial master view controller and the BoolTool master view controller shar
 
 \subsection{Welcome}
 
-The welcome view controller is simple subclass of\verb+ UIViewController+ and presents it's content in an not so simple \verb+UIWebView+,
+The welcome view controller is a simple subclass of\verb+ UIViewController+ 
+and presents its content in a not so simple \verb+UIWebView+,
 which is a fully functional, but ‘naked’ web-browser, i.e. links are followed and there is a page history, but no back-button is presented.
 The behavior of the web view can be altered by implementing a web view delegate – usually the controller.
 
@@ -384,7 +388,7 @@ Tabbing an entry will cause the detail view controller to present the correspond
 with an additional exercise button on the top of the view.
 
 Tabbing this exercise button will put the exercise view controller in charge. 
-An suitable overlay view will be opened, 
+A suitable overlay view will be opened, 
 and an instance of a matched class implementing of\verb+ NyTuTester+ will be created.
 
 \begin{figure}[htbp]
@@ -396,7 +400,7 @@ and an instance of a matched class implementing of\verb+ NyTuTester+ will be cre
 \end{figure}
 
 The method \verb+firstTest+ initializes the test parameters and fills the test view with instructions and labels. 
-Then it calls \verb+nextTest+, which will fill the test view with a new question by every call.
+Then it calls \verb+nextTest+, which will fill the test view with a new question with every call.
 The method \verb+checkTest+ evaluates the user's answer and displays the result in the test view.
 When the test view is closed by the user \verb+removeTest+ will dispose resources attached to the test view.
 
@@ -404,7 +408,7 @@ When the test view is closed by the user \verb+removeTest+ will dispose resource
 
 The playground master view controller presents a table view with the list of stored and selectable formulas.
 The user can use a formula from this list to add a tree view to the detail view – the canvas view.
-Or the user can add a new tree view by an tap and hold gesture to the canvas view.
+Or the user can add a new tree view to the canvas view using a tap and hold gesture.
 The canvas view can hold multiple syntax trees.
 
 \begin{figure}[htbp]
@@ -415,9 +419,9 @@ The canvas view can hold multiple syntax trees.
 \end{center}
 \end{figure}
 
-The nodes of the syntax tree view are drawn as circles around \verb+symbol()+ 
+The nodes of the syntax tree view are drawn as circles around the \verb+symbol()+ 
 method defined in the category
-\verb+Display+ of the class \verb+NyayaNode+..
+\verb+Display+ of the class \verb+NyayaNode+.
 The color of the border is determined by the value of \verb+displayValue()+.
 
 
@@ -432,7 +436,7 @@ The color of the border is determined by the value of \verb+displayValue()+.
 \subsection{Glossary}
 
 The glossary master view controller reads all elements with an id from the glossary content document,
-creates an alphabetical ordered list of technical terms using the texts included between the corresponding element-tags.
+creates an alphabetically ordered list of technical terms using the texts included between the corresponding element-tags.
 This list of technical terms defined by the glossary document is presented in a table view.
 Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
 controlled by the glossary detail view controller.
@@ -472,7 +476,7 @@ in the documents folder of the app.
 \subsection{Export and import of content}
 
 Single formulas can be exported from or imported into editable text fields 
-by simple using the standard copy and paste mechanism of iOS.
+by simply using the standard copy and paste mechanism of iOS.
 
 
 
