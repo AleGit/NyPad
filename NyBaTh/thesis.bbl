@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Git:Main}
 \textit{Git}.
@@ -17,6 +17,13 @@ E.~M. Buck and D.~A. Yacktman.
 S.~Chacon.
 \newblock {\em Pro Git}.
 \newblock Apress, Berkely, CA, USA, 1st edition, 2009.
+
+\bibitem{Dunlosky01012013}
+J.~Dunlosky, K.~A. Rawson, E.~J. Marsh, M.~J. Nathan, and D.~T. Willingham.
+\newblock Improving students' learning with effective learning techniques:
+  Promising directions from cognitive and educational psychology.
+\newblock {\em Psychological Science in the Public Interest}, 14(1):4--58,
+  2013.
 
 \bibitem{GAMMAETAL}
 E.~Gamma, R.~Helm, R.~Johnson, and J.~Vlissides.
