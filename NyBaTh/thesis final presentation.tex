@@ -1,8 +1,9 @@
 % !TEX encoding = UTF-8 Unicode
 %\documentclass[handout]{beamer}
-\documentclass{beamer}
+\documentclass[bigger]{beamer}
 \usetheme{Boadilla}
 \input{packages}
+\usepackage{transparent}
 %\usepackage{ngerman}
 %\usepackage[utf8]{inputenc} % äöü direkt eintippen
 %\usepackage[right]{eurosym}
@@ -23,11 +24,12 @@
 
 %\usepackage{beamerthemesplit} // Activate for custom appearance
 
-% \usebackgroundtemplate{\includegraphics[width=3cm]{fp_images/SyntaxTreeBackground.png}}
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
+\usebackgroundtemplate{ % \includegraphics[width=3cm]{pics/NyayaAppIcon1024.png}}
+\vbox to \paperheight{\vspace{2.3cm}\hbox to \paperwidth{\hfil\includegraphics[width=2.9cm]{pics/NyayaAppIcon1024.png}\hfil}}
+}
 
 \title{\Nyaya  for iPad}
-\subtitle{Interactive Environment with BoolTool}
+\subtitle{Interactive Environment with BoolTool \vspace{1.8cm}}
 \author{Alexander Maringele}
 \institute[UIBK]{}
 
@@ -43,6 +45,8 @@ Supervisor: Dr. Georg Moser
 
 
 %\section[Outline]{}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/BoolToolInterface.png}}
 
 \frame {
 	\frametitle{What is BoolTool?} 
@@ -69,20 +73,20 @@ Supervisor: Dr. Georg Moser
 	
 	}
 	
-	
+	\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
 
-\frame {
-	\frametitle{BoolTool}
-	\framesubtitle{Web interface}
-%\begin{figure}[htbp]
-%\begin{center}
-\includegraphics[scale=0.35]{fp_images/BoolToolInterface.png}
-%\caption{default}
-%\label{default}
-%\end{center}
-%\end{figure}
-
-}
+%\frame {
+%	\frametitle{BoolTool}
+%	\framesubtitle{Web interface}
+%%\begin{figure}[htbp]
+%%\begin{center}
+%\includegraphics[scale=0.35]{fp_images/BoolToolInterface.png}
+%%\caption{default}
+%%\label{default}
+%%\end{center}
+%%\end{figure}
+%
+%}
 	
 %\frame{
 %	\frametitle{BoolTool}
@@ -102,10 +106,22 @@ Supervisor: Dr. Georg Moser
 %}
 
 \frame {
-	\frametitle{Project Aim}
-	\framesubtitle{Allow the user to learn}
+	\frametitle{What is an iPad?}
+% a silly question huh? But when you develop for a platform you have to know what you are develop
 
-	\begin{itemize}
+not:
+	useless, an big iphone, the saviour of the newspaper industry
+
+always on, small screen, single window, small ram, small ops
+}
+
+\frame {
+	\frametitle{What is \Nyaya?}
+	\framesubtitle{Project Aim}
+
+	Allow the user to learn
+
+\begin{itemize}
 	
 	\item Formalism of propositional logic
 	
@@ -118,36 +134,67 @@ Supervisor: Dr. Georg Moser
 	\item Coherence of different representations
 		
 	\end{itemize}
+in a self-explanatory environment.
 
 }
 
 %\section{Quellen}
 
-\frame {
-	\frametitle{Part I: Concept}
 
-	\framesubtitle{Platform agnostic}
+
+\frame {
+	\frametitle{What is \Nyaya?}
+
+	\framesubtitle{Platform agnostic concept}
 	
 	\begin{itemize}
-	
-	\item Self-explanatory environment
 	
 	\item Tutorials for general concepts and definitions
 
 	\item Exercises to consolidate the learned concepts and definitions
 	
-	\item Glossary of technical terms
+	\item Playground to build and transform formulas
 	
-	\item Playgrounds to build and transform formulas
+	\item Glossary of technical terms
+
+	\item BoolTool 
 	
 \end{itemize}
 }
 
-\frame {
-	\frametitle{Part II: Implementation}
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabN1.png}}
 
-	\framesubtitle{Platform specific}
+\frame {
+	
+	\frametitle{What is \Nyaya?}
+	\framesubtitle{Platform specific iPad App}
 	%\includegraphics[width=12.2cm,trim=1.5cm 4cm 2cm 2cm]{Images/BoolPad6}
+}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabT1.png}}
+
+\frame {
+	\frametitle{Tutorials}
+}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabE1.png}}
+\frame {
+	\frametitle{Exercises}
+}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabP1.png}}
+\frame {
+	\frametitle{Playground}
+}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabG1.png}}
+\frame {
+	\frametitle{Glossary}
+}
+
+\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/NyayaTabB1.png}}
+\frame {
+	\frametitle{BoolTool}
 }
 
 \section{Sources}
