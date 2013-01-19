@@ -1,0 +1,182 @@
+% !TEX encoding = UTF-8 Unicode
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+\usetheme{Boadilla}
+\input{packages}
+%\usepackage{ngerman}
+%\usepackage[utf8]{inputenc} % äöü direkt eintippen
+%\usepackage[right]{eurosym}
+
+%\usepackage{subfigure}
+
+%\usepackage{booktabs}
+
+%\usepackage{tabularx}
+%\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % linksbündig mit Breitenangabe
+%\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
+%\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe
+
+%\newcommand{\USD}[1]{{#1}\,\$}
+
+
+ % \setbeamercovered{transparent}
+
+%\usepackage{beamerthemesplit} // Activate for custom appearance
+
+% \usebackgroundtemplate{\includegraphics[width=3cm]{fp_images/SyntaxTreeBackground.png}}
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
+
+\title{\Nyaya  for iPad}
+\subtitle{Interactive Environment with BoolTool}
+\author{Alexander Maringele}
+\institute[UIBK]{}
+
+\date{March 5th, 2013}
+
+\begin{document}
+
+\frame{
+\titlepage
+Supervisor: Dr. Georg Moser
+}
+
+
+
+%\section[Outline]{}
+
+\frame {
+	\frametitle{What is BoolTool?} 
+	\framesubtitle{Manipulation and evaluation\\of formulae in propositional logic}
+
+
+	
+\begin{itemize}
+\item<1-5,11> BoolTool is powerful
+	\begin{itemize}
+	\item<2-5> It defines an input syntax for formulas
+	\item<3-5> It derives normal forms
+	\item<4-5> It computes truth tables and binary decision diagrams
+	\item<5-5> It calculates satisfiability, tautologies and contradictions
+	\end{itemize}
+\item<1,6-> But it is not for beginners.
+	\begin{itemize}
+	\item<7-10> It does not motivate or explain anything.
+	\item<8-10> It does not use standard symbols of propositional logic
+	\item<9-10> It does not explain equivalence transformations
+	\item<10-10> It does not define normal forms.
+	\end{itemize}
+\end{itemize}
+	
+	}
+	
+	
+
+\frame {
+	\frametitle{BoolTool}
+	\framesubtitle{Web interface}
+%\begin{figure}[htbp]
+%\begin{center}
+\includegraphics[scale=0.35]{fp_images/BoolToolInterface.png}
+%\caption{default}
+%\label{default}
+%\end{center}
+%\end{figure}
+
+}
+	
+%\frame{
+%	\frametitle{BoolTool}
+%	\framesubtitle{Drawbacks}
+%	
+%	\begin{itemize}
+%	\item Syntax is slightly different
+%	\item Semantics is not explained
+%	\item Normal forms are not defined
+%	\item Transformations are not demonstrated
+%	
+%	\end{itemize}
+%	
+%%	\vfill
+%%	
+%%	User can not learn many facts about propositional logic.
+%}
+
+\frame {
+	\frametitle{Project Aim}
+	\framesubtitle{Allow the user to learn}
+
+	\begin{itemize}
+	
+	\item Formalism of propositional logic
+	
+	\item Separation of syntax and semantics
+	
+	\item Normal forms (NNF, CNF, DNF)
+
+	\item Standard transformations of Boolean functions
+	
+	\item Coherence of different representations
+		
+	\end{itemize}
+
+}
+
+%\section{Quellen}
+
+\frame {
+	\frametitle{Part I: Concept}
+
+	\framesubtitle{Platform agnostic}
+	
+	\begin{itemize}
+	
+	\item Self-explanatory environment
+	
+	\item Tutorials for general concepts and definitions
+
+	\item Exercises to consolidate the learned concepts and definitions
+	
+	\item Glossary of technical terms
+	
+	\item Playgrounds to build and transform formulas
+	
+\end{itemize}
+}
+
+\frame {
+	\frametitle{Part II: Implementation}
+
+	\framesubtitle{Platform specific}
+	%\includegraphics[width=12.2cm,trim=1.5cm 4cm 2cm 2cm]{Images/BoolPad6}
+}
+
+\section{Sources}
+\frame{
+	\frametitle{Sources}
+	
+	\begin{itemize}
+	\item Barwise, Etchemendy und Barker Plummer, \textbf{Tarski's World}
+	\item Middeldorp, \textbf{Logic}, Lecture 
+	\item Huth and Ryan, \textbf{Logic in Computer Science}
+	\item Apple iOS Developer Documentation
+	% \item OCaml Sourcecode for BoolTool
+	% \item Scofield, \textbf{Cross Compiling OCaml to iOS} %, \href{http://psellos.com/ocaml/compile-to-iphone.html}{www.psellos.com}
+	
+	\end{itemize}
+}
+
+%\section{Tools}
+%\frame{
+%	\frametitle{Tools}
+%	
+%	\begin{itemize}
+%	\item XCode
+%	\item Objective C
+%	\item Cocoa
+%	
+%		
+%	\end{itemize}
+%}
+
+
+\end{document}
