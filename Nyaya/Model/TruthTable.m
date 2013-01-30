@@ -92,8 +92,10 @@
 - (id)initWithNode:(NyayaNode *)node compact:(BOOL)compact {
     self = [super init];
     if (self) {
-        if (!compact) self->isa = [ExpandedTruthTable class];
-        
+        if (!compact) {
+            self->isa = [ExpandedTruthTable class];
+            // object_setClass(self, [ExpandedTruthTable class]);
+        }        
         _formula = node;
         _title = [node description];
         _variables = [[node setOfVariables] allObjects];
