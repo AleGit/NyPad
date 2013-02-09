@@ -52,28 +52,22 @@ The file “Tutorials.plist” (see \tabref{tab:TUTORIALPLIST})
 provides the basic data about available tutorial sections and tutorial titles 
 to build a navigation menu programmatically.
 
-Every tutorial includes a teaching part with examples (html-files in utf-8 encoding) 
+Every tutorial includes a teaching part with examples (HTML-files in UTF-8 encoding) 
 and an interactive knowledge checker with exercises, 
 where the user gets immediate feedback. 
 Every interactive part will present some instructions to master the task.
 
 \subsection{Introduction}
 
-The first tutorial section with four tutorials 
-(\hyperref[tut:11]{11}, 
-\hyperref[tut:12]{12}, 
-\hyperref[tut:13]{13},
-\hyperref[tut:14]{14}) 
-gives an informal introduction to modeling, 
-i.e. the translation from sentences in natural language to sentences in the formal language of propositional logic.
-
-The content file “QA1.plist” (see \tabref{tab:QA1PLIST}) contains
-an array (starts at line 5) 
-of arrays that include sentences and sample solutions 
-(the first exercise starts at line 6). 
-The first string is the sample sentence (at line 7), 
-which must be analyzed by the user
-and the following strings are sample solutions for different exercises. 
+The first tutorial section with four tutorials gives an informal introduction to modeling, 
+i.e.\ the translation from sentences in natural language to sentences in the formal language of propositional logic.
+Three of the four tutorials
+% \hyperref[tut:11]{\textnumero 11}, 
+% \hyperref[tut:12]{\textnumero 12}, and
+% \hyperref[tut:13]{\textnumero 13} 
+use the same content file to present some questions
+to check the user's comprehension. 
+The fourth tutorial does not include an exercise.
 
 \begin{table}[htdp]
 \begin{center}
@@ -87,16 +81,22 @@ and the following strings are sample solutions for different exercises.
   </array>
 $\square$
 \end{lstlisting}
-\caption{QA1.plist – content file for the first three tutorials}
+\caption{QA1.plist – content file for the first three tutorials with exercises}
 \label{tab:QA1PLIST}
 \end{center}
 \end{table}%
 
-Each tutorial has its own configuration file 
-(see \tabref{tab:11PLIST})
-with a dictionary that
-describes the task and defines the index of the sample solution,
-with which the user's answer will be checked with some tolerance.
+The content file “QA1.plist” (see \tabref{tab:QA1PLIST}) contains
+an array (starts at line 5) 
+of arrays of strings that represents sentences and sample solutions for the 
+first three exercises.
+The first sentence/solutions array of strings starts at line 7 and ends at line 10. 
+The first string in the first array (at line 7) is a sentence, 
+which must be analyzed in all three exercises. 
+The next string (at line 8) is a correct solution for the first exercise,
+the third string (at line 9) is a correct solution for the second exercise,
+and the last string in the array (at line 10) is a correct solution for the third exercise.  
+The next array of strings would start at line 13.
 
 \begin{table}[htdp]
 \begin{center}
@@ -117,27 +117,34 @@ with which the user's answer will be checked with some tolerance.
 \caption{11.plist – configuration file for the first exercise}
 \label{tab:11PLIST}
 \end{center}
-\end{table}%
+\end{table}
 
-\subsubsection{Applications}
+Each tutorial has its own configuration file 
+(see \tabref{tab:11PLIST})
+with a dictionary that
+describes the exercise and defines the index of the sample solution,
+with which the user's answer will be checked with some tolerance.
+The \verb+solutionIndex+ expresses which string 
+is to be used as sample solution in exercise.
+
+\paragraph{Applications – \textnumero 11.}
 \label{tut:11}
-
-(11) The aim of logic in general is to reason about situations \cite{Huth:2004:LCS:975331}. 
-In this tutorial it is shown, how two different paragraphs in natural language 
-can be reduced to the same formal sentence “If p and not q, then r. Not r. p. Therefore, q“. 
+{\em{}“The aim of logic in general is to reason about situations.”}\ \cite{Huth:2004:LCS:975331} 
+The first tutorial shows, how two different paragraphs in natural language 
+can be reduced to the same formal sentence {\em“If p and not q, then r. Not r. p. Therefore, q“}. 
 If the reasoning is correct, the user can use it in both situations. 
 
 In the interactive part the user has to ‘guess’ the formal structure of composite sentences in natural language. 
 The sentence 
 \verb+‘If the barometer falls,+ \verb+then it will rain’+ 
-from line 7 of \verb+QA1.plist+ (\tabref{tab:QA1PLIST})
+from line 7 of \verb+QA1.plist+ (see \tabref{tab:QA1PLIST})
 has to be translated into
 \verb+‘if p then q’+ from line 8 (the solution index is defined as 1 in \verb+11.plist+, see \tabref{tab:11PLIST}).
 
-\subsubsection{Propositions}
+\paragraph{Propositions – \textnumero 12.}
 \label{tut:12}
 
-(12) The concept of propositions – simple declarative sentences – 
+The concept of propositions – simple declarative sentences – 
 as indivisible building blocks of propositional logic 
 is explained in more detail. Some counter-examples are presented 
 and the ambiguity of natural language is demonstrated.
@@ -151,13 +158,13 @@ from line 9
 (the solution index is defined as 2 in \verb+12.plist+).
 
 
-\subsubsection{Connectives}
+\paragraph{Connectives – \textnumero 13.}
 \label{tut:13}
-
-(13) The basic symbols of propositional logic to connect propositions are introduced. 
-“$\rightarrow$”, “$\neg$”, “$\wedge$”, and “$\vee$”
+The basic symbols of propositional logic to connect propositions are introduced. 
+The symbols “$\rightarrow$”, “$\neg$”, “$\wedge$”, and “$\vee$”
  will replace “if then”, “not”, “and” and “or”. 
 
+The user hast to find a matching formula in propositional logic.
 For the sentence
 \verb+‘If the barometer falls,+ \verb+then it will rain’+ 
 a correct answer is
@@ -167,10 +174,10 @@ from line 10
 but 
 ‘$\neg p \vee q$’ would be accepted too.
 
-\subsubsection{Limits}
+\paragraph{Limits – \textnumero 14.}
 \label{tut:14}
-
-(14) Some examples are given to demonstrate that not every situation can be modeled in propositional logic.
+Some examples are given to demonstrate that not every situation can be modeled in propositional logic. 
+There is no exercise for this tutorial.
 
 % The user has to ‘guess’ whether sentences in natural language are suitable for propositional logic.
 
@@ -178,15 +185,17 @@ but
 
 After the informal introduction into the atoms and connectives of propositional logic, 
 the formal aspects of propositional logic will be introduced to the user.
+Again each exercise is configured by a configuration file similar to 
+\verb+11.plist+ (see \tabref{tab:11PLIST}),
+but without a \verb+questionsFile+ or a \verb+solutionIndex+,
+because the content of the syntax exercises will be generated by the app.
+The user's solution will be checked without tolerance.
 
-The content of these exercises will be generated by the app and the user's solution will be checked without tolerance.
-
-\subsubsection{Definition}
+\paragraph{Definition – \textnumero 21.}
 \label{tut:21}
+The definition of well formed formulas is explained by a strict grammar with mandatory parenthesis.
 
-(21) The definition of well formed formulas is explained. 
-
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccccccccc}
 $P$	&$::=$	&$p$ 	
@@ -195,37 +204,33 @@ $P$	&$::=$	&$p$
 	&|		&  $(P \vee P)$ 
 	&|		&  $(P \rightarrow P)$ \\
 \end{tabular}
-\caption{Grammar with mandatory parentheses}
-\label{tab:BNFGRPA}
+%\caption{Grammar with mandatory parentheses}
+%\label{tab:BNFGRPA}
 \end{center}
-\end{table}
+%\end{table}
 
-The user has to check whether a formula matches the strict definition of 
-a propositional formula (see \tabref{tab:BNFGRPA}).
-If the formula is well formed, the user has to write down the name of the root connective, i.e
-negation, conjunction, disjunction or implication. 
+The user has to check whether a formula matches this strict definition of 
+a propositional formula.
+If the formula is well formed, the user has to write down the name of the root connective, 
+i.e\ negation, conjunction, disjunction or implication. 
 If the formula is not well formed, the user has to leave the answer field empty.
 
-\subsubsection{Conventions}
+\paragraph{Conventions – \textnumero 22.}
 \label{tut:22}
-
-(22) The conventions of precedences and associativity  of connectives to save parentheses are introduced. 
-
+The conventions of precedences and associativity  of connectives to save parentheses are introduced. 
 The user has to rewrite formulas from strict syntax to formulas using conventions and vice versa.
 
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{rcccl}
-$P$		&$::=$ & $D$ &|& $D \rightarrow P$\\
-$D$		&$::=$ & $C$ &|& $D \vee C$			\\
+\begin{tabular}{rccclp{1cm}rcccl}
+$P$		&$::=$ & $D$ &|& $D \rightarrow P$ 	&& $N$		&$::=$ & $T$ &|& $\neg N$ \\
+$D$		&$::=$ & $C$ &|& $D \vee C$		&& $T$		&$::=$ & $p$ &|& $(P)$		\\
 $C$		&$::=$ & $N$ &|& $C \wedge N$ 		\\
-$N$		&$::=$ & $T$ &|& $\neg N$ 			\\
-$T$		&$::=$ & $p$ &|& $(P)$
 \end{tabular}
-\caption{Grammar with precedence and associativity}
-\label{tab:BNFGRPR}
+%\caption{Grammar with precedence and associativity}
+%\label{tab:BNFGRPR}
 \end{center}
-\end{table}
+%\end{table}
 
 %\begin{table}[htdp]
 %\begin{center}
@@ -240,46 +245,53 @@ $T$		&$::=$ & $p$ &|& $(P)$
 %\end{center}
 %\end{table}
 
-\subsubsection{Sub-formulas}
+\paragraph{Sub-formulas – \textnumero 23.}
 \label{tut:23}
-
-(23) Sub-formulas (starting from atoms) are used to build bigger formulas. Big formulas are build from many sub-formulas.
-
-The user has to extract the set of sub-formulas from composite formulas. 
+Sub-formulas (starting from atoms) are used to build bigger formulas. Big formulas are build from many sub-formulas.
+In the exercise the user has to extract the set of sub-formulas from composite formulas. 
 A correct answer for 
 ‘$a \vee b \wedge c$’ would be
 ‘$a,b,c,b\wedge c, a \vee b \wedge c$‘. 
-The order of the sub-formulas does not matter and the user can use parentheses as they like it.
-But no sub-formula may occur more than once.
+The order of the sub-formulas does not matter and the user can use parentheses as she likes it.
+But no sub-formula may occur more than once. 
+So the answer ‘$c, b\wedge c, b, a \vee b \wedge c, a$‘ would be right too, 
+but ‘$a,b,c,b\wedge c, b, a \vee b \wedge c$‘ would be a wrong answer.
 
-\subsubsection{Syntax Trees}
+\paragraph{Syntax Trees – \textnumero 24.}
 \label{tut:24}
+Syntax trees  are introduced as graphical representations of well formed formulas. 
+The user has to write formulas for presented syntax trees. 
+The user can use parentheses as she likes, but still the written formulas have to match the syntax trees exactly. 
+The formula ‘$a \vee b$’ does not match the syntax tree representing the formula ‘$b \vee a$’, 
+where the atom node ‘$a$’ is on the right branch of the disjunction node ‘$\vee$’.
 
-(24) Syntax trees as graphical representation of well formed formulas are introduced. 
-
-The user has to write formulas for presented syntax trees. They can use parentheses as they like – still the formulas have to match the syntax trees exactly. ‘$a \vee b$’ does not match the syntax tree representing ‘$b \vee a$’, where the node ‘$a$’ is on the right branch of the node ‘$\vee$’.
-
-\subsubsection{Top and Bottom}
+\paragraph{Top and Bottom – \textnumero 25.}
 \label{tut:25}
-
-(25) Some natural deduction rules are introduced. 
-“$\top$” (top) and “$ \bot$” (bottom) are defined
+The symbols “$\top$” (top) and “$ \bot$” (bottom) are defined
 as abbreviations of conjunctions and disjunctions 
-of formulas with their negation (tautologies and contradictions, \tabref{tab:TopBottom}).
-
-\begin{table}[htdp]
+of formulas with their negation). Additional basic equivalences are introduced.
+The user has to simplify given formulas using tautologies, contradictions and basic equivalences.
+%\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{c|c|c|c}
-$\neg P \vee P$&$P \vee \neg P$  & $\neg P \wedge P$ & $P \wedge \neg P$ \\
-\hline
-$\top$ & $\top$ & $ \bot$&$ \bot$\\
+\begin{tabular}{cp{0.1cm}c}
+$\neg P \vee P \equiv \top \equiv P \vee \neg P$  & &
+$\neg P \wedge P \equiv \bot \equiv  P \wedge \neg P$
 \end{tabular}
-\caption{tautologies and contradictions}
-\label{tab:TopBottom}
+\begin{tabular}{ccc}
+$P \vee P \equiv P$ &
+$\neg \neg P \equiv P$ & 
+$P \wedge P \equiv P$
+\end{tabular}
+\begin{tabular}{cp{1cm}c}
+$P \vee Q \equiv Q \vee P$ & &
+$P \wedge Q \equiv Q \wedge P$
+\end{tabular}
+%\caption{tautologies and contradictions}
+%\label{tab:TopBottom}
 \end{center}
-\end{table}
+%\end{table}
 
-The user has to simplify given formulas using the tautologies, contradictions and basic rules of natural deduction.
+
 
 %\subsubsection{Simplifying formulas – basic natural deduction rules}
 %\label{tut:206}
@@ -288,17 +300,17 @@ The user has to simplify given formulas using the tautologies, contradictions an
 %
 %
 %
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{c|c|c|c|c}
-$\neg \neg P$ & $P \vee P$ & $P \wedge P$ & $P \vee Q$ & $P \wedge Q$\\
-\hline
-$P$ & $P$ & $P$ & $Q \vee P$ & $Q \wedge P$\\
-\end{tabular}
-\caption{basic rules}
-\label{tab:BasicRules}
-\end{center}
-\end{table}
+%\begin{table}[htdp]
+%\begin{center}
+%\begin{tabular}{c|c|c|c|c}
+%$\neg \neg P$ & $P \vee P$ & $P \wedge P$ & $P \vee Q$ & $P \wedge Q$\\
+%\hline
+%$P$ & $P$ & $P$ & $Q \vee P$ & $Q \wedge P$\\
+%\end{tabular}
+%\caption{basic rules}
+%\label{tab:BasicRules}
+%\end{center}
+%\end{table}
 %
 %The user has to rewrite some formulas eleminating 
 %top, bottom, double negations, conjunctions and disjunctions 
@@ -328,35 +340,32 @@ $P$ & $P$ & $P$ & $Q \vee P$ & $Q \wedge P$\\
 \subsection{Semantics}
 
 After the introduction of well formed formulas the meaning of logical connectives is defined.
+Configuration files are used again, the exercise context is generated randomly by the app, 
+but exercise \textnumero 33 
+also uses a context file with exemplary entailments that would not be likely generated.
 
-\subsubsection{Valuation}
+\paragraph{Valuation – \textnumero 31}
 \label{tut:31}
-(31)
 The truth assignment for atoms $(p,q,r,…)$ is introduced. 
 The extended valuation for negation, conjunction, disjunction and implication is defined.
 The valuation of arbitrary formulas by evaluating all sub-formulas is described.
-
 The user has to guess or calculate the evaluation of a given formula with a given truth assignment for the atoms of the formula.
 
-\subsubsection{Truth Tables}
+\paragraph{Truth Tables – \textnumero 32}
 \label{tut:32}
-(32)
 The concept of truth tables is explained and demonstrated with the basic connectives. 
 The valuation of arbitrary formulas by evaluating all sub-formulas is demonstrated again.
-
 The user has to fill in truth tables for formulas with a maximum of three atoms.
 
-\subsubsection{Entailment and Equivalence}
+\paragraph{Entailment and Equivalence – \textnumero 33}
 \label{tut:33}
-(33) Semantic entailment and equivalence is defined and explained with various examples.
-
+Semantic entailment and equivalence is defined and explained with various examples.
 The user has to guess or calculate whether a given semantic entailment or equivalence holds. 
 
-\subsubsection{Satisfiability and Validity}
+\paragraph{Satisfiability and Validity – \textnumero 34}
 \label{tut:34}
-(34) The properties satisfiability and validity of propositional formulas are defined and demonstrated. 
+The properties satisfiability and validity of propositional formulas are defined and demonstrated. 
 The relationship of these properties with top and bottom is mentioned. 
-
 The user has to guess or calculate whether a given formula is satisfiable or valid.
 
 \subsection{Normal Forms}
@@ -369,14 +378,16 @@ conjunctive normal forms and disjunctive normal forms will be provided.
 A recipe to transform arbitrary propositional formulas into specific normal forms will be delivered.
 Rules to detect satisfiability or validity from normal forms will be mentioned.
 
-\subsubsection{Implication Free Form}
+\subsubsection{Implication Free Form – \textnumero 41}
 \label{tut:41}
-(41)
-By removing the rule for $P$ from the grammar in \tabref{tab:BNFGRPR} 
-the grammar for implication free forms is defined  
-(see \tabref{tab:BNFGRIFF}). 
+By removing the rule $P ::= D \rightarrow P$ in \vref{tut:22} 
+and optimizing the resulting grammar
+the implication free form is defined for propositional formulas.
+The equivalence transformation
+for removing implications is presented
+and proved with a truth table. 
 
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccl}
 $D$		&$::=$ & $C$ &|& $C \vee D$			\\
@@ -384,39 +395,37 @@ $C$		&$::=$ & $N$ &|& $N \wedge C$ 		\\
 $N$		&$::=$ & $T$ &|& $\neg N$ 			\\
 $T$		&$::=$ & $p$ &|& $(D)$
 \end{tabular}
-\caption{Grammar without implications}
-\label{tab:BNFGRIFF}
+%\caption{Grammar without implications}
+%\label{tab:BNFGRIFF}
 \end{center}
-\end{table}
-
-The equivalence transformation (see \tabref{tab:ET_IFF}) 
-for removing implications is presented
-and proved with a truth table. 
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{r}
-$P \rightarrow Q$ \\ 
-\hline
-$\neg P \;\vee\; Q$
-\end{tabular}
-\caption{Equivalence transformation towards implication free form}
-\label{tab:ET_IFF}
-\end{center}
-\end{table}
+%\end{table}
 
 The user has to check whether a given formula is implication free.
 If the formula is not implication free the user has to transform it into an implication free form
 using the equivalence transformation.
 
-\subsubsection{Negation Normal Form}
-\label{tut:42}
-
-(42)
-By removing all  rules for arbitrary negations, the negation normal form is defined
- (\tabref{tab:BNFGRNNF}). 
-
 \begin{table}[htdp]
+\begin{center}
+%\begin{tabular}{c}
+$P \rightarrow Q \equiv \neg P \;\vee\; Q$
+%\end{tabular}
+%\caption{Equivalence transformation towards implication free form}
+%\label{tab:ET_IFF}
+\end{center}
+\end{table}
+
+\subsubsection{Negation Normal Form – \textnumero 42}
+\label{tut:42}
+By removing all rules for arbitrary negations 
+and optimizing the resulting grammar, 
+the negation normal form is defined  for propositional formulas. 
+The equivalence transformations to transform negations of conjunctions,
+negations of disjunctions, 
+and double negations
+into negation normal forms are presented 
+and proved with truth tables.
+
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccl}
 $D$		&$::=$ & $C$ 		&|& 	$C \vee D$\\
@@ -424,109 +433,108 @@ $C$		&$::=$ & $N$ 		&|& 	$N \wedge C$ \\
 $N$		&$::=$ & $(D)$ 	&|& 	$L$\\
 $L$		&$::=$ & $p $ 		&|& 	$\neg p$
 \end{tabular}
-\caption{Grammar for negation normal form}
-\label{tab:BNFGRNNF}
+%\caption{Grammar for negation normal form – \textnumero }
+%\label{tab:BNFGRNNF}
 \end{center}
-\end{table}
-
-The equivalence transformations to transform negations of conjunctions,
-negations of disjunctions, 
-and double negations (see \tabref{tab:ET_NNF})
-into negation normal forms are presented 
-and proved with a truth table.
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{ccr}
-$\neg (P \wedge Q) $&$ \neg (P \vee Q)$&$ \neg \neg P$\\
-\hline
-$\neg P \vee \neg Q$&$\neg P \wedge \neg Q$&$P$
-\end{tabular}
-\caption{Equivalence transformations towards negation normal form}
-\label{tab:ET_NNF}
-\end{center}
-\end{table}
+%\end{table}
 
 The user has to check whether a given formula is in negation normal form.
 If the formula is not in negation normal form
-the user has to transform it into negation normal form.
+the user has to transform it into negation normal form
+using the equivalence transformation for implications and the equivalence transformations for negations.
+The rule for double negations is already known from \vref{tut:25}.
 
-\subsubsection{Conjunctive Normal Form}
+%\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{cp{5mm}cp{5mm}c}
+$\neg (P \wedge Q) \equiv \neg P \vee \neg Q$& &
+$\neg \neg P \equiv P$ & &
+$\neg (P \vee Q)  \equiv \neg P \wedge \neg Q$
+\end{tabular}
+%\caption{Equivalence transformations towards negation normal form}
+%\label{tab:ET_NNF}
+\end{center}
+%\end{table}
+
+\subsubsection{Conjunctive Normal Form – \textnumero 43}
 \label{tut:43}
-
-(43) A formula in conjunctive normal form is a conjunctive concatenation of disjunctive clauses.
+A formula in conjunctive normal form is a conjunctive concatenation of disjunctive clauses.
 A disjunctive clause is a disjunctive concatenation of literals. 
 A literal is an atom or the negation of an atom. 
+The distributions of disjunctions over conjunctions is presented
+and proved with a truth table.
 
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccl}
 $C$	&$::=$ & $(D)$ 	&$|$ & $(D) \wedge C$\\
 $D$	&$::=$ & $L$ 	&$|$ & $L \vee D$\\
 $L$	&$::=$ & $p$ 	&$|$ & $\neg p$ 
 \end{tabular}
-\caption{Grammar for conjunctive normal form}
-\label{tab:CNF}
+%\caption{Grammar for conjunctive normal form}
+%\label{tab:CNF}
 \end{center}
-\end{table}
+%\end{table}
 
-The distribution of disjunctions over conjunctions is presented (\tabref{tab:ET_CNF})
-and proved with a truth table.
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{cc}
-$P \vee (Q \wedge R)$ & $(P \wedge Q) \vee R$\\
-\hline
-$(P\vee Q) \wedge (P\vee R)$ & $(P\vee R) \wedge (Q\vee R)$
-\end{tabular}
-\caption{Equivalence transformations towards conjunctive normal form}
-\label{tab:ET_CNF}
-\end{center}
-\end{table}
-
-The user has to rewrite formulas to a conjunctive normal form.  
-The presented formula is in negation normal form 
+The user has to rewrite formulas to conjunctive normal forms.  
+All presented formulas are in negation normal form 
 but may already be in conjunctive normal form.
+So at most the user have to apply the distributions of disjunctions over conjunctions 
+multiple times
+as the equivalence transformations towards conjunctive normal form.
+
+%\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{cp{5mm}c}
+$P \vee (Q \wedge R) \equiv (P\vee Q) \wedge (P\vee R)$ & &
+$(P \wedge Q) \vee R \equiv (P\vee R) \wedge (Q\vee R)$
+\end{tabular}
+%\caption{Equivalence transformations towards conjunctive normal form}
+%\label{tab:ET_CNF}
+\end{center}
+%\end{table}
 
 
-\subsubsection{Disjunctive Normal Form}
+\subsubsection{Disjunctive Normal Form – \textnumero 44}
 \label{tut:44}
-
-(44) A formula in disjunctive normal form is a disjunctive concatenation of conjunctive clauses.
+A formula in disjunctive normal form is a disjunctive concatenation of conjunctive clauses.
 A conjunctive clause is a conjunctive concatenation of literals. 
 A literal is an atom or the negation of an atom. 
+The distributions of conjunctions over disjunctions is presented
+and proved with truth tables.
 
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccl}
 $D$	&$::=$ & $C$ 	&$|$ & $C \;\vee D$\\
 $C$	&$::=$ & $L$ 	&$|$ & $L \wedge D$\\
 $L$	&$::=$ & $p$ 	&$|$ & $\neg p$
 \end{tabular}
-\caption{Grammar for disjunctive normal form}
-\label{tab:DNF}
+%\caption{Grammar for disjunctive normal form}
+%\label{tab:DNF}
 \end{center}
-\end{table}
+%\end{table}
 
-The distribution of conjunctions over disjunctions is presented (\tabref{tab:ET_DNF})
-and proved with a truth table.
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{cc}
-$P \wedge (Q \vee R)$ 			& $(P \wedge Q) \wedge R$\\
-\hline
-$(P\wedge Q) \vee (P\wedge Q)$ 	& $(P\wedge R) \vee (Q\wedge R)$
-\end{tabular}
-\caption{Equivalence transformations towards disjunctive normal form}
-\label{tab:ET_DNF}
-\end{center}
-\end{table}
-
-The user has to rewrite formulas to a disjunctive normal form. 
-The presented formula is in negation normal form 
+The user has to rewrite formulas to disjunctive normal forms. 
+All presented formulas are in negation normal form 
 but may already be in disjunctive normal form.
+So at most the user have to apply the distributions of conjunctions over disjunctions 
+multiple times as
+equivalence transformations towards disjunctive normal form.
+
+
+%\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{cp{5mm}c}
+$P \wedge (Q \vee R) \equiv (P\wedge Q) \vee (P\wedge Q)$ 			& &
+$(P \wedge Q) \wedge R \equiv (P\wedge R) \vee (Q\wedge R)$
+\end{tabular}
+%\caption{Equivalence transformations towards disjunctive normal form}
+%\label{tab:ET_DNF}
+\end{center}
+%\end{table}
+
+
 
 %\subsubsection{From general formula to CNF or DNF}
 %\label{tut:406}
@@ -556,22 +564,26 @@ but may already be in disjunctive normal form.
 
 \subsection{Binary Decision Diagrams}
 
-\subsubsection{Boolean functions}
+The definition of Boolean functions is introduced. 
+Propositional formulas and syntax trees from the previous sections are representations of Boolean functions.
+Boolean expressions and binary decision diagrams are additional representations of Boolean functions.
+
+\paragraph{Boolean functions - \textnumero 51}
 \label{tut:51}
-
-(51) N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set ${0,1}$.
+N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set ${0,1}$.
 The Boolean operators $\bar{ \;\;}\;+\;\cdot\;\oplus$ are introduced as special representations of
-specific unitary and binary Boolean functions. For convenience an exclamation mark $!(B)$ 
+specific unitary and binary Boolean functions. 
+For convenience  in the exercises
+an exclamation mark $!(B)$ 
 will be used for the negation of a Boolean expression $B$ instead of the bar $\bar{B}$. 
-
 The user has to guess or calculate the results for composite expressions.
-\subsubsection{Boolean expressions}
-\label{tut:52}
 
-(52) The grammar for Boolean expressions is defined. 
+\paragraph{Boolean expressions - \textnumero 52}
+\label{tut:52}
+The grammar for Boolean expressions is defined. 
 The equivalence relation of Boolean expressions is explained.
 
-\begin{table}[htdp]
+%\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rcccccccccc}
 $B$	&$::=$	&$p$ 	
@@ -580,30 +592,26 @@ $B$	&$::=$	&$p$
 	&|		&  $(B + B)$ 
 	&|		&  $(B \oplus B)$ \\
 \end{tabular}
-\caption{Grammar for Boolean expressions}
-\label{tab:BNFGRBE}
+%\caption{Grammar for Boolean expressions}
+%\label{tab:BNFGRBE}
 \end{center}
-\end{table}
+%\end{table}
 
 The user has to rewrite formulas with propositional symbols into Boolean expressions.
 The implication may be a challenge for some users, 
 but is doable because the implication free form was introduced 
 in an earlier tutorial.
 
-\subsubsection{Binary Decisions}
+\paragraph{Binary Decisions - \textnumero 53}
 \label{tut:53}
-
-(53) Binary decision nodes are introduced. 
+Binary decision nodes are introduced. 
 The valuation of binary decision trees is explained.
-
 The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
 
-\subsubsection{Binary Decision Diagrams}
+\paragraph{Binary Decision Diagrams - \textnumero 54}
 \label{tut:54}
-
-(54) Arbitrary binary decision diagrams are explained. 
+Arbitrary binary decision diagrams are explained. 
 Ordered and reduced binary decision diagrams are introduced.
-
 The user has to check whether a binary decision diagram is ordered and/or reduced.
 
 \section{Playground}
