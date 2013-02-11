@@ -14,7 +14,7 @@ A glossary of terms and a formula calculator to check formulas will support the 
 \section{Tutorials}
 
 \Nyaya for iPad covers syntax and semantics of propositional logic, 
-but only some basic rules of equivalences.
+but only some basic equivalences.
 It introduces normal forms, truth tables and binary decision diagrams 
 as different but equivalent representations of Boolean functions.
 
@@ -180,7 +180,7 @@ Some examples are given to demonstrate that not every situation can be modeled i
 There is no exercise for this tutorial.
 
 % The user has to ‘guess’ whether sentences in natural language are suitable for propositional logic.
-
+%\vspace{2cm}
 \subsection{Syntax}
 
 After the informal introduction into the atoms and connectives of propositional logic, 
@@ -223,9 +223,9 @@ The user has to rewrite formulas from strict syntax to formulas using convention
 %\begin{table}[htdp]
 \begin{center}
 \begin{tabular}{rccclp{1cm}rcccl}
-$P$		&$::=$ & $D$ &|& $D \rightarrow P$ 	&& $N$		&$::=$ & $T$ &|& $\neg N$ \\
-$D$		&$::=$ & $C$ &|& $D \vee C$		&& $T$		&$::=$ & $p$ &|& $(P)$		\\
-$C$		&$::=$ & $N$ &|& $C \wedge N$ 		\\
+$P$		&$::=$ & $D$ &|& $D \rightarrow P$ 	 \\
+$D$		&$::=$ & $C$ &|& $D \vee C$		&& $N$		&$::=$ & $T$ &|& $\neg N$	\\
+$C$		&$::=$ & $N$ &|& $C \wedge N$ 	&& $T$		&$::=$ & $p$ &|& $(P)$		\\
 \end{tabular}
 %\caption{Grammar with precedence and associativity}
 %\label{tab:BNFGRPR}
@@ -273,18 +273,14 @@ of formulas with their negation). Additional basic equivalences are introduced.
 The user has to simplify given formulas using tautologies, contradictions and basic equivalences.
 %\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{cp{0.1cm}c}
-$\neg P \vee P \equiv \top \equiv P \vee \neg P$  & &
-$\neg P \wedge P \equiv \bot \equiv  P \wedge \neg P$
-\end{tabular}
-\begin{tabular}{ccc}
+\begin{tabular}{lll}
+$P \vee \neg P \equiv \neg P \vee P\equiv \top$  &
+$P \wedge \neg P \equiv \neg P \wedge P \equiv  \bot$\\
 $P \vee P \equiv P$ &
-$\neg \neg P \equiv P$ & 
-$P \wedge P \equiv P$
-\end{tabular}
-\begin{tabular}{cp{1cm}c}
-$P \vee Q \equiv Q \vee P$ & &
-$P \wedge Q \equiv Q \wedge P$
+$P \wedge P \equiv P$\\
+$P \vee Q \equiv Q \vee P$ &
+$P \wedge Q \equiv Q \wedge P$ &
+$\neg \neg P \equiv P$
 \end{tabular}
 %\caption{tautologies and contradictions}
 %\label{tab:TopBottom}
@@ -389,11 +385,9 @@ and proved with a truth table.
 
 %\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{rcccl}
-$D$		&$::=$ & $C$ &|& $C \vee D$			\\
-$C$		&$::=$ & $N$ &|& $N \wedge C$ 		\\
-$N$		&$::=$ & $T$ &|& $\neg N$ 			\\
-$T$		&$::=$ & $p$ &|& $(D)$
+\begin{tabular}{rccclp{1cm}rcccl}
+$D$		&$::=$ & $C$ &|& $C \vee D$		&& $N$		&$::=$ & $T$ &|& $\neg N$	\\
+$C$		&$::=$ & $N$ &|& $N \wedge C$ 	&& $T$		&$::=$ & $p$ &|& $(D)$	\\
 \end{tabular}
 %\caption{Grammar without implications}
 %\label{tab:BNFGRIFF}
@@ -427,11 +421,9 @@ and proved with truth tables.
 
 %\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{rcccl}
-$D$		&$::=$ & $C$ 		&|& 	$C \vee D$\\
-$C$		&$::=$ & $N$ 		&|& 	$N \wedge C$ \\
-$N$		&$::=$ & $(D)$ 	&|& 	$L$\\
-$L$		&$::=$ & $p $ 		&|& 	$\neg p$
+\begin{tabular}{rccclp{1cm}rcccc}
+$D$		&$::=$ & $C$ 		&|& 	$C \vee D$	&&	$N$		&$::=$ & $(D)$ 	&|& 	$L$\\
+$C$		&$::=$ & $N$ 		&|& 	$N \wedge C$ 	&&	$L$		&$::=$ & $p $ 		&|& 	$\neg p$
 \end{tabular}
 %\caption{Grammar for negation normal form – \textnumero }
 %\label{tab:BNFGRNNF}
@@ -466,9 +458,9 @@ and proved with a truth table.
 
 %\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{rcccl}
-$C$	&$::=$ & $(D)$ 	&$|$ & $(D) \wedge C$\\
-$D$	&$::=$ & $L$ 	&$|$ & $L \vee D$\\
+\begin{tabular}{rccccp{1cm}rcccl}
+$C$	&$::=$ & $(D)$ 	&$|$ & $(D) \wedge C$ \\
+$D$	&$::=$ & $L$ 	&$|$ & $L \vee D$ &&
 $L$	&$::=$ & $p$ 	&$|$ & $\neg p$ 
 \end{tabular}
 %\caption{Grammar for conjunctive normal form}
@@ -505,9 +497,9 @@ and proved with truth tables.
 
 %\begin{table}[htdp]
 \begin{center}
-\begin{tabular}{rcccl}
+\begin{tabular}{rccccp{1cm}rcccl}
 $D$	&$::=$ & $C$ 	&$|$ & $C \;\vee D$\\
-$C$	&$::=$ & $L$ 	&$|$ & $L \wedge D$\\
+$C$	&$::=$ & $L$ 	&$|$ & $L \wedge D$ &&
 $L$	&$::=$ & $p$ 	&$|$ & $\neg p$
 \end{tabular}
 %\caption{Grammar for disjunctive normal form}

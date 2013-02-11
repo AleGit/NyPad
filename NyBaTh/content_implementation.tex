@@ -3,38 +3,41 @@
 
 \section{Architecture}
 
-The general design of \Nyaya follows the Model-View-Controller pattern,
+The general design of \Nyaya follows the Model-View-Controller pattern (MVC),
 which is originated in Smalltalk \cite[p.4]{GAMMAETAL}, 
 that separates the representation of data from the user interaction.
-Cocoa Touch (see \vref{sec:Cocoa}) encourages the use of MVC 
-by providing a rich set of useful views and controllers with the framework UIKit.
-These cover many use cases of data presentation and user interaction.
+Cocoa Touch (see section \vref{sec:Cocoa}) encourages the use of MVC
+by providing a rich set of useful views and controllers within the UIKit framework.
+These views and controllers cover many use cases of data presentation and user interaction.
 
 \section{Model}
 
-\Nyaya must hold different representations of Boolean functions – propositional formulas, abstract syntax trees and binary decision diagrams. 
+\Nyaya must hold different representations of Boolean functions, 
+for example propositional formulas, abstract syntax trees and binary decision diagrams. 
 
-\subsection{Propositional formulas and Boolean expressions}
+%\subsection{Propositional formulas and Boolean expressions}
 Since propositional formulas and Boolean expressions are subsets of the set of all Unicode strings,
-they are easily represented by the standard string classes of actual frameworks. 
+they are easily represented by the standard string classes of actual frameworks in general and Objective-C in particular. 
 
 Due to the unambiguous relationship between propositional formulas and Boolean expressions 
 \Nyaya allows the use of a mixed syntax and additional symbols as input
-for the user's convenience. The input expression $!a \wedge b + c \oplus a$ translates into the propositional formula
-$\neg a \wedge b \vee c \veebar a$ (see \vref{subsec:Parser}).
+for the user's convenience. The input expression $!a \wedge b + c \oplus a$ 
+translates into the propositional formula
+$\neg a \wedge b \vee c \veebar a$ (see section \vref{sec:Parser}).
 
 \subsection{Abstract Syntax Trees}
+\label{sec:AST}
 
 Cocoa does not provide a class to represent trees, 
 but with instances of a class, 
 that implements the composite pattern \cite[p.163ff]{GAMMAETAL}
-arbitrary graphs and therefore syntax trees can be represented easily.
+arbitrary graphs and therefore syntax trees can be represented easily (see \figref{fig:NyayaNode}).
 
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNode.png}
 \caption{Node class to represent an abstract syntax tree}
-\label{fig:NyayaNodeCluster}
+\label{fig:NyayaNode}
 \end{center}
 \end{figure}
 
@@ -174,7 +177,7 @@ With every exclusive disjunction of a formula $P$ and an atom $p$,
 that is not already used in $P$,
 the number of nodes will at least double 
 when deriving an equivalent implication free form.
-“Implication free” means also the absence of exclusive disjunctions (see \tabref{tab:BNFGRIFF}).
+“Implication free” means also the absence of exclusive disjunctions. %  (see \tabref{tab:BNFGRIFF}).
 
 \begin{eqnarray*}
 \#(P \oplus p) & = & 1 \cdot(\#(P) + 2) \\
@@ -198,10 +201,10 @@ the derivation of normal forms is aborted, when the results surpass a defined si
 
 
 \subsection{Parser}
-\label{subsec:Parser}
+\label{sec:Parser}
 
 The backend of \verb+BoolTool+\footnote{
-\href{http://cl-informatik.uibk.ac.at/software/booltool/}{cl-informatik.uibk.ac.at/software/booltool/}} 
+\href{http://cl-informatik.uibk.ac.at/software/BoolTool/}{cl-informatik.uibk.ac.at/software/BoolTool/}} 
 – parsing and transformation of Boolean functions – 
 is implemented in \verb+OCaml+\footnote{
 \href{http://ocaml.org}{ocaml.org}}, 
@@ -265,8 +268,8 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 
 \subsubsection{Limitations}
 
-\Nyaya does not parse as fast and (memory) efficient as BoolTool's parser,
-primarily because recursion and token probing are more expansive operations in Objective-C than in OCaml.
+\Nyaya's \BoolTool does not parse as fast and (memory) efficient as \verb+BoolTool+'s parser,
+primarily because recursion and token probing are more expansive operations in Objective-C than in \verb+OCaml+.
 The creation of a syntax graph instead of a syntax tree adds more overhead.
 But \Nyaya's implementation is {\em good enough}, 
 because {\em real world} user input is limited to at most a few thousands characters.
@@ -358,7 +361,7 @@ The class provides a factory method to create
 
 \newpage\section{Views and Controllers}
 
-\Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and NyBoolTool – 
+\Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and \BoolTool – 
 is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
 At start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
 The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
@@ -370,7 +373,7 @@ The tab bar controller will switch the selected view controller, which then will
 Except for the welcome view controller 
 all content view controllers inherits from split view controller,
 which provides a master view controller and a detail view controller.
-The tutorial master view controller and the BoolTool master view controller shares a list of persisted formulas.
+The tutorial master view controller and the \BoolTool master view controller shares a list of persisted formulas.
 
 \subsection{Welcome}
 
@@ -441,9 +444,9 @@ This list of technical terms defined by the glossary document is presented in a 
 Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
 controlled by the glossary detail view controller.
 
-\subsection{BoolTool}
+\subsection{Bool+Tool}
 
-The BoolTool master view controller presents a table view with stored and selectable formulas.
+The \BoolTool master view controller presents a table view with stored and selectable formulas.
 An editable text field with an attached customized keyboard will allow the user to enter their formulas.
 
 The output will be presented in different views. Read only text views are used for the normal form, 
@@ -469,7 +472,7 @@ while receiving \Nyaya for iPad from the App Store.
 
 \subsection{User created content}
 
-Formulas from the playground and BoolTool are persisted 
+Formulas from the playground and \BoolTool are persisted 
 in the simple property list file \verb+BoolToolData+ 
 in the documents folder of the app.
 
