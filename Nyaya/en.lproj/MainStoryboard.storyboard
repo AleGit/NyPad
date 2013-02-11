@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Ny Welcome View Controller - Nyāya-->
@@ -618,7 +618,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="BoolTool" id="i5X-ak-Cbk">
+                    <navigationItem key="navigationItem" title="Bool+Tool" id="i5X-ak-Cbk">
                         <barButtonItem key="rightBarButtonItem" title="Evaluate" id="MYv-eC-mcV">
                             <connections>
                                 <action selector="send:" destination="mdJ-xw-K5Z" id="Hg3-9i-LwN"/>
@@ -646,11 +646,11 @@
             </objects>
             <point key="canvasLocation" x="2419" y="2362"/>
         </scene>
-        <!--Split View Controller - BoolTool-->
+        <!--Split View Controller - Bool+Tool-->
         <scene sceneID="QOk-Mb-sAN">
             <objects>
                 <splitViewController id="ZnC-dO-Rhu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="BoolTool" image="i5.png" id="RXS-CG-Yhr"/>
+                    <tabBarItem key="tabBarItem" title="Bool+Tool" image="i5.png" id="RXS-CG-Yhr"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -742,7 +742,6 @@
                 <relationship kind="action" name="didEndOnExit:"/>
                 <relationship kind="action" name="editingChanged:"/>
                 <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="process:" candidateClass="UIButton"/>
                 <relationship kind="action" name="send:"/>
                 <relationship kind="outlet" name="bddView" candidateClass="NyayaBddView"/>
                 <relationship kind="outlet" name="cnfField" candidateClass="UITextView"/>
