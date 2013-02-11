@@ -725,15 +725,16 @@ Terms, definitions and truth tables from the tutorials are listed in the glossar
 
 \section{BoolTool}
 
-The interactive environment contains the functionality of
-\href{http://cl-informatik.uibk.ac.at/software/booltool/}{BoolTool} 
-developed and published by the Computational Logic Research Group
+The interactive environment contains the functionality of the
+web front end of \texttt{BoolTool}\footnote{
+\href{http://cl-informatik.uibk.ac.at/software/booltool/}{cl-informatik.uibk.ac.at/software/booltool}}
+developed and provided by the Computational Logic Research Group
 of the Institute of Computer Science at the University of Innsbruck.
-This reimplementation is referenced as \verb=Bool+Tool=.
+\Nyaya's reimplementation is referenced as \verb=Bool+Tool= in this document.
 
 \subsection{Input}
 
-\verb=Bool+Tool= supports Latin letters as identifiers for atoms. 
+\BoolTool supports Latin letters as identifiers for atoms. 
 It reads the symbols
 \verb#T# as top, 
 \verb#F# as bottom,
@@ -742,13 +743,14 @@ It reads the symbols
 \verb#+# as disjunction operator,
 \verb#># as implication operator, 
 \verb#^# as exclusive disjunction operator,
-and the parenthesis \verb#(# and \verb#)#,
-because these ASCII-symbols can be found on almost every keyboard,
-which could be attached to an iPad running \Nyaya.
+and \verb#(# and \verb#)# as parentheses.
+These ASCII-symbols can be found on almost every keyboard.
+Thereby any formula of propositional logic can be created completely
+using only a keyboard attached to an iPad running \Nyaya.
 
-\verb=Bool+Tool= also accepts standard symbols “$ \neg \vee \wedge \rightarrow $” 
+\BoolTool also accepts standard 
 and additional symbols of propositional logic and Boolean expressions
-(see \tabref{tab:BASICSYMBOLS}),
+(see appendix \vref{app:SYMBOLS} for a complete list of accepted ASCII characters and symbols),
 which are provided by extended and customized on-screen keyboards.
 \verb=Bool+Tool= does not limit identifiers to Latin characters, since, for example, 
 Chinese symbols are meaningful names for atoms (see \figref{fig:BoolToolChineseInput}).
@@ -765,12 +767,12 @@ Chinese symbols are meaningful names for atoms (see \figref{fig:BoolToolChineseI
 
 \subsection{Output}
 
-BoolTool calculates validity and satisfiability, 
-conjunctive normal form, 
-disjunctive normal form, 
-truth table and 
-(reduced) ordered binary decision diagram 
-of user's input (\figref{fig:BoolToolROBDD}). 
+\verb=Bool+Tool= calculates validity and satisfiability, 
+a conjunctive normal form, 
+a disjunctive normal form, 
+the truth table and a ordered and
+reduced binary decision diagram 
+(see \figref{fig:BoolToolROBDD}) of the user's input . 
 
 \begin{figure}[htbp]
 \begin{center}
