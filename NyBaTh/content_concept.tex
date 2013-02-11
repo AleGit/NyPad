@@ -344,25 +344,25 @@ Configuration files are used again, the exercise context is generated randomly b
 but exercise \textnumero 33 
 also uses a context file with exemplary entailments that would not be likely generated.
 
-\paragraph{Valuation – \textnumero 31}
+\paragraph{Valuation – \textnumero 31.}
 \label{tut:31}
 The truth assignment for atoms $(p,q,r,…)$ is introduced. 
 The extended valuation for negation, conjunction, disjunction and implication is defined.
 The valuation of arbitrary formulas by evaluating all sub-formulas is described.
 The user has to guess or calculate the evaluation of a given formula with a given truth assignment for the atoms of the formula.
 
-\paragraph{Truth Tables – \textnumero 32}
+\paragraph{Truth Tables – \textnumero 32.}
 \label{tut:32}
 The concept of truth tables is explained and demonstrated with the basic connectives. 
 The valuation of arbitrary formulas by evaluating all sub-formulas is demonstrated again.
 The user has to fill in truth tables for formulas with a maximum of three atoms.
 
-\paragraph{Entailment and Equivalence – \textnumero 33}
+\paragraph{Entailment and Equivalence – \textnumero 33.}
 \label{tut:33}
 Semantic entailment and equivalence is defined and explained with various examples.
 The user has to guess or calculate whether a given semantic entailment or equivalence holds. 
 
-\paragraph{Satisfiability and Validity – \textnumero 34}
+\paragraph{Satisfiability and Validity – \textnumero 34.}
 \label{tut:34}
 The properties satisfiability and validity of propositional formulas are defined and demonstrated. 
 The relationship of these properties with top and bottom is mentioned. 
@@ -378,7 +378,7 @@ conjunctive normal forms and disjunctive normal forms will be provided.
 A recipe to transform arbitrary propositional formulas into specific normal forms will be delivered.
 Rules to detect satisfiability or validity from normal forms will be mentioned.
 
-\subsubsection{Implication Free Form – \textnumero 41}
+\subsubsection{Implication Free Form – \textnumero 41.}
 \label{tut:41}
 By removing the rule $P ::= D \rightarrow P$ in \vref{tut:22} 
 and optimizing the resulting grammar
@@ -414,7 +414,7 @@ $P \rightarrow Q \equiv \neg P \;\vee\; Q$
 \end{center}
 \end{table}
 
-\subsubsection{Negation Normal Form – \textnumero 42}
+\subsubsection{Negation Normal Form – \textnumero 42.}
 \label{tut:42}
 By removing all rules for arbitrary negations 
 and optimizing the resulting grammar, 
@@ -456,7 +456,7 @@ $\neg (P \vee Q)  \equiv \neg P \wedge \neg Q$
 \end{center}
 %\end{table}
 
-\subsubsection{Conjunctive Normal Form – \textnumero 43}
+\subsubsection{Conjunctive Normal Form – \textnumero 43.}
 \label{tut:43}
 A formula in conjunctive normal form is a conjunctive concatenation of disjunctive clauses.
 A disjunctive clause is a disjunctive concatenation of literals. 
@@ -495,7 +495,7 @@ $(P \wedge Q) \vee R \equiv (P\vee R) \wedge (Q\vee R)$
 %\end{table}
 
 
-\subsubsection{Disjunctive Normal Form – \textnumero 44}
+\subsubsection{Disjunctive Normal Form – \textnumero 44.}
 \label{tut:44}
 A formula in disjunctive normal form is a disjunctive concatenation of conjunctive clauses.
 A conjunctive clause is a conjunctive concatenation of literals. 
@@ -568,7 +568,7 @@ The definition of Boolean functions is introduced.
 Propositional formulas and syntax trees from the previous sections are representations of Boolean functions.
 Boolean expressions and binary decision diagrams are additional representations of Boolean functions.
 
-\paragraph{Boolean functions - \textnumero 51}
+\paragraph{Boolean functions - \textnumero 51.}
 \label{tut:51}
 N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set ${0,1}$.
 The Boolean operators $\bar{ \;\;}\;+\;\cdot\;\oplus$ are introduced as special representations of
@@ -578,7 +578,7 @@ an exclamation mark $!(B)$
 will be used for the negation of a Boolean expression $B$ instead of the bar $\bar{B}$. 
 The user has to guess or calculate the results for composite expressions.
 
-\paragraph{Boolean expressions - \textnumero 52}
+\paragraph{Boolean expressions - \textnumero 52.}
 \label{tut:52}
 The grammar for Boolean expressions is defined. 
 The equivalence relation of Boolean expressions is explained.
@@ -602,55 +602,67 @@ The implication may be a challenge for some users,
 but is doable because the implication free form was introduced 
 in an earlier tutorial.
 
-\paragraph{Binary Decisions - \textnumero 53}
+\paragraph{Binary Decisions - \textnumero 53.}
 \label{tut:53}
 Binary decision nodes are introduced. 
 The valuation of binary decision trees is explained.
 The user has to fill in the result nodes in a binary decision tree for a given Boolean expression.
 
-\paragraph{Binary Decision Diagrams - \textnumero 54}
+\paragraph{Binary Decision Diagrams - \textnumero 54.}
 \label{tut:54}
 Arbitrary binary decision diagrams are explained. 
 Ordered and reduced binary decision diagrams are introduced.
 The user has to check whether a binary decision diagram is ordered and/or reduced.
 
+\newpage
 \section{Playground}
 
 On the playground the user can create arbitrary propositional formulas 
 by building syntax trees interactively.
 Truth assignments can be applied and will be visualized.
-The playground supports a least the following use cases.
+The playground supports two modes for working with a syntax tree.
 
-\begin{itemize}
+\subsection{Free mode} 
 
-\item In the {\em free mode} arbitrary formulas can be created by adding, replacing and removing connectives and atoms. The process starts with an atom, which can be expanded or replaced. 
-Connectives can be changed any time, sub-formulas can be reordered.
-The smallest possible formula consists of one atom with one symbol from the set $\{ \top, \bot, p, q, r, … \}$.
+In the free mode an arbitrary formula can be manipulated 
+by adding, replacing and removing connectives and atoms. 
+The process starts with an atom, which can be expanded or replaced. 
+Connectives can be changed at any time, and sub-formulas can be reordered.
+The smallest possible formula consists of one atom with a symbol from the set 
+$\{ \top, \bot, p, q, r, ... \}$.
 
-\item In the {\em locked mode} only equivalence transformations can be applied to nodes (see \tabref{tab:ET:ALL})
-– depending on the kind of node. 
-
-\item Truth values can be assigned to leaf nodes, 
+Truth values can be assigned to leaf nodes, 
 which represent the atoms of the corresponding propositional formula. 
 By default no truth values are assigned to atoms, which is visualized by a blue color of the node.
 A green color represents ‘true’, and a red color ‘false’.
 The valuation of connective nodes is calculated automatically 
 and displayed using the same blue, green and red colors.
 
-\item Connective nodes of obvious tautologies like
+\subsection{Locked mode}
+
+In the locked mode only equivalence transformations (see \tabref{tab:ET:ALL})
+can be applied to nodes of a syntax tree.
+The offered transformations depend on the type of node selected by the user. 
+
+In the locked mode the valuation of atoms can not be changed, 
+but the automatic valuation of sub-formulas is still active.
+The user can observe that equivalence transformations do no change the valuation of the root node.
+
+
+\subsection{Remarks}
+
+Connective nodes of obvious tautologies like
 $P \vee \neg P$ or
 $P \rightarrow P$ are displayed with a green color – 
 independent form the valuation status of any sub-node.
 
-\item Connective nodes of obvious contradictions like $P \wedge \neg P$ are displayed with a red color – 
-independent form the valuation status of any sub-node.
+Connective nodes of obvious contradictions like $P \wedge \neg P$ are displayed with a red color – 
+independent from the valuation status of any sub-node.
 
-\item While working with a syntax tree, the corresponding propositional formula is shown on top of the playground.
+While working with a syntax tree, the corresponding propositional formula is shown on top of the playground.
 
-\item While selecting a sub-node of the syntax tree – the root of a sub-tree – 
+While selecting a sub-node of the syntax tree – the root of a sub-tree – 
 for manipulation the corresponding sub-formula will be highlighted in the corresponding propositional formula.
-
-\end{itemize}
 
 
 \begin{table}[htdp]
@@ -695,27 +707,17 @@ $(P\vee R)$&$\TAP{\wedge}$&$(Q\vee R)$		&$(P\wedge R)$&$\TAP{\vee}$&$(Q\wedge R)
 \\
 $P$&$\TAP{\vee}$&$(Q\vee R)$				&$P$&$\TAP{\wedge}$&$(Q\wedge R)$			\\
 \hline
-$(P\vee Q)$&$\TAP{\vee}$&$R$			&$(P\wedge Q)$&$\TAP{\wedge}$&$R$	\\
-
-\end{tabular}
-\caption{Transformations which are offered in locked mode}
-\label{tab:ET:ALL}
-\end{center}
-\end{table}%
-
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{rcl|rcl}
-
+$(P\vee Q)$&$\TAP{\vee}$&$R$			&$(P\wedge Q)$&$\TAP{\wedge}$&$R$		\\
+\\
 $P$&$ \TAP{\leftrightarrow}$&$Q$					&$P$&$ \TAP{\veebar}$&$Q$			\\
 \hline
-$P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$ \TAP{\vee}$&$\neg (Q \rightarrow P)$				\\
+$P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$ \TAP{\vee}$&$\neg (Q \rightarrow P)$
 
 \end{tabular}
-\caption{Additional transformations in locked mode}
-\label{tab:addnf}
+\caption{Available equivalence transformations in locked mode}
+\label{tab:ET:ALL}
 \end{center}
-\end{table}%
+\end{table}
 
 \section{Glossary}
 
@@ -723,29 +725,33 @@ Terms, definitions and truth tables from the tutorials are listed in the glossar
 
 \section{BoolTool}
 
-The interactive environment has to contain the functionality of the
-\href{http://cl-informatik.uibk.ac.at/software/booltool/}{BoolTool web frontend}.
+The interactive environment contains the functionality of
+\href{http://cl-informatik.uibk.ac.at/software/booltool/}{BoolTool} 
+developed and published by the Computational Logic Research Group
+of the Institute of Computer Science at the University of Innsbruck.
+This reimplementation is referenced as \verb=Bool+Tool=.
 
 \subsection{Input}
 
-In the least the embedded BoolTool must support Latin letters as identifiers for atoms, 
-and has to parse the symbols
+\verb=Bool+Tool= supports Latin letters as identifiers for atoms. 
+It reads the symbols
 \verb#T# as top, 
 \verb#F# as bottom,
 \verb#!# as negation operator, 
 \verb#&# as conjunction operator,
 \verb#+# as disjunction operator,
-\verb#># as implication operator,
+\verb#># as implication operator, 
 \verb#^# as exclusive disjunction operator,
-and \verb#(# as left and \verb#)# as right parentheses, 
-because these ASCII-symbols can be found on almost every keyboard.
+and the parenthesis \verb#(# and \verb#)#,
+because these ASCII-symbols can be found on almost every keyboard,
+which could be attached to an iPad running \Nyaya.
 
-Standard symbols “$ \neg \vee \wedge \rightarrow $” 
+\verb=Bool+Tool= also accepts standard symbols “$ \neg \vee \wedge \rightarrow $” 
 and additional symbols of propositional logic and Boolean expressions
-should be accepted too (see \tabref{tab:BASICSYMBOLS}) 
-to make extended or custom keyboards more useful.
-A limitation to Latin characters should be avoided, since, for example, 
-Chinese symbols also make good identifiers. (\figref{fig:BoolToolChineseInput}).
+(see \tabref{tab:BASICSYMBOLS}),
+which are provided by extended and customized on-screen keyboards.
+\verb=Bool+Tool= does not limit identifiers to Latin characters, since, for example, 
+Chinese symbols are meaningful names for atoms (see \figref{fig:BoolToolChineseInput}).
 
 \begin{figure}[htbp]
 \begin{center}
