@@ -31,7 +31,7 @@ is a reflective, object-oriented extension of the C programming language,
 which was developed by Tom Love and Brad Cox in the early 1980s (a few moments earlier than C++). 
 The syntax for objects and methods is based on Smalltalk. 
 Objective-C method calls will be bound to functions at runtime with no need to be defined formally at compile time.
-Objective-C is organized in header and implementation files 
+Objective-C code is organized in header \verb=*.h= and implementation \verb+.m+ files 
 with \verb+@interface+ and \verb+@implementation+ sections for
 the declaration and definition of classes, properties, fields and operations.
 The Objective-C keyword \verb+@interface+ must not be mixed up with the Java/C\# \verb+interface+ directive. 
@@ -60,11 +60,11 @@ Most of the time memory management by automatic reference counting is as easy to
 But one important consequence is that strong object graphs must be implemented as directed acyclic graphs. 
 For example a circular strong linked list would never be released. 
 
-The disadvantage is that deallocated objects can still be referenced, 
-which would corrupt the event loop,
-without the possibility of error recovery by exception handling.
 The advantages are the deterministic and economical run-time behavior.
 Objects are destroyed at a defined time and a separate thread for garbage collection isn't needed. 
+The main disadvantage is that deallocated objects can still be referenced, 
+which would corrupt the event loop
+without the possibility of error recovery by exception handling.
 
 
 %These were very important features in 2007, when the original iPhone was introduced, because

@@ -16,8 +16,10 @@ These views and controllers cover many use cases of data presentation and user i
 for example propositional formulas, abstract syntax trees and binary decision diagrams. 
 
 %\subsection{Propositional formulas and Boolean expressions}
-Since propositional formulas and Boolean expressions are subsets of the set of all Unicode strings,
-they are easily represented by the standard string classes of actual frameworks in general and Objective-C in particular. 
+Since propositional formulas and Boolean expressions are formal languages 
+and therefore subsets of the set of all Unicode strings,
+they are easily represented by the standard string classes 
+of actual frameworks in general and Objective-C in particular. 
 
 Due to the unambiguous relationship between propositional formulas and Boolean expressions 
 \Nyaya allows the use of a mixed syntax and additional symbols as input
@@ -29,9 +31,9 @@ $\neg a \wedge b \vee c \veebar a$ (see section \vref{sec:Parser}).
 \label{sec:AST}
 
 Cocoa does not provide a class to represent trees, 
-but with instances of a class, 
+but with instances of a custom class (see \figref{fig:NyayaNode}), 
 that implements the composite pattern \cite[p.163ff]{GAMMAETAL}
-arbitrary graphs and therefore syntax trees can be represented easily (see \figref{fig:NyayaNode}).
+arbitrary graphs and therefore syntax trees can be represented easily .
 
 \begin{figure}[htbp]
 \begin{center}
@@ -41,7 +43,7 @@ arbitrary graphs and therefore syntax trees can be represented easily (see \figr
 \end{center}
 \end{figure}
 
-\subsubsection{Node class cluster}
+\subsubsection{Node Class Cluster}
 
 The node class is implemented as a class cluster, 
 which is a Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
@@ -54,15 +56,18 @@ of \verb+NyayaNode+.
 \begin{figure}[htbp]
 \begin{center}
 \UML{NyayaNodeCluster.png}
-\caption{Public root class and non public subclasses}
+\caption{Class hierarchy with abstract and concrete classes}
 \label{fig:NyayaNodeCluster}
 \end{center}
 \end{figure}
 
-Actually the creational methods were implemented as a class category in a different source file. 
+\subsubsection{Node Class Categories}
+
+Actually the creational methods were implemented as one node class category in a separate source file. 
 Class categories are a language feature of Objective-C \cite[p.225ff]{Kochan:2009:PO:1538451}
 – an adaptation of the decorator design pattern \cite[p.175ff]{GAMMAETAL} – 
-to extend or organize the functionality of given classes beyond their core purpose. 
+to extend or organize the functionality of given classes beyond their core purpose.
+% – the representation of an abstract syntax tree in the case of the node class.
 
 There are base implementations of category methods in the root node class,
 that will be overridden in subclasses.
@@ -70,15 +75,19 @@ For example \verb+isLiteral:bool+ returns false for all node instances
 except for instances of variables
 and instances of negations of variables.
 
-The variable node class adds setters for the categories \verb+Valuation+  (\figref{fig:NyayaNodeValuation})
-and \verb+Display+.
+The variable node class adds setters for the categories \verb+Valuation+  
+(see \figref{fig:NyayaNodeValuation}) and \verb+Display+.
 
-\subsubsection{Node class categories}
 
-\begin{itemize}
 
-\item The category “Creation” implements the production rules of the grammar 
-to create syntax trees recursively (\figref{fig:NyayaNodeCreation}).
+\begin{description}
+
+\item[“Attribute”] provides information about the number of sub-nodes of a node 
+and the normal forms the sub-tree matches. 
+
+\item[“Creation”] (see \figref{fig:NyayaNodeCreation}) 
+implements the production rules of the grammar (see \tabref{tab:CoreEBNF})
+to create syntax trees recursively .
 Since the constructors of all classes in the cluster are hidden, 
 the production of invalid syntax trees is prevented.
 
@@ -90,38 +99,44 @@ the production of invalid syntax trees is prevented.
 \end{center}
 \end{figure}
 
-\item The category “Description” provides methods to convert a syntax tree into one of it's string representations – 
+\item[“Derivation”] defines methods to derive semantically equivalent normal forms from a given syntax tree.
+These methods are used to create implication free forms, negation normal forms, conjunctive and disjunctive normal forms for \BoolTool.
+
+\item[“Description”] provides methods to convert a syntax tree into one of it's string representations – 
 either a propositional formula in strict syntax with many parentheses 
 or a formula using precedences and associativity.
 In most cases, the second form leads to shorter strings with less parentheses. 
 In rare case, only the outer parentheses are omitted.
 
-\item The category “Display”  allows extended valuations (undefined, false, true) 
-with incomplete truth assignments. 
+\item[“Display”] (see \figref{fig:NyayaNodeDisplay}) allows extended valuations
+with incomplete truth assignments, i.e the value of an atom can be undefined.
 It is used for the interactive syntax tree view on the playground, 
-where the user can assign truth values to some or all atoms.
-% (see \figref{fig:NyayaNodeDisplay)
+where the user can assign truth values to no atom, some atoms or all atoms.
+% 
 
+%\begin{figure}[htbp]
+%\begin{center}
+%\UML{NyayaNodeDisplay.png}
+%\caption{Display of trees}
+%\label{fig:NyayaNodeValuation}
+%\end{center}
+%\end{figure}
 
-\item The category “Attributes”  provides information about the number of sub-nodes of a node 
-and the normal forms the sub-tree matches.
+\item[“Random”] creates arbitrary syntax trees with a given set of connectives and atoms 
+within a given range for the number of nodes. It is used to create formulas for the exercises.
 
-\item The category “Transformations” provides equivalence transformations 
+\item[“Transformation”] provides equivalence transformations 
 and methods to create 
  semantically different syntax trees by replacing atoms, connectives or sub-trees with
 atoms, connectives or trees.
 
-\item The category “Derivations” defines methods to derive semantically equivalent normal forms from a given syntax tree.
-
-\item The category “Random” creates arbitrary syntax trees with a given set of connectives and atoms and within a range for the number of nodes. It is used to create formulas for the exercises.
-
 %\item The category “Reductions”
 %\item The category “Resolution”
-\item The  category “Type” provides a method, 
-that returns the type of a node, i.e constant, variable, type of connective as an enum.
+\item[“Type”] provides a single method, 
+that returns an enum type of a node, i.e constant, variable, type of connective. 
+This method is used to decide, which equivalence transformations are available.
 
-
-\item The category “Valuation” (\figref{fig:NyayaNodeValuation}) 
+\item[“Valuation”] (see \figref{fig:NyayaNodeValuation}) 
 provides fast valuations with complete truth assignments. 
 It is used to create truth tables and binary decision diagrams. 
 
@@ -133,7 +148,7 @@ It is used to create truth tables and binary decision diagrams.
 \end{center}
 \end{figure}
 
-\end{itemize}
+\end{description}
 \subsubsection{Immutable syntax trees}
 
 Instances of node classes are not mutable 
@@ -359,7 +374,8 @@ The class provides a factory method to create
 (un)reduced ordered binary decision diagrams from abstract syntax trees
 (\figref{fig:BddNode}).
 
-\newpage\section{Views and Controllers}
+\newpage
+\section{Views and Controllers}
 
 \Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and \BoolTool – 
 is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
