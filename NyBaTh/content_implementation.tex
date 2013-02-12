@@ -108,7 +108,7 @@ or a formula using precedences and associativity.
 In most cases, the second form leads to shorter strings with less parentheses. 
 In rare case, only the outer parentheses are omitted.
 
-\item[“Display”] (see \figref{fig:NyayaNodeDisplay}) allows extended valuations
+\item[“Display”]\label{item:DISPLAY} (see \figref{fig:NyayaNodeDisplay}) allows extended valuations
 with incomplete truth assignments, i.e the value of an atom can be undefined.
 It is used for the interactive syntax tree view on the playground, 
 where the user can assign truth values to no atom, some atoms or all atoms.
@@ -125,7 +125,7 @@ where the user can assign truth values to no atom, some atoms or all atoms.
 \item[“Random”] creates arbitrary syntax trees with a given set of connectives and atoms 
 within a given range for the number of nodes. It is used to create formulas for the exercises.
 
-\item[“Transformation”] provides equivalence transformations 
+\item[“Transformation”]\label{item:TRANSFORMATIONS} provides equivalence transformations 
 and methods to create 
  semantically different syntax trees by replacing atoms, connectives or sub-trees with
 atoms, connectives or trees.
@@ -218,25 +218,29 @@ the derivation of normal forms is aborted, when the results surpass a defined si
 \subsection{Parser}
 \label{sec:Parser}
 
-The backend of \verb+BoolTool+\footnote{
+The orginal backend of \verb+BoolTool+\footnote{
 \href{http://cl-informatik.uibk.ac.at/software/BoolTool/}{cl-informatik.uibk.ac.at/software/BoolTool/}} 
 – parsing and transformation of Boolean functions – 
 is implemented in \verb+OCaml+\footnote{
 \href{http://ocaml.org}{ocaml.org}}, 
 a functional programming language, which is well suited for this kind of task.
 
-After several failed attempts to cross-compile the \verb+OCaml+ sources to iPad's processor architecture (ARM),
-to link the object code to the Xcode project and to bridge and call functions from C, 
+After several failed attempts to use the \verb+OCaml+ sources in the Xcode project, 
+i.e to cross-compile the sources to iPad's processor architecture (ARM),
+to add the object code to the project's build configuration correctly 
+to bridge and call \verb+BoolTool+'s functions from C, 
+to pass data to these functions and to read return data from these functions calls,
 the implementation of a simple translator 
 for propositional formulas (a subset of all possible strings)
-into syntax trees looked more promising. 
+into syntax trees looked more promising and was successful. 
+\verb=BoolTool='s transformations were implemented as node class category (see Section \vref{item:TRANSFORMATIONS}).
 
 The generation of a syntax tree from a formula  is carried out in two steps. 
 
 \subsubsection{Scanning}
 
 In the first step the input string is transformed into an array of strings – the list of input tokens –
-using the standard regular expression class of Cocoa Foundation.
+using the standard regular expression class of Cocoa Foundation with a suitable expression (see \tabref{tab:REGEX}).
 \begin{table}[htdp]
 \begin{center}
 $\top | \bot 
@@ -253,14 +257,14 @@ $\top | \bot
 \end{center}
 \end{table}
 
-The set of valid tokens, which includes identifiers, connectives and parentheses
-was simply defined by writing a suitable regular expression (see \tabref{tab:REGEX}), 
+%The set of valid tokens, which includes identifiers, connectives and parentheses
+%was simply defined by writing a suitable regular expression (see \tabref{tab:REGEX}), 
 
 \subsubsection{Parsing}
 
 In the second step the list of input tokens is parsed top-down 
 using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
-following an ebnf grammar outlined in \tabref{tab:CoreEBNF}), 
+following an ebnf grammar outlined in \tabref{tab:CoreEBNF}, 
 that defines precedence and associativity of connectives too.
 
 \begin{table}[htdp]
@@ -299,19 +303,20 @@ the benefits far outweigh the disadvantages of implementing its own parser.
 
 \begin{itemize}
 
-\item \Nyaya parses strings with Unicode characters, 
+\item \Nyaya parses strings in UTF8-encoding, 
 therefore identifiers are not limited to Latin letters and
 $\alpha + \omega$ will be parsed correctly. 
 
-\item The grammar rules for operators are defined as sets of tokens, 
-which will be initialized at application start. 
+\item The grammar rules for operators (see \tabref{tab:LocalizedEBNF}) 
+are defined as sets of tokens, 
+which are initialized at application start. 
 
 \begin{table}[htdp]
 \begin{center}
-\begin{lstlisting}[mathescape,firstnumber=7]
-disjunction    ::= conjunction { OR conjunction }
+\begin{lstlisting}[mathescape,firstnumber=7, xleftmargin=1cm]
+disjunction    ::= conjunction { OR conjunction }   
 \end{lstlisting}
-\begin{lstlisting}[mathescape,firstnumber=15]
+\begin{lstlisting}[mathescape,firstnumber=15, xleftmargin=1cm]
 OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
 \end{lstlisting}
 \caption{Excerpts from a localized grammar (Italian)}
@@ -321,12 +326,14 @@ OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
 % conjunction    ::= negation { AND negation }
 % AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
 
-\item Symbols for operators
-can be localized using the standard localization framework of Cocoa.
+\item The symbols for operators
+are localized using the standard localization framework of Cocoa,
+which will return the localized string from the appropriate
+text file (see \tabref{tab:LocalizableStrings}).
 
 \begin{table}[htdp]
 \begin{center}
-\begin{lstlisting}[mathescape,numbers=none,multicols=2]
+\begin{lstlisting}[mathescape,numbers=none,multicols=2, xleftmargin=1cm]
 IMP = "$\rightarrow$ $>$ IMPLIES";
 OR  = "$\vee$ | + OR";
 AND = "$\wedge$ & . AND";
@@ -344,6 +351,12 @@ NEG = "$\neg$ ! ~ NON";
 
 \item The parser generates syntax graphs with Objective-C run-time objects,
 which are well suited for the use cases in an interactive environment.
+
+\item 
+Extensions can be added to the parser at any time, without the risk of breaking anything,
+because the correctness of the parser is substantiated with unit tests in the project itself. 
+
+% \item The parser is easily extendable
 
 \end{itemize}
 
