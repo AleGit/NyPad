@@ -199,6 +199,8 @@
 		8170790F16A17B3400907851 /* 52.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790B16A17B3400907851 /* 52.plist */; };
 		8170791016A17B3400907851 /* 53.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790C16A17B3400907851 /* 53.plist */; };
 		8170791116A17B3400907851 /* 54.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8170790D16A17B3400907851 /* 54.plist */; };
+		817AC9BA16CA461D00FE0528 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817AC9B916CA461D00FE0528 /* HelpViewController.m */; };
+		817AC9BC16CA4AF100FE0528 /* playground.html in Resources */ = {isa = PBXBuildFile; fileRef = 817AC9BB16CA4AF100FE0528 /* playground.html */; };
 		8196878F1699B70A006174CD /* 31.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8196878E1699B70A006174CD /* 31.plist */; };
 		819687921699CAD7006174CD /* NyTrueFalseKeysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */; };
 		8196FF8116A1AB05004D3A1B /* BinaryTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8196FF8016A1AB05004D3A1B /* BinaryTreeView.m */; };
@@ -535,6 +537,9 @@
 		8170790B16A17B3400907851 /* 52.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 52.plist; path = Nyaya/NyTutorials/52.plist; sourceTree = "<group>"; };
 		8170790C16A17B3400907851 /* 53.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 53.plist; path = Nyaya/NyTutorials/53.plist; sourceTree = "<group>"; };
 		8170790D16A17B3400907851 /* 54.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 54.plist; path = Nyaya/NyTutorials/54.plist; sourceTree = "<group>"; };
+		817AC9B816CA461D00FE0528 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = NyPlayground/HelpViewController.h; sourceTree = "<group>"; };
+		817AC9B916CA461D00FE0528 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = NyPlayground/HelpViewController.m; sourceTree = "<group>"; };
+		817AC9BB16CA4AF100FE0528 /* playground.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = playground.html; path = html/playground.html; sourceTree = "<group>"; };
 		8196878E1699B70A006174CD /* 31.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 31.plist; path = Nyaya/NyTutorials/31.plist; sourceTree = "<group>"; };
 		819687911699CAD7006174CD /* NyTrueFalseKeysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NyTrueFalseKeysView.xib; path = Nyaya/NyBranches/NyTrueFalseKeysView.xib; sourceTree = "<group>"; };
 		8196FF7F16A1AB05004D3A1B /* BinaryTreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTreeView.h; path = Nyaya/NyTutorials/BinaryTreeView.h; sourceTree = "<group>"; };
@@ -676,6 +681,8 @@
 				1177497115E7D68B00B5C071 /* NyPgMasterViewController.m */,
 				11E3EC6D1606ECF30069497A /* NyNodeView.h */,
 				11E3EC6E1606ECF30069497A /* NyNodeView.m */,
+				817AC9B816CA461D00FE0528 /* HelpViewController.h */,
+				817AC9B916CA461D00FE0528 /* HelpViewController.m */,
 			);
 			name = NyPlayground;
 			sourceTree = "<group>";
@@ -764,6 +771,7 @@
 		11061F1915EE10DC00345516 /* htmlinstructions */ = {
 			isa = PBXGroup;
 			children = (
+				817AC9BB16CA4AF100FE0528 /* playground.html */,
 				11B0B26715EFEC13006AFBFC /* instructions11.html */,
 				11DBC0B51604F2CF0007A82B /* instructions12.html */,
 				11DBC0B61604F2CF0007A82B /* instructions13.html */,
@@ -1446,6 +1454,7 @@
 				81F6D59F16A191AC00E09A95 /* BinaryTreeTestView.xib in Resources */,
 				819AAB0B16A1F85D00FDCA31 /* Test34View.xib in Resources */,
 				819AAB0D16A1F90300FDCA31 /* Test33View.xib in Resources */,
+				817AC9BC16CA4AF100FE0528 /* playground.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1528,6 +1537,7 @@
 				11EAB8E0161432D800C8DE32 /* NyayaNode+Random.m in Sources */,
 				8196FF8116A1AB05004D3A1B /* BinaryTreeView.m in Sources */,
 				8197BF8816A292F2002B7205 /* BoolToolData.m in Sources */,
+				817AC9BA16CA461D00FE0528 /* HelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
