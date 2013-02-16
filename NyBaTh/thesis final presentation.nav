@@ -23,42 +23,50 @@
 \headcommand {\beamer@subsectionentry {0}{3}{3}{6}{Concept}}\headcommand {\beamer@subsectionpages {5}{5}}
 \headcommand {\slideentry {3}{3}{1}{6/6}{Concept}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{7}{App}}\headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\slideentry {3}{4}{1}{7/7}{App}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{7}{iPad App}}\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\slideentry {3}{4}{1}{7/7}{iPad App}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {4}{Walk-through}{8}{Walk-through}{0}}
+\headcommand {\sectionentry {4}{Development Tools and Principles}{8}{Development Tools and Principles}{0}}
 \headcommand {\beamer@sectionpages {4}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{8}{Tutorials}}\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\slideentry {4}{1}{1}{8/8}{Tutorials}{0}}
+\headcommand {\slideentry {4}{0}{2}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{9}{Exercises}}\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {4}{2}{1}{9/9}{Exercises}{0}}
+\headcommand {\sectionentry {5}{Implementation}{9}{Implementation}{0}}
+\headcommand {\beamer@sectionpages {8}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {5}{0}{3}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{10}{Playground}}\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\slideentry {4}{3}{1}{10/10}{Playground}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{10}{Model}}\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\slideentry {5}{1}{1}{10/10}{Model}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{4}{11}{Glossary}}\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\slideentry {4}{4}{1}{11/11}{Glossary}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{11}{Views}}\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {5}{2}{1}{11/11}{Views}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{4}{5}{12}{BoolTool}}\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\slideentry {4}{5}{1}{12/12}{BoolTool}{0}}
+\headcommand {\sectionentry {6}{Walk-through}{12}{Walk-through}{0}}
+\headcommand {\beamer@sectionpages {9}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{12}{Tutorials}}\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\slideentry {6}{1}{1}{12/12}{Tutorials}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {5}{Implementation}{13}{Implementation}{0}}
-\headcommand {\beamer@sectionpages {8}{12}}
-\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\slideentry {5}{0}{2}{13/13}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{13}{Exercises}}\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {6}{2}{1}{13/13}{Exercises}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@subsectionentry {0}{5}{1}{14}{Model}}\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\slideentry {5}{1}{1}{14/14}{Model}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{3}{14}{Playground}}\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\slideentry {6}{3}{1}{14/14}{Playground}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\sectionentry {6}{Sources}{15}{Sources}{0}}
-\headcommand {\beamer@sectionpages {13}{14}}
-\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\slideentry {6}{0}{2}{15/15}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{4}{15}{Glossary}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {6}{4}{1}{15/15}{Glossary}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {15}{15}}
-\headcommand {\beamer@sectionpages {15}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\def \inserttotalframenumber {15}}
+\headcommand {\beamer@subsectionentry {0}{6}{5}{16}{BoolTool}}\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {6}{5}{1}{16/16}{BoolTool}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\sectionentry {7}{Sources}{17}{Sources}{0}}
+\headcommand {\beamer@sectionpages {12}{16}}
+\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\slideentry {7}{0}{2}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@partpages {1}{17}}
+\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\beamer@sectionpages {17}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\def \inserttotalframenumber {17}}

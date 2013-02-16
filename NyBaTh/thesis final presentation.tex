@@ -25,6 +25,18 @@
 
 %\usepackage{beamerthemesplit} // Activate for custom appearance
 
+\newcommand{\BgSyntaxTree}{\usebackgroundtemplate{\transparent{0.2}\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}}
+\newcommand{\BgBtInterface}{\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/BoolToolInterface.png}}}
+
+\newcommand{\BgTabB}{\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabB1.png}}}
+\newcommand{\BgTabE}{\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabE1.png}}}
+\newcommand{\BgTabG}{\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabG1.png}}}
+\newcommand{\BgTabN}{\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabN1.png}}}
+\newcommand{\BgTabP}{\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabP1.png}}}
+\newcommand{\BgTabT}{\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabT1.png}}}
+
+
+
 \usebackgroundtemplate{ % \includegraphics[width=3cm]{pics/NyayaAppIcon1024.png}}
 \vbox to \paperheight{\vspace{2.3cm}\hbox to \paperwidth{\hfil\includegraphics[width=2.9cm]{pics/NyayaAppIcon1024.png}\hfil}}
 }
@@ -52,7 +64,7 @@ Supervisor: Dr. Georg Moser
 
 % \frame{ \frametitle{Contents} \tableofcontents}
 
-\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
+\BgSyntaxTree
 
 \section{Motivation}
 \frame {
@@ -76,7 +88,8 @@ M. Huth and M. Ryan, Logic in Computer Science: Modelling and Reasoning about Sy
 	
 }
 
-\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/BoolToolInterface.png}}
+
+\BgBtInterface
 
 \section{What is BoolTool?}
 \frame {
@@ -95,16 +108,16 @@ M. Huth and M. Ryan, Logic in Computer Science: Modelling and Reasoning about Sy
 	\end{itemize}
 \item<1,6-> But it is not for beginners.
 	\begin{itemize}
-	\item<7-10> It does not motivate or explain anything.
-	\item<8-10> It does not use standard symbols of propositional logic
-	\item<9-10> It does not explain equivalence transformations
+	\item<7-10> It does not motivate or explain much.
+	\item<8-10> It does not use standard symbols of propositional logic.
+	\item<9-10> It does not explain equivalence transformations.
 	\item<10-10> It does not define normal forms.
 	\end{itemize}
 \end{itemize}
 	
 	}
 	
-	\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
+\BgSyntaxTree
 
 %\frame {
 %	\frametitle{BoolTool}
@@ -161,17 +174,16 @@ M. Huth and M. Ryan, Logic in Computer Science: Modelling and Reasoning about Sy
 
 	\item<1-> Sanskrit ny-$\bar{\mbox{a}}$yá, literally “recursion”  
 
-	used in the sense of  “syllogism, inference“
+	used in the sense of  “syllogism, inference“.\footnote{ \tiny
+	\href{http://en.wikipedia.org/wiki/Nyaya}{en.wikipedia.org/wiki/Nyaya}}
 
 	\item<2-> One of the schools of Hindu philosophy, 
 
-	specifically the school of logic.
-
-	\item<3-> “Obtaining valid knowledge is the only way 
-
-	to obtain release from suffering”\footnote{ \tiny
-	\href{http://en.wikipedia.org/wiki/Nyaya}{ en.wikipedia.org/wiki/Nyaya} • 
+	specifically the school of logic.\footnote{ \tiny
 	\href{http://www.iep.utm.edu/nyaya/}{www.iep.utm.edu/nyaya/}}
+
+	\item<3-> \textit{“Obtaining valid knowledge is the only way \newline
+	to obtain release from suffering.”} (tenet)
 \end{itemize}
 
 
@@ -211,65 +223,81 @@ in a self-explanatory environment.
 	\frametitle{What is \Nyaya?}
 
 	\framesubtitle{Concept}
+
+
+\Nyaya supports the most effective learning techniques
+– steadily learning and practice testing – % \footnote{Dunlosky et al. Improving […{ learning with effective […] techniques: […]} –
+with its combination of small bits of learning content  and
+seemingly countless exercises. 
 	
 	\begin{itemize}
 	
-	\item Tutorials for general concepts and definitions
+	\item Tutorials for general concepts and definitions.
 
-	\item Exercises to consolidate the learned concepts and definitions
+	\item Exercises to consolidate the learned concepts and definitions.
 	
-	\item Playground to build and transform formulas
+	\item A Playground to build and transform formulas.
 	
-	\item Glossary of technical terms
+	\item A Glossary of technical terms.
 
-	\item BoolTool 
+	\item Bool+Tool to construct normal forms reduced OBDDs.
+
+
 	
 \end{itemize}
+
+
 }
 
-\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabN1.png}}
-\subsection{App}
+\BgTabN
+
+\subsection{iPad App}
 \frame {
 	
 	\frametitle{What is \Nyaya?}
-	\framesubtitle{App}
+	\framesubtitle{iPad App}
 	%\includegraphics[width=12.2cm,trim=1.5cm 4cm 2cm 2cm]{Images/BoolPad6}
 }
 
-\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabT1.png}}
+\BgSyntaxTree
 
-\section{Walk-through}
-\subsection{Tutorials}
-\frame {
-	% \frametitle{Tutorials}
+\section{Development Tools and Principles}
+\frame{
+	\frametitle{Tools and Processes}
+	\framesubtitle{}
+
+\begin{itemize}
+
+\item Tools
+
+	\begin{itemize}
+	
+	\item Xcode, Git, Objective-C, CocoaTouch, Git
+
+	\item Apple Developer Portal, GitHub
+	
+	\item Interface prototypes, core components
+	
+	\item Content.
+
+\end{itemize}
+
+\item Principles
+
+\begin{itemize}
+	
+	\item Fail Fast.
+
+	\item Test-driven development.
+	
+	\item Refactoring.
+	
+	\item Use cases.
+
+\end{itemize}
+\end{itemize}
+
 }
-
-
-\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabE1.png}}
-\subsection{Exercises}
-\frame {
-	% \frametitle{Exercises}
-}
-
-\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabP1.png}}
-\subsection{Playground}
-\frame {
-	% \frametitle{Playground}
-}
-
-\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabG1.png}}
-\subsection{Glossary}
-\frame {
-	% \frametitle{Glossary}
-}
-
-\usebackgroundtemplate{\transparent{1}\includegraphics[width=\paperwidth, trim=0 0 0 17mm, clip=true]{fp_images/NyayaTabB1.png}}
-\subsection{BoolTool}
-\frame {
-	%\frametitle{BoolTool}
-}
-
-\usebackgroundtemplate{\transparent{0.1}\includegraphics[width=\paperwidth]{fp_images/SyntaxTreeBackground.png}}
 
 \section{Implementation}
 \frame{
@@ -284,26 +312,82 @@ in a self-explanatory environment.
 
 	\begin{itemize}
 	\item BoolTool
-	\begin{itemize}
-	\item OCaml
-	\item Cross-Compiling
-	
+		\begin{itemize}
+		\item OCaml Sources
+		\item Cross-Compiling
+		\end{itemize}
+	\item Bool+Tool
+		\begin{itemize}
+		\item Scanner
+		\item Parser
+		\end{itemize}
+	\item Syntax Tree
+		\begin{itemize}
+		\item Node Cluster
+		\item Node Category
+		\end{itemize}
 	\end{itemize}
-	\item Scanner
-	\item Parser
-	\end{itemize}
+
 	
 }
+
+
+\subsection{Views}
+\frame{
+	\frametitle{Views}
+	\framesubtitle{Demo}	
+}
+
+\BgTabT
+
+\section{Walk-through}
+\subsection{Tutorials}
+\frame {
+	% \frametitle{Tutorials}
+}
+
+\BgTabE
+
+\subsection{Exercises}
+\frame {
+	% \frametitle{Exercises}
+}
+
+
+\BgTabP
+
+\subsection{Playground}
+\frame {
+	% \frametitle{Playground}
+}
+
+\BgTabG
+
+\subsection{Glossary}
+\frame {
+	% \frametitle{Glossary}
+}
+
+\BgTabB
+
+\subsection{BoolTool}
+\frame {
+	%\frametitle{BoolTool}
+}
+
+\BgSyntaxTree
 
 \section{Sources}
 \frame{
 	\frametitle{Sources}
 	
 	\begin{itemize}
-	\item Barwise, Etchemendy und Barker Plummer, \textbf{Tarski's World}
-	\item Middeldorp, \textbf{Logic}, Lecture 
-	\item Huth and Ryan, \textbf{Logic in Computer Science}
-	\item Apple iOS Developer Documentation
+	\item Huth and Ryan. \textbf{Logic in Computer Science}
+	\item Middeldorp. \textbf{Logic}, Lecture 
+	\item Gamma, Helm, Johnson, Vlissides. \textbf{Design patterns: elements of reusable object-orientated software}
+	\item Louden. \textbf{Compiler Construction: Principles and Practice}
+	\item Buck and Yacktman. \textbf{Cocoa Design Patterns}
+	\item Apple. \textbf{iOS Developer Documentation}
 	% \item OCaml Sourcecode for BoolTool
 	% \item Scofield, \textbf{Cross Compiling OCaml to iOS} %, \href{http://psellos.com/ocaml/compile-to-iphone.html}{www.psellos.com}
 	
