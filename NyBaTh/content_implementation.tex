@@ -264,7 +264,7 @@ $\top | \bot
 
 In the second step the list of input tokens is parsed top-down 
 using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
-following an ebnf grammar outlined in \tabref{tab:CoreEBNF}, 
+following an EBNF grammar outlined in \tabref{tab:CoreEBNF}, 
 that defines precedence and associativity of connectives too.
 
 \begin{table}[htdp]
@@ -287,8 +287,8 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 
 \subsubsection{Limitations}
 
-\Nyaya's \BoolTool does not parse as fast and (memory) efficient as \verb+BoolTool+'s parser,
-primarily because recursion and token probing are more expansive operations in Objective-C than in \verb+OCaml+.
+\BoolTool does not parse as fast and (memory) efficient as \verb+BoolTool+'s parser,
+primarily because recursion and token probing are more expensive operations in Objective-C than in \verb+OCaml+.
 The creation of a syntax graph instead of a syntax tree adds more overhead.
 But \Nyaya's implementation is {\em good enough}, 
 because {\em real world} user input is limited to at most a few thousands characters.
@@ -473,12 +473,12 @@ This list of technical terms defined by the glossary document is presented in a 
 Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
 controlled by the glossary detail view controller.
 
-\subsection{Bool+Tool}
+\subsection{BoolTool}
 
-The \BoolTool master view controller presents a table view with stored and selectable formulas.
+The master view controller of \BoolTool presents a table view with stored and selectable formulas.
 An editable text field with an attached customized keyboard will allow the user to enter their formulas.
 
-The output will be presented in different views. Read only text views are used for the normal form, 
+The output will be presented in different views. Text views, which are configured to be read only, are used to present normal forms, 
 a web form is used for the truth table and a customized view will draw the binary decision diagram.
 
 

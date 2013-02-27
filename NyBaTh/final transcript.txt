@@ -1,4 +1,75 @@
-Herzlich willkommen zu meinem Abschlussvortrag zu meine Bachelorproject Nyaya für iPad.
-Mein Name is Alexander Maringele und 
-mein Betreuer ist Dr. Georg Moser, 
-Mitglied der Computational Logic Research Group am Instititut für Informatik der Universität Innsbruck.
+Welcome to the final presentation of my bachelor and software project
+
+Nyaya for iPad
+
+an interactive learning environment with Bool+Tool.
+
+My name is Alexander Maringele, and my supervisor is Georg Moser
+of the Computational Logic Research Group.
+
+What is the origin and meaning of nyaya.
+
+Nyaya is a sanskrit word, and means literally "recurison", 
+used in the sense of syllogism or inferenc or simpyl logic.
+
+Nyaya is the name of one of the ortohodox schools of Hindu philosophy,
+specifically the school of logic.
+
+One of the tenet of this school is that "Obtaining valid knowledge is the only
+way to obtain release from suffering." 
+
+To obtain valid knowledge is an objective of modern logic  too.
+This is true for the core of all logic, propostional logic.
+
+ca. 1.5'
+
+The aim of logic ...
+
+For example we can model the nursery rhyme from the 16th centurey
+
+An the rhyme is true!
+
++ 1,5' (3')
+
+BoolTool is provided by the computational logic research group.
+
+It's a tool to ...
+
+ca. 0.75" (3'45")
+
+The aim of my project was to 
+ allow the user to learn intaractivle simple facts about logic
+- ..
+
+in a self-explanatory environment
+
+0.75 (4'30")
+
+The concept for this self-explanatory environment is platform agnostic.
+
+And it is very simple, Nyaya support the ...
+
+For that Nyaya provides are tutorials ...
+exercises
+a playground
+a glossary, where the user can find all the content from the tutorials.
+and the functionality of bool tool,
+which is very useful.
+
+1 (5'30")
+
+A concept is no useful without implementation. 
+Therefore a platform had to be chosen.
+
+1 (6'30")
+
+
+
+
+
+
+
+
+
+
+
