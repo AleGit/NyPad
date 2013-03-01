@@ -2,26 +2,43 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>Playground Help</title>
+            <title>Playground Hints</title>
             <link rel="stylesheet" type="text/css" href="format.css">
                 </head>
     <body style="margin-left:10px; margin-right:20px; margin-top:20px; margin-bottom:20px;">
         
+        <p>Adding syntax trees:</p>
         <ul>
-            <li><b>Adding a syntax tree from the list of formulas:</b>
-                Tap on the button “Formulas“, tap on one formula in the list.
-                <em>The syntax tree for the selected formula will be added to the playground.</em></li>
-            <li><b>Adding a new syntax tree to the playground:</b>
-                Tap and hold on a place in the grid.
-                <em>A new syntax tree with simple formula “p” will be added to the playground on the tapped place.</em></li>
-            </li>
-            <li><b>Selecting a syntax tree:</b> Tap on a syntax tree.</li>
-            <li><b>Moving a syntax tree:</b> Tap and move a syntax tree.</li>
-            <li><b>Locking or unlocking a syntax tree:</b> Tap the lock symbol.</li>
-            <li><b>Deleting a syntax tree:</b> Tap the red symbol.</li>
-            <li>
+            <li>Tapping on the button “Formulas“ at the top left
+                and then tapping on one of the formulas in the list will add
+                the syntax tree of the tapped formula to the playground.</li>
+            <li>Tapping and holding a free space on the playground will add the syntax tree of the simple formula p to the playground.</li>
+        </ul>
+        <p>Interacting with Syntax trees:</p>
+        <ul>
+            <li>Tapping into a syntax tree will (de)select the syntax tree.</li>
+            <li>Tapping into a syntax tree and moving will move the syntax tree.</li>
+            <li>Tapping the lock symbol at the top left of a selected syntax tree will (un)lock the syntax tree.</li>
+             
+                
+            <li>Tapping the delete symbol at the top right of a selected syntax tree will delete the syntax tree.</li>
+            </ul>
+        <!-- <p>Syntax tree manipulations in free mode</p>-->
+        <ul>
+            <li>A syntax tree is in free mode, when the lock symbol is open.</li>
+            <li>In free mode the syntax tree can be manipulated freely.</li>
+            
+            <li>Tapping a node will offer a list of actions.</li>
+            <li>Atoms can be assigned to red (true), green (false) or blue (unassigned). Connectives will evaluate to red (true), green (false) or blue (pendant) automatically.
         </ul>
         
+        <!-- <p>Equivalence transformations in locked mode</p>-->
+        <ul>
+            <li>A syntax tree is in locked mode when the lock symbol is closed.</li>
+            <li>Tapping a node will offer a list of equivalence transformations.</li>
+        </ul>
+        
+                
             
     </body>
 </html>
