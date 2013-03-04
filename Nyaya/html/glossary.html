@@ -6,14 +6,13 @@
         <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
-        <!-- Inhalt der Datei -->
-        <!-- <h3>A Learning environment for BoolTool</h3> -->
         
+        <div style="clear:both;"></div>
         <h3 id="associativity">Associativity</h3>
         
         <p>A binary connective is associative when the evaluation order does not matter for the result.<p>
         
-        <table class="left">
+        <table>
             <tr><th>input</th><td></th><th>syntax</th><th></th><th>semantics</th><td></td></tr>
             <tr><td>a∧b∧c</td><td>≣</td><td>(a∧b)∧c</td><td>=</td><td>a∧(b∧c)</td><td>associative</td></tr>
             <tr><td>a∨b∨c</td><td>≣</td><td>(a∨b)∨c</td><td>=</td><td>a∨(b∨c)</td><td>associative</td></tr>
@@ -22,8 +21,7 @@
             <tr><td>a↔b↔c</td><td>≣</td><td>a↔(b↔c)</td><td>=</td><td>(a↔b)↔c</td><td>associative</td></tr>
         </table>
         
-        <h3 id="atom">Atom</h3>
-        
+        <div style="clear:both;"></div>
         <h3>
             <span id="biconditional">Biconditonal</span>
             <span class="sb" id="bic">BIC</span>
@@ -43,6 +41,8 @@
         
         <p>BoolTool does not support Biconditional, but <code>!(P^Q)</code> is equivalent. Nyāya accepts <code>P BIC Q</code>, <code>P↔Q</code>, and <code>P&lt;&gt;Q</code> as input.</p>
         
+        
+        <div style="clear:both;"></div>
         <h3>
             <span id="conjunction">Conjunction</span>
             <span class="sb" id="and">AND</span>
@@ -76,10 +76,11 @@
         
         <p>BoolTool supports <code>P&amp;Q</code>, Nyāya accepts <code>P AND Q</code>, <code>P∧Q</code>, <code>P.Q</code>, and <code>P&amp;Q</code> as input.</p>
         
-        <h3 id="connective">Connective</h3>
         
-        <p>Connects one ore more <a href="formula">formulas</a> as <a href="#subformula">sub formulas</a> of a new formula.</p>
         
+        
+        
+        <div style="clear:both;"></div>
         <h3>
             <span id="disjunction">Disjunction<span>
             <span class="sb" id="or">OR</span>
@@ -108,6 +109,8 @@
         
         <p>BoolTool supports <code>P|Q</code> and <code>P+Q</code>, Nyāya accepts <code>P OR Q</code>, <code>P∨Q</code>, <code>P+Q</code>, and <code>P|Q</code> as input.</p>
                     
+        
+        <div style="clear:both;"></div>
         <h3>
             <span id="exclusive_or">Exclusive Disjunction</span>
             <span class="sb" id="xor">XOR</span>
@@ -136,8 +139,10 @@
         
         <p>BoolTool supports <code>P^Q</code>, Nyāya accepts <code>P XOR Q</code>, <code>P⊻Q</code>, <code>P⊕Q</code>, and <code>P^Q</code> as input.</p>
         
-        <h3 id="formula">Formula</a></h3>
+                
         
+        
+        <div style="clear:both;"></div>
         <h3>
             <span id="implication">Implication</span>
             <span class="sb" id="imp">IMP</span>
@@ -159,6 +164,7 @@
         
         <p>BoolTool supports <code>P>Q</code>, Nyāya accepts <code>P IMP Q</code>, <code>P→Q</code>, and <code>P>Q</code> as input.</p>
         
+        <div style="clear:both;"></div>
         <h3>
             <span id="negation">Negation</span>
             <span class="sb" id="not">NOT</span>
@@ -184,14 +190,11 @@
         
         <p>Nyāya accepts <code>NOT P</code>, <code>¬P</code>, and <code>!P</code> as input.</p>
         
-        <h3>
-            <span id="parenthesis">Parenthesis</span>
-            <span class="sb" id="lpar">(</span>
-            <span class="sb" id="lpar">)</span>
-        </h3>
         
         
-        <h3 id="precedence">Precedence</h3>
+        
+            <div style="clear:both;"></div>
+            <h3 id="precedence">Precedence</h3>
         
         <table class="right">
             <tr>
@@ -225,8 +228,8 @@
             </tr>
         </table>
         
-        <p>Precedence of connectives is used to get rid of too many parenthesis.
-        The artihmetic expression <code>a.b+c</code> is to be read as <code>(a.b)+c</code>, while <code>a.(b+c)</code> can&rsquo;t be written without parenthesis.
+        <p>Precedence of connectives is used to get rid of too many parentheses.
+        The artihmetic expression <code>a.b+c</code> is to be read as <code>(a.b)+c</code>, while <code>a.(b+c)</code> can&rsquo;t be written without parentheses.
         This is because by convention mutltiplication has a higher precedence than addition.
         Similar conventions are used in propositional logic.</p>
         
@@ -253,41 +256,10 @@
             </tr>
             </table>
         
-        <p>Precedence determines the <a href="#syntax_tree">syntax tree</a>,
-        i.e. the order of <a href="#valuation">valuation</a>
-        of a composite <a href="#formula">formula</a>.
+        <p>Precedence determines the order of valuation
+        of a composite formula.
         A symbol with higher precedence is evaluated before a symbol with lower precedence.
-        Implicitly <a href="#atom">Atoms</a> in propositional formulas has the highest precedence because they must be evaluated before connectives can be evaluated. Most connectives are <a href="#associativity">associative</a>, but not the implication (<code>→</code>).<p>
-        
-        <h3 id="subformula">Sub formula</h3>
-        
-        <p></p>
-        
-        <p></p>
-        
-        <h3 id="syntax">Syntax</h3>
-        
-        <p></p>
-        
-        <p></p>
-        
-        <h3 id="syntax_tree">Syntax tree</h3>
-        
-        <p></p>
-        
-        <p></p>
-        
-        <h3 id="semantics">Semantics</h3>
-        
-        <p></p>
-        
-        <p></p>
-        
-        <h3>
-            <span id="valuation">Valuation</span>,
-            <span id="truht_assignment">Truth Assignment</span>
-        </h3>
-        
+        Implicitly atoms in propositional formulas has the highest precedence because they must be evaluated before connectives can be evaluated. Most connectives are associative, but not the implication (<code>→</code>).<p>
                 
     </body>
 </html>
