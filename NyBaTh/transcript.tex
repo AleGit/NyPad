@@ -220,81 +220,98 @@ Truth tables are abbreviated if they have more than 128 rows.
 
 \frame{
 \frametitle{Model}
-The scanner of Nyaya uses a Regex to transform the input string into a stream of tokens. 
+Parser and node class constitute the core of \Nyaya. \\\vspace{3mm}
+\Nyaya uses a regular expression to transform the input string into a stream of tokens. 
 Special symbols and words are transformed into operator tokens, all other words are recognized as identifiers.
-Since the cocoa framework works with Unicode-strings, you can use Chinese words as identifiers.
-For the parser, I adjusted an EBNF grammar for propositional logic to bring it into accordance with
-precedences and associativity used in BoolTool. 
-This grammar was implemented straight forward into a recursive descendent parser,
-following the principles outlined in "Compiler Construction" by Kenneth C. Louden.
-The parser returns the root node of the syntax tree derived from the input using the factory methods of the node class.
-To enable Nyaya to transform syntax trees, the decorator pattern is used for adding additional methods to the node class. 
+Since the cocoa framework works with Unicode-strings, 
+Chinese words can be used as identifiers.\\\vspace{3mm}
+An EBNF grammar for propositional logic,
+adapted to be in accordance with precedence and associativity used in BoolTool,
+was implemented into a recursive descendent parser,
+following the principles outlined in "Compiler Construction" by Kenneth C. Louden.\\\vspace{3mm}
+%The parser returns the root node of the syntax tree derived from the input using the factory methods of the node class.
+%To enable Nyaya to transform syntax trees, the decorator pattern is used for adding additional methods to the node class. 
+
+The parser reads the stream of tokens, uses factory methods of the abstract node class to create all necessary sub-trees,
+like atoms and conjunctions, and returns the root node of the syntax tree derived from the input.\\\vspace{3mm}
+
+To enable Nyaya to transform syntax trees, the decorator pattern is used for adding additional methods to the node class
+and it’s private sub-classes.
+
+
 }
 
 \frame{
 \frametitle{Graphs}
-The in-memory representation of syntax trees is optimized. 
-In Nyaya syntax trees are designed as immutable reduced acyclic object graphs.
-Every syntax operation will create a new acyclic object graph by re-using sub-formulas multiple times.
+The in-memory representation of syntax trees is optimized. \\
+\Nyaya’s syntax trees are designed as immutable reduced acyclic object graphs.
+Every syntax operation will create a new acyclic object graph by re-using sub-formulas multiple times.\\\vspace{3mm}
 Although immutable, the "colour" of leaf nodes, the truth assignment, can be changed, 
 because changing the colour does not change the object graph, which directly represents the syntax of the formula.
 }
 
 \frame{
-\frametitle{Retrospective}
-Nyaya is in a stable and fully functional state but not everything is perfect.
-If there is a typo in a tutorial, a new version of Nyaya has to be submitted to the app store.
+\frametitle{Retrospective }
+Nyaya is in a stable and fully functional state but not everything is perfect.\\
+To distribute the correction of a typo in a tutorial, 
+a new version of Nyaya has to be submitted to the app store.
 It usually takes one week from submitting to publishing an app. 
-Since all content files are html files, it would be possible for Nyaya to download directly from a web server, 
-but this feature has not been added yet.
+It would be possible for Nyaya to download content directly from a web server, 
+but this feature has not been added yet.\\\vspace{3mm}
 
 Although sub-formulas are re-used, the valuation process re-calculates a sub-formula every time it is used.
 The creation of reduced ordered binary decision diagrams is very slow. 
-You can paste formulas into the input field of bool tool, but you cannot export normal forms.
+You can paste formulas into the input field of bool tool, but you cannot export normal forms.\\\vspace{3mm}
 
 If your eyesight is bad, "voice over" and "zoom" would be helpful for using the application.
 If your physical and motoric skills are restricted, "AssistiveTouch" could help you.
 To my disgrace, I must admit
 Nyaya still does not support these standard accessibility techniques of iOS (very well.)
 
-Nyaya is available in English only. 
-So far, there were downloads of the application in USA, Canada, Austria and Belgium. 
-Translations and localization would help to extend the market.
-A German version will be released this year.
+
 }
 
 \frame{
 \frametitle{Outlook}
-Some additional features, like creating and editing binary decision diagrams in a similar way to syntax trees, would be nice.
+Nyaya is available in English only. 
+So far, there were downloads of the application in USA, Canada, Austria and Belgium. 
+Translations and localization would help to extend the market.
+A German version will be released this year.\\\vspace{3mm}
+Some additional features, \\
+like creating and editing binary decision diagrams in a similar way to syntax trees, \\
+would be nice.\\\vspace{3mm}
 The use of n-ary Boolean functions in formulas and syntax trees would be an obvious extension to Nyaya . 
-Actually the parser would support it, but Nyaya's syntax tree and BoolTool do not.
-Syntax trees, truth tables and BDDs should be exportable, too.
-
+Actually the parser would support it, but Nyaya's syntax tree and BoolTool do not.\\\vspace{3mm}
+Syntax trees, truth tables and BDDs should be exportable, too.\\\vspace{3mm}
 I think, there is a small chance of creating a version for Mac or Android.
 }
 
 \frame{
 \frametitle{Distribution}
-Nyaya is distributed via AppStore and GitHub. 
-In the app store, you can buy and download it. 
-You will get a promo code to download it for free, 
-when you write an E-Mail to nyaya@maringele.at 
-with a reply-address of the University of Innsbruck. 
-You can also download the source code from GitHub and run it on a Mac with Xcode. 
-To install Nyaya on your iPad, you will need a developer certificate from Apple. 
-Or you have jailbreaked your device. 
-The source code is not intended for re-use or redistribution.
+Nyaya is distributed via AppStore and GitHub. \\\vspace{3mm}
+In the app store, you can buy and download it.  \\
+You will receive a promo code to download it for free, \\ 
+when you write an E-Mail to nyaya@maringele.at  \\
+with a reply-address of the University of Innsbruck. \\
+You can also download the source code from GitHub \\
+and run it on a Mac with Xcode and iPad Simulator. \\
+To install Nyaya on your iPad, using the source code, \\
+you will need a developer certificate from Apple. \\
+Or you have jailbreaked your device. \\\vspace{3mm}
+The source code is not intended for re-use or redistribution. 
 }
 
 \frame{
 \frametitle{Sources}
-At last, I want to mention the pillars, my application is built on. 
-The content is completely based on "Logic in Computer Science" by Huth and Ryan and the Logic Lecture of professor Middeldorp.
-The architecture of Nyaya was guided by "design patterns: elements of reusable object-oriented software" by the Gang of Four. 
-Nyaya's Parser was built following principles taken from "compiler construction" by Louden. 
-The platform-specific tasks were mastered with the help of "cocoa design patterns" by Buck anydYacktman
-and the online iOS developer documentation by apple.
-
+At last, I want to mention the pillars, my application is built on. \\\vspace{3mm}
+The content is  based on "Logic in Computer Science" by Huth and Ryan \\
+and the Lecture “Logic” of professor Middeldorp. \\
+The architecture of \Nyaya was guided by 
+\\“Design Patterns: Elements of Reusable Object-Oriented Software” \\by the Gang of Four. \\
+\Nyaya's Parser was built following principles taken from \\
+“Compiler Construction: Principles and Practice” by Louden. \\ 
+The platform-specific tasks were mastered with the help of \\“Cocoa Design Patterns” by Buck anyd Yacktman\\
+and the online iOS developer documentation by apple.\\\vspace{3mm}
 Thank you for your attention! I am now open to answer all remaining questions.
 }
 
