@@ -43,6 +43,10 @@
 }
 
 #pragma mark - view configuration
+- (void)configureAccessoryView {
+    [self.accessoryView viewWithTag:KEY_BACKGROUND_TAG].backgroundColor = [UIColor nyKeyboardBackgroundColor];
+    self.inputField.inputAccessoryView = self.accessoryView;
+}
 
 - (void)configureView
 {

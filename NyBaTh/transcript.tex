@@ -15,58 +15,57 @@ I am Alexander Maringele, \\ and my supervisor is Dr. Georg Moser.
 
 \frame{
 \frametitle{\Nyaya – origin and meaning}
-First of all, I want to explain to you the name Nyaya and its origin. 
-Nyaya is sanskrit and its literal meaning is recursion in the sense of syllogism or inference.
-Nyaya is one of the orthodox schools of Hindu philosophy, specifically the school of logic.
-One of its central tenets is "that obtaining valid knowledge is the only way to obtain release from suffering." 
-And valid knowledge, on the other hand, is also an important goal of many studies, especially for the subject of logic. 
+First of all, I want to explain to you the name Nyaya and its origin. \\
+Nyaya is sanskrit and its literal meaning is recursion\\ in the sense of syllogism or inference. \\
+Nyaya is one of the orthodox schools of Hindu philosophy, \\specifically the school of logic.\\
+One of its central tenets is\\ "that obtaining valid knowledge is the only way to obtain release from suffering." 
+And valid knowledge, on the other hand,\\ is also an important goal of many studies, especially for the subject of logic. 
 }
 
 \frame{
 \frametitle{Logic – motivation}
-In their book "Logic in Computer Science", Huth and Ryan write
-"The aim of logic in computer science is to develop languages 
-to model the situations we encounter as computer science professionals, 
+In their book "Logic in Computer Science", Huth and Ryan write\\
+"The aim of logic in computer science is \\to develop languages 
+to model the situations\\ we encounter as computer science professionals, \\
 in such a way that we can reason about them formally."
 
-Let's take, for example, the beginning of the famous nursery rhyme 
-"If wishes were horses, beggars would ride."
-We could ask ourselves whether or not this statement is true. 
-So we split it into two parts, first the condition and second the result, 
-which leaves us with a model "if-then". This can be formalized into "p implies q". 
-Now we can calculate the valuation, and we realize that the condition "p" is not true,
-because wishes are not horses. 
-Therefore, following the principle that anything can be concluded from an untrue condition, the complete statement is true.
+Let's take, for example, the beginning of the famous nursery rhyme\\ 
+"If wishes were horses, beggars would ride."\\
+We could ask ourselves whether or not this statement is true.\\ 
+So we split it into two parts, first the condition and second the result,\\ 
+which leaves us with a model "if-then". \\This can be formalized into "p implies q". \\
+Now we can calculate the valuation, \\and we realize that the valuation of "p" must be false,\\
+because wishes are not horses in our domain. \\
+Therefore, following the principle that anything \\can be concluded from an untrue condition, the complete statement is true.
 }
 
 \frame{
 \frametitle{CL BoolTool}
-Next, I want to give you a short introduction to BoolTool 
-created by the computational logic research group at the university of innsbruck
-because its functionality is included in my project. 
-BoolTool is a powerful means for manipulating and evaluating formulas in propositional logic.  
+Next, I want to give you a short introduction to BoolTool \\
+created by the computational logic research group at the university of innsbruck\\
+because its functionality is included in my project. \\
+BoolTool is a powerful means for manipulating and evaluating formulas in propositional logic.  \\\vspace{3mm}
+It defines an input syntax for formulas\\
+It derives normal forms from formulas\\
+It computes truth tables and binary decision diagrams\\
+and it calculates satisfiability, tautologies and contradictions.\\\vspace{3mm}
 
-It defines an input syntax for formulas
-It derives normal forms from formulas
-It computes truth tables and binary decision diagrams
-and it calculates satisfiability, tautologies and contradictions.
+Unfortunately, it is not really suitable for beginners because up to now\\
 
-Unfortunately, it is not really suitable for beginners because up to now
-
-It does not motivate or explain much,
-It does not use standard symbols of propositional logic,
-It does not explain equivalence transformations,
+It does not motivate or explain much,\\
+It does not use standard symbols of propositional logic,\\
+It does not explain equivalence transformations,\\
 and it does not define normal forms.
 }
 
 \frame{
 \frametitle{Aim}
-The aim of my project now is to provide an interactive learning environment for propositional logic.
-It should allow the user to learn the formalism of propositional logic, 
-it should clarify the separation of syntax and semantics. 
-It should introduce normal forms like negation normal forms, conjunctive and disjunctive normal forms to the user.
-It also has to demonstrate standard transformations of Boolean functions 
-and the coherence of different representations of a Boolean function.
+The aim of my project now is to provide \\an interactive learning environment for propositional logic.\\
+It should allow the user to learn the formalism of propositional logic, \\
+it should clarify the separation of syntax and semantics. \\
+It should introduce normal forms like negation normal forms, conjunctive and disjunctive normal forms to the user.\\
+It also has to demonstrate standard transformations of Boolean functions \\
+and the coherence of different representations of a Boolean function.\\\vspace{3mm}
 
 All this should be supported by a self-explanatory environment.
 }
@@ -74,15 +73,15 @@ All this should be supported by a self-explanatory environment.
 \frame{
 \frametitle{Concept}
 
-To reach this goal, I developed a platform agnostic concept
-which supports the most effective learning techniques –
-steady learning and practice testing –
-by combining small bits of learning content with literally countless exercises.
+To reach this goal, I developed a platform agnostic concept\\
+which supports the most effective learning techniques \\–
+steady learning and practice testing –\\
+by combining small bits of learning content with literally countless exercises.\\\vspace{3mm}
 
-Nyaya offers short tutorials for general concepts and definitions as well as 
-exercises to consolidate the learned content and definitions. 
-It also provides a playground for building and transforming syntax trees and a glossary of technical terms. 
-It includes an user interface that works similar to the web interface of BoolTool. 
+Nyaya offers short tutorials for general concepts and definitions as well as \\
+exercises to consolidate the learned concepts and definitions. \\
+It also provides a playground for building and transforming syntax trees\\ and a glossary of technical terms. \\
+It includes an user interface that works similar to the web interface of BoolTool. \\
 }
 
 \frame{
@@ -153,28 +152,39 @@ I would also recommend the use of GitHub or a similar service for backup.
 }
 
 \frame{
-\frametitle{Execution}
+\frametitle{Execution - Fail Fast}
 My project execution did not follow a specific development model, 
-but I used some principles of agile development and scrum instead. 
+but I used some principles of agile development with scrum instead. 
 One of its major principles is to fail fast. 
 This encourages you to find critical points of your project as soon as possible, 
 and to decide in a given amount of time, if the problem can be overcome. 
 If not, you have to find an alternative to your original plan. 
 This actually happened when I wanted to use the OCaml source code of BoolTool for my application. 
 After several failing attempts, I decided to rewrite the functionality of BoolTool in Objetive-C. 
-I also created several tests before its implementation, which I used to prove the correct running of the application at any time of the process. 
-This principle is called test driven development. While implementing, I refactored many lines of code. 
-And by writing down a detailed concept, I already defined all use cases of the application.
+}
 
-I started my project by exploring interface possibilities. 
-After developing some prototypes, I implemented the core components. 
-I added content, controllers and configurations to make my application ready for use. 
-And finally, I reviewed and tested all parts of Nyaya multiple times. 
+\frame{
+\frametitle{Execution - Cont.}
+I also created a lot of tests before its implementation, \\
+which I used to prove the correct running of the application \\at any time of the project process. 
+This principle is called test driven development. \\
+While implementing, I rewrote classes and methods to improve the quality of the code,\\
+This refactoring was always secured by unit-tests written before the first implementation.\\
+For example I switched from mutable to immutable data structureswithout hassle in the midst of the project .\\
+
+And by writing down a detailed concept, I already defined all use cases of the application.\\
+
+
 }
 
 \frame{
 \frametitle{Commits}
-The commit history at GitHub reflects those four phases. 
+
+I started my project by exploring interface possibilities.\\
+After developing some prototypes, I implemented the core components. \\
+I added content, controllers and configurations to make my application ready for use. \\
+And finally, I reviewed and tested all parts of Nyaya multiple times. \\
+The commit history at GitHub reflects those four phases. \\
 The main work was done in the second phase by developing the core components like parser, views of syntax trees,  
 truth tables, and binary decision diagrams.
 }
