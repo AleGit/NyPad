@@ -8,7 +8,7 @@ First steps in developing applications for iPad can be made on a computer runnin
 \href{sec:Xcode}{Xcode} (IDE), which is a free download from the Mac App Store.
 Knowledge of object-oriented programming, object-oriented design patterns, 
 and the C programming language 
-builds a good base to learn the main platform-specific technologies 
+constitutes a good basis to learn the main platform-specific technologies 
 \href{sec:ObjC}{Objective-C},
 \href{sec:Cocoa}{Cocoa}, and
 \href{sec:MemoryManagement}{memory management}
@@ -22,7 +22,7 @@ should be obtained.
 \label{sec:Xcode}
 is Apple's integrated development environment to create software for OS X and iOS devices.
 It includes an iPad simulator, complete API documentations and development guides to various topics. 
-Xcode supports the source management systems Git and Apache™ Subversion®. 
+Xcode supports the source management systems Git and Apache Subversion. 
 Git will be installed along various other development tools with Xcode.
 
 \paragraph{Objective-C}
@@ -44,7 +44,7 @@ Cocoa Touch covers the platform specific Objective-C runtime and a platform spec
 
 \begin{itemize}
 \item\label{secitem:CocoaFoundation}
-The Foundation framework provides the basis for programming with Objective-C. 
+The Foundation framework provides the basis for programming applications in Objective-C. 
 In addition to the memory and exception handling it includes the base classes for strings, values, lists, sets and files.
 \item\label{secitem:CocoaUIKit} The UIKit framework provides a set of classes and functions for implementing (touch based) graphical user interfaces. 
 The architecture of this framework follows the Model-View-Controller pattern 
@@ -58,7 +58,7 @@ The run time does not offer  garbage collection – which is surprising and anno
 But the necessary retains and releases are added automatically at compile time.
 Most of the time memory management by automatic reference counting is as easy to use as garbage collection.
 But one important consequence is that strong object graphs must be implemented as directed acyclic graphs. 
-For example a circular strong linked list would never be released. 
+For example a circular strongly linked list would never be released. 
 
 The advantages are the deterministic and economical run-time behavior.
 Objects are destroyed at a defined time and there is no need for a separate thread for garbage collection. 
@@ -99,7 +99,7 @@ Local repositories can be synchronized and merged with remote repositories for c
 Since Apple's IDE Xcode works with Git's local repositories out of the box,
 it was obvious to use Git as source control for the project.
 
-\paragraph{Github \cite{GitHub:Main}}
+\paragraph{GitHub \cite{GitHub:Main}}
 \label{sec.GITHUB}
 is a hosting service for projects that use Git. 
 GitHub offers free accounts for public repositories, 
@@ -147,10 +147,13 @@ the main classes for the representation of abstract syntax trees and binary deci
 After several failed attempts to cross-compile \verb=BoolTool='s sources \verb+OCaml+ 
 and to use the binaries on iPad, the functionality of \verb+BoolTool+ was reimplemented as \BoolTool in Objective-C.
 % A left recursive descendent parser for input strings with the syntax propositional logic was implement in Objective-C. 
+The additional workload was rewarded by a more flexible parser than CL \verb+BoolTool+’s parser.
+The parser accepts standard symbols of propositional logic as well as operator symbols of Boolean expressions.
+Furthermore, characters and words of all languages can be used as identifiers for atoms.
 
 \paragraph{Adding content, controllers, and configurations.}
 
-Although the general concept was developed, content had to be expounded. 
+Although the general concept was developed, content had to be expanded. 
 The tutorials had to be written and the exercises had to be generated. 
 Content and configuration files had to be added to the project. 
 The different views had to be controlled and the navigation between the different use cases had to be added. 
@@ -191,5 +194,5 @@ and unit tests provided a quick check, whether the reimplementation was correct.
 With the written concept (see chapter \vref{ch:concept}) of an interactive environment for BoolTool 
 that enables the learning  of simple facts about propositional logic the collection of use cases was defined. 
 These use cases represent the real value of the project 
-and they mark the criterion for completion of development.
+and they define the criterion for completion of development.
 

@@ -133,8 +133,8 @@ atoms, connectives or trees.
 %\item The category “Reductions”
 %\item The category “Resolution”
 \item[“Type”] provides a single method, 
-that returns an enum type of a node, i.e constant, variable, type of connective. 
-This method is used to decide, which equivalence transformations are available.
+that returns an enum type of a node, i.e. constant, variable, type of connective. 
+This method is used to decide which equivalence transformations are available.
 
 \item[“Valuation”] (see \figref{fig:NyayaNodeValuation}) 
 provides fast valuations with complete truth assignments. 
@@ -206,12 +206,12 @@ Deriving the negation normal form does not increase or decrease the number of no
 but the necessary distributions of disjunctions will multiply the number of nodes again.
 
 To ensure the stability of \Nyaya 
-and since it is near impossible 
+and since it is nearly impossible 
 to present a propositional formula 
 with thousands of symbols 
 in a meaningful way
 to the user, 
-the derivation of normal forms is aborted, when the results surpass a defined size.
+the derivation of normal forms is aborted when the results surpass a defined size.
 
 
 
@@ -226,7 +226,7 @@ is implemented in \verb+OCaml+\footnote{
 a functional programming language, which is well suited for this kind of task.
 
 After several failed attempts to use the \verb+OCaml+ sources in the Xcode project, 
-i.e to cross-compile the sources to iPad's processor architecture (ARM),
+i.e. to cross-compile the sources to iPad's processor architecture (ARM),
 to add the object code to the project's build configuration correctly 
 to bridge and call \verb+BoolTool+'s functions from C, 
 to pass data to these functions and to read return data from these functions calls,
@@ -327,9 +327,11 @@ OR             ::= '$\vee$' | '$|$' | '$+$' | 'O'
 % AND            ::= '$\wedge$' | '$.$' | '$\&$' | 'E'
 
 \item The symbols for operators
-are localized using the standard localization framework of Cocoa,
+are localizable using the standard localization framework of Cocoa,
 which will return the localized string from the appropriate
-text file (see \tabref{tab:LocalizableStrings}).
+text file (see \tabref{tab:LocalizableStrings}). 
+This can be useful when an external keyboard is used to write formulas,
+because most symbols of propositional logic cannot be found on standard keyboards.
 
 \begin{table}[htdp]
 \begin{center}
@@ -354,7 +356,8 @@ which are well suited for the use cases in an interactive environment.
 
 \item 
 Extensions can be added to the parser at any time, without the risk of breaking anything,
-because the correctness of the parser is substantiated with unit tests in the project itself. 
+because the “correctness” of the parser is substantiated (but not in the formal sense) 
+with unit tests in the project itself. 
 
 % \item The parser is easily extendable
 
@@ -391,18 +394,18 @@ The class provides a factory method to create
 \section{Views and Controllers}
 
 \Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and \BoolTool – 
-is organized by a sub-class of\verb+ UITabBarController+ (an heir of \verb+UIViewController+). 
-At start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
+is controlled by a \verb+UIViewController+ derived from \verb+UITabBarController+. 
+At application start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
 The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
-and will appoint of one of its view controllers, which will present its view such as the welcome screen.
+and will appoint one of its view controllers, which will present its view such as the welcome screen.
 
 Tabbing an \verb+UITabBarItem+ will cause the tab bar to delegate the event to its \verb+UITabBarDelegate+ – the tab bar controller.
 The tab bar controller will switch the selected view controller, which then will present its content.
 
 Except for the welcome view controller 
-all content view controllers inherits from split view controller,
+all content view controllers inherit from \verb+UISplitViewController+,
 which provides a master view controller and a detail view controller.
-The tutorial master view controller and the \BoolTool master view controller shares a list of persisted formulas.
+\BoolTool master view controller  and the tutorial master view controller share a list of persisted formulas.
 
 \subsection{Welcome}
 
