@@ -195,6 +195,8 @@ when deriving an equivalent implication free form.
 “Implication free” means also the absence of exclusive disjunctions. %  (see \tabref{tab:BNFGRIFF}).
 
 \begin{eqnarray*}
+P \oplus p & \equiv & (P \wedge \neg p) \vee  (\neg P \wedge p) \\
+& \equiv & (P \vee p) \wedge  (\neg P \vee \neg p) \\
 \#(P \oplus p) & = & 1 \cdot(\#(P) + 2) \\
 \#((P \wedge \neg p) \vee  (\neg P \wedge p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
 \#((P \vee p) \wedge  (\neg P \vee \neg p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
@@ -265,7 +267,7 @@ $\top | \bot
 In the second step the list of input tokens is parsed top-down 
 using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
 following an EBNF grammar outlined in \tabref{tab:CoreEBNF}, 
-that defines precedence and associativity of connectives too.
+that defines precedence and associativity of connectives, too.
 
 \begin{table}[htdp]
 \begin{center}
@@ -473,7 +475,7 @@ The color of the border is determined by the value of \verb+displayValue()+.
 The glossary master view controller reads all elements with an id from the glossary content document,
 creates an alphabetically ordered list of technical terms using the texts included between the corresponding element-tags.
 This list of technical terms defined by the glossary document is presented in a table view.
-Tapping a term will scroll the glossary document view – a web view - to the chosen term, 
+Tapping a term will scroll the glossary document view – a web view – to the chosen term, 
 controlled by the glossary detail view controller.
 
 \subsection{BoolTool}
@@ -495,7 +497,7 @@ the storage of application content must be defined.
 
 \subsection{Content on delivery}
 
-Configuration data, localization data and html documents
+Configuration data, localization data and HTML documents
 are stored in UTF-8 encoded text files.
 All graphical content such as icons and diagrams are stored in portable network graphics.
 These content files are embedded in \Nyaya's app bundle

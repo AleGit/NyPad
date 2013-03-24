@@ -41,16 +41,18 @@ by
 propositional logic by calculating truth tables and minimal forms, 
 but does not draw syntax trees or binary decision diagrams.
 Instead it draws a logic circuit and a Venn diagram from the input. 
-Additionaly it calculates the truth density
-and the boolean operator number of the input formula. 
+Additionaly it calculates the “truth density” of a formula, 
+i.e. the ratio between the number of distinct truth assignments of the formula that evaluate to true 
+and the number of all distinct truth assignments for the formula.
+Further it provides the “boolean operator number” for the input. 
 
-Wolfram Alpha does not calculate exactly for an arbitrary number of variables in propositional formulas.
-For example no truth table, conjunctive normal form, no disjunctive normal form is calculated
+for an arbitrary number of variables in propositional formulas, Wolfram Alpha does not calculate exactly.
+It does not derive a truth table, a conjunctive normal form or a disjunctive normal form 
 for the input
 %\href{http://www.wolframalpha.com/input/?i=a⊻b⊻c⊻d⊻e⊻f⊻g⊻h⊻i⊻j}{
 \href{http://www.wolframalpha.com/input/?i=a+xor+b+xor+c+xor+d+xor+e+xor+f+xor+g+xor+h+xor+i+xor+j}{
-$a\veebar b\veebar c\veebar d\veebar e\veebar f\veebar g\veebar h\veebar i\veebar j$.}
-The truth density is only sampled and does not match the exact result 0.5.
+$a\oplus b\oplus c\oplus d\oplus e\oplus f\oplus g\oplus h\oplus i\oplus j$.}
+Further, the truth density is only sampled and does not match the exact result 0.5.
 \end{itemize}
 
 \section{Apps for iPad}

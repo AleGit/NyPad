@@ -58,7 +58,7 @@ The run time does not offer  garbage collection – which is surprising and anno
 But the necessary retains and releases are added automatically at compile time.
 Most of the time memory management by automatic reference counting is as easy to use as garbage collection.
 But one important consequence is that strong object graphs must be implemented as directed acyclic graphs. 
-For example a circular strongly linked list would never be released. 
+For example, a circular strongly linked list would never be released. 
 
 The advantages are the deterministic and economical run-time behavior.
 Objects are destroyed at a defined time and there is no need for a separate thread for garbage collection. 
@@ -144,7 +144,7 @@ In this phase several prototypes were developed for interactive syntax trees and
 After the formulation of the general concept with tutorials including 
 exercises, a playground, a glossary, and the embedding of BoolTool,
 the main classes for the representation of abstract syntax trees and binary decision diagrams were implemented.
-After several failed attempts to cross-compile \verb=BoolTool='s sources \verb+OCaml+ 
+After several failed attempts to cross-compile \verb=BoolTool='s \verb+OCaml+ sources 
 and to use the binaries on iPad, the functionality of \verb+BoolTool+ was reimplemented as \BoolTool in Objective-C.
 % A left recursive descendent parser for input strings with the syntax propositional logic was implement in Objective-C. 
 The additional workload was rewarded by a more flexible parser than CL \verb+BoolTool+’s parser.
@@ -164,7 +164,7 @@ The different views had to be controlled and the navigation between the differen
 
 \subsection{Development model}
 
-The development of this software did no follow a specific development model, 
+The development of this software did not follow a specific development model, 
 but did borrow some principles from agile development.
 
 \paragraph{Fail-Fast.} The interaction with syntax trees and 
