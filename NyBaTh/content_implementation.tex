@@ -3,9 +3,9 @@
 
 \section{Architecture}
 
-The general design of \Nyaya follows the Model-View-Controller pattern (MVC),
-which is originated in Smalltalk \cite[p.4]{GAMMAETAL}, 
-that separates the representation of data from the user interaction.
+The general design of \Nyaya follows the Model-View-Controller pattern (MVC)
+– originated in Smalltalk \cite[p.4]{GAMMAETAL} –
+that separates the representation of data from user interaction.
 Cocoa Touch (see section \vref{sec:Cocoa}) encourages the use of MVC
 by providing a rich set of useful views and controllers within the UIKit framework.
 These views and controllers cover many use cases of data presentation and user interaction.
@@ -31,8 +31,8 @@ $\neg a \wedge b \vee c \veebar a$ (see section \vref{sec:Parser}).
 \label{sec:AST}
 
 Cocoa does not provide a class to represent trees, 
-but with instances of a custom class (see \figref{fig:NyayaNode}), 
-that implements the composite pattern \cite[p.163ff]{GAMMAETAL}
+but with instances of a custom class (see \figref{fig:NyayaNode})
+which implements the composite pattern \cite[p.163ff]{GAMMAETAL}
 arbitrary graphs and therefore syntax trees can be represented easily .
 
 \begin{figure}[htbp]
@@ -47,9 +47,9 @@ arbitrary graphs and therefore syntax trees can be represented easily .
 
 The node class is implemented as a class cluster, 
 which is a Cocoa design pattern \cite[p.282ff]{Buck:2009:CDP:1803585}
-– an adaptation of the the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
+– an adaptation of the abstract factory design pattern \cite[p.87ff]{GAMMAETAL}.
 The abstract and public class \verb+NyayaNode+ 
-provides a set of static and public methods (see \figref{fig:NyayaNodeCreation}),
+provides a set of static and public methods (see \figref{fig:NyayaNodeCreation})
 that returns instances of non public sub-classes (see \figref{fig:NyayaNodeCluster})
 of \verb+NyayaNode+.
 
@@ -69,7 +69,7 @@ Class categories are a language feature of Objective-C \cite[p.225ff]{Kochan:200
 to extend or organize the functionality of given classes beyond their core purpose.
 % – the representation of an abstract syntax tree in the case of the node class.
 
-There are base implementations of category methods in the root node class,
+There are base implementations of category methods in the root node class
 that will be overridden in subclasses.
 For example \verb+isLiteral:bool+ returns false for all node instances
 except for instances of variables
@@ -102,10 +102,10 @@ the production of invalid syntax trees is prevented.
 \item[“Derivation”] defines methods to derive semantically equivalent normal forms from a given syntax tree.
 These methods are used to create implication free forms, negation normal forms, conjunctive and disjunctive normal forms for \BoolTool.
 
-\item[“Description”] provides methods to convert a syntax tree into one of it's string representations – 
+\item[“Description”] provides methods to convert a syntax tree into one of its string representations – 
 either a propositional formula in strict syntax with many parentheses 
 or a formula using precedences and associativity.
-In most cases, the second form leads to shorter strings with less parentheses. 
+In most cases, the second form leads to shorter strings with fewer parentheses. 
 In rare case, only the outer parentheses are omitted.
 
 \item[“Display”]\label{item:DISPLAY} (see \figref{fig:NyayaNodeDisplay}) allows extended valuations
@@ -154,9 +154,9 @@ It is used to create truth tables and binary decision diagrams.
 Instances of node classes are not mutable 
 regarding their function as nodes of abstract syntax trees. 
 This means nodes can be created, but not modified.
-The symbol of an atom can not be changed, 
-a connective node can not be altered into another one,
-and child nodes of a connective node can not be replaced or reordered.
+The symbol of an atom cannot be changed, 
+a connective node cannot be altered into another one,
+and child nodes of a connective node cannot be replaced or reordered.
 
 Derivations or transformations do not change the structure of an existing syntax tree,
 but rather create a new independent syntax tree.
@@ -166,7 +166,7 @@ because truth assignments are semantics, not syntax.
 
 \subsubsection{Acyclic syntax graphs}
 
-Since the representation of abstract syntax trees is implemented immutable,
+Since the representation of abstract syntax trees is immutable,
 there is no need to create multiple instances for syntactically equivalent sub-trees. 
 At run-time syntax trees are represented by acyclic syntax graphs, 
 where multiple sub-trees can be represented by the same instance-graph
@@ -188,7 +188,7 @@ because the sub-tree $P$ on the left side is represented by the same object-grap
 The derivation of normal forms will fail on some relatively small syntax trees.
 especially when the formula contains too many exclusive disjunctions.
 
-With every exclusive disjunction of a formula $P$ and an atom $p$, 
+With every exclusive disjunction of a formula $P$ and an atom $p$
 that is not already used in $P$,
 the number of nodes will at least double 
 when deriving an equivalent implication free form.
@@ -202,7 +202,7 @@ P \oplus p & \equiv & (P \wedge \neg p) \vee  (\neg P \wedge p) \\
 \#((P \vee p) \wedge  (\neg P \vee \neg p)) & = & 2 \cdot (\#(P) + 2) + 3 \\
 \end{eqnarray*}
 
-The syntax tree for an exclusive disjunction of 20 different atoms is build from 39 nodes.
+The syntax tree for an exclusive disjunction of 20 different atoms is built from 39 nodes.
 The syntax tree of a semantically equivalent implication free form will already contain over four million nodes.
 Deriving the negation normal form does not increase or decrease the number of nodes significantly,
 but the necessary distributions of disjunctions will multiply the number of nodes again.
@@ -267,7 +267,7 @@ $\top | \bot
 In the second step the list of input tokens is parsed top-down 
 using a recursive-descent parsing algorithm \cite[p.144ff]{Louden:1997:CCP:523017} 
 following an EBNF grammar outlined in \tabref{tab:CoreEBNF}, 
-that defines precedence and associativity of connectives, too.
+which defines precedence and associativity of connectives, too.
 
 \begin{table}[htdp]
 \begin{center}
@@ -289,7 +289,7 @@ negation       ::= '$\neg$' negation | '(' formula ')' | identifier
 
 \subsubsection{Limitations}
 
-\BoolTool does not parse as fast and (memory) efficient as \verb+BoolTool+'s parser,
+\BoolTool does not parse as fast and (memory) efficiently as \verb+BoolTool+'s parser,
 primarily because recursion and token probing are more expensive operations in Objective-C than in \verb+OCaml+.
 The creation of a syntax graph instead of a syntax tree adds more overhead.
 But \Nyaya's implementation is {\em good enough}, 
@@ -396,7 +396,7 @@ The class provides a factory method to create
 \section{Views and Controllers}
 
 \Nyaya's main navigation – switching between Welcome, Tutorials, Playground, Glossary and \BoolTool – 
-is controlled by a \verb+UIViewController+ derived from \verb+UITabBarController+. 
+is controlled by a \verb+UIViewController+ derived from a \verb+UITabBarController+. 
 At application start the tab bar controller will be instantiated and invoked by \Nyaya's application delegate. 
 The tab bar controller will present it's \verb+UITabBar+ (an heir of \verb+UIView+)
 and will appoint one of its view controllers, which will present its view such as the welcome screen.
@@ -472,7 +472,7 @@ The color of the border is determined by the value of \verb+displayValue()+.
 
 \subsection{Glossary}
 
-The glossary master view controller reads all elements with an id from the glossary content document,
+The glossary master view controller reads all elements with an id-tag from the glossary content document,
 creates an alphabetically ordered list of technical terms using the texts included between the corresponding element-tags.
 This list of technical terms defined by the glossary document is presented in a table view.
 Tapping a term will scroll the glossary document view – a web view – to the chosen term, 
@@ -481,7 +481,7 @@ controlled by the glossary detail view controller.
 \subsection{BoolTool}
 
 The master view controller of \BoolTool presents a table view with stored and selectable formulas.
-An editable text field with an attached customized keyboard will allow the user to enter their formulas.
+An editable text field with an attached customized keyboard will allow the user to enter her formulas.
 
 The output will be presented in different views. Text views, which are configured to be read only, are used to present normal forms, 
 a web form is used for the truth table and a customized view will draw the binary decision diagram.
@@ -492,7 +492,7 @@ a web form is used for the truth table and a customized view will draw the binar
 %\newpage
 \section{Application content}
 
-Beside the classes to determines the run-time behavior of the application,
+Besides the classes to determine the run-time behavior of the application,
 the storage of application content must be defined.
 
 \subsection{Content on delivery}
@@ -501,12 +501,12 @@ Configuration data, localization data and HTML documents
 are stored in UTF-8 encoded text files.
 All graphical content such as icons and diagrams are stored in portable network graphics.
 These content files are embedded in \Nyaya's app bundle
-and will be downloaded along the application execution data,
+and will be downloaded along with the application execution data,
 while receiving \Nyaya for iPad from the App Store.
 
 \subsection{User created content}
 
-Formulas from the playground and \BoolTool are persisted 
+Formulas from the playground and \BoolTool are stored 
 in the simple property list file \verb+BoolToolData+ 
 in the documents folder of the app.
 

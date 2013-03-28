@@ -46,7 +46,7 @@ General and specific configurations for the tutorials and additional content for
 are stored in simple property lists (see \tabref{tab:PLISTDTD}) %\footnote{
 %\href{http://www.apple.com/DTDs/PropertyList-1.0.dtd}{http://www.apple.com/DTDs/PropertyList-1.0.dtd}
 %(see \tabref{tab:PLISTDTD}). }, 
-which are xml-files with some basic data types for data and collections, 
+which are xml-files with some basic data types for data and collections 
 that can be easily read and interpreted by different programs.
 The file “Tutorials.plist” (see \tabref{tab:TUTORIALPLIST}) 
 provides the basic data about available tutorial sections and tutorial titles 
@@ -90,12 +90,12 @@ The content file “QA1.plist” (see \tabref{tab:QA1PLIST}) contains
 an array (starts at line 5) 
 of arrays of strings that represents sentences and sample solutions for the 
 first three exercises.
-The first sentence/solutions array of strings starts at line 7 and ends at line 10. 
-The first string in the first array (at line 7) is a sentence, 
+The first sentence/solutions array of strings starts in line 7 and ends in line 10. 
+The first string in the first array (at line 7) is a sentence 
 which must be analyzed in all three exercises. 
-The next string (at line 8) is a correct solution for the first exercise,
-the third string (at line 9) is a correct solution for the second exercise,
-and the last string in the array (at line 10) is a correct solution for the third exercise.  
+The next string (at line 8) is a correct solution of the first exercise,
+the third string (at line 9) is a correct solution of the second exercise,
+and the last string in the array (at line 10) is a correct solution of the third exercise.  
 The next array of strings would start at line 13.
 
 \begin{table}[htdp]
@@ -125,7 +125,7 @@ with a dictionary that
 describes the exercise and defines the index of the sample solution,
 with which the user's answer will be checked with some tolerance.
 The \verb+solutionIndex+ expresses which string 
-is to be used as sample solution in the exercise.
+is to be used as a sample solution in the exercise.
 The numbers after tutorial titles indicate the position of the tutorials 
 and the names of corresponding configuration and content files.
 \textnumero 32 represents the 2nd tutorial in the 3rd section and corresponds 
@@ -134,7 +134,7 @@ to the tutorial configuration file \verb+32.plist+ and the tutorial content file
 \paragraph{Applications – \textnumero 11.}
 \label{tut:11}
 {\em{}“The aim of logic in general is to reason about situations.”}\ \cite{Huth:2004:LCS:975331} 
-The first tutorial shows, how two different paragraphs in natural language 
+The first tutorial shows how two different paragraphs in natural language 
 can be reduced to the same formal sentence {\em“If p and not q, then r. Not r. p. Therefore, q“}. 
 If the reasoning is correct, the user can use it in both situations. 
 
@@ -197,7 +197,7 @@ The user's solution will be checked without tolerance.
 
 \paragraph{Definition – \textnumero 21.}
 \label{tut:21}
-The definition of well formed formulas is explained by a strict grammar with mandatory parentheses.
+The definition of well-formed formulas is explained by a strict grammar with mandatory parentheses.
 
 %\begin{table}[htdp]
 \begin{center}
@@ -275,7 +275,7 @@ nor does ‘$a \vee b \vee c$’ match ‘$a \vee (b \vee c)$’.
 \label{tut:25}
 The symbols “$\top$” (top) and “$ \bot$” (bottom) are defined
 as abbreviations of conjunctions and disjunctions 
-of formulas with their negation). Additional basic equivalences are introduced.
+of formulas with their negations. Additional basic equivalences are introduced.
 The user has to simplify given formulas using tautologies, contradictions and basic equivalences.
 %\begin{table}[htdp]
 \begin{center}
@@ -341,7 +341,7 @@ $\neg \neg P \equiv P$
 
 \subsection{Semantics}
 
-After the introduction of well formed formulas the meaning of logical connectives is defined.
+After the introduction of well-formed formulas the meaning of logical connectives is defined.
 Configuration files are used again, the exercise context is generated randomly by the app, 
 but exercise \textnumero 33 
 also uses a context file with exemplary entailments that would not likely be generated.
@@ -459,7 +459,7 @@ $\neg (P \vee Q)  \equiv \neg P \wedge \neg Q$
 A formula in conjunctive normal form is a conjunctive concatenation of disjunctive clauses.
 A disjunctive clause is a disjunctive concatenation of literals. 
 A literal is an atom or the negation of an atom. 
-The distributions of disjunctions over conjunctions is presented
+The distributions of disjunctions over conjunctions are presented
 and proved with a truth table.
 
 %\begin{table}[htdp]
@@ -571,7 +571,7 @@ Boolean expressions and binary decision diagrams are additional representations 
 N-ary Boolean functions are introduced as mapping from n-tupels of 0s and 1s to the set ${0,1}$.
 The Boolean operators $\bar{ \;\;}\;+\;\cdot\;\oplus$ are introduced as special representations of
 specific unitary and binary Boolean functions. 
-For convenience  in the exercises
+For convenience’s sake  in the exercises
 an exclamation mark $!(B)$ 
 will be used for the negation of a Boolean expression $B$ instead of the bar $\bar{B}$. 
 The user has to guess or calculate the results for composite expressions.
@@ -597,7 +597,7 @@ $B$	&$::=$	&$p$
 
 The user has to rewrite formulas with propositional symbols into Boolean expressions.
 The implication may be a challenge for some users, 
-but is doable because the implication free form was introduced 
+but is feasible because the implication free form was introduced 
 in an earlier tutorial.
 
 \paragraph{Binary Decisions - \textnumero 53.}
@@ -653,10 +653,10 @@ The user can observe that equivalence transformations do no change the valuation
 Connective nodes of obvious tautologies like
 $P \vee \neg P$ or
 $P \rightarrow P$ are displayed with a green color – 
-independent from the valuation status of any sub-node.
+independent of the valuation status of any sub-node.
 
 Connective nodes of obvious contradictions like $P \wedge \neg P$ are displayed with a red color – 
-independent from the valuation status of any sub-node.
+independent of the valuation status of any sub-node.
 
 While working with a syntax tree, the corresponding propositional formula is shown on top of the playground.
 
@@ -721,7 +721,7 @@ $P \rightarrow Q $&$ \TAP{\wedge}$&$Q \rightarrow P$	&$\neg(P \rightarrow Q) $&$
 \section{Glossary}
 
 Terms, definitions and truth tables from the tutorials are listed 
-an additional content is defined in the glossary.
+and additional content is defined in the glossary.
 
 
 \section{BoolTool}
@@ -747,7 +747,7 @@ It reads the symbols
 and \verb#(# and \verb#)# as parentheses.
 These ASCII-symbols can be found on almost every keyboard.
 Thereby any formula of propositional logic can be created completely
-using only a keyboard attached to an iPad running \Nyaya.
+just using a keyboard attached to an iPad running \Nyaya.
 
 \BoolTool also accepts standard 
 and additional symbols of propositional logic and Boolean expressions
@@ -771,7 +771,7 @@ Chinese symbols are meaningful names for atoms (see \figref{fig:BoolToolChineseI
 \BoolTool calculates validity and satisfiability, 
 a conjunctive normal form, 
 a disjunctive normal form, 
-the truth table and a ordered and
+the truth table and an ordered and
 reduced binary decision diagram 
 (see \figref{fig:BoolToolROBDD}) of the user's input . 
 
