@@ -9,6 +9,7 @@
 #import "BasicBddTests.h"
 #include "NyayaParser.h"
 #include "NyayaNode+Creation.h"
+#include "NyayaNode+Valuation.h"
 #include "TruthTable.h"
 #include "BddNode.h"
 
@@ -352,22 +353,51 @@
     STAssertEqualObjects(a101.name, @"1", nil);
     STAssertEqualObjects(a110.name, @"1", nil);
     STAssertEqualObjects(a111.name, @"1", nil);
-
-
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
 }
 
+
+- (void)testIssue_20130420_1 {
+    
+    NyayaParser *parser = [[NyayaParser alloc] initWithString:@"p&q^r&s"];
+    NyayaNode *node = [parser parseFormula];
+    
+    NSArray *variables = [node.setOfVariables allObjects];
+    NyayaNodeVariable *r = [variables objectAtIndex:0];
+    NyayaNodeVariable *p = [variables objectAtIndex:1];
+    NyayaNodeVariable *s = [variables objectAtIndex:2];
+    NyayaNodeVariable *q = [variables objectAtIndex:3];
+    
+    STAssertEqualObjects(r.symbol, @"r", @"r");
+    STAssertEqualObjects(p.symbol, @"p", @"p");
+    STAssertEqualObjects(s.symbol, @"s", @"s");
+    STAssertEqualObjects(q.symbol, @"q", @"q");
+    BddNode *bddNode = [BddNode obddWithNode:node order:variables reduce:YES];
+    
+
+    STAssertEqualObjects(bddNode.name, r.symbol, nil);
+    STAssertEqualObjects(bddNode.leftBranch.name, @"p", nil);
+    STAssertEqualObjects(bddNode.leftBranch.leftBranch.name, @"0", nil);
+    STAssertEqualObjects(bddNode.leftBranch.rightBranch.name, @"q", nil);
+    STAssertEqualObjects(bddNode.leftBranch.rightBranch.leftBranch.name, @"0", nil);
+    STAssertEqualObjects(bddNode.leftBranch.rightBranch.rightBranch.name, @"1", nil);
+    
+    
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.name, @"s", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.name, @"q", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.leftBranch.name, @"0", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.rightBranch.name, @"1", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.name, @"q", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.leftBranch.name, @"1", nil);
+    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.rightBranch.name, @"0", nil);
+
+
+    STAssertEqualObjects(bddNode.rightBranch.leftBranch.name, @"s", nil);
+    STAssertEqualObjects(bddNode.rightBranch.leftBranch.leftBranch.name, @"0", nil);
+    STAssertEqualObjects(bddNode.rightBranch.leftBranch.rightBranch.name, @"1", nil);
+    
+        
+    // NSLog(@"%@", [formula description]);
+}
 
 
 

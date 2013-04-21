@@ -33,10 +33,7 @@
 
 // Constructs an Ordered BDD with variable order of 'truth table'
 +(BddNode*)bddWithTruthTable:(TruthTable*)truthTable reduce:(BOOL)reduce;
-
-
 +(BddNode*)obddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
-+(BddNode*)lbddWithNode:(NyayaNode*)node order:(NSArray*)variables reduce:(BOOL)reduce;
 
 
 + (id)top;
