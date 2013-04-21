@@ -56,7 +56,7 @@
         // NSLog(@"%@.%i layer=%i", node.name, node.layer, layer);
         
         if (node.isLeaf) *stop = YES;
-        else {
+        else  {
             if (node.leftBranch.layer == layer) {
                 if ([nextLayer indexOfObject:node.leftBranch] == NSNotFound)
                     [nextLayer addObject:node.leftBranch];
@@ -69,7 +69,8 @@
             }
             else if (node.rightBranch.layer > layer) [nextLayer addObject:node]; // dummy node
         }
-    }];
+         
+        }];
     
     if (nextLayer.count > 0) {
         [_layers addObject:nextLayer];
@@ -116,35 +117,56 @@
                     
                     // draw line to left child
                     target = node.leftBranch;
-                    tyidx = target.layer;
-                    tlayer = [_layers objectAtIndex:tyidx];
-                    txidx = [tlayer indexOfObject:target];
-                    dtx = width / (CGFloat)tlayer.count;
-                    
-                    ty = dy/2.0 + tyidx * dy;
-                    tx = dtx/2.0 + txidx * dtx;
-                    
                     CGContextSetLineDash(context, 30.0, arr, 2);
                     CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
                     CGContextMoveToPoint(context, x, y);
-                    CGContextAddLineToPoint(context, tx, ty);
+                    
+                    for (tyidx = yidx+1 ; tyidx <= target.layer; tyidx++) {
+                        tlayer = [_layers objectAtIndex:tyidx];
+                        
+                        if (tyidx < target.layer)
+                            txidx = [tlayer indexOfObject:node];
+                        else
+                            txidx = [tlayer indexOfObject:target];
+                        
+                        dtx = width / (CGFloat)tlayer.count;
+                        
+                        ty = dy/2.0 + tyidx * dy;
+                        tx = dtx/2.0 + txidx * dtx;
+                        
+                        CGContextAddLineToPoint(context, tx, ty);
+                    }
                     CGContextStrokePath(context);
                     
                     // draw line to right child
                     target = node.rightBranch;
-                    tyidx = target.layer;
-                    tlayer = [_layers objectAtIndex:tyidx];
-                    txidx = [tlayer indexOfObject:target];
-                    dtx = width / (CGFloat)tlayer.count;
-                    
-                    ty = dy/2.0 + tyidx * dy;
-                    tx = dtx/2.0 + txidx * dtx;
-                    
-                    
                     CGContextSetLineDash(context, 0.0, nil, 0);
                     CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
                     CGContextMoveToPoint(context, x, y);
-                    CGContextAddLineToPoint(context, tx, ty);
+                    
+                    for (tyidx = yidx+1; tyidx <= target.layer; tyidx++) {
+                        tlayer = [_layers objectAtIndex:tyidx];
+                        
+                        if (tyidx < target.layer) {
+                            txidx = [tlayer indexOfObjectWithOptions:NSEnumerationReverse passingTest:^BOOL(BddNode *bddNode, NSUInteger idx, BOOL *stop) {
+                                if (bddNode == node) {
+                                    *stop = YES;
+                                    return idx;
+                                }
+                                
+                                return NO;
+                            
+                            }];
+                        }
+                        else
+                            txidx = [tlayer indexOfObject:target];
+                        
+                        dtx = width / (CGFloat)tlayer.count;
+                        
+                        ty = dy/2.0 + tyidx * dy;
+                        tx = dtx/2.0 + txidx * dtx;
+                        CGContextAddLineToPoint(context, tx, ty);
+                    }
                     CGContextStrokePath(context);
                     
                     // draw lines to children (end)
