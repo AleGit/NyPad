@@ -18,6 +18,7 @@
 
 // the name ot the atom: x, y, 0, 1, a, b, etc.
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSInteger layer;
 
 // follow this path if the atom 'name' evaluates to 0
 @property (nonatomic, readonly) BddNode *leftBranch;
@@ -27,23 +28,6 @@
 // Marks if the reduce algorithm was used
 @property (nonatomic, readonly) BOOL reduced;
 
-// Ordered BBDs has an array of levels:
-// The first ('lowest') level contains 2^n '0's and '1's
-// Reduced OBDDs which represent tautologies ('1')
-// or contradictions ('0') have one level with one entry.
-// The second level contains entries of the first atom. etc.
-// Reduced OBDDs holds the same 'name:id' multiple times.
-// (every 'name:id' must not be drawn more than once)
-// ===============================================
-// !a&!b    reduced                unreduced
-// -----------------------------------------------
-//            [a:3]                  [a:6]
-//        [0:0  ,  b:2]          [b:4  ,  b:5]
-//      [1:1,0:0,0:0,0:0]      [1:0,0:1,0:2,0:3]
-// ===============================================
-// OBDDs contain at most #(atoms)+1 levels.
-// (unordered BDDs will not contain levels
-// but drawing is not supported yet.)
 
 @property (nonatomic,readonly) NSArray *names;  // root.names != nil, !root.names == nil
 

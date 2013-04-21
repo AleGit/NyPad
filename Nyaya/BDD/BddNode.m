@@ -62,6 +62,27 @@
     return _leftBranch == nil;
 }
 
+- (void)setLayer:(NSInteger)layer {
+    _layer = layer;
+}
+
+- (void)resetLayer {
+    _layer = 0;
+    [_leftBranch resetLayer];
+    [_rightBranch resetLayer];
+}
+
+- (NSString*)description {
+    return [NSString stringWithFormat:@"%@.%i", self.name, self.layer];
+}
+
+- (void)calcLayer {
+    _leftBranch.layer = MAX(_leftBranch.layer, _layer +1);
+    [_leftBranch calcLayer];
+    _rightBranch.layer = MAX(_rightBranch.layer, _layer +1);
+    [_rightBranch calcLayer];
+}
+
 + (BddNode *)bddWithTruthTable:(TruthTable *)truthTable reduce:(BOOL)reduce {
     if (!truthTable) return nil;
     
@@ -152,6 +173,9 @@
     NSAssert([lowerLevelArray count] == 1, @"lowerLevelArray should contain one element");
     bdd = [lowerLevelArray objectAtIndex:0];
     bdd->_levels = levels;
+    
+    [bdd resetLayer];
+    [bdd calcLayer];
     return bdd;
 }
 
@@ -197,6 +221,9 @@
         }
     }
     
+    
+    [bdd resetLayer];
+    [bdd calcLayer];
     return bdd;
 }
 
@@ -210,6 +237,9 @@
     
     BddNode *bdd = [self obddWithNode:node order:variables reduce:reduce bdds:allNodes];
     bdd->_names = [variables valueForKeyPath:@"symbol"];
+    
+    [bdd resetLayer];
+    [bdd calcLayer];
     return bdd;
         
 }
@@ -298,6 +328,9 @@
     bdd = [lowerLevelArray objectAtIndex:0];
     bdd->_levels = levels;
     
+    
+    [bdd resetLayer];
+    [bdd calcLayer];
     return bdd;
 }
 

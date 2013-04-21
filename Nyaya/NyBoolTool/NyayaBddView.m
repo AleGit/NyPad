@@ -13,6 +13,8 @@
 @interface NyayaBddView () {
     NSMutableDictionary *_structure;
     NSMutableDictionary *_nodepoints;
+    
+    NSMutableArray *_layers;
 
 }
 @end
@@ -26,10 +28,53 @@
 
 - (void)setBddNode:(BddNode *)bddNode {
     @synchronized(self) {
+        _layers = nil;
         _bddNode = nil;
         _structure = nil;
         _nodepoints = nil;
+        
         _bddNode = bddNode;
+        if (_bddNode) {
+            _layers = [NSMutableArray arrayWithCapacity:[bddNode height]];
+            [_layers addObject:[NSArray arrayWithObject:_bddNode]];
+            [self buildNextLayer: 0];
+            
+            
+        }
+        
+    }
+    NSLog(@"%@",_layers);
+}
+
+- (void)buildNextLayer: (NSInteger)layer {
+    NSArray *actualLayer = [_layers objectAtIndex:layer];
+    NSMutableArray *nextLayer = [NSMutableArray array];
+    
+    
+    layer++;
+    [actualLayer enumerateObjectsUsingBlock:^(BddNode* node, NSUInteger idx, BOOL *stop) {
+        // NSLog(@"%@.%i layer=%i", node.name, node.layer, layer);
+        
+        if (node.isLeaf) *stop = YES;
+        else {
+            if (node.leftBranch.layer == layer) {
+                if ([nextLayer indexOfObject:node.leftBranch] == NSNotFound)
+                    [nextLayer addObject:node.leftBranch];
+            }
+            else if (node.leftBranch.layer > layer) [nextLayer addObject:node]; // dummy node
+            
+            if (node.rightBranch.layer == layer) {
+                if ([nextLayer indexOfObject:node.rightBranch] == NSNotFound)
+                    [nextLayer addObject:node.rightBranch];
+            }
+            else if (node.rightBranch.layer > layer) [nextLayer addObject:node]; // dummy node
+        }
+    }];
+    
+    if (nextLayer.count > 0) {
+        [_layers addObject:nextLayer];
+        [self buildNextLayer:layer];
+        // NSLog(@"%i %i", layer, nextLayer.count);
     }
 }
 
@@ -40,15 +85,109 @@
     // By implementing an empty -drawRect: method, we allow UIKit to continue to implement
     // this logic, while doing our real drawing work inside of -drawLayer:inContext:
     
-    //    CGContextRef context = UIGraphicsGetCurrentContext();
-    //    [self drawDiagram:context];
+    
+    static const CGFloat arr [] = { 3.0, 6.0, 9.0, 2.0 };
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 3.0);
+    
+    CGFloat width = self.bounds.size.width;
+    CGFloat height = self.bounds.size.height;
+    
+    CGFloat dy = height / (CGFloat)_layers.count;
+   
+    [_layers enumerateObjectsUsingBlock:^(NSArray *actualLayer, NSUInteger yidx, BOOL *stop) {
+        
+        CGFloat y = dy/2.0 + yidx * dy;
+        CGFloat dx = width / (CGFloat)actualLayer.count;
+        
+        
+        [actualLayer enumerateObjectsUsingBlock:^(BddNode *node, NSUInteger xidx, BOOL *stop) {
+            CGFloat x = dx/2.0 + xidx * dx;
+            
+            if (node.layer == yidx) {
+                
+                if (!node.isLeaf) {
+                    // draw lines to children (start)
+                    NSUInteger txidx, tyidx;
+                    NSArray *tlayer;
+                    BddNode *target;
+                    CGFloat tx, ty, dtx;
+                    
+                    // draw line to left child
+                    target = node.leftBranch;
+                    tyidx = target.layer;
+                    tlayer = [_layers objectAtIndex:tyidx];
+                    txidx = [tlayer indexOfObject:target];
+                    dtx = width / (CGFloat)tlayer.count;
+                    
+                    ty = dy/2.0 + tyidx * dy;
+                    tx = dtx/2.0 + txidx * dtx;
+                    
+                    CGContextSetLineDash(context, 30.0, arr, 2);
+                    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+                    CGContextMoveToPoint(context, x, y);
+                    CGContextAddLineToPoint(context, tx, ty);
+                    CGContextStrokePath(context);
+                    
+                    // draw line to right child
+                    target = node.rightBranch;
+                    tyidx = target.layer;
+                    tlayer = [_layers objectAtIndex:tyidx];
+                    txidx = [tlayer indexOfObject:target];
+                    dtx = width / (CGFloat)tlayer.count;
+                    
+                    ty = dy/2.0 + tyidx * dy;
+                    tx = dtx/2.0 + txidx * dtx;
+                    
+                    
+                    CGContextSetLineDash(context, 0.0, nil, 0);
+                    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+                    CGContextMoveToPoint(context, x, y);
+                    CGContextAddLineToPoint(context, tx, ty);
+                    CGContextStrokePath(context);
+                    
+                    // draw lines to children (end)
+                    
+                    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
+                    CGContextSetRGBFillColor(context, 1, 1, 1, 0.9);
+                    CGContextAddEllipseInRect(context, CGRectMake(x-21.0, y-21.0,43.0,43.0));
+                    CGContextDrawPath(context, kCGPathEOFillStroke);                    
+                }
+                else {
+                    
+                    if ([node.name isEqual:@"0"])
+                        CGContextSetRGBFillColor(context, 1.0, 0, 0, 1.0);
+                    else
+                        CGContextSetRGBFillColor(context, 0, 0.75, 0, 1.0);
+                    
+                    CGContextSetRGBStrokeColor(context, 0, 0, 0, 1.0);
+                    CGContextAddRect(context, CGRectMake(x-21.0, y-21.0,43.0,43.0));
+                    CGContextDrawPath(context, kCGPathEOFillStroke);
+                }
+                
+                
+                UIGraphicsPushContext(context);
+                CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
+                NSString *name = [NSString stringWithFormat:@"%@", node.name];
+                CGSize size = [name sizeWithFont:[UIFont systemFontOfSize:23]];
+                [name drawAtPoint:CGPointMake(x - size.width/2.0, y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+                UIGraphicsPopContext();
+            }
+            
+            
+            
+        }];
+    }];
+    
+    // draw lines
     
     
 }
 
 
 
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+- (void)drawLayerX:(CALayer *)layer inContext:(CGContextRef)context {
     if (!self.bddNode) return;
     
     if (!_structure) {
@@ -136,7 +275,7 @@
     
     [_nodepoints enumerateKeysAndObjectsUsingBlock:^(BddNode *key, NSString *obj, BOOL *stop) {
         CGPoint pos = CGPointFromString(obj);
-        NSLog(@"%@ %@", key.name, obj);
+        // NSLog(@"%@ %@", key.name, obj);
         
         if (!key.isLeaf) {
             CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.5);
@@ -160,8 +299,9 @@
         
         CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
         UIGraphicsPushContext(context);
-        CGSize size = [key.name sizeWithFont:[UIFont systemFontOfSize:23]];
-        [key.name drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+        NSString *keyName = [NSString stringWithFormat:@"%@:%i", key.name, key.layer];
+        CGSize size = [keyName sizeWithFont:[UIFont systemFontOfSize:23]];
+        [keyName drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
         UIGraphicsPopContext();
         
     }];
