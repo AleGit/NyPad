@@ -11,6 +11,7 @@
 #import "NSString+NyayaToken.h"
 #import "NyayaNode+Valuation.h"
 #import "NyayaNode_Cluster.h"
+#include <objc/runtime.h>
 
 @interface TruthTable () {
 @protected
@@ -93,8 +94,8 @@
     self = [super init];
     if (self) {
         if (!compact) {
-            self->isa = [ExpandedTruthTable class];
-            // object_setClass(self, [ExpandedTruthTable class]);
+            // self->isa = [ExpandedTruthTable class]; is deprecated
+            object_setClass(self,[ExpandedTruthTable class]);
         }        
         _formula = node;
         _title = [node description];
