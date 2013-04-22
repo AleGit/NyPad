@@ -1698,7 +1698,7 @@
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Nyaya;
+				PRODUCT_NAME = nyaya;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1710,7 +1710,7 @@
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Nyaya;
+				PRODUCT_NAME = nyaya;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1718,7 +1718,7 @@
 		11C3762B15B3D23D005C5C9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Nyaya.app/Nyaya";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/nyaya.app/nyaya";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -1735,7 +1735,7 @@
 		11C3762C15B3D23D005C5C9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Nyaya.app/Nyaya";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/nyaya.app/nyaya";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
