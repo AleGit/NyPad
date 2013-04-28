@@ -473,7 +473,7 @@
 		11BFCBA715F9E331004CBDA2 /* NyPgCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NyPgCanvasView.m; path = NyPlayground/NyPgCanvasView.m; sourceTree = "<group>"; };
 		11BFCBAA15F9E3E1004CBDA2 /* kariert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kariert.png; path = NyPlayground/kariert.png; sourceTree = "<group>"; };
 		11BFCBAB15F9E3E1004CBDA2 /* kariert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "kariert@2x.png"; path = "NyPlayground/kariert@2x.png"; sourceTree = "<group>"; };
-		11C375E915B3D23D005C5C9C /* Nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11C375E915B3D23D005C5C9C /* nyaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nyaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C375ED15B3D23D005C5C9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		11C375EF15B3D23D005C5C9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		11C375F515B3D23D005C5C9C /* Nyaya-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Nyaya-Info.plist"; sourceTree = "<group>"; };
@@ -959,7 +959,7 @@
 		11C375EA15B3D23D005C5C9C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11C375E915B3D23D005C5C9C /* Nyaya.app */,
+				11C375E915B3D23D005C5C9C /* nyaya.app */,
 				11C3761515B3D23D005C5C9C /* NyayaTests.octest */,
 			);
 			name = Products;
@@ -1251,7 +1251,7 @@
 			);
 			name = Nyaya;
 			productName = Nyaya;
-			productReference = 11C375E915B3D23D005C5C9C /* Nyaya.app */;
+			productReference = 11C375E915B3D23D005C5C9C /* nyaya.app */;
 			productType = "com.apple.product-type.application";
 		};
 		11C3761415B3D23D005C5C9C /* NyayaTests */ = {
