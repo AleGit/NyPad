@@ -9,23 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>iPadIcon.png</string>
-				<string>iPadIcon@2x.png</string>
-				<string>Default-Landscape~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
-				<string>Default-Landscape~ipad.png</string>
-				<string>Default-Portrait@2x~ipad.png</string>
-				<string>Default-Landscape@2x~ipad.png</string>
-			</array>
-		</dict>
-	</dict>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

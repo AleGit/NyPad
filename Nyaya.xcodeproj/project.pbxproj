@@ -218,6 +218,7 @@
 		819BA0C3169DD90F00545496 /* 44.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819BA0BF169DD90F00545496 /* 44.plist */; };
 		81C865BD164E8BD200A77B02 /* 24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BC164E8BD100A77B02 /* 24.plist */; };
 		81C865BF164E967F00A77B02 /* SyntaxTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */; };
+		81F2E83B17D46B1F009FB545 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81F2E83A17D46B1F009FB545 /* Images.xcassets */; };
 		81F6D59F16A191AC00E09A95 /* BinaryTreeTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F6D59E16A191AC00E09A95 /* BinaryTreeTestView.xib */; };
 		81FED8541699E5CD00F33BC4 /* TruthTableTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */; };
 		81FED8571699E64800F33BC4 /* 32.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81FED8561699E64800F33BC4 /* 32.plist */; };
@@ -560,6 +561,7 @@
 		819BA0BF169DD90F00545496 /* 44.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 44.plist; path = Nyaya/NyTutorials/44.plist; sourceTree = "<group>"; };
 		81C865BC164E8BD100A77B02 /* 24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 24.plist; path = Nyaya/NyTutorials/24.plist; sourceTree = "<group>"; };
 		81C865BE164E967E00A77B02 /* SyntaxTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyntaxTreeTestView.xib; path = Nyaya/NyTutorials/SyntaxTreeTestView.xib; sourceTree = "<group>"; };
+		81F2E83A17D46B1F009FB545 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81F6D59E16A191AC00E09A95 /* BinaryTreeTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BinaryTreeTestView.xib; path = Nyaya/NyTutorials/BinaryTreeTestView.xib; sourceTree = "<group>"; };
 		81FED8531699E5CD00F33BC4 /* TruthTableTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TruthTableTestView.xib; path = Nyaya/NyTutorials/TruthTableTestView.xib; sourceTree = "<group>"; };
 		81FED8561699E64800F33BC4 /* 32.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 32.plist; path = Nyaya/NyTutorials/32.plist; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 				116D220215D9252C003DBD88 /* NyWelcome */,
 				11C375F415B3D23D005C5C9C /* Supporting Files */,
 				1105107815DA8054000219C9 /* TabBarIcons */,
+				81F2E83A17D46B1F009FB545 /* Images.xcassets */,
 			);
 			path = Nyaya;
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				111F923915E89D6800EB6B1D /* tutorial11.html in Resources */,
 				11C61BAC15E9190900F5BB28 /* paper.png in Resources */,
 				11C61BAE15E91BC400F5BB28 /* paper@2x.png in Resources */,
+				81F2E83B17D46B1F009FB545 /* Images.xcassets in Resources */,
 				11C61BB315E91DAC00F5BB28 /* Paper1.png in Resources */,
 				11C61BB415E91DAC00F5BB28 /* Paper1@2x.png in Resources */,
 				11281B7A15EB452700B377B3 /* syntaxtree.png in Resources */,
@@ -1701,6 +1705,8 @@
 		11C3762815B3D23D005C5C9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
@@ -1713,6 +1719,8 @@
 		11C3762915B3D23D005C5C9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
