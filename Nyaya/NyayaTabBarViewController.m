@@ -44,7 +44,7 @@
     
     if (result == NSOrderedAscending) { // current < required
         // Workaround: On iOS < 6.0.1 the playground crashes if it is not shown first
-        self.selectedViewController = [self.viewControllers objectAtIndex:0]; // 2 = playground
+        self.selectedViewController = [self.viewControllers objectAtIndex:2]; // 2 = playground
     }
     else {
         self.selectedViewController = [self.viewControllers objectAtIndex:0]; // 1=tutorial, 2=playground, 3=gloassary, 4=booltool
