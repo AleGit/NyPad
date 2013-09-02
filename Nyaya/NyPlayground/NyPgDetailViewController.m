@@ -413,7 +413,7 @@
         if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
         
         key = [node switchKey];
-        selector = @selector(switchSymbol:);
+        selector = @selector(switchChildren:);
         if (key) [menuItems addObject:[[UIMenuItem alloc] initWithTitle:NSLocalizedString(key, nil) action:selector]];
         
         // implication free
