@@ -16,6 +16,8 @@
 @interface NyBtDetailViewController () {
     dispatch_queue_t queue;
 }
+@property UIAlertView *drawingAlertView;
+@property UIActivityIndicatorView *drawingIndicatorView;
 @end
 
 @implementation NyBtDetailViewController
@@ -126,19 +128,31 @@
     });
 }
 
+- (void)showDrawingAlert {
+    if (!_drawingAlertView) {
+        _drawingAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CALC_DRAW_TITLE",nil)
+                                                    message:NSLocalizedString(@"CALC_DRAW_MESSAGE", nil)
+                                                   delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        _drawingIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(125, 50, 30, 30)];
+        _drawingIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        [_drawingAlertView addSubview:_drawingIndicatorView];
+    }
+    
+    [_drawingIndicatorView startAnimating];
+    [_drawingAlertView show];
+    
+}
+
+- (void)hideDrawingAlert {
+    [_drawingIndicatorView stopAnimating];
+    [_drawingAlertView dismissWithClickedButtonIndex:0 animated:NO];
+}
+
 - (void)compute:(NSString*)input {
     @autoreleasepool {
         self.bddView.bddNode = nil;
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CALC_DRAW_TITLE",nil)
-                                                        message:NSLocalizedString(@"CALC_DRAW_MESSAGE", nil)
-                                                       delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        UIActivityIndicatorView *progress= [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(125, 50, 30, 30)];
-        progress.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-        [alert addSubview:progress];
-        [progress startAnimating];
-        
-        [alert show];
+        [self showDrawingAlert];
         
         dispatch_async(queue, ^{
             dispatch_queue_t mq = dispatch_get_main_queue();
@@ -210,8 +224,7 @@
             }
             
             dispatch_async(mq, ^{
-                [progress stopAnimating];
-                [alert dismissWithClickedButtonIndex:0 animated:NO];
+                [self hideDrawingAlert];
                 // [self.resultView scrollRectToVisible:CGRectMake(0.0,0.0,10.0,10.0) animated:NO];
                 // [self.resultView scrollRectToVisible:self.dnfField.frame animated:YES];
                 [self.bddView setNeedsDisplay];
