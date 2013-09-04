@@ -83,7 +83,7 @@
 }
 
 - (void)tester:(id<NyTuTester>)tester didRemoveTest:(BOOL)success {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
