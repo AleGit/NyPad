@@ -98,11 +98,8 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    NSLog(@"didRotate %@",self.canvasView);
-    // CGRect f = self.canvasView.frame;
-    // self.canvasView.frame = CGRectInset(f, 10, 10);
+    NSLog(@"%@ didRotateFromInterfaceOrientation:%i\n%@\n%@",self, fromInterfaceOrientation, self.view, self.canvasView);
     [self.canvasView setNeedsDisplay];
-    // [self.canvasView setNeedsDisplayInRect:self.canvasView.frame];
 }
 
 
