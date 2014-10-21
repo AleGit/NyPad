@@ -21,13 +21,13 @@
     NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
     NyayaNode *cnf = [nnf deriveNnf:NSIntegerMax];
     NyayaNode *dnf = [imf deriveDnf:NSIntegerMax];
-    STAssertEquals(node.evaluationValue, evaluation, nil);
-    STAssertEquals(imf.evaluationValue, evaluation, nil);
-    STAssertEquals(nnf.evaluationValue, evaluation, nil);
-    STAssertEquals(cnf.evaluationValue, evaluation, nil);
-    STAssertEquals(dnf.evaluationValue, evaluation, nil);
+    XCTAssertEqual(node.evaluationValue, evaluation);
+    XCTAssertEqual(imf.evaluationValue, evaluation);
+    XCTAssertEqual(nnf.evaluationValue, evaluation);
+    XCTAssertEqual(cnf.evaluationValue, evaluation);
+    XCTAssertEqual(dnf.evaluationValue, evaluation);
     
-    STAssertEquals([[node setOfVariables] count], (NSUInteger)0,nil);
+    XCTAssertEqual([[node setOfVariables] count], (NSUInteger)0);
 }
 
 - (void)testConstantEvaluation {

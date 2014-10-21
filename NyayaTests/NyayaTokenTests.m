@@ -12,207 +12,207 @@
 @implementation NyayaTokenTests
 
 - (void)testIsNegation {
-    STAssertTrue([@"¬" isNegationToken],nil);
-    STAssertTrue([@"!" isNegationToken],nil);
+    XCTAssertTrue([@"¬" isNegationToken]);
+    XCTAssertTrue([@"!" isNegationToken]);
     
-    STAssertFalse([@"∨" isNegationToken],nil);
-    STAssertFalse([@"|" isNegationToken],nil);
-    STAssertFalse([@"∧" isNegationToken],nil);
-    STAssertFalse([@"&" isNegationToken],nil);
-    STAssertFalse([@"→" isNegationToken],nil);
-    STAssertFalse([@">" isNegationToken],nil);
-    STAssertFalse([@"↔" isNegationToken],nil);
-    STAssertFalse([@"<>" isNegationToken],nil);
+    XCTAssertFalse([@"∨" isNegationToken]);
+    XCTAssertFalse([@"|" isNegationToken]);
+    XCTAssertFalse([@"∧" isNegationToken]);
+    XCTAssertFalse([@"&" isNegationToken]);
+    XCTAssertFalse([@"→" isNegationToken]);
+    XCTAssertFalse([@">" isNegationToken]);
+    XCTAssertFalse([@"↔" isNegationToken]);
+    XCTAssertFalse([@"<>" isNegationToken]);
     
-    STAssertFalse([@"(" isNegationToken],nil);
-    STAssertFalse([@")" isNegationToken],nil);
-    STAssertFalse([@";" isNegationToken],nil);
-    STAssertFalse([@"," isNegationToken],nil);
+    XCTAssertFalse([@"(" isNegationToken]);
+    XCTAssertFalse([@")" isNegationToken]);
+    XCTAssertFalse([@";" isNegationToken]);
+    XCTAssertFalse([@"," isNegationToken]);
 }
 
 - (void)testIsConjunction {
-    STAssertFalse([@"¬" isConjunctionToken],nil);
-    STAssertFalse([@"!" isConjunctionToken],nil);
-    STAssertFalse([@"∨" isConjunctionToken],nil);
-    STAssertFalse([@"|" isConjunctionToken],nil);
-    STAssertTrue([@"∧" isConjunctionToken],nil);
-    STAssertTrue([@"&" isConjunctionToken],nil);
-    STAssertFalse([@"→" isConjunctionToken],nil);
-    STAssertFalse([@">" isConjunctionToken],nil);
-    STAssertFalse([@"↔" isConjunctionToken],nil);
-    STAssertFalse([@"<>" isConjunctionToken],nil);
+    XCTAssertFalse([@"¬" isConjunctionToken]);
+    XCTAssertFalse([@"!" isConjunctionToken]);
+    XCTAssertFalse([@"∨" isConjunctionToken]);
+    XCTAssertFalse([@"|" isConjunctionToken]);
+    XCTAssertTrue([@"∧" isConjunctionToken]);
+    XCTAssertTrue([@"&" isConjunctionToken]);
+    XCTAssertFalse([@"→" isConjunctionToken]);
+    XCTAssertFalse([@">" isConjunctionToken]);
+    XCTAssertFalse([@"↔" isConjunctionToken]);
+    XCTAssertFalse([@"<>" isConjunctionToken]);
     
-    STAssertFalse([@"(" isConjunctionToken],nil);
-    STAssertFalse([@")" isConjunctionToken],nil);
-    STAssertFalse([@";" isConjunctionToken],nil);
-    STAssertFalse([@"," isConjunctionToken],nil);
+    XCTAssertFalse([@"(" isConjunctionToken]);
+    XCTAssertFalse([@")" isConjunctionToken]);
+    XCTAssertFalse([@";" isConjunctionToken]);
+    XCTAssertFalse([@"," isConjunctionToken]);
 }
 
 - (void)testIsDisjunction {
-    STAssertFalse([@"¬" isDisjunctionToken],nil);
-    STAssertFalse([@"!" isDisjunctionToken],nil);
-    STAssertTrue([@"∨" isDisjunctionToken],nil);
-    STAssertTrue([@"|" isDisjunctionToken],nil);
-    STAssertFalse([@"∧" isDisjunctionToken],nil);
-    STAssertFalse([@"&" isDisjunctionToken],nil);
-    STAssertFalse([@"→" isDisjunctionToken],nil);
-    STAssertFalse([@">" isDisjunctionToken],nil);
-    STAssertFalse([@"↔" isDisjunctionToken],nil);
-    STAssertFalse([@"<>" isDisjunctionToken],nil);
+    XCTAssertFalse([@"¬" isDisjunctionToken]);
+    XCTAssertFalse([@"!" isDisjunctionToken]);
+    XCTAssertTrue([@"∨" isDisjunctionToken]);
+    XCTAssertTrue([@"|" isDisjunctionToken]);
+    XCTAssertFalse([@"∧" isDisjunctionToken]);
+    XCTAssertFalse([@"&" isDisjunctionToken]);
+    XCTAssertFalse([@"→" isDisjunctionToken]);
+    XCTAssertFalse([@">" isDisjunctionToken]);
+    XCTAssertFalse([@"↔" isDisjunctionToken]);
+    XCTAssertFalse([@"<>" isDisjunctionToken]);
     
-    STAssertFalse([@"(" isDisjunctionToken],nil);
-    STAssertFalse([@")" isDisjunctionToken],nil);
-    STAssertFalse([@";" isDisjunctionToken],nil);
-    STAssertFalse([@"," isDisjunctionToken],nil);
+    XCTAssertFalse([@"(" isDisjunctionToken]);
+    XCTAssertFalse([@")" isDisjunctionToken]);
+    XCTAssertFalse([@";" isDisjunctionToken]);
+    XCTAssertFalse([@"," isDisjunctionToken]);
 }
 
 
 
 - (void)testIsImplication {
-    STAssertFalse([@"¬" isImplicationToken],nil);
-    STAssertFalse([@"!" isImplicationToken],nil);
-    STAssertFalse([@"∨" isImplicationToken],nil);
-    STAssertFalse([@"|" isImplicationToken],nil);
-    STAssertFalse([@"∧" isImplicationToken],nil);
-    STAssertFalse([@"&" isImplicationToken],nil);
-    STAssertTrue([@"→" isImplicationToken],nil);
-    STAssertTrue([@">" isImplicationToken],nil);
-    STAssertFalse([@"↔" isImplicationToken],nil);
-    STAssertFalse([@"<>" isImplicationToken],nil);
+    XCTAssertFalse([@"¬" isImplicationToken]);
+    XCTAssertFalse([@"!" isImplicationToken]);
+    XCTAssertFalse([@"∨" isImplicationToken]);
+    XCTAssertFalse([@"|" isImplicationToken]);
+    XCTAssertFalse([@"∧" isImplicationToken]);
+    XCTAssertFalse([@"&" isImplicationToken]);
+    XCTAssertTrue([@"→" isImplicationToken]);
+    XCTAssertTrue([@">" isImplicationToken]);
+    XCTAssertFalse([@"↔" isImplicationToken]);
+    XCTAssertFalse([@"<>" isImplicationToken]);
     
-    STAssertFalse([@"(" isImplicationToken],nil);
-    STAssertFalse([@")" isImplicationToken],nil);
-    STAssertFalse([@";" isImplicationToken],nil);
-    STAssertFalse([@"," isImplicationToken],nil);
+    XCTAssertFalse([@"(" isImplicationToken]);
+    XCTAssertFalse([@")" isImplicationToken]);
+    XCTAssertFalse([@";" isImplicationToken]);
+    XCTAssertFalse([@"," isImplicationToken]);
 }
 
 - (void)testIsBicondition {
-    STAssertFalse([@"¬" isBiconditionToken],nil);
-    STAssertFalse([@"!" isBiconditionToken],nil);
-    STAssertFalse([@"∨" isBiconditionToken],nil);
-    STAssertFalse([@"|" isBiconditionToken],nil);
-    STAssertFalse([@"∧" isBiconditionToken],nil);
-    STAssertFalse([@"&" isBiconditionToken],nil);
-    STAssertFalse([@"→" isBiconditionToken],nil);
-    STAssertFalse([@">" isBiconditionToken],nil);
-    STAssertTrue([@"↔" isBiconditionToken],nil);
-    STAssertTrue([@"<>" isBiconditionToken],nil);
+    XCTAssertFalse([@"¬" isBiconditionToken]);
+    XCTAssertFalse([@"!" isBiconditionToken]);
+    XCTAssertFalse([@"∨" isBiconditionToken]);
+    XCTAssertFalse([@"|" isBiconditionToken]);
+    XCTAssertFalse([@"∧" isBiconditionToken]);
+    XCTAssertFalse([@"&" isBiconditionToken]);
+    XCTAssertFalse([@"→" isBiconditionToken]);
+    XCTAssertFalse([@">" isBiconditionToken]);
+    XCTAssertTrue([@"↔" isBiconditionToken]);
+    XCTAssertTrue([@"<>" isBiconditionToken]);
     
-    STAssertFalse([@"(" isBiconditionToken],nil);
-    STAssertFalse([@")" isBiconditionToken],nil);
-    STAssertFalse([@";" isBiconditionToken],nil);
-    STAssertFalse([@"," isBiconditionToken],nil);
+    XCTAssertFalse([@"(" isBiconditionToken]);
+    XCTAssertFalse([@")" isBiconditionToken]);
+    XCTAssertFalse([@";" isBiconditionToken]);
+    XCTAssertFalse([@"," isBiconditionToken]);
 }
 
 
 
 - (void)testIsLeftParenthesis {
-    STAssertFalse([@"¬" isLeftParenthesis],nil);
-    STAssertFalse([@"!" isLeftParenthesis],nil);
-    STAssertFalse([@"∨" isLeftParenthesis],nil);
-    STAssertFalse([@"|" isLeftParenthesis],nil);
-    STAssertFalse([@"∧" isLeftParenthesis],nil);
-    STAssertFalse([@"&" isLeftParenthesis],nil);
-    STAssertFalse([@"→" isLeftParenthesis],nil);
-    STAssertFalse([@">" isLeftParenthesis],nil);
-    STAssertFalse([@"↔" isLeftParenthesis],nil);
-    STAssertFalse([@"<>" isLeftParenthesis],nil);
+    XCTAssertFalse([@"¬" isLeftParenthesis]);
+    XCTAssertFalse([@"!" isLeftParenthesis]);
+    XCTAssertFalse([@"∨" isLeftParenthesis]);
+    XCTAssertFalse([@"|" isLeftParenthesis]);
+    XCTAssertFalse([@"∧" isLeftParenthesis]);
+    XCTAssertFalse([@"&" isLeftParenthesis]);
+    XCTAssertFalse([@"→" isLeftParenthesis]);
+    XCTAssertFalse([@">" isLeftParenthesis]);
+    XCTAssertFalse([@"↔" isLeftParenthesis]);
+    XCTAssertFalse([@"<>" isLeftParenthesis]);
     
-    STAssertTrue([@"(" isLeftParenthesis],nil);
-    STAssertFalse([@")" isLeftParenthesis],nil);
-    STAssertFalse([@";" isLeftParenthesis],nil);
-    STAssertFalse([@"," isLeftParenthesis],nil);
+    XCTAssertTrue([@"(" isLeftParenthesis]);
+    XCTAssertFalse([@")" isLeftParenthesis]);
+    XCTAssertFalse([@";" isLeftParenthesis]);
+    XCTAssertFalse([@"," isLeftParenthesis]);
 }
 
 - (void)testIsRightParenthesis {
-    STAssertFalse([@"¬" isRightParenthesis],nil);
-    STAssertFalse([@"!" isRightParenthesis],nil);
-    STAssertFalse([@"∨" isRightParenthesis],nil);
-    STAssertFalse([@"|" isRightParenthesis],nil);
-    STAssertFalse([@"∧" isRightParenthesis],nil);
-    STAssertFalse([@"&" isRightParenthesis],nil);
-    STAssertFalse([@"→" isRightParenthesis],nil);
-    STAssertFalse([@">" isRightParenthesis],nil);
-    STAssertFalse([@"↔" isRightParenthesis],nil);
-    STAssertFalse([@"<>" isRightParenthesis],nil);
+    XCTAssertFalse([@"¬" isRightParenthesis]);
+    XCTAssertFalse([@"!" isRightParenthesis]);
+    XCTAssertFalse([@"∨" isRightParenthesis]);
+    XCTAssertFalse([@"|" isRightParenthesis]);
+    XCTAssertFalse([@"∧" isRightParenthesis]);
+    XCTAssertFalse([@"&" isRightParenthesis]);
+    XCTAssertFalse([@"→" isRightParenthesis]);
+    XCTAssertFalse([@">" isRightParenthesis]);
+    XCTAssertFalse([@"↔" isRightParenthesis]);
+    XCTAssertFalse([@"<>" isRightParenthesis]);
     
-    STAssertFalse([@"(" isRightParenthesis],nil);
-    STAssertTrue([@")" isRightParenthesis],nil);
-    STAssertFalse([@";" isRightParenthesis],nil);
-    STAssertFalse([@"," isRightParenthesis],nil);
+    XCTAssertFalse([@"(" isRightParenthesis]);
+    XCTAssertTrue([@")" isRightParenthesis]);
+    XCTAssertFalse([@";" isRightParenthesis]);
+    XCTAssertFalse([@"," isRightParenthesis]);
 }
 
 - (void)testIsComma {
-    STAssertFalse([@"¬" isComma],nil);
-    STAssertFalse([@"!" isComma],nil);
-    STAssertFalse([@"∨" isComma],nil);
-    STAssertFalse([@"|" isComma],nil);
-    STAssertFalse([@"∧" isComma],nil);
-    STAssertFalse([@"&" isComma],nil);
-    STAssertFalse([@"→" isComma],nil);
-    STAssertFalse([@">" isComma],nil);
-    STAssertFalse([@"↔" isComma],nil);
-    STAssertFalse([@"<>" isComma],nil);
+    XCTAssertFalse([@"¬" isComma]);
+    XCTAssertFalse([@"!" isComma]);
+    XCTAssertFalse([@"∨" isComma]);
+    XCTAssertFalse([@"|" isComma]);
+    XCTAssertFalse([@"∧" isComma]);
+    XCTAssertFalse([@"&" isComma]);
+    XCTAssertFalse([@"→" isComma]);
+    XCTAssertFalse([@">" isComma]);
+    XCTAssertFalse([@"↔" isComma]);
+    XCTAssertFalse([@"<>" isComma]);
     
-    STAssertFalse([@"(" isComma],nil);
-    STAssertFalse([@")" isComma],nil);
-    STAssertFalse([@";" isComma],nil);
-    STAssertTrue([@"," isComma],nil);
+    XCTAssertFalse([@"(" isComma]);
+    XCTAssertFalse([@")" isComma]);
+    XCTAssertFalse([@";" isComma]);
+    XCTAssertTrue([@"," isComma]);
 }
 
 - (void)testIsSemicolon {
-    STAssertFalse([@"¬" isSemicolon],nil);
-    STAssertFalse([@"!" isSemicolon],nil);
-    STAssertFalse([@"∨" isSemicolon],nil);
-    STAssertFalse([@"|" isSemicolon],nil);
-    STAssertFalse([@"∧" isSemicolon],nil);
-    STAssertFalse([@"&" isSemicolon],nil);
-    STAssertFalse([@"→" isSemicolon],nil);
-    STAssertFalse([@">" isSemicolon],nil);
-    STAssertFalse([@"↔" isSemicolon],nil);
-    STAssertFalse([@"<>" isSemicolon],nil);
+    XCTAssertFalse([@"¬" isSemicolon]);
+    XCTAssertFalse([@"!" isSemicolon]);
+    XCTAssertFalse([@"∨" isSemicolon]);
+    XCTAssertFalse([@"|" isSemicolon]);
+    XCTAssertFalse([@"∧" isSemicolon]);
+    XCTAssertFalse([@"&" isSemicolon]);
+    XCTAssertFalse([@"→" isSemicolon]);
+    XCTAssertFalse([@">" isSemicolon]);
+    XCTAssertFalse([@"↔" isSemicolon]);
+    XCTAssertFalse([@"<>" isSemicolon]);
     
-    STAssertFalse([@"(" isSemicolon],nil);
-    STAssertFalse([@")" isSemicolon],nil);
-    STAssertTrue([@";" isSemicolon],nil);
-    STAssertFalse([@"," isSemicolon],nil);
+    XCTAssertFalse([@"(" isSemicolon]);
+    XCTAssertFalse([@")" isSemicolon]);
+    XCTAssertTrue([@";" isSemicolon]);
+    XCTAssertFalse([@"," isSemicolon]);
 }
 
 
 
 - (void)testIsComplement {
-    STAssertTrue([@"¬atom" hasComplement:@"atom"],nil);
-    STAssertTrue([@"atom" hasComplement:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" hasComplement:@"¬atom"],nil);
-    STAssertTrue([@"¬¬atom" hasComplement:@"¬¬¬atom"],nil);
+    XCTAssertTrue([@"¬atom" hasComplement:@"atom"]);
+    XCTAssertTrue([@"atom" hasComplement:@"¬atom"]);
+    XCTAssertTrue([@"¬¬atom" hasComplement:@"¬atom"]);
+    XCTAssertTrue([@"¬¬atom" hasComplement:@"¬¬¬atom"]);
     
-    STAssertFalse([@"x" hasComplement:@"x"],nil);
-    STAssertFalse([@"x" hasComplement:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" hasComplement:@"¬y"],nil);
-    STAssertFalse([@"¬¬x" hasComplement:@"¬¬x"],nil);
+    XCTAssertFalse([@"x" hasComplement:@"x"]);
+    XCTAssertFalse([@"x" hasComplement:@"¬y"]);
+    XCTAssertFalse([@"¬¬x" hasComplement:@"¬y"]);
+    XCTAssertFalse([@"¬¬x" hasComplement:@"¬¬x"]);
     
-    STAssertTrue([@"¬atom&y" hasComplement:@"atom&y"],nil);
-    STAssertTrue([@"atom&y" hasComplement:@"¬atom&y"],nil);
-    STAssertTrue([@"¬¬atom&y" hasComplement:@"¬atom&y"],nil);
-    STAssertTrue([@"¬¬atom&y" hasComplement:@"¬¬¬atom&y"],nil);
+    XCTAssertTrue([@"¬atom&y" hasComplement:@"atom&y"]);
+    XCTAssertTrue([@"atom&y" hasComplement:@"¬atom&y"]);
+    XCTAssertTrue([@"¬¬atom&y" hasComplement:@"¬atom&y"]);
+    XCTAssertTrue([@"¬¬atom&y" hasComplement:@"¬¬¬atom&y"]);
     
-    STAssertFalse([@"x&y" hasComplement:@"x&y"],nil);
-    STAssertFalse([@"x&y" hasComplement:@"¬y&y"],nil);
-    STAssertFalse([@"¬¬x&y" hasComplement:@"¬y&y"],nil);
-    STAssertFalse([@"¬¬x&y" hasComplement:@"¬¬x&y"],nil);
+    XCTAssertFalse([@"x&y" hasComplement:@"x&y"]);
+    XCTAssertFalse([@"x&y" hasComplement:@"¬y&y"]);
+    XCTAssertFalse([@"¬¬x&y" hasComplement:@"¬y&y"]);
+    XCTAssertFalse([@"¬¬x&y" hasComplement:@"¬¬x&y"]);
     
 }
 
 - (void)testIsIdentifierTokenTrue {
     for (NSString *input in @[@"ä"]) {
-        STAssertTrue([input isIdentifierToken], input);
+        XCTAssertTrue([input isIdentifierToken], @"%@",input);
     }
 }
 
 
 - (void)testIsIdentifierTokenFalse {
     for (NSString *input in @[@"frm", @"NOT", @"AND", @"OR"]) {
-        STAssertFalse([input isIdentifierToken], input);
+        XCTAssertFalse([input isIdentifierToken], @"%@",input);
     }
 }
 

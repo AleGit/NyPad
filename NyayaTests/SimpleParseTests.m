@@ -32,8 +32,8 @@
          ]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], input, input);
-        STAssertTrue([[result description] isEqual: input], input);
+        XCTAssertEqualObjects([result description], input, @"%@", input);
+        XCTAssertTrue([[result description] isEqual: input], @"%@", input);
     }
 }
 
@@ -43,8 +43,8 @@
     for (NSString *input in @[@"$", @"➽", @"⟫"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertFalse([[result description] isEqual: input], input);
-        STAssertTrue([parser hasErrors], input);
+        XCTAssertFalse([[result description] isEqual: input], @"%@", input);
+        XCTAssertTrue([parser hasErrors], @"%@", input);
     }
 }
 
@@ -54,13 +54,13 @@
     for (NSString *input in @[@"T", @"1", @"⊤"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"T", input);
+        XCTAssertEqualObjects([result description], @"T", @"%@", input);
     }
     
     for (NSString *input in [NSSet trueTokens]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"T", input);
+        XCTAssertEqualObjects([result description], @"T", @"%@", input);
     }
 }
 
@@ -70,13 +70,13 @@
     for (NSString *input in @[@"F", @"0", @"⊥"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"F", input);
+        XCTAssertEqualObjects([result description], @"F", @"%@", input);
     }
     
     for (NSString *input in [NSSet falseTokens]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"F", input);
+        XCTAssertEqualObjects([result description], @"F", @"%@", input);
     }
 }
 
@@ -87,14 +87,14 @@
     for (NSString *input in @[@"¬b", @"!b", @"NOT b"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"¬b", input);
+        XCTAssertEqualObjects([result description], @"¬b", @"%@", input);
     }
     
     for (NSString *conn in [NSSet notTokens]) {
         NSString *input = [NSString stringWithFormat:@"%@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"¬b", input);
+        XCTAssertEqualObjects([result description], @"¬b", @"%@", input);
     }
 }
 
@@ -105,14 +105,14 @@
          ]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ∧ b", input);
+        XCTAssertEqualObjects([result description], @"a ∧ b", @"%@", input);
     }
     
     for (NSString *conn in [NSSet andTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ∧ b", input);
+        XCTAssertEqualObjects([result description], @"a ∧ b", @"%@", input);
     }
 }
 
@@ -122,7 +122,7 @@
     for (NSString *input in @[@"a∨b", @"a|b", @"a+b", @"a OR b"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ∨ b", input);
+        XCTAssertEqualObjects([result description], @"a ∨ b", @"%@", input);
     }
 }
 
@@ -132,14 +132,14 @@
     for (NSString *input in @[@"a=b", @"a<>b", @"a XNOR b"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ↔ b", input);
+        XCTAssertEqualObjects([result description], @"a ↔ b", @"%@", input);
     }
     
     for (NSString *conn in [NSSet bicTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ↔ b", input);
+        XCTAssertEqualObjects([result description], @"a ↔ b", @"%@", input);
     }
 }
 
@@ -149,14 +149,14 @@
     for (NSString *input in @[@"a > b", @"a→b"]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a → b", input);
+        XCTAssertEqualObjects([result description], @"a → b", @"%@", input);
     }
     
     for (NSString *conn in [NSSet impTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a → b", input);
+        XCTAssertEqualObjects([result description], @"a → b", @"%@", input);
     }
 }
 
@@ -166,14 +166,14 @@
     for (NSString *input in @[@"a⊻b", @"a ^ b", @" a XOR b" ]) {
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ⊻ b", input);
+        XCTAssertEqualObjects([result description], @"a ⊻ b", @"%@", input);
     }
     
     for (NSString *conn in [NSSet xorTokens]) {
         NSString *input = [NSString stringWithFormat:@"a %@ b",conn, nil];
         parser = [[NyayaParser alloc] initWithString:input];
         result = [parser parseFormula];
-        STAssertEqualObjects([result description], @"a ⊻ b", input);
+        XCTAssertEqualObjects([result description], @"a ⊻ b", @"%@", input);
     }
 }
 

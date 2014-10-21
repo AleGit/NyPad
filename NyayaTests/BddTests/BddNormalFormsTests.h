@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 private. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NyayaNode.h"
 
-@interface BddNormalFormsTests : SenTestCase
+@interface BddNormalFormsTests : XCTestCase
 
 
 

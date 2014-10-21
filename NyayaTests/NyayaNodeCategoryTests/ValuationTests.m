@@ -16,20 +16,20 @@
 
 - (void)testValuationTop {
     NyayaNode *top = [NyayaNode top];
-    STAssertEquals(top.evaluationValue, YES, nil);
+    XCTAssertEqual(top.evaluationValue, YES);
 }
 
 - (void)testValuationBottom {
     NyayaNode *bottom = [NyayaNode bottom];
-    STAssertEquals(bottom.evaluationValue, NO, nil);
+    XCTAssertEqual(bottom.evaluationValue, NO);
 }
 
 - (void)testValuationA {
     NyayaNode *a = [[NyayaFormula formulaWithString:@"a"] syntaxTree:NO];
     ((NyayaNodeVariable*)a).evaluationValue = YES;
-    STAssertEquals(a.evaluationValue, YES, @"%d",a.evaluationValue);
+    XCTAssertEqual(a.evaluationValue, YES, @"%d",a.evaluationValue);
     ((NyayaNodeVariable*)a).evaluationValue = NO;
-    STAssertEquals(a.evaluationValue, NO, @"%d",a.evaluationValue);
+    XCTAssertEqual(a.evaluationValue, NO, @"%d",a.evaluationValue);
 }
 
 @end

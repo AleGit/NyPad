@@ -157,14 +157,14 @@
         NSString *tree = [array objectAtIndex:2];
         NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
         NyayaNode *formula = [parser parseFormula];
-        STAssertEqualObjects([formula description], expected, key);
-        STAssertEqualObjects([formula strictDescription], tree, key);
+        XCTAssertEqualObjects([formula description], expected, @"%@", key);
+        XCTAssertEqualObjects([formula strictDescription], tree, @"%@",key);
         
         count++;
         
     }];
     
-    STAssertEquals(count, 15, nil);
+    XCTAssertEqual(count, 15);
     
     
 }
@@ -172,9 +172,9 @@
 
 
 - (void)testUFT {
-    STAssertEqualObjects(@"U", [_u description], nil);
-    STAssertEqualObjects(@"F", [_f description], nil);
-    STAssertEqualObjects(@"T", [_t description], nil);
+    XCTAssertEqualObjects(@"U", [_u description]);
+    XCTAssertEqualObjects(@"F", [_f description]);
+    XCTAssertEqualObjects(@"T", [_t description]);
 }
 
 - (void)testNegation {
@@ -183,17 +183,17 @@
     // ¬u
     
     n = [NyayaNode negation:_u];
-    STAssertEqualObjects(@"¬U", [n description], nil);
+    XCTAssertEqualObjects(@"¬U", [n description]);
     
     // ¬f
     
     n = [NyayaNode negation:_f];
-    STAssertEqualObjects(@"¬F", [n description], nil);
+    XCTAssertEqualObjects(@"¬F", [n description]);
     
     // ¬t
     
     n = [NyayaNode negation:_t];
-    STAssertEqualObjects(@"¬T", [n description], nil);
+    XCTAssertEqualObjects(@"¬T", [n description]);
     
 }
 
@@ -203,35 +203,35 @@
     // u ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_u with:_u];
-    STAssertEqualObjects(@"U ∧ U", [n description], nil);
+    XCTAssertEqualObjects(@"U ∧ U", [n description]);
     
     n = [NyayaNode conjunction:_u with:_f];
-    STAssertEqualObjects(@"U ∧ F", [n description], nil);
+    XCTAssertEqualObjects(@"U ∧ F", [n description]);
     
     n = [NyayaNode conjunction:_u with:_t];
-    STAssertEqualObjects(@"U ∧ T", [n description], nil);
+    XCTAssertEqualObjects(@"U ∧ T", [n description]);
     
     // f ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_f with:_u];
-    STAssertEqualObjects(@"F ∧ U", [n description], nil);
+    XCTAssertEqualObjects(@"F ∧ U", [n description]);
     
     n = [NyayaNode conjunction:_f with:_f];
-    STAssertEqualObjects(@"F ∧ F", [n description], nil);
+    XCTAssertEqualObjects(@"F ∧ F", [n description]);
     
     n = [NyayaNode conjunction:_f with:_t];
-    STAssertEqualObjects(@"F ∧ T", [n description], nil);
+    XCTAssertEqualObjects(@"F ∧ T", [n description]);
     
     // t ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_t with:_u];
-    STAssertEqualObjects(@"T ∧ U", [n description], nil);
+    XCTAssertEqualObjects(@"T ∧ U", [n description]);
     
     n = [NyayaNode conjunction:_t with:_f];
-    STAssertEqualObjects(@"T ∧ F", [n description], nil);
+    XCTAssertEqualObjects(@"T ∧ F", [n description]);
     
     n = [NyayaNode conjunction:_t with:_t];
-    STAssertEqualObjects(@"T ∧ T", [n description], nil);
+    XCTAssertEqualObjects(@"T ∧ T", [n description]);
     
     
 }
@@ -244,35 +244,35 @@
     // u ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_u with:_u];
-    STAssertEqualObjects(@"U ∨ U", [n description], nil);
+    XCTAssertEqualObjects(@"U ∨ U", [n description]);
     
     n = [NyayaNode disjunction:_u with:_f];
-    STAssertEqualObjects(@"U ∨ F", [n description], nil);
+    XCTAssertEqualObjects(@"U ∨ F", [n description]);
     
     n = [NyayaNode disjunction:_u with:_t];
-    STAssertEqualObjects(@"U ∨ T", [n description], nil);
+    XCTAssertEqualObjects(@"U ∨ T", [n description]);
     
     // f ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_f with:_u];
-    STAssertEqualObjects(@"F ∨ U", [n description], nil);
+    XCTAssertEqualObjects(@"F ∨ U", [n description]);
     
     n = [NyayaNode disjunction:_f with:_f];
-    STAssertEqualObjects(@"F ∨ F", [n description], nil);
+    XCTAssertEqualObjects(@"F ∨ F", [n description]);
     
     n = [NyayaNode disjunction:_f with:_t];
-    STAssertEqualObjects(@"F ∨ T", [n description], nil);
+    XCTAssertEqualObjects(@"F ∨ T", [n description]);
     
     // t ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_t with:_u];
-    STAssertEqualObjects(@"T ∨ U", [n description], nil);
+    XCTAssertEqualObjects(@"T ∨ U", [n description]);
     
     n = [NyayaNode disjunction:_t with:_f];
-    STAssertEqualObjects(@"T ∨ F", [n description], nil);
+    XCTAssertEqualObjects(@"T ∨ F", [n description]);
     
     n = [NyayaNode disjunction:_t with:_t];
-    STAssertEqualObjects(@"T ∨ T", [n description], nil);
+    XCTAssertEqualObjects(@"T ∨ T", [n description]);
     
     
 }
@@ -283,35 +283,35 @@
     // u → {u,f,t}
     
     n = [NyayaNode implication: _u with:_u];
-    STAssertEqualObjects(@"U → U", [n description], nil);
+    XCTAssertEqualObjects(@"U → U", [n description]);
     
     n = [NyayaNode implication:_u with:_f];
-    STAssertEqualObjects(@"U → F", [n description], nil);
+    XCTAssertEqualObjects(@"U → F", [n description]);
     
     n = [NyayaNode implication:_u with:_t];
-    STAssertEqualObjects(@"U → T", [n description], nil);
+    XCTAssertEqualObjects(@"U → T", [n description]);
     
     // f → {u,f,t}
     
     n = [NyayaNode implication:_f with:_u];
-    STAssertEqualObjects(@"F → U", [n description], nil);
+    XCTAssertEqualObjects(@"F → U", [n description]);
     
     n = [NyayaNode implication:_f with:_f];
-    STAssertEqualObjects(@"F → F", [n description], nil);
+    XCTAssertEqualObjects(@"F → F", [n description]);
     
     n = [NyayaNode implication:_f with:_t];
-    STAssertEqualObjects(@"F → T", [n description], nil);
+    XCTAssertEqualObjects(@"F → T", [n description]);
     
     // t → {u,f,t}
     
     n = [NyayaNode implication:_t with:_u];
-    STAssertEqualObjects(@"T → U", [n description], nil);
+    XCTAssertEqualObjects(@"T → U", [n description]);
     
     n = [NyayaNode implication:_t with:_f];
-    STAssertEqualObjects(@"T → F", [n description], nil);
+    XCTAssertEqualObjects(@"T → F", [n description]);
     
     n = [NyayaNode implication:_t with:_t];
-    STAssertEqualObjects(@"T → T", [n description], nil);
+    XCTAssertEqualObjects(@"T → T", [n description]);
     
     
 }

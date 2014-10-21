@@ -19,8 +19,8 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"¬¬a";
     NSString *expected2 = @"(¬(¬a))";
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testNegationAnd {
@@ -28,11 +28,11 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"¬a ∧ b";
     NSString *expected2 = @"((¬a)∧b)";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaConjunction, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable, nil);
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqual(node.type, (NyayaNodeType)NyayaConjunction);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testAndNegation {
@@ -40,11 +40,11 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"a ∧ ¬b";
     NSString *expected2 = @"(a∧(¬b))";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaConjunction, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation, nil);
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqual(node.type, (NyayaNodeType)NyayaConjunction);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testNegationOr {
@@ -52,11 +52,11 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"¬a ∨ b";
     NSString *expected2 = @"((¬a)∨b)";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaDisjunction, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable, nil);
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqual(node.type, (NyayaNodeType)NyayaDisjunction);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaNegation);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaVariable);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testOrNegation {
@@ -64,11 +64,11 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"a ∨ ¬b";
     NSString *expected2 = @"(a∨(¬b))";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaDisjunction, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation, nil);
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqual(node.type, (NyayaNodeType)NyayaDisjunction);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaVariable);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaNegation);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testSequence {
@@ -76,8 +76,8 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"a ↔ b; a ∧ b ↔ c";
     NSString *expected2 = @"((a↔b);((a∧b)↔c))";
-    STAssertEqualObjects([node description], expected, nil);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqualObjects([node description], expected);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 - (void)testComplex {
@@ -85,11 +85,11 @@
     NyayaNode *node = [parser parseFormula];
     NSString *expected = @"(a ⊻ b → a) ↔ b ∨ (a ∧ ¬b)";
     NSString *expected2 = @"(((a⊻b)→a)↔(b∨(a∧(¬b))))";
-    STAssertEquals(node.type, (NyayaNodeType)NyayaBicondition, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaImplication, nil);
-    STAssertEquals(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaDisjunction, nil);
-    STAssertEqualObjects([node description], expected, [[node description] commonPrefixWithString:expected options:0]);
-    STAssertEqualObjects([node strictDescription], expected2, nil);
+    XCTAssertEqual(node.type, (NyayaNodeType)NyayaBicondition);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:0]).type, (NyayaNodeType)NyayaImplication);
+    XCTAssertEqual(((NyayaNode*)[node.nodes objectAtIndex:1]).type, (NyayaNodeType)NyayaDisjunction);
+    XCTAssertEqualObjects([node description], expected, @"%@",[[node description] commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects([node strictDescription], expected2);
 }
 
 @end

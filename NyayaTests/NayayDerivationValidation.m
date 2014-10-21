@@ -38,7 +38,7 @@
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [obj evaluateTable];
         if (idx > 0) {
-            STAssertEqualObjects([truthTables objectAtIndex:idx-1], obj, input);
+            XCTAssertEqualObjects([truthTables objectAtIndex:idx-1], obj, @"%@", input);
         }
     }];
     
@@ -74,7 +74,7 @@
     
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [obj evaluateTable];
-        STAssertEqualObjects(truthTable, obj, [truthTable.formula description]);
+        XCTAssertEqualObjects(truthTable, obj, @"%@",[truthTable.formula description]);
     }];
     
     

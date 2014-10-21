@@ -16,13 +16,13 @@
 - (void) assert:(NSString*)input truthTable:(NSString*)tt tautology:(BOOL)isTautology contradiction: (BOOL)isContradiction {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
-    STAssertFalse(parser.hasErrors, input);
+    XCTAssertFalse(parser.hasErrors, @"%@",input);
     TruthTable *astTable = [[TruthTable alloc] initWithNode:ast compact:NO];
     [astTable evaluateTable];
-    STAssertEqualObjects([astTable description],tt, input);
-    STAssertTrue([astTable isTautology] == isTautology, input);
-    STAssertTrue([astTable isContradiction] == isContradiction, input);
-    STAssertTrue([astTable isSatisfiable] != isContradiction, input);
+    XCTAssertEqualObjects([astTable description],tt, @"%@",input);
+    XCTAssertTrue([astTable isTautology] == isTautology, @"%@",input);
+    XCTAssertTrue([astTable isContradiction] == isContradiction, @"%@",input);
+    XCTAssertTrue([astTable isSatisfiable] != isContradiction, @"%@",input);
 }
 
 
@@ -315,9 +315,9 @@
     "| T | F | T     |\n"
     "| T | T | F     |";
     
-    STAssertEqualObjects([table1 description], tt1, nil);
-    STAssertEqualObjects([table2 description], tt2, nil);
-    STAssertFalse([table1 isEqual:table2], nil);
+    XCTAssertEqualObjects([table1 description], tt1);
+    XCTAssertEqualObjects([table2 description], tt2);
+    XCTAssertFalse([table1 isEqual:table2]);
 }
 
 @end

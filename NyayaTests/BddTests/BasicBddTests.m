@@ -24,7 +24,7 @@
         sum+=idx;
     }
     
-    STAssertEquals(sum, (NSUInteger)45, nil);
+    XCTAssertEqual(sum, (NSUInteger)45);
     
     
     
@@ -39,8 +39,8 @@
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
     
-    STAssertTrue(node.isLeaf,nil);
-    STAssertEquals(node.id, 1, nil);
+    XCTAssertTrue(node.isLeaf);
+    XCTAssertEqual(node.id, 1);
     
 //    STAssertEqualObjects(node.CNF.description, @"1", nil);
 //    STAssertEqualObjects([node dnfDescription], @"1", nil);
@@ -53,11 +53,11 @@
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
-    STAssertTrue(node.isLeaf,nil);
-    STAssertEquals(node.id, 0, nil);
+    XCTAssertTrue(node.isLeaf);
+    XCTAssertEqual(node.id, 0);
     
     
-    STAssertEqualObjects(node.cnfDescription, @"F", nil);
+    XCTAssertEqualObjects(node.cnfDescription, @"F");
 //    STAssertEqualObjects([node dnfDescription], @"0", nil);
 }
 
@@ -70,18 +70,18 @@
     
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
-    STAssertTrue([node isMemberOfClass:[BddNode class]], nil);
-    STAssertEquals(node.id, 3, nil);
-    STAssertEqualObjects(node.name, @"a", nil);
+    XCTAssertTrue([node isMemberOfClass:[BddNode class]]);
+    XCTAssertEqual(node.id, 3);
+    XCTAssertEqualObjects(node.name, @"a");
     
-    STAssertEquals(node.leftBranch.id, 2, nil);
-    STAssertEqualObjects(node.leftBranch.name, @"b", nil);
-    STAssertEquals(node.leftBranch.leftBranch.id, 0, nil);
-    STAssertEquals(node.leftBranch.rightBranch.id, 1, nil);
+    XCTAssertEqual(node.leftBranch.id, 2);
+    XCTAssertEqualObjects(node.leftBranch.name, @"b");
+    XCTAssertEqual(node.leftBranch.leftBranch.id, 0);
+    XCTAssertEqual(node.leftBranch.rightBranch.id, 1);
     
-    STAssertEquals(node.rightBranch.id, 1, nil);
+    XCTAssertEqual(node.rightBranch.id, 1);
     
-    STAssertEqualObjects(node.cnfDescription, @"(a ∨ b)", nil);
+    XCTAssertEqualObjects(node.cnfDescription, @"(a ∨ b)");
 //    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b)", nil);
 }
 
@@ -93,19 +93,19 @@
     
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
-    STAssertTrue([node isMemberOfClass:[BddNode class]], nil);
-    STAssertEquals(node.id, 3, nil);
-    STAssertEqualObjects(node.name, @"a", nil);
+    XCTAssertTrue([node isMemberOfClass:[BddNode class]]);
+    XCTAssertEqual(node.id, 3);
+    XCTAssertEqualObjects(node.name, @"a");
     
-    STAssertEquals(node.rightBranch.id, 2, nil);
-    STAssertEqualObjects(node.rightBranch.name, @"b", nil);
-    STAssertEquals(node.rightBranch.leftBranch.id, 0, nil);
-    STAssertEquals(node.rightBranch.rightBranch.id, 1, nil);
+    XCTAssertEqual(node.rightBranch.id, 2);
+    XCTAssertEqualObjects(node.rightBranch.name, @"b");
+    XCTAssertEqual(node.rightBranch.leftBranch.id, 0);
+    XCTAssertEqual(node.rightBranch.rightBranch.id, 1);
     
-    STAssertEquals(node.leftBranch.id, 0, nil);
+    XCTAssertEqual(node.leftBranch.id, 0);
     
-    STAssertEqualObjects([node cnfDescription], @"(a ∧ b)", nil);
-    STAssertEqualObjects([node dnfDescription], @"(a ∧ b)", nil);
+    XCTAssertEqualObjects([node cnfDescription], @"(a ∧ b)");
+    XCTAssertEqualObjects([node dnfDescription], @"(a ∧ b)");
 }
 
 - (void)testXor {
@@ -116,20 +116,20 @@
     
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
     
-    STAssertEquals(node.id, 4, nil);
-    STAssertEquals(node.rightBranch.id, 3, nil);
-    STAssertEquals(node.leftBranch.id, 2, nil);
-    STAssertEquals(node.leftBranch.rightBranch.id, 1, nil);   
-    STAssertEquals(node.rightBranch.leftBranch.id, 1, nil);
-    STAssertEquals(node.leftBranch.leftBranch.id, 0, nil);
-    STAssertEquals(node.rightBranch.rightBranch.id, 0, nil);
+    XCTAssertEqual(node.id, 4);
+    XCTAssertEqual(node.rightBranch.id, 3);
+    XCTAssertEqual(node.leftBranch.id, 2);
+    XCTAssertEqual(node.leftBranch.rightBranch.id, 1);   
+    XCTAssertEqual(node.rightBranch.leftBranch.id, 1);
+    XCTAssertEqual(node.leftBranch.leftBranch.id, 0);
+    XCTAssertEqual(node.rightBranch.rightBranch.id, 0);
     
-    STAssertEqualObjects(node.name, @"a", nil);
-    STAssertEqualObjects(node.leftBranch.name, @"b", nil);
-    STAssertEqualObjects(node.rightBranch.name, @"b", nil);
+    XCTAssertEqualObjects(node.name, @"a");
+    XCTAssertEqualObjects(node.leftBranch.name, @"b");
+    XCTAssertEqualObjects(node.rightBranch.name, @"b");
     
-    STAssertEqualObjects(node.cnfDescription, @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
-    STAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
+    XCTAssertEqualObjects(node.cnfDescription, @"(a ∨ b) ∧ (¬a ∨ ¬b)");
+    XCTAssertEqualObjects([node dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)");
     
 }
 
@@ -141,20 +141,20 @@
     [truthTable evaluateTable];
     
     BddNode *node = [BddNode bddWithTruthTable:truthTable reduce:YES];
-    STAssertEquals(node.id, 4, nil);
-    STAssertEqualObjects(node.name, @"a", nil);
-    STAssertEquals(node.leftBranch.id, 3, nil);
-    STAssertEqualObjects(node.leftBranch.name, @"b", nil);
-    STAssertEquals(node.leftBranch.rightBranch.id, 2, nil);
-    STAssertEqualObjects(node.leftBranch.rightBranch.name, @"c", nil);
+    XCTAssertEqual(node.id, 4);
+    XCTAssertEqualObjects(node.name, @"a");
+    XCTAssertEqual(node.leftBranch.id, 3);
+    XCTAssertEqualObjects(node.leftBranch.name, @"b");
+    XCTAssertEqual(node.leftBranch.rightBranch.id, 2);
+    XCTAssertEqualObjects(node.leftBranch.rightBranch.name, @"c");
     
-    STAssertEquals(node.rightBranch.id, 1, nil);
-    STAssertEquals(node.leftBranch.rightBranch.rightBranch.id, 1, nil);
+    XCTAssertEqual(node.rightBranch.id, 1);
+    XCTAssertEqual(node.leftBranch.rightBranch.rightBranch.id, 1);
     
-    STAssertEquals(node.leftBranch.leftBranch.id, 0, nil);
-    STAssertEquals(node.leftBranch.rightBranch.leftBranch.id, 0, nil);
+    XCTAssertEqual(node.leftBranch.leftBranch.id, 0);
+    XCTAssertEqual(node.leftBranch.rightBranch.leftBranch.id, 0);
     
-    STAssertEqualObjects(node.cnfDescription, @"(a ∨ ¬b ∨ c) ∧ (a ∨ b)", nil);
+    XCTAssertEqualObjects(node.cnfDescription, @"(a ∨ ¬b ∨ c) ∧ (a ∨ b)");
 //    STAssertEqualObjects([node dnfDescription], @"(a) ∨ (¬a ∧ b ∧ c)", nil);
     
     NSLog(@"%@", [formula description]);
@@ -185,19 +185,19 @@
     BddNode *c0 = b1.leftBranch;
     BddNode *c1 = b1.rightBranch;
     
-    STAssertEqualObjects(bdd.name, @"a", nil);
+    XCTAssertEqualObjects(bdd.name, @"a");
     
-    STAssertEqualObjects(a0.name, @"b", nil);
-    STAssertEqualObjects(a1.name, @"1", nil);
+    XCTAssertEqualObjects(a0.name, @"b");
+    XCTAssertEqualObjects(a1.name, @"1");
     
-    STAssertEqualObjects(b0.name, @"0", nil);
-    STAssertEqualObjects(b1.name, @"c", nil);
+    XCTAssertEqualObjects(b0.name, @"0");
+    XCTAssertEqualObjects(b1.name, @"c");
     
-    STAssertEqualObjects(c0.name, @"0", nil);
-    STAssertEqualObjects(c1.name, @"1", nil);
+    XCTAssertEqualObjects(c0.name, @"0");
+    XCTAssertEqualObjects(c1.name, @"1");
     
-    STAssertEquals(a1, c1, nil);
-    STAssertEquals(b0, c0, nil);
+    XCTAssertEqual(a1, c1);
+    XCTAssertEqual(b0, c0);
 }
 
 - (void)testAxorBReduced {
@@ -208,9 +208,9 @@
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [bdd fillStructure:dict];
-    STAssertEquals([dict count], (NSUInteger)4, nil);
+    XCTAssertEqual([dict count], (NSUInteger)4);
     
-    STAssertEqualObjects(bdd.name, @"a", nil);
+    XCTAssertEqualObjects(bdd.name, @"a");
     //     a
     //    . \
     //   b   b
@@ -219,14 +219,14 @@
     
     BddNode *a0 = bdd.leftBranch;
     BddNode *a1 = bdd.rightBranch;
-    STAssertEqualObjects(a0.name, @"b", nil);
-    STAssertEqualObjects(a1.name, @"b", nil);
+    XCTAssertEqualObjects(a0.name, @"b");
+    XCTAssertEqualObjects(a1.name, @"b");
     
     BddNode *a0b1 = a0.rightBranch;
     BddNode *a1b0 = a1.leftBranch;
-    STAssertEqualObjects(a0b1.name, @"1", nil);
-    STAssertEqualObjects(a1b0.name, @"1", nil);
-    STAssertEquals(a0b1, a1b0, nil);
+    XCTAssertEqualObjects(a0b1.name, @"1");
+    XCTAssertEqualObjects(a1b0.name, @"1");
+    XCTAssertEqual(a0b1, a1b0);
     
 }
 
@@ -242,9 +242,9 @@
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:YES];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [bdd fillStructure:dict];
-    STAssertEquals([dict count], (NSUInteger)5, nil);
+    XCTAssertEqual([dict count], (NSUInteger)5);
     
-    STAssertEqualObjects(bdd.name, @"a", nil);
+    XCTAssertEqualObjects(bdd.name, @"a");
     //     a
     //    . \
     //   b   b
@@ -255,16 +255,16 @@
     
     BddNode *a0 = bdd.leftBranch;
     BddNode *a1 = bdd.rightBranch;
-    STAssertEqualObjects(a0.name, @"b", nil);
-    STAssertEqualObjects(a1.name, @"b", nil);
+    XCTAssertEqualObjects(a0.name, @"b");
+    XCTAssertEqualObjects(a1.name, @"b");
     
     BddNode *a0b1 = a0.rightBranch;
     BddNode *a1b0 = a1.leftBranch;
-    STAssertEquals(a0b1, a1b0, nil);
+    XCTAssertEqual(a0b1, a1b0);
     
     BddNode *a1b1 = a1.rightBranch;
     BddNode *a0b0 = a0.leftBranch;
-    STAssertEquals(a1b1, a0b0, nil);
+    XCTAssertEqual(a1b1, a0b0);
 
 }
 
@@ -278,14 +278,14 @@
     // a + b.c
     
     BddNode *bdd = [BddNode obddWithNode:node order:variables reduce:NO];
-    STAssertEquals([bdd.names count], (NSUInteger)3, nil);
+    XCTAssertEqual([bdd.names count], (NSUInteger)3);
     [variables enumerateObjectsUsingBlock:^(NyayaNode *obj, NSUInteger idx, BOOL *stop) {
-        STAssertEqualObjects(obj.symbol, bdd.names[idx], nil);
+        XCTAssertEqualObjects(obj.symbol, bdd.names[idx]);
     }];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [bdd fillStructure:dict];
-    STAssertEquals([dict count], (NSUInteger)5, nil);
+    XCTAssertEqual([dict count], (NSUInteger)5);
     
     
     //               a:14
@@ -315,44 +315,44 @@
     BddNode *a110 = a11.leftBranch;
     BddNode *a111 = a11.rightBranch;
     
-    STAssertEquals(bdd.id, 14, nil);
+    XCTAssertEqual(bdd.id, 14);
     
-    STAssertEquals(a0.id, 6, nil);
-    STAssertEquals(a1.id, 13, nil);
+    XCTAssertEqual(a0.id, 6);
+    XCTAssertEqual(a1.id, 13);
     
-    STAssertEquals(a00.id, 2, nil);
-    STAssertEquals(a01.id, 5, nil);
-    STAssertEquals(a10.id, 9, nil);
-    STAssertEquals(a11.id, 12, nil);
+    XCTAssertEqual(a00.id, 2);
+    XCTAssertEqual(a01.id, 5);
+    XCTAssertEqual(a10.id, 9);
+    XCTAssertEqual(a11.id, 12);
     
-    STAssertEquals(a000.id, 0, nil);
-    STAssertEquals(a001.id, 1, nil);
-    STAssertEquals(a010.id, 3, nil);
-    STAssertEquals(a011.id, 4, nil);
-    STAssertEquals(a100.id, 7, nil);
-    STAssertEquals(a101.id, 8, nil);
-    STAssertEquals(a110.id, 10, nil);
-    STAssertEquals(a111.id, 11, nil);
+    XCTAssertEqual(a000.id, 0);
+    XCTAssertEqual(a001.id, 1);
+    XCTAssertEqual(a010.id, 3);
+    XCTAssertEqual(a011.id, 4);
+    XCTAssertEqual(a100.id, 7);
+    XCTAssertEqual(a101.id, 8);
+    XCTAssertEqual(a110.id, 10);
+    XCTAssertEqual(a111.id, 11);
    
         
-    STAssertEqualObjects(bdd.name, @"a", nil);
+    XCTAssertEqualObjects(bdd.name, @"a");
     
-    STAssertEqualObjects(a0.name, @"b", nil);
-    STAssertEqualObjects(a1.name, @"b", nil);
+    XCTAssertEqualObjects(a0.name, @"b");
+    XCTAssertEqualObjects(a1.name, @"b");
     
-    STAssertEqualObjects(a00.name, @"c", nil);
-    STAssertEqualObjects(a01.name, @"c", nil);
-    STAssertEqualObjects(a00.name, @"c", nil);
-    STAssertEqualObjects(a01.name, @"c", nil);
+    XCTAssertEqualObjects(a00.name, @"c");
+    XCTAssertEqualObjects(a01.name, @"c");
+    XCTAssertEqualObjects(a00.name, @"c");
+    XCTAssertEqualObjects(a01.name, @"c");
     
-    STAssertEqualObjects(a000.name, @"0", nil);
-    STAssertEqualObjects(a001.name, @"0", nil);
-    STAssertEqualObjects(a010.name, @"0", nil);
-    STAssertEqualObjects(a011.name, @"1", nil);
-    STAssertEqualObjects(a100.name, @"1", nil);
-    STAssertEqualObjects(a101.name, @"1", nil);
-    STAssertEqualObjects(a110.name, @"1", nil);
-    STAssertEqualObjects(a111.name, @"1", nil);
+    XCTAssertEqualObjects(a000.name, @"0");
+    XCTAssertEqualObjects(a001.name, @"0");
+    XCTAssertEqualObjects(a010.name, @"0");
+    XCTAssertEqualObjects(a011.name, @"1");
+    XCTAssertEqualObjects(a100.name, @"1");
+    XCTAssertEqualObjects(a101.name, @"1");
+    XCTAssertEqualObjects(a110.name, @"1");
+    XCTAssertEqualObjects(a111.name, @"1");
 }
 
 
@@ -367,33 +367,33 @@
     NyayaNodeVariable *s = [variables objectAtIndex:2];
     NyayaNodeVariable *q = [variables objectAtIndex:3];
     
-    STAssertEqualObjects(r.symbol, @"r", @"r");
-    STAssertEqualObjects(p.symbol, @"p", @"p");
-    STAssertEqualObjects(s.symbol, @"s", @"s");
-    STAssertEqualObjects(q.symbol, @"q", @"q");
+    XCTAssertEqualObjects(r.symbol, @"r", @"r");
+    XCTAssertEqualObjects(p.symbol, @"p", @"p");
+    XCTAssertEqualObjects(s.symbol, @"s", @"s");
+    XCTAssertEqualObjects(q.symbol, @"q", @"q");
     BddNode *bddNode = [BddNode obddWithNode:node order:variables reduce:YES];
     
 
-    STAssertEqualObjects(bddNode.name, r.symbol, nil);
-    STAssertEqualObjects(bddNode.leftBranch.name, @"p", nil);
-    STAssertEqualObjects(bddNode.leftBranch.leftBranch.name, @"0", nil);
-    STAssertEqualObjects(bddNode.leftBranch.rightBranch.name, @"q", nil);
-    STAssertEqualObjects(bddNode.leftBranch.rightBranch.leftBranch.name, @"0", nil);
-    STAssertEqualObjects(bddNode.leftBranch.rightBranch.rightBranch.name, @"1", nil);
+    XCTAssertEqualObjects(bddNode.name, r.symbol);
+    XCTAssertEqualObjects(bddNode.leftBranch.name, @"p");
+    XCTAssertEqualObjects(bddNode.leftBranch.leftBranch.name, @"0");
+    XCTAssertEqualObjects(bddNode.leftBranch.rightBranch.name, @"q");
+    XCTAssertEqualObjects(bddNode.leftBranch.rightBranch.leftBranch.name, @"0");
+    XCTAssertEqualObjects(bddNode.leftBranch.rightBranch.rightBranch.name, @"1");
     
     
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.name, @"s", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.name, @"q", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.leftBranch.name, @"0", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.rightBranch.name, @"1", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.name, @"q", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.leftBranch.name, @"1", nil);
-    STAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.rightBranch.name, @"0", nil);
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.name, @"s");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.name, @"q");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.leftBranch.name, @"0");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.leftBranch.rightBranch.name, @"1");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.name, @"q");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.leftBranch.name, @"1");
+    XCTAssertEqualObjects(bddNode.rightBranch.rightBranch.rightBranch.rightBranch.name, @"0");
 
 
-    STAssertEqualObjects(bddNode.rightBranch.leftBranch.name, @"s", nil);
-    STAssertEqualObjects(bddNode.rightBranch.leftBranch.leftBranch.name, @"0", nil);
-    STAssertEqualObjects(bddNode.rightBranch.leftBranch.rightBranch.name, @"1", nil);
+    XCTAssertEqualObjects(bddNode.rightBranch.leftBranch.name, @"s");
+    XCTAssertEqualObjects(bddNode.rightBranch.leftBranch.leftBranch.name, @"0");
+    XCTAssertEqualObjects(bddNode.rightBranch.leftBranch.rightBranch.name, @"1");
     
         
     // NSLog(@"%@", [formula description]);

@@ -43,12 +43,12 @@
 }
 
 - (void)testUFT {
-    STAssertEqualObjects(@"U", _u.symbol, nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, _u.displayValue, nil);
-    STAssertEqualObjects(@"F", _f.symbol, nil);
-    STAssertEquals((NyayaBool)NyayaFalse, _f.displayValue, nil);
-    STAssertEqualObjects(@"T", _t.symbol, nil);
-    STAssertEquals((NyayaBool)NyayaTrue, _t.displayValue, nil);
+    XCTAssertEqualObjects(@"U", _u.symbol);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, _u.displayValue);
+    XCTAssertEqualObjects(@"F", _f.symbol);
+    XCTAssertEqual((NyayaBool)NyayaFalse, _f.displayValue);
+    XCTAssertEqualObjects(@"T", _t.symbol);
+    XCTAssertEqual((NyayaBool)NyayaTrue, _t.displayValue);
 }
 
 
@@ -58,23 +58,23 @@
     // ¬u
     
     n = [NyayaNode negation:_u];
-    STAssertEqualObjects(@"¬", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"¬", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaNegation, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     // ¬f
     
     n = [NyayaNode negation:_f];
-    STAssertEqualObjects(@"¬", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"¬", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaNegation, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     // ¬t
     
     n = [NyayaNode negation:_t];
-    STAssertEqualObjects(@"¬", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaNegation, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"¬", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaNegation, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
 }
 
@@ -84,53 +84,53 @@
     // u ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_u with:_u];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode conjunction:_u with:_f];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode conjunction:_u with:_t];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     // f ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_f with:_u];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode conjunction:_f with:_f];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode conjunction:_f with:_t];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     // t ∧ {u,f,t}
     
     n = [NyayaNode conjunction:_t with:_u];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode conjunction:_t with:_f];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode conjunction:_t with:_t];
-    STAssertEqualObjects(@"∧", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaConjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∧", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaConjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     
 }
@@ -143,53 +143,53 @@
     // u ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_u with:_u];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode disjunction:_u with:_f];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode disjunction:_u with:_t];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     // f ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_f with:_u];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode disjunction:_f with:_f];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode disjunction:_f with:_t];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     // t ∨ {u,f,t}
     
     n = [NyayaNode disjunction:_t with:_u];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     n = [NyayaNode disjunction:_t with:_f];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     n = [NyayaNode disjunction:_t with:_t];
-    STAssertEqualObjects(@"∨", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaDisjunction, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"∨", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaDisjunction, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     
 }
@@ -200,53 +200,53 @@
     // u → {u,f,t}
     
     n = [NyayaNode implication: _u with:_u];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode implication:_u with:_f];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode implication:_u with:_t];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     // f → {u,f,t}
     
     n = [NyayaNode implication:_f with:_u];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     n = [NyayaNode implication:_f with:_f];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     n = [NyayaNode implication:_f with:_t];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     // t → {u,f,t}
     
     n = [NyayaNode implication:_t with:_u];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaUndefined, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaUndefined, n.displayValue);
     
     n = [NyayaNode implication:_t with:_f];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaFalse, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaFalse, n.displayValue);
     
     n = [NyayaNode implication:_t with:_t];
-    STAssertEqualObjects(@"→", n.symbol, nil);
-    STAssertEquals((NyayaNodeType)NyayaImplication, n.type,nil);
-    STAssertEquals((NyayaBool)NyayaTrue, n.displayValue, nil);
+    XCTAssertEqualObjects(@"→", n.symbol);
+    XCTAssertEqual((NyayaNodeType)NyayaImplication, n.type);
+    XCTAssertEqual((NyayaBool)NyayaTrue, n.displayValue);
     
     
 }

@@ -24,11 +24,11 @@
     ,[formula description: [[formula nodeAtIndex:1] nodeAtIndex:1]] // c
     ];
     
-    STAssertEqualObjects([descs objectAtIndex:0], @"[ a ∨ (b ∧ c) ]", nil);
-    STAssertEqualObjects([descs objectAtIndex:1], @"[ a ] ∨ (b ∧ c)", nil);
-    STAssertEqualObjects([descs objectAtIndex:2], @"a ∨ ([ b ∧ c ])", nil);
-    STAssertEqualObjects([descs objectAtIndex:3], @"a ∨ ([ b ] ∧ c)", nil);
-    STAssertEqualObjects([descs objectAtIndex:4], @"a ∨ (b ∧ [ c ])", nil);
+    XCTAssertEqualObjects([descs objectAtIndex:0], @"[ a ∨ (b ∧ c) ]");
+    XCTAssertEqualObjects([descs objectAtIndex:1], @"[ a ] ∨ (b ∧ c)");
+    XCTAssertEqualObjects([descs objectAtIndex:2], @"a ∨ ([ b ∧ c ])");
+    XCTAssertEqualObjects([descs objectAtIndex:3], @"a ∨ ([ b ] ∧ c)");
+    XCTAssertEqualObjects([descs objectAtIndex:4], @"a ∨ (b ∧ [ c ])");
 }
 
 @end

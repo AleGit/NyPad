@@ -20,18 +20,18 @@ enum { AST, IMF, NNF, CNF, DNF };
 - (NSArray*)assert:(NSString*)input descriptions:(NSArray*)descs truthTable:(NSString*)tt {
     NyayaParser *parser = [[NyayaParser alloc] initWithString:input];
     NyayaNode *ast = [parser parseFormula];
-    STAssertFalse(parser.hasErrors, input);
+    XCTAssertFalse(parser.hasErrors, @"%@",input);
     
     NyayaNode *imf = [ast deriveImf:NSIntegerMax];
     NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
     NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
     NyayaNode *dnf = [nnf deriveDnf:NSIntegerMax];
     
-    STAssertEqualObjects([ast description], [descs objectAtIndex:AST], input);
-    STAssertEqualObjects([imf description], [descs objectAtIndex:IMF], input);
-    STAssertEqualObjects([nnf description], [descs objectAtIndex:NNF], input);
-    STAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], input);
-    STAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], input);
+    XCTAssertEqualObjects([ast description], [descs objectAtIndex:AST], @"%@",input);
+    XCTAssertEqualObjects([imf description], [descs objectAtIndex:IMF], @"%@",input);
+    XCTAssertEqualObjects([nnf description], [descs objectAtIndex:NNF], @"%@",input);
+    XCTAssertEqualObjects([cnf description], [descs objectAtIndex:CNF], @"%@",input);
+    XCTAssertEqualObjects([dnf description], [descs objectAtIndex:DNF], @"%@",input);
     
     TruthTable *astTable = [[TruthTable alloc] initWithNode:[ast copy] compact:NO];
     TruthTable *imfTable = [[TruthTable alloc] initWithNode:[imf copy] compact:NO];
@@ -45,11 +45,11 @@ enum { AST, IMF, NNF, CNF, DNF };
     [cnfTable evaluateTable];
     [dnfTable evaluateTable];
     
-    STAssertEqualObjects([astTable description],tt, input);
-    STAssertEqualObjects(astTable, imfTable, input);
-    STAssertEqualObjects(astTable, nnfTable, input);
-    STAssertEqualObjects(astTable, cnfTable, input);
-    STAssertEqualObjects(astTable, dnfTable, input);
+    XCTAssertEqualObjects([astTable description],tt, @"%@",input);
+    XCTAssertEqualObjects(astTable, imfTable, @"%@",input);
+    XCTAssertEqualObjects(astTable, nnfTable, @"%@",input);
+    XCTAssertEqualObjects(astTable, cnfTable, @"%@",input);
+    XCTAssertEqualObjects(astTable, dnfTable, @"%@",input);
     return @[ast, imf, nnf, cnf, dnf];
 }
 
@@ -77,50 +77,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertTrue([ast isNegationNormalForm], input);
-        STAssertTrue([ast isConjunctiveNormalForm], input);
-        STAssertTrue([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@",input);
+        XCTAssertTrue([ast isNegationNormalForm], @"%@",input);
+        XCTAssertTrue([ast isConjunctiveNormalForm], @"%@",input);
+        XCTAssertTrue([ast isDisjunctiveNormalForm], @"%@",input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@",input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@",input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@",input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@",input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertTrue([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@",input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@",input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@",input);
+        XCTAssertTrue([imf isDisjunctiveNormalForm], @"%@",input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@",input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@",input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@",input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@",input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@",input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@",input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@",input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@",input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@",input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@",input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@",input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@",input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@",input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@",input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@",input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@",input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@",input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@",input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@",input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@",input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@",input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@",input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@",input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@",input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@",input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@",input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@",input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@",input);
     }
 }
 
@@ -148,50 +148,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertTrue([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
 }
 
@@ -221,50 +221,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertTrue([ast isNegationNormalForm], input);
-        STAssertTrue([ast isConjunctiveNormalForm], input);
-        STAssertTrue([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@", input);
+        XCTAssertTrue([ast isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertTrue([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
 }
 
@@ -294,50 +294,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertTrue([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
 }
 
@@ -367,50 +367,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertTrue([ast isNegationNormalForm], input);
-        STAssertTrue([ast isConjunctiveNormalForm], input);
-        STAssertTrue([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@", input);
+        XCTAssertTrue([ast isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertTrue([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
 }
 
@@ -440,60 +440,60 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertTrue([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertTrue([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertTrue([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
     // check node relations
-    STAssertFalse(nnf == cnf, nil);
-    STAssertFalse(cnf == dnf, nil);
-    STAssertFalse(dnf == nnf, nil);
+    XCTAssertFalse(nnf == cnf);
+    XCTAssertFalse(cnf == dnf);
+    XCTAssertFalse(dnf == nnf);
     
-    STAssertEqualObjects([nnf description], [cnf description], nil);
-    STAssertEqualObjects([cnf description], [dnf description], nil);
-    STAssertEqualObjects([dnf description], [nnf description], nil);
+    XCTAssertEqualObjects([nnf description], [cnf description]);
+    XCTAssertEqualObjects([cnf description], [dnf description]);
+    XCTAssertEqualObjects([dnf description], [nnf description]);
     
     
 }
@@ -524,50 +524,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertTrue([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertTrue([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertFalse([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertTrue([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertFalse([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertTrue([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertFalse([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
         
     }
 }
@@ -597,74 +597,74 @@ enum { AST, IMF, NNF, CNF, DNF };
     NyayaNode *dnf = [frms objectAtIndex:DNF];
     
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertFalse([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertTrue([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertTrue([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertFalse([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertFalse([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertTrue([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertTrue([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
     // check node relations
     
-    STAssertFalse(nnf == dnf, nil);
+    XCTAssertFalse(nnf == dnf);
     
     NyayaNode *nal = [nnf valueForKeyPath:@"firstNode.firstNode"];
     NyayaNode *nar = [nnf valueForKeyPath:@"secondNode.secondNode.firstNode"];
     NyayaNode *dal = [dnf valueForKeyPath:@"firstNode.firstNode"];
     NyayaNode *dar = [dnf valueForKeyPath:@"secondNode.secondNode.firstNode"];
     
-    STAssertTrue(nal == nar, nil);
-    STAssertTrue(nal == dal, nil);
-    STAssertTrue(nal == dar, nil);
-    STAssertTrue(nar == dal, nil);
-    STAssertTrue(nar == dar, nil);
-    STAssertTrue(dal == dar, nil);
+    XCTAssertTrue(nal == nar);
+    XCTAssertTrue(nal == dal);
+    XCTAssertTrue(nal == dar);
+    XCTAssertTrue(nar == dal);
+    XCTAssertTrue(nar == dar);
+    XCTAssertTrue(dal == dar);
     
-    STAssertTrue([nal isEqual: nar], nil);
-    STAssertTrue([nal isEqual: dal], nil);
-    STAssertTrue([nal isEqual: dar], nil);
-    STAssertTrue([nar isEqual: dal], nil);
-    STAssertTrue([nar isEqual: dar], nil);
-    STAssertTrue([dal isEqual: dar], nil);
+    XCTAssertTrue([nal isEqual: nar]);
+    XCTAssertTrue([nal isEqual: dal]);
+    XCTAssertTrue([nal isEqual: dar]);
+    XCTAssertTrue([nar isEqual: dal]);
+    XCTAssertTrue([nar isEqual: dar]);
+    XCTAssertTrue([dal isEqual: dar]);
     
 }
 
@@ -694,50 +694,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertTrue([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertTrue([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
 }
@@ -768,50 +768,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertTrue([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertTrue([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertFalse([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
 }
@@ -842,54 +842,54 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertTrue([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertTrue([imf isNegationNormalForm], input);
-        STAssertTrue([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertFalse([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertTrue([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertTrue([imf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertTrue([nnf isConjunctiveNormalForm], input);
-        STAssertFalse([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertFalse([nnf isCnfTransformationNode], input);
-        STAssertTrue([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertFalse([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertTrue([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertTrue([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertFalse([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
         // (a ∧ ¬a) ∨ (a ∧ ¬b) ∨ ((b ∧ ¬a) ∨ (b ∧ ¬b))
-        STAssertFalse([dnf isCnfTransformationNode], input);                          //                     ∨
-        STAssertTrue([[dnf.nodes objectAtIndex:0] isCnfTransformationNode], input);   //          ∨                      ∨
-        STAssertTrue([[dnf.nodes objectAtIndex:1] isCnfTransformationNode], input);   // (a ∧ ¬a)   (a ∧ ¬b)    (b ∧ ¬a)   (b ∧ ¬b)
+        XCTAssertFalse([dnf isCnfTransformationNode], @"%@", input);                          //                     ∨
+        XCTAssertTrue([[dnf.nodes objectAtIndex:0] isCnfTransformationNode], @"%@", input);   //          ∨                      ∨
+        XCTAssertTrue([[dnf.nodes objectAtIndex:1] isCnfTransformationNode], @"%@", input);   // (a ∧ ¬a)   (a ∧ ¬b)    (b ∧ ¬a)   (b ∧ ¬b)
         
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
 }
@@ -920,50 +920,50 @@ enum { AST, IMF, NNF, CNF, DNF };
     
     // check properties of syntax trees and normal forms
     {
-        STAssertFalse([ast isImplicationFree], input);
-        STAssertFalse([ast isNegationNormalForm], input);
-        STAssertFalse([ast isConjunctiveNormalForm], input);
-        STAssertFalse([ast isDisjunctiveNormalForm], input);
-        STAssertFalse([ast isImfTransformationNode], input);
-        STAssertFalse([ast isNnfTransformationNode], input);
-        STAssertFalse([ast isCnfTransformationNode], input);
-        STAssertFalse([ast isDnfTransformationNode], input);
+        XCTAssertFalse([ast isImplicationFree], @"%@", input);
+        XCTAssertFalse([ast isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([ast isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([ast isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([ast isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([imf isImplicationFree], input);
-        STAssertFalse([imf isNegationNormalForm], input);
-        STAssertFalse([imf isConjunctiveNormalForm], input);
-        STAssertFalse([imf isDisjunctiveNormalForm], input);
-        STAssertFalse([imf isImfTransformationNode], input);
-        STAssertTrue([imf isNnfTransformationNode], input);
-        STAssertFalse([imf isCnfTransformationNode], input);
-        STAssertFalse([imf isDnfTransformationNode], input);
+        XCTAssertTrue([imf isImplicationFree], @"%@", input);
+        XCTAssertFalse([imf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([imf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([imf isImfTransformationNode], @"%@", input);
+        XCTAssertTrue([imf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([imf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([nnf isImplicationFree], input);
-        STAssertTrue([nnf isNegationNormalForm], input);
-        STAssertFalse([nnf isConjunctiveNormalForm], input);
-        STAssertTrue([nnf isDisjunctiveNormalForm], input);
-        STAssertFalse([nnf isImfTransformationNode], input);
-        STAssertFalse([nnf isNnfTransformationNode], input);
-        STAssertTrue([nnf isCnfTransformationNode], input);
-        STAssertFalse([nnf isDnfTransformationNode], input);
+        XCTAssertTrue([nnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([nnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([nnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([nnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isNnfTransformationNode], @"%@", input);
+        XCTAssertTrue([nnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([nnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([cnf isImplicationFree], input);
-        STAssertTrue([cnf isNegationNormalForm], input);
-        STAssertTrue([cnf isConjunctiveNormalForm], input);
-        STAssertFalse([cnf isDisjunctiveNormalForm], input);
-        STAssertFalse([cnf isImfTransformationNode], input);
-        STAssertFalse([cnf isNnfTransformationNode], input);
-        STAssertFalse([cnf isCnfTransformationNode], input);
-        STAssertFalse([cnf isDnfTransformationNode], input);
+        XCTAssertTrue([cnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([cnf isNegationNormalForm], @"%@", input);
+        XCTAssertTrue([cnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([cnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isNnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([cnf isDnfTransformationNode], @"%@", input);
         
-        STAssertTrue([dnf isImplicationFree], input);
-        STAssertTrue([dnf isNegationNormalForm], input);
-        STAssertFalse([dnf isConjunctiveNormalForm], input);
-        STAssertTrue([dnf isDisjunctiveNormalForm], input);
-        STAssertFalse([dnf isImfTransformationNode], input);
-        STAssertFalse([dnf isNnfTransformationNode], input);
-        STAssertTrue([dnf isCnfTransformationNode], input);
-        STAssertFalse([dnf isDnfTransformationNode], input);
+        XCTAssertTrue([dnf isImplicationFree], @"%@", input);
+        XCTAssertTrue([dnf isNegationNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isConjunctiveNormalForm], @"%@", input);
+        XCTAssertTrue([dnf isDisjunctiveNormalForm], @"%@", input);
+        XCTAssertFalse([dnf isImfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isNnfTransformationNode], @"%@", input);
+        XCTAssertTrue([dnf isCnfTransformationNode], @"%@", input);
+        XCTAssertFalse([dnf isDnfTransformationNode], @"%@", input);
     }
     
 }

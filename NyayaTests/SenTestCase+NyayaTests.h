@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 private. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NyayaNode_Cluster.h"
 
-@interface SenTestCase (NyayaTests)
+@interface XCTestCase (NyayaTests)
 
 
 @end

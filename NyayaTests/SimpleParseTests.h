@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 private. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface SimpleParseTests : SenTestCase
+@interface SimpleParseTests : XCTestCase
 
 @end

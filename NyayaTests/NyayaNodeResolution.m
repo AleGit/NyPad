@@ -101,17 +101,17 @@ enum { INPUT, AST, IMF, NNF, CNF, DNF, CDS, DCS };
         NSArray *cdsp = [cnfp conjunctionOfDisjunctions];
         NSArray *dcsp = [dnfp disjunctionOfConjunctions];
         
-        STAssertEqualObjects([astp description], [obj objectAtIndex:AST], nil);
-        STAssertEqualObjects([imfp description], [obj objectAtIndex:IMF], nil);
-        STAssertEqualObjects([nnfp description], [obj objectAtIndex:NNF], nil);
-        STAssertEqualObjects([cnfp description], [obj objectAtIndex:CNF], nil);
-        STAssertEqualObjects([dnfp description], [obj objectAtIndex:DNF], nil);
+        XCTAssertEqualObjects([astp description], [obj objectAtIndex:AST]);
+        XCTAssertEqualObjects([imfp description], [obj objectAtIndex:IMF]);
+        XCTAssertEqualObjects([nnfp description], [obj objectAtIndex:NNF]);
+        XCTAssertEqualObjects([cnfp description], [obj objectAtIndex:CNF]);
+        XCTAssertEqualObjects([dnfp description], [obj objectAtIndex:DNF]);
         
         NSLog(@"%@\n%@", [cdsp myDescription], [dcsp myDescription]);
         
         
-        STAssertEqualObjects([cdsp myDescription], [obj objectAtIndex:CDS], nil);
-        STAssertEqualObjects([dcsp myDescription], [obj objectAtIndex:DCS], nil);
+        XCTAssertEqualObjects([cdsp myDescription], [obj objectAtIndex:CDS]);
+        XCTAssertEqualObjects([dcsp myDescription], [obj objectAtIndex:DCS]);
         
         
         

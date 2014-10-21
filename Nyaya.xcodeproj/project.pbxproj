@@ -158,7 +158,6 @@
 		11C375FA15B3D23D005C5C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C375F915B3D23D005C5C9C /* main.m */; };
 		11C375FE15B3D23D005C5C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C375FD15B3D23D005C5C9C /* AppDelegate.m */; };
 		11C3760115B3D23D005C5C9C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11C375FF15B3D23D005C5C9C /* MainStoryboard.storyboard */; };
-		11C3761715B3D23D005C5C9C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C3761615B3D23D005C5C9C /* SenTestingKit.framework */; };
 		11C3761815B3D23D005C5C9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375ED15B3D23D005C5C9C /* UIKit.framework */; };
 		11C3761915B3D23D005C5C9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C375EF15B3D23D005C5C9C /* Foundation.framework */; };
 		11C3762115B3D23D005C5C9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11C3761F15B3D23D005C5C9C /* InfoPlist.strings */; };
@@ -485,7 +484,6 @@
 		11C375FD15B3D23D005C5C9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		11C3760015B3D23D005C5C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		11C3761515B3D23D005C5C9C /* NyayaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyayaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11C3761615B3D23D005C5C9C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		11C3761E15B3D23D005C5C9C /* NyayaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NyayaTests-Info.plist"; sourceTree = "<group>"; };
 		11C3762015B3D23D005C5C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		11C3763F15B3EC48005C5C9C /* Nyaya.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Nyaya.g; path = Model/Nyaya.g; sourceTree = "<group>"; };
@@ -615,7 +613,6 @@
 			files = (
 				815912771724594100DA9FE7 /* QuartzCore.framework in Frameworks */,
 				815912761724591100DA9FE7 /* CoreGraphics.framework in Frameworks */,
-				11C3761715B3D23D005C5C9C /* SenTestingKit.framework in Frameworks */,
 				11C3761815B3D23D005C5C9C /* UIKit.framework in Frameworks */,
 				11C3761915B3D23D005C5C9C /* Foundation.framework in Frameworks */,
 			);
@@ -974,7 +971,6 @@
 				117C723A15F8B8BE00C8C10A /* QuartzCore.framework */,
 				11C375ED15B3D23D005C5C9C /* UIKit.framework */,
 				11C375EF15B3D23D005C5C9C /* Foundation.framework */,
-				11C3761615B3D23D005C5C9C /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1274,7 +1270,7 @@
 			name = NyayaTests;
 			productName = NyayaTests;
 			productReference = 11C3761515B3D23D005C5C9C /* NyayaTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1282,7 +1278,7 @@
 		11C375E015B3D23D005C5C9C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = private;
 				TargetAttributes = {
 					11C375E815B3D23D005C5C9C = {
@@ -1647,10 +1643,12 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1660,6 +1658,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1685,12 +1684,15 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1743,14 +1745,13 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/nyaya.app/nyaya";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "NyayaTests/NyayaTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -1760,14 +1761,13 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/nyaya.app/nyaya";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "NyayaTests/NyayaTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

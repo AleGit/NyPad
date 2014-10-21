@@ -8,7 +8,7 @@
 
 #import "SenTestCase+NyayaTests.h"
 
-@implementation SenTestCase (NyayaTests)
+@implementation XCTestCase (NyayaTests)
 
 
 

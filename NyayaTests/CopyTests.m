@@ -18,8 +18,8 @@
     NyayaNode *A = [NyayaNode atom:@"a"];
     NyayaNode *Ac = [A copy];
     
-    STAssertTrue(A == Ac, nil);
-    STAssertTrue([A isEqual: Ac], nil);
+    XCTAssertTrue(A == Ac);
+    XCTAssertTrue([A isEqual: Ac]);
 }
 
 - (void) testNegationCopy {
@@ -32,33 +32,33 @@
     NyayaNode *nAc = [nnAc.nodes objectAtIndex:0];
     NyayaNode *Ac = [nAc.nodes objectAtIndex:0];
 
-    STAssertEquals(A.displayValue, Ac.displayValue,nil);
-    STAssertEquals(A.evaluationValue, Ac.evaluationValue,nil);
+    XCTAssertEqual(A.displayValue, Ac.displayValue);
+    XCTAssertEqual(A.evaluationValue, Ac.evaluationValue);
     
     A.displayValue = NyayaTrue;
     A.evaluationValue = TRUE;
-    STAssertEquals(Ac.displayValue, (NyayaBool)NyayaTrue,nil);
-    STAssertTrue(Ac.evaluationValue, nil);
+    XCTAssertEqual(Ac.displayValue, (NyayaBool)NyayaTrue);
+    XCTAssertTrue(Ac.evaluationValue);
     
     A.displayValue = NyayaFalse;
     A.evaluationValue = FALSE;
-    STAssertEquals(Ac.displayValue, (NyayaBool)NyayaFalse,nil);
-    STAssertFalse(Ac.evaluationValue, nil);
+    XCTAssertEqual(Ac.displayValue, (NyayaBool)NyayaFalse);
+    XCTAssertFalse(Ac.evaluationValue);
 
     A.displayValue = NyayaUndefined;
-    STAssertEquals(Ac.displayValue, (NyayaBool)NyayaUndefined,nil);
+    XCTAssertEqual(Ac.displayValue, (NyayaBool)NyayaUndefined);
     
-    STAssertEqualObjects(nnA, nnAc,nil);
-    STAssertEqualObjects(nA, nAc,nil);
-    STAssertEqualObjects(A, Ac,nil);
+    XCTAssertEqualObjects(nnA, nnAc);
+    XCTAssertEqualObjects(nA, nAc);
+    XCTAssertEqualObjects(A, Ac);
     
-    STAssertEqualObjects([nnA description], [nnAc description],nil);
-    STAssertEqualObjects([nA description], [nAc description],nil);
-    STAssertEqualObjects([A description], [Ac description],nil);
+    XCTAssertEqualObjects([nnA description], [nnAc description]);
+    XCTAssertEqualObjects([nA description], [nAc description]);
+    XCTAssertEqualObjects([A description], [Ac description]);
     
-    STAssertTrue(A == Ac, nil);
-    STAssertTrue(nA == nAc, nil);
-    STAssertTrue(nnA == nnAc, nil);
+    XCTAssertTrue(A == Ac);
+    XCTAssertTrue(nA == nAc);
+    XCTAssertTrue(nnA == nnAc);
 }
 
 @end

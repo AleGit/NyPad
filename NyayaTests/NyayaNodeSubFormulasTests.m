@@ -17,15 +17,15 @@
     NyayaParser *parser = [[NyayaParser alloc] initWithString:@"a & b | a"];
     NyayaNode *ast = [parser parseFormula];
     NSString *description = [ast description];
-    STAssertEqualObjects(description, @"(a ∧ b) ∨ a",nil);
+    XCTAssertEqualObjects(description, @"(a ∧ b) ∨ a");
     
     NSSet *set = [ast setOfSubformulas];
     
-    STAssertEquals([set count], (NSUInteger)4, nil);
-    STAssertTrue([set containsObject:@"a"], nil);
-    STAssertTrue([set containsObject:@"b"], nil);
-    STAssertTrue([set containsObject:@"a ∧ b"], nil);
-    STAssertTrue([set containsObject:@"(a ∧ b) ∨ a"], nil);
+    XCTAssertEqual([set count], (NSUInteger)4);
+    XCTAssertTrue([set containsObject:@"a"]);
+    XCTAssertTrue([set containsObject:@"b"]);
+    XCTAssertTrue([set containsObject:@"a ∧ b"]);
+    XCTAssertTrue([set containsObject:@"(a ∧ b) ∨ a"]);
 
 }
 

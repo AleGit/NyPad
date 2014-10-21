@@ -23,8 +23,8 @@
     
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"x ∧ y",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"x ∧ y");
     
     [truthTable setOrder:[NSArray arrayWithObjects:@"x", @"y",nil]];
     [truthTable evaluateTable];
@@ -38,7 +38,7 @@
     
     NSString *actual = truthTable.description;
     //NSLog(@"\n%@", actual);
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
     
     [truthTable setOrder:[NSArray arrayWithObjects:@"y",nil]];
     [truthTable evaluateTable];
@@ -52,7 +52,7 @@
     
     actual = truthTable.description;
     //NSLog(@"\n%@", actual);
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
     
 }
 
@@ -64,8 +64,8 @@
     
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"x10 ∨ x2",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"x10 ∨ x2");
     
     
     [truthTable evaluateTable];
@@ -79,7 +79,7 @@
     
     NSString *actual = truthTable.description;
     //NSLog(@"\n%@", actual);
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
 }
 
 - (void)testXthenA {
@@ -90,8 +90,8 @@
     
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"x → a",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"x → a");
     
     
     [truthTable evaluateTable];
@@ -105,7 +105,7 @@
     
     NSString *actual = truthTable.description;
     //NSLog(@"\n%@", actual);
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
 }
 
 - (void)testXandTthenY {
@@ -116,8 +116,8 @@
     
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula compact:NO];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"x ∧ T → y",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"x ∧ T → y");
     
     [truthTable setOrder:[NSArray arrayWithObjects:@"T",@"y",@"x",nil]];
     [truthTable evaluateTable];
@@ -131,7 +131,7 @@
     
     NSString *actual = truthTable.description;
     //NSLog(@"\n%@", actual);
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
 }
 
 - (void)testTrueTop {
@@ -139,13 +139,13 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"T",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"T");
     [truthTable evaluateTable];
     
     NSString *expected = @"| T |\n| T |";
     NSString *actual = truthTable.description;
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
     
     
 }
@@ -155,13 +155,13 @@
     NyayaNode *formula = [parser parseFormula];
     TruthTable *truthTable = [[TruthTable alloc] initWithNode:formula];
     
-    STAssertEqualObjects(truthTable.formula, formula,nil);
-    STAssertEqualObjects(truthTable.title, @"F",nil);
+    XCTAssertEqualObjects(truthTable.formula, formula);
+    XCTAssertEqualObjects(truthTable.title, @"F");
     [truthTable evaluateTable];
     
     NSString *expected = @"| F |\n| F |";
     NSString *actual = truthTable.description;
-    STAssertEqualObjects(actual, expected, [actual commonPrefixWithString:expected options:0]);
+    XCTAssertEqualObjects(actual, expected, @"%@",[actual commonPrefixWithString:expected options:0]);
     
     
 }
@@ -200,20 +200,20 @@
     NSUInteger expectedHash = [[truthTables objectAtIndex:0] hash];
     
     for (TruthTable *truthTable in truthTables) {
-        STAssertEquals([truthTable hash], expectedHash, [truthTable.formula description]);
-        STAssertEqualObjects(truthTable, [truthTables objectAtIndex:0],[truthTable.formula description]);
-        STAssertTrue([[truthTables objectAtIndex:0] isEqual: truthTable], [truthTable.formula description]);
+        XCTAssertEqual([truthTable hash], expectedHash, @"%@",[truthTable.formula description]);
+        XCTAssertEqualObjects(truthTable, [truthTables objectAtIndex:0],@"%@",[truthTable.formula description]);
+        XCTAssertTrue([[truthTables objectAtIndex:0] isEqual: truthTable], @"%@",[truthTable.formula description]);
         
-        STAssertEquals([truthTable hash], [aoa hash], [truthTable.formula description]);
-        STAssertEqualObjects(aoa, [truthTables objectAtIndex:0],[truthTable.formula description]);
-        STAssertTrue([aoa isEqual: truthTable], [truthTable.formula description]);
+        XCTAssertEqual([truthTable hash], [aoa hash], @"%@",[truthTable.formula description]);
+        XCTAssertEqualObjects(aoa, [truthTables objectAtIndex:0],@"%@",[truthTable.formula description]);
+        XCTAssertTrue([aoa isEqual: truthTable], @"%@",[truthTable.formula description]);
         
-        STAssertEquals([truthTable hash], [aaa hash], [truthTable.formula description]);
-        STAssertEqualObjects(aaa, [truthTables objectAtIndex:0],[truthTable.formula description]);
-        STAssertTrue([aaa isEqual: truthTable], [truthTable.formula description]);
+        XCTAssertEqual([truthTable hash], [aaa hash], @"%@",[truthTable.formula description]);
+        XCTAssertEqualObjects(aaa, [truthTables objectAtIndex:0],@"%@",[truthTable.formula description]);
+        XCTAssertTrue([aaa isEqual: truthTable], @"%@",[truthTable.formula description]);
         
-        STAssertFalse([tt hash] == expectedHash, [truthTable.formula description]);
-        STAssertFalse([tt isEqual: truthTable], [truthTable.formula description]);
+        XCTAssertFalse([tt hash] == expectedHash, @"%@",[truthTable.formula description]);
+        XCTAssertFalse([tt isEqual: truthTable], @"%@",[truthTable.formula description]);
     }
     
                            
@@ -229,7 +229,7 @@
     [tand evaluateTable];
     [tor evaluateTable];
     
-    STAssertFalse([tand isEqual:tor],nil);
+    XCTAssertFalse([tand isEqual:tor]);
     
     
     
@@ -245,8 +245,8 @@
     NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
     // NyayaNode *dnf = [nnf dnf];
     
-    STAssertEqualObjects([nnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"NNF");
-    STAssertEqualObjects([cnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"CNF");
+    XCTAssertEqualObjects([nnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"NNF");
+    XCTAssertEqualObjects([cnf description], @"(x ∨ y) ∧ (¬x ∨ ¬y)", @"CNF");
     
     
     

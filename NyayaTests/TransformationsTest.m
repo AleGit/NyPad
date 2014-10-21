@@ -25,16 +25,16 @@
     node = [node nodeByReplacingNodeAtIndexPath:[NSIndexPath indexPathWithIndex:0] withNode:[NyayaNode negation:a]];
     node = [node substitute:nil];
     
-    STAssertEqualObjects([ab description], @"a ∧ b", nil);
-    STAssertEqualObjects([node description], @"¬a ∧ (a ∧ b)", nil);
+    XCTAssertEqualObjects([ab description], @"a ∧ b");
+    XCTAssertEqualObjects([node description], @"¬a ∧ (a ∧ b)");
 }
 
 - (void)testImfKey {
     NyayaFormula *frm = [NyayaFormula formulaWithString:@"(a>b)|c"];
     NyayaNode *node = [frm syntaxTree:NO];
-    STAssertNil(node.imfKey, nil);
-    STAssertEqualObjects([node nodeAtIndex:0].imfKey, @"P→Q=¬P∨Q", nil);
-    STAssertNil([node nodeAtIndex:1].imfKey, nil);
+    XCTAssertNil(node.imfKey);
+    XCTAssertEqualObjects([node nodeAtIndex:0].imfKey, @"P→Q=¬P∨Q");
+    XCTAssertNil([node nodeAtIndex:1].imfKey);
 }
 
 - (void)testCnfKeys {
@@ -44,17 +44,17 @@
     NyayaNode *def = [[node nodeAtIndex:1] nodeAtIndex:0];
     NyayaNode *ghij = [[node nodeAtIndex:1] nodeAtIndex:1];
     
-    STAssertEqualObjects([abc description], @"a ∨ (b ∧ c)", nil);
-    STAssertNil(abc.cnfLeftKey,nil);
-    STAssertEqualObjects(abc.cnfRightKey, @"P∨(Q∧R)=(P∨Q)∧(P∨R)", nil);
+    XCTAssertEqualObjects([abc description], @"a ∨ (b ∧ c)");
+    XCTAssertNil(abc.cnfLeftKey);
+    XCTAssertEqualObjects(abc.cnfRightKey, @"P∨(Q∧R)=(P∨Q)∧(P∨R)");
     
-    STAssertEqualObjects([def description], @"(d ∧ e) ∨ f", nil);
-    STAssertEqualObjects(def.cnfLeftKey, @"(P∧Q)∨R=(P∨R)∧(Q∨R)", nil);
-    STAssertNil(def.cnfRightKey, nil);
+    XCTAssertEqualObjects([def description], @"(d ∧ e) ∨ f");
+    XCTAssertEqualObjects(def.cnfLeftKey, @"(P∧Q)∨R=(P∨R)∧(Q∨R)");
+    XCTAssertNil(def.cnfRightKey);
     
-    STAssertEqualObjects([ghij description], @"(g ∧ h) ∨ (i ∧ j)", nil);
-    STAssertEqualObjects(ghij.cnfLeftKey, @"(P∧Q)∨R=(P∨R)∧(Q∨R)", nil);
-    STAssertEqualObjects(ghij.cnfRightKey, @"P∨(Q∧R)=(P∨Q)∧(P∨R)", nil);
+    XCTAssertEqualObjects([ghij description], @"(g ∧ h) ∨ (i ∧ j)");
+    XCTAssertEqualObjects(ghij.cnfLeftKey, @"(P∧Q)∨R=(P∨R)∧(Q∨R)");
+    XCTAssertEqualObjects(ghij.cnfRightKey, @"P∨(Q∧R)=(P∨Q)∧(P∨R)");
 }
 
 - (void)testDnfKeys {
@@ -64,17 +64,17 @@
     NyayaNode *def = [[node nodeAtIndex:1] nodeAtIndex:0];
     NyayaNode *ghij = [[node nodeAtIndex:1] nodeAtIndex:1];
     
-    STAssertEqualObjects([abc description], @"a ∧ (b ∨ c)", nil);
-    STAssertNil(abc.dnfLeftKey,nil);
-    STAssertEqualObjects(abc.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
+    XCTAssertEqualObjects([abc description], @"a ∧ (b ∨ c)");
+    XCTAssertNil(abc.dnfLeftKey);
+    XCTAssertEqualObjects(abc.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)");
     
-    STAssertEqualObjects([def description], @"(d ∨ e) ∧ f", nil);
-    STAssertEqualObjects(def.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)", nil);
-    STAssertNil(def.dnfRightKey, nil);
+    XCTAssertEqualObjects([def description], @"(d ∨ e) ∧ f");
+    XCTAssertEqualObjects(def.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)");
+    XCTAssertNil(def.dnfRightKey);
     
-    STAssertEqualObjects([ghij description], @"(g ∨ h) ∧ (i ∨ j)", nil);
-    STAssertEqualObjects(ghij.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)", nil);
-    STAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)", nil);
+    XCTAssertEqualObjects([ghij description], @"(g ∨ h) ∧ (i ∨ j)");
+    XCTAssertEqualObjects(ghij.dnfLeftKey, @"(P∨Q)∧R=(P∧R)∨(Q∧R)");
+    XCTAssertEqualObjects(ghij.dnfRightKey, @"P∧(Q∨R)=(P∧Q)∨(P∧R)");
 }
 
 - (void)testCnfs {
@@ -92,10 +92,10 @@
         
         NSString *leftkey = [node cnfLeftKey];
         NSString *rightkey = [node cnfRightKey];
-        STAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], obj);
-        STAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], obj);
-        STAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], obj);
-        STAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], obj);
+        XCTAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], @"%@", obj);
+        XCTAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], @"%@", obj);
     }];
     
 }
@@ -117,10 +117,10 @@
         
         NSString *leftkey = [node dnfLeftKey];
         NSString *rightkey = [node dnfRightKey];
-        STAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], obj);
-        STAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], obj);
-        STAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], obj);
-        STAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], obj);
+        XCTAssertEqualObjects(leftkey ? leftkey : @"---", leftkeys[idx], @"%@", obj);
+        XCTAssertEqualObjects(rightkey ? rightkey : @"---", rightkeys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node distributedNodeToIndex:0] description], leftDists[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node distributedNodeToIndex:1] description], rightDist[idx], @"%@", obj);
     }];
     
 }
@@ -138,8 +138,8 @@
         NyayaNode *node = [frm syntaxTree:NO];
         
         NSString *key = [node imfKey];
-        STAssertEqualObjects(key ? key : @"---", keys[idx], obj);
-        STAssertEqualObjects([[node imfNode] description], trans[idx], obj);
+        XCTAssertEqualObjects(key ? key : @"---", keys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node imfNode] description], trans[idx], @"%@", obj);
     }];
 }
 
@@ -154,8 +154,8 @@
         NyayaNode *node = [frm syntaxTree:NO];
         
         NSString *key = [node nnfKey];
-        STAssertEqualObjects(key ? key : @"---", keys[idx], obj);
-        STAssertEqualObjects([[node nnfNode] description], trans[idx], obj);
+        XCTAssertEqualObjects(key ? key : @"---", keys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node nnfNode] description], trans[idx], @"%@", obj);
     }];    
 }
 
@@ -169,8 +169,8 @@
         NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
         NyayaNode *node = [frm syntaxTree:NO];
         
-        STAssertEqualObjects([node collapseKey], keys[idx], obj);
-        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+        XCTAssertEqualObjects([node collapseKey], keys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node collapsedNode] description], trans[idx], @"%@", obj);
     }];
 }
 
@@ -184,8 +184,8 @@
         NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
         NyayaNode *node = [frm syntaxTree:NO];
         
-        STAssertEqualObjects([node collapseKey], keys[idx], obj);
-        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+        XCTAssertEqualObjects([node collapseKey], keys[idx], @"%@", obj);
+        XCTAssertEqualObjects([[node collapsedNode] description], trans[idx], @"%@", obj);
     }];
 }
 
@@ -198,8 +198,8 @@
         NyayaFormula *frm = [NyayaFormula formulaWithString:obj];
         NyayaNode *node = [frm syntaxTree:NO];
         
-        STAssertNil([node collapseKey], obj);
-        STAssertEqualObjects([[node collapsedNode] description], trans[idx], obj);
+        XCTAssertNil([node collapseKey], @"%@", obj);
+        XCTAssertEqualObjects([[node collapsedNode] description], trans[idx], @"%@", obj);
     }];
 }
 

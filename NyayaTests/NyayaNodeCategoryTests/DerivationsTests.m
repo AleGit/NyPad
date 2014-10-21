@@ -22,28 +22,28 @@
     NyayaNode *node = [self nodeWithFormula:@"a"];
     NyayaNode *a = node;
     NSSet *set = [node subNodeSet];
-    STAssertEquals([set count], (NSUInteger)1, nil);
+    XCTAssertEqual([set count], (NSUInteger)1);
     
     node = [self nodeWithFormula:@"a|a"];
     set = [node subNodeSet];
-    STAssertEquals([set count], (NSUInteger)2, nil); // a, a|a
+    XCTAssertEqual([set count], (NSUInteger)2); // a, a|a
     
     node = [self nodeWithFormula:@"(a|b)&(a|b)"];
     set = [node subNodeSet];
-    STAssertEquals([set count], (NSUInteger)4, nil);
+    XCTAssertEqual([set count], (NSUInteger)4);
     
     node = [self nodeWithFormula:@"(a>b)|((a>b)&c)"];
     set = [node subNodeSet];
-    STAssertEquals([set count], (NSUInteger)6, nil);
+    XCTAssertEqual([set count], (NSUInteger)6);
     
     
-    STAssertTrue([set containsObject:a], nil);
+    XCTAssertTrue([set containsObject:a]);
     NSArray* array = [set allObjects];
     NSUInteger idx = [array indexOfObject:a];
-    STAssertTrue(idx != NSNotFound, nil);
+    XCTAssertTrue(idx != NSNotFound);
     NyayaNode *a2 = [array objectAtIndex:idx];
-    STAssertFalse(a == a2, nil);
-    STAssertTrue([a isEqual:a2], nil);
+    XCTAssertFalse(a == a2);
+    XCTAssertTrue([a isEqual:a2]);
     
 }
 
@@ -52,7 +52,7 @@
          ]) {
         NyayaNode *n = [self nodeWithFormula:input];
         NyayaNode *i = [n deriveImf:NSIntegerMax];
-        STAssertEqualObjects(i, n, nil);
+        XCTAssertEqualObjects(i, n);
     }
 }
 
@@ -60,14 +60,14 @@
     NyayaNode *n = [self nodeWithFormula:@"a>b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [self nodeWithFormula:@"!a|b"];
-    STAssertEqualObjects(i, e, nil);
+    XCTAssertEqualObjects(i, e);
 }
 
 - (void)testBiconditionalImf {
     NyayaNode *n = [self nodeWithFormula:@"a=b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [self nodeWithFormula:@"(!a|b)&(!b|a)"];
-    STAssertEqualObjects(i, e, nil);
+    XCTAssertEqualObjects(i, e);
 }
 
 
@@ -76,7 +76,7 @@
     NyayaNode *n = [self nodeWithFormula:@"F^T"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [self nodeWithFormula:@"(F|T)&(!F|!T)"];
-    STAssertEqualObjects(i, e, nil);
+    XCTAssertEqualObjects(i, e);
 }
 
 
@@ -84,7 +84,7 @@
     NyayaNode *n = [self nodeWithFormula:@"a^b"];
     NyayaNode *i = [n deriveImf:NSIntegerMax];
     NyayaNode *e = [self nodeWithFormula:@"(a|b)&(!a|!b) "];
-    STAssertEqualObjects(i, e, nil);
+    XCTAssertEqualObjects(i, e);
     
     
 }

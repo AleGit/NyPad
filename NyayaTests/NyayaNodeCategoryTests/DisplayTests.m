@@ -17,21 +17,21 @@
 
 - (void)testDisplayTop {
     NyayaNode *top = [NyayaNode top];
-    STAssertEquals(top.displayValue, (NyayaBool)NyayaTrue, nil);
+    XCTAssertEqual(top.displayValue, (NyayaBool)NyayaTrue);
 }
 
 - (void)testDisplayBottom {
     NyayaNode *top = [NyayaNode bottom];
-    STAssertEquals(top.displayValue, (NyayaBool)NyayaFalse, nil);
+    XCTAssertEqual(top.displayValue, (NyayaBool)NyayaFalse);
 }
 
 - (void)testDisplayA {
     NyayaFormula *formula = [NyayaFormula formulaWithString:@"a"];
     NyayaNode *a = [formula syntaxTree:NO];
     ((NyayaNodeVariable*)a).displayValue = NyayaTrue;
-    STAssertEquals(a.displayValue, (NyayaBool)NyayaTrue, @"%d",a.displayValue);
+    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaTrue, @"%d",a.displayValue);
     ((NyayaNodeVariable*)a).displayValue = NyayaFalse;
-    STAssertEquals(a.displayValue, (NyayaBool)NyayaFalse, @"%d",a.displayValue);
+    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaFalse, @"%d",a.displayValue);
 }
 
 @end

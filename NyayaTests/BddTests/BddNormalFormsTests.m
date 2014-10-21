@@ -23,81 +23,81 @@
     NyayaFormula *node = [NyayaFormula formulaWithString:@"0"];
     BddNode *bdd = [node OBDD:YES];
     
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)0, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)0);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)0, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)0);
     
-    STAssertEqualObjects([bdd dnfDescription], @"F", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"F", nil);
+    XCTAssertEqualObjects([bdd dnfDescription], @"F");
+    XCTAssertEqualObjects([bdd cnfDescription], @"F");
     
     node = [NyayaFormula formulaWithString:@"a"];
     bdd = [node OBDD:YES];
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)1);
     
-    STAssertEqualObjects([bdd dnfDescription], @"(a)", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"(a)", nil);
+    XCTAssertEqualObjects([bdd dnfDescription], @"(a)");
+    XCTAssertEqualObjects([bdd cnfDescription], @"(a)");
     
     
     node = [NyayaFormula formulaWithString:@"a|b"];
     bdd = [node OBDD:YES];
     
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"b"] count], (NSUInteger)1);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)2);
     
-    STAssertEqualObjects([bdd dnfDescription], @"(a ∨ b)", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b)", nil);
+    XCTAssertEqualObjects([bdd dnfDescription], @"(a ∨ b)");
+    XCTAssertEqualObjects([bdd cnfDescription], @"(a ∨ b)");
     
     node = [NyayaFormula formulaWithString:@"a&b"];
     bdd = [node OBDD:YES];
     
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"b"] count], (NSUInteger)1);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)1);
     
-    STAssertEqualObjects([bdd dnfDescription], @"(a ∧ b)", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"(a ∧ b)", nil);
+    XCTAssertEqualObjects([bdd dnfDescription], @"(a ∧ b)");
+    XCTAssertEqualObjects([bdd cnfDescription], @"(a ∧ b)");
     
     node = [NyayaFormula formulaWithString:@"a^b"];
     bdd = [node OBDD:YES];
     
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)2, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"b"] count], (NSUInteger)2);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)2);
     
-    STAssertEqualObjects([bdd dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)", nil);
-    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)", nil);
+    XCTAssertEqualObjects([bdd dnfDescription], @"(a ∧ ¬b) ∨ (¬a ∧ b)");
+    XCTAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (¬a ∨ ¬b)");
     
     node = [NyayaFormula formulaWithString:@"a+b.c"];
     bdd = [node OBDD:YES];
     
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"c"] count], (NSUInteger)1, nil);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"b"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"c"] count], (NSUInteger)1);
     
-    STAssertEquals([[bdd conjunctiveSet] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd disjunctiveSet] count], (NSUInteger)2, nil);
+    XCTAssertEqual([[bdd conjunctiveSet] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd disjunctiveSet] count], (NSUInteger)2);
     
 //    STAssertEqualObjects([bdd dnfDescription], @"a ∨ (b ∧ c)", nil);
 //    STAssertEqualObjects([bdd cnfDescription], @"(a ∨ b) ∧ (a ∨ c)", nil);
@@ -108,20 +108,20 @@
 - (void)xtestBigXor {
     NyayaFormula *node = [NyayaFormula formulaWithString:@"a^b^c^d^e^f^g^h^i^j^k^l"]; //^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z"];
     BddNode *bdd = [node OBDD:YES];
-    STAssertEquals([[bdd pathsTo:@"a"] count], (NSUInteger)1, nil);
-    STAssertEquals([[bdd pathsTo:@"b"] count], (NSUInteger)2, nil);
-    STAssertEquals([[bdd pathsTo:@"c"] count], (NSUInteger)4, nil);
-    STAssertEquals([[bdd pathsTo:@"d"] count], (NSUInteger)8, nil);
-    STAssertEquals([[bdd pathsTo:@"e"] count], (NSUInteger)16, nil);
-    STAssertEquals([[bdd pathsTo:@"f"] count], (NSUInteger)32, nil);
-    STAssertEquals([[bdd pathsTo:@"g"] count], (NSUInteger)64, nil);
-    STAssertEquals([[bdd pathsTo:@"h"] count], (NSUInteger)128, nil);
-    STAssertEquals([[bdd pathsTo:@"i"] count], (NSUInteger)256, nil);
-    STAssertEquals([[bdd pathsTo:@"j"] count], (NSUInteger)512, nil);
-    STAssertEquals([[bdd pathsTo:@"k"] count], (NSUInteger)1024, nil);
-    STAssertEquals([[bdd pathsTo:@"l"] count], (NSUInteger)2048, nil);
-    STAssertEquals([[bdd pathsTo:@"0"] count], (NSUInteger)2048, nil);
-    STAssertEquals([[bdd pathsTo:@"1"] count], (NSUInteger)2048, nil);
+    XCTAssertEqual([[bdd pathsTo:@"a"] count], (NSUInteger)1);
+    XCTAssertEqual([[bdd pathsTo:@"b"] count], (NSUInteger)2);
+    XCTAssertEqual([[bdd pathsTo:@"c"] count], (NSUInteger)4);
+    XCTAssertEqual([[bdd pathsTo:@"d"] count], (NSUInteger)8);
+    XCTAssertEqual([[bdd pathsTo:@"e"] count], (NSUInteger)16);
+    XCTAssertEqual([[bdd pathsTo:@"f"] count], (NSUInteger)32);
+    XCTAssertEqual([[bdd pathsTo:@"g"] count], (NSUInteger)64);
+    XCTAssertEqual([[bdd pathsTo:@"h"] count], (NSUInteger)128);
+    XCTAssertEqual([[bdd pathsTo:@"i"] count], (NSUInteger)256);
+    XCTAssertEqual([[bdd pathsTo:@"j"] count], (NSUInteger)512);
+    XCTAssertEqual([[bdd pathsTo:@"k"] count], (NSUInteger)1024);
+    XCTAssertEqual([[bdd pathsTo:@"l"] count], (NSUInteger)2048);
+    XCTAssertEqual([[bdd pathsTo:@"0"] count], (NSUInteger)2048);
+    XCTAssertEqual([[bdd pathsTo:@"1"] count], (NSUInteger)2048);
     
     
 }

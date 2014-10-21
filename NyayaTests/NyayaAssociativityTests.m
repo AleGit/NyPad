@@ -26,7 +26,7 @@
     }
     
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        STAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]], nil);
+        XCTAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]]);
     }];
 }
 
@@ -44,7 +44,7 @@
     }
     
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        STAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]], nil);
+        XCTAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]]);
     }];
 }
 
@@ -61,7 +61,7 @@
     }
     
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        STAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]], nil);
+        XCTAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]]);
     }];
 }
 - (void)testXorAssociativity {
@@ -77,7 +77,7 @@
     }
     
     [truthTables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        STAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]], nil);
+        XCTAssertEqualObjects(obj, [truthTables objectAtIndex:(idx + 1) % [inputs count]]);
     }];
 }
 
@@ -94,9 +94,9 @@
         [truthTables addObject:truthTable];
     }
     
-    STAssertFalse([[truthTables objectAtIndex:0] isEqual: [truthTables objectAtIndex:1]], nil);
-    STAssertFalse([[truthTables objectAtIndex:1] isEqual: [truthTables objectAtIndex:2]], nil);
-    STAssertTrue([[truthTables objectAtIndex:2] isEqual: [truthTables objectAtIndex:0]], nil);
+    XCTAssertFalse([[truthTables objectAtIndex:0] isEqual: [truthTables objectAtIndex:1]]);
+    XCTAssertFalse([[truthTables objectAtIndex:1] isEqual: [truthTables objectAtIndex:2]]);
+    XCTAssertTrue([[truthTables objectAtIndex:2] isEqual: [truthTables objectAtIndex:0]]);
     
 }
 

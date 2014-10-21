@@ -195,9 +195,9 @@ enum { kTitle, kInput, kOutput, kErrorState, kErrors, kC  };
         NSString *ast = [node description];
         
         
-        STAssertEqualObjects(ast, ast_expected, title);
-        STAssertEquals(parser.firstErrorState, firstErrorState_expected, title);
-        STAssertEqualObjects([parser errorDescriptions], ed_expected, title);
+        XCTAssertEqualObjects(ast, ast_expected, @"%@",title);
+        XCTAssertEqual(parser.firstErrorState, firstErrorState_expected, @"%@",title);
+        XCTAssertEqualObjects([parser errorDescriptions], ed_expected, @"%@",title);
     } ];
     
     

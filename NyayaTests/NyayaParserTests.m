@@ -87,7 +87,7 @@
         
         NSString *d = [node description];
         
-        STAssertEqualObjects(obj, d, [d commonPrefixWithString:(NSString*)obj options:NSLiteralSearch]);
+        XCTAssertEqualObjects(obj, d, @"%@",[d commonPrefixWithString:(NSString*)obj options:NSLiteralSearch]);
         
     }];
     

@@ -26,11 +26,11 @@
     aAb = [[[[NyayaNode implication:b with:aAb] deriveImf:NSIntegerMax] deriveNnf:NSIntegerMax] deriveCnf:NSIntegerMax];
     
     NSSet *set = [aAb setOfVariables];
-    STAssertEquals([set count], (NSUInteger)2,nil);
-    STAssertTrue([set containsObject:a], nil);
-    STAssertTrue([set containsObject:b], nil);
-    STAssertTrue(![set containsObject:c], nil);
-    STAssertTrue(![set containsObject:d], nil);
+    XCTAssertEqual([set count], (NSUInteger)2);
+    XCTAssertTrue([set containsObject:a]);
+    XCTAssertTrue([set containsObject:b]);
+    XCTAssertTrue(![set containsObject:c]);
+    XCTAssertTrue(![set containsObject:d]);
     
     
 }

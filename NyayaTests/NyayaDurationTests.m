@@ -94,8 +94,8 @@
         id result = block(input);
         end = [NSDate date];
         duration = [end timeIntervalSinceDate:begin];
-        STAssertNotNil(result, input);
-        STAssertTrue(duration < maxDuration, @"%3f %@", duration, label);
+        XCTAssertNotNil(result, @"%@", input);
+        XCTAssertTrue(duration < maxDuration, @"%3f %3f %@", duration, maxDuration, label);
     }
 }
 
@@ -130,8 +130,8 @@
         NSTimeInterval duration0 = [[NSDate date] timeIntervalSinceDate:begin];
         NSLog(@"d0:%f (%f) %@", duration0, [t0 timeIntervalSinceDate:begin], [node description]);
         
-        if (index !=1 && index != 2) STAssertEquals(bdd0.height, [varibles count]+1, nil);
-        else STAssertEquals(bdd0.height, (NSUInteger)1, nil);
+        if (index !=1 && index != 2) XCTAssertEqual(bdd0.height, [varibles count]+1);
+        else XCTAssertEqual(bdd0.height, (NSUInteger)1);
         /*
         begin = [NSDate date];
         TruthTable *tTable = [formula truthTable:YES];
@@ -139,7 +139,7 @@
         NSTimeInterval duration1 = [[NSDate date] timeIntervalSinceDate:begin];
         
         STAssertFalse(bdd0 == bdd1, nil);
-        STAssertTrue(duration0 != duration1, @"d0:%f d1:%f %@", duration0, duration1,input);
+        STAssertTrue(duration0 != duration1, @"d0:%f d1:%f %@", duration0, duration1,@"%@", input);
         NSLog(@"d1:%f %@ co=%u ta=%u sa=%u", duration1,input, tTable.isContradiction, tTable.isTautology, tTable.isContradiction);
          */
         index++;
