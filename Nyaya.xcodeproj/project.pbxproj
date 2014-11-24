@@ -483,7 +483,7 @@
 		11C375FC15B3D23D005C5C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		11C375FD15B3D23D005C5C9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		11C3760015B3D23D005C5C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		11C3761515B3D23D005C5C9C /* NyayaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyayaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11C3761515B3D23D005C5C9C /* NyayaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyayaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C3761E15B3D23D005C5C9C /* NyayaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NyayaTests-Info.plist"; sourceTree = "<group>"; };
 		11C3762015B3D23D005C5C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		11C3763F15B3EC48005C5C9C /* Nyaya.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Nyaya.g; path = Model/Nyaya.g; sourceTree = "<group>"; };
@@ -959,7 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				11C375E915B3D23D005C5C9C /* nyaya.app */,
-				11C3761515B3D23D005C5C9C /* NyayaTests.octest */,
+				11C3761515B3D23D005C5C9C /* NyayaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1269,7 +1269,7 @@
 			);
 			name = NyayaTests;
 			productName = NyayaTests;
-			productReference = 11C3761515B3D23D005C5C9C /* NyayaTests.octest */;
+			productReference = 11C3761515B3D23D005C5C9C /* NyayaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

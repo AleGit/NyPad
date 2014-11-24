@@ -1013,7 +1013,7 @@
     NSUInteger count = [self.valueNodes count];
     NSUInteger rows = 1 << count;
     
-    NSLog(@"count=%u rows=%u", count, rows);
+    NSLog(@"count=%lu rows=%lu", (unsigned long)count, (unsigned long)rows);
     
     [self.solutionButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
         if (button.tag < rows) {

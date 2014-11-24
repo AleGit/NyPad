@@ -29,9 +29,9 @@
     NyayaFormula *formula = [NyayaFormula formulaWithString:@"a"];
     NyayaNode *a = [formula syntaxTree:NO];
     ((NyayaNodeVariable*)a).displayValue = NyayaTrue;
-    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaTrue, @"%d",a.displayValue);
+    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaTrue, @"%lu",(unsigned long)a.displayValue);
     ((NyayaNodeVariable*)a).displayValue = NyayaFalse;
-    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaFalse, @"%d",a.displayValue);
+    XCTAssertEqual(a.displayValue, (NyayaBool)NyayaFalse, @"%lu",(unsigned long)a.displayValue);
 }
 
 @end

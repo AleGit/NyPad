@@ -63,10 +63,10 @@
     
     if (spare) {
         NSString *text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_TRUE_OF_U_ROWS,nil), self.truthCount, self.rowsCount];
-        [description appendFormat:@"<tr><td class='green' colspan='%u'>%@</td>", [self.variables count]+2, text];
+        [description appendFormat:@"<tr><td class='green' colspan='%lu'>%@</td>", (unsigned long)[self.variables count]+2lu, text];
         text = [NSString stringWithFormat:NSLocalizedString(TRUTH_TABLE_U_FALSE_OF_U_ROWS,nil), self.falseCount, self.rowsCount];
-        [description appendFormat:@"<tr><td class='red' colspan='%u'>%@</td>", [self.variables count]+2, text];
-        [description appendFormat:@"<tr><td colspan='%u'></td></tr>", [self.variables count]+2];
+        [description appendFormat:@"<tr><td class='red' colspan='%lu'>%@</td>", (unsigned long)[self.variables count]+2lu, text];
+        [description appendFormat:@"<tr><td colspan='%lu'></td></tr>", (unsigned long)[self.variables count]+2lu];
         
     }
     
@@ -109,7 +109,7 @@
         }
         else if (firstSpare) {
             firstSpare = NO;
-            [description appendFormat:@"<td colspan='%u'></td><td></td>", [self.variables count]];
+            [description appendFormat:@"<td colspan='%lu'></td><td></td>", (unsigned long)[self.variables count]];
             if (eval) [description appendString: tdT];
             else [description appendString:tdF];
             rowCount++;

@@ -98,7 +98,7 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    NSLog(@"%@ didRotateFromInterfaceOrientation:%i\n%@\n%@",self, fromInterfaceOrientation, self.view, self.canvasView);
+    NSLog(@"%@ didRotateFromInterfaceOrientation:%li\n%@\n%@",self, (long)fromInterfaceOrientation, self.view, self.canvasView);
     [self.canvasView setNeedsDisplay];
 }
 

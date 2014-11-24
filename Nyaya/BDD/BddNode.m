@@ -73,7 +73,7 @@
 }
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"%@.%i", self.name, self.layer];
+    return [NSString stringWithFormat:@"%@.%li", self.name, (long)self.layer];
 }
 
 - (void)calcLayer {

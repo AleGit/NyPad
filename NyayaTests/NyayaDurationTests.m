@@ -156,7 +156,7 @@
         NyayaNode *imf = [formula deriveImf:NSIntegerMax];
         NyayaNode *nnf = [imf deriveNnf:NSIntegerMax];
         NyayaNode *cnf = [nnf deriveCnf:NSIntegerMax];
-        NSLog(@"%@ %7u %7u %7u %7u %7u", atom, [[formula setOfVariables] count], [formula length], [imf length], [nnf length], [cnf length]);
+        NSLog(@"%@ %7lu %7lu %7lu %7lu %7lu", atom, (unsigned long)[[formula setOfVariables] count], (unsigned long)[formula length], (unsigned long)[imf length], (unsigned long)[nnf length], (unsigned long)[cnf length]);
         
         
 
@@ -166,6 +166,6 @@
     
     NyayaParser *parser7 = [NyayaParser parserWithString:cnf7];
     formula = [parser7 parseFormula];
-    NSLog(@"%7u \n%@", [formula length], [formula description]);
+    NSLog(@"%7lu \n%@", (unsigned long)[formula length], [formula description]);
 }
 @end

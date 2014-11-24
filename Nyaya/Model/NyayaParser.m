@@ -92,14 +92,14 @@
     NSUInteger _idx = _index+1;
     NSString* description = nil;
     if (errorState != NyayaErrorFunctionNotSupported) {
-        description = [NSString stringWithFormat:@"%@::%@::%@::%d",
+        description = [NSString stringWithFormat:@"%@::%@::%@::%lu",
                              [[_tokens subarrayWithRange:NSMakeRange(0, _index)] componentsJoinedByString:@""],
                              _token ? _token : @" ",
                              _idx < [_tokens count] ? [[_tokens subarrayWithRange:NSMakeRange(_idx, [_tokens count]-_idx)] componentsJoinedByString:@""] : @"",
-                             errorState];
+                             (unsigned long)errorState];
     }
     else {
-        description = [NSString stringWithFormat:@"%u",errorState];
+        description = [NSString stringWithFormat:@"%lu",(unsigned long)errorState];
     }
     [_errors addObject:description];
 }

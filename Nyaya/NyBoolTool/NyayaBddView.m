@@ -321,7 +321,7 @@
         
         CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
         UIGraphicsPushContext(context);
-        NSString *keyName = [NSString stringWithFormat:@"%@:%i", key.name, key.layer];
+        NSString *keyName = [NSString stringWithFormat:@"%@:%li", key.name, (long)key.layer];
         CGSize size = [keyName sizeWithFont:[UIFont systemFontOfSize:23]];
         [keyName drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
         UIGraphicsPopContext();

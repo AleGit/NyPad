@@ -310,7 +310,7 @@
     long size = _cellCount * sizeof(BOOL); // aver ineffizient way to store a truth table
     
     if (size > 1*1000*1000)
-        NSLog(@"\ncols: %u rows: %u calloc(%u,%lu) = %lu", _colsCount, _rowsCount, _cellCount, sizeof(BOOL), size);
+        NSLog(@"\ncols: %lu rows: %lu calloc(%lu,%lu) = %lu", (unsigned long)_colsCount, (unsigned long)_rowsCount, (unsigned long)_cellCount, sizeof(BOOL), size);
     
     _evals = calloc(_cellCount, sizeof(BOOL));
     
