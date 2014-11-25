@@ -36,6 +36,8 @@
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
+/* 
+ // gradient does not fit the iOS 7/8 style anymore
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
@@ -60,5 +62,6 @@
     
     // CGContextDrawPath(currentContext, kCGPathStroke);
 }
+ */
 
 @end
