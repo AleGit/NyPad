@@ -120,11 +120,11 @@
             <objects>
                 <viewController modalPresentationStyle="formSheet" id="egB-da-fIt" customClass="NyTuTestViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ltI-le-nPx">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5yJ-rZ-XXi">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem title="check anwswer" id="UYl-bC-CCN">
@@ -154,7 +154,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="checkButton" destination="UYl-bC-CCN" id="3V0-Pp-2xM"/>
                         <outlet property="doneButton" destination="lm6-vy-jjd" id="k7u-Jn-XOh"/>
