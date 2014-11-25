@@ -40,7 +40,7 @@
     NSString *currentSytemVersion = [[UIDevice currentDevice] systemVersion];
     NSString *requiredSystemVersion = @"6.0";
     NSComparisonResult result = [currentSytemVersion compare: requiredSystemVersion options:NSNumericSearch];
-    NSLog(@"%@ %@ %i", currentSytemVersion, requiredSystemVersion, result);
+    NSLog(@"%@ %@ %li", currentSytemVersion, requiredSystemVersion, (long int)result);
     
     if (result == NSOrderedAscending) { // current < required
         // Workaround: On iOS < 6.0.1 the playground crashes if it is not shown first
