@@ -176,8 +176,17 @@
     NyayaNode *n0 = [self nodeAtIndex:0];   // level 1
     NyayaNode *n1 = [self nodeAtIndex:1];   // level 1
     
-    if (self.type == NyayaImplication) {
-        node = [NyayaNode disjunction:[NyayaNode negation:n0] with:n1];  
+    switch (self.type) {
+        case NyayaImplication:
+            node = [NyayaNode disjunction:[NyayaNode negation:n0] with:n1];
+            break;
+        case NyayaBicondition:
+            node = [NyayaNode conjunction:[NyayaNode implication:n0 with:n1] with:[NyayaNode implication:n1 with:n0]];
+            break;
+        case NyayaXdisjunction:
+            node = [NyayaNode negation:[NyayaNode bicondition:n0 with:n1]];
+            break;
+            
     }
     return node;
 }
