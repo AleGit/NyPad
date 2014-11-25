@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C54</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1296</int>
+		<string key="IBDocument.SystemVersion">14B25</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6250</string>
+		<string key="IBDocument.AppKitVersion">1343.16</string>
+		<string key="IBDocument.HIToolboxVersion">755.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">6244</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -36,7 +36,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">301</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIButton" id="541397967">
@@ -44,6 +44,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{-4, -4}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="917481056"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -52,17 +53,17 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIHighlightedTitle">🔏</string>
-						<string key="IBUISelectedTitle">🔓</string>
-						<string key="IBUINormalTitle">🔒</string>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="635239901">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
+						<object class="NSColor" key="IBUIHighlightedTitleColor" id="635239901">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
+						<string key="IBUIHighlightedTitle">🔏</string>
+						<string key="IBUISelectedTitle">🔓</string>
+						<string key="IBUINormalTitle">🔒</string>
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="695917298">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
@@ -72,7 +73,7 @@
 							<double key="pointSize">24</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
+							<string key="NSName">HelveticaNeue-Bold</string>
 							<double key="NSSize">24</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -82,25 +83,27 @@
 						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{367, -2}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">2</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">⛔</string>
-						<reference key="IBUIHighlightedTitleColor" ref="635239901"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
+						<reference key="IBUIHighlightedTitleColor" ref="635239901"/>
+						<string key="IBUINormalTitle">⛔</string>
 						<reference key="IBUINormalTitleShadowColor" ref="695917298"/>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
 							<double key="pointSize">15</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
+							<string key="NSName">HelveticaNeue-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -110,6 +113,7 @@
 						<int key="NSvFlags">293</int>
 						<string key="NSFrame">{{165, -1}, {70, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="112071567"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -137,20 +141,27 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<bool key="useAutomaticPreferredMaxLayoutWidth">YES</bool>
 					</object>
 				</array>
 				<string key="NSFrameSize">{400, 400}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="541397967"/>
 				<reference key="IBUIBackgroundColor" ref="635239901"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<int key="IBUITag">1</int>
 				<array key="IBUIGestureRecognizers" id="0"/>
+				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics" id="661705362">
+					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
+					<string key="IBUIDisplayName">Freeform</string>
+				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="759239828"/>
 			<object class="IBUIPanGestureRecognizer" id="867163482"/>
 			<object class="IBUIView" id="466388088">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUILabel" id="96872865">
@@ -158,6 +169,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{41, 41}</string>
 						<reference key="NSSuperview" ref="466388088"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="121642249"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -175,22 +187,24 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
 							<double key="pointSize">43</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
+							<string key="NSName">HelveticaNeue</string>
 							<double key="NSSize">43</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="useAutomaticPreferredMaxLayoutWidth">YES</bool>
 					</object>
 					<object class="IBUILabel" id="121642249">
 						<reference key="NSNextResponder" ref="466388088"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{41, 41}</string>
 						<reference key="NSSuperview" ref="466388088"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -206,19 +220,20 @@
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<string key="name">ArialMT</string>
-							<string key="family">Arial</string>
-							<int key="traits">0</int>
+							<int key="type">1</int>
 							<double key="pointSize">21</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">ArialMT</string>
+							<string key="NSName">HelveticaNeue</string>
 							<double key="NSSize">21</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="useAutomaticPreferredMaxLayoutWidth">YES</bool>
 					</object>
 				</array>
 				<string key="NSFrameSize">{41, 41}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="96872865"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -230,10 +245,7 @@
 				</object>
 				<int key="IBUITag">2</int>
 				<reference key="IBUIGestureRecognizers" ref="0"/>
-				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
-					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
-					<string key="IBUIDisplayName">Freeform</string>
-				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="661705362"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="143240065"/>
@@ -245,13 +257,12 @@
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="191373211"/>
 						<reference key="destination" ref="759239828"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">9</int>
@@ -261,7 +272,6 @@
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="191373211"/>
 						<reference key="destination" ref="867163482"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">16</int>
@@ -353,7 +363,6 @@
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="466388088"/>
 						<reference key="destination" ref="143240065"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">46</int>
@@ -363,7 +372,6 @@
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="466388088"/>
 						<reference key="destination" ref="727792096"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">55</int>
@@ -373,7 +381,6 @@
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="466388088"/>
 						<reference key="destination" ref="983981422"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">60</int>
@@ -542,51 +549,114 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NyDetailInputViewController</string>
 					<string key="superclassName">NyDetailViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="accessoryView">UIView</string>
-						<string key="backButton">UIButton</string>
-						<string key="dismissButton">UIButton</string>
-						<string key="inputField">UITextField</string>
-						<string key="processButton">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="accessoryView">
-							<string key="name">accessoryView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="backButton">
-							<string key="name">backButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="dismissButton">
-							<string key="name">dismissButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="inputField">
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">inputField</string>
+						<string key="NS.object.0">UITextField</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">inputField</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">inputField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="processButton">
-							<string key="name">processButton</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="711482898">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Nyaya/NyBranches/NyDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NyDetailInputViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="back:">UIButton</string>
+						<string key="dismiss:">UIButton</string>
+						<string key="negate:">UIButton</string>
+						<string key="parenthesize:">UIButton</string>
+						<string key="press:">UIButton</string>
+						<string key="process:">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="back:">
+							<string key="name">back:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="dismiss:">
+							<string key="name">dismiss:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="negate:">
+							<string key="name">negate:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="parenthesize:">
+							<string key="name">parenthesize:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="press:">
+							<string key="name">press:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="process:">
+							<string key="name">process:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NyDetailInputViewController.h</string>
+						<string key="minorKey">../Nyaya/NyBranches/NyDetailViewController.m</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NyDetailViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<reference key="sourceIdentifier" ref="711482898"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NyNodeView</string>
+					<string key="superclassName">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NyDetailViewController.h</string>
+						<string key="minorKey">../Nyaya/NyPlayground/NyNodeView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NyPgDetailViewController</string>
 					<string key="superclassName">NyDetailInputViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="canvasLongPress:">UILongPressGestureRecognizer</string>
+						<string key="canvasTap:">UITapGestureRecognizer</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="canvasLongPress:">
+							<string key="name">canvasLongPress:</string>
+							<string key="candidateClassName">UILongPressGestureRecognizer</string>
+						</object>
+						<object class="IBActionInfo" key="canvasTap:">
+							<string key="name">canvasTap:</string>
+							<string key="candidateClassName">UITapGestureRecognizer</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="canvasView">UIView</string>
+						<string key="detailDescriptionLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="canvasView">
+							<string key="name">canvasView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="detailDescriptionLabel">
+							<string key="name">detailDescriptionLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Nyaya/NyPlayground/NyPgDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NyPgDetailViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="canvasLongPress:">UILongPressGestureRecognizer</string>
 						<string key="canvasTap:">UITapGestureRecognizer</string>
@@ -631,35 +701,167 @@
 							<string key="candidateClassName">UITapGestureRecognizer</string>
 						</object>
 					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Nyaya/NyPlayground/NyPgDetailViewController.m</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NyTreeView</string>
+					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="canvasView">UIView</string>
-						<string key="detailDescriptionLabel">UILabel</string>
+						<string key="dataSource">id</string>
+						<string key="delegate">id</string>
+						<string key="formulaPanGestureRecognizer">UIPanGestureRecognizer</string>
+						<string key="formulaTapGestureRecognizer">UITapGestureRecognizer</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="canvasView">
-							<string key="name">canvasView</string>
-							<string key="candidateClassName">UIView</string>
+						<object class="IBToOneOutletInfo" key="dataSource">
+							<string key="name">dataSource</string>
+							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="detailDescriptionLabel">
-							<string key="name">detailDescriptionLabel</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="delegate">
+							<string key="name">delegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="formulaPanGestureRecognizer">
+							<string key="name">formulaPanGestureRecognizer</string>
+							<string key="candidateClassName">UIPanGestureRecognizer</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="formulaTapGestureRecognizer">
+							<string key="name">formulaTapGestureRecognizer</string>
+							<string key="candidateClassName">UITapGestureRecognizer</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NyPgDetailViewController.h</string>
+						<string key="minorKey">../Nyaya/NyPlayground/NyTreeView.h</string>
+					</object>
+				</object>
+			</array>
+			<array class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
+				<object class="IBPartialClassDescription">
+					<string key="className">UIButton</string>
+					<string key="superclassName">UIControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIControl</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIControl.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIGestureRecognizer</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIGestureRecognizer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UILabel</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UILabel.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UILongPressGestureRecognizer</string>
+					<string key="superclassName">UIGestureRecognizer</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UILongPressGestureRecognizer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIPanGestureRecognizer</string>
+					<string key="superclassName">UIGestureRecognizer</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIPanGestureRecognizer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIResponder</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIResponder.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UISearchBar</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UISearchBar.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UISearchDisplayController</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UISearchDisplayController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UISwipeGestureRecognizer</string>
+					<string key="superclassName">UIGestureRecognizer</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UISwipeGestureRecognizer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UITapGestureRecognizer</string>
+					<string key="superclassName">UIGestureRecognizer</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UITapGestureRecognizer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UITextField</string>
+					<string key="superclassName">UIControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIView</string>
+					<string key="superclassName">UIResponder</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIViewController</string>
+					<string key="superclassName">UIResponder</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIViewController.h</string>
 					</object>
 				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
+			<integer value="4600" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>
