@@ -37,7 +37,7 @@
 
 @implementation NyayaFormula
 
-- (id)initNode:(NyayaNode*)node {
+- (instancetype)initNode:(NyayaNode*)node {
     self = [super init];
     if (self) {
         _slfNode = node;
@@ -47,11 +47,11 @@
 }
 
 
-+ (id)formulaWithNode:(NyayaNode*)node {
++ (instancetype)formulaWithNode:(NyayaNode*)node {
     return [[NyayaFormula alloc] initNode:node];
 }
 
-+ (id)formulaWithString:(NSString*)input {
++ (instancetype)formulaWithString:(NSString*)input {
     NyayaFormula *formula = nil;
     
     if ([input length] < NYAYA_MAX_INPUT_LENGTH) {

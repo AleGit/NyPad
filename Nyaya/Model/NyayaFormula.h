@@ -21,7 +21,7 @@
 @property (nonatomic, readonly, getter=isWellFormed) BOOL wellFormed;
 @property (nonatomic, readonly) NSSet* subNodesSet;
 
-+ (id)formulaWithString:(NSString*)input;
++ (instancetype)formulaWithString:(NSString*)input;
 - (NyayaNode*)syntaxTree:(BOOL)optimized;
 - (TruthTable*)truthTable:(BOOL)compact;
 - (BddNode*)OBDD:(BOOL)reduced;
