@@ -109,16 +109,6 @@
         && request.URL.isFileURL
         && [fileName hasPrefix:@"tutorial"]
         ) {
-    
-        /*
-         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorials" ofType:@"plist"];
-         self.tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
-         
-         NSArray *tutorialSection = [self.tutorialSections objectAtIndex:indexPath.section+1];
-         NSString *sectionTitle = [tutorialSection objectAtIndex:0];
-         NSArray *tutorial = [tutorialSection objectAtIndex:indexPath.row +1];
-         self.detailViewController.detailItem = @[sectionTitle, tutorial];
-        */
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorials" ofType:@"plist"];
         NSArray *tutorialSections = [NSArray arrayWithContentsOfFile:filePath];
@@ -141,8 +131,7 @@
             
         }
         
-        
-        self.detailItem = @[sectionTitle, tutorial];
+        self.detailItem = @[sectionTitle, tutorial ? tutorial : @[]];
         
         NSLog(@"%@ %@", sectionTitle, tutorial);
         [self configureView];
@@ -157,12 +146,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NyTuTestViewController *testViewController = (NyTuTestViewController*)segue.destinationViewController;
-    
-    
-    
-    
-    
-    // testViewController.instructionsName = [NSString stringWithFormat:@"instructions%@", [[self.detailItem objectAtIndex:1] objectAtIndex:1]];
     testViewController.tester = [NyTuTester testerForKey:self.tutorialKey];
     testViewController.modalPresentationStyle = testViewController.tester.modalPresentationStyle;
     testViewController.modalTransitionStyle = testViewController.tester.modalTransitionStyle;

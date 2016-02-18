@@ -34,6 +34,7 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     // self.webView.delegate = self;
     _baseurl = [[NSBundle mainBundle] URLForResource:@"glossary" withExtension:@"html"];
     if (_baseurl) {

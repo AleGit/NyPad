@@ -88,8 +88,10 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     _formulaViews = [NSMutableArray arrayWithCapacity:10];
     // [self addNewNodeLocation:CGPointMake(self.canvasView.center.x, 50.0)];
+
 }
 
 - (void)viewDidUnload {
