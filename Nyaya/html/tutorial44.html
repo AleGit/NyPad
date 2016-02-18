@@ -12,8 +12,9 @@
         <h3>Disjunctive Normal Form</h3>
         
         <p>A literal is an atom or the negation of an atom.
-        A propositional formula in disjunctive normal form (DNF)
-        is a disjunction of clauses, where each clause is a conjunction of literals.</p>
+        A propositional formula in <em>disjunctive normal form</em> (DNF)
+        is a disjunction of clauses, where each clause is a conjunction of literals.
+        By definition a DNF is implication free and in negation normal form.</p>
         
         <blockquote>L &nbsp;::=&nbsp; p &nbsp;|&nbsp; ¬p</blockquote>
         <blockquote>C &nbsp;::=&nbsp; L &nbsp;|&nbsp; L ∧ C</blockquote>
@@ -33,7 +34,6 @@
             </tr>            
         </table>
         
-        <p>By definition a DNF is implication free and in negation normal form.</p>
         <p>To transform an arbitrary propositional formula into CNF,
         we transform the formula into NNF, then
         we distribute conjunctions over disjunctions.</p>

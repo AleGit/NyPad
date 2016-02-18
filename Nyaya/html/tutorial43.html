@@ -12,8 +12,9 @@
         <h3>Conjunctive Normal Form</h3>
         
         <p>A literal is an atom or the negation of an atom.
-        A propositional formula in conjunctive normal form (CNF)
-        is a conjunction of clauses, where each clause is a disjunction of literals.</p>
+        A propositional formula in <em>conjunctive normal form</em> (CNF)
+        is a conjunction of clauses, where each clause is a disjunction of literals.
+        By definition a CNF is implication free and in negation normal form.</p>
         
         <blockquote>L &nbsp;::=&nbsp; p &nbsp;|&nbsp; ¬p</blockquote>
         <blockquote>D &nbsp;::=&nbsp; L &nbsp;|&nbsp; L ∨ D</blockquote>
@@ -32,8 +33,6 @@
             </tr>
                          
         </table>
-        
-        <p>By definition a CNF is implication free and in negation normal form.</p>
         <p>To transform an arbitrary propositional formula into CNF,
         we transform the formula into NNF, then
         we distribute disjunctions over conjunctions.</p>
