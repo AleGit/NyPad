@@ -29,6 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+    self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+
 	// Do any additional setup after loading the view.
 }
 
@@ -42,26 +46,15 @@
     return NSLocalizedString(@"MASTER", @"Override in subclasses!");
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.title = [self localizedBarButtonItemTitle];
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
+- (void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
+    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+        self.navigationItem.leftBarButtonItem = svc.displayModeButtonItem;
+    }
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
-}
 
-- (BOOL)splitViewController:(UISplitViewController*)svc
-   shouldHideViewController:(UIViewController *)vc
-              inOrientation:(UIInterfaceOrientation)orientation
-{
-    return YES; // this method will be called only once per orientation
-}
+
+
 
 #pragma mark - Managing the detail item
 

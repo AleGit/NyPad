@@ -1282,6 +1282,7 @@
 				TargetAttributes = {
 					11C375E815B3D23D005C5C9C = {
 						DevelopmentTeam = 6V4PMHYMV6;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1720,13 +1721,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6V4PMHYMV6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = nyaya;
+				PROVISIONING_PROFILE_SPECIFIER = "XC: nyaya";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1736,13 +1740,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6V4PMHYMV6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Nyaya/Nyaya-Prefix.pch";
 				INFOPLIST_FILE = "Nyaya/Nyaya-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = nyaya;
+				PROVISIONING_PROFILE_SPECIFIER = "XC: nyaya";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
