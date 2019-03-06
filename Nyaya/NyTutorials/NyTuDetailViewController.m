@@ -90,14 +90,6 @@
     }
 }
 
-- (void)viewDidUnload {
-    self.webView = nil;
-    self.backButton = nil;
-    self.exerciseButton = nil;
-    
-    [super viewDidUnload];
-}
-
 - (IBAction)back:(id)sender {
     [self.webView goBack];
 }

@@ -47,11 +47,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setHelpView:nil];
-    [super viewDidUnload];
-}
-
 - (IBAction)closeHelp:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     

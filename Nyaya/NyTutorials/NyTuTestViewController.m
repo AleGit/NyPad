@@ -47,21 +47,6 @@
     [self.tester firstTest:self.view];
 }
 
-- (void)viewDidUnload
-{
-    [self setInstructionsView:nil];
-    [self setCheckButton:nil];
-    [self setNextButton:nil];
-    [self setDoneButton:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return YES;
-}
-
 - (void)done:(id)sender {
     [self.tester removeTest];
 }

@@ -94,15 +94,10 @@
 
 }
 
-- (void)viewDidUnload {
-    [self setCanvasView:nil];
-    [super viewDidUnload];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    NSLog(@"%@ didRotateFromInterfaceOrientation:%li\n%@\n%@",self, (long)fromInterfaceOrientation, self.view, self.canvasView);
-    [self.canvasView setNeedsDisplay];
-}
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+//    NSLog(@"%@ didRotateFromInterfaceOrientation:%li\n%@\n%@",self, (long)fromInterfaceOrientation, self.view, self.canvasView);
+//    [self.canvasView setNeedsDisplay];
+//}
 
 
 // enable menu controller

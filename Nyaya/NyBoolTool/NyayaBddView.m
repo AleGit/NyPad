@@ -191,9 +191,12 @@
                 
                 UIGraphicsPushContext(context);
                 CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
+                UIFont *font = [UIFont systemFontOfSize:23];
+                NSDictionary *attributes = @{NSFontAttributeName: font};
                 NSString *name = [NSString stringWithFormat:@"%@", node.name];
-                CGSize size = [name sizeWithFont:[UIFont systemFontOfSize:23]];
-                [name drawAtPoint:CGPointMake(x - size.width/2.0, y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+                CGSize size = [name sizeWithAttributes:attributes];
+                CGPoint point = CGPointMake(x - size.width/2.0, y-size.height/2.0);
+                [name drawAtPoint: point withAttributes:attributes];
                 UIGraphicsPopContext();
             }
             
@@ -322,8 +325,11 @@
         CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
         UIGraphicsPushContext(context);
         NSString *keyName = [NSString stringWithFormat:@"%@:%li", key.name, (long)key.layer];
-        CGSize size = [keyName sizeWithFont:[UIFont systemFontOfSize:23]];
-        [keyName drawAtPoint:CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0) withFont:[UIFont systemFontOfSize:23]];
+        UIFont *font = [UIFont systemFontOfSize:23];
+        NSDictionary *attributes = @{NSFontAttributeName: font};
+        CGSize size = [keyName sizeWithAttributes:attributes];
+        CGPoint point = CGPointMake(pos.x - size.width/2.0, pos.y-size.height/2.0);
+        [keyName drawAtPoint: point withAttributes:attributes];
         UIGraphicsPopContext();
         
     }];

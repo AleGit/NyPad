@@ -59,9 +59,11 @@ const NSInteger dy = 55;
     
     CGContextSetRGBFillColor(context, 0, 0, 0, 0.9);
     UIGraphicsPushContext(context);
-    CGSize size = [bddNode.name sizeWithFont:[UIFont systemFontOfSize:23]];
-    [bddNode.name drawAtPoint:CGPointMake(CGRectGetMidX(rect)-size.width/2.0, CGRectGetMinY(rect)+b+r-size.height/2.0)
-                     withFont:[UIFont systemFontOfSize:23]];
+    UIFont *font = [UIFont systemFontOfSize:23];
+    NSDictionary *attributes = @{NSFontAttributeName: font};
+    CGSize size = [bddNode.name sizeWithAttributes:attributes];
+    CGPoint point = CGPointMake(CGRectGetMidX(rect)-size.width/2.0, CGRectGetMinY(rect)+b+r-size.height/2.0);
+    [bddNode.name drawAtPoint: point withAttributes:attributes];
     UIGraphicsPopContext();    
     
 }

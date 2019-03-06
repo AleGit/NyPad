@@ -82,24 +82,6 @@
     // if (self.detailItem) [self configureView];
 }
 
-- (void)viewDidUnload {
-    [self setInputField:nil];
-    [self setParsedField:nil];
-    [self setSatisfiabilityLabel:nil];
-    [self setTautologyLabel:nil];
-    [self setContradictionLabel:nil];
-    [self setNnfLabel:nil];
-    [self setNnfField:nil];
-    [self setCnfLabel:nil];
-    [self setCnfField:nil];
-    [self setDnfLabel:nil];
-    [self setDnfField:nil];
-    [self setResultView:nil];
-    [self setBddView:nil];
-    [self setTruthTableView:nil];
-    [super viewDidUnload];
-}
-
 - (void)resetOutputViews {
     self.nnfField.text = @"";
     self.cnfField.text = @"";
@@ -320,11 +302,6 @@
     self.resultView.contentSize = CGSizeMake(CGRectGetMaxX(f), CGRectGetMaxY(f));
     
 }
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self.bddView setNeedsDisplay];
-}
-
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     textField.text = @"";

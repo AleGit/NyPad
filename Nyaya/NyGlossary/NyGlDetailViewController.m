@@ -42,9 +42,4 @@
         [self.webView loadRequest:request];
     }
 }
-
-- (void)viewDidUnload {
-    [self setWebView:nil];
-    [super viewDidUnload];
-}
 @end
