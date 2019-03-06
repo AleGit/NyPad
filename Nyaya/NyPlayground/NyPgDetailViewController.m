@@ -248,7 +248,7 @@
         formulaView.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
         formulaView.alpha = 0.0;
     } completion:^(BOOL finished) {
-        [_formulaViews removeObject:formulaView];
+        [self->_formulaViews removeObject:formulaView];
         [formulaView removeFromSuperview];
     }];
     

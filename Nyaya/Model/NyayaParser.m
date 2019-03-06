@@ -77,7 +77,7 @@
                               range:NSMakeRange(0, [_input length]) 
                          usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
                              
-                             NSString *s = [_input substringWithRange:[match range]];
+                             NSString *s = [self->_input substringWithRange:[match range]];
                              [tokens addObject:s];
                          }];
     

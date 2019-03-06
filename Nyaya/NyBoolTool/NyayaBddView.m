@@ -122,7 +122,7 @@
                     CGContextMoveToPoint(context, x, y);
                     
                     for (tyidx = yidx+1 ; tyidx <= target.layer; tyidx++) {
-                        tlayer = [_layers objectAtIndex:tyidx];
+                        tlayer = [self->_layers objectAtIndex:tyidx];
                         
                         if (tyidx < target.layer)
                             txidx = [tlayer indexOfObject:node];
@@ -145,7 +145,7 @@
                     CGContextMoveToPoint(context, x, y);
                     
                     for (tyidx = yidx+1; tyidx <= target.layer; tyidx++) {
-                        tlayer = [_layers objectAtIndex:tyidx];
+                        tlayer = [self->_layers objectAtIndex:tyidx];
                         
                         if (tyidx < target.layer) {
                             txidx = [tlayer indexOfObjectWithOptions:NSEnumerationReverse passingTest:^BOOL(BddNode *bddNode, NSUInteger idx, BOOL *stop) {
@@ -228,12 +228,12 @@
                     [self.bddNode.names enumerateObjectsUsingBlock:^(NSString *name, NSUInteger yidx, BOOL *stop) {
                         CGFloat y = 30.0 + yidx * 60.0;
                         
-                        NSSet *bddLevel = _structure[name];
+                        NSSet *bddLevel = self->_structure[name];
                         CGFloat levelCount = [bddLevel count] + 1.0;
                         
                         [[bddLevel allObjects] enumerateObjectsUsingBlock:^(BddNode *lbdd, NSUInteger xidx, BOOL *stop) {
                             CGFloat x = (1.0+(CGFloat)xidx) * self.bounds.size.width / levelCount;
-                            _nodepoints[lbdd] = NSStringFromCGPoint(CGPointMake(x,y));
+                            self->_nodepoints[lbdd] = NSStringFromCGPoint(CGPointMake(x,y));
                         }];
                         
                     }];
@@ -269,8 +269,8 @@
         if (!key.isLeaf) {
             
             
-            CGPoint posL = CGPointFromString([_nodepoints objectForKey:key.leftBranch]);
-            CGPoint posR = CGPointFromString([_nodepoints objectForKey:key.rightBranch]);
+            CGPoint posL = CGPointFromString([self->_nodepoints objectForKey:key.leftBranch]);
+            CGPoint posR = CGPointFromString([self->_nodepoints objectForKey:key.rightBranch]);
             
             // draw left branch
             CGContextSetLineDash(context, 30.0, arr, 2);

@@ -30,11 +30,11 @@
             [components enumerateObjectsWithOptions:0 usingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
                 
                 if ([obj hasSuffix:@" id"]) {
-                    _entryId = [components objectAtIndex:idx+2];
+                    self->_entryId = [components objectAtIndex:idx+2];
                 }
                 
                 else if ([obj isEqual:@"/"]) {
-                    _entryTitle = [[components objectAtIndex:idx-1] capitalizedHtmlEntityFreeString];
+                    self->_entryTitle = [[components objectAtIndex:idx-1] capitalizedHtmlEntityFreeString];
                 }
             }];
             

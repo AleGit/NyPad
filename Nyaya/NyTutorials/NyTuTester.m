@@ -998,7 +998,7 @@
             if (button.isSelected != self.questionTree.evaluationValue) {
                 
                 [self animateWrong:button withDelay:0.1*(float)button.tag];
-                _success = NO;
+                self->_success = NO;
             }
             
             else {
@@ -1459,7 +1459,7 @@
         
         if (button.isSelected != self.questionTree.evaluationValue) {
             [self animateWrong:button withDelay:0.0];
-            _success = NO;
+            self->_success = NO;
 
         }
         else {

@@ -40,9 +40,9 @@
 - (void)sortVariablesAndHeaders {
     
     _variables = [_variables sortedArrayUsingComparator:^NSComparisonResult(NyayaNode *obj1, NyayaNode *obj2) {
-        if (_sortedNames) {
-            NSUInteger idx1 = [_sortedNames indexOfObject:obj1.symbol];
-            NSUInteger idx2 = [_sortedNames indexOfObject:obj2.symbol];
+        if (self->_sortedNames) {
+            NSUInteger idx1 = [self->_sortedNames indexOfObject:obj1.symbol];
+            NSUInteger idx2 = [self->_sortedNames indexOfObject:obj2.symbol];
             
             if (idx1 != NSNotFound && idx2 != NSNotFound) {
                 if (idx1 < idx2) return -1;
@@ -60,8 +60,8 @@
     
     _headers = [_headers sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString* obj2) {
         
-        NSUInteger idx1 = [_sortedNames indexOfObject:obj1];
-        NSUInteger idx2 = [_sortedNames indexOfObject:obj2];
+        NSUInteger idx1 = [self->_sortedNames indexOfObject:obj1];
+        NSUInteger idx2 = [self->_sortedNames indexOfObject:obj2];
         
         if (idx1 != NSNotFound && idx2 != NSNotFound) {
             if (idx1 < idx2) return -1;

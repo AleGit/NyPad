@@ -101,7 +101,7 @@
    
     [UIView animateWithDuration:0.3 animations:^{
         self.frame = frame;
-        _headLabel.text = [node headLabelText];
+        self->_headLabel.text = [node headLabelText];
         
         
     } completion:^(BOOL finished) {
