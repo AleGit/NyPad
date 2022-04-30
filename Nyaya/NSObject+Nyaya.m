@@ -11,8 +11,8 @@
 @implementation NSObject (NyayaCopy)
 
 - (id)trueDeepCopy {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
-    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:NO error:nil];
+    id obj = [NSKeyedUnarchiver unarchivedObjectOfClass:NSObject.class fromData:data error:nil];
     return obj;
 }
 
