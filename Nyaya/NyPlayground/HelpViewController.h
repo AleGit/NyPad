@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @interface HelpViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIWebView *helpView;
+@property (weak, nonatomic) IBOutlet WKWebView *helpView;
 
 - (IBAction)closeHelp:(UIBarButtonItem *)sender;
 

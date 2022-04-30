@@ -7,10 +7,11 @@
 //
 
 #import "NyDetailViewController.h"
+#import <WebKit/WebKit.h>
 
 @interface NyTuDetailViewController : NyDetailViewController
 
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) IBOutlet WKWebView *webView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 - (IBAction)back:(id)sender;

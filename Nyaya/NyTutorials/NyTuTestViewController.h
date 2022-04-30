@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "NyTuTester.h"
 
 @class NyTuDetailViewController;
@@ -15,7 +16,7 @@
 @interface NyTuTestViewController : UIViewController <NyTuTesterDelegate>
 
 
-@property (strong, nonatomic) IBOutlet UIWebView *instructionsView;
+@property (strong, nonatomic) IBOutlet WKWebView *instructionsView;
 @property (copy, nonatomic) NSString *instructionsName;
 @property (strong, nonatomic) id<NyTuTester> tester;
 

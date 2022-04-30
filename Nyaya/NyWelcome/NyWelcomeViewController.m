@@ -40,7 +40,7 @@
     [webView loadRequest:request];
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler {
     NSURL *url = navigationAction.request.URL;
@@ -48,7 +48,7 @@
         NSLog(@"Open file url: %@", url);
         decisionHandler(WKNavigationActionPolicyAllow);
         
-    } else if (url) {
+    } else if (navigationAction.navigationType == WKNavigationTypeLinkActivated && url) {
         NSLog(@"Open web url: %@", url);
         decisionHandler(WKNavigationActionPolicyCancel);
         [[UIApplication sharedApplication] openURL:url options: @{} completionHandler:nil];
