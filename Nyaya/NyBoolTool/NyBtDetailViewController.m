@@ -75,7 +75,7 @@
     
     [self resetOutputViews];
     [self loadAccessoryView];
-    [self.inputField becomeFirstResponder];
+    // [self.inputField becomeFirstResponder]; // TODO: why does this cause an app crash?
     
     queue = dispatch_queue_create("at.maringele.nyaya.booltool.queue", DISPATCH_QUEUE_SERIAL);
     
