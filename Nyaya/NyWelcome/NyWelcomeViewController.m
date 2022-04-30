@@ -8,7 +8,7 @@
 
 #import "NyWelcomeViewController.h"
 
-@interface NyWelcomeViewController () <UIWebViewDelegate>
+@interface NyWelcomeViewController () <WKNavigationDelegate>
 
 @end
 
@@ -33,38 +33,28 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.webView.delegate = self;
+    webView.navigationDelegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"welcome" ofType:@"html"];
     NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
     NSURLRequest *request = [NSURLRequest requestWithURL:fileUrl];
-    [(UIWebView*)(self.view) loadRequest:request];
+    [webView loadRequest:request];
 }
 
 #pragma mark - UIWebViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        if (request.URL.isFileURL) {
-            return YES;
-        }
-        else {
-            [[UIApplication sharedApplication] openURL:request.URL];
-            return NO;
-        }
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSURL *url = navigationAction.request.URL;
+    if (url.isFileURL) {
+        NSLog(@"Open file url: %@", url);
+        decisionHandler(WKNavigationActionPolicyAllow);
+        
+    } else if (url) {
+        NSLog(@"Open web url: %@", url);
+        decisionHandler(WKNavigationActionPolicyCancel);
+        [[UIApplication sharedApplication] openURL:url options: @{} completionHandler:nil];
+    } else {
+        decisionHandler(WKNavigationActionPolicyCancel);
     }
-    
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
-}
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    
 }
 
 @end
