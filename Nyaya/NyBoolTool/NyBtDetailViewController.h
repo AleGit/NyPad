@@ -8,6 +8,7 @@
 
 #import "NyDetailViewController.h"
 #import "NyayaBddView.h"
+#import <WebKit/WebKit.h>
 
 @interface NyBtDetailViewController : NyDetailInputViewController
 
@@ -26,7 +27,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *dnfLabel;
 @property (strong, nonatomic) IBOutlet UITextView *dnfField;
 @property (strong, nonatomic) IBOutlet NyayaBddView *bddView;
-@property (strong, nonatomic) IBOutlet UIWebView *truthTableView;
+@property (strong, nonatomic) IBOutlet WKWebView *truthTableView;
 
 - (IBAction)send:(id)sender;
 - (IBAction)didEndOnExit:(id)sender;

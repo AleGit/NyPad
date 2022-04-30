@@ -623,7 +623,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mp-tK-Ncl">
-                                <rect key="frame" x="0.0" y="115" width="768" height="840"/>
+                                <rect key="frame" x="0.0" y="115" width="768" height="841"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Tautology" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rB3-XC-X1G">
@@ -683,12 +683,15 @@
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
-                                    <webView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4R9-pc-TXy">
+                                    <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNm-OL-bla">
                                         <rect key="frame" x="20" y="387" width="728" height="133"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <dataDetectorType key="dataDetectorTypes"/>
-                                    </webView>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
                                     <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzh-UR-frg" customClass="NyayaBddView">
                                         <rect key="frame" x="20" y="197" width="728" height="182"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -736,12 +739,12 @@
                         <outlet property="resultView" destination="2Mp-tK-Ncl" id="NYj-WD-VlX"/>
                         <outlet property="satisfiabilityLabel" destination="dk3-gu-CJ0" id="j9d-5g-gvf"/>
                         <outlet property="tautologyLabel" destination="rB3-XC-X1G" id="dAc-Eu-Hww"/>
-                        <outlet property="truthTableView" destination="4R9-pc-TXy" id="o8X-C1-skb"/>
+                        <outlet property="truthTableView" destination="ZNm-OL-bla" id="zWF-fR-FAl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLQ-mF-uac" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1323" y="3988"/>
+            <point key="canvasLocation" x="1322.65625" y="3987.8906249999995"/>
         </scene>
         <!--Bool+Tool-->
         <scene sceneID="QOk-Mb-sAN">
