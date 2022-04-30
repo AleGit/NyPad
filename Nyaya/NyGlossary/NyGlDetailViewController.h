@@ -7,9 +7,10 @@
 //
 
 #import "NyDetailViewController.h"
+#import <Webkit/WebKit.h>
 
 @interface NyGlDetailViewController : NyDetailViewController
 
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet WKWebView *webView;
 
 @end

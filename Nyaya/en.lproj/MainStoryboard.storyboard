@@ -477,24 +477,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="904"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ur1-7m-3tH">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNW-MW-GbM">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="976"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Entry" id="jYn-wK-DyK"/>
+                    <navigationItem key="navigationItem" title="Glossary" id="jYn-wK-DyK"/>
                     <connections>
-                        <outlet property="webView" destination="ur1-7m-3tH" id="VnV-Pc-CMv"/>
+                        <outlet property="webView" destination="GNW-MW-GbM" id="R2c-uI-YRq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WX1-QR-08z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1323" y="2375"/>
+            <point key="canvasLocation" x="1322.65625" y="2374.8046875"/>
         </scene>
         <!--Glossary-->
         <scene sceneID="6vO-Qz-2mI">
